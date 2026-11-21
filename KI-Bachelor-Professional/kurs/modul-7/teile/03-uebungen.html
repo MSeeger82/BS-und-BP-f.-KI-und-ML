@@ -1,0 +1,170 @@
+    <!-- Übungen -->
+    <section class="lesson" id="uebungen" data-title="Übungen">
+      <div class="lesson-head"><span class="meta">Übungen · 150 Minuten</span><h2>Übungen mit Musterlösung</h2></div>
+      <p>Lesen Sie den Code genau und führen Sie ihn „im Kopf“ aus – Variable für Variable. Wer möchte, prüft die Antworten zusätzlich in einem Notebook.</p>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 1: Datentypen</h3><span class="points">4 Punkte</span></div>
+        <p>Welchen Datentyp haben: 1. <code>19.99</code> 2. <code>"Köln"</code> 3. <code>True</code> 4. <code>[1, 2, 3]</code>?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. float · 2. str · 3. bool · 4. list. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 2: Listen</h3><span class="points">3 Punkte</span></div>
+        <p><code>x = [5, 8, 13, 21]</code>. Was ergeben <code>x[1] + x[-1]</code> und <code>len(x)</code>? (<code>x[-1]</code> ist das letzte Element.)</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p><code>x[1]</code> = 8, <code>x[-1]</code> = 21 → <b>29</b> (2 P.); <code>len(x)</code> = <b>4</b> (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 3: Schleife und Bedingung</h3><span class="points">3 Punkte</span></div>
+        <pre class="code">summe = 0
+for u in [3, 7, 2, 8]:
+    if u &gt; 4:
+        summe = summe + u
+print(summe)</pre>
+        <p>Was gibt das Programm aus?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Nur 7 und 8 sind größer als 4: Ausgabe <b>15</b> (3 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 4: Funktion</h3><span class="points">4 Punkte</span></div>
+        <pre class="code">def rabatt(betrag, prozent=10):
+    return betrag * (1 - prozent / 100)</pre>
+        <p>Was liefern <code>rabatt(200)</code> und <code>rabatt(200, 25)</code>?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p><code>rabatt(200)</code> = 200 · 0,9 = <b>180</b> (2 P.); <code>rabatt(200, 25)</code> = 200 · 0,75 = <b>150</b> (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 5: pandas lesen</h3><span class="points">3 Punkte</span></div>
+        <p>Was liefert jeweils: 1. <code>df.groupby("filiale")["umsatz"].sum()</code> 2. <code>df.isna().sum()</code> 3. <code>df[df["menge"] &gt; 10]</code>?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Umsatzsumme je Filiale · 2. Anzahl fehlender Werte je Spalte · 3. alle Zeilen mit Menge über 10. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 6: pandas schreiben</h3><span class="points">4 Punkte</span></div>
+        <p>Schreiben Sie pandas-Code, der aus <code>df</code> alle Bestellungen aus der Region „Nord“ mit Betrag über 500 auswählt und davon den mittleren Betrag je Monat (Spalte <code>monat</code>) berechnet.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <pre class="code">auswahl = df[(df["region"] == "Nord") &amp; (df["betrag"] &gt; 500)]
+auswahl.groupby("monat")["betrag"].mean()</pre>
+          <p>Filter mit beiden Bedingungen, Klammern und &amp; (2 P.); groupby und mean (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 7: Ablauf mit scikit-learn</h3><span class="points">4 Punkte</span></div>
+        <p>Bringen Sie die Schritte in die richtige Reihenfolge und erklären Sie, warum Schritt B vor Schritt C kommt: A Modell mit <code>fit</code> trainieren · B Daten mit <code>train_test_split</code> aufteilen · C Skalierung festlegen (in der Pipeline) · D mit <code>classification_report</code> auf Testdaten bewerten.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>B → C → A → D (2 P.). Erst aufteilen, damit Skalierung und Modell nur aus den Trainingsdaten lernen; sonst Data Leakage und zu optimistische Testwerte (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 8: Fehler im Code finden</h3><span class="points">4 Punkte</span></div>
+        <pre class="code">scaler = StandardScaler()
+X_skaliert = scaler.fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(X_skaliert, y, test_size=0.2)
+modell = LogisticRegression().fit(X_train, y_train)
+print(modell.score(X_test, y_test))</pre>
+        <p>Was ist falsch, und wie korrigieren Sie es?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Der Scaler lernt Mittelwert und Standardabweichung aus allen Daten einschließlich der Testdaten – Data Leakage (2 P.). Korrektur: erst aufteilen, dann eine Pipeline aus StandardScaler und LogisticRegression nur auf X_train fitten (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 9: HTTP-Statuscodes</h3><span class="points">3 Punkte</span></div>
+        <p>Was bedeuten die Antworten einer Modell-API: 1. 200 2. 400 3. 500?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. OK, Vorhersage geliefert · 2. fehlerhafte Anfrage (z. B. fehlendes Feld) · 3. Fehler auf dem Server. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 10: Reproduzierbarkeit</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Prüfer fragt, warum ein Modell vor einem Jahr einen Antrag abgelehnt hat. Was muss versioniert und protokolliert sein, damit Sie die Entscheidung nachvollziehen können? Nennen Sie vier Punkte.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Code-Stand (Git-Commit), Trainingsdatenstand, Modellversion mit Parametern und Kennzahlen (Modellregister), Paketversionen/Umgebung, Protokoll der Anfrage mit Eingaben, Ergebnis, Zeitpunkt und Modellversion. Je 1 Punkt für vier Punkte.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 11: Ausrollen</h3><span class="points">3 Punkte</span></div>
+        <p>Welche Strategie ist gemeint? 1. Das neue Modell rechnet parallel mit, seine Ergebnisse werden nur protokolliert. 2. Zunächst gehen 5 % der Anfragen an das neue Modell, dann schrittweise mehr. 3. Zwei Kundengruppen bekommen zufällig das alte oder das neue Modell; die Geschäftskennzahlen werden verglichen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Schattenbetrieb · 2. Canary-Release · 3. A/B-Test. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 12: Situationsaufgabe vom Notebook in den Betrieb</h3><span class="points">8 Punkte</span></div>
+        <p>Ein Werkstudent der Muster Logistik GmbH hat in einem Notebook ein gutes Modell zur Vorhersage von Lieferverspätungen gebaut. Die Geschäftsführung will es in drei Monaten im Dispositionssystem für alle 14 Standorte nutzen. Beschreiben Sie die nötigen Schritte in einer sinnvollen Reihenfolge (mindestens sechs) und nennen Sie zwei Rollen, die Sie im Projekt brauchen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Schritte (6 P., je 1 P.): Code in ein Repository mit Versionierung überführen und prüfen (Review); Daten- und Merkmalsdefinition festlegen, Pipeline ohne Leakage; Bewertung gegen Baseline auf aktuellen Testdaten aller Standorte; Modell als versionierte API mit Eingabeprüfung bereitstellen (Container); Integration ins Dispositionssystem mit Rückfallebene; Schattenbetrieb bzw. Pilot an einem Standort, dann schrittweise Ausrollen; Monitoring (Güte, Drift, Antwortzeit) und Neutrainingsprozess; Schulung der Disponenten, Dokumentation, Datenschutz/Betriebsrat prüfen. Rollen (2 P.): z. B. Product Owner aus der Disposition, ML-/Data Engineer, Softwareentwickler für Integration, IT-Betrieb, Datenschutzbeauftragter.</p>
+        </details>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Aufgaben 1 bis 9 trainieren Code-Lesekompetenz, wie sie in Teil 1, Bereich B verlangt werden kann. Aufgabe 12 verbindet Technik mit Projektmanagement (Modul 9) – eine gute Vorlage für die Transferarbeit.</p>
+      </aside>
+    </section>
+
+    <!-- Quiz -->
+    <section class="lesson" id="quiz" data-title="Abschlussquiz">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 25 Minuten</span><h2>Abschlussquiz Modul 7</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="flow-a"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Wer unter 14 liegt, wiederholt die Lektionen zu den falschen Antworten.</p>
+      </aside>
+    </section>
+
+    <!-- Zusammenfassung -->
+    <section class="lesson" id="summary" data-title="Zusammenfassung">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Python</h3><p>Variablen, Datentypen, Listen ab 0, Dictionaries, Einrückung bildet Blöcke.</p></div>
+        <div class="card"><h3>Funktionen</h3><p>def, Parameter, return; Module und Bibliotheken per import.</p></div>
+        <div class="card"><h3>NumPy</h3><p>Arrays, vektorisiert rechnen.</p></div>
+        <div class="card"><h3>pandas</h3><p>read_csv, filtern, groupby, merge, bereinigen.</p></div>
+        <div class="card"><h3>scikit-learn</h3><p>split, fit, predict, score; Baseline, Kreuzvalidierung.</p></div>
+        <div class="card"><h3>Pipeline</h3><p>Vorverarbeitung + Modell als ein Objekt – kein Leakage, gleich im Betrieb.</p></div>
+        <div class="card"><h3>KI-System</h3><p>Daten, Modell, API, Monitoring, Register, Mensch.</p></div>
+        <div class="card"><h3>Versionierung</h3><p>Code (Git), Daten, Experimente, Modelle.</p></div>
+        <div class="card"><h3>MLOps</h3><p>Tests, CI/CD, Container, Schattenbetrieb, Monitoring, Rollback.</p></div>
+        <div class="card"><h3>LLM-Anwendungen</h3><p>Vorlagen, strukturierte Ausgaben, RAG, Werkzeuge, Evaluation, Kosten.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Glossar Modul 7</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+          <tbody>
+            <tr><td>API</td><td>Festgelegte Schnittstelle, über die Programme miteinander sprechen</td></tr>
+            <tr><td>Canary-Release</td><td>Neue Version zuerst für einen kleinen Teil der Anfragen</td></tr>
+            <tr><td>CI/CD</td><td>Automatisches Prüfen, Bauen und Ausrollen von Änderungen</td></tr>
+            <tr><td>Container</td><td>Software samt Umgebung verpackt, läuft überall gleich</td></tr>
+            <tr><td>DataFrame</td><td>Tabelle in pandas</td></tr>
+            <tr><td>Git</td><td>Versionsverwaltung für Code</td></tr>
+            <tr><td>JSON</td><td>Textformat für strukturierte Daten</td></tr>
+            <tr><td>Modellregister</td><td>Verwaltung von Modellversionen mit Kennzahlen und Status</td></tr>
+            <tr><td>Pipeline</td><td>Verkettung von Vorverarbeitung und Modell</td></tr>
+            <tr><td>Schattenbetrieb</td><td>Neues Modell rechnet mit, ohne zu entscheiden</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Weiter mit Modul 8:</b> Prozessmanagement – wie man Prozesse analysiert und KI sinnvoll einbettet.</p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Mit Modul 7 endet Handlungsbereich 1. Lassen Sie die Teilnehmenden die Probeprüfungen Teil 1 (Bereiche A und B) bearbeiten, bevor es mit den Managementthemen weitergeht.</p>
+      </aside>
+    </section>
+<!--SCRIPTS-->

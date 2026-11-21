@@ -1,0 +1,154 @@
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Datenqualität" data-part="Teil B · Daten vorbereiten">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Datenqualität: Garbage in, garbage out</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Navi mit veralteter Karte schickt Sie in eine Straße, die es nicht mehr gibt. Das Navi rechnet perfekt – aber auf falscher Grundlage. Genauso übernimmt ein Modell jeden Fehler seiner Daten.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Datenqualität</b> beschreibt, wie gut Daten für ihren Zweck geeignet sind („fitness for use“). Sie wird an mehreren Dimensionen gemessen und sollte vor jedem Training geprüft und dokumentiert werden.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Dimension</th><th>Frage</th><th>Beispiel für ein Problem</th><th>Messgröße</th></tr></thead>
+        <tbody>
+          <tr><td><b>Vollständigkeit</b></td><td>Fehlt etwas?</td><td>20 % der Kunden ohne Geburtsjahr</td><td>Anteil fehlender Werte je Spalte</td></tr>
+          <tr><td><b>Korrektheit</b></td><td>Stimmt es mit der Realität überein?</td><td>Alter 210 Jahre, negative Mengen</td><td>Anteil verletzter Plausibilitätsregeln</td></tr>
+          <tr><td><b>Konsistenz</b></td><td>Widerspricht es sich?</td><td>Lieferdatum vor Bestelldatum; „Köln“ und „KÖLN“</td><td>Anzahl Regelverstöße zwischen Feldern/Systemen</td></tr>
+          <tr><td><b>Aktualität</b></td><td>Ist es noch gültig?</td><td>Adressen von vor fünf Jahren</td><td>Alter der Daten, Zeit seit letzter Aktualisierung</td></tr>
+          <tr><td><b>Eindeutigkeit</b></td><td>Gibt es Doppelte?</td><td>derselbe Kunde dreimal angelegt</td><td>Anteil Duplikate</td></tr>
+          <tr><td><b>Repräsentativität</b></td><td>Bildet es alle relevanten Fälle ab?</td><td>Nur Daten aus dem Sommer, nur aus einem Werk</td><td>Vergleich der Verteilungen mit der Zielpopulation</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Modell kann nicht besser sein als seine Daten – Datenqualität wird geprüft, gemessen und dokumentiert, bevor trainiert wird.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Die EU-KI-Verordnung verlangt für Hochrisiko-KI ausdrücklich Daten-Governance: Trainings-, Validierungs- und Testdaten müssen relevant, hinreichend repräsentativ und so weit wie möglich fehlerfrei und vollständig sein (Art. 10). Diese Brücke zwischen Technik und Recht bringt in Teil 2 Punkte.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie nach Datenpannen aus dem eigenen Betrieb – jeder kennt eine. Ordnen Sie sie den Dimensionen zu. Repräsentativität ist die Brücke zu Bias in Modul 6.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Vorverarbeitung" data-part="Teil B · Daten vorbereiten">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 35 Minuten</span><h2>Vorverarbeitung: fehlende Werte, Ausreißer, Duplikate</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Bevor gekocht wird, wird geputzt, geschält und geschnitten. Niemand wirft eine ungewaschene Kartoffel samt Erde in den Topf. Vorverarbeitung ist das Gemüseputzen der Daten.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Vorverarbeitung</b> (Preprocessing) umfasst alle Schritte zwischen Rohdaten und Modell: Bereinigen, Ergänzen, Umwandeln, Auswählen. Jede Entscheidung wird dokumentiert, damit sie im Betrieb identisch angewendet wird.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Fehlende Werte</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Vorgehen</th><th>Wann sinnvoll</th><th>Risiko</th></tr></thead>
+          <tbody>
+            <tr><td>Zeilen löschen</td><td>wenige Lücken, zufällig verteilt</td><td>Datenverlust, Verzerrung, wenn Lücken nicht zufällig sind</td></tr>
+            <tr><td>Spalte löschen</td><td>Spalte überwiegend leer und unwichtig</td><td>wertvolle Information geht verloren</td></tr>
+            <tr><td>Mit Median/Mittelwert/Modus füllen (Imputation)</td><td>numerisch: Median (robust); kategorial: häufigster Wert</td><td>Streuung wird kleiner</td></tr>
+            <tr><td>Indikatorspalte „Wert fehlte“ ergänzen</td><td>wenn das Fehlen selbst etwas bedeutet</td><td>mehr Spalten</td></tr>
+            <tr><td>Modellbasiert schätzen</td><td>starke Zusammenhänge zu anderen Merkmalen</td><td>aufwendig, Scheingenauigkeit</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Ausreißer</h3>
+        <p>Erst fragen: <b>Fehler oder echter Extremwert?</b> Ein Alter von 210 ist ein Fehler (korrigieren oder entfernen). Eine Großbestellung über 80.000 € kann echt sein – und für das Geschäft besonders wichtig. Erkennen lassen sich Ausreißer mit dem Boxplot (IQR-Regel, Lektion 11) oder z-Werten (mehr als 3 Standardabweichungen vom Mittelwert). Umgang: korrigieren, entfernen, kappen (Winsorisieren) oder robuste Verfahren nutzen.</p>
+        <h3>Duplikate</h3>
+        <p>Exakte Duplikate löscht man; <b>unscharfe</b> („Meier GmbH“ / „Meyer GmbH, Köln“) brauchen Abgleichsregeln (Record Linkage).</p>
+      </div>
+      <pre class="code"><span class="k">import</span> pandas <span class="k">as</span> pd
+df = pd.read_csv(<span class="s">"kunden.csv"</span>)
+df.isna().sum()                                   <span class="c"># fehlende Werte je Spalte</span>
+df = df.drop_duplicates()                         <span class="c"># exakte Duplikate entfernen</span>
+df[<span class="s">"alter"</span>] = df[<span class="s">"alter"</span>].where(df[<span class="s">"alter"</span>].between(16, 110))   <span class="c"># Unmögliches → fehlend</span>
+df[<span class="s">"alter_fehlte"</span>] = df[<span class="s">"alter"</span>].isna()
+df[<span class="s">"alter"</span>] = df[<span class="s">"alter"</span>].fillna(df[<span class="s">"alter"</span>].median())</pre>
+      <p class="code-cap">In echten Projekten wird der Median nur aus den Trainingsdaten berechnet – siehe Lektion 9.</p>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Fehlende Werte und Ausreißer nie automatisch löschen – erst verstehen, warum sie da sind.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Großbestellung ist das Schlüsselbeispiel: Wer Ausreißer blind löscht, wirft vielleicht die wichtigsten Kunden weg. Fragen Sie: „Wann bedeutet ein fehlender Wert selbst etwas?“ – z. B. keine Telefonnummer angegeben = weniger Bindung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Merkmale umwandeln" data-part="Teil B · Daten vorbereiten">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 35 Minuten</span><h2>Merkmale umwandeln: Skalierung, Kodierung, Feature Engineering</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer Äpfel mit Birnen vergleicht, muss sich auf eine Einheit einigen – Gewicht, Preis, Stück. Ohne gemeinsame Einheit sind Vergleiche Unsinn.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Viele Verfahren rechnen mit Abständen oder Gradienten. Liegen Merkmale auf sehr unterschiedlichen Skalen, dominiert das Merkmal mit den größten Zahlen. <b>Skalierung</b> bringt sie auf vergleichbare Bereiche; <b>Kodierung</b> übersetzt Kategorien in Zahlen.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/skalierung.gif" width="640" height="380" alt="Animation: Links Balken für Alter und Gehalt in Originaleinheiten, das Alter ist kaum sichtbar. Rechts nach Min-Max-Skalierung liegen beide Merkmale zwischen 0 und 1." loading="lazy">
+        <figcaption>Nach der Skalierung zählen Alter und Gehalt gleich stark.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Min-Max: x′ = <span class="frac"><span>x − min</span><span>max − min</span></span></div>
+        <div class="eq">Standardisierung (z-Wert): z = <span class="frac"><span>x − μ</span><span>σ</span></span></div>
+        <div class="legend-eq"><span>Min-Max bringt Werte auf [0; 1], ist aber ausreißerempfindlich. Standardisierung ergibt Mittelwert 0 und Standardabweichung 1.</span></div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel:</b> Alter 41, Minimum 22, Maximum 63 → <span class="calcline">(41 − 22) / (63 − 22) = 19 / 41 ≈ 0,46</span>.</p>
+        <h3>Kategorien kodieren</h3>
+        <ul>
+          <li><b>One-Hot-Kodierung</b> für nominale Merkmale: aus „Tarif = Basis/Plus/Premium“ werden drei Spalten mit 0/1. Mit <code>drop="first"</code> reichen zwei.</li>
+          <li><b>Ordinale Kodierung</b> für geordnete Kategorien: gering = 1, mittel = 2, hoch = 3.</li>
+          <li>Bei sehr vielen Kategorien (z. B. 8.000 Postleitzahlen): zusammenfassen (Region) oder Häufigkeits- bzw. Zielwertkodierung.</li>
+        </ul>
+        <h3>Feature Engineering</h3>
+        <p>Aus vorhandenen Daten neue, aussagekräftige Merkmale bauen: Wochentag aus dem Datum, Tage seit letztem Kauf, Umsatz der letzten 90 Tage, Verhältnis Retouren zu Bestellungen. Gutes Fachwissen schlägt hier oft komplizierte Modelle.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Abstandsbasierte Verfahren (kNN, k-Means, neuronale Netze) brauchen skalierte Merkmale; Entscheidungsbäume nicht.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Nominale Kategorien einfach durchnummerieren (Köln = 1, Bonn = 2, Ulm = 3) täuscht eine Reihenfolge und Abstände vor, die es nicht gibt. Für lineare Modelle und Netze: One-Hot.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Min-Max-Beispiel an der Tafel. Fragen Sie danach: Warum brauchen Bäume keine Skalierung? – Weil sie nur fragen „größer oder kleiner als ein Schwellwert“, die Einheit ist egal.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Data Leakage" data-part="Teil B · Daten vorbereiten">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 25 Minuten</span><h2>Data Leakage – die häufigste Prüfungsfalle</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Schüler bekommt vor der Klassenarbeit versehentlich das Lösungsblatt zu sehen. Seine Note ist hervorragend – über sein Können sagt sie nichts.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Data Leakage</b> heißt: Informationen, die im echten Einsatz zum Vorhersagezeitpunkt nicht verfügbar wären, gelangen ins Training. Das Modell wirkt im Test hervorragend und enttäuscht im Betrieb.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Art</th><th>Beispiel</th><th>Gegenmittel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Ziel-Leck</b> (target leakage)</td><td>Kündigerprognose nutzt die Spalte „Kündigungsgrund“ – die gibt es erst nach der Kündigung</td><td>Für jedes Merkmal fragen: Kenne ich es zum Vorhersagezeitpunkt?</td></tr>
+          <tr><td><b>Vorverarbeitungs-Leck</b></td><td>Skalierung, Imputation oder Merkmalsauswahl auf allen Daten vor dem Split</td><td>Erst aufteilen, dann nur auf Trainingsdaten anpassen (Pipeline)</td></tr>
+          <tr><td><b>Zeit-Leck</b></td><td>Zufälliger Split bei Zeitreihen</td><td>Zeitlich trennen</td></tr>
+          <tr><td><b>Gruppen-Leck</b></td><td>Fotos desselben Patienten in Training und Test</td><td>Gruppenweise aufteilen</td></tr>
+        </tbody>
+      </table></div>
+      <pre class="code"><span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="k">from</span> sklearn.pipeline <span class="k">import</span> make_pipeline
+<span class="k">from</span> sklearn.impute <span class="k">import</span> SimpleImputer
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> StandardScaler
+<span class="k">from</span> sklearn.linear_model <span class="k">import</span> LogisticRegression
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+modell = make_pipeline(SimpleImputer(strategy=<span class="s">"median"</span>), StandardScaler(), LogisticRegression())
+modell.fit(X_train, y_train)          <span class="c"># Median und Skalierung nur aus Trainingsdaten</span>
+<span class="k">print</span>(modell.score(X_test, y_test))   <span class="c"># Testdaten werden nur transformiert</span></pre>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Zuerst aufteilen, dann vorverarbeiten – und nur Merkmale nutzen, die zum Vorhersagezeitpunkt bekannt sind.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Ein Testergebnis, das „zu gut um wahr zu sein“ ist (z. B. 99,8 % bei einer schwierigen Aufgabe), ist fast immer ein Leck. In Situationsaufgaben wird genau das gern versteckt.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Modell soll bei Auftragseingang vorhersagen, ob ein Auftrag storniert wird. Welches Merkmal ist ein Leck?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Auftragswert</button>
+          <button type="button" class="opt">Anzahl früherer Stornos des Kunden</button>
+          <button type="button" class="opt" data-right="true">Datum der Rückerstattung</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Eine Rückerstattung gibt es erst nach der Stornierung – zum Vorhersagezeitpunkt ist sie unbekannt." data-no="Nicht ganz. Auftragswert und frühere Stornos sind bei Auftragseingang bekannt. Das Rückerstattungsdatum entsteht erst nach der Stornierung."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie für einen Datensatz jedes Merkmal mit „bekannt zum Vorhersagezeitpunkt? ja/nein“ markieren. Diese Spalte gehört in jede Merkmalsdokumentation.</p>
+      </aside>
+    </section>

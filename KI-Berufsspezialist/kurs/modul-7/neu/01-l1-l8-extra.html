@@ -1,0 +1,262 @@
+<!--EXTRA l1-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Ein Neuron im Alltag und mit den Aktivierungen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Das Jogging-Neuron mit Bias</span>
+        <p>Eingaben: Wetter schön (1 = ja), müde (1 = ja), Freund kommt mit (1 = ja). Gewichte: Wetter <b>+3</b>, müde <b>−2</b>, Freund <b>+1</b>. Bias <b>−1</b> (man geht nur, wenn die Gründe etwas überwiegen).</p>
+        <ul>
+          <li><b>Schöner Tag, müde, Freund kommt:</b> <span class="calcline">z = 3 · 1 − 2 · 1 + 1 · 1 − 1 = 1</span> → positiv → man geht joggen.</li>
+          <li><b>Regen, müde, kein Freund:</b> <span class="calcline">z = 0 − 2 + 0 − 1 = −3</span> → negativ → man bleibt zu Hause.</li>
+        </ul>
+        <p>Die Gewichte sagen, wie wichtig jeder Grund ist; der Bias legt fest, wie hoch die Schwelle liegt. Ein Netz lernt beides aus Beispielen, statt dass jemand die Zahlen vorgibt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Dieselbe Summe, drei Aktivierungen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">z</th><th class="r">ReLU</th><th class="r">Sigmoid</th><th class="r">Tanh</th></tr></thead>
+          <tbody>
+            <tr><td class="r">−2</td><td class="r">0</td><td class="r">0,119</td><td class="r">−0,964</td></tr>
+            <tr><td class="r">0,1</td><td class="r">0,1</td><td class="r">0,525</td><td class="r">0,100</td></tr>
+            <tr><td class="r">2</td><td class="r">2</td><td class="r">0,881</td><td class="r">0,964</td></tr>
+          </tbody>
+        </table></div>
+        <p>ReLU lässt Positives durch und sperrt Negatives, Sigmoid drückt alles in den Bereich 0 bis 1 (Wahrscheinlichkeit), Tanh in den Bereich −1 bis 1.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Neuron in der Kreditprüfung</span>
+        <p>Eingaben (auf 0 bis 1 skaliert): Einkommen 0,8 und Schuldenquote 0,6. Gewichte: +1,5 und −2,0; Bias +0,2. <span class="calcline">z = 1,5 · 0,8 − 2,0 · 0,6 + 0,2 = 1,2 − 1,2 + 0,2 = 0,2</span>. Mit Sigmoid: σ(0,2) ≈ 0,55 – leicht über 50 %. Ein einziges Neuron entspricht der logistischen Regression aus Modul 4. Mehrere Neuronen hintereinander machen daraus ein Netz.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Neuron hat die Eingaben x = (2; 3), Gewichte w = (0,5; 0,2) und den Bias b = −1. Berechnen Sie z, die Ausgabe mit ReLU und die Ausgabe mit Sigmoid.</p>
+        <p><b>Musterlösung:</b> z = 0,5 · 2 + 0,2 · 3 − 1 = 1 + 0,6 − 1 = 0,6 (2 Punkte). ReLU: max(0; 0,6) = 0,6 (1 Punkt). Sigmoid: 1 : (1 + e^−0,6) ≈ 0,646 (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l2-->
+      <div class="prose">
+        <h3>Das XOR-Problem selbst lösen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein einzelnes Neuron kann UND und ODER</span>
+        <p>Mit einer Stufenfunktion (Ausgabe 1, wenn z &gt; 0, sonst 0):</p>
+        <ul>
+          <li><b>ODER:</b> Gewichte (1, 1), Bias −0,5. Punkt (0|0): −0,5 → 0; (0|1): 0,5 → 1; (1|0): 0,5 → 1; (1|1): 1,5 → 1. ✓</li>
+          <li><b>UND:</b> Gewichte (1, 1), Bias −1,5. Punkt (1|1): 0,5 → 1; alle anderen negativ → 0. ✓</li>
+        </ul>
+        <p>Für XOR gibt es dagegen keine Gewichte, die beide „1“-Punkte (0|1) und (1|0) über die Schwelle bringen und zugleich (1|1) darunter lassen, denn (1|1) hätte immer die Summe der beiden Einzelbeiträge.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Das Netz mit einer verborgenen Schicht</span>
+        <p>Verborgenes Neuron 1 = ODER, verborgenes Neuron 2 = UND. Das Ausgabeneuron rechnet <span class="calcline">h₁ − h₂ − 0,5</span> (Stufenfunktion).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">x₁</th><th class="r">x₂</th><th class="r">h₁ (ODER)</th><th class="r">h₂ (UND)</th><th class="r">z = h₁ − h₂ − 0,5</th><th class="r">Ausgabe</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0</td><td class="r">0</td><td class="r">0</td><td class="r">0</td><td class="r">−0,5</td><td class="r">0</td></tr>
+            <tr><td class="r">0</td><td class="r">1</td><td class="r">1</td><td class="r">0</td><td class="r">0,5</td><td class="r">1</td></tr>
+            <tr><td class="r">1</td><td class="r">0</td><td class="r">1</td><td class="r">0</td><td class="r">0,5</td><td class="r">1</td></tr>
+            <tr><td class="r">1</td><td class="r">1</td><td class="r">1</td><td class="r">1</td><td class="r">−0,5</td><td class="r">0</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Ergebnis ist genau XOR. Die verborgene Schicht hat das Problem in zwei einfache Teilprobleme zerlegt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was „linear trennbar“ in der Praxis heißt</span>
+        <p>Entscheidet bei einer Qualitätsprüfung allein die Länge und die Breite über „in Ordnung“ (je größer, desto besser), kann eine gerade Linie die Klassen trennen. Gilt „zu klein oder zu groß ist schlecht, nur mittlere Größen sind gut“, geht das nicht mit einer Linie – wie bei XOR. Reale Zusammenhänge sind meist nichtlinear. Genau dafür braucht man mehrere Schichten.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum kann ein einzelnes Perzeptron das XOR-Problem nicht lösen, und wie löst man es?</p>
+        <p><b>Musterlösung:</b> Ein Perzeptron trennt nur mit einer geraden Linie; die beiden „1“-Fälle von XOR liegen diagonal gegenüber und sind nicht linear trennbar (2 Punkte). Mit einer verborgenen Schicht (z. B. ein Neuron für ODER, eines für UND) und einem Ausgabeneuron, das „ODER, aber nicht UND“ bildet, wird XOR lösbar (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Aktivierungen im Detail</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Werte der vier Funktionen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">z</th><th class="r">Sigmoid</th><th class="r">Tanh</th><th class="r">ReLU</th><th class="r">Leaky ReLU (0,01)</th></tr></thead>
+          <tbody>
+            <tr><td class="r">−2</td><td class="r">0,119</td><td class="r">−0,964</td><td class="r">0</td><td class="r">−0,02</td></tr>
+            <tr><td class="r">0</td><td class="r">0,5</td><td class="r">0</td><td class="r">0</td><td class="r">0</td></tr>
+            <tr><td class="r">2</td><td class="r">0,881</td><td class="r">0,964</td><td class="r">2</td><td class="r">2</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum Sigmoid bei tiefen Netzen Probleme macht</span>
+        <p>Die Steigung der Sigmoid-Funktion beträgt höchstens 0,25 (bei z = 0) und wird für große |z| winzig: bei z = 5 nur etwa <span class="calcline">0,993 · 0,007 ≈ 0,007</span>. Beim Rückwärtsrechnen werden die Steigungen Schicht für Schicht multipliziert. Bei zehn Sigmoid-Schichten ergibt sich im Bestfall <span class="calcline">0,25¹⁰ ≈ 0,000001</span>: Die ersten Schichten bekommen kaum noch Rückmeldung und lernen nicht. ReLU hat für positive Werte die Steigung 1 und vermeidet dieses „Verschwinden“.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die richtige Ausgabeschicht wählen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Aufgabe</th><th>Ausgabeschicht</th></tr></thead>
+          <tbody>
+            <tr><td>Kündigt der Kunde? (ja/nein)</td><td>1 Neuron, Sigmoid</td></tr>
+            <tr><td>Welche von 5 Fehlerarten liegt vor?</td><td>5 Neuronen, Softmax</td></tr>
+            <tr><td>Wie hoch ist der Stromverbrauch morgen?</td><td>1 Neuron, linear</td></tr>
+            <tr><td>Welche von mehreren Eigenschaften gelten gleichzeitig (Bild enthält Hund, Ball)?</td><td>je Eigenschaft ein Neuron mit Sigmoid</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Berechnen Sie Softmax für die Rohwerte (3; 0) und nennen Sie die geeignete Aktivierung der Ausgabeschicht für eine Regressionsaufgabe.</p>
+        <p><b>Musterlösung:</b> e³ ≈ 20,09 und e⁰ = 1; Summe 21,09; Wahrscheinlichkeiten ≈ 0,953 und ≈ 0,047 (3 Punkte). Regression: ein Ausgabeneuron mit linearer Aktivierung (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l4-->
+      <div class="prose">
+        <h3>Den Forward Pass mit neuer Eingabe wiederholen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Dasselbe Netz mit der Eingabe (0 | 1)</span>
+        <p>Neuron 1: Gewichte (0,8; −0,4), Bias 0,1. Neuron 2: Gewichte (0,3; 0,9), Bias −0,2. Neuron 3: Gewichte (−0,6; 0,5), Bias 0. Ausgabe: Gewichte (0,7; −0,5; 0,9), Bias 0,05.</p>
+        <ol class="steps">
+          <li><div>Neuron 1: <span class="calcline">ReLU(0,8 · 0 − 0,4 · 1 + 0,1) = ReLU(−0,3) = 0</span></div></li>
+          <li><div>Neuron 2: <span class="calcline">ReLU(0,3 · 0 + 0,9 · 1 − 0,2) = ReLU(0,7) = 0,7</span></div></li>
+          <li><div>Neuron 3: <span class="calcline">ReLU(−0,6 · 0 + 0,5 · 1 + 0) = ReLU(0,5) = 0,5</span></div></li>
+          <li><div>Ausgabe: <span class="calcline">z = 0,7 · 0 − 0,5 · 0,7 + 0,9 · 0,5 + 0,05 = −0,35 + 0,45 + 0,05 = 0,15</span> → <span class="calcline">σ(0,15) ≈ 0,54</span></div></li>
+        </ol>
+        <p>Bei dieser Eingabe schweigt Neuron 1, dafür sind Neuron 2 und 3 aktiv. Je nach Eingabe „sprechen“ andere Teile des Netzes – darin besteht seine Flexibilität.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viele Parameter hat dieses kleine Netz?</span>
+        <p>Verborgene Schicht: <span class="calcline">2 · 3 + 3 = 9</span> (6 Gewichte, 3 Bias). Ausgabeschicht: <span class="calcline">3 · 1 + 1 = 4</span>. Zusammen <b>13 Parameter</b>, die beim Training angepasst werden. Das Netz aus Lektion 8 mit 101.770 Parametern funktioniert genauso, nur größer.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was die Schichten bei einem Foto „sehen“</span>
+        <ul>
+          <li><b>Erste Schichten:</b> Kanten und Farbübergänge.</li>
+          <li><b>Mittlere Schichten:</b> Ecken, Rundungen, Texturen (Fell, Metall).</li>
+          <li><b>Späte Schichten:</b> Augen, Räder, Fenster.</li>
+          <li><b>Letzte Schicht:</b> „Katze“ oder „Auto“.</li>
+        </ul>
+        <p>Niemand hat diese Stufen vorgeschrieben; sie entstehen im Training, weil sie bei der Aufgabe helfen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Eingabe x = (1; 1). Ein verborgenes Neuron mit Gewichten (1; −1), Bias 0,5 und ReLU; ein Ausgabeneuron mit Gewicht 2, Bias −0,5 und Sigmoid. Berechnen Sie die Ausgabe.</p>
+        <p><b>Musterlösung:</b> Verborgenes Neuron: 1 · 1 + (−1) · 1 + 0,5 = 0,5; ReLU(0,5) = 0,5 (2 Punkte). Ausgabe: z = 2 · 0,5 − 0,5 = 0,5 (2 Punkte); σ(0,5) ≈ 0,62 (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l5-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Die Kreuzentropie in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Binäre Kreuzentropie für drei Vorhersagen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">wahr y</th><th class="r">Vorhersage ŷ (Wahrscheinlichkeit für 1)</th><th>Rechnung</th><th class="r">Verlust</th></tr></thead>
+          <tbody>
+            <tr><td class="r">1</td><td class="r">0,9</td><td>−ln(0,9)</td><td class="r">0,105</td></tr>
+            <tr><td class="r">1</td><td class="r">0,2</td><td>−ln(0,2)</td><td class="r">1,609</td></tr>
+            <tr><td class="r">0</td><td class="r">0,3</td><td>−ln(1 − 0,3) = −ln(0,7)</td><td class="r">0,357</td></tr>
+          </tbody>
+        </table></div>
+        <p>Mittlerer Verlust: <span class="calcline">(0,105 + 1,609 + 0,357) : 3 ≈ 0,69</span>. Die zweite Vorhersage (wahr = 1, aber nur 20 % vorhergesagt) verursacht den größten Anteil. Das Training zielt darauf, genau solche Fälle zu verbessern.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mehrere Klassen</span>
+        <p>Ein Bildnetz gibt aus: Katze 0,7 · Hund 0,2 · Vogel 0,1. Auf dem Bild ist tatsächlich ein Hund. Der Verlust ist <span class="calcline">−ln(0,2) ≈ 1,61</span>. Hätte das Netz „Hund 0,8“ vorhergesagt, wäre es nur <span class="calcline">−ln(0,8) ≈ 0,22</span>. Nur die Wahrscheinlichkeit der <b>richtigen</b> Klasse geht in den Verlust ein.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: MSE oder Kreuzentropie?</span>
+        <ul>
+          <li><b>Vorhersage der Raumtemperatur in Grad:</b> MSE (Zahl).</li>
+          <li><b>Erkennung, ob eine Rechnung doppelt gebucht ist:</b> binäre Kreuzentropie.</li>
+          <li><b>Zuordnung einer Mail zu einer von sechs Abteilungen:</b> kategoriale Kreuzentropie.</li>
+        </ul>
+        <p>Die Kreuzentropie bestraft ein sicheres „Falsch“ extrem: Bei ŷ = 0,01 für die richtige Klasse ist der Verlust 4,6, bei ŷ = 0,001 schon 6,9 – das Netz lernt, nie zu selbstgewiss falsch zu liegen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (4 Punkte):</b> Die richtige Klasse erhält die vorhergesagte Wahrscheinlichkeit 0,5. Berechnen Sie die Kreuzentropie und sagen Sie, welche Aufgabe damit trainiert wird.</p>
+        <p><b>Musterlösung:</b> −ln(0,5) = ln 2 ≈ 0,693 (2 Punkte). Die Kreuzentropie ist die Verlustfunktion für Klassifikation (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Backpropagation Schritt für Schritt</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Mehrere Lernschritte für ein Gewicht</span>
+        <p>Ausgangslage: ŷ = w · x mit x = 2, Wahrheit y = 3, Lernrate η = 0,05, Startgewicht w = 0,5. Der Gradient ist <span class="calcline">∂L/∂w = 2 · (ŷ − y) · x</span>.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Schritt</th><th class="r">w</th><th class="r">ŷ</th><th class="r">Verlust (ŷ − 3)²</th><th class="r">Gradient</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0</td><td class="r">0,50</td><td class="r">1,00</td><td class="r">4,00</td><td class="r">−8,0</td></tr>
+            <tr><td class="r">1</td><td class="r">0,90</td><td class="r">1,80</td><td class="r">1,44</td><td class="r">−4,8</td></tr>
+            <tr><td class="r">2</td><td class="r">1,14</td><td class="r">2,28</td><td class="r">0,52</td><td class="r">−2,88</td></tr>
+            <tr><td class="r">3</td><td class="r">1,28</td><td class="r">2,57</td><td class="r">0,19</td><td class="r">−1,73</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Verlust schrumpft von 4 auf 0,19. Der Gradient wird kleiner, weil man sich dem Ziel (w = 1,5) nähert; die Schritte werden von selbst kürzer.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Kettenregel mit zwei Gewichten hintereinander</span>
+        <p>Ein Mini-Netz: <span class="calcline">ŷ = w₂ · (w₁ · x)</span> mit x = 1, w₁ = 2, w₂ = 3, Wahrheit y = 5, η = 0,05.</p>
+        <ol class="steps">
+          <li><div>Vorhersage: <span class="calcline">ŷ = 3 · (2 · 1) = 6</span>; Verlust <span class="calcline">(6 − 5)² = 1</span>; <span class="calcline">∂L/∂ŷ = 2 · (6 − 5) = 2</span></div></li>
+          <li><div>Gewicht w₂ (näher an der Ausgabe): <span class="calcline">∂ŷ/∂w₂ = w₁ · x = 2</span> → <span class="calcline">∂L/∂w₂ = 2 · 2 = 4</span></div></li>
+          <li><div>Gewicht w₁ (weiter vorn): <span class="calcline">∂ŷ/∂w₁ = w₂ · x = 3</span> → <span class="calcline">∂L/∂w₁ = 2 · 3 = 6</span></div></li>
+          <li><div>Update: <span class="calcline">w₂ = 3 − 0,05 · 4 = 2,8 · w₁ = 2 − 0,05 · 6 = 1,7</span></div></li>
+          <li><div>Probe: <span class="calcline">ŷ = 2,8 · 1,7 = 4,76</span>, Verlust <span class="calcline">(4,76 − 5)² ≈ 0,058</span> – <span class="result">von 1 auf 0,06.</span></div></li>
+        </ol>
+        <p>Der Gradient jedes Gewichts ist das Produkt der Einzelwirkungen auf dem Weg zum Verlust – das ist die Kettenregel in Aktion.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Verschwindender Gradient in Zahlen</span>
+        <p>Jede Sigmoid-Schicht multipliziert den rückwärts laufenden Gradienten mit höchstens 0,25. Nach 5 Schichten: <span class="calcline">0,25⁵ ≈ 0,001</span>, nach 10 Schichten: <span class="calcline">0,25¹⁰ ≈ 0,000001</span>. Die vorderen Schichten erhalten praktisch keine Lernsignale mehr. Abhilfe: ReLU, gute Startgewichte, Batch-Normalisierung, Abkürzungen (Residual-Verbindungen).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> ŷ = w · x mit x = 3, w = 1, y = 6, L = (ŷ − y)², η = 0,02. Führen Sie einen Gradientenschritt durch.</p>
+        <p><b>Musterlösung:</b> ŷ = 3; L = 9 (1 Punkt). ∂L/∂w = 2 · (ŷ − y) · x = 2 · (−3) · 3 = −18 (2 Punkte). Neues w = 1 − 0,02 · (−18) = 1,36 (2 Punkte). Kontrolle: ŷ = 4,08, L ≈ 3,69 – kleiner als vorher (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l7-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Training planen und lesen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Schritte, Epochen und Dauer</span>
+        <p>Ein Netz für Ziffernbilder wird mit 60.000 Bildern trainiert, Batch-Größe 64, 15 Epochen. Ein Schritt dauert 0,05 Sekunden.</p>
+        <ol class="steps">
+          <li><div>Schritte je Epoche: <span class="calcline">60.000 : 64 = 937,5</span>, also 938 (der letzte Batch ist kleiner).</div></li>
+          <li><div>Insgesamt: <span class="calcline">938 · 15 = 14.070</span> Schritte.</div></li>
+          <li><div>Dauer: <span class="calcline">14.070 · 0,05 s ≈ 704 s ≈ 11,7 Minuten</span>.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Lernrate zu groß, passend, zu klein</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Lernrate</th><th>Verlauf des Trainingsverlusts</th><th>Diagnose</th></tr></thead>
+          <tbody>
+            <tr><td>0,5</td><td>0,9 → 1,4 → 3,0 → „nan“</td><td>zu groß, das Training „explodiert“</td></tr>
+            <tr><td>0,001</td><td>0,90 → 0,55 → 0,38 → 0,30 → 0,27</td><td>passend</td></tr>
+            <tr><td>0,000001</td><td>0,900 → 0,899 → 0,898</td><td>zu klein, kaum Fortschritt</td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Verlustkurve ist das wichtigste Werkzeug zur Fehlersuche: Sie zeigt in den ersten Minuten, ob die Lernrate stimmt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Welcher Optimierer?</span>
+        <ul>
+          <li><b>Adam:</b> Standard für die meisten Aufgaben; stellt die Schrittgröße je Gewicht selbst ein.</li>
+          <li><b>SGD mit Momentum:</b> bei Bildnetzen oft mit sorgfältig eingestellter Lernrate noch etwas besser, braucht aber mehr Feintuning.</li>
+          <li><b>Lernratenplan:</b> Zu Beginn größere Schritte, nach einigen Epochen kleinere, damit das Netz „fein einrastet“.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> 5.000 Beispiele, Batch-Größe 25, 40 Epochen. Wie viele Gewichts-Updates finden insgesamt statt? Erklären Sie die Begriffe Epoche und Batch.</p>
+        <p><b>Musterlösung:</b> 5.000 : 25 = 200 Schritte je Epoche; 200 · 40 = 8.000 Updates (2 Punkte). Eine Epoche ist ein vollständiger Durchlauf durch alle Trainingsdaten (1,5 Punkte); ein Batch ist die Gruppe von Beispielen, nach der die Gewichte einmal angepasst werden (1,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l8-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Netze in Größe und Speicher</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Netz für Tabellendaten</span>
+        <p>20 Merkmale → 64 Neuronen → 32 Neuronen → 1 Ausgabe.</p>
+        <ul>
+          <li>Schicht 1: <span class="calcline">20 · 64 + 64 = 1.344</span></li>
+          <li>Schicht 2: <span class="calcline">64 · 32 + 32 = 2.080</span></li>
+          <li>Ausgabe: <span class="calcline">32 · 1 + 1 = 33</span></li>
+          <li>Zusammen: <span class="result">3.457 Parameter</span></li>
+        </ul>
+        <p>Das ist ein kleines Netz. Bei einer Tabelle mit einigen tausend Zeilen besteht dennoch die Gefahr des Overfittings: Es gibt mehr Parameter als Beispiele.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Speicherbedarf</span>
+        <p>Jeder Parameter belegt bei 32-Bit-Zahlen 4 Byte. Ein Bildnetz mit 25 Millionen Parametern braucht <span class="calcline">25.000.000 · 4 Byte = 100 MB</span>. Ein Sprachmodell mit 7 Milliarden Parametern in 16-Bit-Genauigkeit (2 Byte): <span class="calcline">7.000.000.000 · 2 = 14 GB</span> – das passt nicht auf jede Grafikkarte. Deshalb werden Modelle für den Einsatz komprimiert (Quantisierung, Modul 7 Lektion 16).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Parameter und Daten im Verhältnis</span>
+        <p>Ein Netz mit 100.000 Parametern und 2.000 Trainingsbeispielen hat 50 Parameter pro Beispiel und kann die Daten leicht auswendig lernen. Als Faustregel sollten Beispiele und Parameter in einem vernünftigen Verhältnis stehen, oder man nutzt Regularisierung, Augmentation oder Transfer Learning. Größere Netze sind nicht automatisch besser, sondern nur bei genügend Daten.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (4 Punkte):</b> Ein Netz hat 10 Eingaben, eine verborgene Schicht mit 5 Neuronen und eine Ausgabeschicht mit 3 Neuronen. Wie viele Parameter hat es?</p>
+        <p><b>Musterlösung:</b> Schicht 1: 10 · 5 + 5 = 55 (2 Punkte). Schicht 2: 5 · 3 + 3 = 18 (1 Punkt). Zusammen 73 (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->

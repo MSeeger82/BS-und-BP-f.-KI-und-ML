@@ -1,0 +1,313 @@
+<!--EXTRA l1-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Woran Projekte in der Praxis scheitern</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: 97 % Genauigkeit und trotzdem wertlos</span>
+        <p>Ein Maschinenbauer will Ausfälle vorhersagen. Von 1.000 Maschinen fallen im Jahr 30 aus (3 %). Das erste Modell sagt für jede Maschine „kein Ausfall“.</p>
+        <ol class="steps">
+          <li><div>Richtig: <span class="calcline">970 von 1.000 = 97 % Genauigkeit</span></div></li>
+          <li><div>Erkannte Ausfälle: <span class="calcline">0 von 30 → Recall 0 %</span></div></li>
+        </ol>
+        <p>Das Team berichtet stolz von 97 %. Das Geschäftsziel („Ausfälle früher erkennen“) wird aber nicht erreicht. Ursache: Das Ziel wurde nie in eine passende Kennzahl übersetzt (Modul 6). Ein klares Erfolgskriterium vorab hätte das verhindert.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Prognose, die niemand nutzt</span>
+        <p>Ein Großhändler entwickelt monatelang eine Absatzprognose. Sie ist genau, wird aber als Excel-Datei an die Einkäufer gemailt. Diese bestellen weiter nach Gefühl, weil sie nicht verstehen, wie die Zahlen entstehen, und weil niemand ihren Arbeitsablauf angepasst hat. Nach einem Jahr wird das Projekt eingestellt.</p>
+        <p><b>Lehre:</b> Der Prozess, in dem das Ergebnis genutzt wird, gehört zum Projekt. Wer trifft welche Entscheidung mit der Prognose? Wie wird sie im Alltag angezeigt? Wer darf ihr widersprechen, und wie fließt das zurück?</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Vom Wunsch zum prüfbaren Ziel</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wunsch</th><th>Besser formuliert</th></tr></thead>
+          <tbody>
+            <tr><td>„Wir wollen den Kundenservice mit KI verbessern.“</td><td>„Bis 30.09. sinkt die mittlere Erstantwortzeit auf E-Mails von 12 auf 4 Stunden; mindestens 70 % der Entwürfe werden ohne größere Änderung übernommen.“</td></tr>
+            <tr><td>„Weniger Ausschuss.“</td><td>„Die Ausschussquote an Linie 3 sinkt bis Ende Q2 von 4,2 % auf 3,0 % (rund 29 % weniger); das Modell erkennt mindestens 90 % der fehlerhaften Teile bei höchstens 5 % Fehlalarmen.“</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Mit der Frage „Welches Modell nehmen wir?“ starten statt mit „Welches Problem lösen wir?“.</li>
+          <li>Annehmen, Daten seien vorhanden, nur weil ein System sie irgendwo speichert – Qualität und Labels fehlen oft.</li>
+          <li>Das Projekt mit dem Prototyp als „fertig“ ansehen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei typische Gründe, warum KI-Projekte scheitern, und je eine Gegenmaßnahme.</p>
+        <p><b>Musterlösung:</b> Unklares Ziel → messbares Geschäftsziel und Erfolgskriterium vorab. Schlechte oder fehlende Daten → Datenprüfung vor Projektstart. Fehlende Akzeptanz oder kein Prozess für das Ergebnis → Nutzer und Betriebsrat früh einbinden, Schulung. (Weitere gleichwertig: Prototyp ohne Betrieb → MLOps; späte Rechtsprüfung → Datenschutz und AI Act zu Beginn; keine Wartung → Monitoring.) Je Grund mit Maßnahme 2 Punkte.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Denken Sie an ein IT-Projekt, das bei Ihnen nicht den erhofften Nutzen gebracht hat. Welcher der sieben Gründe der Tabelle trifft zu? Meist waren es Ziel und Prozess, nicht die Technik.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l2-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Die sechs Phasen an einem Projekt</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kündigerprognose durch alle Phasen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Phase</th><th>Was konkret geschieht</th></tr></thead>
+          <tbody>
+            <tr><td>1 Business Understanding</td><td>Ziel: Kündigungen im Tarif „Basis“ um 15 % senken. Erfolgskriterium, Budget, Datenschutz (Rechtsgrundlage) klären.</td></tr>
+            <tr><td>2 Data Understanding</td><td>Vertragsdaten, Rechnungen, Anrufe sichten; 12 % der Kunden haben kein Kündigungsdatum eingetragen – Qualität prüfen.</td></tr>
+            <tr><td>3 Data Preparation</td><td>Kündigungsdatum rekonstruieren, Merkmale bilden („Anrufe der letzten 90 Tage“), in Training, Validierung und Test teilen.</td></tr>
+            <tr><td>4 Modeling</td><td>Logistische Regression als Baseline, Entscheidungsbaum und Gradient Boosting vergleichen.</td></tr>
+            <tr><td>5 Evaluation</td><td>Recall und Precision auf dem Testdatensatz; zusätzlich: Würde die Rückholaktion bei diesem Treffer-Niveau Geld sparen? Go/No-Go.</td></tr>
+            <tr><td>6 Deployment</td><td>Nächtlicher Batch-Lauf, Liste an den Kundenservice, Monitoring, Dokumentation.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein Rücksprung kostet Zeit, aber spart Geld</span>
+        <p>In Phase 2 zeigt sich, dass bei 40 % der Verträge die Kündigungsgründe fehlen, auf denen das Ziel („Kündigungen wegen Preis verhindern“) aufbaut. Das Team springt zu Phase 1 zurück und ändert das Ziel: Statt Gründe vorherzusagen, wird die Kündigung selbst prognostiziert. Ohne den Rücksprung wäre ein Modell entstanden, das nie ausreichend trainiert werden konnte.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wo bleibt die Arbeitszeit?</span>
+        <p>Ein Projekt umfasst 200 Personentage:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Phase</th><th class="r">Personentage</th><th class="r">Anteil</th></tr></thead>
+          <tbody>
+            <tr><td>Business Understanding</td><td class="r">10</td><td class="r">5 %</td></tr>
+            <tr><td>Data Understanding</td><td class="r">15</td><td class="r">7,5 %</td></tr>
+            <tr><td>Data Preparation</td><td class="r">130</td><td class="r">65 %</td></tr>
+            <tr><td>Modeling</td><td class="r">20</td><td class="r">10 %</td></tr>
+            <tr><td>Evaluation</td><td class="r">10</td><td class="r">5 %</td></tr>
+            <tr><td>Deployment</td><td class="r">15</td><td class="r">7,5 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Summe 200 Tage. Bei einem Tagessatz von 600 € sind das 120.000 €, davon <span class="calcline">130 · 600 = 78.000 €</span> für die Datenaufbereitung. Wer nur das Modell kalkuliert, plant etwa ein Zehntel des Aufwands.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Zuordnung üben</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tätigkeit</th><th>Phase</th></tr></thead>
+          <tbody>
+            <tr><td>Erfolgskriterium mit dem Fachbereich festlegen</td><td>Business Understanding</td></tr>
+            <tr><td>Fehlende Werte zählen, Histogramme anschauen</td><td>Data Understanding</td></tr>
+            <tr><td>Ausreißer behandeln, Merkmale skalieren</td><td>Data Preparation</td></tr>
+            <tr><td>Hyperparameter mit Kreuzvalidierung einstellen</td><td>Modeling</td></tr>
+            <tr><td>Entscheiden, ob das Ziel erreicht wird (Go/No-Go)</td><td>Evaluation</td></tr>
+            <tr><td>Monitoring einrichten, Abschlussbericht schreiben</td><td>Deployment</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>CRISP-DM als starre Abfolge verstehen. Rücksprünge sind ausdrücklich vorgesehen.</li>
+          <li>Die Evaluation auf Kennzahlen reduzieren – es geht auch um das Geschäftsziel.</li>
+          <li>Die Phase 6 mit „Modell fertig“ gleichsetzen; zu Deployment gehören Überwachung und Wartung.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie die sechs Phasen von CRISP-DM und erklären Sie, warum es Rücksprünge gibt.</p>
+        <p><b>Musterlösung:</b> Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, Deployment (3 Punkte). Rücksprünge: Erkenntnisse aus späteren Phasen können frühere Annahmen widerlegen (z. B. fehlende Daten zwingen zur Zieländerung; schlechte Evaluation zwingt zu neuen Merkmalen) (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Ziele, Baseline und Wirtschaftlichkeit</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Fehlerkosten bestimmen die Schwelle</span>
+        <p>Ein verpasster Ausfall (FN) kostet 5.000 €, ein Fehlalarm (FP) kostet 200 € für eine unnötige Prüfung.</p>
+        <ol class="steps">
+          <li><div>Ein Alarm lohnt sich, wenn der erwartete Schaden höher ist als die Prüfkosten: <span class="calcline">p · 5.000 € &gt; 200 €</span></div></li>
+          <li><div>Umgestellt: <span class="calcline">p &gt; 200 : 5.000 = 0,04</span></div></li>
+        </ol>
+        <p>Schon bei einer Ausfallwahrscheinlichkeit von mehr als 4 % lohnt sich eine Prüfung. Die Schwelle des Modells sollte also niedrig angesetzt werden – ein hoher Recall ist wichtiger als hohe Precision.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Business Case mit angenommenen Zahlen</span>
+        <p>100 Ausfälle pro Jahr zu je 5.000 € = 500.000 €. Die Baseline (Wartung nach Plan) erkennt keinen davon vorab. Das Modell erreicht Recall 80 % und Precision 50 %. Ein rechtzeitig erkannter Ausfall wird durch eine Wartung für 500 € verhindert.</p>
+        <ol class="steps">
+          <li><div>Erkannte Ausfälle: <span class="calcline">100 · 0,8 = 80</span> · Ersparnis je Fall 5.000 − 500 = 4.500 € → <span class="calcline">80 · 4.500 = 360.000 €</span></div></li>
+          <li><div>Fehlalarme bei Precision 50 %: 160 Alarme insgesamt, davon 80 falsch → <span class="calcline">80 · 200 € = 16.000 €</span></div></li>
+          <li><div>Nutzen: <span class="calcline">360.000 − 16.000 = 344.000 €</span> pro Jahr. Die übrigen 20 Ausfälle kosten weiter 100.000 €.</div></li>
+        </ol>
+        <p>Diesen Nutzen stellt man den Projektkosten gegenüber (Modul 11). Entsteht kein positiver Business Case, ist ein früher Stopp die richtige Entscheidung.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die Baseline ist der Maßstab</span>
+        <p>Heute erkennen erfahrene Mitarbeitende 55 % der fehlerhaften Teile. Ein Modell mit 70 % ist deutlich besser; ein Modell mit 52 % wäre schlechter als der Mensch, selbst wenn es „nach viel“ klingt. Ohne bekannte Baseline weiß niemand, ob das Projekt etwas gebracht hat. Oft ist auch eine einfache Regel („Ausfall, wenn Temperatur &gt; 90 °C“) eine Baseline, die das Modell schlagen muss.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Nur technische Kriterien festlegen (Recall ≥ 80 %), aber keinen Geschäftsnutzen.</li>
+          <li>Fehlerkosten gleich hoch ansetzen, obwohl ein verpasster Ausfall viel teurer ist als ein Fehlalarm.</li>
+          <li>Rechtliche Fragen (Datenschutz, AI Act) erst nach dem Training prüfen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Formulieren Sie für „Wir wollen Retouren reduzieren“ ein SMART-Ziel und nennen Sie zwei weitere Prüffragen vor Projektstart.</p>
+        <p><b>Musterlösung:</b> Beispiel: „Bis 31.12. sinkt die Retourenquote bei Schuhen von 38 % auf 30 %; das Modell empfiehlt die richtige Größe in mindestens 75 % der Fälle“ (spezifisch, messbar, terminiert, realistisch; 4 Punkte). Prüffragen: Wer trifft die Entscheidung und nutzt das Ergebnis? Gibt es genug Daten mit Labels, und dürfen sie genutzt werden? Was ist die Baseline? Was kosten Fehler? (je 1 Punkt, max. 2).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Schreiben Sie für Ihr Transferthema in drei Sätzen: Welche Entscheidung wird besser? Woran messen wir es? Was ist heute der Stand (Baseline)? Wenn sich das nicht beantworten lässt, ist das Thema noch nicht reif.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l4-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Wer macht was?</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Aufgaben den Rollen zuordnen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Aufgabe</th><th>Rolle</th></tr></thead>
+          <tbody>
+            <tr><td>Entscheidet, ob die Prognose den Bedarf wirklich besser trifft (Abnahme)</td><td>Auftraggeber / Fachbereich</td></tr>
+            <tr><td>Verbindet das ERP-System mit dem Datenspeicher und prüft die Datenqualität</td><td>Data Engineer</td></tr>
+            <tr><td>Testet Modelle, bildet Merkmale, wertet Kennzahlen aus</td><td>Data Scientist</td></tr>
+            <tr><td>Verpackt das Modell als Dienst und richtet die Überwachung ein</td><td>ML Engineer</td></tr>
+            <tr><td>Prüft, ob Kundendaten für den Zweck genutzt werden dürfen</td><td>Datenschutzbeauftragte/r</td></tr>
+            <tr><td>Verhandelt eine Betriebsvereinbarung zur Nutzung</td><td>Betriebsrat (mit Geschäftsleitung)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein kleiner Betrieb mit drei Personen</span>
+        <p>Ein Handwerksbetrieb mit 25 Beschäftigten will Angebotstexte mit KI vorbereiten. Das Team: die Büroleiterin (Fachbereich und Product Owner), ein externer IT-Dienstleister (Data/ML Engineer und IT-Betrieb), der Inhaber (Auftraggeber, zugleich Datenschutz-Verantwortlicher; ein externer Datenschutzbeauftragter berät). Wichtig ist nicht die Zahl der Personen, sondern dass jede Rolle jemandem zugeordnet ist – sonst bleibt zum Beispiel die Datenschutzprüfung unerledigt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein typischer Konflikt</span>
+        <p>Der Data Scientist möchte für bessere Vorhersagen zusätzlich Standortdaten der Außendienst-Fahrzeuge verwenden. Der Datenschutzbeauftragte sieht hier Leistungs- und Verhaltenskontrolle, der Betriebsrat widerspricht. Gelöst wird das, indem Zweck und Daten gemeinsam abgegrenzt werden (z. B. nur anonymisierte, zusammengefasste Daten je Region), eine Betriebsvereinbarung die Nutzung regelt und der Product Owner den Nutzen gegen den Aufwand abwägt. Wer als Berufsspezialist beide Seiten versteht, kann hier vermitteln.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Das Projekt allein in der IT oder allein im Fachbereich starten.</li>
+          <li>Datenschutz und Betriebsrat erst bei der Einführung hinzuziehen.</li>
+          <li>Rollen mit Personen verwechseln: Eine Person kann mehrere Rollen haben, aber keine darf fehlen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie fünf Rollen in einem KI-Projekt und ihre Aufgabe.</p>
+        <p><b>Musterlösung:</b> Fachbereich (Ziel, Fachwissen, Abnahme); Product Owner (Prioritäten, Bindeglied); Data Engineer (Datenquellen und -qualität); Data Scientist (Analyse und Modelle); ML Engineer (Betrieb und Überwachung); außerdem IT-Betrieb, Datenschutz, Betriebsrat, Endnutzer. Je Rolle mit Aufgabe 1 Punkt.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Schreiben Sie die neun Rollen auf und tragen Sie hinter jede einen Namen ein. Wo ein Feld leer bleibt, haben Sie die erste Projektlücke gefunden.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l5-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Stufen, Kosten und Dokumentation</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Warum man in Stufen investiert</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Stufe</th><th>Dauer und Aufwand</th><th class="r">Kosten</th></tr></thead>
+          <tbody>
+            <tr><td>Proof of Concept</td><td>6 Wochen, 2 Personen: 60 Personentage</td><td class="r">36.000 €</td></tr>
+            <tr><td>Pilot</td><td>3 Monate, eine Filiale: 150 Personentage</td><td class="r">90.000 €</td></tr>
+            <tr><td>Rollout</td><td>alle 60 Filialen, Betrieb, Schulung</td><td class="r">250.000 €</td></tr>
+          </tbody>
+        </table></div>
+        <p>(Tagessatz 600 €.) Zeigt der PoC, dass die Baseline nicht geschlagen wird, kostet der Abbruch 36.000 €. Hätte man gleich alles gebaut, wären <span class="calcline">36.000 + 90.000 + 250.000 = 376.000 €</span> verloren. Der frühe Abbruch spart <span class="calcline">90.000 + 250.000 = 340.000 €</span> – ein Erfolg.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Abbruchkriterien vorab festlegen</span>
+        <ul>
+          <li><b>PoC:</b> Das Modell erreicht auf Testdaten mindestens Recall 70 % (Baseline 55 %). Sonst Abbruch oder Zielüberprüfung.</li>
+          <li><b>Pilot:</b> Nach 3 Monaten sind mindestens 20 % der Fälle schneller bearbeitet, mindestens 4 von 5 Nutzern würden es weiter verwenden, keine Datenschutzvorfälle.</li>
+          <li><b>Rollout:</b> Monitoring zeigt stabile Kennzahlen; Support-Aufwand unter 2 Tickets pro Woche.</li>
+        </ul>
+        <p>Wer die Kriterien erst hinterher festlegt, bewertet den Erfolg meist so, dass das Projekt gut aussieht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Eine Model Card in Kurzform</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Feld</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td>Zweck</td><td>Prognose des Wochenabsatzes frischer Waren je Filiale</td></tr>
+            <tr><td>Daten</td><td>Kassendaten 01/2024–12/2025, Wetter, Feiertage; keine Personendaten</td></tr>
+            <tr><td>Kennzahlen</td><td>mittlere Abweichung 8 % (Test), Baseline 13 %</td></tr>
+            <tr><td>Grenzen</td><td>nicht geeignet für neue Filialen in den ersten 8 Wochen; Aktionswochen ungenau</td></tr>
+            <tr><td>Verantwortlich</td><td>Fachbereich Einkauf, technisch ML Engineer, Version v3</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Den PoC als Mini-Produkt verstehen und dann „einfach hochskalieren“.</li>
+          <li>Einen Pilot an Freiwilligen testen, die ohnehin begeistert sind – das verzerrt das Ergebnis.</li>
+          <li>Dokumentation erst am Ende „nachliefern“; dann fehlen Entscheidungen und Gründe.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Unterscheiden Sie Proof of Concept, Pilot und Rollout und nennen Sie ein Dokument, das ein Modell beschreibt.</p>
+        <p><b>Musterlösung:</b> PoC: technische Machbarkeit, wenige Wochen, historische Daten. Pilot: Nutzen im echten Prozess mit begrenzter Nutzerzahl. Rollout: Betrieb für alle, mit Support und Monitoring (je 1,5 Punkte). Dokument: Model Card (Zweck, Daten, Kennzahlen, Grenzen, Verantwortliche) oder Datenblatt (0,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Was MLOps im Alltag ändert</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: „Es läuft nur auf Herrn Brandts Laptop“</span>
+        <p>Ein Data Scientist hat ein Modell im Notebook gebaut. Als er in den Urlaub geht, will das Team es neu trainieren. Niemand weiß, welche Daten er benutzt hat, welche Pakete installiert waren und in welcher Reihenfolge die Zellen ausgeführt wurden. Das Ergebnis lässt sich nicht reproduzieren. Mit MLOps stünden Code in Git, Daten und Modell versioniert, die Umgebung im Container und der Ablauf in einer Pipeline.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Experiment-Tracking</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Lauf</th><th>Verfahren und Einstellungen</th><th class="r">Recall</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Zufallswald, Tiefe 5</td><td class="r">0,72</td></tr>
+            <tr><td>2</td><td>Zufallswald, Tiefe 10</td><td class="r">0,78</td></tr>
+            <tr><td>3</td><td>Zufallswald, Tiefe 10, neues Merkmal „Anrufe 90 Tage“</td><td class="r">0,83</td></tr>
+          </tbody>
+        </table></div>
+        <p>Nach drei Wochen weiß ohne Protokoll niemand mehr, welche Einstellung zu welchem Wert gehörte. Mit Tracking (z. B. MLflow) steht alles nachvollziehbar da; Lauf 3 wird mit Daten- und Code-Version in der Registry abgelegt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Drei Reifegrade</span>
+        <ul>
+          <li><b>Stufe 0 – manuell:</b> Notebook, händischer Export, Modell wird per E-Mail weitergegeben. Neutraining dauert 2 Tage.</li>
+          <li><b>Stufe 1 – automatisierte Pipeline:</b> Training läuft geskriptet, Ergebnisse werden protokolliert; Neutraining per Knopfdruck.</li>
+          <li><b>Stufe 2 – automatisiert mit CI/CD/CT:</b> Änderungen lösen Tests aus, Modelle werden bei Drift automatisch neu trainiert und nach Prüfung freigegeben.</li>
+        </ul>
+        <p>Rechnung: Bei monatlichem Neutraining kostet Stufe 0 <span class="calcline">12 · 2 Tage = 24 Tage · 600 € = 14.400 €</span> pro Jahr nur für diese Handarbeit.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>MLOps als „Luxus für Konzerne“ abtun – schon Git, ein protokolliertes Experiment und ein Container sind MLOps.</li>
+          <li>Das Modell versionieren, aber nicht die Daten, mit denen es trainiert wurde.</li>
+          <li>Das Modell einmal ausliefern und danach nicht mehr ansehen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie, worin sich MLOps von klassischem DevOps unterscheidet, und nennen Sie drei Bausteine von MLOps.</p>
+        <p><b>Musterlösung:</b> Bei ML ändern sich neben dem Code auch Daten und Modelle, und ein Modell kann veralten, ohne dass jemand etwas ändert (Drift) (2 Punkte). Bausteine: Versionierung von Code, Daten und Modellen; Experiment-Tracking; automatisierte Pipelines; Tests; Bereitstellung; Monitoring (je 1 Punkt, max. 3).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l7-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Die passende Variante wählen und dimensionieren</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Wie viele Instanzen für eine Online-API?</span>
+        <p>Eine Instanz beantwortet eine Anfrage in 20 ms. Zur Spitzenzeit kommen 400 Anfragen pro Sekunde.</p>
+        <ol class="steps">
+          <li><div>Eine Instanz schafft: <span class="calcline">1.000 ms : 20 ms = 50 Anfragen pro Sekunde</span></div></li>
+          <li><div>Benötigt: <span class="calcline">400 : 50 = 8 Instanzen</span></div></li>
+          <li><div>Mit 25 % Reserve für Lastspitzen und Ausfälle: <span class="calcline">8 · 1,25 = 10 Instanzen</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Batch-Lauf über Nacht</span>
+        <p>2 Mio. Kunden sollen bewertet werden; das Modell schafft 5.000 Vorhersagen pro Sekunde.</p>
+        <p><span class="calcline">2.000.000 : 5.000 = 400 Sekunden ≈ 6,7 Minuten</span> – locker innerhalb eines Nachtfensters. Eine Online-API wäre hier unnötig teuer, weil die Liste nur einmal am Tag gebraucht wird.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Edge und Modellgröße</span>
+        <p>Das Modell für eine Kamera an der Fertigungslinie belegt 200 MB (32-Bit-Zahlen). Das Gerät hat 512 MB Arbeitsspeicher, davon sind 300 MB frei. Knapp, aber machbar. Mit Quantisierung (8 Bit statt 32 Bit) schrumpft das Modell auf <span class="calcline">200 MB · 8 : 32 = 50 MB</span> und läuft schneller, bei meist geringem Genauigkeitsverlust.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Auswahl mit Leitfragen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Szenario</th><th>Leitfrage</th><th>Variante</th></tr></thead>
+          <tbody>
+            <tr><td>Wöchentliche Absatzprognose für den Einkauf</td><td>Reicht ein Ergebnis pro Woche?</td><td>Batch</td></tr>
+            <tr><td>Betrugsprüfung beim Bezahlen</td><td>Antwort in Millisekunden nötig?</td><td>Online-API</td></tr>
+            <tr><td>Prüfkamera in einer Halle ohne stabiles Netz</td><td>Muss es offline laufen?</td><td>Edge</td></tr>
+            <tr><td>Überwachung von Maschinen-Sensoren in Echtzeit</td><td>Dauerhafter Datenstrom?</td><td>Streaming</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Standardmäßig eine Online-API bauen, obwohl ein nächtlicher Batch-Lauf reichen würde.</li>
+          <li>Ein Modell ohne Container ausliefern – dann fehlen auf dem Server Bibliotheken oder passen nicht in der Version.</li>
+          <li>Latenz und Last nicht im Voraus berechnen und erst im Betrieb merken, dass das System zu langsam ist.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Eine Instanz beantwortet 25 Anfragen pro Sekunde. Zur Spitzenzeit kommen 300 Anfragen pro Sekunde. Wie viele Instanzen braucht man mit 20 % Reserve? Nennen Sie eine weitere Bereitstellungsvariante mit Beispiel.</p>
+        <p><b>Musterlösung:</b> 300 : 25 = 12; mit Reserve 12 · 1,2 = 14,4, also <b>15 Instanzen</b> (3 Punkte). Beispiel: Batch für die nächtliche Kündigerliste oder Edge für eine Kamera ohne Netz (2 Punkte).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Fragen Sie für Ihr Thema: Wie schnell wird das Ergebnis gebraucht – Sekunden, Stunden oder Tage? Die Antwort legt die Variante und damit einen großen Teil der Kosten fest.</p>
+      </div>
+<!--/EXTRA-->

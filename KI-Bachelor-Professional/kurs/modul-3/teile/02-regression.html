@@ -1,0 +1,135 @@
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Lineare Regression" data-part="Teil B · Regression">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 30 Minuten</span><h2>Lineare Regression: eine Gerade durch die Punktwolke</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Taxi kostet 4 € Grundpreis plus 2 € pro Kilometer. Für 10 km zahlen Sie 24 €. Kennt man Grundpreis und Kilometerpreis, kann man jede Fahrt vorhersagen. Die lineare Regression lernt genau diese beiden Zahlen aus vergangenen Fahrten.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>einfache lineare Regression</b> modelliert eine metrische Zielgröße y als Gerade in Abhängigkeit von einem Merkmal x. <b>b₀</b> ist der Achsenabschnitt (Wert bei x = 0), <b>b₁</b> die Steigung (Änderung von y je Einheit x).</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Modell</span>
+        <div class="eq">ŷ = b₀ + b₁ · x &nbsp;&nbsp; Residuum e = y − ŷ</div>
+        <div class="legend-eq"><span>ŷ („y-Dach“) ist die Vorhersage, y der echte Wert. Das Residuum ist der Fehler je Beispiel.</span></div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel:</b> Ein Modell schätzt die Heizkosten einer Halle: <span class="calcline">ŷ = 1.200 € + 85 € · (Grad unter 15 °C)</span>. Bei durchschnittlich 9 °C (6 Grad unter 15) ergibt sich <span class="calcline">1.200 + 85 · 6 = 1.710 €</span>.</p>
+        <p><b>Annahmen</b> (für gute Ergebnisse und saubere Deutung): linearer Zusammenhang, Residuen ohne Muster und mit gleicher Streuung, keine starken Ausreißer. Außerhalb des Datenbereichs (<b>Extrapolation</b>) ist jede Vorhersage unsicher.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>b₀ = Startwert, b₁ = Veränderung pro Einheit. Die Gerade gilt nur im Bereich der Trainingsdaten sicher.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Eine Gerade für Grundstückspreise in Abhängigkeit von der Fläche, gelernt mit 300 bis 900 m², sagt für 10 m² womöglich einen negativen Preis vorher. Nicht weit über die Daten hinaus vorhersagen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Teilnehmenden eigene Beispiele mit Grundbetrag plus Betrag je Einheit nennen (Handytarif, Stundenlohn mit Anfahrt). Genau das ist eine lineare Regression.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Kleinste Quadrate und R²" data-part="Teil B · Regression">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 45 Minuten</span><h2>Methode der kleinsten Quadrate und Bestimmtheitsmaß R²</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Beim Darts ist ein Pfeil knapp daneben ärgerlich, einer ganz am Rand richtig schlecht. Wer große Fehler stärker bestraft als kleine, quadriert die Abstände – so funktioniert die beste Gerade.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>Methode der kleinsten Quadrate</b> (OLS) wählt b₀ und b₁ so, dass die Summe der quadrierten Residuen Σ(y − ŷ)² minimal wird. Für eine Gerade gibt es dafür eine geschlossene Formel.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/kleinste-quadrate.gif" width="640" height="380" alt="Animation: Eine Gerade dreht sich durch sechs Punkte. Zu jedem Punkt ist das quadrierte Residuum als rotes Quadrat eingezeichnet; die Summe der Flächen sinkt, bis sie minimal ist." loading="lazy">
+        <figcaption>Die beste Gerade macht die Summe der roten Quadrate am kleinsten.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">b₁ = <span class="frac"><span>Σ (xᵢ − x̄)(yᵢ − ȳ)</span><span>Σ (xᵢ − x̄)²</span></span> &nbsp;&nbsp; b₀ = ȳ − b₁ · x̄</div>
+        <div class="eq">R² = 1 − <span class="frac"><span>Σ (yᵢ − ŷᵢ)²</span><span>Σ (yᵢ − ȳ)²</span></span></div>
+        <div class="legend-eq"><span>R² ist der Anteil der Streuung von y, den das Modell erklärt: 0 = nichts, 1 = alles.</span></div>
+      </div>
+      <div class="prose">
+        <h3>Komplett durchgerechnet</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">x</th><th class="r">y</th><th class="r">x − x̄</th><th class="r">y − ȳ</th><th class="r">(x − x̄)(y − ȳ)</th><th class="r">(x − x̄)²</th></tr></thead>
+          <tbody>
+            <tr><td class="r">1</td><td class="r">2</td><td class="r">−2</td><td class="r">−2</td><td class="r">4</td><td class="r">4</td></tr>
+            <tr><td class="r">2</td><td class="r">4</td><td class="r">−1</td><td class="r">0</td><td class="r">0</td><td class="r">1</td></tr>
+            <tr><td class="r">3</td><td class="r">5</td><td class="r">0</td><td class="r">1</td><td class="r">0</td><td class="r">0</td></tr>
+            <tr><td class="r">4</td><td class="r">4</td><td class="r">1</td><td class="r">0</td><td class="r">0</td><td class="r">1</td></tr>
+            <tr><td class="r">5</td><td class="r">5</td><td class="r">2</td><td class="r">1</td><td class="r">2</td><td class="r">4</td></tr>
+            <tr class="total"><td class="r">x̄ = 3</td><td class="r">ȳ = 4</td><td></td><td></td><td class="r">6</td><td class="r">10</td></tr>
+          </tbody>
+        </table></div>
+        <p><span class="calcline">b₁ = 6 / 10 = 0,6</span> &nbsp; <span class="calcline">b₀ = 4 − 0,6 · 3 = 2,2</span> &nbsp; → <span class="result">ŷ = 2,2 + 0,6 · x</span></p>
+        <p>Vorhersagen 2,8 / 3,4 / 4,0 / 4,6 / 5,2; Residuen −0,8 / 0,6 / 1,0 / −0,6 / −0,2; Summe der Quadrate 2,4. Gesamtstreuung Σ(y − ȳ)² = 4 + 0 + 1 + 0 + 1 = 6. <span class="calcline">R² = 1 − 2,4 / 6 = 0,6</span> – das Modell erklärt 60 % der Streuung.</p>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Lineare Regression</span>
+        <div class="calc-row">
+          <div class="field"><label for="lrX">x-Werte</label><input type="text" id="lrX" value="1 2 3 4 5"></div>
+          <div class="field"><label for="lrY">y-Werte (gleiche Anzahl)</label><input type="text" id="lrY" value="2 4 5 4 5"></div>
+        </div>
+        <div class="kpis" id="lrOut"></div>
+        <p class="calc-note" id="lrNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kleinste Quadrate: Summe der quadrierten Fehler minimieren. R² = Anteil erklärter Streuung.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Ein hohes R² beweist keine Ursache und keine gute Vorhersage für neue Daten. R² auf den <b>Testdaten</b> prüfen – mit vielen Merkmalen steigt das Trainings-R² fast immer.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Tabelle ist das Standardschema für Prüfungsaufgaben. Lassen Sie sie einmal komplett von Hand ausfüllen und dann mit dem Rechner kontrollieren.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Multiple Regression" data-part="Teil B · Regression">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 30 Minuten</span><h2>Mehrere Merkmale: multiple Regression und Koeffizienten deuten</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Der Preis eines Gebrauchtwagens hängt nicht nur vom Alter ab, sondern auch vom Kilometerstand, der Ausstattung und davon, ob er einen Unfall hatte. Jedes Merkmal schiebt den Preis ein Stück rauf oder runter.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>multiple lineare Regression</b> nutzt mehrere Merkmale: ŷ = b₀ + b₁x₁ + b₂x₂ + … + bₚxₚ. Jeder Koeffizient bⱼ gibt an, wie sich ŷ ändert, wenn xⱼ um eine Einheit steigt <b>und alle anderen Merkmale gleich bleiben</b> („ceteris paribus“).</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel Gebrauchtwagen:</b> <span class="calcline">Preis = 24.000 − 1.300 · Alter − 0,04 · km + 1.500 · Navi − 3.000 · Unfall</span></p>
+        <p>Für ein 5 Jahre altes Auto mit 60.000 km, Navi, ohne Unfall: <span class="calcline">24.000 − 6.500 − 2.400 + 1.500 − 0 = 16.600 €</span>.</p>
+        <ul>
+          <li><b>Kategoriale Merkmale</b> werden als 0/1-Spalten aufgenommen (Dummy-Variablen, One-Hot).</li>
+          <li><b>Größe der Koeffizienten</b> nur bei standardisierten Merkmalen vergleichen – sonst hängt sie an der Einheit (Euro gegen Cent).</li>
+          <li><b>Multikollinearität</b>: Hängen Merkmale stark zusammen (Alter und Kilometerstand), werden die einzelnen Koeffizienten unsicher.</li>
+          <li><b>Regularisierung</b> (Ridge, Lasso; Modul 4) zügelt große Koeffizienten und hilft gegen Overfitting.</li>
+          <li>Nichtlineare Zusammenhänge kann man mit umgeformten Merkmalen abbilden (x², log x) – das Modell bleibt in den Koeffizienten linear.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Koeffizient zeigt die Wirkung eines Merkmals, wenn alle anderen gleich bleiben – nicht mehr und nicht weniger.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Lineare Modelle sind gut erklärbar: Man kann jeder Fachabteilung zeigen, welches Merkmal wie stark wirkt. Das ist ein Argument in Aufgaben mit Erklärungs- oder Begründungspflicht.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Gebrauchtwagenbeispiel gemeinsam. Fragen Sie: Ist ein Auto mit Unfall automatisch 3.000 € billiger? – Nach dem Modell ja, wenn alles andere gleich ist.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Logistische Regression" data-part="Teil B · Regression">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 35 Minuten</span><h2>Logistische Regression: Wahrscheinlichkeit für eine Klasse</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Dimmer statt eines Lichtschalters: Die Helligkeit geht nicht sprunghaft von aus auf an, sondern gleitet zwischen 0 und 100 %. Die logistische Regression liefert keine harte Ja/Nein-Antwort, sondern einen Wert zwischen 0 und 1.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>logistische Regression</b> ist ein Klassifikationsverfahren. Sie berechnet erst eine gewichtete Summe z wie die lineare Regression und presst sie dann mit der <b>Sigmoid-Funktion</b> in den Bereich 0 bis 1 – als Wahrscheinlichkeit der Klasse 1.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/sigmoid.gif" width="640" height="380" alt="Animation: Die S-förmige Sigmoid-Kurve wird gezeichnet. Punkte auf der Kurve oberhalb der Schwelle 0,5 werden rot als Klasse 1 markiert, darunter grün als Klasse 0." loading="lazy">
+        <figcaption>Die Sigmoid-Kurve macht aus jeder Zahl eine Wahrscheinlichkeit.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formel</span>
+        <div class="eq">z = b₀ + b₁x₁ + … + bₚxₚ &nbsp;&nbsp; P(y = 1) = σ(z) = <span class="frac"><span>1</span><span>1 + e<sup>−z</sup></span></span></div>
+        <div class="legend-eq"><span>σ(0) = 0,5. Große positive z → nahe 1, große negative z → nahe 0.</span></div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel Kündigung:</b> <span class="calcline">z = −2 + 0,8 · Beschwerden</span>. Ein Kunde mit 4 Beschwerden: <span class="calcline">z = −2 + 3,2 = 1,2</span>, <span class="calcline">P = 1 / (1 + e^(−1,2)) = 1 / (1 + 0,301) ≈ 0,77</span>. Mit Schwelle 0,5: Vorhersage „kündigt“.</p>
+        <p>Die <b>Schwelle</b> ist eine Geschäftsentscheidung: Kostet ein übersehener Kündiger viel und ein Anruf wenig, senkt man sie (z. B. auf 0,3) – mehr Kunden werden angerufen. Trainiert wird mit der Verlustfunktion <b>Kreuzentropie</b> (Log-Loss), meist per Gradientenabstieg.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Logistische Regression = lineare Summe + Sigmoid = Wahrscheinlichkeit einer Klasse. Die Schwelle legt das Geschäft fest, nicht die Mathematik.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Trotz des Namens kein Regressionsverfahren für Zahlen. Wer in der Prüfung „logistische Regression für die Umsatzprognose“ vorschlägt, verliert die Punkte.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Beispiel mit dem Taschenrechner (e^x-Taste). Diskutieren Sie dann die Schwelle: Wer im Betrieb entscheidet sie? – Fachabteilung und Controlling, nicht das Data-Science-Team allein.</p>
+      </aside>
+    </section>

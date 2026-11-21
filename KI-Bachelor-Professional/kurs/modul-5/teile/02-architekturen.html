@@ -1,0 +1,102 @@
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Faltungsnetze (CNN)" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 35 Minuten</span><h2>Faltungsnetze (CNN) für Bilder</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer ein Suchbild löst, schiebt den Blick Stück für Stück über das Bild und sucht immer dasselbe Muster – etwa eine rote Mütze. Wo sie auftaucht, ist egal. Genau so arbeitet ein Faltungsfilter.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Convolutional Neural Network</b> (CNN) nutzt kleine <b>Filter</b> (z. B. 3×3 Gewichte), die über das Bild gleiten. Jeder Filter erzeugt eine <b>Merkmalskarte</b>, die zeigt, wo sein Muster vorkommt. <b>Pooling</b> verkleinert die Karten. Tiefe Schichten kombinieren einfache Muster zu Objekten.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/cnn-filter.gif" width="640" height="380" alt="Animation: Ein 3×3-Filter mit Werten minus 1, 0 und 1 gleitet über ein 8×8-Bild mit einer senkrechten Hell-Dunkel-Kante. Rechts füllt sich eine 6×6-Merkmalskarte; nur in den Spalten an der Kante stehen hohe Werte." loading="lazy">
+        <figcaption>Der Filter reagiert stark, wo eine senkrechte Kante ist.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Gewichtsteilung</b>: Derselbe Filter wird an jeder Stelle verwendet – viel weniger Parameter als eine voll verbundene Schicht. Ein 3×3-Filter auf einem Graustufenbild hat 9 Gewichte + 1 Bias.</li>
+          <li><b>Verschiebungsinvarianz</b>: Ein Muster wird überall erkannt.</li>
+          <li><b>Ausgabegröße</b> ohne Rand (Padding) und Schrittweite 1: (Bildbreite − Filterbreite + 1); 8×8 mit 3×3 → 6×6.</li>
+          <li><b>Max-Pooling 2×2</b>: nimmt aus jedem 2×2-Block den größten Wert, halbiert Breite und Höhe.</li>
+        </ul>
+        <p><b>Einsatz:</b> Qualitätsprüfung in der Produktion, medizinische Bilder, Dokumentenerkennung, Fahrerassistenz. Heute konkurrieren auch Vision-Transformer mit CNNs.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>CNN: Filter gleiten über das Bild und finden Muster – von Kanten über Formen bis zu Objekten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie einen Feldwert der Merkmalskarte: Filterwerte mal Pixelwerte, aufaddieren. Dann die Brücke zur Produktion: Kratzer, Risse, Verfärbungen sind genau solche Muster.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Rekurrente Netze" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 25 Minuten</span><h2>Rekurrente Netze (RNN, LSTM) für Folgen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Beim Lesen eines Romans merken Sie sich, wer wer ist und was vorher passiert ist. Jedes neue Kapitel verstehen Sie im Licht des Bisherigen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>rekurrentes neuronales Netz</b> (RNN) verarbeitet Folgen Schritt für Schritt und gibt einen <b>Zustand</b> (Gedächtnis) an den nächsten Schritt weiter. <b>LSTM</b> (Long Short-Term Memory) und GRU haben Tore (Gates), die steuern, was behalten, vergessen oder ausgegeben wird – so werden längere Zusammenhänge lernbar.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>Einsatz:</b> Zeitreihen (Sensoren, Absatz, Energieverbrauch), Sprache und Text – bis etwa 2017 Standard für Übersetzung. <b>Grenzen:</b> Verarbeitung nur nacheinander (schlecht parallelisierbar), sehr lange Abhängigkeiten bleiben schwierig. Deshalb haben Transformer sie bei Sprache weitgehend abgelöst; für kleinere Zeitreihen-Aufgaben sind LSTMs weiter verbreitet.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>RNN/LSTM: ein Netz mit Gedächtnis, das Folgen Schritt für Schritt liest.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Kurz halten – die Prüfung fragt eher den Unterschied RNN gegenüber Transformer als Details der Gates.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Transformer und Attention" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 35 Minuten</span><h2>Transformer und Aufmerksamkeit (Attention)</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Im Satz „Die Maschine stoppte, weil sie überhitzte“ wissen Sie sofort, dass „sie“ die Maschine meint. Ihr Kopf schaut bei jedem Wort auf die anderen Wörter, die dafür wichtig sind.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Der <b>Transformer</b> (2017, „Attention Is All You Need“) berechnet für jedes Element einer Folge, wie stark es auf jedes andere achten soll (<b>Self-Attention</b>). Alle Positionen werden gleichzeitig verarbeitet – das ist schnell auf GPUs und erfasst auch weit entfernte Bezüge.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/attention.gif" width="640" height="380" alt="Animation: Der Satz Die Maschine stoppte, weil sie überhitzte. Vom Wort sie gehen Bögen zu allen anderen Wörtern; der dickste Bogen mit Gewicht 0,71 führt zu Maschine." loading="lazy">
+        <figcaption>Attention-Gewichte: „sie“ achtet vor allem auf „Maschine“.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Query, Key, Value</b>: Jedes Wort stellt eine „Frage“ (Query), vergleicht sie mit den „Schlüsseln“ (Keys) der anderen und sammelt deren „Werte“ (Values) gewichtet ein.</li>
+          <li><b>Mehrere Köpfe</b> (Multi-Head Attention) achten auf verschiedene Beziehungen gleichzeitig (Grammatik, Bedeutung, Bezüge).</li>
+          <li><b>Positionskodierung</b> gibt die Wortreihenfolge mit, weil alles parallel verarbeitet wird.</li>
+          <li><b>Encoder</b> (verstehen, z. B. BERT), <b>Decoder</b> (erzeugen, z. B. GPT-artige Sprachmodelle), oder beides (Übersetzung).</li>
+          <li>Der Rechenaufwand der Attention wächst mit dem Quadrat der Folgenlänge – ein Grund, warum lange Kontexte teuer sind.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Transformer verarbeiten alle Wörter gleichzeitig und lernen über Attention, welche Wörter füreinander wichtig sind – die Grundlage heutiger Sprachmodelle.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Typische Frage: „Nennen Sie zwei Vorteile von Transformern gegenüber RNNs.“ – parallele Verarbeitung (schnelleres Training) und bessere Erfassung weit entfernter Bezüge.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Animation genügt für das Prinzip. Query/Key/Value nur als Bild erklären: Bibliothek – Ihre Frage (Query), Buchrücken (Keys), Buchinhalt (Values).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Transfer Learning" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 25 Minuten</span><h2>Transfer Learning und vortrainierte Modelle</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer Gitarre spielen kann, lernt Ukulele in Tagen statt Jahren. Das Wissen über Akkorde und Rhythmus wird übertragen, nur die Feinheiten sind neu.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Beim <b>Transfer Learning</b> nutzt man ein auf großen Daten vortrainiertes Modell und passt es mit wenigen eigenen Beispielen an. Varianten: nur die letzten Schichten neu trainieren (<b>Feature Extraction</b>) oder das ganze Netz behutsam weitertrainieren (<b>Fine-Tuning</b>).</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel:</b> Ein Hersteller will Kratzer auf Gehäusen erkennen, hat aber nur 800 Fotos. Ein auf Millionen Alltagsbildern vortrainiertes CNN kennt bereits Kanten und Texturen; man ersetzt die Ausgabeschicht (z. B. „Kratzer/kein Kratzer“) und trainiert sie mit den 800 Bildern. Ergebnis in Tagen statt Monaten.</p>
+        <p><b>Parametereffizientes Fine-Tuning</b> (z. B. LoRA) passt bei großen Sprachmodellen nur einen kleinen Zusatz an Parametern an – spart Rechenleistung und Speicher.</p>
+        <p><b>Zu prüfen:</b> Lizenz des vortrainierten Modells (gewerbliche Nutzung erlaubt?), Herkunft der Trainingsdaten, mögliche Verzerrungen (Bias), die mitübertragen werden.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Nicht bei null anfangen: Vortrainierte Modelle mit wenigen eigenen Daten anpassen spart Daten, Zeit und Geld.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Für Unternehmen ist Transfer Learning der Normalfall. Die Lizenzfrage ist ein Bachelor-Thema – Brücke zu Modul 12 (Urheberrecht, Lizenzen).</p>
+      </aside>
+    </section>

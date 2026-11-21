@@ -1,0 +1,187 @@
+<!--META {"nr": 6, "titel": "Chancen und Herausforderungen der KI", "lektionen": 16, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 6 von 17 · ca. 30 Lernstunden</span>
+      <h1 id="introTitle">Chancen und Herausforderungen: Bias, Erklärbarkeit, Robustheit</h1>
+      <p>KI kann Prozesse beschleunigen, Fehler vermeiden und neue Produkte ermöglichen. Sie kann aber auch Menschen benachteiligen, unverständlich entscheiden und sich täuschen lassen. Als Bachelor Professional tragen Sie Verantwortung dafür, dass KI im Betrieb fair, nachvollziehbar und robust arbeitet. Dieses Modul zeigt, wie algorithmischer Bias entsteht und gemessen wird, wie man Entscheidungen erklärbar macht und wie man neuronale Netze gegen Drift und Angriffe absichert – mit den Anforderungen der EU-KI-Verordnung im Blick.</p>
+      <div class="facts">
+        <span class="chip">16 Lektionen in 4 Teilen</span><span class="chip">6 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 4</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--violet-soft); outline: 2px solid var(--violet);"></i><span><b>Prüfungstipp</b> – so wird es abgefragt</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Chancen der KI" data-part="Teil A · Chancen und Risiken">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 25 Minuten</span><h2>Chancen: Produktivität, Qualität, neue Produkte, Fachkräftemangel</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Die Waschmaschine hat niemandem die Hausarbeit genommen, aber Stunden pro Woche freigemacht. Gute KI-Anwendungen wirken ähnlich: Sie nehmen Routine ab und lassen Menschen mehr Zeit für das, was nur Menschen können.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>KI schafft Wert vor allem auf vier Wegen: <b>Effizienz</b> (schneller, günstiger), <b>Qualität</b> (weniger Fehler, gleichbleibend), <b>Erkenntnis</b> (Muster in großen Datenmengen) und <b>Innovation</b> (neue Produkte und Geschäftsmodelle).</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Chance</th><th>Beispiel</th><th>Messbar an</th></tr></thead>
+        <tbody>
+          <tr><td>Routine automatisieren</td><td>Belege auslesen, Anfragen sortieren</td><td>Bearbeitungszeit, Kosten je Vorgang</td></tr>
+          <tr><td>Qualität sichern</td><td>optische Prüfung jedes Bauteils statt Stichprobe</td><td>Ausschuss, Reklamationsquote</td></tr>
+          <tr><td>Vorausschauen</td><td>Wartung vor dem Ausfall, Absatzprognose</td><td>Stillstandszeiten, Lagerbestand</td></tr>
+          <tr><td>Wissen erschließen</td><td>Assistent für Handbücher und Richtlinien</td><td>Suchzeit, Einarbeitungszeit</td></tr>
+          <tr><td>Fachkräftemangel abfedern</td><td>Entwürfe, Dokumentation, Übersetzung</td><td>Kapazität bei gleichem Personal</td></tr>
+          <tr><td>Neue Angebote</td><td>datenbasierte Dienstleistungen, personalisierte Produkte</td><td>Umsatz, Kundenzufriedenheit</td></tr>
+          <tr><td>Nachhaltigkeit</td><td>Energieverbrauch optimieren, Routen verkürzen</td><td>kWh, CO₂, Kilometer</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Eine Chance ist erst dann eine Chance, wenn klar ist, woran man den Nutzen misst.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Beginnen Sie positiv – viele Teilnehmende kennen vor allem die Risikodebatte. Lassen Sie für den eigenen Betrieb eine Chance mit Messgröße formulieren; das ist eine Vorübung für Modul 13.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Risiken im Überblick" data-part="Teil A · Chancen und Risiken">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 25 Minuten</span><h2>Risiken im Überblick</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Risiko</th><th>Was passieren kann</th><th>Wo im Kurs</th></tr></thead>
+        <tbody>
+          <tr><td><b>Fehler</b></td><td>falsche Vorhersagen, Halluzinationen</td><td>Module 4, 5</td></tr>
+          <tr><td><b>Bias und Diskriminierung</b></td><td>Gruppen werden systematisch benachteiligt</td><td>Teil B</td></tr>
+          <tr><td><b>Intransparenz</b></td><td>niemand kann erklären, warum entschieden wurde</td><td>Teil C</td></tr>
+          <tr><td><b>Mangelnde Robustheit</b></td><td>Drift, Täuschung, Angriffe</td><td>Teil D</td></tr>
+          <tr><td><b>Datenschutz und Sicherheit</b></td><td>Datenabfluss, unzulässige Verarbeitung</td><td>Module 2, 12</td></tr>
+          <tr><td><b>Rechtliche Risiken</b></td><td>Verstoß gegen EU-KI-Verordnung, DSGVO, Urheberrecht, AGG</td><td>Modul 12</td></tr>
+          <tr><td><b>Abhängigkeit</b></td><td>von einem Anbieter, von einem Modell, von wenigen Fachleuten</td><td>Module 5, 14</td></tr>
+          <tr><td><b>Akzeptanz und Arbeit</b></td><td>Ängste, Widerstand, veränderte Tätigkeiten, Mitbestimmung</td><td>Module 10, 15, 16</td></tr>
+          <tr><td><b>Ökologische Kosten</b></td><td>Energie- und Wasserbedarf</td><td>Modul 14</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Risiken bewertet man wie im Projektmanagement (Modul 9): <b>Eintrittswahrscheinlichkeit × Schadenshöhe</b>, und man legt Maßnahmen, Verantwortliche und Kontrollen fest. Die EU-KI-Verordnung folgt demselben Gedanken: Je höher das Risiko eines Einsatzes, desto strenger die Pflichten.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Die wichtigsten KI-Risiken: Fehler, Bias, Intransparenz, mangelnde Robustheit, Datenschutz, Recht, Abhängigkeit, Akzeptanz.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Wägen Sie Chancen und Risiken des KI-Einsatzes in der Muster GmbH ab“ – antworten Sie in einer zweispaltigen Tabelle mit je drei Punkten aus der Situation und schließen Sie mit einer begründeten Empfehlung samt Bedingungen (z. B. Pilot, menschliche Prüfung, Betriebsvereinbarung).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Tabelle ist die Landkarte für den Rest des Moduls. Fragen Sie: Welches Risiko ist in Ihrem Betrieb das größte? Meist ist es nicht die Technik, sondern Akzeptanz oder Datenqualität.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Wie Bias entsteht" data-part="Teil B · Algorithmischer Bias und Fairness">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Wie Bias entsteht: Daten, Messung, Auswahl, Rückkopplung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Gesichtserkennungssystem wurde vor allem mit Fotos hellhäutiger Männer trainiert. Bei anderen Gesichtern irrt es sich häufiger – nicht aus böser Absicht, sondern weil es diese Gesichter kaum „gesehen“ hat.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Algorithmischer Bias</b> ist eine systematische Verzerrung, durch die ein KI-System bestimmte Personen oder Gruppen benachteiligt. Er entsteht selten im Algorithmus selbst, meist in Daten, Zielgrößen und im Einsatzkontext.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/bias-quellen.gif" width="640" height="380" alt="Animation: Kette aus Vergangenheit mit historischem Bias, Daten mit Auswahl- und Messbias, Modell und Entscheidung. Danach läuft ein roter Pfeil von der Entscheidung zurück zu den Daten: Rückkopplung." loading="lazy">
+        <figcaption>Bias kann an jeder Stelle der Kette entstehen – und sich über Rückkopplung verstärken.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bias-Art</th><th>Ursache</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Historischer Bias</b></td><td>Daten spiegeln vergangene Ungerechtigkeit</td><td>früher fast nur Männer in Führung eingestellt</td></tr>
+          <tr><td><b>Stichproben- / Auswahlbias</b></td><td>Gruppen fehlen oder sind unterrepräsentiert</td><td>Spracherkennung kaum mit Dialekten trainiert</td></tr>
+          <tr><td><b>Messbias</b></td><td>Zielgröße oder Merkmal misst etwas anderes als gedacht</td><td>„Gesundheitsbedarf“ über bisherige Behandlungskosten gemessen</td></tr>
+          <tr><td><b>Proxy-Bias</b></td><td>scheinbar neutrales Merkmal steht für ein geschütztes</td><td>Postleitzahl als Stellvertreter für Herkunft</td></tr>
+          <tr><td><b>Rückkopplung</b></td><td>Entscheidungen erzeugen die künftigen Daten</td><td>Polizei patrouilliert, wo sie viel findet – und findet dort mehr</td></tr>
+          <tr><td><b>Automation Bias</b></td><td>Menschen übernehmen Vorschläge ungeprüft</td><td>Sachbearbeiter folgt der KI-Empfehlung immer</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bias steckt meist in den Daten und der Zielgröße, nicht im Algorithmus – und verstärkt sich über Rückkopplung.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>„Wir haben das Merkmal Geschlecht gelöscht, also ist das Modell fair.“ Falsch: Proxys wie Vorname, Teilzeit, Lücken im Lebenslauf oder bestimmte Hobbys können die Information weitertragen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Beispiel „Gesundheitsbedarf über Kosten“ stammt aus einer bekannten US-Studie (2019): Weil für bestimmte Gruppen historisch weniger ausgegeben wurde, stufte der Algorithmus sie als weniger bedürftig ein. Ein Lehrstück für Messbias.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Beispiele für Bias" data-part="Teil B · Algorithmischer Bias und Fairness">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Beispiele: Bewerberauswahl, Kreditvergabe, Gesichtserkennung</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Bewerberauswahl</h3><p>Ein großer Onlinehändler testete ab 2014 ein System, das Lebensläufe bewertete. Es lernte aus zehn Jahren überwiegend männlicher Einstellungen und wertete Hinweise auf Frauen ab. Das Projekt wurde eingestellt. Heute ist KI in der Personalauswahl nach der EU-KI-Verordnung <b>Hochrisiko</b>.</p></div>
+        <div class="card"><h3>Kreditvergabe und Scoring</h3><p>Scores können Gruppen benachteiligen, wenn Merkmale wie Wohnort oder Zahlungsverhalten mit Herkunft zusammenhängen. Der EuGH hat 2023 (SCHUFA, C-634/21) entschieden, dass ein Score eine automatisierte Entscheidung nach Art. 22 DSGVO sein kann, wenn er maßgeblich für die Kreditentscheidung ist.</p></div>
+        <div class="card"><h3>Gesichtserkennung</h3><p>Untersuchungen zeigten deutlich höhere Fehlerraten bei dunkelhäutigen Frauen als bei hellhäutigen Männern – Folge unausgewogener Trainingsdaten. Biometrische Fernidentifizierung in Echtzeit im öffentlichen Raum ist nach der EU-KI-Verordnung weitgehend verboten.</p></div>
+        <div class="card"><h3>Sprachmodelle</h3><p>Generative Modelle übernehmen Stereotype aus Texten („die Krankenschwester – sie“, „der Ingenieur – er“). In Stellenanzeigen oder Kundenkommunikation muss man das prüfen.</p></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Wo KI über Zugang zu Arbeit, Geld, Bildung oder Leistungen entscheidet, ist Bias besonders schädlich – und rechtlich besonders streng geregelt.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Verbinden Sie in Antworten immer drei Ebenen: technische Ursache (Daten), rechtlicher Rahmen (AGG, DSGVO, EU-KI-Verordnung) und betriebliche Maßnahme (Prüfung, Mitbestimmung, menschliche Entscheidung).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diskutieren Sie: Hätte das Bewerbungsbeispiel mit einem Fairness-Test vor dem Einsatz verhindert werden können? Ja – Auswahlquoten je Gruppe hätten den Fehler sichtbar gemacht (Lektion 5).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Fairness messen" data-part="Teil B · Algorithmischer Bias und Fairness">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 40 Minuten</span><h2>Fairness messen: Demographic Parity, Equal Opportunity, Equalized Odds</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ist ein Sportverein fair, wenn er gleich viele Jungen und Mädchen aufnimmt? Oder wenn er die gleich Talentierten aufnimmt, egal welches Geschlecht? Beides klingt fair – und beides kann sich widersprechen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Fairness lässt sich mit Kennzahlen je Gruppe messen. Welche Definition gilt, ist eine <b>fachliche, rechtliche und ethische Entscheidung</b> – nicht nur eine technische.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/auswahlquoten.gif" width="640" height="380" alt="Animation: Je 100 Punkte für Gruppe A und Gruppe B. In Gruppe A werden 30 ausgewählt, in Gruppe B 15. Das Verhältnis 0,5 liegt unter 0,8 – ein Hinweis auf Benachteiligung." loading="lazy">
+        <figcaption>Auswahlquoten 30 % und 15 %: Verhältnis 0,5.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Maß</th><th>Forderung</th><th>Formel je Gruppe</th></tr></thead>
+        <tbody>
+          <tr><td><b>Demographic Parity</b> (statistische Parität)</td><td>gleiche Auswahlquote</td><td>ausgewählt / alle</td></tr>
+          <tr><td><b>Equal Opportunity</b></td><td>gleicher Recall: Geeignete werden gleich oft erkannt</td><td>TP / (TP + FN)</td></tr>
+          <tr><td><b>Equalized Odds</b></td><td>gleicher Recall <b>und</b> gleiche Falsch-Positiv-Rate</td><td>TP/(TP+FN) und FP/(FP+TN)</td></tr>
+          <tr><td><b>Predictive Parity</b></td><td>gleiche Precision: ein positiver Bescheid ist gleich zuverlässig</td><td>TP / (TP + FP)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Verhältnis der Auswahlquoten</b> (Disparate Impact Ratio) = Quote der benachteiligten Gruppe / Quote der bevorzugten Gruppe. Die US-amerikanische <b>80-%-Regel</b> (four-fifths rule) wertet Werte unter 0,8 als Hinweis auf Benachteiligung. In Deutschland gibt das AGG keine feste Grenze vor; die Faustregel ist trotzdem ein guter Prüfpunkt.</p>
+        <p><b>Unvereinbarkeit:</b> Unterscheiden sich die tatsächlichen Anteile Geeigneter zwischen Gruppen, lassen sich Demographic Parity und Equalized Odds nicht gleichzeitig erfüllen. Man muss entscheiden und begründen, welches Ziel gilt.</p>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Fairness je Gruppe</span>
+        <div class="calc-row">
+          <div class="field"><label for="faNa">Gruppe A: Personen</label><input type="number" id="faNa" value="200" min="1"></div>
+          <div class="field"><label for="faSa">Gruppe A: ausgewählt</label><input type="number" id="faSa" value="60" min="0"></div>
+          <div class="field"><label for="faNb">Gruppe B: Personen</label><input type="number" id="faNb" value="160" min="1"></div>
+          <div class="field"><label for="faSb">Gruppe B: ausgewählt</label><input type="number" id="faSb" value="24" min="0"></div>
+        </div>
+        <div class="kpis" id="faOut"></div>
+        <p class="calc-note" id="faNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Fairness misst man je Gruppe; welche Kennzahl gleich sein soll, ist eine Entscheidung, die man begründen und dokumentieren muss.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Rechner-Beispiel: 30 % gegenüber 15 % → 0,5. Diskutieren Sie dann das Sportverein-Dilemma – es gibt keine rein technische Lösung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Bias reduzieren" data-part="Teil B · Algorithmischer Bias und Fairness">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 30 Minuten</span><h2>Bias reduzieren: vor, während und nach dem Training</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Phase</th><th>Maßnahmen</th></tr></thead>
+        <tbody>
+          <tr><td><b>Vor dem Projekt</b></td><td>Betroffene Gruppen und mögliche Schäden identifizieren; Fairnessziel festlegen; vielfältiges Team; Betriebsrat und Datenschutz einbinden</td></tr>
+          <tr><td><b>Daten (pre-processing)</b></td><td>Repräsentativität prüfen, fehlende Gruppen ergänzen, Proxys aufspüren, Labels prüfen, Beispiele umgewichten</td></tr>
+          <tr><td><b>Training (in-processing)</b></td><td>Fairness-Nebenbedingungen oder -Strafterme, einfache und erklärbare Modelle</td></tr>
+          <tr><td><b>Nach dem Training (post-processing)</b></td><td>Schwellen je Gruppe anpassen (rechtlich prüfen!), Kennzahlen je Gruppe berichten</td></tr>
+          <tr><td><b>Betrieb</b></td><td>Monitoring je Gruppe, Beschwerdeweg, menschliche Entscheidung bei Grenzfällen, regelmäßige Audits</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Dokumentation:</b> Datenblätter für Datensätze (Herkunft, Zusammensetzung, Lücken) und Modellkarten (Model Cards: Zweck, Grenzen, Kennzahlen je Gruppe) machen Fairness prüfbar. Für Hochrisiko-KI verlangt die EU-KI-Verordnung ohnehin technische Dokumentation und Daten-Governance (Art. 10, 11).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Fairness ist kein Schalter, sondern ein Prozess: Ziel festlegen, Daten prüfen, je Gruppe messen, im Betrieb überwachen, dokumentieren.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Unterschiedliche Schwellen je Gruppe können selbst eine unmittelbare Benachteiligung nach AGG sein. Solche Eingriffe immer mit Rechtsabteilung bzw. Datenschutz klären.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Für Führungskräfte zählt vor allem die erste und letzte Zeile der Tabelle: Wer legt das Fairnessziel fest, und wer überwacht es im Betrieb? Das gehört in jede Transferarbeit mit Personenbezug.</p>
+      </aside>
+    </section>

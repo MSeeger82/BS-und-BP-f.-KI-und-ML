@@ -1,0 +1,183 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Welche Reihenfolge ist vom allgemeinsten zum speziellsten Begriff richtig?", ["Maschinelles Lernen – KI – generative KI – Deep Learning", "KI – generative KI – Deep Learning – maschinelles Lernen", "KI – maschinelles Lernen – Deep Learning – generative KI", "Deep Learning – maschinelles Lernen – KI – generative KI"], 2, "KI ist der Oberbegriff, maschinelles Lernen ein Teil davon, Deep Learning ein Teil des ML, generative KI meist ein Teil des Deep Learning."],
+ ["Was unterscheidet maschinelles Lernen von klassischer Programmierung?", ["Beim ML werden Regeln aus Beispielen abgeleitet statt vom Menschen geschrieben", "Klassische Programme können keine Daten verarbeiten", "ML liefert immer richtige Ergebnisse", "ML braucht keinen Computer"], 0, "Beim maschinellen Lernen sind die Regeln das Ergebnis des Trainings."],
+ ["Ein Modell sagt die Lieferzeit in Tagen vorher. Welcher Aufgabentyp ist das?", ["Regression", "Klassifikation", "Bestärkendes Lernen", "Clustering"], 0, "Die Zielgröße ist eine Zahl – also Regression."],
+ ["Ein Modell gibt aus: „Kündigung mit 81 % Wahrscheinlichkeit“. Welcher Aufgabentyp liegt zugrunde?", ["Binäre Klassifikation", "Assoziationsanalyse", "Dimensionsreduktion", "Regression"], 0, "Die Zielgröße ist kündigt ja/nein; die Wahrscheinlichkeit drückt nur die Sicherheit aus."],
+ ["Was ist ein Label?", ["Die bekannte richtige Antwort eines Trainingsbeispiels", "Eine Spalte mit fehlenden Werten", "Ein Merkmal, das immer numerisch ist", "Der Name eines Algorithmus"], 0, "Das Label ist die Zielgröße, die das Modell vorhersagen lernt."],
+ ["Welche Aussage zu Parametern und Hyperparametern stimmt?", ["Hyperparameter werden gelernt, Parameter vorher festgelegt", "Parameter werden gelernt, Hyperparameter vorher festgelegt", "Beide werden vom Modell gelernt", "Beide legt der Mensch fest"], 1, "Beispiel: Gewichte sind Parameter, die Lernrate ist ein Hyperparameter."],
+ ["Wozu dienen Testdaten?", ["Zum Auffüllen fehlender Werte", "Zur abschließenden ehrlichen Schätzung der Leistung bei neuen Fällen", "Zum Einstellen der Hyperparameter", "Zum Lernen der Parameter"], 1, "Testdaten bleiben bis zum Schluss unberührt."],
+ ["Training 98 %, Test 64 %. Was liegt am wahrscheinlichsten vor?", ["Overfitting", "Underfitting", "Drift", "Perfektes Modell"], 0, "Die große Lücke zwischen Training und Test zeigt Überanpassung."],
+ ["Welche Lernart passt: Kundengruppen finden, ohne Gruppen vorzugeben?", ["Bestärkend", "Unüberwacht", "Regression", "Überwacht"], 1, "Ohne Labels werden Gruppen per Clustering gefunden."],
+ ["Was kennzeichnet bestärkendes Lernen?", ["Lernen aus gelabelten Tabellen", "Verdichtung vieler Merkmale", "Ein Agent lernt durch Belohnungen beim Handeln in einer Umgebung", "Gruppierung ähnlicher Datenpunkte"], 2, "Agent, Umgebung, Aktion, Belohnung, Strategie."],
+ ["Wie werden große Sprachmodelle hauptsächlich vortrainiert?", ["Bestärkend mit Spielen", "Selbstüberwacht, z. B. durch Vorhersage des nächsten Wortes", "Unüberwacht mit k-Means", "Ausschließlich mit von Menschen gelabelten Daten"], 1, "Die Texte liefern ihre Aufgaben selbst; RLHF folgt erst danach."],
+ ["Was ist Inferenz?", ["Das Training eines Modells", "Das Anwenden eines trainierten Modells auf neue Daten", "Das Löschen alter Daten", "Das Sammeln von Labels"], 1, "Inferenz ist der tägliche Einsatz des Modells."],
+ ["Eine Betrugsprüfung muss bei jeder Kartenzahlung in Millisekunden entscheiden. Welche Einsatzform passt?", ["Edge ohne Netz zwingend", "Batch", "Monatlicher Bericht", "Echtzeit über eine Schnittstelle"], 3, "Jede Zahlung braucht sofort eine Antwort."],
+ ["Was bezeichnet Drift?", ["Eine Art neuronales Netz", "Veränderungen der Daten oder Zusammenhänge nach dem Training", "Das Mischen der Daten vor der Aufteilung", "Ein Fehler im Programmcode"], 1, "Drift ist ein Grund, Modelle zu überwachen und neu zu trainieren."],
+ ["Welches Verfahren ist trotz seines Namens ein Klassifikationsverfahren?", ["PCA", "k-Means", "Lineare Regression", "Logistische Regression"], 3, "Die logistische Regression schätzt die Wahrscheinlichkeit einer Klasse."],
+ ["Welche Familie ist bei Tabellendaten oft sehr stark und gleichzeitig mit Erklärverfahren gut nutzbar?", ["Generative Bildmodelle", "Bestärkendes Lernen", "Faltungsnetze", "Gradient Boosting (Baum-Ensembles)"], 3, "Baum-Ensembles sind bei Tabellendaten häufig Spitzenreiter."],
+ ["Was sind laut EU-KI-Verordnung Kennzeichen eines KI-Systems?", ["Es arbeitet nur in der Cloud", "Es enthält immer ein neuronales Netz", "Es ist immer Hochrisiko", "Es leitet aus Eingaben ab, wie es Ausgaben wie Vorhersagen oder Entscheidungen erzeugt"], 3, "Kernmerkmal ist das Ableiten (Art. 3 Nr. 1)."],
+ ["Warum ist die Kunden-ID meist kein gutes Merkmal?", ["Sie ist kategorial", "Sie ist immer geheim", "Sie ist zu lang", "Sie trägt kein fachliches Wissen über die Zielgröße und verleitet zum Auswendiglernen"], 3, "IDs sind zufällige Bezeichner ohne inhaltliche Bedeutung."],
+ ["Bei Absatzdaten pro Woche: Wie teilt man Training und Test sinnvoll auf?", ["Gar nicht", "Nach Filialname alphabetisch", "Zeitlich: ältere Wochen zum Training, jüngste zum Test", "Zufällig gemischt"], 2, "Sonst sieht das Modell beim Training schon die Zukunft."],
+ ["Welche drei Treiber haben den Durchbruch des Deep Learning ab etwa 2012 ermöglicht?", ["Expertensysteme, Lochkarten, Großrechner", "Neue Gesetze, neue Steuern, neue Normen", "Viele Daten, viel Rechenleistung (GPUs), bessere Verfahren", "Mehr Programmierer, mehr Büros, mehr Meetings"], 2, "Daten, Rechenleistung und Algorithmen kamen zusammen."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Brauche ich Vorkenntnisse für den Bachelor Professional in KI und Maschinellem Lernen?", "a": "Für den Kurs nicht: Jeder Begriff wird von Grund auf erklärt. Für die Prüfungszulassung brauchen Sie aber eine Voraussetzung nach § 2 der Rechtsvorschrift, zum Beispiel eine abgeschlossene dreijährige Ausbildung, 90 ECTS plus Praxis, vier Jahre Berufspraxis oder den Berufsspezialisten KI."},
+  {"q": "Was wird in Modul 1 geprüft?", "a": "Modul 1 deckt § 4 Nr. 1 der Rechtsvorschrift ab: Regression und Klassifikation, Daten als Repräsentation von Wissen, Training, Einsatz von KI-Modellen, Arten des maschinellen Lernens, Algorithmen und typische Anwendungen. Diese Grundlagen kommen vor allem in Teil 1, Bereich A der schriftlichen Prüfung vor."},
+  {"q": "Ist Modul 1 kostenlos?", "a": "Ja. Modul 1 ist vollständig frei zugänglich, mit allen Lektionen, Übungen und dem Abschlussquiz."}
+ ],
+ "l1": [
+  {"q": "Wo wird KI in Unternehmen am häufigsten eingesetzt?", "a": "Typisch sind Prognosen (Absatz, Wartung), Qualitätsprüfung per Kamera, das Sortieren und Beantworten von Anfragen, Betrugserkennung und die Unterstützung bei Texten. Meist handelt es sich um Modelle, die aus früheren Fällen lernen und einen neuen Fall einschätzen."},
+  {"q": "Woran erkenne ich, dass in einer Anwendung maschinelles Lernen steckt?", "a": "Wenn ein System aus vielen früheren Beispielen eine Einschätzung für einen neuen Fall ableitet, statt festen, von Menschen geschriebenen Regeln zu folgen, steckt fast immer maschinelles Lernen dahinter."},
+  {"q": "Wie beantworte ich Fragen nach KI-Einsatzmöglichkeiten in der Situationsaufgabe?", "a": "Nennen Sie Beispiele aus der beschriebenen Situation und jeweils, was das Modell konkret ausgibt, etwa eine Zahl, eine Kategorie oder einen Text. Allgemeine Lehrbuchbeispiele ohne Bezug zum Fall bringen meist nur Teilpunkte."}
+ ],
+ "l2": [
+  {"q": "Was ist Künstliche Intelligenz einfach erklärt?", "a": "KI ist der Oberbegriff für Computersysteme, die Aufgaben übernehmen, für die Menschen Intelligenz brauchen: wahrnehmen, verstehen, entscheiden und lernen. Sie rechnet dabei mit Wahrscheinlichkeiten und hat kein Bewusstsein."},
+  {"q": "Wie definiert die EU-KI-Verordnung ein KI-System?", "a": "Nach Art. 3 Nr. 1 ist ein KI-System ein maschinengestütztes System, das für explizite oder implizite Ziele aus seinen Eingaben ableitet, wie es Ausgaben wie Vorhersagen, Inhalte, Empfehlungen oder Entscheidungen erzeugt, und das mit unterschiedlicher Autonomie arbeitet."},
+  {"q": "Was ist der Unterschied zwischen schwacher und starker KI?", "a": "Schwache KI löst eine eng umrissene Aufgabe; dazu gehören alle heutigen Systeme, auch große Sprachmodelle. Starke KI wäre allgemein intelligent wie ein Mensch und existiert bisher nicht."},
+  {"q": "Ist ein regelbasiertes Expertensystem KI?", "a": "Ja, es zählt zur KI, weil es eine Denkaufgabe übernimmt. Es ist aber kein maschinelles Lernen, weil die Regeln von Menschen geschrieben und nicht aus Daten gelernt sind."}
+ ],
+ "l3": [
+  {"q": "Wie hängen KI, maschinelles Lernen und Deep Learning zusammen?", "a": "Sie sind ineinander verschachtelt: Deep Learning ist ein Teil des maschinellen Lernens, und maschinelles Lernen ist ein Teil der KI. Generative KI ist meist ein Teil des Deep Learning."},
+  {"q": "Ist generative KI dasselbe wie KI?", "a": "Nein. Generative KI, etwa Chat-Assistenten oder Bildgeneratoren, ist nur der innerste Bereich. Die meisten KI-Anwendungen in Betrieben sind klassische Vorhersagemodelle für Zahlen oder Kategorien."},
+  {"q": "Was bedeutet das „Deep“ in Deep Learning?", "a": "Es bezeichnet die vielen Schichten eines künstlichen neuronalen Netzes, nicht ein besonders tiefes Verständnis."}
+ ],
+ "l4": [
+  {"q": "Was sind Merkmale und Labels im maschinellen Lernen?", "a": "Merkmale (Features) sind die Eingabeinformationen eines Beispiels, etwa Vertragsdauer oder Tarif. Das Label ist die Zielgröße, die vorhergesagt werden soll, zum Beispiel ob ein Kunde gekündigt hat."},
+  {"q": "Was ist der Unterschied zwischen strukturierten und unstrukturierten Daten?", "a": "Strukturierte Daten liegen in Tabellen mit festen Spalten vor. Unstrukturierte Daten sind Texte, Bilder, Audio oder Video und müssen für ein Modell erst in Zahlen übersetzt werden."},
+  {"q": "Warum ist eine Kunden-ID kein gutes Merkmal?", "a": "Eine ID ist ein zufälliger Bezeichner ohne fachliche Bedeutung für die Zielgröße. Ein Modell, das sie nutzt, lernt Zufallsmuster auswendig und versagt bei neuen Kunden."}
+ ],
+ "l5": [
+  {"q": "Wie lernt eine Maschine?", "a": "Ein Modell macht Vorhersagen für Trainingsbeispiele, misst mit einer Verlustfunktion, wie falsch sie sind, und verstellt seine Parameter so, dass der Fehler sinkt. Das wiederholt sich, bis der Fehler kaum noch kleiner wird."},
+  {"q": "Was ist der Unterschied zwischen Parameter und Hyperparameter?", "a": "Parameter lernt das Modell beim Training selbst, zum Beispiel Gewichte. Hyperparameter legt der Mensch vorher fest, zum Beispiel die Lernrate oder die maximale Tiefe eines Entscheidungsbaums."},
+  {"q": "Was ist eine Verlustfunktion?", "a": "Eine Verlustfunktion misst, wie stark die Vorhersagen von den richtigen Antworten abweichen, etwa als mittlerer quadratischer Fehler. Das Training versucht, diesen Wert zu minimieren."}
+ ],
+ "l6": [
+  {"q": "Warum teilt man Daten in Training, Validierung und Test auf?", "a": "Mit Trainingsdaten lernt das Modell, mit Validierungsdaten werden Einstellungen gewählt und Modelle verglichen, und mit Testdaten wird am Ende ehrlich geschätzt, wie gut das Modell bei neuen Fällen ist."},
+  {"q": "Was ist Overfitting?", "a": "Overfitting heißt, dass ein Modell die Trainingsbeispiele samt Zufall auswendig lernt. Es ist im Training sehr gut, bei neuen Daten aber deutlich schlechter."},
+  {"q": "Wie teilt man Zeitreihen richtig auf?", "a": "Zeitlich: mit älteren Daten trainieren und mit dem jüngsten Zeitraum testen. Bei einer zufälligen Aufteilung würde das Modell im Training schon Informationen aus der Zukunft sehen."}
+ ],
+ "l7": [
+  {"q": "Was ist Regression im maschinellen Lernen?", "a": "Regression ist die Vorhersage einer Zahl auf einer durchgehenden Skala, etwa Preis, Absatzmenge, Energieverbrauch oder Restlebensdauer."},
+  {"q": "Wie deutet man einen Koeffizienten in einem Regressionsmodell?", "a": "Er gibt an, um wie viel sich die Vorhersage ändert, wenn das Merkmal um eine Einheit steigt und alles andere gleich bleibt. Bei 11,50 € je Quadratmeter steigt die geschätzte Miete pro zusätzlichem Quadratmeter um 11,50 €."},
+  {"q": "Woran misst man die Güte einer Regression?", "a": "An durchschnittlichen Fehlern wie MAE oder RMSE und am Bestimmtheitsmaß R². Diese Kennzahlen werden in Modul 4 ausführlich behandelt."}
+ ],
+ "l8": [
+  {"q": "Was ist Klassifikation?", "a": "Klassifikation ist die Vorhersage einer Kategorie, etwa Spam oder kein Spam. Viele Verfahren liefern dazu eine Wahrscheinlichkeit, die über eine Schwelle in eine Entscheidung übersetzt wird."},
+  {"q": "Was ist der Unterschied zwischen binärer, Mehrklassen- und Multi-Label-Klassifikation?", "a": "Binär heißt zwei Klassen, Mehrklassen heißt genau eine von mehreren Klassen, Multi-Label heißt, dass einem Beispiel mehrere Klassen gleichzeitig zugeordnet werden können."},
+  {"q": "Ist die logistische Regression eine Regression?", "a": "Nein, trotz des Namens ist sie ein Klassifikationsverfahren: Sie schätzt die Wahrscheinlichkeit, dass ein Beispiel zu einer Klasse gehört."}
+ ],
+ "l9": [
+  {"q": "Was ist überwachtes Lernen?", "a": "Beim überwachten Lernen enthält jedes Trainingsbeispiel die richtige Antwort, das Label. Das Modell lernt die Abbildung von Merkmalen auf das Label; die Aufgabentypen sind Regression und Klassifikation."},
+  {"q": "Woher kommen Labels in Unternehmen?", "a": "Oft entstehen sie im Geschäftsprozess, etwa ob eine Rechnung bezahlt wurde. Andernfalls müssen Fachleute sie vergeben, was teuer ist; fehlerhafte Labels begrenzen die erreichbare Modellqualität."}
+ ],
+ "l10": [
+  {"q": "Was ist unüberwachtes Lernen?", "a": "Beim unüberwachten Lernen gibt es keine Labels. Das Verfahren findet selbst Strukturen, etwa Gruppen ähnlicher Kunden (Clustering), ungewöhnliche Fälle (Anomalien) oder eine Verdichtung vieler Merkmale."},
+  {"q": "Was ist der Unterschied zwischen Clustering und Klassifikation?", "a": "Bei der Klassifikation sind die Klassen vorher bekannt und in den Trainingsdaten markiert. Beim Clustering entstehen die Gruppen erst durch das Verfahren, und ein Mensch gibt ihnen danach eine Bedeutung."}
+ ],
+ "l11": [
+  {"q": "Was ist Reinforcement Learning?", "a": "Beim bestärkenden Lernen handelt ein Agent in einer Umgebung, erhält für seine Aktionen Belohnungen oder Strafen und lernt eine Strategie, die die Belohnung auf lange Sicht maximiert."},
+  {"q": "Was ist RLHF?", "a": "Reinforcement Learning from Human Feedback: Menschen bewerten Antworten eines Sprachmodells, und das Modell lernt daraus, hilfreichere und sicherere Antworten zu geben."},
+  {"q": "Warum ist die Wahl der Belohnung so wichtig?", "a": "Ein Agent optimiert genau das, was belohnt wird. Trifft die Belohnung das eigentliche Ziel nicht, findet er Abkürzungen, die formal belohnt werden, aber nicht erwünscht sind."}
+ ],
+ "l12": [
+  {"q": "Was ist selbstüberwachtes Lernen?", "a": "Das Verfahren erzeugt die Labels aus den Daten selbst, etwa indem es das nächste Wort eines Textes vorhersagt. So lässt sich mit sehr großen Mengen ungelabelter Daten lernen."},
+  {"q": "Was ist ein Foundation Model?", "a": "Ein sehr großes, breit vortrainiertes Basismodell, das für viele Aufgaben angepasst werden kann, zum Beispiel ein großes Sprachmodell. Die EU-KI-Verordnung spricht von KI-Modellen mit allgemeinem Verwendungszweck."},
+  {"q": "Was ist Transfer Learning?", "a": "Ein vortrainiertes Modell wird mit wenigen eigenen Beispielen auf eine neue Aufgabe angepasst. Unternehmen müssen so nicht bei null anfangen."}
+ ],
+ "l13": [
+  {"q": "Welche Algorithmen des maschinellen Lernens sollte ich kennen?", "a": "Für die Prüfung wichtig sind lineare und logistische Regression, Entscheidungsbäume, Ensembles wie Random Forest und Gradient Boosting, k-nächste Nachbarn, Clusterverfahren wie k-Means sowie neuronale Netze."},
+  {"q": "Welcher Algorithmus ist der beste?", "a": "Es gibt keinen besten. Die Wahl hängt von Datenart, Datenmenge, geforderter Genauigkeit und Erklärbarkeit ab; bei Tabellendaten sind Baum-Ensembles oft sehr stark, bei Bildern und Sprache neuronale Netze."},
+  {"q": "Was ist eine Baseline?", "a": "Ein einfaches Vergleichsmodell, an dem sich aufwendigere Modelle messen lassen müssen. Ist ein komplexes Modell kaum besser als die Baseline, lohnt sich der Aufwand meist nicht."}
+ ],
+ "l14": [
+  {"q": "Was bedeutet Inferenz?", "a": "Inferenz ist das Anwenden eines trainierten Modells auf neue Daten, also der tägliche Einsatz nach dem Training."},
+  {"q": "Welche Einsatzformen gibt es für KI-Modelle?", "a": "Batch (viele Fälle regelmäßig auf einmal), Echtzeit über eine Schnittstelle (eine Anfrage, sofortige Antwort) und Edge (direkt auf dem Gerät ohne Cloud)."},
+  {"q": "Warum muss ein KI-Modell im Betrieb überwacht werden?", "a": "Weil sich Daten und Zusammenhänge ändern (Drift). Ohne Überwachung werden Vorhersagen unbemerkt schlechter; deshalb gehören Monitoring und Neutraining zum Betrieb."}
+ ],
+ "l15": [
+  {"q": "Welche KI-Anwendungen gibt es in Industrie und Handel?", "a": "In der Industrie etwa vorausschauende Wartung und optische Qualitätsprüfung, im Handel Absatzprognosen, Empfehlungen und Kundensegmente."},
+  {"q": "Wie beschreibe ich einen KI-Anwendungsfall?", "a": "Mit fünf Fragen: Welches Problem lösen wir, welche Entscheidung wird unterstützt, welche Daten gibt es, was gibt das Modell aus und woran wird der Nutzen gemessen."}
+ ],
+ "l16": [
+  {"q": "Wie wähle ich die richtige Lernart?", "a": "Erst fragen, ob ein System durch Handeln mit Belohnung lernt (bestärkend). Dann, ob Labels vorliegen (überwacht) oder nicht (unüberwacht). Bei überwachtem Lernen entscheidet die Zielgröße: Zahl heißt Regression, Kategorie heißt Klassifikation."},
+  {"q": "Was tun, wenn keine Labels vorhanden sind?", "a": "Zuerst prüfen, ob sich Labels aus dem Prozess gewinnen lassen, etwa aus späteren Ereignissen. Erst wenn das nicht geht, auf unüberwachte Verfahren wie Clustering oder Anomalieerkennung ausweichen."}
+ ],
+ "l17": [
+  {"q": "Seit wann gibt es Künstliche Intelligenz?", "a": "Der Begriff entstand 1956 auf der Dartmouth-Konferenz. Erste lernende Neuronen gab es 1958 mit dem Perzeptron."},
+  {"q": "Warum ist KI seit etwa 2012 so leistungsfähig geworden?", "a": "Drei Treiber kamen zusammen: sehr viele Daten, viel Rechenleistung durch Grafikprozessoren und bessere Verfahren wie Backpropagation und später die Transformer-Architektur."},
+  {"q": "Was war der KI-Winter?", "a": "Phasen, in denen überzogene Erwartungen enttäuscht wurden und Förderung und Interesse stark zurückgingen, vor allem nach den Grenzen der regelbasierten Expertensysteme."}
+ ]
+}
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 1 */
+(function () {
+  var LA = ["Überwachtes Lernen", "Unüberwachtes Lernen", "Bestärkendes Lernen"];
+  var TYP = ["Regression", "Klassifikation", "Clustering", "Anomalieerkennung", "Strategie lernen (Policy)"];
+  var KI = ["Keine KI", "KI ohne maschinelles Lernen (regelbasiert)", "Maschinelles Lernen"];
+  var EF = ["Batch", "Echtzeit", "Edge"];
+  function fall(n, la, typ) {
+    return [
+      { id: "f" + n + "la", label: "Fall " + n + ": Lernart", typ: "wahl", punkte: 0.5, optionen: LA, richtig: la },
+      { id: "f" + n + "ty", label: "Fall " + n + ": Aufgabentyp", typ: "wahl", punkte: 0.5, optionen: TYP, richtig: typ }
+    ];
+  }
+  window.UEBUNGEN = {
+    modul: 1,
+    aufgaben: {
+      a1: { teile: [].concat(fall(1, 0, 0), fall(2, 0, 1), fall(3, 1, 2), fall(4, 2, 4), fall(5, 1, 3), fall(6, 0, 1)) },
+      a2: { teile: [{ id: "abgr", label: "Abgrenzung mit je einem Beispiel", typ: "text", punkte: 4,
+        erwartung: "Teilmengenbeziehung KI ⊃ ML ⊃ DL (1 P.); KI auch regelbasiert mit Beispiel (1 P.); ML lernt aus Beispielen mit Beispiel (1 P.); DL mit vielschichtigen neuronalen Netzen, Bild/Ton/Text, mit Beispiel (1 P.)." }] },
+      a3: { teile: [
+        { id: "merk", label: "Merkmale", typ: "text", punkte: 1, hinweis: "Welche Angaben gehen in das Modell hinein?", erwartung: "Marke, Baujahr, Kilometerstand, Unfallwagen" },
+        { id: "label", label: "Label", typ: "text", punkte: 1, hinweis: "Was soll vorhergesagt werden?", erwartung: "der erzielte Verkaufspreis" },
+        { id: "typ", label: "Aufgabentyp", typ: "wahl", punkte: 1, optionen: ["Regression", "Klassifikation", "Clustering"], richtig: 0 },
+        { id: "la", label: "Lernart", typ: "wahl", punkte: 1, optionen: LA, richtig: 0 }
+      ] },
+      a4: { teile: [
+        { id: "t1", label: "1. Tabellenkalkulation summiert", typ: "wahl", punkte: 1, optionen: KI, richtig: 0 },
+        { id: "t2", label: "2. Diagnosesystem mit Wenn-dann-Regeln", typ: "wahl", punkte: 1, optionen: KI, richtig: 1 },
+        { id: "t3", label: "3. Spamfilter aus markierten Mails", typ: "wahl", punkte: 1, optionen: KI, richtig: 2 },
+        { id: "t4", label: "4. Pflanzen-App mit Fotos", typ: "wahl", punkte: 1, optionen: KI, richtig: 2 }
+      ] },
+      a5: { teile: [{ id: "ph", label: "Unterschied mit je einem Beispiel", typ: "text", punkte: 3,
+        erwartung: "Parameter werden beim Training gelernt, z. B. Gewichte/Steigung (1,5 P.); Hyperparameter werden vorher festgelegt, z. B. Lernrate, Baumtiefe, Anzahl Cluster (1,5 P.)." }] },
+      a6: { teile: [
+        { id: "test", label: "a) Anzahl Testbeispiele", typ: "zahl", punkte: 1, wert: 3000, tol: 0 },
+        { id: "val", label: "b) Zweck der Validierungsdaten und Risiko mehrfacher Testnutzung", typ: "text", punkte: 4,
+          erwartung: "Validierung: Hyperparameter einstellen, Modelle vergleichen (2 P.). Mehrfache Testnutzung passt Entscheidungen an die Testdaten an, Ergebnis wird zu optimistisch, keine ehrliche Schätzung mehr (2 P.)." }
+      ] },
+      a7: { teile: [
+        { id: "fa", label: "a) Training 62 %, Test 60 %", typ: "wahl", punkte: 1, optionen: ["Underfitting", "Overfitting", "gute Generalisierung"], richtig: 0 },
+        { id: "fb", label: "b) Training 99 %, Test 70 %", typ: "wahl", punkte: 1, optionen: ["Underfitting", "Overfitting", "gute Generalisierung"], richtig: 1 },
+        { id: "fc", label: "c) Training 91 %, Test 89 %", typ: "wahl", punkte: 1, optionen: ["Underfitting", "Overfitting", "gute Generalisierung"], richtig: 2 },
+        { id: "emp", label: "Empfehlung für b)", typ: "text", punkte: 1, erwartung: "einfacheres Modell, mehr Daten, Regularisierung oder Kreuzvalidierung" }
+      ] },
+      a8: { teile: [
+        { id: "zeit", label: "a) Bearbeitungszeit", typ: "zahl", punkte: 2, wert: 64, tol: 0, einheit: "min" },
+        { id: "deut", label: "b) Bedeutung der Zahl 4", typ: "text", punkte: 2, erwartung: "Jede zusätzliche Position erhöht die geschätzte Zeit um 4 Minuten, wenn alles andere gleich bleibt." }
+      ] },
+      a9: { teile: [
+        { id: "verf", label: "Verfahrensfamilie", typ: "wahl", punkte: 1, optionen: ["Gut erklärbares Verfahren (logistische Regression, Entscheidungsbaum)", "Tiefes Faltungsnetz", "Bestärkendes Lernen", "k-Means-Clustering"], richtig: 0 },
+        { id: "begr", label: "Begründung mit zwei Kriterien", typ: "text", punkte: 3, erwartung: "Tabellendaten mittlerer Größe eignen sich gut für diese Verfahren (1,5 P.); Begründungspflicht/Nachvollziehbarkeit, Kreditwürdigkeit ist Hochrisiko nach EU-KI-Verordnung (1,5 P.)." }
+      ] },
+      a10: { teile: [
+        { id: "e1", label: "1. Betrugsprüfung an der Kasse", typ: "wahl", punkte: 1, optionen: EF, richtig: 1 },
+        { id: "e2", label: "2. Wöchentliche Absatzprognose", typ: "wahl", punkte: 1, optionen: EF, richtig: 0 },
+        { id: "e3", label: "3. Kamera an der Abfüllanlage ohne Netz", typ: "wahl", punkte: 1, optionen: EF, richtig: 2 }
+      ] },
+      a11: { teile: [{ id: "drift", label: "Ursache, Früherkennung und Behebung", typ: "text", punkte: 5,
+        erwartung: "Drift: Daten/Kaufverhalten haben sich geändert (2 P.). Erkennen: laufendes Monitoring der Prognosegüte und Eingabedaten, Warnschwellen, Zuständigkeit (2 P.). Beheben: Neutraining mit aktuellen Daten, ggf. neue Merkmale, MLOps-Prozess (1 P.)." }] },
+      a12: { teile: [
+        { id: "uc", label: "Anwendungsfall mit den fünf Fragen", typ: "text", punkte: 5,
+          erwartung: "Problem: manueller Aufwand/Verzögerung (1 P.); Entscheidung: Zielabteilung (1 P.); Daten: historische Mails mit tatsächlicher Abteilung als Label (1 P.); Ausgabe: Abteilung mit Wahrscheinlichkeit, unsichere Fälle an Menschen (1 P.); Nutzenmessung: Zeitersparnis, Trefferquote, Antwortzeit (1 P.)." },
+        { id: "art", label: "Lernart und Aufgabentyp", typ: "wahl", punkte: 1, optionen: ["Überwacht, Mehrklassen-Klassifikation", "Unüberwacht, Clustering", "Überwacht, Regression", "Bestärkend"], richtig: 0 }
+      ] }
+    }
+  };
+})();
+</script>

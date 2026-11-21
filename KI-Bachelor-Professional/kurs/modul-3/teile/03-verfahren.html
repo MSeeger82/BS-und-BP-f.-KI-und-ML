@@ -1,0 +1,181 @@
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="k-nächste Nachbarn" data-part="Teil C · Klassifikationsverfahren">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 30 Minuten</span><h2>k-nächste Nachbarn: Sag mir, wer deine Nachbarn sind</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Sie ziehen in eine neue Stadt und suchen einen Friseur. Sie fragen die fünf Nachbarn, die am nächsten wohnen. Drei empfehlen denselben Laden – Sie gehen hin.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>k-nächste Nachbarn (kNN)</b> klassifiziert ein neues Beispiel nach der Mehrheit der k ähnlichsten Trainingsbeispiele (bei Regression: Mittelwert der Nachbarn). Es gibt kein Training im engeren Sinn – das Modell speichert alle Beispiele („lazy learning“).</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/knn.gif" width="640" height="380" alt="Animation: Grüne und rote Punkte, ein neuer schwarzer Punkt in der Mitte. Ein Kreis wächst, bis fünf Nachbarn darin liegen; die Mehrheitsklasse färbt den neuen Punkt." loading="lazy">
+        <figcaption>k = 5: Die Mehrheit der fünf nächsten Nachbarn entscheidet.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Beispiel</h3>
+        <p>Neuer Kunde mit (Vertragsmonate 10, Beschwerden 3), Merkmale skaliert. Die drei nächsten Kunden: Abstand 0,8 „kündigt“, 1,1 „kündigt“, 1,5 „treu“. Bei k = 3 lautet die Vorhersage „kündigt“ (2 : 1).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wahl von k</th><th>Wirkung</th></tr></thead>
+          <tbody>
+            <tr><td>k klein (z. B. 1)</td><td>folgt jedem Ausreißer → Overfitting</td></tr>
+            <tr><td>k groß</td><td>zu glatt, Mehrheitsklasse dominiert → Underfitting</td></tr>
+            <tr><td>Praxis</td><td>k per Kreuzvalidierung wählen; bei zwei Klassen ungerade</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Stärken:</b> einfach, ohne Trainingszeit, gut erklärbar („diese fünf ähnlichen Fälle“). <b>Schwächen:</b> langsam bei großen Daten (jede Vorhersage vergleicht mit allen), braucht skalierte Merkmale, schwach bei sehr vielen Merkmalen (Fluch der Dimensionalität).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>kNN: ähnlichste Fälle suchen, Mehrheit entscheidet. Vorher skalieren, k mit Kreuzvalidierung wählen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>kNN ist die Idee hinter vielen Empfehlungssystemen („Kunden wie Sie kauften auch“) und hinter der Vektorsuche in RAG-Systemen. Das macht es für die Prüfung anschaulich.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Entscheidungsbaum" data-part="Teil C · Klassifikationsverfahren">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 45 Minuten</span><h2>Entscheidungsbaum: Fragen stellen, Gini und Entropie</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Beim Spiel „Wer bin ich?“ fragen geschickte Spieler zuerst „Bin ich eine Frau?“ – eine Frage, die die Möglichkeiten halbiert. Ein Entscheidungsbaum sucht auch immer die Frage, die am meisten Klarheit bringt.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Entscheidungsbaum</b> teilt die Daten schrittweise mit Ja/Nein-Fragen zu einzelnen Merkmalen. In jedem Knoten wählt er die Frage, die die Gruppen am <b>reinsten</b> macht. Die Blätter liefern die Vorhersage (Mehrheitsklasse oder Mittelwert).</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/entscheidungsbaum.gif" width="640" height="380" alt="Animation: Rote und grüne Punkte in einem Quadrat. Nacheinander erscheinen eine senkrechte und zwei waagerechte Trennlinien; rechts wächst der passende Baum mit den Fragen x größer 0,55, y größer 0,35 und y größer 0,8." loading="lazy">
+        <figcaption>Jede Frage zieht eine Linie parallel zu einer Achse.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Reinheitsmaße</span>
+        <div class="eq">Gini-Unreinheit G = 1 − Σ pᵢ² &nbsp;&nbsp; Entropie H = − Σ pᵢ · log₂ pᵢ</div>
+        <div class="legend-eq"><span>pᵢ = Anteil der Klasse i im Knoten. G = 0 heißt rein; bei zwei Klassen ist G höchstens 0,5.</span></div>
+      </div>
+      <div class="prose">
+        <h3>Durchgerechnet</h3>
+        <p>Knoten mit 100 Kunden, 40 kündigen: <span class="calcline">G = 1 − (0,4² + 0,6²) = 1 − 0,52 = 0,48</span></p>
+        <p>Frage „Vertrag kürzer als 12 Monate?“ teilt in links 50 (35 kündigen) und rechts 50 (5 kündigen):</p>
+        <ul>
+          <li>links: <span class="calcline">1 − (0,7² + 0,3²) = 1 − 0,58 = 0,42</span></li>
+          <li>rechts: <span class="calcline">1 − (0,1² + 0,9²) = 1 − 0,82 = 0,18</span></li>
+          <li>gewichtet: <span class="calcline">0,5 · 0,42 + 0,5 · 0,18 = 0,30</span> → Verbesserung 0,48 − 0,30 = <span class="result">0,18</span></li>
+        </ul>
+        <p>Der Baum probiert viele mögliche Fragen und nimmt die mit der größten Verbesserung. Gegen <b>Overfitting</b> begrenzt man die Tiefe oder die Mindestzahl Beispiele je Blatt (Hyperparameter) oder schneidet den Baum zurück (<b>Pruning</b>).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Baum stellt die Frage, nach der die Gruppen am reinsten sind. Zu tiefe Bäume lernen auswendig.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Bäume sind leicht zu erklären (Regeln), brauchen keine Skalierung und kommen mit gemischten Merkmalen zurecht – das sind die drei Standardvorteile. Nachteil: instabil, kleine Datenänderungen ändern den Baum stark.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Gini-Rechnung ist eine typische Rechenaufgabe in Teil 1, Bereich B. Lassen Sie sie mit anderen Zahlen wiederholen, bis sie sitzt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Ensembles" data-part="Teil C · Klassifikationsverfahren">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Ensembles: Random Forest und Boosting</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Bei „Wer wird Millionär?“ liegt der Publikumsjoker meist richtig – nicht weil jeder im Saal klug ist, sondern weil sich die Fehler vieler Menschen gegenseitig aufheben.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Ensemble</b> kombiniert viele einfache Modelle zu einem starken. Die beiden wichtigsten Ideen sind <b>Bagging</b> (parallel, Abstimmung) und <b>Boosting</b> (nacheinander, Fehler korrigieren).</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/random-forest.gif" width="640" height="380" alt="Animation: Fünf Bäume erscheinen nacheinander, jeder mit einer Stimme: dreimal kündigt, zweimal treu. Die Mehrheit ergibt die Vorhersage kündigt." loading="lazy">
+        <figcaption>Random Forest: Mehrheit vieler unterschiedlicher Bäume.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Random Forest (Bagging)</th><th>Gradient Boosting</th></tr></thead>
+        <tbody>
+          <tr><td>Aufbau</td><td>viele tiefe Bäume parallel, je auf einer Zufallsstichprobe (mit Zurücklegen) und mit zufälliger Merkmalsauswahl</td><td>viele flache Bäume nacheinander, jeder lernt die Restfehler der vorherigen</td></tr>
+          <tr><td>Wirkt gegen</td><td>Varianz (Overfitting einzelner Bäume)</td><td>Bias (zu einfache Modelle)</td></tr>
+          <tr><td>Stärken</td><td>robust, wenig Feinabstimmung nötig</td><td>bei Tabellendaten oft die höchste Genauigkeit</td></tr>
+          <tr><td>Bekannte Umsetzungen</td><td>scikit-learn RandomForest</td><td>XGBoost, LightGBM, CatBoost</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Ensembles liefern eine <b>Merkmalswichtigkeit</b> (Feature Importance), sind aber weniger direkt erklärbar als ein einzelner Baum. Für Einzelentscheidungen nutzt man Erklärverfahren wie SHAP (Modul 6).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bagging: viele Bäume parallel, Mehrheit entscheidet. Boosting: Bäume nacheinander, jeder korrigiert den Vorgänger.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Für Tabellendaten gilt in der Praxis: Ein gut eingestelltes Gradient Boosting ist schwer zu schlagen. Das ist ein gutes Argument gegen „Wir brauchen dafür ein großes neuronales Netz“.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Naive Bayes" data-part="Teil C · Klassifikationsverfahren">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 25 Minuten</span><h2>Naive Bayes für Texte</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Mail mit „Gewinn“, „sofort“ und „Konto bestätigen“ – Sie ahnen Spam, ohne den ganzen Text zu lesen. Jedes Wort ist ein kleines Indiz; zusammen ergeben sie ein klares Bild.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Naive Bayes</b> wendet den Satz von Bayes auf viele Merkmale an. „Naiv“ heißt: Es nimmt an, dass die Merkmale (z. B. Wörter) bei gegebener Klasse unabhängig sind. Die Annahme stimmt selten – das Verfahren funktioniert trotzdem erstaunlich gut, besonders für Textklassifikation.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Beispiel mit einem Wort</h3>
+        <p>30 % aller Mails sind Spam. Das Wort „Gewinn“ steht in 20 % der Spam-Mails und in 1 % der normalen Mails.</p>
+        <p><span class="calcline">P(Spam | „Gewinn“) = 0,2 · 0,3 / (0,2 · 0,3 + 0,01 · 0,7) = 0,06 / 0,067 ≈ 0,90</span></p>
+        <p>Mit mehreren Wörtern multipliziert das Verfahren die Einzelwahrscheinlichkeiten je Klasse und wählt die Klasse mit dem höchsten Ergebnis.</p>
+        <p><b>Stärken:</b> sehr schnell, wenig Daten nötig, gut als Baseline für Texte. <b>Schwächen:</b> Wahrscheinlichkeiten oft schlecht kalibriert; unbekannte Wörter brauchen Glättung (Laplace).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Naive Bayes = Satz von Bayes mit der vereinfachenden Annahme unabhängiger Merkmale – schnell und stark bei Texten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Klassische Spamfilter der 2000er arbeiteten so. Heute sind Sprachmodelle stärker, aber Naive Bayes bleibt eine gute, billige Baseline.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Support Vector Machine" data-part="Teil C · Klassifikationsverfahren">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 25 Minuten</span><h2>Support Vector Machine in einem Bild</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Zwischen zwei verfeindeten Lagern soll eine Straße gebaut werden – möglichst breit, damit niemand dem anderen zu nahe kommt. Die Mittellinie dieser Straße ist die Trennlinie der SVM.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Eine <b>Support Vector Machine</b> sucht die Trennlinie (allgemein: Hyperebene) mit dem <b>größten Abstand (Margin)</b> zu den nächstgelegenen Punkten beider Klassen. Diese Randpunkte heißen <b>Stützvektoren</b>. Mit dem <b>Kernel-Trick</b> trennt sie auch Daten, die nicht durch eine Gerade trennbar sind.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <ul>
+          <li><b>Hyperparameter C</b>: wie streng Fehlklassifikationen bestraft werden – groß = enge Straße, wenig Fehler im Training (Overfitting-Gefahr).</li>
+          <li><b>Kernel</b>: linear, polynomial oder RBF (radiale Basisfunktion).</li>
+          <li><b>Stärken</b>: gut bei mittelgroßen Datensätzen mit vielen Merkmalen (z. B. Text). <b>Schwächen</b>: langsam bei sehr großen Datenmengen, braucht Skalierung, schwer erklärbar.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>SVM: die Trennlinie mit dem breitesten Sicherheitsabstand; der Kernel-Trick macht krumme Grenzen möglich.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>SVM wird in der Prüfung meist nur beschrieben, nicht gerechnet. Die Straßen-Analogie reicht.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Welches Verfahren wann?" data-part="Teil C · Klassifikationsverfahren">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 30 Minuten</span><h2>Welches Verfahren wann? Eine Entscheidungshilfe</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Aufgabe</th><th>Erklärbarkeit</th><th>Skalierung nötig</th><th>Gut wenn …</th></tr></thead>
+        <tbody>
+          <tr><td>Lineare Regression</td><td>Regression</td><td>sehr gut</td><td>für Vergleich der Koeffizienten</td><td>Zusammenhang annähernd linear, Begründung wichtig</td></tr>
+          <tr><td>Logistische Regression</td><td>Klassifikation</td><td>sehr gut</td><td>empfohlen</td><td>Wahrscheinlichkeiten und Begründung gefragt, Baseline</td></tr>
+          <tr><td>kNN</td><td>beides</td><td>gut (Beispiele)</td><td>ja</td><td>kleine Datensätze, Ähnlichkeit zählt</td></tr>
+          <tr><td>Entscheidungsbaum</td><td>beides</td><td>sehr gut (Regeln)</td><td>nein</td><td>Regeln für Fachabteilungen, gemischte Merkmale</td></tr>
+          <tr><td>Random Forest</td><td>beides</td><td>mittel</td><td>nein</td><td>robuste Genauigkeit ohne viel Feinabstimmung</td></tr>
+          <tr><td>Gradient Boosting</td><td>beides</td><td>mittel (mit SHAP)</td><td>nein</td><td>höchste Genauigkeit auf Tabellendaten</td></tr>
+          <tr><td>Naive Bayes</td><td>Klassifikation</td><td>gut</td><td>nein</td><td>Texte, wenig Daten, sehr schnell</td></tr>
+          <tr><td>SVM</td><td>beides</td><td>gering</td><td>ja</td><td>mittelgroße Daten mit vielen Merkmalen</td></tr>
+          <tr><td>Neuronale Netze</td><td>beides</td><td>gering</td><td>ja</td><td>Bild, Sprache, Text, sehr große Daten (Modul 5)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="flow">
+        <div class="flow-step"><p class="flow-q">1. Muss jede Entscheidung gegenüber Kunden, Aufsicht oder Betriebsrat begründet werden?</p><div class="flow-a"><span class="yes">Ja → lineare/logistische Regression oder Baum zuerst</span></div></div>
+        <div class="flow-step"><p class="flow-q">2. Tabellendaten und Genauigkeit zählt am meisten?</p><div class="flow-a"><span class="yes">Ja → Gradient Boosting oder Random Forest, mit Erklärverfahren</span></div></div>
+        <div class="flow-step"><p class="flow-q">3. Bilder, Audio, freier Text in großer Menge?</p><div class="flow-a"><span class="yes">Ja → neuronale Netze, oft vortrainiert (Transfer Learning)</span></div></div>
+        <div class="flow-step"><p class="flow-q">4. Immer:</p><div class="flow-a"><span class="yes">einfache Baseline zuerst, Vergleich auf Validierungsdaten, Entscheidung dokumentieren</span></div></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Mit dem einfachsten passenden Modell anfangen; Komplexität muss sich durch messbar bessere Ergebnisse rechtfertigen.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>In Fachgespräch und Transferarbeit kommt fast sicher: „Warum haben Sie dieses Verfahren gewählt und nicht ein einfacheres?“ Antworten Sie mit Datenart, Datenmenge, Erklärbarkeit, Ergebnis im Vergleich zur Baseline und Betriebsaufwand.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Spielen Sie zwei Fälle mit dem Entscheidungsweg durch: Kreditvorprüfung (Begründungspflicht) und Fehlererkennung auf Produktfotos (Bilder). Die Begründung ist wichtiger als das genannte Verfahren.</p>
+      </aside>
+    </section>

@@ -1,0 +1,199 @@
+    <!-- Übungen -->
+    <section class="lesson" id="uebungen" data-title="Übungen">
+      <div class="lesson-head"><span class="meta">Übungen · 90 Minuten</span><h2>Übungen mit Musterlösung</h2></div>
+      <p>Tragen Sie Ihre Antworten direkt in die Felder unter jeder Aufgabe ein. Auswahlfelder und Zahlen prüft die Seite sofort. Freitext-Antworten bewertet auf Knopfdruck die KI wie ein IHK-Prüfer, mit Punkten und Begründung. Öffnen Sie die Musterlösung erst danach.</p>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 1: Zuordnen</h3><span class="points">6 Punkte</span></div>
+        <p>Ordnen Sie jedem Fall Lernart und Aufgabentyp zu.</p>
+        <ol class="prose" style="padding-left:1.3em">
+          <li>Ein Stadtwerk sagt den Gasverbrauch des nächsten Tages in Kilowattstunden voraus; die Verbräuche der letzten Jahre sind bekannt.</li>
+          <li>Eine Versicherung erkennt Betrugsverdacht; alte Fälle sind geprüft und markiert.</li>
+          <li>Ein Möbelhaus teilt seine Kundschaft nach Kaufverhalten in Gruppen ein, ohne Vorgaben.</li>
+          <li>Ein Lagerroboter lernt, Kisten möglichst schnell zu stapeln, und bekommt Punkte für jede stabile Kiste.</li>
+          <li>Eine Bank sucht ungewöhnliche Überweisungen, ohne dass Betrugsfälle markiert sind.</li>
+          <li>Ein Callcenter ordnet eingehende E-Mails einer von fünf Abteilungen zu; 30.000 alte Mails sind zugeordnet.</li>
+        </ol>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Nr.</th><th>Lernart</th><th>Aufgabentyp</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Überwacht</td><td>Regression</td></tr>
+              <tr><td>2</td><td>Überwacht</td><td>Klassifikation (binär)</td></tr>
+              <tr><td>3</td><td>Unüberwacht</td><td>Clustering</td></tr>
+              <tr><td>4</td><td>Bestärkend</td><td>Strategie lernen (Policy)</td></tr>
+              <tr><td>5</td><td>Unüberwacht</td><td>Anomalieerkennung</td></tr>
+              <tr><td>6</td><td>Überwacht</td><td>Klassifikation (Mehrklassen)</td></tr>
+            </tbody>
+          </table></div>
+          <p>Je 1 Punkt, wenn Lernart und Aufgabentyp stimmen.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 2: Begriffe abgrenzen</h3><span class="points">4 Punkte</span></div>
+        <p>Erklären Sie den Unterschied zwischen KI, maschinellem Lernen und Deep Learning und nennen Sie je ein betriebliches Beispiel.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>KI ist der Oberbegriff für Systeme, die Denkaufgaben übernehmen – auch regelbasiert (z. B. Expertensystem für Störungsdiagnosen). Maschinelles Lernen ist der Teil der KI, der Regeln aus Beispielen lernt (z. B. Kündigerprognose aus Kundendaten). Deep Learning ist maschinelles Lernen mit vielschichtigen neuronalen Netzen, besonders für Bild, Ton und Text (z. B. Bauteilprüfung per Kamera). Bewertung: Teilmengenbeziehung 1 P., je Begriff mit Beispiel 1 P.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 3: Merkmale und Label</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Autohaus will den Verkaufspreis von Gebrauchtwagen schätzen. Es hat eine Tabelle mit 8.000 verkauften Autos: Marke, Baujahr, Kilometerstand, Unfallwagen ja/nein und erzielter Preis. Nennen Sie Merkmale, Label, Aufgabentyp und Lernart.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <ul class="prose" style="padding-left:1.3em">
+            <li>Merkmale: Marke, Baujahr, Kilometerstand, Unfallwagen (1 P.)</li>
+            <li>Label: erzielter Preis (1 P.)</li>
+            <li>Aufgabentyp: Regression, da der Preis eine Zahl ist (1 P.)</li>
+            <li>Lernart: überwacht, da der Preis für alle Beispiele bekannt ist (1 P.)</li>
+          </ul>
+          <p>Häufiger Fehler: „Unfallwagen ja/nein“ als Label nennen. Es ist ein Merkmal, weil es nicht vorhergesagt werden soll.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 4: KI oder nicht?</h3><span class="points">4 Punkte</span></div>
+        <p>Entscheiden Sie jeweils: keine KI, KI ohne maschinelles Lernen (regelbasiert) oder maschinelles Lernen.</p>
+        <ol class="prose" style="padding-left:1.3em">
+          <li>Eine Tabellenkalkulation summiert Rechnungsbeträge.</li>
+          <li>Ein Diagnosesystem für Heizungsstörungen mit 400 von Technikern geschriebenen Wenn-dann-Regeln.</li>
+          <li>Ein Spamfilter, der aus 100.000 markierten Mails gelernt hat.</li>
+          <li>Eine App, die aus Fotos von Blättern die Pflanzenart bestimmt.</li>
+        </ol>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <ol class="prose" style="padding-left:1.3em">
+            <li>Keine KI – feste Rechenregel, keine Denkaufgabe wie Erkennen oder Einschätzen.</li>
+            <li>KI ohne maschinelles Lernen (Expertensystem, regelbasiert).</li>
+            <li>Maschinelles Lernen (überwacht, Klassifikation).</li>
+            <li>Maschinelles Lernen, genauer Deep Learning (Bilderkennung, Klassifikation).</li>
+          </ol>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 5: Parameter und Hyperparameter</h3><span class="points">3 Punkte</span></div>
+        <p>Erklären Sie den Unterschied zwischen Parameter und Hyperparameter und nennen Sie je ein Beispiel.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Parameter lernt das Modell beim Training selbst, z. B. die Steigung einer Regressionsgeraden oder die Gewichte eines neuronalen Netzes (1,5 P.). Hyperparameter legt der Mensch vor dem Training fest, z. B. die Lernrate, die maximale Tiefe eines Entscheidungsbaums oder die Anzahl der Cluster bei k-Means (1,5 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 6: Datenaufteilung</h3><span class="points">5 Punkte</span></div>
+        <p>Ein Datensatz hat 20.000 Beispiele. Er wird im Verhältnis 70 / 15 / 15 aufgeteilt. a) Wie viele Beispiele landen im Testdatensatz? b) Erklären Sie, wozu Validierungsdaten dienen und warum man Testdaten nicht mehrfach zum Vergleichen benutzen sollte.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 20.000 · 0,15 = <b>3.000</b> Beispiele (1 P.).</p>
+          <p>b) Mit Validierungsdaten werden Hyperparameter eingestellt und Modelle verglichen (2 P.). Wer Testdaten immer wieder zum Vergleichen nutzt, passt seine Entscheidungen an sie an – das Testergebnis ist dann zu optimistisch und keine ehrliche Schätzung für neue Fälle mehr (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 7: Diagnose</h3><span class="points">4 Punkte</span></div>
+        <p>Ordnen Sie zu: a) Training 62 %, Test 60 %. b) Training 99 %, Test 70 %. c) Training 91 %, Test 89 %. Welche Situation ist jeweils gemeint, und was empfehlen Sie für b)?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) Underfitting – Modell zu einfach oder Merkmale fehlen (1 P.). b) Overfitting (1 P.). c) gute Generalisierung (1 P.). Empfehlung für b): einfacheres Modell, mehr Daten, Regularisierung oder Kreuzvalidierung (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 8: Rechnen mit einem Modell</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Modell schätzt die Bearbeitungszeit eines Serviceauftrags: <span class="calcline">Zeit (min) = 25 + 4 · Anzahl Positionen + 15 · Neukunde</span> (Neukunde = 1, sonst 0). a) Berechnen Sie die Zeit für einen Neukunden mit 6 Positionen. b) Deuten Sie die Zahl 4.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 25 + 4 · 6 + 15 · 1 = <b>64 Minuten</b> (2 P.). b) Jede zusätzliche Position verlängert die geschätzte Bearbeitungszeit um 4 Minuten, wenn alles andere gleich bleibt (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 9: Algorithmus begründen</h3><span class="points">4 Punkte</span></div>
+        <p>Eine Bank will Kreditanträge vorsortieren. Die Daten liegen als Tabelle vor (40 Merkmale, 60.000 Anträge). Die Bank muss Ablehnungen gegenüber Kunden und Aufsicht begründen können. Schlagen Sie eine Verfahrensfamilie vor und begründen Sie mit zwei Kriterien.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Gut erklärbare Verfahren wie logistische Regression oder ein Entscheidungsbaum (alternativ Gradient Boosting mit Erklärverfahren wie SHAP) (1 P.). Kriterien: Tabellendaten mittlerer Größe – dafür eignen sich diese Verfahren sehr gut (1,5 P.); Begründungspflicht – einfache Modelle sind nachvollziehbar; Kreditwürdigkeitsprüfung ist zudem Hochrisiko-KI nach der EU-KI-Verordnung (1,5 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 10: Einsatzform</h3><span class="points">3 Punkte</span></div>
+        <p>Ordnen Sie die Einsatzform zu: Batch, Echtzeit oder Edge.</p>
+        <ol class="prose" style="padding-left:1.3em">
+          <li>Betrugsprüfung bei jeder Kartenzahlung an der Kasse</li>
+          <li>Wöchentliche Absatzprognose für 300 Filialen</li>
+          <li>Kamera an einer Abfüllanlage ohne Internetanbindung erkennt beschädigte Flaschen</li>
+        </ol>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Echtzeit – Antwort in Millisekunden nötig. 2. Batch – viele Fälle gesammelt, regelmäßig. 3. Edge – direkt auf dem Gerät. Je 1 P.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 11: Lebenszyklus</h3><span class="points">5 Punkte</span></div>
+        <p>Ein Modell zur Absatzprognose wurde vor zwei Jahren eingeführt. Seit einem neuen Online-Shop werden die Prognosen immer schlechter. Erklären Sie die Ursache mit dem passenden Fachbegriff und beschreiben Sie, wie ein Unternehmen so etwas künftig früh erkennt und behebt.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Ursache: Drift – das Kaufverhalten und die Daten haben sich verändert, die gelernten Zusammenhänge passen nicht mehr (2 P.). Erkennen: laufende Überwachung der Prognosegüte und der Eingabedaten, Warnschwellen, Zuständigkeit festlegen (2 P.). Beheben: mit aktuellen Daten neu trainieren, ggf. neue Merkmale (z. B. Onlineanteil) aufnehmen; geregelt über MLOps (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 12: Situationsaufgabe Use Case</h3><span class="points">6 Punkte</span></div>
+        <p>Die Muster Logistik GmbH (450 Beschäftigte) erhält täglich 2.000 Kundenanfragen per E-Mail. Mitarbeitende lesen jede Mail und leiten sie an eine von sechs Abteilungen weiter; das dauert im Schnitt 3 Minuten. Beschreiben Sie einen KI-Anwendungsfall mit den fünf Fragen aus Lektion 15 (Problem, Entscheidung, Daten, Ausgabe, Nutzenmessung) und nennen Sie Lernart und Aufgabentyp.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Problem: hoher manueller Aufwand und Verzögerung bei der Weiterleitung (1 P.). Entscheidung: an welche Abteilung eine Mail geht (1 P.). Daten: historische Mails mit der tatsächlich zuständigen Abteilung als Label (1 P.). Ausgabe: Abteilung mit Wahrscheinlichkeit; bei unsicheren Fällen Prüfung durch Menschen (1 P.). Nutzen: Zeitersparnis (2.000 · 3 min = 100 Stunden pro Tag als Obergrenze), Weiterleitungsquote richtig, Antwortzeit an Kunden (1 P.). Überwacht, Mehrklassen-Klassifikation (1 P.).</p>
+        </details>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Aufgaben 1 bis 8 eignen sich für Einzelarbeit, 9 bis 12 für Zweiergruppen. Achten Sie bei Aufgabe 12 darauf, dass die Nutzenmessung konkret ist – das ist die Brücke zu Modul 13 (Abwägungsmethoden).</p>
+      </aside>
+    </section>
+
+    <!-- Quiz -->
+    <section class="lesson" id="quiz" data-title="Abschlussquiz">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 25 Minuten</span><h2>Abschlussquiz Modul 1</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="flow-a"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Einzeln und ohne Unterlagen bearbeiten lassen. Wer unter 14 liegt, wiederholt die Lektionen zu den falsch beantworteten Fragen.</p>
+      </aside>
+    </section>
+
+    <!-- Zusammenfassung -->
+    <section class="lesson" id="summary" data-title="Zusammenfassung">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>KI</h3><p>Oberbegriff für Systeme, die Denkaufgaben übernehmen – auch regelbasiert.</p></div>
+        <div class="card"><h3>Maschinelles Lernen</h3><p>Regeln werden aus Beispielen gelernt statt programmiert.</p></div>
+        <div class="card"><h3>Deep Learning</h3><p>ML mit vielschichtigen neuronalen Netzen; stark bei Bild, Ton, Text.</p></div>
+        <div class="card"><h3>Generative KI</h3><p>Erzeugt neue Inhalte; beruht auf selbstüberwacht trainierten Basismodellen.</p></div>
+        <div class="card"><h3>Daten</h3><p>Beispiele (Zeilen), Merkmale (Spalten), Label (Zielgröße).</p></div>
+        <div class="card"><h3>Training</h3><p>Parameter anpassen, bis der Fehler klein ist; Hyperparameter gibt der Mensch vor.</p></div>
+        <div class="card"><h3>Aufteilung</h3><p>Training, Validierung, Test – Testdaten bleiben verschlossen.</p></div>
+        <div class="card"><h3>Regression / Klassifikation</h3><p>Zahl vorhersagen / Kategorie vorhersagen.</p></div>
+        <div class="card"><h3>Lernarten</h3><p>Überwacht (Labels), unüberwacht (ohne Labels), bestärkend (Belohnung), selbstüberwacht.</p></div>
+        <div class="card"><h3>Einsatz</h3><p>Inferenz als Batch, Echtzeit oder Edge; Überwachung gegen Drift.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Glossar Modul 1</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+          <tbody>
+            <tr><td>Agent</td><td>Handelndes System beim bestärkenden Lernen</td></tr>
+            <tr><td>Data Leakage</td><td>Informationen aus Test- oder Zukunftsdaten gelangen ins Training</td></tr>
+            <tr><td>Drift</td><td>Daten oder Zusammenhänge ändern sich nach dem Training</td></tr>
+            <tr><td>Foundation Model</td><td>Großes, breit vortrainiertes Basismodell</td></tr>
+            <tr><td>Hyperparameter</td><td>Vor dem Training festgelegte Einstellung</td></tr>
+            <tr><td>Inferenz</td><td>Anwenden des fertigen Modells auf neue Daten</td></tr>
+            <tr><td>Label</td><td>Bekannte richtige Antwort eines Trainingsbeispiels</td></tr>
+            <tr><td>Merkmal (Feature)</td><td>Eingabeinformation eines Beispiels</td></tr>
+            <tr><td>Overfitting</td><td>Auswendiglernen statt Verallgemeinern</td></tr>
+            <tr><td>Parameter</td><td>Vom Modell gelernte Stellschraube</td></tr>
+            <tr><td>Policy</td><td>Gelernte Handlungsstrategie eines Agenten</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Weiter mit Modul 2:</b> Umgang mit Daten – Datenbanken, SQL, Datenqualität, Statistik und Datenschutz.</p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Reihum erklärt jede Person eine Karte in einem Satz. Ausblick auf Modul 2: Ohne gute Daten kein gutes Modell.</p>
+      </aside>
+    </section>
+<!--SCRIPTS-->

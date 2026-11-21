@@ -1,0 +1,158 @@
+    <!-- Übungen -->
+    <section class="lesson" id="uebungen" data-title="Übungen">
+      <div class="lesson-head"><span class="meta">Übungen · 150 Minuten</span><h2>Übungen mit Musterlösung</h2></div>
+      <p>Rechnen Sie mit Taschenrechner und schreiben Sie die Ergebnisse in die Felder. Zahlen und Auswahlfelder prüft die Seite sofort, Freitexte bewertet die KI wie ein IHK-Prüfer. Die beiden Rechner in den Lektionen 5 und 8 helfen bei der Kontrolle.</p>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 1: Vektoren und Abstände</h3><span class="points">4 Punkte</span></div>
+        <p>a) Berechnen Sie das Skalarprodukt von (3; 1; 2) und (1; 4; 0). b) Berechnen Sie den euklidischen und den Manhattan-Abstand zwischen (1 | 1) und (4 | 5).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 3·1 + 1·4 + 2·0 = <b>7</b> (2 P.). b) euklidisch √(3² + 4²) = <b>5</b> (1 P.), Manhattan 3 + 4 = <b>7</b> (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 2: Gradientenabstieg</h3><span class="points">4 Punkte</span></div>
+        <p>Fehlerfunktion f(w) = (w − 5)², Ableitung f′(w) = 2(w − 5). Start w = 1, Lernrate η = 0,25. Berechnen Sie w nach dem ersten und nach dem zweiten Schritt.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Schritt 1: f′(1) = −8 → w = 1 − 0,25 · (−8) = <b>3</b> (2 P.). Schritt 2: f′(3) = −4 → w = 3 − 0,25 · (−4) = <b>4</b> (2 P.). Das Minimum liegt bei 5; die Schritte werden kleiner, weil die Steigung abnimmt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 3: Satz von Bayes</h3><span class="points">5 Punkte</span></div>
+        <p>2 % aller Bauteile sind fehlerhaft. Eine Kamera-KI erkennt 95 % der fehlerhaften Teile, schlägt aber auch bei 10 % der guten Teile an. Wie wahrscheinlich ist ein Teil tatsächlich fehlerhaft, wenn die KI anschlägt? Was folgt daraus für den Prozess?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>P = 0,95 · 0,02 / (0,95 · 0,02 + 0,10 · 0,98) = 0,019 / 0,117 ≈ <b>16,2 %</b> (3 P.). Folge: Die meisten Alarme sind Fehlalarme; angeschlagene Teile nicht automatisch verschrotten, sondern nachprüfen lassen, und die Fehlalarmquote senken (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 4: Lineare Regression von Hand</h3><span class="points">6 Punkte</span></div>
+        <p>Werbeausgaben x (in T€) und Umsatz y (in T€): (2 | 3), (4 | 7), (6 | 8), (8 | 10). Berechnen Sie b₁ und b₀ nach der Methode der kleinsten Quadrate und schätzen Sie den Umsatz für x = 10.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>x̄ = 5, ȳ = 7. Σ(x − x̄)(y − ȳ) = 12 + 0 + 1 + 9 = 22; Σ(x − x̄)² = 9 + 1 + 1 + 9 = 20.</p>
+          <p>b₁ = 22 / 20 = <b>1,1</b> (2 P.), b₀ = 7 − 1,1 · 5 = <b>1,5</b> (2 P.). Für x = 10: 1,5 + 11 = <b>12,5 T€</b> (2 P.) – Vorsicht, x = 10 liegt außerhalb der Daten (Extrapolation).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 5: Bestimmtheitsmaß</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Modell hat auf den Testdaten eine Summe der quadrierten Residuen von 12; die Gesamtstreuung Σ(y − ȳ)² beträgt 48. Berechnen und deuten Sie R².</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>R² = 1 − 12 / 48 = <b>0,75</b> (2 P.). Das Modell erklärt 75 % der Streuung der Zielgröße auf neuen Daten (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 6: Multiple Regression</h3><span class="points">4 Punkte</span></div>
+        <p>Modell aus Lektion 9: Preis = 24.000 − 1.300 · Alter − 0,04 · km + 1.500 · Navi − 3.000 · Unfall. Berechnen Sie den Preis für ein 8 Jahre altes Auto mit 120.000 km, ohne Navi, mit Unfall, und deuten Sie den Koeffizienten −0,04.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>24.000 − 10.400 − 4.800 + 0 − 3.000 = <b>5.800 €</b> (2 P.). Jeder zusätzliche Kilometer senkt den geschätzten Preis um 4 Cent, wenn alle anderen Merkmale gleich bleiben – 10.000 km also um 400 € (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 7: Logistische Regression</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Modell berechnet z = −3 + 0,5 · (offene Mahnungen). Ein Kunde hat 8 offene Mahnungen. Berechnen Sie die Ausfallwahrscheinlichkeit in % (eine Nachkommastelle) und die Klasse bei Schwelle 0,5.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>z = −3 + 4 = 1; P = 1 / (1 + e^(−1)) = 1 / 1,368 ≈ <b>73,1 %</b> (3 P.). Über 0,5 → Klasse „Ausfall“ (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 8: k-nächste Nachbarn</h3><span class="points">4 Punkte</span></div>
+        <p>Die fünf nächsten Nachbarn eines neuen Falls, nach Abstand sortiert: kündigt, treu, kündigt, treu, treu. a) Vorhersage bei k = 3? b) bei k = 5? c) Warum müssen die Merkmale vorher skaliert werden?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) kündigt (2 : 1) (1 P.). b) treu (3 : 2) (1 P.). c) kNN entscheidet über Abstände; ohne Skalierung dominieren Merkmale mit großen Zahlenbereichen (z. B. Umsatz in € gegenüber Anzahl Beschwerden) (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 9: Gini-Unreinheit</h3><span class="points">5 Punkte</span></div>
+        <p>Ein Knoten enthält 80 Fälle, 40 davon Klasse A. Eine Frage teilt in links 40 Fälle (30 A) und rechts 40 Fälle (10 A). Berechnen Sie die Gini-Unreinheit vor der Teilung, links, rechts und gewichtet danach.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Vorher 1 − (0,5² + 0,5²) = <b>0,5</b> (1 P.). Links 1 − (0,75² + 0,25²) = 1 − 0,625 = <b>0,375</b> (1 P.). Rechts ebenso <b>0,375</b> (1 P.). Gewichtet 0,5 · 0,375 + 0,5 · 0,375 = <b>0,375</b> (1 P.); Verbesserung 0,125 (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 10: Bagging und Boosting</h3><span class="points">4 Punkte</span></div>
+        <p>Erklären Sie den Unterschied zwischen Random Forest und Gradient Boosting und nennen Sie je einen Vorteil.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Random Forest: viele tiefe Bäume parallel auf Zufallsstichproben und zufälligen Merkmalen, Mehrheit/Mittelwert entscheidet; Vorteil: robust, wenig Feinabstimmung (2 P.). Gradient Boosting: flache Bäume nacheinander, jeder lernt die Restfehler der vorherigen; Vorteil: oft höchste Genauigkeit auf Tabellendaten (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 11: Verfahren zuordnen</h3><span class="points">3 Punkte</span></div>
+        <p>Welches Verfahren passt am besten? 1. Eine Bank braucht für jede Kreditablehnung nachvollziehbare Regeln. 2. Ein Händler will mit 300 Tabellenmerkmalen die Abwanderung möglichst genau vorhersagen. 3. Ein Kundenservice will mit sehr wenig Aufwand eingehende Mails in Themen sortieren, als erste Baseline.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Entscheidungsbaum (oder logistische Regression) · 2. Gradient Boosting · 3. Naive Bayes. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 12: Situationsaufgabe Versicherung</h3><span class="points">8 Punkte</span></div>
+        <p>Die Muster Versicherung AG will (a) die Schadenhöhe neuer Kfz-Schäden schätzen und (b) Schäden mit Betrugsverdacht markieren. Es gibt 200.000 abgeschlossene Schäden mit 45 Tabellenmerkmalen; 0,8 % waren Betrug. Ablehnungen müssen gegenüber Kunden begründbar sein. Schlagen Sie je Aufgabe ein Verfahren vor und begründen Sie. Erklären Sie, warum bei (b) eine hohe Accuracy wenig aussagt und wie die Schwelle festgelegt werden sollte.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>(a) Regression, z. B. Gradient Boosting mit linearer Regression als Baseline; Tabellendaten, viele Fälle (2 P.). (b) Klassifikation, z. B. logistische Regression oder Gradient Boosting mit Erklärverfahren (SHAP), weil Entscheidungen begründet werden müssen; ein Mensch prüft markierte Fälle (2 P.).</p>
+          <p>Accuracy: Bei 0,8 % Betrug erreicht ein Modell, das nie „Betrug“ sagt, schon 99,2 % – wichtig sind Precision und Recall, und wegen der niedrigen Basisrate sind viele Alarme falsch (2 P.). Schwelle: anhand der Kosten eines übersehenen Betrugs gegenüber den Kosten einer Prüfung und der Prüfkapazität festlegen, gemeinsam mit der Fachabteilung (2 P.).</p>
+        </details>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Aufgaben 2 bis 9 sind typische Rechenaufgaben für Teil 1, Bereich B. Aufgabe 12 ist eine kleine Situationsaufgabe; besprechen Sie besonders die Rolle der Basisrate – Brücke zu Modul 4.</p>
+      </aside>
+    </section>
+
+    <!-- Quiz -->
+    <section class="lesson" id="quiz" data-title="Abschlussquiz">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 25 Minuten</span><h2>Abschlussquiz Modul 3</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="flow-a"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Taschenrechner erlaubt. Wer unter 14 liegt, rechnet die Beispiele der betroffenen Lektionen noch einmal selbst.</p>
+      </aside>
+    </section>
+
+    <!-- Zusammenfassung -->
+    <section class="lesson" id="summary" data-title="Zusammenfassung">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Vektoren</h3><p>Beispiel = Vektor, Datensatz = Matrix; Modelle rechnen Skalarprodukte.</p></div>
+        <div class="card"><h3>Abstände</h3><p>euklidisch, Manhattan, Kosinus – nur mit skalierten Merkmalen fair.</p></div>
+        <div class="card"><h3>Gradientenabstieg</h3><p>w neu = w alt − η · Steigung; Lernrate richtig wählen.</p></div>
+        <div class="card"><h3>Bayes</h3><p>Basisrate entscheidet mit; seltene Ereignisse → viele Fehlalarme.</p></div>
+        <div class="card"><h3>Lineare Regression</h3><p>b₁ = Cov/Var, b₀ = ȳ − b₁x̄, R² = erklärte Streuung.</p></div>
+        <div class="card"><h3>Logistische Regression</h3><p>Sigmoid macht aus z eine Wahrscheinlichkeit; Schwelle = Geschäftsentscheidung.</p></div>
+        <div class="card"><h3>kNN</h3><p>Mehrheit der k ähnlichsten Fälle; k per Kreuzvalidierung.</p></div>
+        <div class="card"><h3>Entscheidungsbaum</h3><p>Fragen nach größter Reinheit (Gini/Entropie); Tiefe begrenzen.</p></div>
+        <div class="card"><h3>Ensembles</h3><p>Random Forest parallel, Boosting nacheinander – stark auf Tabellendaten.</p></div>
+        <div class="card"><h3>Naive Bayes, SVM</h3><p>Texte schnell klassifizieren; breitester Sicherheitsabstand.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Glossar Modul 3</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+          <tbody>
+            <tr><td>Ableitung</td><td>Steigung einer Funktion an einer Stelle</td></tr>
+            <tr><td>Basisrate</td><td>Wie häufig ein Ereignis überhaupt vorkommt</td></tr>
+            <tr><td>Gini-Unreinheit</td><td>1 − Σ pᵢ²; 0 = reiner Knoten</td></tr>
+            <tr><td>Gradient</td><td>Vektor der partiellen Ableitungen; Richtung des steilsten Anstiegs</td></tr>
+            <tr><td>Kernel-Trick</td><td>SVM trennt in einem höherdimensionalen Raum, ohne ihn auszurechnen</td></tr>
+            <tr><td>Kreuzentropie</td><td>Verlustfunktion für Klassifikation</td></tr>
+            <tr><td>Lernrate</td><td>Schrittweite des Gradientenabstiegs (Hyperparameter)</td></tr>
+            <tr><td>Pruning</td><td>Zurückschneiden eines Entscheidungsbaums gegen Overfitting</td></tr>
+            <tr><td>Residuum</td><td>Differenz zwischen echtem und vorhergesagtem Wert</td></tr>
+            <tr><td>Sigmoid</td><td>1 / (1 + e^(−z)); bildet jede Zahl auf 0 bis 1 ab</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Weiter mit Modul 4:</b> Evaluierung und Clustering – wie man Modelle fair bewertet und Gruppen ohne Labels findet.</p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Jede Person erklärt ein Verfahren in zwei Sätzen und nennt einen Einsatzfall. Ausblick: In Modul 4 wird gemessen, welches Verfahren wirklich besser ist.</p>
+      </aside>
+    </section>
+<!--SCRIPTS-->

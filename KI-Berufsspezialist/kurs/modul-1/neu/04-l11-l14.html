@@ -1,0 +1,288 @@
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Mischformen">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 30 Minuten</span><h2>Mischformen: halbüberwacht und selbstüberwacht</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Lückentext: „Der Hund ___ laut.“ Sie wissen sofort, dass „bellt“ fehlt. Niemand musste Ihnen die Lösung geben – die Lösung steckt im Text selbst, man hat sie nur abgedeckt. Wenn Sie so hundertmal geübt haben, kennen Sie Sprache immer besser, ohne dass je ein Lehrer ein Lösungsheft geöffnet hätte. So lernen große Sprachmodelle.</p>
+        <p>Eine zweite Szene: Ein Lehrer korrigiert nur 5 von 100 Hausaufgaben und gibt den Rest der Klasse zur gegenseitigen Prüfung. Die fünf korrigierten Hefte dienen als Maßstab, die anderen 95 helfen trotzdem beim Lernen. Das ist die Idee des halbüberwachten Lernens.</p>
+      </div>
+      <div class="prose">
+        <h3>Warum es überhaupt Mischformen gibt</h3>
+        <p>Die drei Hauptlernarten haben jeweils eine Schwäche. Überwachtes Lernen braucht viele <b>Labels</b>, und die sind teuer. Unüberwachtes Lernen kommt ohne aus, liefert aber nur Gruppen und Auffälligkeiten, keine konkreten Vorhersagen. Mischformen versuchen, das Beste aus beiden Welten zu verbinden: Sie nutzen die riesigen Mengen an Daten, die keine Labels haben, und kommen mit wenigen oder gar keinen von Menschen vergebenen Labels aus.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Lernform</th><th>Idee</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Halbüberwacht</b> (semi-supervised)</td><td>Wenige Beispiele haben ein Label, sehr viele nicht. Das Modell nutzt beide.</td><td>500 markierte und 50.000 unmarkierte Röntgenbilder</td></tr>
+          <tr><td><b>Selbstüberwacht</b> (self-supervised)</td><td>Das Label wird aus den Daten selbst erzeugt, indem man einen Teil verdeckt.</td><td>Sprachmodell lernt, das nächste Wort vorherzusagen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Halbüberwacht – was es bei Röntgenbildern spart</span>
+        <p>Eine Klinik besitzt 50.500 Röntgenbilder. Eine Fachärztin braucht pro Bild etwa 2 Minuten für die Markierung. Alle Bilder zu markieren hieße <span class="calcline">50.500 · 2 min = 101.000 min ≈ 1.683 Stunden</span>, also über 42 Arbeitswochen. Die Klinik markiert deshalb nur 500 Bilder (<span class="calcline">500 · 2 min = 1.000 min ≈ 17 Stunden</span>). Das Verfahren nutzt die 500 beschrifteten Bilder als „Anker“ und lernt zusätzlich aus den 50.000 unbeschrifteten, welche Bilder einander ähnlich sind. Der Aufwand sinkt auf etwa ein Hundertstel – bei oft ähnlich guter Qualität.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Selbstüberwacht – wie ein Sprachmodell aus Texten lernt</span>
+        <p>Man nimmt einen beliebigen Satz aus dem Internet: „Die Katze sitzt auf dem Sofa.“ Aus diesem einen Satz entstehen mehrere Lernaufgaben, ohne dass ein Mensch etwas markiert:</p>
+        <ul>
+          <li>Eingabe „Die“ → richtiges Wort: <b>Katze</b></li>
+          <li>Eingabe „Die Katze“ → richtiges Wort: <b>sitzt</b></li>
+          <li>Eingabe „Die Katze sitzt auf dem“ → richtiges Wort: <b>Sofa</b></li>
+        </ul>
+        <p>Das „Label“ steckt im Text selbst, man hat es nur verdeckt. Bei Milliarden Sätzen entstehen so Billionen Lernaufgaben, und niemand musste sie von Hand beschriften. Das ist der Grund, warum große Sprachmodelle möglich wurden: Man braucht keine Armee von Beschriftern, sondern „nur“ sehr viel Text und sehr viel Rechenleistung.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Selbstüberwacht bei Bildern</span>
+        <p>Man schneidet aus einem Foto ein Stück heraus und lässt das Modell den fehlenden Teil erraten, oder man zeigt zwei leicht veränderte Ausschnitte desselben Bildes und lehrt das Modell, dass sie zusammengehören. Auch hier entsteht die „richtige Antwort“ aus dem Bild selbst. Ein so vortrainiertes Modell hat bereits ein Gefühl für Kanten, Formen und Objekte und lässt sich dann mit wenigen markierten Beispielen für eine konkrete Aufgabe nachschärfen.</p>
+      </div>
+      <div class="prose">
+        <h3>Vortrainieren und Feintunen</h3>
+        <p>Bei großen Modellen läuft es meist in zwei Stufen. Zuerst das <b>Vortraining</b>: selbstüberwacht auf riesigen Datenmengen. Das Modell lernt allgemeine Fähigkeiten, zum Beispiel Sprache. Danach das <b>Feintuning</b>: mit vergleichsweise wenigen, speziell vorbereiteten Beispielen wird es auf eine konkrete Aufgabe zugeschnitten, etwa auf höfliche Antworten im Kundenservice. In Modul 8 sehen Sie, wie das bei Chat-Assistenten abläuft.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Häufige Missverständnisse</span>
+        <ul>
+          <li><b>„Selbstüberwacht ist unüberwacht.“</b> Nein, nicht ganz. Es gibt ein Lernziel (das verdeckte Wort), nur wird es automatisch aus den Daten erzeugt. Deshalb ein eigener Name.</li>
+          <li><b>„Halbüberwacht braucht gar keine Labels.“</b> Doch, ein paar. Sie sind der Anker, an dem sich das Modell orientiert.</li>
+          <li><b>„Sprachmodelle lernen aus Fragen und Antworten.“</b> Das Vortraining beruht auf dem Vorhersagen des nächsten Wortes. Frage-Antwort-Beispiele kommen erst im Feintuning hinzu.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Große Sprachmodelle werden zuerst selbstüberwacht trainiert: Sie sagen immer wieder das nächste Wort voraus. Halbüberwacht heißt: wenige Labels, viele unmarkierte Daten.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Sprachmodell lernt, indem es in Texten das jeweils nächste Wort vorhersagt. Welche Lernform ist das?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Überwacht, weil Menschen jedes Wort markiert haben</button>
+          <button type="button" class="opt" data-right="true">Selbstüberwacht, weil die Antwort aus dem Text selbst stammt</button>
+          <button type="button" class="opt">Bestärkend, weil es Punkte sammelt</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Das „Label“ (das nächste Wort) wird aus den Daten selbst gewonnen. Niemand musste etwas markieren." data-no="Nicht ganz. Die richtige Antwort steckt im Text selbst – das nennt man selbstüberwachtes Lernen."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Machen Sie mit der Gruppe zwei, drei Lückentexte. Erklären Sie dann: Das Internet ist ein riesiger Lückentext – deshalb braucht man für Sprachmodelle keine Menschen, die Labels vergeben. Das Thema wird in Modul 8 vertieft.</p>
+        <p>Rechnen Sie das Röntgenbeispiel durch: Die Zahl von über 42 Arbeitswochen für eine Fachärztin überzeugt sofort, warum man Verfahren sucht, die mit wenig Labeln auskommen.</p>
+        <p>Fragen Sie am Ende: „Wo haben Sie in Ihrem Betrieb viele Daten, aber wenige markierte Beispiele?“ Typische Antworten: E-Mails, Fotos von Bauteilen, Maschinenprotokolle. Dort kommen Mischformen ins Spiel.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Aufgabentypen">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 45 Minuten</span><h2>Aufgabentypen: Was soll das Modell herausfinden?</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Der einfachste Trick: Hören Sie auf die Frage. Lautet sie <b>„Wie viel?“</b> oder „Wie hoch?“, ist die Antwort eine Zahl. Lautet sie <b>„Welche Sorte?“</b> oder „Ja oder nein?“, ist die Antwort eine Kategorie. Lautet sie <b>„Was gehört zusammen?“</b>, sucht man Gruppen.</p>
+        <p>Beispiel aus dem Supermarkt: „Wie viele Joghurts verkaufen wir morgen?“ – eine Zahl. „Ist dieser Joghurt noch genießbar?“ – ja oder nein. „Welche Kundinnen kaufen ähnlich ein?“ – Gruppen. Mit dieser einen Gewohnheit ordnen Sie später fast jede Prüfungsaufgabe richtig ein.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/regression.gif" width="640" height="380" alt="Animation: Punkte zeigen Wohnungen mit Wohnfläche und Miete. Eine Linie dreht sich, bis sie gut durch die Punkte läuft. Rote Striche zeigen die Fehler. Der durchschnittliche Fehler sinkt, rechts steht die Vorhersage für 70 Quadratmeter." loading="lazy">
+        <figcaption>Regression: Die Linie wird so lange angepasst, bis die Fehler klein sind. Dann kann man für jede Wohnfläche eine Miete ablesen.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aufgabentyp</th><th>Typische Frage</th><th>Ergebnis</th><th>Beispiel</th><th>Lernart</th></tr></thead>
+        <tbody>
+          <tr><td><b>Regression</b></td><td>Wie viel?</td><td>Eine Zahl</td><td>Miete, Umsatz, Restlebensdauer einer Maschine</td><td>überwacht</td></tr>
+          <tr><td><b>Klassifikation</b></td><td>Welche Kategorie?</td><td>Eine Klasse</td><td>Spam ja/nein (binär); Ziffer 0–9 (mehrklassig)</td><td>überwacht</td></tr>
+          <tr><td><b>Clustering</b></td><td>Was gehört zusammen?</td><td>Gruppen</td><td>Kundensegmente</td><td>unüberwacht</td></tr>
+          <tr><td><b>Anomalieerkennung</b></td><td>Was ist ungewöhnlich?</td><td>Auffällige Fälle</td><td>Kreditkartenbetrug</td><td>meist unüberwacht</td></tr>
+          <tr><td><b>Dimensionsreduktion</b></td><td>Geht es einfacher?</td><td>Weniger Merkmale</td><td>50 Sensorwerte auf 5 verdichten</td><td>unüberwacht</td></tr>
+          <tr><td><b>Generierung</b></td><td>Erzeuge etwas Neues</td><td>Text, Bild, Code</td><td>Produktbeschreibung schreiben</td><td>selbstüberwacht + Feintuning</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <h3>Die Aufgabentypen einzeln</h3>
+        <p><b>Regression – eine Zahl vorhersagen.</b> Das Ergebnis kann viele Werte annehmen: 623,40 €, 17,3 °C, 1.340 Stück. Der Name kommt aus der Statistik. Das Modell ist im einfachsten Fall eine Gerade durch die Datenpunkte, wie in der Animation.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Regression – die Miete aus der Wohnfläche</span>
+        <p>Aus vielen Wohnungen hat das Modell gelernt: <span class="calcline">Miete ≈ 10 € · Wohnfläche + 150 €</span> (150 € sind eine Art Grundbetrag). Für eine Wohnung mit 70 m² lautet die Vorhersage <span class="calcline">10 · 70 + 150 = 850 €</span>. Für 45 m² ergibt sich <span class="calcline">10 · 45 + 150 = 600 €</span>. Das Ergebnis ist eine Zahl – also Regression.</p>
+      </div>
+      <div class="prose">
+        <p><b>Klassifikation – eine Kategorie vorhersagen.</b> Das Ergebnis ist eine von wenigen festen Klassen. Gibt es nur zwei (Spam/kein Spam, krank/gesund, Ausschuss/in Ordnung), spricht man von <b>binärer Klassifikation</b>. Gibt es mehr (Ziffer 0 bis 9, Obstsorte), von <b>mehrklassiger Klassifikation</b>. Das Modell berechnet meist eine Wahrscheinlichkeit je Klasse.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Klassifikation – Spam oder nicht?</span>
+        <p>Das Modell berechnet für eine eingehende Mail „Spam: 87 %“. Ab einer festgelegten <b>Schwelle</b>, zum Beispiel 50 %, wird die Mail als Spam einsortiert. Weil 87 % über der Schwelle liegt, landet sie im Spam-Ordner. Eine andere Mail mit „Spam: 12 %“ bleibt im Posteingang. Das Ergebnis ist eine Kategorie (Spam/kein Spam), obwohl intern mit Zahlen gerechnet wird. Die Schwelle kann man ändern: Ist sie bei 90 %, landen weniger echte Mails im Spam, aber mehr Spam im Posteingang.</p>
+      </div>
+      <div class="prose">
+        <p><b>Clustering – Gruppen finden</b> (Lektion 9). <b>Anomalieerkennung – Ungewöhnliches finden:</b> auffällige Zahlungen, ungewöhnliche Maschinenzustände. <b>Dimensionsreduktion – Vereinfachen:</b> viele Merkmale zu wenigen verdichten. <b>Generierung – Neues erzeugen:</b> Das Modell liefert Text, Bilder, Töne oder Code, die es so noch nicht gab.</p>
+        <h3>Üben: Aufgabentyp erkennen</h3>
+        <p>Ordnen Sie zu, bevor Sie in die Lösung schauen. Die Frage zu hören genügt.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Aufgabe</th><th>Gesuchtes Ergebnis</th><th>Aufgabentyp</th></tr></thead>
+          <tbody>
+            <tr><td>Wie viel Strom verbraucht das Werk morgen?</td><td>Zahl in kWh</td><td>Regression</td></tr>
+            <tr><td>Ist die eingegangene Rechnung eine Fälschung?</td><td>ja/nein</td><td>Klassifikation (binär)</td></tr>
+            <tr><td>Zu welcher Abteilung gehört diese Kundenmail?</td><td>Eine von sechs Abteilungen</td><td>Klassifikation (mehrklassig)</td></tr>
+            <tr><td>Welche Kunden verhalten sich ähnlich?</td><td>Gruppen</td><td>Clustering</td></tr>
+            <tr><td>Welche Buchungen sehen auffällig aus?</td><td>Auffällige Fälle</td><td>Anomalieerkennung</td></tr>
+            <tr><td>Wie lange läuft diese Maschine noch bis zum Ausfall?</td><td>Zahl in Stunden</td><td>Regression</td></tr>
+            <tr><td>Verfasse eine Antwort auf diese Anfrage.</td><td>Neuer Text</td><td>Generierung</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Häufige Missverständnisse</span>
+        <ul>
+          <li><b>„Logistische Regression ist Regression.“</b> Nein. Trotz des Namens ist sie ein Verfahren für Klassifikation (Modul 4).</li>
+          <li><b>„Ja/nein-Fragen sind Regression, weil das Modell eine Wahrscheinlichkeit ausgibt.“</b> Nein. Die Aufgabe ist Klassifikation, auch wenn intern Wahrscheinlichkeiten berechnet werden. Entscheidend ist das Endergebnis: eine Klasse.</li>
+          <li><b>„Eine Note von 1 bis 6 vorherzusagen ist Regression.“</b> Hängt davon ab: Wird die Note als beliebige Zahl behandelt (z. B. 2,7), ist es Regression; wird sie als eine von sechs Klassen behandelt, ist es Klassifikation.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Vorsicht: Die „logistische Regression“ ist trotz ihres Namens ein Verfahren für Klassifikation. Das wird in Modul 4 erklärt und gern als Falle abgefragt.</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Zahl → Regression. Kategorie → Klassifikation. Gruppen ohne Vorgabe → Clustering. Etwas Neues erzeugen → Generierung.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Online-Shop will vorhersagen, wie viele Regenschirme er nächste Woche verkauft. Welcher Aufgabentyp?</p>
+        <div class="check-opts">
+          <button type="button" class="opt" data-right="true">Regression</button>
+          <button type="button" class="opt">Klassifikation</button>
+          <button type="button" class="opt">Clustering</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Gesucht ist eine Anzahl, also eine Zahl." data-no="Nicht ganz. Die Frage lautet „Wie viele?“ – die Antwort ist eine Zahl, also Regression."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Der „Hör auf die Frage“-Trick ist für Laien der schnellste Weg. Üben Sie ihn mit fünf Zurufen aus der Gruppe: Jemand nennt eine Frage aus dem eigenen Betrieb, die Gruppe ordnet zu.</p>
+        <p>In der Animation sehen die Teilnehmenden eine Linie, die sich langsam an die Punkte anpasst – das ist dieselbe Lernschleife wie in Lektion 5, nur für Zahlen. Rechnen Sie die Miete für 70 m² und 45 m² an der Tafel aus, damit „Vorhersage“ konkret wird.</p>
+        <p>Beim Spam-Beispiel lohnt die Diskussion über die Schwelle: Wer entscheidet, ab wann eine Mail als Spam gilt? Das ist eine Geschäftsentscheidung, keine reine Technikfrage. Sie wird in Modul 6 bei Precision und Recall wieder auftauchen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Teilgebiete und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Teilgebiete und typische Anwendungen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Auch in einem Krankenhaus gibt es Fachabteilungen: Radiologie, Kardiologie, Labor. Jede kümmert sich um einen Bereich, und für schwierige Fälle arbeiten sie zusammen. In der KI ist es ähnlich. Man unterscheidet <b>Teilgebiete</b> nach der Art der Daten und der Aufgabe, zum Beispiel Bilder, Sprache oder Bewegung. Viele Anwendungen verbinden mehrere Gebiete.</p>
+      </div>
+      <p>In der Prüfung sollen Sie zu jedem Gebiet ein Beispiel nennen und die passenden Daten benennen können.</p>
+      <div class="cards">
+        <div class="card"><h3>Computer Vision</h3><p>Bilder und Videos verstehen. Beispiel: Kratzer auf Bauteilen erkennen, Schilder im Auto erkennen, Pflanzenkrankheiten auf Fotos finden.</p></div>
+        <div class="card"><h3>Sprachverarbeitung (NLP)</h3><p>Texte verstehen und erzeugen. Beispiel: Kundenmails nach Thema sortieren, Übersetzung, Zusammenfassungen schreiben.</p></div>
+        <div class="card"><h3>Spracherkennung</h3><p>Gesprochenes in Text umwandeln. Beispiel: Diktierfunktion, Sprachassistent, automatische Untertitel.</p></div>
+        <div class="card"><h3>Robotik</h3><p>Maschinen, die sich bewegen und greifen. Beispiel: Lagerroboter, Pick-and-Place in der Fertigung, Staubsaugerroboter.</p></div>
+        <div class="card"><h3>Empfehlungssysteme</h3><p>Passende Produkte vorschlagen. Beispiel: „Kunden kauften auch“, Musikvorschläge, Filmempfehlungen.</p></div>
+        <div class="card"><h3>Prognose</h3><p>Zukünftige Werte vorhersagen. Beispiel: Absatz, Energiebedarf, Wartungszeitpunkt.</p></div>
+        <div class="card"><h3>Expertensysteme</h3><p>Regelbasiertes Fachwissen. Beispiel: Prüfung von Förderanträgen nach festen Kriterien, Fehlerdiagnose nach Wenn-dann-Regeln.</p></div>
+        <div class="card"><h3>Planung und Optimierung</h3><p>Beste Abfolge finden. Beispiel: Tourenplanung für Lieferfahrzeuge, Schichtpläne.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Was steckt dahinter? Daten, Aufgabe, Beispiel</h3>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Teilgebiet</th><th>Typische Daten</th><th>Typische Aufgabe</th><th>Beispiel aus dem Betrieb</th></tr></thead>
+        <tbody>
+          <tr><td>Computer Vision</td><td>Bilder, Videos</td><td>Klassifikation, Objekte finden</td><td>Prüfung von Lötstellen per Kamera</td></tr>
+          <tr><td>Sprachverarbeitung</td><td>Texte</td><td>Klassifikation, Generierung</td><td>Eingehende E-Mails dem richtigen Team zuordnen</td></tr>
+          <tr><td>Spracherkennung</td><td>Audio</td><td>Sprache in Text umwandeln</td><td>Besprechungen automatisch protokollieren</td></tr>
+          <tr><td>Robotik</td><td>Sensordaten, Bilder</td><td>Steuerung, bestärkendes Lernen</td><td>Robotergreifarm für wechselnde Teile</td></tr>
+          <tr><td>Empfehlungssysteme</td><td>Käufe, Bewertungen, Klicks</td><td>Ähnlichkeit, Ranking</td><td>Zubehörvorschläge im Webshop</td></tr>
+          <tr><td>Prognose</td><td>Zeitreihen (Werte über der Zeit)</td><td>Regression</td><td>Stromverbrauch der nächsten Woche</td></tr>
+          <tr><td>Expertensysteme</td><td>Regeln, Fachwissen</td><td>Schlussfolgern nach Regeln</td><td>Förderantrag auf Vollständigkeit prüfen</td></tr>
+          <tr><td>Planung und Optimierung</td><td>Ziele, Randbedingungen</td><td>Beste Lösung suchen</td><td>Touren für 12 Lieferwagen planen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Sprachassistent kombiniert drei Gebiete</span>
+        <p>Sie sagen: „Wie wird das Wetter morgen in Köln?“ <b>Spracherkennung</b> wandelt Ihre Stimme in Text um. <b>Sprachverarbeitung</b> versteht, dass Sie eine Wetterauskunft für einen Ort und ein Datum wollen. Eine <b>Prognose</b> liefert die Wetterdaten, und eine Sprachausgabe spricht die Antwort. Eine einzige Alltagsfunktion – vier Bausteine.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Das Auto mit Spurassistent</span>
+        <p><b>Computer Vision</b> erkennt Fahrbahnmarkierungen und andere Fahrzeuge. Ein <b>Prognose</b>-Baustein schätzt, wohin sich Fußgänger bewegen. Eine <b>Planung</b> bestimmt den sicheren Kurs, und die <b>Robotik</b> setzt ihn in Lenk- und Bremsbewegungen um. Auch hier arbeiten mehrere Teilgebiete zusammen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Handwerksbetrieb</span>
+        <p>Ein Dachdecker nutzt Drohnenfotos, um Schäden an Dächern zu finden (<b>Computer Vision</b>), lässt Kundenanfragen von einem Assistenten vorsortieren (<b>Sprachverarbeitung</b>) und plant die Einsatztouren seiner Kolonnen (<b>Planung und Optimierung</b>). Dafür muss kein Teilgebiet im Betrieb entwickelt werden – oft werden fertige Produkte genutzt. Entscheidend ist, die richtige Art von Hilfe für das richtige Problem zu erkennen.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Häufige Missverständnisse</span>
+        <ul>
+          <li><b>„Teilgebiete sind getrennte Welten.“</b> Nein, sie überschneiden sich und werden oft kombiniert.</li>
+          <li><b>„Expertensysteme gehören nicht zur KI.“</b> Doch, als regelbasierte KI (Lektion 2 und 3). Sie lernen nur nicht aus Daten.</li>
+          <li><b>„Empfehlungssysteme sind Chat-Assistenten.“</b> Nein, sie schlagen Produkte nach Ähnlichkeiten im Verhalten vor und erzeugen keinen freien Text.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Zu jedem Teilgebiet ein Beispiel aus dem eigenen Betrieb parat haben – das bringt im Fachgespräch Punkte. Viele Anwendungen kombinieren mehrere Gebiete.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Eine Kamera erkennt auf einer Produktionslinie fehlerhafte Teile. Welches Teilgebiet ist das?</p>
+        <div class="check-opts">
+          <button type="button" class="opt" data-right="true">Computer Vision</button>
+          <button type="button" class="opt">Spracherkennung</button>
+          <button type="button" class="opt">Empfehlungssystem</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Bilder auswerten ist die Aufgabe von Computer Vision." data-no="Nicht ganz. Eine Kamera liefert Bilder – deren Auswertung gehört zur Computer Vision."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Bitten Sie jede Person, eine Karte auszuwählen und ein Beispiel aus dem eigenen Arbeitsumfeld zu nennen. Das ist eine gute Vorbereitung auf die Transferarbeit, deren Thema ja selbst gewählt wird.</p>
+        <p>Nutzen Sie die Beispiele „Sprachassistent“ und „Auto“, um zu zeigen, dass reale Systeme mehrere Teilgebiete kombinieren. Lassen Sie die Gruppe selbst ein Beispiel zerlegen, etwa eine Online-Übersetzung mit Foto-Texterkennung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Die richtige Lernart wählen">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 40 Minuten</span><h2>Entscheidungshilfe: Welche Lernart passt?</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wenn Sie einen Arzt aufsuchen, stellt er der Reihe nach einfache Fragen: Wo tut es weh? Seit wann? Gibt es Fieber? Aus den Antworten ergibt sich die Richtung der Behandlung. Genauso lässt sich fast jeder KI-Fall mit drei einfachen Fragen einordnen. Sie brauchen kein Spezialwissen, nur eine feste Reihenfolge.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><span class="flow-q">Frage 1: Gibt es zu jedem Beispiel die richtige Antwort (Label)?</span>
+          <div class="flow-a"><span class="yes">Ja → Überwachtes Lernen. Weiter mit Frage 3.</span><span class="no">Nein → weiter mit Frage 2</span></div></div>
+        <div class="flow-step"><span class="flow-q">Frage 2: Handelt ein System selbst und bekommt Belohnung oder Strafe?</span>
+          <div class="flow-a"><span class="yes">Ja → Bestärkendes Lernen</span><span class="no">Nein → Unüberwachtes Lernen (Gruppen, Ausreißer finden)</span></div></div>
+        <div class="flow-step"><span class="flow-q">Frage 3 (nur bei überwacht): Ist die Antwort eine Zahl oder eine Kategorie?</span>
+          <div class="flow-a"><span class="yes">Zahl → Regression</span><span class="yes">Kategorie → Klassifikation</span></div></div>
+      </div>
+      <div class="prose">
+        <h3>Drei Fälle, Schritt für Schritt entschieden</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Fall 1: Betrugserkennung bei einer Bank</span>
+        <ol class="steps">
+          <li><div>Frage 1: Gibt es zu jedem früheren Fall die richtige Antwort? <b>Ja</b> – Ermittler haben jede Transaktion als „Betrug“ oder „kein Betrug“ markiert. → überwacht.</div></li>
+          <li><div>Frage 3: Ist die Antwort eine Zahl oder eine Kategorie? <b>Kategorie</b> (Betrug ja/nein). → Klassifikation.</div></li>
+          <li><div><span class="result">Ergebnis: Überwachtes Lernen, binäre Klassifikation.</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Fall 2: Kundensegmente für ein Fitnessstudio</span>
+        <ol class="steps">
+          <li><div>Frage 1: Gibt es richtige Antworten? <b>Nein</b>, niemand hat die Mitglieder in Gruppen eingeteilt.</div></li>
+          <li><div>Frage 2: Handelt ein System und bekommt Belohnung? <b>Nein</b>. → unüberwacht.</div></li>
+          <li><div><span class="result">Ergebnis: Unüberwachtes Lernen, Clustering. Die Gruppen werden danach von Menschen benannt („Frühaufsteher“, „Wochenend-Besucher“).</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Fall 3: Heizungssteuerung in einem Bürogebäude</span>
+        <ol class="steps">
+          <li><div>Frage 1: Gibt es zu jeder Situation die richtige Einstellung vorgegeben? <b>Nein</b>.</div></li>
+          <li><div>Frage 2: Handelt ein System selbst und erhält Belohnung (wenig Energie bei angenehmer Temperatur) oder Strafe (Beschwerden, hoher Verbrauch)? <b>Ja</b>. → bestärkend.</div></li>
+          <li><div><span class="result">Ergebnis: Bestärkendes Lernen. Der Agent ist die Steuerung, die Umgebung das Gebäude.</span></div></li>
+        </ol>
+      </div>
+      <div class="prose">
+        <h3>Weitere Fälle zum Üben</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Praxisfall</th><th>Lernart</th><th>Aufgabentyp / Begründung</th></tr></thead>
+          <tbody>
+            <tr><td>Vorhersage des Stromverbrauchs aus vergangenen Verbräuchen und Wetter</td><td>überwacht</td><td>Regression – Label ist der tatsächliche Verbrauch (Zahl)</td></tr>
+            <tr><td>Fotos von Pilzen in „essbar“ und „giftig“ einteilen, mit markierten Beispielen</td><td>überwacht</td><td>Klassifikation – Kategorie, Labels vorhanden</td></tr>
+            <tr><td>Auffällige Anmeldeversuche an einem Server finden, ohne dass es markierte Angriffe gibt</td><td>unüberwacht</td><td>Anomalieerkennung</td></tr>
+            <tr><td>Ein Roboter lernt, Pakete zu stapeln, und wird für stabile Stapel belohnt</td><td>bestärkend</td><td>Agent, Aktion, Belohnung</td></tr>
+            <tr><td>Ähnliche Produkte in einem Katalog gruppieren</td><td>unüberwacht</td><td>Clustering</td></tr>
+            <tr><td>Aus 100 Sensorwerten 8 Kennzahlen bilden</td><td>unüberwacht</td><td>Dimensionsreduktion</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Was tun, wenn zwei Antworten möglich scheinen?</h3>
+        <ul>
+          <li><b>Labels sind nur teilweise vorhanden:</b> Dann ist es eine Mischform (halbüberwacht). Nennen Sie das ausdrücklich.</li>
+          <li><b>Ein Sprachmodell wird trainiert:</b> Das Vortraining ist selbstüberwacht, das Feintuning teils überwacht, teils bestärkend (Feedback von Menschen).</li>
+          <li><b>Unklar, ob Zahl oder Kategorie:</b> Fragen Sie, was der Auftraggeber am Ende braucht. Eine Zahl (z. B. Ausfallwahrscheinlichkeit 0,06) oder eine Entscheidung (Kredit ja/nein)?</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">So schreiben Sie es in der Prüfung</span>
+        <p>Immer drei Teile: <b>Lernart</b> nennen, <b>Begründung</b> aus dem Fall geben, <b>Aufgabentyp oder Verfahren</b> ergänzen. Beispiel: „Überwachtes Lernen, da für vergangene Kredite bekannt ist, ob sie zurückgezahlt wurden. Es handelt sich um eine binäre Klassifikation (Ausfall ja/nein).“</p>
+        <p>Noch ein Beispiel: „Unüberwachtes Lernen, weil keine Labels vorliegen und Gruppen gefunden werden sollen. Aufgabentyp: Clustering, zum Beispiel mit k-Means.“</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler in der Prüfung</span>
+        <ul>
+          <li>Nur die Lernart nennen, aber nicht begründen – dafür gibt es meist nur einen Teil der Punkte.</li>
+          <li>„Klassifikation“ bei einer Zahlenvorhersage antworten (oder umgekehrt).</li>
+          <li>Bei unklaren Fällen raten, statt die Fragen der Reihe nach zu stellen.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Labels vorhanden? → überwacht. Belohnung durch Handeln? → bestärkend. Sonst → unüberwacht. Bei überwacht: Zahl → Regression, Kategorie → Klassifikation.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Versicherer will aus Schadensdaten, bei denen jeweils die Schadenshöhe bekannt ist, die Höhe künftiger Schäden vorhersagen. Welche Lernart und welcher Aufgabentyp?</p>
+        <div class="check-opts">
+          <button type="button" class="opt" data-right="true">Überwacht, Regression</button>
+          <button type="button" class="opt">Überwacht, Klassifikation</button>
+          <button type="button" class="opt">Unüberwacht, Clustering</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Die Schadenshöhe ist bekannt (Label), und gesucht ist eine Zahl – also überwachtes Lernen mit Regression." data-no="Nicht ganz. Zu jedem Fall ist die Schadenshöhe bekannt, also überwacht. Gesucht ist eine Zahl, also Regression."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Schreiben Sie die drei Fragen an die Tafel und lassen Sie sie den Rest des Kurses dort stehen. Arbeiten Sie danach die Übungen gemeinsam durch, immer mit diesen drei Fragen.</p>
+        <p>Entscheiden Sie die drei Fälle gemeinsam, indem Sie die Gruppe Frage für Frage antworten lassen. Erst danach die Ergebnisse zeigen. Gehen Sie dann die Übungstabelle durch: Die Teilnehmenden decken die rechten Spalten ab und nennen Lernart und Aufgabentyp.</p>
+        <p>Der Kasten „So schreiben Sie es in der Prüfung“ ist Gold wert: Viele verlieren Punkte, weil sie nur die Lernart nennen, aber nicht begründen. Üben Sie einen Satz dazu laut.</p>
+      </aside>
+    </section>

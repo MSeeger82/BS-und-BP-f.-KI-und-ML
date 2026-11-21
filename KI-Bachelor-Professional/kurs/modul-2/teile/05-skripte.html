@@ -1,0 +1,208 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Welches Skalenniveau hat die Postleitzahl?", ["Nominal", "Verhältnis", "Ordinal", "Intervall"], 0, "Postleitzahlen sind Bezeichner; Rechnen mit ihnen ist sinnlos."],
+ ["Welches Lagemaß ist für ordinale Daten das höchste sinnvolle?", ["Varianz", "Median", "Standardabweichung", "Mittelwert"], 1, "Ordinale Daten haben eine Reihenfolge, aber keine gesicherten Abstände."],
+ ["Was leistet ein Fremdschlüssel?", ["Er verweist auf den Primärschlüssel einer anderen Tabelle", "Er verschlüsselt sensible Spalten", "Er verhindert NULL-Werte", "Er sortiert die Tabelle"], 0, "So entstehen Beziehungen zwischen Tabellen."],
+ ["Wie bildet man eine n:m-Beziehung ab?", ["Gar nicht, sie ist verboten", "Mit einer Zwischentabelle mit zwei Fremdschlüsseln", "Mit einem LEFT JOIN", "Mit einer Spalte, die mehrere Werte enthält"], 1, "Beispiel: Bestellposition zwischen Bestellung und Artikel."],
+ ["Gegen welche Normalform verstößt ein Feld mit „Stuhl, Tisch, Lampe“?", ["gegen keine", "1. Normalform", "2. Normalform", "3. Normalform"], 1, "Die 1. NF verlangt atomare Werte."],
+ ["Eine Kundentabelle enthält PLZ und Ort. Gegen welche Normalform verstößt das?", ["1. NF", "2. NF", "3. NF (transitive Abhängigkeit)", "keine"], 2, "Der Ort hängt von der PLZ ab, nicht direkt vom Schlüssel."],
+ ["Wie prüft man in SQL auf fehlende Werte?", ["spalte IS NULL", "spalte LIKE NULL", "spalte == ''", "spalte = NULL"], 0, "Vergleiche mit NULL ergeben nie wahr."],
+ ["Was ist der Unterschied zwischen WHERE und HAVING?", ["WHERE filtert Zeilen vor dem Gruppieren, HAVING Gruppen danach", "Es gibt keinen", "HAVING filtert Zeilen, WHERE Gruppen", "HAVING sortiert"], 0, "Aggregate gibt es erst nach GROUP BY."],
+ ["Welcher JOIN behält alle Zeilen der linken Tabelle?", ["RIGHT JOIN", "INNER JOIN", "LEFT JOIN", "CROSS JOIN"], 2, "Fehlende Partner rechts werden mit NULL aufgefüllt."],
+ ["Welcher Wert ist der Median von 2, 9, 4, 7, 5?", ["5,4", "5", "7", "4"], 1, "Sortiert: 2, 4, 5, 7, 9 – der mittlere Wert ist 5."],
+ ["Welche Werte beschreiben eine Verteilung robust gegen Ausreißer?", ["Summe und Anzahl", "Maximum und Minimum", "Mittelwert und Standardabweichung", "Median und Interquartilsabstand"], 3, "Beide beruhen auf Rangpositionen."],
+ ["Q1 = 40, Q3 = 60. Ab welchem Wert ist eine Beobachtung nach Tukey ein Ausreißer nach oben?", ["über 100", "über 80", "über 90", "über 70"], 2, "IQR = 20; 60 + 1,5 · 20 = 90."],
+ ["Was bedeutet ein Korrelationskoeffizient r = −0,85?", ["Ursache-Wirkungs-Beziehung", "Kein Zusammenhang", "Starker gegenläufiger linearer Zusammenhang", "Schwacher gleichläufiger Zusammenhang"], 2, "Negatives Vorzeichen = gegenläufig, Betrag nahe 1 = stark."],
+ ["Warum ist Korrelation kein Beweis für Kausalität?", ["Weil r immer klein ist", "Weil Korrelation nur für Texte gilt", "Weil eine dritte Größe beide Merkmale beeinflussen kann", "Weil Korrelationen immer zufällig sind"], 2, "Stichwort Störgröße, z. B. Sonne bei Eis und Sonnenbrand."],
+ ["Welches Diagramm eignet sich, um die Verteilung von Lieferzeiten zu zeigen?", ["Histogramm oder Boxplot", "Kreisdiagramm", "Gestapeltes Flächendiagramm", "Liniendiagramm über die Kundennummer"], 0, "Verteilung → Histogramm/Boxplot."],
+ ["Was ist Data Leakage?", ["Informationen, die zum Vorhersagezeitpunkt nicht verfügbar wären, gelangen ins Training", "Ein Datenleck durch Hacker", "Fehlende Werte in den Testdaten", "Zu wenige Trainingsdaten"], 0, "Das Modell wirkt im Test zu gut und enttäuscht im Betrieb."],
+ ["Wann sollte die Skalierung angepasst (fit) werden?", ["Nur auf den Trainingsdaten, dann auf Testdaten angewendet", "Gar nicht", "Auf allen Daten vor dem Split", "Nur auf den Testdaten"], 0, "Sonst fließen Testinformationen ins Training."],
+ ["Wie kodiert man das nominale Merkmal „Tarif = Basis/Plus/Premium“ für ein lineares Modell?", ["Mittelwert der Kategorien", "1, 2, 3", "One-Hot (je Kategorie eine 0/1-Spalte)", "Als Text lassen"], 2, "Durchnummerieren täuscht Reihenfolge und Abstände vor."],
+ ["Was gehört NICHT zu den drei klassischen Schutzzielen der Informationssicherheit?", ["Verfügbarkeit", "Vertraulichkeit", "Integrität", "Rentabilität"], 3, "Die drei Schutzziele sind Vertraulichkeit, Integrität, Verfügbarkeit."],
+ ["Welche Aussage zu pseudonymisierten Daten stimmt?", ["Die DSGVO gilt nicht mehr", "Sie dürfen ohne Rechtsgrundlage weitergegeben werden", "Sie bleiben personenbezogen, die DSGVO gilt weiter", "Sie sind immer anonym"], 2, "Mit der Zuordnungstabelle ist die Person bestimmbar."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Was gehört laut Rechtsvorschrift zum Thema „Umgang mit Daten“?", "a": "§ 4 Nr. 2 nennt Grundzüge relationaler Datenbanken, Datenvorverarbeitung, deskriptive Statistik, Visualisierung, Sicherheit sowie Datenerhebung und Datenschutz. Diese Inhalte kommen in Teil 1 der schriftlichen Prüfung vor und spielen in der Situationsaufgabe eine Rolle."},
+  {"q": "Muss ich für die Prüfung SQL schreiben können?", "a": "Sie sollten einfache Abfragen mit SELECT, WHERE, JOIN, GROUP BY und HAVING lesen und schreiben können. In der Prüfung wird Papier-SQL ohne Datenbank verlangt; der Rechenweg und die richtige Logik zählen."}
+ ],
+ "l1": [
+  {"q": "Welche Skalenniveaus gibt es?", "a": "Nominal (nur Kategorien), ordinal (Reihenfolge), Intervall (gleiche Abstände, kein echter Nullpunkt) und Verhältnis (gleiche Abstände und echter Nullpunkt). Das Skalenniveau bestimmt, welche Kennzahlen und Rechnungen sinnvoll sind."},
+  {"q": "Ist eine Postleitzahl ein metrisches Merkmal?", "a": "Nein, sie ist nominal. Sie sieht wie eine Zahl aus, ist aber nur ein Bezeichner; für ein Modell wird sie als Kategorie behandelt oder zusammengefasst."}
+ ],
+ "l2": [
+  {"q": "Was ist ein Primärschlüssel?", "a": "Ein Primärschlüssel ist eine Spalte oder Spaltenkombination, die jede Zeile einer Tabelle eindeutig identifiziert, zum Beispiel die Kundennummer."},
+  {"q": "Was ist ein Fremdschlüssel?", "a": "Ein Fremdschlüssel verweist auf den Primärschlüssel einer anderen Tabelle und stellt so eine Beziehung her, etwa die Kundennummer in der Bestelltabelle."},
+  {"q": "Wie setzt man eine n:m-Beziehung um?", "a": "Mit einer Zwischentabelle, die die Primärschlüssel beider beteiligten Tabellen als Fremdschlüssel enthält, zum Beispiel eine Bestellposition zwischen Bestellung und Artikel."}
+ ],
+ "l3": [
+  {"q": "Was ist Normalisierung?", "a": "Normalisierung zerlegt Tabellen so, dass jede Information nur einmal gespeichert wird. Das verhindert Redundanz sowie Einfüge-, Änderungs- und Löschanomalien."},
+  {"q": "Was verlangen die 1., 2. und 3. Normalform?", "a": "1. NF: atomare Werte je Feld. 2. NF: jedes Nicht-Schlüssel-Attribut hängt vom ganzen Primärschlüssel ab. 3. NF: keine Abhängigkeiten zwischen Nicht-Schlüssel-Attributen."}
+ ],
+ "l4": [
+  {"q": "Was macht eine SELECT-Abfrage?", "a": "SELECT wählt Spalten aus einer Tabelle (FROM), WHERE filtert die Zeilen und ORDER BY sortiert das Ergebnis."},
+  {"q": "Warum funktioniert „spalte = NULL“ nicht?", "a": "Ein Vergleich mit NULL ergibt in SQL nie wahr, weil NULL für einen unbekannten Wert steht. Fehlende Werte prüft man mit IS NULL bzw. IS NOT NULL."}
+ ],
+ "l5": [
+  {"q": "Was ist der Unterschied zwischen INNER JOIN und LEFT JOIN?", "a": "INNER JOIN liefert nur Zeilen mit passendem Partner in beiden Tabellen. LEFT JOIN behält alle Zeilen der linken Tabelle und füllt fehlende Partner mit NULL auf."},
+  {"q": "Wann nutze ich HAVING statt WHERE?", "a": "WHERE filtert einzelne Zeilen vor dem Gruppieren. HAVING filtert Gruppen nach GROUP BY, zum Beispiel nur Regionen mit mehr als 50 Verkäufen."},
+  {"q": "In welcher Reihenfolge wertet SQL eine Abfrage aus?", "a": "Logisch: FROM und JOIN, dann WHERE, GROUP BY, HAVING, SELECT, ORDER BY und zuletzt LIMIT."}
+ ],
+ "l6": [
+  {"q": "Welche Dimensionen der Datenqualität gibt es?", "a": "Wichtig sind Vollständigkeit, Korrektheit, Konsistenz, Aktualität, Eindeutigkeit und für KI besonders die Repräsentativität der Daten."},
+  {"q": "Was verlangt die EU-KI-Verordnung zur Datenqualität?", "a": "Für Hochrisiko-KI verlangt Art. 10 Daten-Governance: Trainings-, Validierungs- und Testdaten müssen relevant, hinreichend repräsentativ und so weit wie möglich fehlerfrei und vollständig sein."}
+ ],
+ "l7": [
+  {"q": "Wie geht man mit fehlenden Werten um?", "a": "Je nach Ursache und Umfang: Zeilen oder Spalten löschen, mit Median oder häufigstem Wert füllen, eine Indikatorspalte ergänzen oder den Wert modellbasiert schätzen. Wichtig ist, erst zu verstehen, warum Werte fehlen."},
+  {"q": "Sollte man Ausreißer immer löschen?", "a": "Nein. Erst klären, ob es ein Fehler oder ein echter Extremwert ist. Fehler werden korrigiert oder entfernt, echte Extremwerte wie Großbestellungen können geschäftlich besonders wichtig sein."}
+ ],
+ "l8": [
+  {"q": "Was ist der Unterschied zwischen Min-Max-Skalierung und Standardisierung?", "a": "Min-Max bringt Werte mit (x − min) / (max − min) auf den Bereich 0 bis 1. Standardisierung rechnet z = (x − μ) / σ und ergibt Mittelwert 0 und Standardabweichung 1."},
+  {"q": "Welche Verfahren brauchen skalierte Merkmale?", "a": "Verfahren, die mit Abständen oder Gradienten rechnen, etwa k-nächste Nachbarn, k-Means, SVM und neuronale Netze. Entscheidungsbäume und ihre Ensembles brauchen keine Skalierung."},
+  {"q": "Was ist One-Hot-Kodierung?", "a": "Jede Kategorie eines nominalen Merkmals wird zu einer eigenen Spalte mit 0 oder 1. So entsteht keine künstliche Reihenfolge zwischen den Kategorien."}
+ ],
+ "l9": [
+  {"q": "Was ist Data Leakage?", "a": "Data Leakage bedeutet, dass Informationen ins Training gelangen, die zum Vorhersagezeitpunkt nicht verfügbar wären, etwa aus den Testdaten oder aus der Zukunft. Das Modell wirkt im Test zu gut und enttäuscht im Betrieb."},
+  {"q": "Wie verhindert man Data Leakage?", "a": "Erst aufteilen, dann vorverarbeiten, am besten mit einer Pipeline; für jedes Merkmal prüfen, ob es zum Vorhersagezeitpunkt bekannt ist; Zeitreihen zeitlich und zusammengehörige Fälle gruppenweise trennen."}
+ ],
+ "l10": [
+  {"q": "Wann ist der Median besser als der Mittelwert?", "a": "Bei Ausreißern und schiefen Verteilungen, etwa bei Einkommen, Lieferzeiten oder Bestellwerten. Der Median wird von einzelnen Extremwerten kaum beeinflusst."},
+  {"q": "Was ist der Modus?", "a": "Der Modus ist der häufigste Wert. Er ist das einzige Lagemaß, das auch für nominale Daten sinnvoll ist."}
+ ],
+ "l11": [
+  {"q": "Wie berechnet man die Standardabweichung?", "a": "Abweichungen vom Mittelwert quadrieren, aufsummieren, durch n − 1 teilen (Stichprobenvarianz) und die Wurzel ziehen. Sie hat dieselbe Einheit wie die Daten."},
+  {"q": "Wie erkennt man Ausreißer mit dem Boxplot?", "a": "Nach Tukey gelten Werte unter Q1 − 1,5 · IQR oder über Q3 + 1,5 · IQR als Ausreißer; der IQR ist Q3 − Q1."}
+ ],
+ "l12": [
+  {"q": "Was misst der Korrelationskoeffizient?", "a": "Der Pearson-Korrelationskoeffizient r misst Stärke und Richtung eines linearen Zusammenhangs zweier metrischer Merkmale, von −1 bis +1."},
+  {"q": "Warum bedeutet Korrelation keine Kausalität?", "a": "Eine dritte Größe kann beide Merkmale beeinflussen, oder der Zusammenhang ist zufällig. Ursache und Wirkung belegt man mit Experimenten oder fachlicher Begründung."}
+ ],
+ "l13": [
+  {"q": "Welches Diagramm passt zu welcher Frage?", "a": "Vergleich von Kategorien: Balken. Verlauf über Zeit: Linie. Verteilung: Histogramm oder Boxplot. Zusammenhang zweier Merkmale: Streudiagramm."},
+  {"q": "Warum sollte die y-Achse bei Balkendiagrammen bei null beginnen?", "a": "Bei Balken wird die Länge verglichen. Eine abgeschnittene Achse lässt kleine Unterschiede riesig wirken und führt Betrachter in die Irre."}
+ ],
+ "l14": [
+  {"q": "Was macht ein gutes Dashboard aus?", "a": "Es richtet sich an eine Zielgruppe und eine Entscheidung, zeigt wenige Kennzahlen mit Vergleichswerten, nutzt Farbe sparsam und nennt Einheiten, Zeitraum, Datenstand und Quelle."},
+  {"q": "Welche Kennzahlen gehören in ein Dashboard für ein KI-System im Betrieb?", "a": "Modellgüte über die Zeit, Drift der Eingabedaten, Anzahl der Vorhersagen, Fehler, Kosten pro Anfrage und der Anteil der Fälle, die an Menschen weitergegeben wurden."}
+ ],
+ "l15": [
+  {"q": "Was sind die drei Schutzziele der Informationssicherheit?", "a": "Vertraulichkeit (nur Befugte sehen die Daten), Integrität (Daten sind unverändert und korrekt) und Verfügbarkeit (Daten sind nutzbar, wenn man sie braucht)."},
+  {"q": "Was ist die 3-2-1-Backup-Regel?", "a": "Drei Kopien der Daten, auf zwei verschiedenen Medien, davon eine außer Haus oder offline. So überstehen Daten auch Brand, Diebstahl oder Verschlüsselungstrojaner."}
+ ],
+ "l16": [
+  {"q": "Was ist der Unterschied zwischen Pseudonymisierung und Anonymisierung?", "a": "Bei der Pseudonymisierung werden identifizierende Merkmale durch Kennungen ersetzt, die Zuordnung bleibt getrennt erhalten; die Daten sind weiter personenbezogen. Anonymisierte Daten lassen sich keiner Person mehr zuordnen, die DSGVO gilt dann nicht mehr."},
+  {"q": "Welche DSGVO-Grundsätze gelten bei der Datenerhebung?", "a": "Vor allem Zweckbindung, Datenminimierung, Speicherbegrenzung und Transparenz; außerdem braucht jede Verarbeitung eine Rechtsgrundlage nach Art. 6 DSGVO."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 2 */
+(function () {
+  function parseList(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(",", "."); }).filter(function (t) { return t !== ""; }).map(Number).filter(function (n) { return isFinite(n); }); }
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 2 : d }) : "–"; }
+  // Quantil nach der Methode p·(n+1) mit linearer Interpolation (wie im Kurs)
+  function quantil(s, p) {
+    var pos = p * (s.length + 1);
+    if (pos <= 1) return s[0];
+    if (pos >= s.length) return s[s.length - 1];
+    var k = Math.floor(pos), f = pos - k;
+    return s[k - 1] + f * (s[k] - s[k - 1]);
+  }
+  var inp = document.getElementById("lsInput");
+  function rechne() {
+    var v = parseList(inp.value), out = document.getElementById("lsOut"), note = document.getElementById("lsNote");
+    if (v.length < 2) { out.innerHTML = ""; note.textContent = "Bitte mindestens zwei Zahlen eingeben."; return; }
+    var s = v.slice().sort(function (a, b) { return a - b; }), n = s.length;
+    var mean = v.reduce(function (a, b) { return a + b; }, 0) / n;
+    var med = n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2;
+    var cnt = {}, best = 0;
+    v.forEach(function (x) { cnt[x] = (cnt[x] || 0) + 1; if (cnt[x] > best) best = cnt[x]; });
+    var modus = best > 1 ? Object.keys(cnt).filter(function (k) { return cnt[k] === best; }).map(Number).sort(function (a, b) { return a - b; }).map(function (x) { return fmt(x); }).join(" · ") : "keiner";
+    var varS = v.reduce(function (a, b) { return a + (b - mean) * (b - mean); }, 0) / (n - 1);
+    var q1 = quantil(s, 0.25), q3 = quantil(s, 0.75), iqr = q3 - q1;
+    var lo = q1 - 1.5 * iqr, hi = q3 + 1.5 * iqr;
+    var aus = v.filter(function (x) { return x < lo || x > hi; });
+    var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+    out.innerHTML = kpi("Anzahl n", n) + kpi("Mittelwert", fmt(mean)) + kpi("Median", fmt(med)) + kpi("Modus", modus) +
+      kpi("Spannweite", fmt(s[n - 1] - s[0])) + kpi("Varianz s²", fmt(varS)) + kpi("Standardabw. s", fmt(Math.sqrt(varS))) +
+      kpi("Q1", fmt(q1)) + kpi("Q3", fmt(q3)) + kpi("IQR", fmt(iqr));
+    note.textContent = "Ausreißergrenzen nach Tukey: unter " + fmt(lo) + " oder über " + fmt(hi) + ". " +
+      (aus.length ? "Ausreißer: " + aus.map(function (x) { return fmt(x); }).join(", ") + "." : "Keine Ausreißer.") +
+      " Varianz mit n − 1 (Stichprobe); Quartile nach der Methode p·(n+1).";
+  }
+  inp.addEventListener("input", rechne); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 2 */
+(function () {
+  var SK = ["nominal", "ordinal", "Intervall", "Verhältnis"];
+  var JO = ["INNER JOIN", "LEFT JOIN (Haupttabelle links)", "FULL OUTER JOIN", "CROSS JOIN"];
+  var LK = ["zulässig", "Leck"];
+  var DQ = ["Vollständigkeit", "Korrektheit", "Konsistenz", "Aktualität", "Eindeutigkeit", "Repräsentativität"];
+  window.UEBUNGEN = {
+    modul: 2,
+    aufgaben: {
+      a1: { teile: [
+        { id: "s1", label: "1. Abteilung", typ: "wahl", punkte: 1, optionen: SK, richtig: 0 },
+        { id: "s2", label: "2. Sterne-Bewertung", typ: "wahl", punkte: 1, optionen: SK, richtig: 1 },
+        { id: "s3", label: "3. Umsatz in €", typ: "wahl", punkte: 1, optionen: SK, richtig: 3 },
+        { id: "s4", label: "4. Temperatur in °C", typ: "wahl", punkte: 1, optionen: SK, richtig: 2 },
+        { id: "s5", label: "5. Postleitzahl", typ: "wahl", punkte: 1, optionen: SK, richtig: 0 },
+        { id: "s6", label: "6. Anzahl Reklamationen", typ: "wahl", punkte: 1, optionen: SK, richtig: 3 }
+      ] },
+      a2: { teile: [
+        { id: "verst", label: "Verstöße gegen 1. und 3. NF", typ: "text", punkte: 2, erwartung: "1. NF: mehrere Werte in artikel/mengen; 3. NF: Kundendaten hängen von kunden_nr ab, Ort von PLZ." },
+        { id: "zerl", label: "Zerlegung in Tabellen mit Schlüsseln", typ: "text", punkte: 4, erwartung: "kunde(kunden_nr PK, name, plz FK), ort(plz PK, ort), auftrag(auftrag_nr PK, datum, kunden_nr FK), artikel(artikel_nr PK, bezeichnung), auftragsposition(auftrag_nr FK, artikel_nr FK, menge, zusammengesetzter PK)." }
+      ] },
+      a3: { teile: [{ id: "sql", label: "Ihre SQL-Abfrage", typ: "text", punkte: 4, erwartung: "SELECT … FROM maschine WHERE werk = 'Ulm' AND baujahr < 2015 ORDER BY stoerungen_2026 DESC; (SELECT/FROM 1 P., Bedingungen 2 P., Sortierung 1 P.)" }] },
+      a4: { teile: [
+        { id: "sql", label: "Ihre SQL-Abfrage", typ: "text", punkte: 3, erwartung: "SELECT werk, COUNT(*), AVG(stoerungen_2026) FROM maschine GROUP BY werk HAVING COUNT(*) > 20;" },
+        { id: "begr", label: "Warum nicht im WHERE?", typ: "text", punkte: 2, erwartung: "WHERE filtert einzelne Zeilen vor dem Gruppieren; die Anzahl je Gruppe gibt es erst nach GROUP BY, Gruppen filtert HAVING." }
+      ] },
+      a5: { teile: [
+        { id: "j1", label: "1. Mitarbeitende mit Abteilung, nur zugeordnete", typ: "wahl", punkte: 1, optionen: JO, richtig: 0 },
+        { id: "j2", label: "2. Alle Artikel mit Verkaufsmenge", typ: "wahl", punkte: 1, optionen: JO, richtig: 1 },
+        { id: "j3", label: "3. Alle Kunden aus beiden Altsystemen", typ: "wahl", punkte: 1, optionen: JO, richtig: 2 }
+      ] },
+      a6: { teile: [
+        { id: "mw", label: "Mittelwert", typ: "zahl", punkte: 1, wert: 28, tol: 0.01, einheit: "h" },
+        { id: "med", label: "Median", typ: "zahl", punkte: 1, wert: 18, tol: 0, einheit: "h" },
+        { id: "mod", label: "Modus", typ: "zahl", punkte: 1, wert: 15, tol: 0, einheit: "h" },
+        { id: "begr", label: "Welcher Wert beschreibt die typische Zeit, und warum?", typ: "text", punkte: 2, erwartung: "Der Median, weil der Ausreißer 95 h den Mittelwert stark nach oben zieht." }
+      ] },
+      a7: { teile: [
+        { id: "var", label: "Stichprobenvarianz s²", typ: "zahl", punkte: 2, wert: 10, tol: 0.01 },
+        { id: "sd", label: "Standardabweichung s", typ: "zahl", punkte: 2, wert: 3.16, tol: 0.01, einheit: "min" }
+      ] },
+      a8: { teile: [
+        { id: "iqr", label: "IQR", typ: "zahl", punkte: 1, wert: 10, tol: 0, einheit: "€" },
+        { id: "grenze", label: "Obere Ausreißergrenze", typ: "zahl", punkte: 2, wert: 45, tol: 0, einheit: "€" },
+        { id: "aus", label: "Ist 52 € ein Ausreißer?", typ: "wahl", punkte: 1, optionen: ["ja", "nein"], richtig: 0 }
+      ] },
+      a9: { teile: [
+        { id: "mm", label: "a) Min-Max-Wert von 35", typ: "zahl", punkte: 2, wert: 0.5, tol: 0.001 },
+        { id: "z", label: "b) z-Wert von 52", typ: "zahl", punkte: 2, wert: 1.5, tol: 0.001 }
+      ] },
+      a10: { teile: [
+        { id: "m1", label: "1. Alter", typ: "wahl", punkte: 1, optionen: LK, richtig: 0 },
+        { id: "m2", label: "2. Anzahl Medikamente laut Entlassbrief", typ: "wahl", punkte: 1, optionen: LK, richtig: 1 },
+        { id: "m3", label: "3. Aufnahmediagnose", typ: "wahl", punkte: 1, optionen: LK, richtig: 0 },
+        { id: "m4", label: "4. Tatsächliche Verweildauer", typ: "wahl", punkte: 1, optionen: LK, richtig: 1 }
+      ] },
+      a11: { teile: [
+        { id: "q1", label: "1. Kunde dreimal angelegt", typ: "wahl", punkte: 1, optionen: DQ, richtig: 4 },
+        { id: "q2", label: "2. 30 % ohne Geburtsdatum", typ: "wahl", punkte: 1, optionen: DQ, richtig: 0 },
+        { id: "q3", label: "3. Lieferdatum vor Bestelldatum", typ: "wahl", punkte: 1, optionen: DQ, richtig: 2 },
+        { id: "q4", label: "4. Nur Wintermonate", typ: "wahl", punkte: 1, optionen: DQ, richtig: 5 }
+      ] },
+      a12: { teile: [
+        { id: "ds", label: "a) Drei Datenschutzprobleme mit je einer Lösung", typ: "text", punkte: 6, erwartung: "Je 1 P. Problem + 1 P. Lösung: Diagnosen sind Gesundheitsdaten (Art. 9) → weglassen/Datenminimierung; Personenbezug unnötig → aggregieren/pseudonymisieren; Zweckbindung/Rechtsgrundlage → prüfen, Datenschutzbeauftragter, Betriebsrat, DSFA; Speicherdauer → Löschfristen." },
+        { id: "tom", label: "b) Zwei technische und zwei organisatorische Maßnahmen", typ: "text", punkte: 2, erwartung: "Technisch z. B. Verschlüsselung, Rechtekonzept, Protokollierung, Backups; organisatorisch z. B. Zugriff nur Projektteam, Schulung, Vertraulichkeitsverpflichtung, Löschkonzept." }
+      ] }
+    }
+  };
+})();
+</script>

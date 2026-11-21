@@ -1,0 +1,1066 @@
+<!--META {"nr": 7, "titel": "Neuronale Netze und Deep Learning", "lektionen": 16, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 7 von 12 · ca. 24 Lernstunden</span>
+      <h1 id="introTitle">Neuronale Netze: Wie Deep Learning Bilder, Sprache und Zeitreihen versteht</h1>
+      <p>Neuronale Netze stecken hinter Gesichtserkennung, Spracheingabe, Übersetzung und Chat-Assistenten. Sie wirken geheimnisvoll, bestehen aber aus einfachen Bausteinen: gewichtete Summen, ein Knick (Aktivierung) und viele Wiederholungen. In diesem Modul rechnen Sie ein Neuron von Hand, verfolgen einen Forward Pass, verstehen Backpropagation und lernen die wichtigsten Architekturen kennen: CNN für Bilder, RNN/LSTM für Abfolgen und den Transformer, auf dem heutige Sprachmodelle beruhen.</p>
+      <div class="facts">
+        <span class="chip">16 Lektionen in 3 Teilen</span><span class="chip">6 Animationen</span><span class="chip">3 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4: Neuronale Netze, Training, Anwendungen</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b></span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b></span></div>
+        <div><i style="background: var(--warm); border-radius: 50%;"></i><span><b>Rechenweg</b></span></div>
+        <div><i style="background: var(--surface); outline: 2px dashed var(--accent);"></i><span><b>Rechner</b></span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Prüfungsfalle</b></span></div>
+      </div>
+    </section>
+
+    <div class="part-head"><span>Teil A · Lektionen 1–8</span><h2>Wie ein neuronales Netz rechnet und lernt</h2></div>
+
+    <section class="lesson" id="l1" data-title="Das künstliche Neuron" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 40 Minuten</span><h2>Vom Gehirn zum künstlichen Neuron</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Sie überlegen, ob Sie heute joggen gehen. Das Wetter ist schön (wichtig für Sie: +3), Sie sind müde (−2), ein Freund kommt mit (+1). Zusammengezählt: +2 – über Ihrer persönlichen Schwelle, also gehen Sie. Ein künstliches Neuron trifft Entscheidungen genau so: gewichtete Gründe addieren, mit einer Schwelle vergleichen.</p>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Das biologische Vorbild</span><p>Nervenzellen empfangen Signale über Dendriten, summieren sie und „feuern“, wenn eine Schwelle überschritten ist. Verbindungen (Synapsen) werden durch Nutzung stärker oder schwächer. Künstliche Netze übernehmen nur diese Grundidee – sie sind keine Nachbildung des Gehirns.</p></div>
+        <div class="box fach"><span class="box-label">Das künstliche Neuron</span>
+          <div class="eq" style="font-size:1.15rem"><i>z</i> = <i>w</i><sub>1</sub><i>x</i><sub>1</sub> + <i>w</i><sub>2</sub><i>x</i><sub>2</sub> + … + <i>b</i> &nbsp; → &nbsp; <i>a</i> = <i>f</i>(<i>z</i>)</div>
+          <p>Eingaben <i>x</i>, Gewichte <i>w</i> (wie wichtig ist jede Eingabe), Bias <i>b</i> (verschiebt die Schwelle), Aktivierungsfunktion <i>f</i> (entscheidet, was weitergegeben wird).</p>
+        </div>
+      </div>
+      <h3>Rechenweg: x = (1; 2), w = (0,5; −0,25), b = 0,1</h3>
+      <ol class="steps">
+        <li><div>Gewichtete Summe: <span class="calcline">0,5 · 1 + (−0,25) · 2 + 0,1 = 0,5 − 0,5 + 0,1 = 0,1</span></div></li>
+        <li><div>Mit ReLU: <span class="calcline">max(0; 0,1) = 0,1</span> · mit Sigmoid: <span class="calcline">σ(0,1) ≈ 0,525</span></div></li>
+      </ol>
+      <div class="calc" id="calcNeuron"><span class="box-label">Rechner: ein Neuron</span>
+        <div class="calc-row">
+          <div class="field"><label for="nX">Eingaben x (3 Werte)</label><input type="text" id="nX" value="1; 2; 0"></div>
+          <div class="field"><label for="nW">Gewichte w (3 Werte)</label><input type="text" id="nW" value="0,5; -0,25; 0"></div>
+          <div class="field"><label for="nB">Bias b</label><input type="number" id="nB" value="0.1" step="0.1"></div>
+          <div class="field"><label for="nF">Aktivierung</label><select id="nF"><option value="relu">ReLU</option><option value="sig">Sigmoid</option><option value="tanh">Tanh</option><option value="lin">linear</option></select></div>
+        </div>
+        <div class="kpis" id="nOut"></div>
+        <p class="calc-note" id="nWeg"></p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Ein Neuron im Alltag und mit den Aktivierungen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Das Jogging-Neuron mit Bias</span>
+        <p>Eingaben: Wetter schön (1 = ja), müde (1 = ja), Freund kommt mit (1 = ja). Gewichte: Wetter <b>+3</b>, müde <b>−2</b>, Freund <b>+1</b>. Bias <b>−1</b> (man geht nur, wenn die Gründe etwas überwiegen).</p>
+        <ul>
+          <li><b>Schöner Tag, müde, Freund kommt:</b> <span class="calcline">z = 3 · 1 − 2 · 1 + 1 · 1 − 1 = 1</span> → positiv → man geht joggen.</li>
+          <li><b>Regen, müde, kein Freund:</b> <span class="calcline">z = 0 − 2 + 0 − 1 = −3</span> → negativ → man bleibt zu Hause.</li>
+        </ul>
+        <p>Die Gewichte sagen, wie wichtig jeder Grund ist; der Bias legt fest, wie hoch die Schwelle liegt. Ein Netz lernt beides aus Beispielen, statt dass jemand die Zahlen vorgibt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Dieselbe Summe, drei Aktivierungen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">z</th><th class="r">ReLU</th><th class="r">Sigmoid</th><th class="r">Tanh</th></tr></thead>
+          <tbody>
+            <tr><td class="r">−2</td><td class="r">0</td><td class="r">0,119</td><td class="r">−0,964</td></tr>
+            <tr><td class="r">0,1</td><td class="r">0,1</td><td class="r">0,525</td><td class="r">0,100</td></tr>
+            <tr><td class="r">2</td><td class="r">2</td><td class="r">0,881</td><td class="r">0,964</td></tr>
+          </tbody>
+        </table></div>
+        <p>ReLU lässt Positives durch und sperrt Negatives, Sigmoid drückt alles in den Bereich 0 bis 1 (Wahrscheinlichkeit), Tanh in den Bereich −1 bis 1.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Neuron in der Kreditprüfung</span>
+        <p>Eingaben (auf 0 bis 1 skaliert): Einkommen 0,8 und Schuldenquote 0,6. Gewichte: +1,5 und −2,0; Bias +0,2. <span class="calcline">z = 1,5 · 0,8 − 2,0 · 0,6 + 0,2 = 1,2 − 1,2 + 0,2 = 0,2</span>. Mit Sigmoid: σ(0,2) ≈ 0,55 – leicht über 50 %. Ein einziges Neuron entspricht der logistischen Regression aus Modul 4. Mehrere Neuronen hintereinander machen daraus ein Netz.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Neuron hat die Eingaben x = (2; 3), Gewichte w = (0,5; 0,2) und den Bias b = −1. Berechnen Sie z, die Ausgabe mit ReLU und die Ausgabe mit Sigmoid.</p>
+        <p><b>Musterlösung:</b> z = 0,5 · 2 + 0,2 · 3 − 1 = 1 + 0,6 − 1 = 0,6 (2 Punkte). ReLU: max(0; 0,6) = 0,6 (1 Punkt). Sigmoid: 1 : (1 + e^−0,6) ≈ 0,646 (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Neuron: Eingaben mal Gewichte, plus Bias, durch die Aktivierungsfunktion. Gelernt werden die Gewichte und der Bias.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Das Jogging-Beispiel mit echten Zahlen an die Tafel schreiben. Betonen Sie: Das Netz lernt die Gewichte selbst – niemand schreibt „Wetter zählt +3“ hinein.</p></aside>
+    </section>
+
+    <section class="lesson" id="l2" data-title="Perzeptron und XOR" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 30 Minuten</span><h2>Das Perzeptron und das XOR-Problem</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Lichtschalter am Treppenhaus mit zwei Schaltern (oben und unten): Das Licht brennt, wenn <b>genau einer</b> der Schalter umgelegt ist. Diese „entweder – oder“-Regel (XOR) kann ein einzelnes Neuron nicht lernen. Das war 1969 eine große Enttäuschung – und trug zum ersten KI-Winter bei.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th class="r">x₁</th><th class="r">x₂</th><th class="r">UND</th><th class="r">ODER</th><th class="r">XOR</th></tr></thead>
+        <tbody>
+          <tr><td class="r">0</td><td class="r">0</td><td class="r">0</td><td class="r">0</td><td class="r">0</td></tr>
+          <tr><td class="r">0</td><td class="r">1</td><td class="r">0</td><td class="r">1</td><td class="r">1</td></tr>
+          <tr><td class="r">1</td><td class="r">0</td><td class="r">0</td><td class="r">1</td><td class="r">1</td></tr>
+          <tr><td class="r">1</td><td class="r">1</td><td class="r">1</td><td class="r">1</td><td class="r">0</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Perzeptron</span><p>Ein einzelnes Neuron mit Stufenfunktion (Ausgabe 0 oder 1). Es zieht eine gerade Linie durch den Raum. UND und ODER lassen sich mit einer Linie trennen – XOR nicht: Die beiden „1“-Punkte liegen diagonal gegenüber.</p></div>
+        <div class="box fach"><span class="box-label">Die Lösung: mehrere Schichten</span><p>Mit einer verborgenen Schicht aus zwei Neuronen (eines lernt ODER, eines lernt UND) und einem Ausgabeneuron („ODER, aber nicht UND“) ist XOR lösbar. Dieses <b>mehrschichtige Perzeptron (MLP)</b> braucht aber ein Verfahren, um die inneren Gewichte zu lernen: Backpropagation (Lektion 6).</p></div>
+      </div>
+      <div class="prose">
+        <h3>Das XOR-Problem selbst lösen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein einzelnes Neuron kann UND und ODER</span>
+        <p>Mit einer Stufenfunktion (Ausgabe 1, wenn z &gt; 0, sonst 0):</p>
+        <ul>
+          <li><b>ODER:</b> Gewichte (1, 1), Bias −0,5. Punkt (0|0): −0,5 → 0; (0|1): 0,5 → 1; (1|0): 0,5 → 1; (1|1): 1,5 → 1. ✓</li>
+          <li><b>UND:</b> Gewichte (1, 1), Bias −1,5. Punkt (1|1): 0,5 → 1; alle anderen negativ → 0. ✓</li>
+        </ul>
+        <p>Für XOR gibt es dagegen keine Gewichte, die beide „1“-Punkte (0|1) und (1|0) über die Schwelle bringen und zugleich (1|1) darunter lassen, denn (1|1) hätte immer die Summe der beiden Einzelbeiträge.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Das Netz mit einer verborgenen Schicht</span>
+        <p>Verborgenes Neuron 1 = ODER, verborgenes Neuron 2 = UND. Das Ausgabeneuron rechnet <span class="calcline">h₁ − h₂ − 0,5</span> (Stufenfunktion).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">x₁</th><th class="r">x₂</th><th class="r">h₁ (ODER)</th><th class="r">h₂ (UND)</th><th class="r">z = h₁ − h₂ − 0,5</th><th class="r">Ausgabe</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0</td><td class="r">0</td><td class="r">0</td><td class="r">0</td><td class="r">−0,5</td><td class="r">0</td></tr>
+            <tr><td class="r">0</td><td class="r">1</td><td class="r">1</td><td class="r">0</td><td class="r">0,5</td><td class="r">1</td></tr>
+            <tr><td class="r">1</td><td class="r">0</td><td class="r">1</td><td class="r">0</td><td class="r">0,5</td><td class="r">1</td></tr>
+            <tr><td class="r">1</td><td class="r">1</td><td class="r">1</td><td class="r">1</td><td class="r">−0,5</td><td class="r">0</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Ergebnis ist genau XOR. Die verborgene Schicht hat das Problem in zwei einfache Teilprobleme zerlegt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was „linear trennbar“ in der Praxis heißt</span>
+        <p>Entscheidet bei einer Qualitätsprüfung allein die Länge und die Breite über „in Ordnung“ (je größer, desto besser), kann eine gerade Linie die Klassen trennen. Gilt „zu klein oder zu groß ist schlecht, nur mittlere Größen sind gut“, geht das nicht mit einer Linie – wie bei XOR. Reale Zusammenhänge sind meist nichtlinear. Genau dafür braucht man mehrere Schichten.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum kann ein einzelnes Perzeptron das XOR-Problem nicht lösen, und wie löst man es?</p>
+        <p><b>Musterlösung:</b> Ein Perzeptron trennt nur mit einer geraden Linie; die beiden „1“-Fälle von XOR liegen diagonal gegenüber und sind nicht linear trennbar (2 Punkte). Mit einer verborgenen Schicht (z. B. ein Neuron für ODER, eines für UND) und einem Ausgabeneuron, das „ODER, aber nicht UND“ bildet, wird XOR lösbar (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein einzelnes Neuron trennt nur linear. Erst mehrere Schichten mit nichtlinearer Aktivierung lösen Probleme wie XOR.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Zeichnen Sie die vier XOR-Punkte in ein Koordinatensystem und lassen Sie die Gruppe versuchen, mit einer einzigen Linie zu trennen. Es geht nicht – das bleibt hängen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l3" data-title="Aktivierungsfunktionen" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 35 Minuten</span><h2>Aktivierungsfunktionen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Dimmer, der ab einem Punkt plötzlich heller wird, ein Lautstärkeregler, der unten nichts tut und dann gleichmäßig lauter wird: Solche Knicke machen aus einfachen Summen ein vielseitiges Werkzeug. Ohne Knick wäre jedes Netz – egal wie tief – nur eine einzige gerade Linie.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/aktivierungsfunktionen.gif" width="640" height="380" alt="Animation: Nacheinander werden die Kurven von Sigmoid (S-Kurve zwischen 0 und 1), Tanh (S-Kurve zwischen minus 1 und 1), ReLU (null links, gerade Linie rechts) und Leaky ReLU (leicht abfallend links) gezeichnet." loading="lazy">
+        <figcaption>Die vier wichtigsten Aktivierungsfunktionen.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Funktion</th><th>Formel</th><th>Wertebereich</th><th>Einsatz</th><th>Hinweis</th></tr></thead>
+        <tbody>
+          <tr><td><b>Sigmoid</b></td><td>1 / (1 + e⁻ᶻ)</td><td>0 bis 1</td><td>Ausgabe bei Ja/Nein</td><td>Gradient verschwindet bei großen |z|</td></tr>
+          <tr><td><b>Tanh</b></td><td>(eᶻ − e⁻ᶻ) / (eᶻ + e⁻ᶻ)</td><td>−1 bis 1</td><td>RNNs, ältere Netze</td><td>nullzentriert</td></tr>
+          <tr><td><b>ReLU</b></td><td>max(0, z)</td><td>0 bis ∞</td><td>Standard in verborgenen Schichten</td><td>schnell; „tote Neuronen“ möglich</td></tr>
+          <tr><td><b>Leaky ReLU</b></td><td>z, sonst 0,01 · z</td><td>−∞ bis ∞</td><td>Alternative zu ReLU</td><td>keine toten Neuronen</td></tr>
+          <tr><td><b>Softmax</b></td><td>eᶻⁱ / Σ eᶻʲ</td><td>0 bis 1, Summe 1</td><td>Ausgabe bei mehreren Klassen</td><td>Wahrscheinlichkeitsverteilung</td></tr>
+          <tr><td><b>Linear</b></td><td>z</td><td>beliebig</td><td>Ausgabe bei Regression</td><td>–</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg Softmax: Rohwerte (2; 1; 0) für Katze, Hund, Vogel</h3>
+      <ol class="steps">
+        <li><div><span class="calcline">e² ≈ 7,389 · e¹ ≈ 2,718 · e⁰ = 1</span> → Summe ≈ 11,107</div></li>
+        <li><div><span class="calcline">Katze 7,389 / 11,107 ≈ 0,665 · Hund ≈ 0,245 · Vogel ≈ 0,090</span></div></li>
+        <li><div><span class="result">66,5 % Katze – zusammen genau 100 %.</span></div></li>
+      </ol>
+      <div class="box tipp"><span class="box-label">Prüfungstipp: die Ausgabeschicht</span><p>Binäre Klassifikation → 1 Neuron mit Sigmoid. Mehrere Klassen → so viele Neuronen wie Klassen mit Softmax. Regression → 1 Neuron, linear. Verborgene Schichten → ReLU.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Aktivierungen im Detail</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Werte der vier Funktionen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">z</th><th class="r">Sigmoid</th><th class="r">Tanh</th><th class="r">ReLU</th><th class="r">Leaky ReLU (0,01)</th></tr></thead>
+          <tbody>
+            <tr><td class="r">−2</td><td class="r">0,119</td><td class="r">−0,964</td><td class="r">0</td><td class="r">−0,02</td></tr>
+            <tr><td class="r">0</td><td class="r">0,5</td><td class="r">0</td><td class="r">0</td><td class="r">0</td></tr>
+            <tr><td class="r">2</td><td class="r">0,881</td><td class="r">0,964</td><td class="r">2</td><td class="r">2</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum Sigmoid bei tiefen Netzen Probleme macht</span>
+        <p>Die Steigung der Sigmoid-Funktion beträgt höchstens 0,25 (bei z = 0) und wird für große |z| winzig: bei z = 5 nur etwa <span class="calcline">0,993 · 0,007 ≈ 0,007</span>. Beim Rückwärtsrechnen werden die Steigungen Schicht für Schicht multipliziert. Bei zehn Sigmoid-Schichten ergibt sich im Bestfall <span class="calcline">0,25¹⁰ ≈ 0,000001</span>: Die ersten Schichten bekommen kaum noch Rückmeldung und lernen nicht. ReLU hat für positive Werte die Steigung 1 und vermeidet dieses „Verschwinden“.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die richtige Ausgabeschicht wählen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Aufgabe</th><th>Ausgabeschicht</th></tr></thead>
+          <tbody>
+            <tr><td>Kündigt der Kunde? (ja/nein)</td><td>1 Neuron, Sigmoid</td></tr>
+            <tr><td>Welche von 5 Fehlerarten liegt vor?</td><td>5 Neuronen, Softmax</td></tr>
+            <tr><td>Wie hoch ist der Stromverbrauch morgen?</td><td>1 Neuron, linear</td></tr>
+            <tr><td>Welche von mehreren Eigenschaften gelten gleichzeitig (Bild enthält Hund, Ball)?</td><td>je Eigenschaft ein Neuron mit Sigmoid</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Berechnen Sie Softmax für die Rohwerte (3; 0) und nennen Sie die geeignete Aktivierung der Ausgabeschicht für eine Regressionsaufgabe.</p>
+        <p><b>Musterlösung:</b> e³ ≈ 20,09 und e⁰ = 1; Summe 21,09; Wahrscheinlichkeiten ≈ 0,953 und ≈ 0,047 (3 Punkte). Regression: ein Ausgabeneuron mit linearer Aktivierung (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Aktivierungsfunktionen bringen Nichtlinearität. ReLU innen, Sigmoid/Softmax/linear außen je nach Aufgabe.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Tabelle zur Ausgabeschicht ist sehr prüfungsrelevant (Übung 3). Lassen Sie den Softmax einmal mit Taschenrechner nachrechnen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l4" data-title="Forward Pass" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 45 Minuten</span><h2>Mehrschichtige Netze und der Forward Pass</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Eine Firma mit Abteilungen: Die Poststelle (Eingabeschicht) verteilt Informationen an Sachbearbeiter (verborgene Schicht), die jeweils einen Aspekt prüfen. Die Geschäftsführung (Ausgabeschicht) sammelt deren Einschätzungen und entscheidet. Jede Ebene verdichtet die Information weiter.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/forward-pass.gif" width="640" height="380" alt="Animation eines Netzes mit 2 Eingaben, 3 verborgenen Neuronen und 1 Ausgabe. Werte 1,0 und 0,5 fließen über die Verbindungen. Die verborgenen Neuronen zeigen 0,70, 0,55 und 0,00. Die Ausgabe zeigt 0,57." loading="lazy">
+        <figcaption>Von links nach rechts: Eingabe → verborgene Schicht (ReLU) → Ausgabe (Sigmoid).</figcaption>
+      </figure>
+      <h3>Rechenweg: das Netz aus der Animation</h3>
+      <ol class="steps">
+        <li><div>Neuron 1: <span class="calcline">ReLU(0,8 · 1 − 0,4 · 0,5 + 0,1) = ReLU(0,70) = 0,70</span></div></li>
+        <li><div>Neuron 2: <span class="calcline">ReLU(0,3 · 1 + 0,9 · 0,5 − 0,2) = ReLU(0,55) = 0,55</span></div></li>
+        <li><div>Neuron 3: <span class="calcline">ReLU(−0,6 · 1 + 0,5 · 0,5 + 0) = ReLU(−0,35) = 0</span> – dieses Neuron „schweigt“</div></li>
+        <li><div>Ausgabe: <span class="calcline">z = 0,7 · 0,70 − 0,5 · 0,55 + 0,9 · 0 + 0,05 = 0,265</span> → <span class="calcline">σ(0,265) ≈ 0,57</span></div></li>
+        <li><div><span class="result">Das Netz schätzt 57 % Wahrscheinlichkeit für Klasse 1.</span></div></li>
+      </ol>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Begriffe</span><ul><li><b>Eingabeschicht</b>: ein Neuron pro Merkmal (rechnet nicht)</li><li><b>Verborgene Schichten</b> (hidden layers): dazwischen</li><li><b>Ausgabeschicht</b>: Vorhersage</li><li><b>Tief</b> (deep) = viele verborgene Schichten</li><li><b>Dense / vollständig verbunden</b>: jedes Neuron mit jedem der nächsten Schicht</li></ul></div>
+        <div class="box fach"><span class="box-label">Warum tief?</span><p>Jede Schicht baut auf der vorigen auf: Bei Bildern erkennt die erste Schicht Kanten, die nächste Ecken und Bögen, die nächste Augen und Räder, die letzte ganze Gesichter oder Autos. Das Netz lernt diese Merkmale selbst – man muss sie nicht wie im klassischen ML von Hand bauen.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Den Forward Pass mit neuer Eingabe wiederholen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Dasselbe Netz mit der Eingabe (0 | 1)</span>
+        <p>Neuron 1: Gewichte (0,8; −0,4), Bias 0,1. Neuron 2: Gewichte (0,3; 0,9), Bias −0,2. Neuron 3: Gewichte (−0,6; 0,5), Bias 0. Ausgabe: Gewichte (0,7; −0,5; 0,9), Bias 0,05.</p>
+        <ol class="steps">
+          <li><div>Neuron 1: <span class="calcline">ReLU(0,8 · 0 − 0,4 · 1 + 0,1) = ReLU(−0,3) = 0</span></div></li>
+          <li><div>Neuron 2: <span class="calcline">ReLU(0,3 · 0 + 0,9 · 1 − 0,2) = ReLU(0,7) = 0,7</span></div></li>
+          <li><div>Neuron 3: <span class="calcline">ReLU(−0,6 · 0 + 0,5 · 1 + 0) = ReLU(0,5) = 0,5</span></div></li>
+          <li><div>Ausgabe: <span class="calcline">z = 0,7 · 0 − 0,5 · 0,7 + 0,9 · 0,5 + 0,05 = −0,35 + 0,45 + 0,05 = 0,15</span> → <span class="calcline">σ(0,15) ≈ 0,54</span></div></li>
+        </ol>
+        <p>Bei dieser Eingabe schweigt Neuron 1, dafür sind Neuron 2 und 3 aktiv. Je nach Eingabe „sprechen“ andere Teile des Netzes – darin besteht seine Flexibilität.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viele Parameter hat dieses kleine Netz?</span>
+        <p>Verborgene Schicht: <span class="calcline">2 · 3 + 3 = 9</span> (6 Gewichte, 3 Bias). Ausgabeschicht: <span class="calcline">3 · 1 + 1 = 4</span>. Zusammen <b>13 Parameter</b>, die beim Training angepasst werden. Das Netz aus Lektion 8 mit 101.770 Parametern funktioniert genauso, nur größer.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was die Schichten bei einem Foto „sehen“</span>
+        <ul>
+          <li><b>Erste Schichten:</b> Kanten und Farbübergänge.</li>
+          <li><b>Mittlere Schichten:</b> Ecken, Rundungen, Texturen (Fell, Metall).</li>
+          <li><b>Späte Schichten:</b> Augen, Räder, Fenster.</li>
+          <li><b>Letzte Schicht:</b> „Katze“ oder „Auto“.</li>
+        </ul>
+        <p>Niemand hat diese Stufen vorgeschrieben; sie entstehen im Training, weil sie bei der Aufgabe helfen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Eingabe x = (1; 1). Ein verborgenes Neuron mit Gewichten (1; −1), Bias 0,5 und ReLU; ein Ausgabeneuron mit Gewicht 2, Bias −0,5 und Sigmoid. Berechnen Sie die Ausgabe.</p>
+        <p><b>Musterlösung:</b> Verborgenes Neuron: 1 · 1 + (−1) · 1 + 0,5 = 0,5; ReLU(0,5) = 0,5 (2 Punkte). Ausgabe: z = 2 · 0,5 − 0,5 = 0,5 (2 Punkte); σ(0,5) ≈ 0,62 (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Forward Pass: Schicht für Schicht gewichtete Summe plus Bias, dann Aktivierung. Tiefe Netze lernen Merkmale in Stufen selbst.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Rechnen Sie das Netz gemeinsam von Hand durch – es dauert zehn Minuten und entzaubert neuronale Netze vollständig. Neuron 3 mit Ausgabe 0 zeigt, was ReLU tut.</p></aside>
+    </section>
+
+    <section class="lesson" id="l5" data-title="Verlustfunktionen" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 35 Minuten</span><h2>Verlustfunktionen: Wie falsch lag das Netz?</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Beim Wetten ist es schlimmer, sich mit voller Überzeugung zu irren, als vorsichtig falsch zu liegen. Wer sagt „ganz sicher Sonne“ und es regnet, verliert mehr als jemand, der „vielleicht Sonne“ gesagt hat. Die Kreuzentropie bestraft genau so.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aufgabe</th><th>Verlustfunktion</th><th>Formel (für ein Beispiel)</th></tr></thead>
+        <tbody>
+          <tr><td>Regression</td><td>MSE</td><td>(<i>y</i> − <i>ŷ</i>)²</td></tr>
+          <tr><td>Binäre Klassifikation</td><td>Binäre Kreuzentropie</td><td>−[<i>y</i> · ln(<i>ŷ</i>) + (1 − <i>y</i>) · ln(1 − <i>ŷ</i>)]</td></tr>
+          <tr><td>Mehrere Klassen</td><td>Kategoriale Kreuzentropie</td><td>−ln(Wahrscheinlichkeit der richtigen Klasse)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg: richtige Klasse bekommt 0,8 bzw. 0,1</h3>
+      <ol class="steps">
+        <li><div>Sicher und richtig: <span class="calcline">−ln(0,8) ≈ 0,223</span> – kleiner Verlust</div></li>
+        <li><div>Unsicher und falsch: <span class="calcline">−ln(0,1) ≈ 2,303</span> – zehnmal größer</div></li>
+        <li><div>Fast sicher falsch: <span class="calcline">−ln(0,01) ≈ 4,605</span> – sehr großer Verlust</div></li>
+      </ol>
+      <div class="prose">
+        <h3>Weitere Beispiele: Die Kreuzentropie in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Binäre Kreuzentropie für drei Vorhersagen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">wahr y</th><th class="r">Vorhersage ŷ (Wahrscheinlichkeit für 1)</th><th>Rechnung</th><th class="r">Verlust</th></tr></thead>
+          <tbody>
+            <tr><td class="r">1</td><td class="r">0,9</td><td>−ln(0,9)</td><td class="r">0,105</td></tr>
+            <tr><td class="r">1</td><td class="r">0,2</td><td>−ln(0,2)</td><td class="r">1,609</td></tr>
+            <tr><td class="r">0</td><td class="r">0,3</td><td>−ln(1 − 0,3) = −ln(0,7)</td><td class="r">0,357</td></tr>
+          </tbody>
+        </table></div>
+        <p>Mittlerer Verlust: <span class="calcline">(0,105 + 1,609 + 0,357) : 3 ≈ 0,69</span>. Die zweite Vorhersage (wahr = 1, aber nur 20 % vorhergesagt) verursacht den größten Anteil. Das Training zielt darauf, genau solche Fälle zu verbessern.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mehrere Klassen</span>
+        <p>Ein Bildnetz gibt aus: Katze 0,7 · Hund 0,2 · Vogel 0,1. Auf dem Bild ist tatsächlich ein Hund. Der Verlust ist <span class="calcline">−ln(0,2) ≈ 1,61</span>. Hätte das Netz „Hund 0,8“ vorhergesagt, wäre es nur <span class="calcline">−ln(0,8) ≈ 0,22</span>. Nur die Wahrscheinlichkeit der <b>richtigen</b> Klasse geht in den Verlust ein.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: MSE oder Kreuzentropie?</span>
+        <ul>
+          <li><b>Vorhersage der Raumtemperatur in Grad:</b> MSE (Zahl).</li>
+          <li><b>Erkennung, ob eine Rechnung doppelt gebucht ist:</b> binäre Kreuzentropie.</li>
+          <li><b>Zuordnung einer Mail zu einer von sechs Abteilungen:</b> kategoriale Kreuzentropie.</li>
+        </ul>
+        <p>Die Kreuzentropie bestraft ein sicheres „Falsch“ extrem: Bei ŷ = 0,01 für die richtige Klasse ist der Verlust 4,6, bei ŷ = 0,001 schon 6,9 – das Netz lernt, nie zu selbstgewiss falsch zu liegen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (4 Punkte):</b> Die richtige Klasse erhält die vorhergesagte Wahrscheinlichkeit 0,5. Berechnen Sie die Kreuzentropie und sagen Sie, welche Aufgabe damit trainiert wird.</p>
+        <p><b>Musterlösung:</b> −ln(0,5) = ln 2 ≈ 0,693 (2 Punkte). Die Kreuzentropie ist die Verlustfunktion für Klassifikation (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Regression → MSE. Klassifikation → Kreuzentropie, die selbstsichere Fehler besonders hart bestraft.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Der natürliche Logarithmus ist für viele neu – Taschenrechnertaste „ln“ zeigen. Wichtig ist das Verhalten: Je kleiner die Wahrscheinlichkeit für die richtige Antwort, desto größer der Verlust.</p></aside>
+    </section>
+
+    <section class="lesson" id="l6" data-title="Backpropagation" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 50 Minuten</span><h2>Backpropagation: Fehler rückwärts verteilen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Projekt geht schief. In der Nachbesprechung fragt man rückwärts: Die Geschäftsführung hat auf die Abteilungsleitung gehört, die auf die Sachbearbeitung – wer hat wie viel zum Fehler beigetragen? Jeder bekommt Rückmeldung im Verhältnis zu seinem Anteil. Backpropagation macht das für jedes Gewicht.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/backpropagation.gif" width="640" height="380" alt="Animation: Das Netz sagt 0,57 voraus, richtig wäre 1,0. Rote Punkte wandern von der Ausgabe rückwärts zur verborgenen Schicht und dann zur Eingabe. Danach färben sich die Verbindungen, um zu zeigen, dass jedes Gewicht angepasst wird." loading="lazy">
+        <figcaption>Der Fehler wird rückwärts durch das Netz verteilt, dann werden alle Gewichte angepasst.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><div><b>Forward Pass:</b> Vorhersage berechnen.</div></li>
+        <li><div><b>Verlust:</b> Vorhersage mit der Wahrheit vergleichen.</div></li>
+        <li><div><b>Backward Pass:</b> Mit der <b>Kettenregel</b> rückwärts berechnen, wie stark jedes Gewicht den Verlust beeinflusst (Gradient ∂L/∂w).</div></li>
+        <li><div><b>Update:</b> Jedes Gewicht entgegen seinem Gradienten verschieben: <span class="calcline">w ← w − η · ∂L/∂w</span> (Gradientenabstieg, Modul 2).</div></li>
+      </ol>
+      <h3>Rechenweg an einem einzigen Gewicht</h3>
+      <p>Ein Neuron ohne Aktivierung: ŷ = w · x mit x = 2, w = 0,5. Wahrheit y = 3. Verlust L = (ŷ − y)². Lernrate η = 0,05.</p>
+      <ol class="steps">
+        <li><div>Vorhersage: <span class="calcline">ŷ = 0,5 · 2 = 1</span> · Verlust: <span class="calcline">(1 − 3)² = 4</span></div></li>
+        <li><div>Kettenregel: <span class="calcline">∂L/∂ŷ = 2(ŷ − y) = −4 · ∂ŷ/∂w = x = 2 → ∂L/∂w = −4 · 2 = −8</span></div></li>
+        <li><div>Update: <span class="calcline">w = 0,5 − 0,05 · (−8) = 0,9</span></div></li>
+        <li><div>Probe: <span class="calcline">ŷ = 0,9 · 2 = 1,8</span>, Verlust <span class="calcline">(1,8 − 3)² = 1,44</span> – <span class="result">deutlich kleiner als 4.</span></div></li>
+      </ol>
+      <div class="box fach"><span class="box-label">Die Kettenregel in einem Satz</span><p>Wenn A auf B wirkt und B auf C, dann ist die Wirkung von A auf C das Produkt der Einzelwirkungen. Im Netz wird diese Multiplikation Schicht für Schicht rückwärts durchgeführt – deshalb „Back“-Propagation.</p></div>
+      <div class="box falle"><span class="box-label">Verschwindende und explodierende Gradienten</span><p>Weil viele Faktoren multipliziert werden, kann der Gradient in tiefen Netzen gegen null schrumpfen (vordere Schichten lernen nicht) oder explodieren. Abhilfe: ReLU statt Sigmoid, sorgfältige Startwerte der Gewichte, Batch-Normalisierung, Residual-Verbindungen (Abkürzungen über Schichten), Gradient Clipping.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Backpropagation Schritt für Schritt</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Mehrere Lernschritte für ein Gewicht</span>
+        <p>Ausgangslage: ŷ = w · x mit x = 2, Wahrheit y = 3, Lernrate η = 0,05, Startgewicht w = 0,5. Der Gradient ist <span class="calcline">∂L/∂w = 2 · (ŷ − y) · x</span>.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Schritt</th><th class="r">w</th><th class="r">ŷ</th><th class="r">Verlust (ŷ − 3)²</th><th class="r">Gradient</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0</td><td class="r">0,50</td><td class="r">1,00</td><td class="r">4,00</td><td class="r">−8,0</td></tr>
+            <tr><td class="r">1</td><td class="r">0,90</td><td class="r">1,80</td><td class="r">1,44</td><td class="r">−4,8</td></tr>
+            <tr><td class="r">2</td><td class="r">1,14</td><td class="r">2,28</td><td class="r">0,52</td><td class="r">−2,88</td></tr>
+            <tr><td class="r">3</td><td class="r">1,28</td><td class="r">2,57</td><td class="r">0,19</td><td class="r">−1,73</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Verlust schrumpft von 4 auf 0,19. Der Gradient wird kleiner, weil man sich dem Ziel (w = 1,5) nähert; die Schritte werden von selbst kürzer.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Kettenregel mit zwei Gewichten hintereinander</span>
+        <p>Ein Mini-Netz: <span class="calcline">ŷ = w₂ · (w₁ · x)</span> mit x = 1, w₁ = 2, w₂ = 3, Wahrheit y = 5, η = 0,05.</p>
+        <ol class="steps">
+          <li><div>Vorhersage: <span class="calcline">ŷ = 3 · (2 · 1) = 6</span>; Verlust <span class="calcline">(6 − 5)² = 1</span>; <span class="calcline">∂L/∂ŷ = 2 · (6 − 5) = 2</span></div></li>
+          <li><div>Gewicht w₂ (näher an der Ausgabe): <span class="calcline">∂ŷ/∂w₂ = w₁ · x = 2</span> → <span class="calcline">∂L/∂w₂ = 2 · 2 = 4</span></div></li>
+          <li><div>Gewicht w₁ (weiter vorn): <span class="calcline">∂ŷ/∂w₁ = w₂ · x = 3</span> → <span class="calcline">∂L/∂w₁ = 2 · 3 = 6</span></div></li>
+          <li><div>Update: <span class="calcline">w₂ = 3 − 0,05 · 4 = 2,8 · w₁ = 2 − 0,05 · 6 = 1,7</span></div></li>
+          <li><div>Probe: <span class="calcline">ŷ = 2,8 · 1,7 = 4,76</span>, Verlust <span class="calcline">(4,76 − 5)² ≈ 0,058</span> – <span class="result">von 1 auf 0,06.</span></div></li>
+        </ol>
+        <p>Der Gradient jedes Gewichts ist das Produkt der Einzelwirkungen auf dem Weg zum Verlust – das ist die Kettenregel in Aktion.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Verschwindender Gradient in Zahlen</span>
+        <p>Jede Sigmoid-Schicht multipliziert den rückwärts laufenden Gradienten mit höchstens 0,25. Nach 5 Schichten: <span class="calcline">0,25⁵ ≈ 0,001</span>, nach 10 Schichten: <span class="calcline">0,25¹⁰ ≈ 0,000001</span>. Die vorderen Schichten erhalten praktisch keine Lernsignale mehr. Abhilfe: ReLU, gute Startgewichte, Batch-Normalisierung, Abkürzungen (Residual-Verbindungen).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> ŷ = w · x mit x = 3, w = 1, y = 6, L = (ŷ − y)², η = 0,02. Führen Sie einen Gradientenschritt durch.</p>
+        <p><b>Musterlösung:</b> ŷ = 3; L = 9 (1 Punkt). ∂L/∂w = 2 · (ŷ − y) · x = 2 · (−3) · 3 = −18 (2 Punkte). Neues w = 1 − 0,02 · (−18) = 1,36 (2 Punkte). Kontrolle: ŷ = 4,08, L ≈ 3,69 – kleiner als vorher (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Backpropagation berechnet mit der Kettenregel für jedes Gewicht seinen Anteil am Fehler. Dann werden alle Gewichte per Gradientenabstieg angepasst.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Ein-Gewicht-Rechnung ist ausreichend für die Prüfung; niemand muss Backpropagation für ein ganzes Netz von Hand rechnen. Wichtig ist die Erklärung in drei Sätzen (Forward – Fehler – rückwärts mit Kettenregel – Update).</p></aside>
+    </section>
+
+    <section class="lesson" id="l7" data-title="Training in der Praxis" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 45 Minuten</span><h2>Training in der Praxis: Epochen, Batches, Optimierer</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Beim Vokabellernen geht man den Stapel Karteikarten mehrmals durch (Epochen) und lernt jeweils ein Päckchen von 20 Karten am Stück (Batch). Nach jedem Päckchen überprüft man sich und passt an.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Batch</b> (Mini-Batch)</td><td>Gruppe von Beispielen, nach der die Gewichte einmal angepasst werden</td><td>32 Bilder</td></tr>
+          <tr><td><b>Iteration / Schritt</b></td><td>ein Update der Gewichte</td><td>nach jedem Batch</td></tr>
+          <tr><td><b>Epoche</b></td><td>ein kompletter Durchlauf durch alle Trainingsdaten</td><td>10.000 Bilder ÷ 32 ≈ 313 Schritte</td></tr>
+          <tr><td><b>Lernrate</b></td><td>Schrittgröße beim Anpassen</td><td>0,001</td></tr>
+          <tr><td><b>Optimierer</b></td><td>Regel, wie die Gewichte angepasst werden</td><td>SGD, SGD mit Momentum, Adam</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg: 10.000 Beispiele, Batch-Größe 50, 20 Epochen</h3>
+      <ol class="steps"><li><div><span class="calcline">10.000 / 50 = 200 Schritte pro Epoche · 200 · 20 = 4.000 Schritte insgesamt</span></div></li></ol>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Optimierer</span><ul><li><b>SGD</b>: einfacher Gradientenabstieg auf Mini-Batches</li><li><b>Momentum</b>: merkt sich die bisherige Richtung, rollt wie eine Kugel über kleine Unebenheiten</li><li><b>Adam</b>: passt die Lernrate für jedes Gewicht selbst an; Standardwahl</li></ul></div>
+        <div class="box fach"><span class="box-label">Weitere Stellschrauben</span><ul><li><b>Startwerte</b> zufällig, aber gut skaliert (Xavier, He)</li><li><b>Batch-Normalisierung</b>: stabilisiert und beschleunigt</li><li><b>Lernraten-Plan</b>: am Anfang größer, später kleiner</li><li><b>Early Stopping</b> und <b>Dropout</b> gegen Overfitting (Modul 6, Lektion 15)</li></ul></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Training planen und lesen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Schritte, Epochen und Dauer</span>
+        <p>Ein Netz für Ziffernbilder wird mit 60.000 Bildern trainiert, Batch-Größe 64, 15 Epochen. Ein Schritt dauert 0,05 Sekunden.</p>
+        <ol class="steps">
+          <li><div>Schritte je Epoche: <span class="calcline">60.000 : 64 = 937,5</span>, also 938 (der letzte Batch ist kleiner).</div></li>
+          <li><div>Insgesamt: <span class="calcline">938 · 15 = 14.070</span> Schritte.</div></li>
+          <li><div>Dauer: <span class="calcline">14.070 · 0,05 s ≈ 704 s ≈ 11,7 Minuten</span>.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Lernrate zu groß, passend, zu klein</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Lernrate</th><th>Verlauf des Trainingsverlusts</th><th>Diagnose</th></tr></thead>
+          <tbody>
+            <tr><td>0,5</td><td>0,9 → 1,4 → 3,0 → „nan“</td><td>zu groß, das Training „explodiert“</td></tr>
+            <tr><td>0,001</td><td>0,90 → 0,55 → 0,38 → 0,30 → 0,27</td><td>passend</td></tr>
+            <tr><td>0,000001</td><td>0,900 → 0,899 → 0,898</td><td>zu klein, kaum Fortschritt</td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Verlustkurve ist das wichtigste Werkzeug zur Fehlersuche: Sie zeigt in den ersten Minuten, ob die Lernrate stimmt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Welcher Optimierer?</span>
+        <ul>
+          <li><b>Adam:</b> Standard für die meisten Aufgaben; stellt die Schrittgröße je Gewicht selbst ein.</li>
+          <li><b>SGD mit Momentum:</b> bei Bildnetzen oft mit sorgfältig eingestellter Lernrate noch etwas besser, braucht aber mehr Feintuning.</li>
+          <li><b>Lernratenplan:</b> Zu Beginn größere Schritte, nach einigen Epochen kleinere, damit das Netz „fein einrastet“.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> 5.000 Beispiele, Batch-Größe 25, 40 Epochen. Wie viele Gewichts-Updates finden insgesamt statt? Erklären Sie die Begriffe Epoche und Batch.</p>
+        <p><b>Musterlösung:</b> 5.000 : 25 = 200 Schritte je Epoche; 200 · 40 = 8.000 Updates (2 Punkte). Eine Epoche ist ein vollständiger Durchlauf durch alle Trainingsdaten (1,5 Punkte); ein Batch ist die Gruppe von Beispielen, nach der die Gewichte einmal angepasst werden (1,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Epoche = einmal alle Daten; Batch = Päckchen pro Update. Schritte pro Epoche = Datenmenge ÷ Batch-Größe. Adam ist der Standard-Optimierer.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Rechnung „Schritte pro Epoche“ ist eine einfache, gern gestellte Prüfungsaufgabe (Übung 11).</p></aside>
+    </section>
+
+    <section class="lesson" id="l8" data-title="Parameter zählen" data-part="A · Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 30 Minuten</span><h2>Wie groß ist ein Netz? Parameter zählen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wie viele Kabel braucht man, um 10 Lampen mit 5 Schaltern so zu verbinden, dass jeder Schalter jede Lampe beeinflusst? 50. Bei vollständig verbundenen Schichten ist es genauso: Jede Verbindung ist ein Gewicht.</p>
+      </div>
+      <div class="formula"><span class="box-label">Parameter einer Dense-Schicht</span>
+        <div class="eq">Parameter = Eingaben · Neuronen + Neuronen</div>
+        <div class="legend-eq"><span>Gewichte für jede Verbindung plus ein Bias pro Neuron.</span></div>
+      </div>
+      <h3>Rechenweg: Bild 28 × 28 = 784 Pixel → 128 Neuronen → 10 Klassen</h3>
+      <ol class="steps">
+        <li><div>Schicht 1: <span class="calcline">784 · 128 + 128 = 100.480</span></div></li>
+        <li><div>Schicht 2: <span class="calcline">128 · 10 + 10 = 1.290</span></div></li>
+        <li><div>Gesamt: <span class="result">101.770 Parameter</span></div></li>
+      </ol>
+      <div class="calc" id="calcDense"><span class="box-label">Rechner: Parameter eines Netzes und Softmax</span>
+        <div class="calc-row">
+          <div class="field"><label for="dsL">Schichtgrößen (Eingabe; versteckt …; Ausgabe)</label><input type="text" id="dsL" value="784; 128; 10"></div>
+          <div class="field"><label for="smZ">Softmax-Rohwerte</label><input type="text" id="smZ" value="2; 1; 0"></div>
+        </div>
+        <div class="kpis" id="dsOut"></div>
+      </div>
+      <div class="box fach"><span class="box-label">Größenordnungen</span><p>Kleine Netze für Tabellen: tausende Parameter. Bildnetze wie ResNet-50: rund 25 Millionen. Große Sprachmodelle: viele Milliarden. Mehr Parameter brauchen mehr Daten, Rechenzeit, Speicher und Energie.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Netze in Größe und Speicher</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Netz für Tabellendaten</span>
+        <p>20 Merkmale → 64 Neuronen → 32 Neuronen → 1 Ausgabe.</p>
+        <ul>
+          <li>Schicht 1: <span class="calcline">20 · 64 + 64 = 1.344</span></li>
+          <li>Schicht 2: <span class="calcline">64 · 32 + 32 = 2.080</span></li>
+          <li>Ausgabe: <span class="calcline">32 · 1 + 1 = 33</span></li>
+          <li>Zusammen: <span class="result">3.457 Parameter</span></li>
+        </ul>
+        <p>Das ist ein kleines Netz. Bei einer Tabelle mit einigen tausend Zeilen besteht dennoch die Gefahr des Overfittings: Es gibt mehr Parameter als Beispiele.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Speicherbedarf</span>
+        <p>Jeder Parameter belegt bei 32-Bit-Zahlen 4 Byte. Ein Bildnetz mit 25 Millionen Parametern braucht <span class="calcline">25.000.000 · 4 Byte = 100 MB</span>. Ein Sprachmodell mit 7 Milliarden Parametern in 16-Bit-Genauigkeit (2 Byte): <span class="calcline">7.000.000.000 · 2 = 14 GB</span> – das passt nicht auf jede Grafikkarte. Deshalb werden Modelle für den Einsatz komprimiert (Quantisierung, Modul 7 Lektion 16).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Parameter und Daten im Verhältnis</span>
+        <p>Ein Netz mit 100.000 Parametern und 2.000 Trainingsbeispielen hat 50 Parameter pro Beispiel und kann die Daten leicht auswendig lernen. Als Faustregel sollten Beispiele und Parameter in einem vernünftigen Verhältnis stehen, oder man nutzt Regularisierung, Augmentation oder Transfer Learning. Größere Netze sind nicht automatisch besser, sondern nur bei genügend Daten.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (4 Punkte):</b> Ein Netz hat 10 Eingaben, eine verborgene Schicht mit 5 Neuronen und eine Ausgabeschicht mit 3 Neuronen. Wie viele Parameter hat es?</p>
+        <p><b>Musterlösung:</b> Schicht 1: 10 · 5 + 5 = 55 (2 Punkte). Schicht 2: 5 · 3 + 3 = 18 (1 Punkt). Zusammen 73 (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Dense-Schicht: Eingaben · Neuronen + Neuronen (Bias). Alle Schichten addieren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Rechnung kommt häufig in der Prüfung. Lassen Sie im Rechner eine weitere Schicht einfügen und die Gesamtzahl beobachten.</p></aside>
+    </section>
+
+    <div class="part-head"><span>Teil B · Lektionen 9–13</span><h2>Architekturen für Bilder, Abfolgen und Sprache</h2></div>
+
+    <section class="lesson" id="l9" data-title="CNN" data-part="B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 50 Minuten</span><h2>Convolutional Neural Networks (CNN)</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wer ein Wimmelbild nach Walter absucht, schiebt seinen Blick Stück für Stück über das Bild und achtet auf ein bestimmtes Muster: rot-weiß gestreift. Ein CNN macht das mit vielen kleinen „Suchschablonen“ (Filtern) gleichzeitig – eine sucht Kanten, eine andere Rundungen, eine dritte bestimmte Farben.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/faltung-cnn.gif" width="640" height="380" alt="Animation: Ein 3 mal 3 Filter mit den Werten minus 1, 0, 1 gleitet über ein 6 mal 6 Bild, das links dunkel und rechts hell ist. An jeder Position wird die Summe der Produkte in eine 4 mal 4 Merkmalskarte geschrieben. Hohe Werte erscheinen genau an der senkrechten Kante." loading="lazy">
+        <figcaption>Ein Filter gleitet über das Bild und erzeugt eine Merkmalskarte.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Baustein</th><th>Aufgabe</th></tr></thead>
+        <tbody>
+          <tr><td><b>Faltungsschicht</b> (Convolution)</td><td>Filter gleiten über das Bild und erzeugen Merkmalskarten; die Filterwerte werden gelernt</td></tr>
+          <tr><td><b>Stride</b> (Schrittweite)</td><td>um wie viele Pixel der Filter jeweils springt</td></tr>
+          <tr><td><b>Padding</b></td><td>Rand mit Nullen, damit die Größe erhalten bleibt</td></tr>
+          <tr><td><b>Pooling</b> (z. B. Max-Pooling 2×2)</td><td>verkleinert die Karte, behält den stärksten Wert; macht robust gegen kleine Verschiebungen</td></tr>
+          <tr><td><b>Dense-Schichten am Ende</b></td><td>treffen die Entscheidung aus den gefundenen Merkmalen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="formula"><span class="box-label">Ausgabegröße einer Faltung</span>
+        <div class="eq">Ausgabe = <span class="frac"><span><i>N</i> − <i>F</i> + 2<i>P</i></span><span><i>S</i></span></span> + 1</div>
+        <div class="legend-eq"><span>N = Bildgröße, F = Filtergröße, P = Padding, S = Stride.</span></div>
+      </div>
+      <h3>Rechenweg: Bild 32 × 32, Filter 3 × 3, Stride 1, kein Padding, danach 2×2-Pooling</h3>
+      <ol class="steps"><li><div><span class="calcline">(32 − 3 + 0) / 1 + 1 = 30 → 30 × 30</span> · nach Pooling <span class="calcline">15 × 15</span></div></li></ol>
+      <div class="calc" id="calcCnn"><span class="box-label">Rechner: Ausgabegröße und Parameter einer Faltungsschicht</span>
+        <div class="calc-row">
+          <div class="field"><label for="cnN">Bildgröße N</label><input type="number" id="cnN" value="32" min="1"></div>
+          <div class="field"><label for="cnF">Filter F</label><input type="number" id="cnF" value="3" min="1"></div>
+          <div class="field"><label for="cnP">Padding P</label><input type="number" id="cnP" value="0" min="0"></div>
+          <div class="field"><label for="cnS">Stride S</label><input type="number" id="cnS" value="1" min="1"></div>
+          <div class="field"><label for="cnC">Eingangskanäle</label><input type="number" id="cnC" value="3" min="1"></div>
+          <div class="field"><label for="cnK">Anzahl Filter</label><input type="number" id="cnK" value="16" min="1"></div>
+        </div>
+        <div class="kpis" id="cnOut"></div>
+      </div>
+      <div class="box fach"><span class="box-label">Warum CNNs so gut für Bilder sind</span><p>Ein Filter wird über das ganze Bild <b>wiederverwendet</b> – eine Kante wird überall erkannt, egal wo sie liegt, und das Netz braucht viel weniger Parameter als ein vollständig verbundenes Netz. Parameter eines Filters: F · F · Kanäle + 1 (Bias).</p></div>
+      <div class="prose">
+        <h3>Eine Faltung von Hand ausrechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Kantenfilter auf einem kleinen Bild</span>
+        <p>Ein 4 × 4-Bild: Die linke Hälfte ist hell (10), die rechte dunkel (0). Der Filter (3 × 3) lautet: in jeder Zeile (1, 0, −1) – er reagiert auf Übergänge von hell nach dunkel.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Bild</th><th>Filter</th></tr></thead>
+          <tbody>
+            <tr><td>10 10 0 0<br>10 10 0 0<br>10 10 0 0<br>10 10 0 0</td><td>1 0 −1<br>1 0 −1<br>1 0 −1</td></tr>
+          </tbody>
+        </table></div>
+        <ol class="steps">
+          <li><div>Position oben links (Spalten 1–3): jede Zeile <span class="calcline">10 · 1 + 10 · 0 + 0 · (−1) = 10</span>, drei Zeilen: <span class="calcline">30</span>.</div></li>
+          <li><div>Position oben rechts (Spalten 2–4): jede Zeile <span class="calcline">10 · 1 + 0 · 0 + 0 · (−1) = 10</span>, drei Zeilen: <span class="calcline">30</span>.</div></li>
+          <li><div>Die Merkmalskarte ist 2 × 2 groß und enthält überall 30: Der Filter hat die senkrechte Kante gefunden.</div></li>
+        </ol>
+        <p>Auf einer einfarbigen Fläche (alle Pixel 10) ergäbe jede Position <span class="calcline">10 + 10 + 10 − 10 − 10 − 10 = 0</span>: keine Kante, keine Reaktion.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Größen berechnen</span>
+        <ul>
+          <li>Bild 28 × 28, Filter 5 × 5, Stride 1, ohne Padding: <span class="calcline">(28 − 5) : 1 + 1 = 24</span> → 24 × 24.</li>
+          <li>Mit Padding 2: <span class="calcline">(28 − 5 + 4) : 1 + 1 = 28</span> → die Größe bleibt erhalten („same“).</li>
+          <li>Danach Max-Pooling 2 × 2: <span class="calcline">24 : 2 = 12</span> → 12 × 12.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum Filter Parameter sparen</span>
+        <p>Ein Farbbild mit 32 × 32 Pixeln hat <span class="calcline">32 · 32 · 3 = 3.072</span> Eingabewerte. Eine Dense-Schicht mit 16 Neuronen bräuchte <span class="calcline">3.072 · 16 + 16 = 49.168</span> Parameter. Eine Faltungsschicht mit 16 Filtern der Größe 3 × 3 über 3 Kanäle hat nur <span class="calcline">(3 · 3 · 3 + 1) · 16 = 448</span> Parameter – gut 100-mal weniger. Dazu erkennt sie ein Muster an jeder Stelle des Bildes, weil derselbe Filter überall angewendet wird.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Bild hat 64 × 64 Pixel, der Filter 5 × 5, Stride 1, Padding 0. Wie groß ist die Merkmalskarte, und wie groß nach Max-Pooling 2 × 2? Erklären Sie die Aufgabe des Poolings.</p>
+        <p><b>Musterlösung:</b> (64 − 5) : 1 + 1 = 60 → 60 × 60 (2 Punkte); nach Pooling 30 × 30 (1 Punkt). Pooling verkleinert die Karte, behält den stärksten Wert je Fenster und macht das Netz robuster gegen kleine Verschiebungen (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>CNN: Filter gleiten übers Bild, Pooling verkleinert, Dense entscheidet. Ausgabegröße = (N − F + 2P) / S + 1.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>In der Animation lässt sich jede Zahl der Merkmalskarte nachrechnen: Drei dunkle Pixel mal −1, drei helle mal +1 ergibt 3. Lassen Sie eine Position gemeinsam nachrechnen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l10" data-title="Bilder verstehen" data-part="B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 30 Minuten</span><h2>Was Computer Vision heute leistet</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>„Ist auf dem Foto eine Katze?“, „Wo genau ist die Katze?“ und „Welche Pixel gehören zur Katze?“ sind drei verschieden schwere Fragen. Die Bildverarbeitung unterscheidet sie genau.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aufgabe</th><th>Ausgabe</th><th>Industriebeispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Bildklassifikation</b></td><td>eine Klasse pro Bild</td><td>Bauteil in Ordnung / Ausschuss</td></tr>
+          <tr><td><b>Objekterkennung</b> (z. B. YOLO)</td><td>Rahmen um jedes Objekt mit Klasse</td><td>Personen im Gefahrenbereich, Pakete auf dem Band</td></tr>
+          <tr><td><b>Segmentierung</b></td><td>Klasse für jeden Pixel</td><td>exakte Fläche eines Lackschadens, Tumorgrenzen</td></tr>
+          <tr><td><b>Texterkennung (OCR)</b></td><td>Text aus Bildern</td><td>Lieferscheine, Typenschilder</td></tr>
+          <tr><td><b>Anomalieerkennung im Bild</b></td><td>„weicht vom Normalen ab“</td><td>neue, unbekannte Fehlerarten</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box falle"><span class="box-label">Praxisfallen</span><ul><li>Beleuchtung, Kamerawinkel und Hintergrund im Training müssen zur Produktion passen</li><li>Das Netz lernt Abkürzungen: Wenn alle Ausschussteile auf einem roten Tablett fotografiert wurden, lernt es „rotes Tablett = Ausschuss“</li><li>Seltene Fehlerarten brauchen gezieltes Sammeln oder Anomalieerkennung</li></ul></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Aufgaben der Bildverarbeitung unterscheiden</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Vier Fragen, vier Aufgaben</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Frage</th><th>Aufgabe</th></tr></thead>
+          <tbody>
+            <tr><td>„Ist das Teil in Ordnung?“</td><td>Bildklassifikation</td></tr>
+            <tr><td>„Wie viele Pakete liegen auf dem Band, und wo?“</td><td>Objekterkennung</td></tr>
+            <tr><td>„Wie groß ist die beschädigte Lackfläche in cm²?“</td><td>Segmentierung</td></tr>
+            <tr><td>„Welche Zahl steht auf dem Typenschild?“</td><td>Texterkennung (OCR)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie gut ist ein Rahmen? (IoU)</span>
+        <p>Bei der Objekterkennung vergleicht man den vorhergesagten Rahmen mit dem richtigen. Die „Intersection over Union“ ist die Überlappung geteilt durch die Gesamtfläche beider Rahmen. Überlappen zwei Rahmen mit je 100 Flächeneinheiten auf 50 Einheiten, ist die Vereinigung <span class="calcline">100 + 100 − 50 = 150</span>, also <span class="calcline">IoU = 50 : 150 ≈ 0,33</span>. Ab einer IoU von etwa 0,5 wird ein Treffer üblicherweise als richtig gewertet.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das seltene Fehlerbild</span>
+        <p>Ein Betrieb besitzt 5.000 Fotos von Gehäuseteilen, davon nur 100 mit Kratzern (2 %). Das Netz lernt „immer in Ordnung“ und erreicht 98 %. Hilfen: Kratzerbilder gezielt nachsammeln, per Augmentation vervielfachen, Klassengewichte setzen oder das Problem als Anomalieerkennung formulieren (ein Autoencoder lernt „normal“ und meldet Abweichungen). Als Maß dienen Recall und Precision für die Fehlerklasse, nicht die Accuracy.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie den Unterschied zwischen Bildklassifikation, Objekterkennung und Segmentierung und nennen Sie ein Beispiel für die Objekterkennung.</p>
+        <p><b>Musterlösung:</b> Klassifikation: eine Klasse pro Bild (was?) (1 Punkt). Objekterkennung: Rahmen mit Klasse um jedes Objekt (was und wo?) (1,5 Punkte), z. B. Personen im Gefahrenbereich einer Anlage (1 Punkt). Segmentierung: Klasse für jeden einzelnen Pixel, z. B. die genaue Fläche eines Schadens (1,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Klassifikation: was? Objekterkennung: was und wo? Segmentierung: welche Pixel? Trainingsbilder müssen den Einsatzbedingungen entsprechen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Das Beispiel mit dem roten Tablett ist ein echter, oft berichteter Fehlertyp (Shortcut Learning). Gute Diskussionsgrundlage für Datenqualität.</p></aside>
+    </section>
+
+    <section class="lesson" id="l11" data-title="RNN und LSTM" data-part="B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 40 Minuten</span><h2>RNN und LSTM: Netze mit Gedächtnis</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Beim Lesen eines Satzes vergessen Sie den Anfang nicht, wenn Sie am Ende ankommen. „Der Umsatz stieg im Dezember …“ – Ihr Kopf trägt eine Zusammenfassung mit. Ein rekurrentes Netz macht dasselbe: Es gibt nach jedem Wort eine Art Notizzettel an den nächsten Schritt weiter.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/rnn-gedaechtnis.gif" width="640" height="380" alt="Animation: Die Wörter Der, Umsatz, stieg, im, Dezember, stark kommen nacheinander in Zellen an. Jede Zelle gibt ihr Gedächtnis per Pfeil an die nächste weiter, der Gedächtnisbalken wird größer. Am Ende steht eine Vorhersage für das nächste Wort." loading="lazy">
+        <figcaption>Das Gedächtnis (hidden state) wird von Schritt zu Schritt weitergereicht.</figcaption>
+      </figure>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">RNN</span><p>Verarbeitet eine Folge Schritt für Schritt; jeder Schritt bekommt die neue Eingabe und das Gedächtnis des vorigen Schritts. Problem: Bei langen Folgen verblasst die Information vom Anfang (verschwindender Gradient).</p></div>
+        <div class="box fach"><span class="box-label">LSTM und GRU</span><p><b>LSTM</b> (Long Short-Term Memory) hat einen eigenen Langzeitspeicher und drei Tore: <b>Vergessenstor</b> (was löschen), <b>Eingangstor</b> (was neu speichern), <b>Ausgangstor</b> (was weitergeben). <b>GRU</b> ist eine vereinfachte Variante mit zwei Toren.</p></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Einsatz</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>Zeitreihenprognose</td><td>Stromverbrauch, Absatz, Sensorwerte</td></tr>
+          <tr><td>Sprache und Text</td><td>früher Übersetzung, Spracherkennung – heute meist durch Transformer abgelöst</td></tr>
+          <tr><td>Ereignisfolgen</td><td>Klickpfade im Shop, Maschinenzustände</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <h3>Das Gedächtnis eines RNN in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein einfaches RNN und das verblassende Signal</span>
+        <p>Der Zustand wird so berechnet: <span class="calcline">hₜ = tanh(0,5 · xₜ + 0,8 · hₜ₋₁)</span>, Start h₀ = 0. Eingabefolge: 1, 0, 0.</p>
+        <ol class="steps">
+          <li><div>Schritt 1: <span class="calcline">h₁ = tanh(0,5 · 1 + 0) = tanh(0,5) ≈ 0,46</span></div></li>
+          <li><div>Schritt 2: <span class="calcline">h₂ = tanh(0 + 0,8 · 0,46) = tanh(0,37) ≈ 0,35</span></div></li>
+          <li><div>Schritt 3: <span class="calcline">h₃ = tanh(0,8 · 0,35) = tanh(0,28) ≈ 0,28</span></div></li>
+        </ol>
+        <p>Die Information der ersten Eingabe (1) wird mit jedem Schritt schwächer: 0,46 → 0,35 → 0,28. Nach vielen Schritten ist sie praktisch verschwunden. Das ist das Gedächtnisproblem des einfachen RNN; LSTM-Zellen halten wichtige Information gezielt fest.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Tore einer LSTM-Zelle am Satz</span>
+        <p>Satz: „Im Dezember stieg der Umsatz stark an, weil …“. Das Wort „Dezember“ ist für den weiteren Verlauf wichtig (Saison). Das <b>Eingangstor</b> speichert es im Langzeitspeicher, das <b>Vergessenstor</b> löscht dagegen bei „stieg der“ unwichtige Füllwörter, das <b>Ausgangstor</b> gibt bei der Vorhersage des nächsten Wortes nur das Relevante weiter. So bleibt „Dezember“ auch nach zehn Wörtern verfügbar.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Eine Zeitreihe mit LSTM</span>
+        <p>Ein Versorger will den Stromverbrauch der nächsten Stunde vorhersagen. Eingabe: die letzten 24 Stundenwerte. Das LSTM verarbeitet sie in der Reihenfolge, erkennt den Tagesrhythmus (morgens Anstieg, nachts Tief) und liefert den Wert für die nächste Stunde. Eine Baseline („wie in der gleichen Stunde gestern“) bleibt als Vergleichsmaßstab.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum haben einfache RNN Probleme mit langen Folgen, und wie hilft ein LSTM?</p>
+        <p><b>Musterlösung:</b> Bei langen Folgen verblasst die Information von früheren Schritten, weil der Gradient beim Rückwärtsrechnen immer wieder multipliziert wird und schrumpft (verschwindender Gradient) (2 Punkte). Ein LSTM besitzt einen eigenen Langzeitspeicher und drei Tore (Vergessen, Eingang, Ausgang), die steuern, was behalten, gespeichert und weitergegeben wird (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>RNN: Gedächtnis von Schritt zu Schritt. LSTM/GRU: Tore steuern Behalten und Vergessen – besser für lange Folgen. Für Text heute meist vom Transformer abgelöst.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Für die Prüfung genügt: wofür RNN/LSTM, warum Tore, Abgrenzung zum Transformer.</p></aside>
+    </section>
+
+    <section class="lesson" id="l12" data-title="Transformer und Attention" data-part="B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 45 Minuten</span><h2>Transformer und Attention</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>„Die Katze jagte die Maus, weil sie hungrig war.“ Wer ist hungrig? Sie wissen sofort: die Katze. Ihr Gehirn hat beim Wort „sie“ auf die passenden anderen Wörter geachtet. Genau das tut der Attention-Mechanismus – für jedes Wort, gleichzeitig.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/attention.gif" width="640" height="380" alt="Animation: Der Satz Die Katze jagte die Maus, weil sie hungrig war. Vom Wort sie gehen Bögen zu allen anderen Wörtern. Der dickste Bogen geht zu Katze mit 62 Prozent, ein dünnerer zu Maus mit 18 Prozent." loading="lazy">
+        <figcaption>Attention gewichtet, welche Wörter für das Verständnis eines Wortes wichtig sind.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>So funktioniert Self-Attention (vereinfacht)</h3>
+        <ol>
+          <li>Jedes Wort wird ein Vektor (Embedding) plus eine Positionsangabe.</li>
+          <li>Jedes Wort bildet eine <b>Frage</b> (Query), einen <b>Schlüssel</b> (Key) und einen <b>Inhalt</b> (Value).</li>
+          <li>Die Frage eines Wortes wird mit den Schlüsseln aller Wörter verglichen (Skalarprodukt, Modul 2) → Ähnlichkeitswerte → Softmax → Gewichte.</li>
+          <li>Das neue Verständnis eines Wortes ist die gewichtete Summe der Inhalte aller Wörter.</li>
+          <li>Mehrere solche „Köpfe“ (Multi-Head) achten auf verschiedene Beziehungen; viele Schichten werden gestapelt.</li>
+        </ol>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>RNN/LSTM</th><th>Transformer</th></tr></thead>
+        <tbody>
+          <tr><td>Verarbeitung</td><td>Wort für Wort nacheinander</td><td>alle Wörter gleichzeitig (parallel)</td></tr>
+          <tr><td>Lange Abhängigkeiten</td><td>schwierig</td><td>direkt über Attention</td></tr>
+          <tr><td>Training auf GPUs</td><td>langsam</td><td>sehr schnell, skaliert auf riesige Datenmengen</td></tr>
+          <tr><td>Nachteil</td><td>–</td><td>Rechenaufwand wächst quadratisch mit der Textlänge</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Bekannte Familien</span><p><b>Encoder</b> (z. B. BERT): Text verstehen, klassifizieren, suchen. <b>Decoder</b> (z. B. GPT-artige Modelle, Claude): Text erzeugen, Wort für Wort. <b>Encoder-Decoder</b> (z. B. T5): Übersetzen, Zusammenfassen. Transformer werden auch für Bilder (Vision Transformer) und Audio eingesetzt. Details zu Sprachmodellen in Modul 8.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Attention in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Gewichte für das Wort „sie“</span>
+        <p>Im Satz „Die Katze jagte die Maus, weil sie hungrig war“ vergleicht das Wort „sie“ seine Frage mit den Schlüsseln der anderen Wörter. Angenommene Ähnlichkeitswerte: Katze 2,0 · jagte 0,5 · Maus 1,0 · hungrig 0,5. Softmax macht daraus Gewichte:</p>
+        <ul>
+          <li><span class="calcline">e²·⁰ ≈ 7,39 · e⁰·⁵ ≈ 1,65 · e¹·⁰ ≈ 2,72 · e⁰·⁵ ≈ 1,65</span>; Summe ≈ 13,41</li>
+          <li>Katze ≈ <b>55 %</b>, Maus ≈ 20 %, jagte ≈ 12 %, hungrig ≈ 12 %</li>
+        </ul>
+        <p>Das neue Verständnis von „sie“ ist die gewichtete Mischung der Inhalte aller Wörter, in der „Katze“ am stärksten vertreten ist – so löst das Netz den Bezug auf.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum lange Texte teuer sind</span>
+        <p>Bei Self-Attention vergleicht jedes Wort sich mit jedem anderen: Bei 1.000 Wörtern sind das <span class="calcline">1.000² = 1.000.000</span> Paare, bei 10.000 Wörtern <span class="calcline">10.000² = 100.000.000</span> – hundertmal so viele für zehnmal so viel Text. Deshalb sind lange Dokumente aufwendig, und es gibt Varianten, die den Aufwand begrenzen. Das erklärt auch, warum Sprachmodelle eine maximale „Kontextlänge“ haben.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Encoder oder Decoder?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Aufgabe</th><th>Passende Familie</th></tr></thead>
+          <tbody>
+            <tr><td>Kundenmails nach Thema sortieren</td><td>Encoder (z. B. BERT)</td></tr>
+            <tr><td>Ähnliche Dokumente in einer Wissensdatenbank finden</td><td>Encoder (Embeddings)</td></tr>
+            <tr><td>Einen Antwortentwurf schreiben</td><td>Decoder (GPT-artig)</td></tr>
+            <tr><td>Einen Text ins Englische übersetzen</td><td>Encoder-Decoder (oder großer Decoder)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Vorteile des Transformers gegenüber einem RNN und einen Nachteil.</p>
+        <p><b>Musterlösung:</b> Vorteile: alle Wörter werden parallel verarbeitet, das Training ist auf GPUs sehr schnell (1,5 Punkte); lange Abhängigkeiten werden direkt über Attention erfasst (1,5 Punkte); gute Skalierbarkeit auf riesige Datenmengen (1,5 Punkte). Nachteil: Der Rechenaufwand wächst quadratisch mit der Textlänge (1,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Transformer: Self-Attention lässt jedes Wort auf alle anderen achten, parallel statt nacheinander. Grundlage aller großen Sprachmodelle.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Das Paper „Attention Is All You Need“ (2017) erwähnen. Query/Key/Value mit einer Bibliothek vergleichen: Die Frage (Query) wird mit den Katalogkarten (Keys) abgeglichen, man liest die passendsten Bücher (Values).</p></aside>
+    </section>
+
+    <section class="lesson" id="l13" data-title="Autoencoder, GAN, Diffusion" data-part="B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 35 Minuten</span><h2>Autoencoder, GANs und Diffusionsmodelle</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Autoencoder ist wie das Zusammenfassen eines Buches auf einer Seite und das anschließende Nacherzählen aus dieser Seite. Wenn das Nacherzählen gut klappt, hat die Zusammenfassung das Wesentliche erfasst.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Architektur</th><th>Idee</th><th>Einsatz</th></tr></thead>
+        <tbody>
+          <tr><td><b>Autoencoder</b></td><td>Encoder presst Daten in einen kleinen Code, Decoder baut sie wieder auf; trainiert, damit Ausgabe = Eingabe</td><td>Anomalieerkennung (großer Rekonstruktionsfehler = ungewöhnlich), Entrauschen, Kompression</td></tr>
+          <tr><td><b>GAN</b> (Generative Adversarial Network)</td><td>Ein Fälscher (Generator) erzeugt Bilder, ein Prüfer (Diskriminator) soll echte von gefälschten unterscheiden; beide werden immer besser</td><td>synthetische Trainingsdaten, Bildbearbeitung</td></tr>
+          <tr><td><b>Diffusionsmodell</b></td><td>lernt, Rauschen schrittweise aus einem Bild zu entfernen; erzeugt neue Bilder aus reinem Rauschen</td><td>Bildgenerierung aus Text</td></tr>
+          <tr><td><b>VAE</b> (Variational Autoencoder)</td><td>Autoencoder mit geordnetem Code-Raum, aus dem man neue Beispiele ziehen kann</td><td>Generierung, Datenexploration</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box falle"><span class="box-label">Risiken generativer Bildmodelle</span><p>Deepfakes, Urheberrechtsfragen bei Trainingsdaten, Kennzeichnungspflicht KI-erzeugter Inhalte nach AI Act (Modul 10).</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Rekonstruktionsfehler und Generatoren</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Autoencoder als Anomaliedetektor</span>
+        <p>Ein Autoencoder wird mit Bildern fehlerfreier Teile trainiert. Er presst jedes Bild auf einen kleinen Code zusammen und baut es wieder auf. Für ein normales Teil beträgt der mittlere Rekonstruktionsfehler 0,02. Für ein Teil mit einem Riss, den er nie gesehen hat, ist der Fehler 0,35, denn das Netz kann den Riss nicht nachbauen. Mit einer Schwelle von 0,10 (aus Validierungsdaten gewählt) wird dieses Teil als Anomalie markiert. Das Verfahren braucht nur Bilder gesunder Teile, keine Fehlerbilder.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Kompression im Autoencoder</span>
+        <p>Ein Bild mit 28 × 28 = 784 Pixeln wird auf einen Code mit 32 Zahlen reduziert: <span class="calcline">784 : 32 = 24,5</span> – der Code ist etwa 25-mal kleiner. Gelingt die Rekonstruktion gut, enthält der Code das Wesentliche. Ähnlich wie PCA (Modul 5), aber nichtlinear und damit leistungsfähiger.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das Spiel von Fälscher und Prüfer (GAN)</span>
+        <ol class="steps">
+          <li><div>Der <b>Generator</b> erzeugt aus Zufallszahlen ein Bild (am Anfang nur Rauschen).</div></li>
+          <li><div>Der <b>Diskriminator</b> bekommt echte und gefälschte Bilder und soll sie unterscheiden.</div></li>
+          <li><div>Der Diskriminator verbessert sich; der Generator wird für jede erkannte Fälschung „bestraft“ und lernt, überzeugendere Bilder zu erzeugen.</div></li>
+          <li><div>Das Spiel läuft, bis die Fälschungen kaum noch erkennbar sind.</div></li>
+        </ol>
+        <p>Einsatz in der Praxis: synthetische Bilder von seltenen Fehlerarten, um Trainingsdaten zu ergänzen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Wie lässt sich ein Autoencoder zur Anomalieerkennung nutzen?</p>
+        <p><b>Musterlösung:</b> Man trainiert ihn nur mit normalen Daten, sodass er diese gut rekonstruiert (2 Punkte). Bei neuen Daten berechnet man den Rekonstruktionsfehler; ist er größer als eine festgelegte Schwelle, weicht der Fall vom Normalen ab und wird als Anomalie gemeldet (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Autoencoder: zusammenpressen und wiederherstellen (Anomalien). GAN: Fälscher gegen Prüfer. Diffusion: Rauschen schrittweise entfernen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Das GAN-Bild „Geldfälscher gegen Polizei“ ist sehr eingängig. Der Autoencoder für Anomalieerkennung ist der praxisrelevanteste Teil dieser Lektion.</p></aside>
+    </section>
+
+    <div class="part-head"><span>Teil C · Lektionen 14–16</span><h2>Deep Learning in der Praxis</h2></div>
+
+    <section class="lesson" id="l14" data-title="Transfer Learning" data-part="C · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 40 Minuten</span><h2>Transfer Learning: auf Vorwissen aufbauen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wer Gitarre spielen kann, lernt Ukulele in wenigen Tagen – Rhythmus, Griffe und Notenlesen sind schon da. Transfer Learning nutzt ein Netz, das auf Millionen Bildern oder Texten vortrainiert ist, und bringt ihm mit wenigen eigenen Daten die neue Aufgabe bei.</p>
+      </div>
+      <ol class="steps">
+        <li><div>Ein vortrainiertes Modell wählen (Bilder: z. B. ResNet, EfficientNet; Text: z. B. BERT).</div></li>
+        <li><div>Die letzte Schicht (die alte Klassenentscheidung) durch eine neue für die eigenen Klassen ersetzen.</div></li>
+        <li><div>Zuerst nur die neue Schicht trainieren, die übrigen Schichten „einfrieren“.</div></li>
+        <li><div>Optional: einige obere Schichten mit kleiner Lernrate mittrainieren (<b>Fine-Tuning</b>).</div></li>
+      </ol>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Vorteile</span><ul><li>Wenige hundert eigene Beispiele reichen oft</li><li>Kurze Trainingszeit, geringe Kosten</li><li>Bessere Ergebnisse als ein Netz von null</li></ul></div>
+        <div class="box falle"><span class="box-label">Grenzen</span><ul><li>Das Vorwissen muss passen (Fotos ≠ Röntgenbilder ≠ Wärmebilder)</li><li>Lizenzen der vortrainierten Modelle prüfen</li><li>Verzerrungen des Vortrainings werden mit übernommen</li></ul></div>
+      </div>
+      <pre class="code"><span class="k">from</span> tensorflow <span class="k">import</span> keras
+basis = keras.applications.EfficientNetB0(include_top=<span class="k">False</span>, weights=<span class="s">"imagenet"</span>, input_shape=(224, 224, 3), pooling=<span class="s">"avg"</span>)
+basis.trainable = <span class="k">False</span>                       <span class="c"># Vorwissen einfrieren</span>
+modell = keras.Sequential([basis, keras.layers.Dropout(0.3), keras.layers.Dense(2, activation=<span class="s">"softmax"</span>)])
+modell.compile(optimizer=<span class="s">"adam"</span>, loss=<span class="s">"sparse_categorical_crossentropy"</span>, metrics=[<span class="s">"accuracy"</span>])
+modell.fit(train_bilder, epochs=10, validation_data=val_bilder)</pre>
+      <div class="prose">
+        <h3>Weitere Beispiele: Transfer Learning im Betrieb</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Daten- und Parameterbedarf im Vergleich</span>
+        <p>Ein Betrieb will Bilder von Holzoberflächen in zwei Klassen („in Ordnung“ und „Fehler“) einteilen.</p>
+        <ul>
+          <li><b>Von null trainiert:</b> Ein Bildnetz bräuchte mehrere zehntausend Bilder – der Betrieb hat 600.</li>
+          <li><b>Mit Transfer Learning:</b> Das vortrainierte Netz (z. B. EfficientNet-B0, vortrainiert auf Millionen Fotos) liefert 1.280 Merkmale je Bild. Die neue Entscheidungsschicht hat nur <span class="calcline">1.280 · 2 + 2 = 2.562</span> trainierbare Parameter, während die rund 4 Millionen Parameter des Basisnetzes eingefroren bleiben. 600 Bilder genügen oft.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wann Fine-Tuning sinnvoll ist</span>
+        <p>Nach dem Training der neuen Schicht erreicht das Modell 88 % auf den Validierungsdaten. Nun „taut“ man die oberen Schichten des Basisnetzes auf und trainiert sie mit einer sehr kleinen Lernrate (z. B. 0,00001) weiter, damit sie sich an Holzmaserungen anpassen. Ergebnis: 93 %. Mit einer zu großen Lernrate würde man das wertvolle Vorwissen zerstören („katastrophales Vergessen“).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wenn das Vorwissen nicht passt</span>
+        <p>Ein auf Alltagsfotos vortrainiertes Netz soll Wärmebildkameras auswerten. Farben und Formen unterscheiden sich stark von den Fotos. Hier hilft Transfer Learning weniger; man braucht mehr eigene Daten oder ein Modell, das auf ähnlichen Bildern vortrainiert wurde. Ebenso sind <b>Lizenz</b> und <b>mitgebrachte Verzerrungen</b> des Basismodells zu prüfen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein Mittelständler hat 500 beschriftete Fotos und will Fehler erkennen. Beschreiben Sie das Vorgehen mit Transfer Learning in vier Schritten und nennen Sie einen Vorteil.</p>
+        <p><b>Musterlösung:</b> Vortrainiertes Modell wählen; letzte Schicht durch eine neue mit den eigenen Klassen ersetzen; zunächst nur die neue Schicht trainieren (übrige eingefroren); optional obere Schichten mit kleiner Lernrate fein abstimmen (4 Punkte). Vorteil: kommt mit wenigen Daten aus, spart Zeit und Rechenkosten (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Transfer Learning: vortrainiertes Netz übernehmen, letzte Schicht ersetzen, zuerst nur diese trainieren. Ideal bei wenigen eigenen Daten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fast jede Bild-Transferarbeit in einem mittelständischen Betrieb sollte Transfer Learning nutzen. Übung 12 ist genau dieser Fall.</p></aside>
+    </section>
+
+    <section class="lesson" id="l15" data-title="Overfitting bei Deep Learning" data-part="C · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 30 Minuten</span><h2>Overfitting bei tiefen Netzen vermeiden</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Netz mit Millionen Parametern kann einen Datensatz mit tausend Bildern mühelos auswendig lernen – wie ein Schüler mit fotografischem Gedächtnis, der nie etwas versteht. Man muss es zum Verallgemeinern zwingen.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Maßnahme</th><th>Wie</th></tr></thead>
+        <tbody>
+          <tr><td><b>Datenaugmentation</b></td><td>Bilder zufällig drehen, spiegeln, zuschneiden, Helligkeit ändern; Audio leicht verrauschen</td></tr>
+          <tr><td><b>Dropout</b></td><td>beim Training zufällig z. B. 30 % der Neuronen abschalten</td></tr>
+          <tr><td><b>Early Stopping</b></td><td>abbrechen, wenn der Validierungsfehler steigt</td></tr>
+          <tr><td><b>Gewichtsregularisierung</b></td><td>L2-Strafe (weight decay)</td></tr>
+          <tr><td><b>Transfer Learning</b></td><td>weniger Parameter von null lernen</td></tr>
+          <tr><td><b>Kleineres Netz</b></td><td>weniger Schichten oder Neuronen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Augmentation nur so, dass das Label stimmt: Ein gespiegeltes Foto eines Bauteils ist noch dasselbe Bauteil – eine gespiegelte „6“ ist aber keine „6“ mehr, eine gedrehte „6“ wird zur „9“. Augmentation nur auf Trainingsdaten anwenden.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Overfitting bei Deep Learning erkennen und bekämpfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Verlustkurven lesen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Epoche</th><th class="r">Trainingsverlust</th><th class="r">Validierungsverlust</th><th>Beobachtung</th></tr></thead>
+          <tbody>
+            <tr><td class="r">1</td><td class="r">0,90</td><td class="r">0,92</td><td>beide sinken</td></tr>
+            <tr><td class="r">5</td><td class="r">0,40</td><td class="r">0,45</td><td>passend</td></tr>
+            <tr><td class="r">10</td><td class="r">0,20</td><td class="r"><b>0,43</b></td><td>Validierung stagniert, Abstand wächst</td></tr>
+            <tr><td class="r">15</td><td class="r">0,05</td><td class="r">0,61</td><td>Overfitting: Validierungsverlust steigt</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Netz sollte um Epoche 10 gestoppt werden (Early Stopping). Danach lernt es nur noch die Trainingsdaten auswendig.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Augmentation vervielfacht die Daten</span>
+        <p>Ein Betrieb hat 2.000 Bilder. Zufällig werden sie gedreht (± 15°), gespiegelt, leicht aufgehellt und zugeschnitten. Bei fünf zufälligen Varianten je Epoche sieht das Netz über 20 Epochen nie zweimal dasselbe Bild: effektiv <span class="calcline">2.000 · 20 = 40.000</span> unterschiedliche Trainingsbeispiele. <b>Vorsicht bei der Wahl der Veränderungen:</b> Eine gespiegelte Schraube ist noch eine Schraube; ein gedrehtes Warnschild (Pfeil nach links statt rechts) bedeutet etwas anderes.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Dropout konkret</span>
+        <p>Eine Schicht hat 200 Neuronen, Dropout 0,3. In jedem Trainingsschritt sind zufällig etwa <span class="calcline">200 · 0,3 = 60</span> Neuronen abgeschaltet. Das Netz kann sich nicht darauf verlassen, dass bestimmte Neuronen immer anwesend sind, und lernt breiter verteilte, robustere Merkmale. Beim Einsatz sind alle 200 aktiv.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein neuronales Netz erreicht im Training 99 % und in der Validierung 74 %. Nennen Sie drei Maßnahmen und begründen Sie eine.</p>
+        <p><b>Musterlösung:</b> Datenaugmentation, Dropout, Early Stopping, L2-Regularisierung, Transfer Learning oder ein kleineres Netz (je 1 Punkt, max. 3). Begründung z. B. Dropout: Das zufällige Abschalten von Neuronen verhindert, dass das Netz einzelne Trainingsbeispiele auswendig lernt (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gegen Overfitting bei Deep Learning: Augmentation, Dropout, Early Stopping, Regularisierung, Transfer Learning.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Das Beispiel mit der 6 und der 9 bleibt sicher hängen und zeigt, dass Augmentation fachliches Denken braucht.</p></aside>
+    </section>
+
+    <section class="lesson" id="l16" data-title="Werkzeuge und Anwendungen" data-part="C · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 35 Minuten</span><h2>Werkzeuge, Hardware und Anwendungen von Deep Learning</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Grafikchip (GPU) ist wie eine Fabrikhalle mit tausenden einfachen Arbeitern, die alle gleichzeitig dieselbe Handbewegung machen. Für die vielen gleichartigen Multiplikationen in neuronalen Netzen ist das viel schneller als ein Prozessor mit wenigen sehr klugen Arbeitern.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bereich</th><th>Werkzeuge</th></tr></thead>
+        <tbody>
+          <tr><td>Frameworks</td><td>PyTorch, TensorFlow/Keras, JAX</td></tr>
+          <tr><td>Vortrainierte Modelle</td><td>Modell-Hubs (z. B. Hugging Face), torchvision, Keras Applications</td></tr>
+          <tr><td>Hardware</td><td>GPU, TPU, spezialisierte KI-Chips; für Geräte am Rand (Edge): kleine, optimierte Modelle</td></tr>
+          <tr><td>Cloud</td><td>Trainingsumgebungen der großen Cloud-Anbieter, Notebooks wie Google Colab</td></tr>
+          <tr><td>Optimierung für den Einsatz</td><td>Quantisierung (kleinere Zahlen), Pruning, Destillation in kleinere Modelle</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cards">
+        <div class="card"><h3>Industrie</h3><p>optische Qualitätsprüfung, Predictive Maintenance mit Vibrationsdaten, Robotergreifen</p></div>
+        <div class="card"><h3>Medizin</h3><p>Auswertung von Röntgen- und Gewebebildern als Zweitmeinung</p></div>
+        <div class="card"><h3>Verwaltung</h3><p>Dokumentenerkennung, Spracheingabe, Übersetzung</p></div>
+        <div class="card"><h3>Handel</h3><p>Empfehlungen, Bedarfsprognose, visuelle Produktsuche</p></div>
+        <div class="card"><h3>Mobilität</h3><p>Fahrerassistenz, Verkehrszeichenerkennung</p></div>
+        <div class="card"><h3>Sprache</h3><p>Chat-Assistenten, Zusammenfassungen, Transkription</p></div>
+      </div>
+      <div class="box fach"><span class="box-label">Kosten und Nachhaltigkeit</span><p>Training großer Netze verbraucht viel Energie. Für die Wirtschaftlichkeitsbetrachtung (Modul 11) zählen GPU-Stunden, Speicher und Betriebskosten der Vorhersagen. Oft genügt ein kleines, vortrainiertes Modell.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Kosten, Hardware und Verkleinerung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Trainings- und Betriebskosten abschätzen</span>
+        <ul>
+          <li><b>Training:</b> 20 GPU-Stunden zu 2,50 € ergeben <span class="calcline">20 · 2,50 = 50 €</span> – für ein kleines, vortrainiertes Bildmodell absolut üblich.</li>
+          <li><b>Betrieb:</b> 1 Million Vorhersagen im Monat zu 0,002 € je Anfrage ergeben <span class="calcline">2.000 € pro Monat</span>. Auf das Jahr gerechnet 24.000 € – eine Größe, die in die Wirtschaftlichkeitsrechnung (Modul 11) gehört.</li>
+          <li>Oft übersteigen die laufenden Betriebskosten die Trainingskosten.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Quantisierung spart Platz und Zeit</span>
+        <p>Ein Modell speichert seine Gewichte als 32-Bit-Zahlen (4 Byte). Quantisiert auf 8 Bit (1 Byte) schrumpft es auf ein Viertel: aus 100 MB werden <span class="calcline">100 : 4 = 25 MB</span>. Die Vorhersage wird schneller, die Genauigkeit sinkt meist nur geringfügig. So passt ein Modell auf eine kleine Kamera direkt an der Maschine.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Edge oder Cloud?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Anforderung</th><th>Eher am Gerät (Edge)</th><th>Eher in der Cloud</th></tr></thead>
+          <tbody>
+            <tr><td>Antwort in unter 20 ms an der Maschine</td><td>ja</td><td>nein (Netzwerk-Verzögerung)</td></tr>
+            <tr><td>Sensible Daten, die den Betrieb nicht verlassen sollen</td><td>ja</td><td>nur mit Vertragsabsicherung</td></tr>
+            <tr><td>Sehr großes Modell, selten genutzt</td><td>nein</td><td>ja</td></tr>
+            <tr><td>Häufige Modellupdates für viele Standorte</td><td>aufwendiger</td><td>einfacher</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum eignen sich GPUs besonders für neuronale Netze, und nennen Sie zwei Möglichkeiten, ein Modell für den Einsatz zu verkleinern.</p>
+        <p><b>Musterlösung:</b> GPUs führen sehr viele gleichartige Rechenschritte (Matrixmultiplikationen) gleichzeitig aus, wie sie in neuronalen Netzen ständig vorkommen (2 Punkte). Verkleinerung: Quantisierung (kleinere Zahlenformate), Pruning (unwichtige Verbindungen entfernen), Destillation (ein kleines Modell lernt vom großen) (je 1,5 Punkte für zwei).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Deep Learning braucht GPUs und Frameworks wie PyTorch oder Keras. Für den Einsatz werden Modelle oft verkleinert. Nicht jede Aufgabe braucht ein großes Netz.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fragen Sie: „Welche dieser Anwendungen gibt es in Ihrem Betrieb schon?“ – oft mehr als gedacht.</p></aside>
+    </section>
+
+    <section class="lesson" id="uebungen" data-title="Übungen" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Übungen · 120 Minuten</span><h2>12 Übungen mit Antwortfeldern</h2></div>
+      <p>Tragen Sie Ihre Antworten in die Felder ein. Freitext bewertet die KI wie ein IHK-Prüfer. Öffnen Sie die Musterlösung erst danach.</p>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 1: Ein Neuron</h3><span class="points">4 Punkte</span></div>
+        <p>x = (2; −1; 3), w = (0,5; 1; −0,2), b = 0,4. Berechnen Sie z, ReLU(z) und σ(z) (drei Nachkommastellen).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>z = 1 − 1 − 0,6 + 0,4 = <b>−0,2</b> (2 P.). ReLU(−0,2) = <b>0</b> (1 P.). σ(−0,2) ≈ <b>0,450</b> (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 2: XOR</h3><span class="points">2 Punkte</span></div>
+        <p>Warum kann ein einzelnes Perzeptron die XOR-Funktion nicht lernen, ein mehrschichtiges Netz aber schon?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Ein Perzeptron kann nur eine gerade Trennlinie ziehen; die XOR-Klassen liegen diagonal und sind nicht linear trennbar (1 P.). Mehrere Schichten mit nichtlinearer Aktivierung können die Grenze aus mehreren Linien zusammensetzen (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 3: Aktivierung wählen</h3><span class="points">4 Punkte</span></div>
+        <p>Welche Aktivierungsfunktion verwenden Sie? (1) Ausgabe für Ja/Nein, (2) Ausgabe für 5 Produktkategorien, (3) verborgene Schichten, (4) Ausgabe für eine Preisvorhersage.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) Sigmoid, (2) Softmax, (3) ReLU, (4) linear.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 4: Softmax</h3><span class="points">2 Punkte</span></div>
+        <p>Rohwerte (2; 1; 0). Welche Wahrscheinlichkeit erhält die erste Klasse (drei Nachkommastellen)?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>e² / (e² + e¹ + e⁰) = 7,389 / 11,107 ≈ <b>0,665</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 5: Kreuzentropie</h3><span class="points">3 Punkte</span></div>
+        <p>Berechnen Sie den Verlust −ln(p) für die richtige Klasse, wenn das Modell ihr (a) 0,8 und (b) 0,1 gibt (drei Nachkommastellen).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) <b>0,223</b> (2 P.), (b) <b>2,303</b> (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 6: Parameter zählen</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Netz hat 784 Eingaben, eine verborgene Schicht mit 128 Neuronen und 10 Ausgaben. Wie viele Parameter haben (a) die erste Schicht, (b) die Ausgabeschicht, (c) das ganze Netz?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) 784 · 128 + 128 = <b>100.480</b>, (b) 128 · 10 + 10 = <b>1.290</b>, (c) <b>101.770</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 7: CNN-Größen</h3><span class="points">3 Punkte</span></div>
+        <p>Bild 64 × 64, Filter 5 × 5, Stride 1. (a) Ausgabegröße ohne Padding? (b) mit Padding 2? (c) Größe nach 2×2-Max-Pooling von (a)?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) (64 − 5)/1 + 1 = <b>60</b>, (b) (64 − 5 + 4)/1 + 1 = <b>64</b>, (c) <b>30</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 8: Parameter einer Faltung</h3><span class="points">2 Punkte</span></div>
+        <p>Eine Faltungsschicht hat 16 Filter der Größe 3 × 3 auf einem Farbbild (3 Kanäle). Wie viele Parameter hat sie?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(3 · 3 · 3 + 1) · 16 = 28 · 16 = <b>448</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 9: Gewicht anpassen</h3><span class="points">2 Punkte</span></div>
+        <p>Ein Gewicht w = 0,8 hat den Gradienten ∂L/∂w = 0,5. Lernrate 0,1. Neuer Wert?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>0,8 − 0,1 · 0,5 = <b>0,75</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 10: Architektur zuordnen</h3><span class="points">4 Punkte</span></div>
+        <p>Welche Architektur passt am besten? (1) Kratzer auf Produktfotos erkennen, (2) Stromverbrauch der nächsten Stunden aus dem Verlauf vorhersagen, (3) Bedienungsanleitungen übersetzen, (4) ungewöhnliche Sensormuster ohne Labels finden.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) CNN, (2) RNN/LSTM, (3) Transformer, (4) Autoencoder.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 11: Epochen und Batches</h3><span class="points">2 Punkte</span></div>
+        <p>10.000 Trainingsbeispiele, Batch-Größe 50, 20 Epochen. Wie viele Gewichts-Updates gibt es (a) pro Epoche, (b) insgesamt?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) <b>200</b>, (b) <b>4.000</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 12: Kratzererkennung mit wenigen Bildern</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Betrieb hat 800 gelabelte Fotos von Metalloberflächen (in Ordnung / Kratzer) und will eine automatische Prüfung. Beschreiben Sie Ihr Vorgehen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Je 1 P.: CNN mit Transfer Learning (vortrainiertes Netz, letzte Schicht ersetzen, zuerst nur diese trainieren); Datenaugmentation (Drehen, Spiegeln, Helligkeit) nur auf Trainingsdaten; stratifizierte Aufteilung und Bewertung mit Recall/F1 statt Accuracy; Gegenmaßnahmen gegen Overfitting (Dropout, Early Stopping) und Bildbedingungen wie in der Produktion.</p></details></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Aufgaben 1, 4 bis 9 und 11 sind Rechenaufgaben, die in Teil 2 der schriftlichen Prüfung vorkommen können.</p></aside>
+    </section>
+
+    <section class="lesson" id="quiz" data-title="Abschlussquiz" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 30 Minuten</span><h2>Abschlussquiz Modul 7</h2></div>
+      <p>20 Fragen, jeweils eine richtige Antwort. Ab 14 richtigen Antworten sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="btnrow"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Ohne Unterlagen, mit Taschenrechner.</p></aside>
+    </section>
+
+    <section class="lesson" id="summary" data-title="Zusammenfassung" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Neuron</h3><p>z = Σ w·x + b, a = f(z).</p></div>
+        <div class="card"><h3>Aktivierung</h3><p>ReLU innen; Sigmoid, Softmax, linear außen.</p></div>
+        <div class="card"><h3>Training</h3><p>Forward → Verlust → Backpropagation → Update; Epoche, Batch, Adam.</p></div>
+        <div class="card"><h3>Verlust</h3><p>MSE für Regression, Kreuzentropie für Klassifikation.</p></div>
+        <div class="card"><h3>Parameter</h3><p>Dense: Ein · Neuronen + Neuronen. Filter: F·F·Kanäle + 1.</p></div>
+        <div class="card"><h3>CNN</h3><p>Faltung, Pooling; (N − F + 2P)/S + 1.</p></div>
+        <div class="card"><h3>RNN/LSTM</h3><p>Gedächtnis über Schritte; Tore.</p></div>
+        <div class="card"><h3>Transformer</h3><p>Self-Attention, parallel; Basis der LLMs.</p></div>
+        <div class="card"><h3>Praxis</h3><p>Transfer Learning, Augmentation, Dropout, Early Stopping.</p></div>
+      </div>
+      <p><b>Weiter mit Modul 8:</b> Generative KI und große Sprachmodelle.</p>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie jede Karte in einem Satz erklären.</p></aside>
+    </section>
+<!--SCRIPTS-->
+<script type="application/json" id="quiz-data">[
+["Was wird beim Training eines neuronalen Netzes gelernt?", ["Die Aktivierungsfunktion", "Gewichte und Bias", "Die Anzahl der Schichten", "Die Lernrate"], 1, "Lektion 1."],
+["Warum kann ein einzelnes Perzeptron XOR nicht lösen?", ["Zu wenig Daten", "XOR ist nicht linear trennbar", "Die Lernrate ist zu klein", "XOR hat zu viele Klassen"], 1, "Lektion 2."],
+["Welche Aktivierung ist der Standard in verborgenen Schichten?", ["Sigmoid", "Softmax", "ReLU", "linear"], 2, "Lektion 3."],
+["Welche Ausgabe passt zu einer Mehrklassen-Klassifikation?", ["Ein Neuron mit Sigmoid", "Ein Neuron, linear", "So viele Neuronen wie Klassen mit Softmax", "ReLU"], 2, "Lektion 3."],
+["ReLU(−3) = ?", ["−3", "0", "3", "0,05"], 1, "max(0, z). Lektion 3."],
+["Was passiert ohne nichtlineare Aktivierungen?", ["Das Netz wird genauer", "Das ganze Netz entspricht einer linearen Funktion", "Das Training ist unmöglich", "Nichts"], 1, "Lektion 3."],
+["Welche Verlustfunktion nutzt man typischerweise für Klassifikation?", ["MSE", "Kreuzentropie", "MAE", "R²"], 1, "Lektion 5."],
+["Was berechnet Backpropagation?", ["Die Vorhersage", "Für jedes Gewicht seinen Anteil am Fehler (Gradient) mit der Kettenregel", "Die beste Architektur", "Die Datenaufteilung"], 1, "Lektion 6."],
+["Was ist eine Epoche?", ["Ein Update", "Ein kompletter Durchlauf durch alle Trainingsdaten", "Ein Batch", "Eine Schicht"], 1, "Lektion 7."],
+["Welcher Optimierer passt die Lernrate je Gewicht automatisch an?", ["SGD", "Adam", "Dropout", "ReLU"], 1, "Lektion 7."],
+["Parameter einer Dense-Schicht mit 10 Eingaben und 5 Neuronen?", ["50", "55", "15", "60"], 1, "10 · 5 + 5. Lektion 8."],
+["Ausgabegröße: Bild 28, Filter 3, Stride 1, Padding 0?", ["25", "26", "27", "28"], 1, "(28 − 3)/1 + 1. Lektion 9."],
+["Was macht Max-Pooling?", ["Fügt Nullen hinzu", "Verkleinert die Merkmalskarte und behält den größten Wert", "Erhöht die Auflösung", "Normalisiert Werte"], 1, "Lektion 9."],
+["Was liefert eine Segmentierung?", ["Eine Klasse pro Bild", "Rahmen um Objekte", "Eine Klasse pro Pixel", "Text aus Bildern"], 2, "Lektion 10."],
+["Wofür haben LSTMs Tore (Gates)?", ["Um schneller zu rechnen", "Um zu steuern, was behalten und was vergessen wird", "Für Bildfilter", "Für Pooling"], 1, "Lektion 11."],
+["Was ist der Kern eines Transformers?", ["Faltung", "Self-Attention", "Pooling", "Entscheidungsbäume"], 1, "Lektion 12."],
+["Welchen Vorteil hat der Transformer gegenüber RNNs?", ["Verarbeitet alle Wörter parallel und erfasst lange Abhängigkeiten direkt", "Braucht keine Daten", "Ist immer kleiner", "Hat kein Training"], 0, "Lektion 12."],
+["Wofür eignet sich ein Autoencoder besonders?", ["Übersetzung", "Anomalieerkennung über den Rekonstruktionsfehler", "Kreditentscheidungen", "Warenkorbanalyse"], 1, "Lektion 13."],
+["Was bedeutet Transfer Learning?", ["Daten zwischen Firmen tauschen", "Ein vortrainiertes Modell für eine neue Aufgabe anpassen", "Modelle in die Cloud verschieben", "Lernrate übertragen"], 1, "Lektion 14."],
+["Welche Augmentation ist bei Ziffernerkennung problematisch?", ["Leichte Helligkeitsänderung", "Drehung um 180 Grad", "Leichtes Rauschen", "Kleine Verschiebung"], 1, "Eine gedrehte 6 wird zur 9. Lektion 15."]
+]</script>
+<script>
+/* Antwortfelder der Übungen in Modul 7 */
+(function () {
+  function z(id, label, punkte, wert, tol, einheit) { return { id: id, label: label, typ: "zahl", punkte: punkte, wert: wert, tol: tol, einheit: einheit }; }
+  var AKT = ["Sigmoid", "Softmax", "ReLU", "linear", "Tanh"];
+  var ARCH = ["CNN", "RNN / LSTM", "Transformer", "Autoencoder", "GAN"];
+  window.UEBUNGEN = {
+    modul: 7,
+    aufgaben: {
+      a1: { teile: [z("z", "z", 2, -0.2, 0.001), z("relu", "ReLU(z)", 1, 0, 0.001), z("sig", "σ(z)", 1, 0.450, 0.002)] },
+      a2: { teile: [{ id: "t", label: "Ihre Erklärung", typ: "text", punkte: 2, erwartung: "Perzeptron zieht nur eine gerade Linie, XOR nicht linear trennbar (1 P.); mehrere Schichten mit nichtlinearer Aktivierung setzen eine gekrümmte Grenze zusammen (1 P.)." }] },
+      a3: { teile: [
+        { id: "a1", label: "(1) Ausgabe Ja/Nein", typ: "wahl", punkte: 1, optionen: AKT, richtig: 0 },
+        { id: "a2", label: "(2) Ausgabe 5 Kategorien", typ: "wahl", punkte: 1, optionen: AKT, richtig: 1 },
+        { id: "a3", label: "(3) verborgene Schichten", typ: "wahl", punkte: 1, optionen: AKT, richtig: 2 },
+        { id: "a4", label: "(4) Ausgabe Preis", typ: "wahl", punkte: 1, optionen: AKT, richtig: 3 }] },
+      a4: { teile: [z("p", "Wahrscheinlichkeit Klasse 1", 2, 0.665, 0.002)] },
+      a5: { teile: [z("a", "(a) p = 0,8", 2, 0.223, 0.002), z("b", "(b) p = 0,1", 1, 2.303, 0.002)] },
+      a6: { teile: [z("a", "(a) erste Schicht", 1, 100480, 0.5), z("b", "(b) Ausgabeschicht", 1, 1290, 0.5), z("c", "(c) gesamt", 1, 101770, 0.5)] },
+      a7: { teile: [z("a", "(a) ohne Padding", 1, 60, 0.001), z("b", "(b) Padding 2", 1, 64, 0.001), z("c", "(c) nach Pooling", 1, 30, 0.001)] },
+      a8: { teile: [z("p", "Parameter", 2, 448, 0.5)] },
+      a9: { teile: [z("w", "Neues Gewicht", 2, 0.75, 0.001)] },
+      a10: { teile: [
+        { id: "f1", label: "(1) Kratzer auf Fotos", typ: "wahl", punkte: 1, optionen: ARCH, richtig: 0 },
+        { id: "f2", label: "(2) Stromverbrauch", typ: "wahl", punkte: 1, optionen: ARCH, richtig: 1 },
+        { id: "f3", label: "(3) Übersetzung", typ: "wahl", punkte: 1, optionen: ARCH, richtig: 2 },
+        { id: "f4", label: "(4) Sensoranomalien ohne Labels", typ: "wahl", punkte: 1, optionen: ARCH, richtig: 3 }] },
+      a11: { teile: [z("a", "(a) pro Epoche", 1, 200, 0.001), z("b", "(b) insgesamt", 1, 4000, 0.001)] },
+      a12: { teile: [{ id: "t", label: "Ihr Vorgehen", typ: "text", punkte: 4, erwartung: "Je 1 P.: CNN mit Transfer Learning; Augmentation nur im Training; stratifizierte Aufteilung, Bewertung mit Recall/F1; Overfitting-Schutz (Dropout, Early Stopping) und Bildbedingungen wie in der Produktion." }] }
+    }
+  };
+})();
+</script>
+<script>
+/* Rechner in Modul 7 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 3 : d }) : "–"; }
+  function kpi(l, v) { return '<div class="kpi"><span>' + l + "</span><b>" + v + "</b></div>"; }
+  function num(id) { var v = parseFloat(String(document.getElementById(id).value).replace(",", ".")); return isFinite(v) ? v : 0; }
+  function list(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(",", "."); }).filter(Boolean).map(Number).filter(isFinite); }
+
+  function neuron() {
+    var x = list(document.getElementById("nX").value), w = list(document.getElementById("nW").value), b = num("nB"), f = document.getElementById("nF").value;
+    if (!x.length || x.length !== w.length) { document.getElementById("nOut").innerHTML = kpi("Hinweis", "gleich viele x und w"); document.getElementById("nWeg").textContent = ""; return; }
+    var z = b, parts = [];
+    x.forEach(function (v, i) { z += v * w[i]; parts.push(fmt(w[i]) + " · " + fmt(v)); });
+    var a = f === "relu" ? Math.max(0, z) : f === "sig" ? 1 / (1 + Math.exp(-z)) : f === "tanh" ? Math.tanh(z) : z;
+    document.getElementById("nOut").innerHTML = kpi("z", fmt(z)) + kpi("Ausgabe a", fmt(a));
+    document.getElementById("nWeg").textContent = "z = " + parts.join(" + ") + " + " + fmt(b) + " = " + fmt(z);
+  }
+  ["nX", "nW", "nB", "nF"].forEach(function (i) { document.getElementById(i).addEventListener("input", neuron); }); neuron();
+
+  function dense() {
+    var L = list(document.getElementById("dsL").value).map(Math.round), z = list(document.getElementById("smZ").value);
+    var h = "", total = 0;
+    for (var i = 1; i < L.length; i++) { var pp = L[i - 1] * L[i] + L[i]; total += pp; h += kpi("Schicht " + i + " (" + L[i - 1] + "→" + L[i] + ")", fmt(pp, 0)); }
+    h += kpi("Parameter gesamt", fmt(total, 0));
+    if (z.length) {
+      var m = Math.max.apply(null, z), ex = z.map(function (v) { return Math.exp(v - m); }), s = ex.reduce(function (a, b) { return a + b; }, 0);
+      h += kpi("Softmax", ex.map(function (v) { return fmt(v / s, 3); }).join(" · "));
+    }
+    document.getElementById("dsOut").innerHTML = h;
+  }
+  ["dsL", "smZ"].forEach(function (i) { document.getElementById(i).addEventListener("input", dense); }); dense();
+
+  function cnn() {
+    var N = num("cnN"), F = num("cnF"), P = num("cnP"), S = Math.max(1, num("cnS")), C = num("cnC"), K = num("cnK");
+    var o = (N - F + 2 * P) / S + 1;
+    document.getElementById("cnOut").innerHTML = kpi("Ausgabe", o > 0 ? fmt(Math.floor(o), 0) + " × " + fmt(Math.floor(o), 0) + (o % 1 ? " (nicht ganzzahlig!)" : "") : "ungültig") +
+      kpi("nach 2×2-Pooling", o > 0 ? fmt(Math.floor(o / 2), 0) + " × " + fmt(Math.floor(o / 2), 0) : "–") +
+      kpi("Parameter der Schicht", fmt((F * F * C + 1) * K, 0)) + kpi("Merkmalskarten", fmt(K, 0));
+  }
+  ["cnN", "cnF", "cnP", "cnS", "cnC", "cnK"].forEach(function (i) { document.getElementById(i).addEventListener("input", cnn); }); cnn();
+})();
+</script>

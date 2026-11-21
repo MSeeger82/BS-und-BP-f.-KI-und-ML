@@ -1,0 +1,182 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Welches Merkmal gehört nach DIN 69901 zu einem Projekt?", ["Tägliche Wiederholung", "Einmaligkeit der Bedingungen in ihrer Gesamtheit", "Unbegrenzte Ressourcen", "Keine Ziele"], 1, "Projekte sind einmalig, zielgerichtet, befristet und haben begrenzte Ressourcen."],
+ ["Welche drei Größen bilden das magische Dreieck?", ["Leistung, Zeit, Kosten", "Daten, Modell, Code", "Planung, Steuerung, Abschluss", "Team, Kunde, Lieferant"], 0, "Verändert man eine Ecke, verändern sich die anderen."],
+ ["Was beschreibt „Scope Creep“?", ["Ein Risiko-Werkzeug", "Ein agiles Ereignis", "Das schleichende Wachsen des Projektumfangs ohne geregelte Änderung", "Einen Netzplanfehler"], 2, "Gegenmittel: Änderungsmanagement mit Change Requests."],
+ ["Wie behandeln Sie einen Stakeholder mit hohem Einfluss und hohem Interesse?", ["Beobachten", "Nur informieren", "Ignorieren", "Eng einbinden"], 3, "Zum Beispiel Auftraggeber, Fachbereich und Betriebsrat."],
+ ["Was gehört NICHT in eine Arbeitspaketbeschreibung?", ["Verantwortlicher", "Ergebnis", "Aufwandsschätzung", "Privatadresse des Teams"], 3, "Ergebnis, Verantwortlicher, Aufwand, Dauer und Abgrenzung gehören hinein."],
+ ["Ein Vorgang hat zwei Vorgänger mit FEZ 8 und FEZ 5. Wie hoch ist sein FAZ?", ["5", "13", "8", "6,5"], 2, "Vorwärts gilt das größte FEZ der Vorgänger."],
+ ["Was kennzeichnet den kritischen Pfad?", ["Vorgänge mit dem größten Puffer", "Vorgänge mit Gesamtpuffer 0", "Die teuersten Vorgänge", "Alle Meilensteine"], 1, "Jede Verzögerung dort verschiebt das Projektende."],
+ ["Ein Vorgang hat FAZ 3 und SAZ 6. Wie groß ist der Gesamtpuffer?", ["3", "9", "0", "6"], 0, "GP = SAZ − FAZ = 6 − 3."],
+ ["Was ist ein Meilenstein?", ["Ein Vorgang mit langer Dauer", "Ein Ereignis ohne Dauer, an dem Ergebnisse geprüft werden", "Ein Kostenposten", "Ein Teammitglied"], 1, "Zum Beispiel Go/No-Go nach dem Pilot."],
+ ["EV 80, AC 100. Wie hoch ist der CPI?", ["1,25", "0,8", "20", "−20"], 1, "CPI = EV / AC = 80 / 100. Unter 1 heißt: über Budget."],
+ ["EV 60, PV 75. Was sagt der SPI?", ["Das Projekt ist günstiger als geplant", "Das Projekt ist hinter dem Terminplan (SPI 0,8)", "Das Projekt ist vor dem Plan", "Nichts"], 1, "SPI = EV / PV = 0,8."],
+ ["BAC 200, CPI 0,8. Wie hoch ist die Kostenprognose EAC?", ["160", "250", "240", "200"], 1, "EAC = BAC / CPI = 200 / 0,8."],
+ ["Wahrscheinlichkeit 20 %, Schaden 40.000 €. Wie hoch ist der Erwartungswert?", ["8.000 €", "20.000 €", "40.000 €", "800 €"], 0, "0,2 · 40.000 €."],
+ ["Eine Versicherung abzuschließen ist welche Risikostrategie?", ["Vermeiden", "Akzeptieren", "Übertragen", "Vermindern"], 2, "Das Risiko wird auf einen Dritten übertragen."],
+ ["Wie viele „A“ darf eine Aufgabe in einer RACI-Matrix haben?", ["Beliebig viele", "Mindestens zwei", "Keines", "Genau eines"], 3, "Genau eine Person trägt die Verantwortung."],
+ ["Welcher Wert steht im Agilen Manifest?", ["Verträge mehr als Zusammenarbeit", "Reagieren auf Veränderung mehr als das Befolgen eines Plans", "Werkzeuge mehr als Menschen", "Dokumentation mehr als funktionierende Software"], 1, "Die Werte rechts sind wichtig, die links wichtiger."],
+ ["Wer priorisiert in Scrum das Product Backlog?", ["Der Product Owner", "Der Scrum Master", "Der Lenkungsausschuss", "Die Geschäftsführung"], 0, "Eine Person, die den Wert des Produkts maximiert."],
+ ["Wie lange dauert ein Sprint höchstens?", ["Eine Woche", "Ein Jahr", "Ein Monat", "Drei Monate"], 2, "Laut Scrum Guide höchstens ein Monat."],
+ ["Was begrenzt ein WIP-Limit in Kanban?", ["Die Anzahl der Teammitglieder", "Das Budget", "Die Anzahl der gleichzeitig bearbeiteten Aufgaben je Spalte", "Die Sprintlänge"], 2, "Erst abschließen, dann Neues beginnen."],
+ ["Welche Stufe prüft, ob ein KI-Modell im echten Betrieb wirkt?", ["Proof of Concept", "Pilot", "Lessons Learned", "Projektauftrag"], 1, "Der PoC zeigt technische Machbarkeit, der Pilot den Nutzen im Betrieb."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Was gehört zum Projektmanagement in der Bachelor-Prüfung?", "a": "§ 5 Nr. 2 nennt das Initiieren, Planen, Steuern und Überwachen von KI-Projekten, das Bewerten von Risiken, das Zusammenstellen von Teams, Berichte unter technischen, organisatorischen und betriebswirtschaftlichen Gesichtspunkten sowie die Skalierung von KI-Projekten."}
+ ],
+ "l1": [
+  {"q": "Was ist ein Projekt nach DIN 69901?", "a": "Ein Vorhaben, das im Wesentlichen durch die Einmaligkeit der Bedingungen in ihrer Gesamtheit gekennzeichnet ist: klares Ziel, zeitliche Begrenzung, begrenzte Ressourcen, eigene Organisation, Komplexität und Risiko."},
+  {"q": "Was ist das magische Dreieck?", "a": "Das Spannungsfeld aus Leistung und Qualität, Zeit und Kosten. Wer eine Größe verändert, muss mindestens eine andere anpassen."}
+ ],
+ "l2": [
+  {"q": "Was steht in einem Projektauftrag?", "a": "Ausgangslage, SMART-Ziele und Nicht-Ziele, Umfang und Abgrenzung, Termine und Meilensteine, Budget und Ressourcen, Rollen, Risiken und Annahmen sowie Abnahmekriterien."}
+ ],
+ "l3": [
+  {"q": "Wie führt man eine Stakeholderanalyse durch?", "a": "Man sammelt alle Beteiligten und Betroffenen, bewertet Einfluss und Interesse und leitet Strategien ab: eng einbinden, zufriedenstellen, informieren oder beobachten."}
+ ],
+ "l4": [
+  {"q": "Was ist ein Projektstrukturplan?", "a": "Die hierarchische Zerlegung des Projekts in Teilaufgaben bis zu Arbeitspaketen, gegliedert nach Objekten, Funktionen oder Phasen. Er ist die Grundlage für Termin-, Kosten- und Ressourcenplanung."}
+ ],
+ "l5": [
+  {"q": "Wie berechnet man einen Netzplan?", "a": "Vorwärts ergeben sich frühester Anfang und frühestes Ende, wobei man bei mehreren Vorgängern das größte FEZ nimmt. Rückwärts ergeben sich späteste Zeiten mit dem kleinsten SAZ der Nachfolger. Der Gesamtpuffer ist SAZ minus FAZ."},
+  {"q": "Was ist der kritische Pfad?", "a": "Die Kette der Vorgänge ohne Gesamtpuffer. Jede Verzögerung eines dieser Vorgänge verschiebt das Projektende."}
+ ],
+ "l6": [
+  {"q": "Wofür nutzt man ein Gantt-Diagramm?", "a": "Es zeigt Vorgänge als Balken auf einer Zeitachse mit Meilensteinen und eignet sich gut, um Termine, Überlappungen und Fortschritt zu kommunizieren."},
+  {"q": "Was ist der Unterschied zwischen Aufwand und Dauer?", "a": "Aufwand ist die benötigte Arbeitszeit in Personentagen, Dauer die Kalenderzeit. 20 Personentage dauern bei zwei voll verfügbaren Personen 10 Arbeitstage."}
+ ],
+ "l7": [
+  {"q": "Was ist die Earned-Value-Analyse?", "a": "Sie vergleicht Planwert, Fertigstellungswert und Istkosten. Der CPI ist EV durch AC, der SPI EV durch PV; Werte unter 1 zeigen Kostenüberschreitung bzw. Terminverzug."},
+  {"q": "Wie prognostiziert man die Gesamtkosten?", "a": "Mit EAC gleich Gesamtbudget durch CPI. Bei einem CPI von 0,8 werden aus 100 T€ Budget voraussichtlich 125 T€."}
+ ],
+ "l8": [
+  {"q": "Wie bewertet man Projektrisiken?", "a": "Nach Wahrscheinlichkeit und Auswirkung, etwa in einer Risikomatrix oder als Erwartungswert in Euro. Daraus folgen Maßnahmen: vermeiden, vermindern, übertragen oder akzeptieren."},
+  {"q": "Welche Risiken sind typisch für KI-Projekte?", "a": "Unzureichende Datenqualität, zu geringe Modellgüte, fehlende Akzeptanz, rechtliche Fragen wie Hochrisiko-Einstufung oder Datenschutz, Anbieterabhängigkeit, hohe Betriebskosten und Ausfall von Schlüsselpersonen."}
+ ],
+ "l9": [
+  {"q": "Was ist eine RACI-Matrix?", "a": "Eine Tabelle, die je Aufgabe festlegt, wer ausführt (Responsible), wer verantwortet (Accountable, genau eine Person), wer gefragt wird (Consulted) und wer informiert wird (Informed)."},
+  {"q": "Welche Rollen braucht ein KI-Projekt?", "a": "Auftraggeber, Lenkungsausschuss, Projektleitung, Fachexperten, Data Scientists, Data Engineers, Softwareentwicklung und IT-Betrieb sowie Datenschutz, Recht und Betriebsrat."}
+ ],
+ "l10": [
+  {"q": "Wie steuert man ein Projekt?", "a": "Durch regelmäßigen Soll-Ist-Vergleich von Terminen, Kosten und Ergebnissen, Ampelstatus, Analyse der Abweichungen und Steuerungsmaßnahmen. Änderungen laufen über Change Requests."}
+ ],
+ "l11": [
+  {"q": "Welche Projektberichte gibt es?", "a": "Den regelmäßigen Statusbericht, den Zwischenbericht an Meilensteinen und den Abschlussbericht mit Zielerreichung, Kosten- und Terminbilanz, Übergabe und Lessons Learned."},
+  {"q": "Was gehört bei KI-Projekten zusätzlich in einen Bericht?", "a": "Modellgüte gegenüber der Baseline, Betriebskosten, rechtliche Einordnung nach EU-KI-Verordnung und Datenschutz, Energiebedarf und Auswirkungen auf Beschäftigte."}
+ ],
+ "l12": [
+  {"q": "Was steht im Agilen Manifest?", "a": "Vier Werte: Individuen und Interaktionen mehr als Prozesse und Werkzeuge, funktionierende Software mehr als umfassende Dokumentation, Zusammenarbeit mit dem Kunden mehr als Vertragsverhandlung, Reagieren auf Veränderung mehr als das Befolgen eines Plans."}
+ ],
+ "l13": [
+  {"q": "Wie ist Scrum aufgebaut?", "a": "Drei Verantwortlichkeiten (Product Owner, Scrum Master, Developers), fünf Ereignisse (Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective) und drei Artefakte (Product Backlog, Sprint Backlog, Increment)."},
+  {"q": "Wie passt Scrum zu KI-Projekten?", "a": "Backlog-Einträge sind oft Experimente, und die Definition of Done umfasst Tests, Dokumentation, Bewertung gegen die Baseline und die Datenschutzprüfung."}
+ ],
+ "l14": [
+  {"q": "Was ist Kanban?", "a": "Eine Methode, die Arbeit auf einem Board sichtbar macht, die gleichzeitig bearbeiteten Aufgaben mit WIP-Limits begrenzt und den Fluss über Durchlaufzeit und Durchsatz verbessert. Sie eignet sich gut für Betrieb und Wartung."}
+ ],
+ "l15": [
+  {"q": "Was ist hybrides Projektmanagement?", "a": "Eine Kombination aus klassischer Rahmenplanung mit Phasen, Meilensteinen und Budget und agiler Umsetzung in Sprints. In Unternehmen ist das der Normalfall."},
+  {"q": "Was ist CRISP-DM?", "a": "Ein Vorgehensmodell für Datenprojekte mit sechs Phasen: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation und Deployment, mit Rücksprüngen zwischen den Phasen."}
+ ],
+ "l16": [
+  {"q": "Warum bleiben viele KI-Projekte im Pilot stecken?", "a": "Häufig fehlen Datenplattform, MLOps, klare Zuständigkeiten im Betrieb und Budget für laufende Kosten; Integration und Akzeptanz werden unterschätzt und rechtliche Fragen zu spät geklärt."},
+  {"q": "Was sind SAFe, LeSS und Nexus?", "a": "Rahmenwerke, um agiles Arbeiten auf viele Teams zu skalieren: SAFe mit Agile Release Trains und Portfolioebene, LeSS mit einem Product Owner und einem Backlog für mehrere Teams, Nexus für drei bis neun Scrum-Teams an einem Produkt."}
+ ],
+ "l17": [
+  {"q": "Wie kann KI die Projektarbeit unterstützen?", "a": "Beim Protokollieren, bei Entwürfen für Pläne und Berichte, bei der Auswertung von Kennzahlen und bei Präsentationen. Die Inhalte müssen geprüft werden, und vertrauliche Unterlagen gehören nur in freigegebene Werkzeuge."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 9 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { minimumFractionDigits: d === undefined ? 0 : d, maximumFractionDigits: d === undefined ? 1 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+  var el = ["evBac", "evPv", "evEv", "evAc"].map(function (id) { return document.getElementById(id); });
+  function rechne() {
+    var v = el.map(function (e) { return Math.max(0, +e.value || 0); });
+    var bac = v[0], pv = v[1], ev = v[2], ac = v[3];
+    var cv = ev - ac, sv = ev - pv, cpi = ac ? ev / ac : NaN, spi = pv ? ev / pv : NaN;
+    var eac = cpi ? bac / cpi : NaN, etc = eac - ac, vac = bac - eac, fg = bac ? ev / bac : NaN;
+    document.getElementById("evOut").innerHTML = kpi("Kostenabweichung CV", fmt(cv)) + kpi("Terminabweichung SV", fmt(sv)) + kpi("CPI", fmt(cpi, 2)) + kpi("SPI", fmt(spi, 2)) +
+      kpi("Fertigstellungsgrad", fmt(fg * 100) + " %") + kpi("Prognose EAC", fmt(eac)) + kpi("Restkosten ETC", fmt(etc)) + kpi("Abweichung am Ende VAC", fmt(vac));
+    var k = !isFinite(cpi) ? "" : cpi < 0.98 ? "über Budget" : cpi > 1.02 ? "unter Budget" : "im Budget";
+    var t = !isFinite(spi) ? "" : spi < 0.98 ? "hinter dem Plan" : spi > 1.02 ? "vor dem Plan" : "im Plan";
+    document.getElementById("evNote").textContent = (k && t ? "Das Projekt liegt " + k + " und " + t + ". " : "") + "CPI = EV / AC, SPI = EV / PV, EAC = BAC / CPI, ETC = EAC − AC, VAC = BAC − EAC.";
+  }
+  el.forEach(function (e) { e.addEventListener("input", rechne); }); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 9 */
+(function () {
+  var PR = ["Projekt", "Routine (Prozess)"];
+  var ST = ["eng einbinden", "zufriedenstellen", "informieren", "beobachten"];
+  var RS = ["vermeiden", "vermindern", "übertragen", "akzeptieren"];
+  var SC = ["Product Owner", "Scrum Master", "Developers", "Sprint Planning", "Daily Scrum", "Sprint Review", "Sprint Retrospective"];
+  var VG = ["klassisch", "agil", "hybrid"];
+  window.UEBUNGEN = {
+    modul: 9,
+    aufgaben: {
+      a1: { teile: [
+        { id: "p1", label: "1. KI-Rechnungsprüfung einführen", typ: "wahl", punkte: 1, optionen: PR, richtig: 0 },
+        { id: "p2", label: "2. Tägliche Datensicherung", typ: "wahl", punkte: 1, optionen: PR, richtig: 1 },
+        { id: "p3", label: "3. Umzug des Rechenzentrums", typ: "wahl", punkte: 1, optionen: PR, richtig: 0 }
+      ] },
+      a2: { teile: [
+        { id: "s1", label: "1. Betriebsrat", typ: "wahl", punkte: 1, optionen: ST, richtig: 0 },
+        { id: "s2", label: "2. Leiter anderer Geschäftsbereich", typ: "wahl", punkte: 1, optionen: ST, richtig: 1 },
+        { id: "s3", label: "3. Sachbearbeitung Buchhaltung", typ: "wahl", punkte: 1, optionen: ST, richtig: 2 },
+        { id: "s4", label: "4. Kantinenbetreiber", typ: "wahl", punkte: 1, optionen: ST, richtig: 3 }
+      ] },
+      a3: { teile: [
+        { id: "dauer", label: "Projektdauer", typ: "zahl", punkte: 2, wert: 15, tol: 0, einheit: "Tage" },
+        { id: "pfad", label: "Kritischer Pfad", typ: "wahl", punkte: 2, optionen: ["A–B–E", "A–C–D–E", "A–B–D–E", "A–C–E"], richtig: 0 },
+        { id: "gpc", label: "Gesamtpuffer C", typ: "zahl", punkte: 1, wert: 1, tol: 0, einheit: "Tage" },
+        { id: "gpd", label: "Gesamtpuffer D", typ: "zahl", punkte: 1, wert: 1, tol: 0, einheit: "Tage" }
+      ] },
+      a4: { teile: [{ id: "tage", label: "Dauer in Arbeitstagen", typ: "zahl", punkte: 2, wert: 15, tol: 0, einheit: "Tage" }] },
+      a5: { teile: [
+        { id: "cv", label: "CV in T€", typ: "zahl", punkte: 1, wert: -25, tol: 0 },
+        { id: "sv", label: "SV in T€", typ: "zahl", punkte: 1, wert: -20, tol: 0 },
+        { id: "cpi", label: "CPI", typ: "zahl", punkte: 1, wert: 0.8, tol: 0.01 },
+        { id: "spi", label: "SPI", typ: "zahl", punkte: 1, wert: 0.83, tol: 0.01 },
+        { id: "eac", label: "EAC in T€", typ: "zahl", punkte: 1, wert: 250, tol: 0.01 }
+      ] },
+      a6: { teile: [
+        { id: "ev1", label: "a) Erwartungswert vorher", typ: "zahl", punkte: 1, wert: 20000, tol: 0, einheit: "€" },
+        { id: "ev2", label: "b) Erwartungswert nachher", typ: "zahl", punkte: 1, wert: 7500, tol: 0, einheit: "€" },
+        { id: "netto", label: "c) Nettovorteil", typ: "zahl", punkte: 1, wert: 6500, tol: 0, einheit: "€" },
+        { id: "lohnt", label: "d) Lohnt sich die Maßnahme?", typ: "wahl", punkte: 1, optionen: ["ja", "nein"], richtig: 0 }
+      ] },
+      a7: { teile: [
+        { id: "r1", label: "1. Versicherung", typ: "wahl", punkte: 1, optionen: RS, richtig: 2 },
+        { id: "r2", label: "2. Verzicht auf Technologie", typ: "wahl", punkte: 1, optionen: RS, richtig: 0 },
+        { id: "r3", label: "3. Datenqualitätsanalyse vorab", typ: "wahl", punkte: 1, optionen: RS, richtig: 1 },
+        { id: "r4", label: "4. Bewusst tragen mit Reserve", typ: "wahl", punkte: 1, optionen: RS, richtig: 3 }
+      ] },
+      a8: { teile: [{ id: "raci", label: "Fehler und Korrektur", typ: "text", punkte: 3, erwartung: "Zwei A, erlaubt ist genau eines (1 P.); kein R, also niemand führt aus (1 P.); Korrektur z. B. Fachbereich A, Projektleitung R, Data Scientist C, Datenschutz I (1 P.)." }] },
+      a9: { teile: [
+        { id: "c1", label: "1. Priorisiert das Product Backlog", typ: "wahl", punkte: 1, optionen: SC, richtig: 0 },
+        { id: "c2", label: "2. Beseitigt Hindernisse", typ: "wahl", punkte: 1, optionen: SC, richtig: 1 },
+        { id: "c3", label: "3. Tägliches 15-Minuten-Treffen", typ: "wahl", punkte: 1, optionen: SC, richtig: 4 },
+        { id: "c4", label: "4. Ergebnis mit Stakeholdern prüfen", typ: "wahl", punkte: 1, optionen: SC, richtig: 5 },
+        { id: "c5", label: "5. Arbeitsweise verbessern", typ: "wahl", punkte: 1, optionen: SC, richtig: 6 }
+      ] },
+      a10: { teile: [
+        { id: "v1", label: "1. Umzug Serverraum", typ: "wahl", punkte: 1, optionen: VG, richtig: 0 },
+        { id: "v2", label: "2. Prognosemodell, Datenlage unklar", typ: "wahl", punkte: 1, optionen: VG, richtig: 1 },
+        { id: "v3", label: "3. Fester Rahmen, Sprints im Inneren", typ: "wahl", punkte: 1, optionen: VG, richtig: 2 }
+      ] },
+      a11: { teile: [
+        { id: "dlz1", label: "a) Durchlaufzeit bei 9 in Arbeit", typ: "zahl", punkte: 2, wert: 6, tol: 0, einheit: "Tage" },
+        { id: "dlz2", label: "b) Durchlaufzeit bei WIP-Limit 3", typ: "zahl", punkte: 2, wert: 2, tol: 0, einheit: "Tage" }
+      ] },
+      a12: { teile: [{ id: "rollout", label: "Ihr Konzept", typ: "text", punkte: 8, erwartung: "a) drei plausible Risiken wie andere Abläufe/Datenqualität je Standort, fehlender Betrieb und Monitoring, Akzeptanz, Betriebsrat, Betriebskosten (2 P.); b) Voraussetzungen Datenplattform, MLOps mit Monitoring und Nachtraining, Betriebsmodell, Schulung, Betriebsvereinbarung, Budget (2 P.); c) Wellen mit Entscheidungstoren und Lessons Learned, hybrides Vorgehen (2 P.); d) Projektorganisation mit Auftraggeber, Lenkungsausschuss, Projektleitung, Key Usern, Betriebsrat, Datenschutz (1 P.); e) Kennzahlen Überstunden, Prognosefehler, Nutzung, Kosten, CPI/SPI (1 P.)." }] }
+    }
+  };
+})();
+</script>

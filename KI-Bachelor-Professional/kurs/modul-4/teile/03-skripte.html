@@ -1,0 +1,176 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Was ist ein falsch negatives Ergebnis (FN)?", ["Eine richtige Entwarnung", "Ein Fehlalarm", "Ein tatsächlich positiver Fall, den das Modell als negativ einstuft", "Ein Treffer"], 2, "Falsch = Vorhersage stimmt nicht, negativ = vorhergesagt wurde negativ."],
+ ["TP 45, FP 5. Wie hoch ist die Precision?", ["90 %", "45 %", "50 %", "10 %"], 0, "45 / (45 + 5) = 90 %."],
+ ["TP 30, FN 10. Wie hoch ist der Recall?", ["40 %", "75 %", "30 %", "25 %"], 1, "30 / (30 + 10) = 75 %."],
+ ["Wann ist der Recall besonders wichtig?", ["Wenn Fehlalarme sehr teuer sind", "Wenn die Klassen genau gleich groß sind", "Nie", "Wenn ein übersehener Fall sehr teuer oder gefährlich ist"], 3, "Recall misst, wie viele echte Fälle gefunden werden."],
+ ["Was beschreibt der F1-Score?", ["Die Fehlerquote", "Das harmonische Mittel von Precision und Recall", "Das arithmetische Mittel von Accuracy und Recall", "Die Fläche unter der ROC-Kurve"], 1, "F1 = 2PR / (P + R)."],
+ ["Ein Modell sagt bei 2 % Betrugsfällen immer „kein Betrug“. Welche Accuracy erreicht es?", ["98 %", "100 %", "50 %", "2 %"], 0, "Es liegt bei allen 98 % ehrlichen Fällen richtig – und ist trotzdem wertlos."],
+ ["Was zeigt eine ROC-Kurve?", ["Cluster in 2D", "Recall gegen Falsch-Positiv-Rate für alle Schwellen", "Fehler über die Trainingszeit", "Precision über die Zeit"], 1, "Jeder Punkt entspricht einer Schwelle."],
+ ["Was bedeutet eine AUC von 0,5?", ["Hälfte der Daten fehlt", "Perfektes Modell", "50 % Accuracy", "Modell trennt nicht besser als Zufall"], 3, "Die Diagonale entspricht Raten."],
+ ["Tatsächlich 10 und 20, Prognose 12 und 17. Wie groß ist der MAE?", ["2,5", "6,5", "5", "3"], 0, "(2 + 3) / 2 = 2,5."],
+ ["Warum ist der RMSE meist größer als der MAE?", ["Er bestraft große Fehler durch das Quadrieren stärker", "Er nutzt Prozentwerte", "Er ignoriert Ausreißer", "Er ist falsch berechnet"], 0, "Große Abweichungen wiegen quadratisch."],
+ ["Training 99 %, Validierung 71 %. Was liegt vor?", ["Overfitting (hohe Varianz)", "Gute Generalisierung", "Underfitting (hoher Bias)", "Data Drift"], 0, "Große Lücke zwischen Training und Validierung."],
+ ["Welche Maßnahme hilft gegen Underfitting?", ["Ein komplexeres Modell oder bessere Merkmale", "Mehr Regularisierung", "Frühzeitig stoppen", "Weniger Merkmale"], 0, "Das Modell ist zu einfach für den Zusammenhang."],
+ ["Was passiert bei der 5-fachen Kreuzvalidierung?", ["Die Daten werden verfünffacht", "Jeder der fünf Datenteile ist genau einmal Prüfdaten", "Es werden fünf Merkmale ausgewählt", "Das Modell wird fünfmal auf denselben Daten getestet"], 1, "Das Ergebnis ist der Mittelwert der fünf Runden."],
+ ["Wie validiert man Zeitreihenmodelle richtig?", ["Vorwärts in der Zeit: mit Vergangenheit trainieren, Folgezeitraum prüfen", "Zufällig gemischt", "Nur auf den ältesten Daten", "Gar nicht"], 0, "Sonst kennt das Modell die Zukunft."],
+ ["Was macht L1-Regularisierung (Lasso) besonders?", ["Sie ändert die Lernrate", "Sie skaliert die Daten", "Sie kann unwichtige Gewichte genau auf null setzen und so Merkmale auswählen", "Sie vergrößert alle Gewichte"], 2, "L2 schrumpft dagegen alle Gewichte, ohne sie auf null zu setzen."],
+ ["Wozu dient eine Baseline?", ["Als Startwert für die Lernrate", "Als Testdatensatz", "Als einfacher Vergleich, den ein Modell deutlich schlagen muss", "Als Sicherungskopie"], 2, "Etwa häufigste Klasse, Mittelwert oder bisheriges Verfahren."],
+ ["Was ist der erste Schritt nach der Wahl der Startzentren bei k-Means?", ["Daten löschen", "k erhöhen", "Zentren verschieben", "Jeden Punkt dem nächsten Zentrum zuordnen"], 3, "Danach werden die Zentren zum Mittelpunkt verschoben."],
+ ["Wofür nutzt man die Elbow-Methode?", ["Um die Lernrate zu wählen", "Um eine sinnvolle Clusteranzahl zu finden", "Um Ausreißer zu löschen", "Um Klassen zu gewichten"], 1, "Man sucht den Knick in der Fehlerkurve über k."],
+ ["Welche Aussage zu DBSCAN stimmt?", ["Es funktioniert nur mit genau zwei Clustern", "Es ist ein überwachtes Verfahren", "Man muss die Clusterzahl vorgeben", "Es findet Cluster beliebiger Form und markiert Ausreißer als Rauschen"], 3, "Parameter sind Radius ε und minPts."],
+ ["Was leistet die PCA?", ["Sie klassifiziert Bilder", "Sie verdichtet viele korrelierte Merkmale auf wenige Komponenten mit möglichst viel Streuung", "Sie erzeugt Labels", "Sie füllt fehlende Werte"], 1, "Vorher standardisieren."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Warum ist Evaluierung für den Bachelor Professional so wichtig?", "a": "Weil Sie Modelle nicht nur bauen, sondern beurteilen und vertreten müssen: Ist das Modell gut genug, lohnt es sich wirtschaftlich, und was passiert bei Fehlern? Kennzahlen wie Precision, Recall und Kosten pro Entscheidung sind die Grundlage dafür."}
+ ],
+ "l1": [
+  {"q": "Was ist eine Konfusionsmatrix?", "a": "Eine Tabelle, die bei binärer Klassifikation die vier Ausgänge zählt: richtig positiv, falsch positiv, falsch negativ und richtig negativ."},
+  {"q": "Was ist der Unterschied zwischen Fehler 1. und 2. Art?", "a": "Fehler 1. Art ist ein falsch positives Ergebnis, also ein Fehlalarm. Fehler 2. Art ist ein falsch negatives Ergebnis, also ein übersehener Fall."}
+ ],
+ "l2": [
+  {"q": "Was ist der Unterschied zwischen Precision und Recall?", "a": "Precision gibt an, wie viele der Alarme richtig sind: TP / (TP + FP). Recall gibt an, wie viele der echten Fälle gefunden werden: TP / (TP + FN)."},
+  {"q": "Wann nutzt man den F1-Score?", "a": "Wenn Precision und Recall gleichermaßen zählen. Der F1-Score ist ihr harmonisches Mittel und wird schlecht, sobald eine der beiden Kennzahlen niedrig ist."}
+ ],
+ "l3": [
+  {"q": "Was ist eine ROC-Kurve?", "a": "Sie zeigt für alle möglichen Schwellen eines Klassifikators den Recall gegen die Falsch-Positiv-Rate. Je weiter sie nach links oben reicht, desto besser trennt das Modell."},
+  {"q": "Was sagt die AUC aus?", "a": "Die Fläche unter der ROC-Kurve: 0,5 entspricht Zufall, 1 einem perfekten Modell. Sie ist unabhängig von der gewählten Schwelle und gut zum Vergleich von Modellen."}
+ ],
+ "l4": [
+  {"q": "Warum ist Accuracy bei unausgewogenen Klassen irreführend?", "a": "Weil ein Modell, das immer die häufige Klasse vorhersagt, schon eine sehr hohe Accuracy erreicht, aber keinen einzigen seltenen Fall findet."},
+  {"q": "Was hilft bei unausgewogenen Klassen?", "a": "Passende Kennzahlen wie Recall, Precision und F1, stratifizierte Aufteilung, Klassengewichte, Resampling nur auf den Trainingsdaten und eine nach Kosten gewählte Schwelle."}
+ ],
+ "l5": [
+  {"q": "Was ist der Unterschied zwischen MAE und RMSE?", "a": "Der MAE ist der mittlere absolute Fehler. Der RMSE ist die Wurzel aus dem mittleren quadrierten Fehler und bestraft große Abweichungen stärker."},
+  {"q": "Wann ist der MAPE ungeeignet?", "a": "Wenn tatsächliche Werte null oder sehr klein sein können, weil dann durch null oder durch sehr kleine Zahlen geteilt wird."}
+ ],
+ "l6": [
+  {"q": "Was ist die Bias-Varianz-Abwägung?", "a": "Zu einfache Modelle haben einen hohen systematischen Fehler (Bias), zu komplexe reagieren stark auf Zufall in den Daten (Varianz). Gesucht ist die Komplexität mit dem kleinsten Fehler auf neuen Daten."}
+ ],
+ "l7": [
+  {"q": "Wie liest man eine Lernkurve?", "a": "Eine große Lücke zwischen Trainings- und Validierungsfehler zeigt Overfitting, beide Kurven hoch zeigen Underfitting. Steigt der Validierungsfehler über die Epochen wieder an, hilft Early Stopping."}
+ ],
+ "l8": [
+  {"q": "Was ist k-fache Kreuzvalidierung?", "a": "Die Trainingsdaten werden in k Teile geteilt; in k Runden ist jeweils ein Teil Prüfdaten. Der Mittelwert der Ergebnisse ist eine stabilere Schätzung der Modellgüte."},
+  {"q": "Was ist stratifizierte Kreuzvalidierung?", "a": "Jeder Teil enthält denselben Anteil der Klassen wie der Gesamtdatensatz. Das ist bei unausgewogenen Klassen wichtig."}
+ ],
+ "l9": [
+  {"q": "Was ist der Unterschied zwischen Grid Search und Random Search?", "a": "Grid Search probiert alle Kombinationen eines Rasters aus, Random Search zufällige Kombinationen in einem festen Budget. Random Search findet oft gleich gute Werte mit deutlich weniger Trainingsläufen."}
+ ],
+ "l10": [
+  {"q": "Was ist Regularisierung?", "a": "Ein Strafterm für große Modellparameter in der Verlustfunktion. Er macht Modelle einfacher und wirkt Overfitting entgegen; L2 schrumpft alle Gewichte, L1 setzt unwichtige auf null."}
+ ],
+ "l11": [
+  {"q": "Was ist eine Baseline?", "a": "Der einfachste sinnvolle Vergleich, etwa die häufigste Klasse, der Mittelwert oder das bisherige Verfahren. Ein KI-Modell muss sie deutlich schlagen, sonst lohnt es sich nicht."},
+  {"q": "Wie übersetzt man Modellgüte in Euro?", "a": "Mit einer Kostenmatrix: Jede Fehlerart bekommt ihre Kosten, zum Beispiel ein übersehener Betrug 500 € und eine unnötige Prüfung 20 €. Die Summe zeigt, welches Modell und welche Schwelle wirtschaftlich besser sind."}
+ ],
+ "l12": [
+  {"q": "Wie funktioniert k-Means?", "a": "k Zentren wählen, jeden Punkt dem nächsten Zentrum zuordnen, jedes Zentrum in den Mittelpunkt seiner Punkte verschieben und das wiederholen, bis sich nichts mehr ändert."},
+  {"q": "Welche Schwächen hat k-Means?", "a": "Die Clusterzahl muss vorgegeben werden, das Ergebnis hängt vom Start ab, es findet vor allem runde, ähnlich große Cluster und braucht skalierte Merkmale."}
+ ],
+ "l13": [
+  {"q": "Wie finde ich die richtige Anzahl Cluster?", "a": "Mit der Elbow-Methode (Knick in der Fehlerkurve über k) und dem Silhouettenkoeffizienten (höchster Mittelwert). Entscheidend ist zusätzlich, ob die Cluster fachlich nutzbar sind."}
+ ],
+ "l14": [
+  {"q": "Was ist ein Dendrogramm?", "a": "Das Baumdiagramm des hierarchischen Clusterings. Es zeigt, in welcher Reihenfolge Punkte und Gruppen zusammengefügt wurden; ein Schnitt auf passender Höhe ergibt die Clusterzahl."}
+ ],
+ "l15": [
+  {"q": "Was ist DBSCAN?", "a": "Ein dichtebasiertes Clusterverfahren: Dichte Bereiche werden zu Clustern beliebiger Form zusammengefasst, einzelne Punkte gelten als Rauschen. Eine Clusterzahl muss nicht vorgegeben werden."},
+  {"q": "Wie erkennt man Anomalien ohne Labels?", "a": "Mit statistischen Regeln wie z-Werten oder IQR, dichtebasierten Verfahren wie DBSCAN oder Local Outlier Factor, Isolation Forest oder Autoencodern. Fachleute prüfen eine Stichprobe der Treffer."}
+ ],
+ "l16": [
+  {"q": "Was macht die Hauptkomponentenanalyse (PCA)?", "a": "Sie dreht das Koordinatensystem so, dass die ersten Achsen möglichst viel Streuung erfassen, und verdichtet viele korrelierte Merkmale auf wenige Komponenten. Vorher müssen die Merkmale standardisiert werden."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 4 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 1 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+  var ids = ["cmTP", "cmFP", "cmFN", "cmTN", "cmKfn", "cmKfp"];
+  var el = ids.map(function (id) { return document.getElementById(id); });
+  function rechne() {
+    var v = el.map(function (e) { return Math.max(0, +e.value || 0); });
+    var tp = v[0], fp = v[1], fn = v[2], tn = v[3], kfn = v[4], kfp = v[5], n = tp + fp + fn + tn;
+    var acc = n ? (tp + tn) / n : NaN, pre = tp + fp ? tp / (tp + fp) : NaN, rec = tp + fn ? tp / (tp + fn) : NaN;
+    var f1 = pre + rec ? 2 * pre * rec / (pre + rec) : NaN, spe = tn + fp ? tn / (tn + fp) : NaN;
+    var h = kpi("Accuracy", fmt(acc * 100) + " %") + kpi("Precision", fmt(pre * 100) + " %") + kpi("Recall", fmt(rec * 100) + " %") + kpi("F1", fmt(f1, 3)) + kpi("Spezifität", fmt(spe * 100) + " %");
+    if (kfn || kfp) h += kpi("Fehlerkosten", fmt(fn * kfn + fp * kfp, 0) + " €");
+    document.getElementById("cmOut").innerHTML = h;
+    document.getElementById("cmNote").textContent = "n = " + n + ". Basisrate (Anteil positiv) = " + fmt(n ? (tp + fn) / n * 100 : NaN) + " %." + (kfn || kfp ? " Kosten = FN · " + kfn + " € + FP · " + kfp + " €." : "");
+  }
+  el.forEach(function (e) { e.addEventListener("input", rechne); }); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 4 */
+(function () {
+  var KZ = ["Precision", "Recall", "Accuracy bzw. F1"];
+  var DI = ["Overfitting", "Underfitting", "gute Generalisierung"];
+  var VF = ["DBSCAN bzw. Isolation Forest", "k-Means mit k = 4", "hierarchisches Clustering", "lineare Regression"];
+  var AB = ["Zentrum A", "Zentrum B"];
+  window.UEBUNGEN = {
+    modul: 4,
+    aufgaben: {
+      a1: { teile: [
+        { id: "acc", label: "Accuracy in %", typ: "zahl", punkte: 1.5, wert: 94, tol: 0.1, einheit: "%" },
+        { id: "pre", label: "Precision in %", typ: "zahl", punkte: 1.5, wert: 60, tol: 0.1, einheit: "%" },
+        { id: "rec", label: "Recall in %", typ: "zahl", punkte: 1.5, wert: 75, tol: 0.1, einheit: "%" },
+        { id: "f1", label: "F1 in %", typ: "zahl", punkte: 1.5, wert: 66.7, tol: 0.15, einheit: "%" }
+      ] },
+      a2: { teile: [
+        { id: "k1", label: "1. Automatische Kontosperre", typ: "wahl", punkte: 1, optionen: KZ, richtig: 0 },
+        { id: "k2", label: "2. Risse in Flugzeugteilen", typ: "wahl", punkte: 1, optionen: KZ, richtig: 1 },
+        { id: "k3", label: "3. Fünf gleich große Abteilungen", typ: "wahl", punkte: 1, optionen: KZ, richtig: 2 }
+      ] },
+      a3: { teile: [{ id: "bew", label: "Bewertung und zwei bessere Kennzahlen", typ: "text", punkte: 4, erwartung: "96 % erreicht schon ein Modell, das nie 'kündigt' sagt (2 P.); stattdessen Recall und Precision für 'kündigt', F1/PR-AUC oder Kosten/Nutzen im Pilot (2 P.)." }] },
+      a4: { teile: [
+        { id: "mae", label: "MAE", typ: "zahl", punkte: 1, wert: 1, tol: 0.01, einheit: "Tage" },
+        { id: "mse", label: "MSE", typ: "zahl", punkte: 2, wert: 2.5, tol: 0.01 },
+        { id: "rmse", label: "RMSE", typ: "zahl", punkte: 2, wert: 1.58, tol: 0.01, einheit: "Tage" }
+      ] },
+      a5: { teile: [
+        { id: "da", label: "a) Diagnose", typ: "wahl", punkte: 1, optionen: DI, richtig: 0 },
+        { id: "ma", label: "a) Maßnahme", typ: "text", punkte: 1, erwartung: "mehr Daten, Regularisierung, einfacheres Modell oder Early Stopping" },
+        { id: "db", label: "b) Diagnose", typ: "wahl", punkte: 1, optionen: DI, richtig: 1 },
+        { id: "mb", label: "b) Maßnahme", typ: "text", punkte: 1, erwartung: "komplexeres Modell, bessere Merkmale oder weniger Regularisierung" }
+      ] },
+      a6: { teile: [
+        { id: "mw", label: "a) Mittelwert F1", typ: "zahl", punkte: 2, wert: 0.72, tol: 0.001 },
+        { id: "zeit", label: "b) Warum nicht zufällig?", typ: "text", punkte: 2, erwartung: "Modell würde mit späteren Monaten trainieren und auf früheren prüfen (Zukunft bekannt, Leakage); vorwärts rollierend validieren." }
+      ] },
+      a7: { teile: [
+        { id: "n", label: "Anzahl Trainingsläufe", typ: "zahl", punkte: 2, wert: 120, tol: 0 },
+        { id: "alt", label: "Zeitsparende Alternative", typ: "text", punkte: 1, erwartung: "Random Search oder Bayes'sche Optimierung mit festem Budget" }
+      ] },
+      a8: { teile: [
+        { id: "ka", label: "Kosten Modell A", typ: "zahl", punkte: 2, wert: 30000, tol: 0, einheit: "€" },
+        { id: "kb", label: "Kosten Modell B", typ: "zahl", punkte: 2, wert: 24500, tol: 0, einheit: "€" },
+        { id: "diff", label: "Ersparnis des günstigeren Modells", typ: "zahl", punkte: 1, wert: 5500, tol: 0, einheit: "€" }
+      ] },
+      a9: { teile: [
+        { id: "p1", label: "P1 (3 | 1)", typ: "wahl", punkte: 0.5, optionen: AB, richtig: 0 },
+        { id: "p2", label: "P2 (7 | 9)", typ: "wahl", punkte: 0.5, optionen: AB, richtig: 1 },
+        { id: "p3", label: "P3 (4 | 3)", typ: "wahl", punkte: 0.5, optionen: AB, richtig: 0 },
+        { id: "p4", label: "P4 (9 | 6)", typ: "wahl", punkte: 0.5, optionen: AB, richtig: 1 },
+        { id: "ax", label: "b) neues Zentrum A: x-Wert", typ: "zahl", punkte: 1, wert: 3.5, tol: 0.001 },
+        { id: "ay", label: "b) neues Zentrum A: y-Wert", typ: "zahl", punkte: 1, wert: 2, tol: 0.001 }
+      ] },
+      a10: { teile: [
+        { id: "s", label: "Silhouettenkoeffizient", typ: "zahl", punkte: 2, wert: 0.75, tol: 0.001 },
+        { id: "deut", label: "Deutung", typ: "text", punkte: 1, erwartung: "Punkt passt gut in seinen Cluster, klar vom Nachbarcluster getrennt." }
+      ] },
+      a11: { teile: [
+        { id: "v1", label: "1. Ungewöhnliche Sensormessungen", typ: "wahl", punkte: 1, optionen: VF, richtig: 0 },
+        { id: "v2", label: "2. Genau vier Kundensegmente", typ: "wahl", punkte: 1, optionen: VF, richtig: 1 },
+        { id: "v3", label: "3. Gruppen und Untergruppen zeigen", typ: "wahl", punkte: 1, optionen: VF, richtig: 2 }
+      ] },
+      a12: { teile: [{ id: "konzept", label: "Ihr Bewertungskonzept", typ: "text", punkte: 8, erwartung: "Kennzahlen: Recall/Precision für 'manipuliert', PR-AUC; Accuracy bei 0,5 % Basisrate aussagelos (2 P.). Validierung: stratifiziert/zeitlich, unberührte Testdaten, Leakage prüfen (2 P.). Schwelle über Kostenmatrix (FN 2.500 €, FP 180 €) und Technikerkapazität (2 P.). Nutzen: Pilot/A-B-Test gegen bisheriges Verfahren, Netto-Ersparnis, Monitoring (2 P.)." }] }
+    }
+  };
+})();
+</script>

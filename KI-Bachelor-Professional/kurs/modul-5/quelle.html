@@ -1,0 +1,803 @@
+<!--META {"nr": 5, "titel": "Neuronale Netze und Deep Learning", "lektionen": 17, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 5 von 17 · ca. 45 Lernstunden</span>
+      <h1 id="introTitle">Neuronale Netze und Deep Learning: vom einzelnen Neuron bis zum Sprachmodell</h1>
+      <p>Neuronale Netze stecken hinter Bild- und Spracherkennung, Übersetzung und generativer KI. In diesem Modul bauen Sie sie Schritt für Schritt auf: ein Neuron, eine Schicht, ein tiefes Netz. Sie verstehen, wie Netze lernen (Backpropagation), welche Architekturen es für Bilder, Folgen und Sprache gibt und wie große Sprachmodelle Text erzeugen. Zum Schluss entscheiden Sie wie ein Projektleiter zwischen Prompting, RAG und Fine-Tuning – mit Blick auf Kosten und Ressourcen.</p>
+      <div class="facts">
+        <span class="chip">17 Lektionen in 3 Teilen</span><span class="chip">8 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 3</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--surface-2);"></i><span><b>Formel</b> – mit Rechenbeispiel</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Das künstliche Neuron" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 30 Minuten</span><h2>Das künstliche Neuron: Gewichte, Summe, Aktivierung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Sie entscheiden, ob Sie joggen gehen: Wetter gut (wichtig), Zeit vorhanden (sehr wichtig), Freund kommt mit (ein bisschen wichtig). Sie gewichten die Gründe, zählen zusammen – und wenn es genug ist, gehen Sie los.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>künstliches Neuron</b> multipliziert jede Eingabe xᵢ mit einem <b>Gewicht</b> wᵢ, addiert alles und einen <b>Bias</b> b und schickt das Ergebnis z durch eine <b>Aktivierungsfunktion</b> f. Gewichte und Bias sind die Parameter, die gelernt werden.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/neuron.gif" width="640" height="380" alt="Animation: Drei Eingaben 2, 1 und 3 fließen mit Gewichten 0,5, minus 1 und 0,25 in ein Neuron. Mit Bias 0,5 ergibt die Summe 1,25; die ReLU-Funktion gibt 1,25 aus." loading="lazy">
+        <figcaption>z = 2·0,5 + 1·(−1) + 3·0,25 + 0,5 = 1,25 → ReLU(1,25) = 1,25</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formel</span>
+        <div class="eq">z = w₁x₁ + w₂x₂ + … + wₙxₙ + b &nbsp;&nbsp; a = f(z)</div>
+        <div class="legend-eq"><span>Positive Gewichte verstärken, negative hemmen. Der Bias verschiebt die Schwelle, ab der das Neuron „feuert“.</span></div>
+      </div>
+      <div class="prose">
+        <p>Ein einzelnes Neuron mit Sigmoid-Aktivierung ist genau eine logistische Regression (Modul 3). Die Kraft entsteht erst, wenn viele Neuronen in Schichten zusammenarbeiten. Das historische <b>Perzeptron</b> (1958) war ein solches Neuron mit Sprungfunktion.</p>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: ein Neuron</span>
+        <div class="calc-row">
+          <div class="field"><label for="nX">Eingaben x (Leerzeichen getrennt)</label><input type="text" id="nX" value="2 1 3"></div>
+          <div class="field"><label for="nW">Gewichte w (gleiche Anzahl)</label><input type="text" id="nW" value="0,5 -1 0,25"></div>
+          <div class="field"><label for="nB">Bias b</label><input type="text" id="nB" value="0,5"></div>
+          <div class="field"><label for="nF">Aktivierung</label><select id="nF"><option value="relu">ReLU</option><option value="sigmoid">Sigmoid</option><option value="tanh">tanh</option><option value="linear">linear</option></select></div>
+        </div>
+        <div class="kpis" id="nOut"></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Neuron = gewichtete Summe + Bias + Aktivierungsfunktion.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Beispiel aus der Animation an der Tafel und spielen Sie im Rechner mit einem negativen Gewicht. Betonen Sie: Ein biologisches Neuron ist viel komplexer – der Name ist eine lose Analogie.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Aktivierungsfunktionen" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 25 Minuten</span><h2>Aktivierungsfunktionen: Sigmoid, tanh, ReLU, Softmax</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Wasserhahn reagiert nicht linear: Erst kommt nichts, dann ein Rinnsal, dann ein voller Strahl. Ohne solche Kennlinien wäre ein Netz nur eine große, lineare Rechnung – und könnte keine Kurven lernen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Aktivierungsfunktionen bringen <b>Nichtlinearität</b> ins Netz. Ohne sie wären auch hundert Schichten zusammen nur eine lineare Funktion.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/aktivierungen.gif" width="640" height="380" alt="Animation: Nacheinander werden die Kurven von Sigmoid (S-Form zwischen 0 und 1), tanh (S-Form zwischen minus 1 und 1) und ReLU (null für negative Werte, danach eine steigende Gerade) gezeichnet." loading="lazy">
+        <figcaption>Die drei wichtigsten Kennlinien.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Funktion</th><th>Formel</th><th>Wertebereich</th><th>Typischer Einsatz</th></tr></thead>
+        <tbody>
+          <tr><td>Sigmoid</td><td>1 / (1 + e^(−z))</td><td>0 bis 1</td><td>Ausgang bei binärer Klassifikation</td></tr>
+          <tr><td>tanh</td><td>(e^z − e^(−z)) / (e^z + e^(−z))</td><td>−1 bis 1</td><td>ältere RNNs</td></tr>
+          <tr><td>ReLU</td><td>max(0, z)</td><td>0 bis ∞</td><td>verdeckte Schichten, Standard</td></tr>
+          <tr><td>Softmax</td><td>e^(zᵢ) / Σ e^(zⱼ)</td><td>0 bis 1, Summe 1</td><td>Ausgang bei Mehrklassen-Klassifikation</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Softmax durchgerechnet:</b> Werte 2, 1, 0 → e² ≈ 7,389; e¹ ≈ 2,718; e⁰ = 1; Summe 11,107 → <span class="calcline">0,665 · 0,245 · 0,090</span>. Die Klasse mit dem höchsten Wert bekommt 66,5 %.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Innen meist ReLU, außen Sigmoid (zwei Klassen), Softmax (mehrere Klassen) oder linear (Regression).</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Sigmoid und tanh werden für große |z| fast flach – die Ableitung geht gegen null, Signale für das Lernen verschwinden (Lektion 7). Deshalb setzt man in tiefen Netzen innen ReLU ein.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Ausgangsschicht passt zur Aufgabe – das ist eine typische Prüfungsfrage: „Welche Aktivierung wählen Sie für die Ausgabeschicht eines Netzes, das zwischen fünf Fehlerarten unterscheidet?“ (Softmax.)</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Vom Neuron zum Netz" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Vom Neuron zum Netz: Schichten, Tiefe, Parameterzahl</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>In einer Firma bereiten Sachbearbeiter Informationen auf, Teamleiter fassen zusammen, die Geschäftsführung entscheidet. Jede Ebene arbeitet mit dem, was die vorige geliefert hat – so arbeiten auch die Schichten eines Netzes.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>mehrschichtiges Perzeptron</b> (MLP) hat eine Eingabeschicht, eine oder mehrere <b>verdeckte Schichten</b> (hidden layers) und eine Ausgabeschicht. In einer <b>voll verbundenen</b> (dense) Schicht ist jedes Neuron mit jedem der vorigen Schicht verbunden. „Deep“ heißt: viele verdeckte Schichten.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/vorwaerts.gif" width="640" height="380" alt="Animation: Ein Netz mit 3 Eingabeneuronen, zwei verdeckten Schichten mit 5 und 4 Neuronen und 2 Ausgängen. Das Signal läuft von links nach rechts, am Ende stehen Katze 0,91 und Hund 0,09." loading="lazy">
+        <figcaption>Vorwärtsdurchlauf (Forward Pass): Schicht für Schicht zur Vorhersage.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Parameter zählen</span>
+        <div class="eq">Parameter einer Dense-Schicht = Eingänge · Neuronen + Neuronen</div>
+        <div class="legend-eq"><span>Beispiel 784 → 128 → 10 (Ziffernerkennung mit 28×28-Pixeln): 784·128 + 128 = 100.480 und 128·10 + 10 = 1.290; zusammen 101.770 Parameter.</span></div>
+      </div>
+      <div class="prose">
+        <p>Je tiefer, desto abstraktere Merkmale: In der Bildverarbeitung erkennen frühe Schichten Kanten, mittlere Formen, späte ganze Objekte. Große Sprachmodelle haben Milliarden Parameter. Mehr Parameter heißen nicht automatisch besser – aber mehr Daten-, Rechen- und Energiebedarf.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Netze lernen in Schichten: Jede Schicht baut aus den Merkmalen der vorigen abstraktere Merkmale.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Die Parameterzahl einer kleinen Netzarchitektur auszurechnen ist eine beliebte Aufgabe. Den Bias je Neuron nicht vergessen!</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das 784-128-10-Beispiel gemeinsam. Lassen Sie danach das Netz aus der Animation zählen: 3·5+5 + 5·4+4 + 4·2+2 = 54 Parameter.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Verlustfunktionen" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Verlustfunktionen: MSE und Kreuzentropie</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Lehrer korrigiert nicht nur „richtig/falsch“, sondern bewertet, wie sehr eine Antwort danebenliegt – wer sich sehr sicher war und trotzdem falschlag, verliert mehr Punkte.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>Verlustfunktion</b> misst, wie schlecht die Vorhersage ist. Das Training minimiert sie. Sie muss zur Aufgabe passen.</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Regression: MSE = <span class="frac"><span>Σ (y − ŷ)²</span><span>n</span></span></div>
+        <div class="eq">Klassifikation: Kreuzentropie L = − log(p<sub>richtige Klasse</sub>)</div>
+        <div class="legend-eq"><span>Mit natürlichem Logarithmus: p = 0,9 → L ≈ 0,105 (kleiner Verlust); p = 0,1 → L ≈ 2,303 (großer Verlust). Selbstsicher falsch wird hart bestraft.</span></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Regression → MSE, Klassifikation → Kreuzentropie. Der Verlust ist die Zahl, die das Training kleiner machen will.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie die beiden Kreuzentropie-Werte: Ein Modell, das sich mit 90 % für die falsche Klasse entscheidet, bekommt einen großen Verlust – genau das soll das Training abtrainieren.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Backpropagation" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 30 Minuten</span><h2>Backpropagation anschaulich</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Kuchen ist misslungen. In der Bäckerei fragt man rückwärts: Lag es am Ofen? Am Teig? An der Butter, die der Lieferant brachte? Jeder bekommt so viel „Schuld“, wie er zum Ergebnis beigetragen hat – und ändert beim nächsten Mal genau das.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Backpropagation</b> berechnet effizient, wie stark jedes Gewicht zum Fehler beigetragen hat: Der Fehler wird von der Ausgabe rückwärts durch die Schichten verteilt; mit der <b>Kettenregel</b> ergibt sich für jedes Gewicht seine Ableitung (sein Gradient). Danach passt der Optimierer alle Gewichte an.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/backprop.gif" width="640" height="380" alt="Animation: Am Ausgang eines Netzes erscheint der Fehler. Er läuft Schicht für Schicht nach links zurück; die Verbindungen färben sich rot und ändern ihre Stärke." loading="lazy">
+        <figcaption>Vorwärts rechnen, Fehler messen, rückwärts zurückverteilen, Gewichte anpassen.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span><b>Vorwärts</b>: Eingabe durch alle Schichten bis zur Vorhersage.</span></li>
+        <li><span><b>Verlust</b> berechnen (Lektion 4).</span></li>
+        <li><span><b>Rückwärts</b>: Gradienten Schicht für Schicht mit der Kettenregel.</span></li>
+        <li><span><b>Aktualisieren</b>: w neu = w alt − Lernrate · Gradient (Gradientenabstieg aus Modul 3).</span></li>
+      </ol>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Backpropagation sagt jedem Gewicht, in welche Richtung und wie stark es sich ändern muss; der Gradientenabstieg führt die Änderung aus.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen muss niemand Backpropagation von Hand. Wichtig ist das Prinzip und das Zusammenspiel mit dem Gradientenabstieg. Frameworks wie PyTorch und TensorFlow erledigen die Ableitungen automatisch.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Optimierer, Batch und Epoche" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Optimierer, Lernrate, Batch, Epoche</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Batch</b> (Mini-Batch)</td><td>Teilmenge der Daten für einen Aktualisierungsschritt</td><td>64 Bilder</td></tr>
+          <tr><td><b>Iteration</b></td><td>ein Schritt mit einem Batch</td><td>–</td></tr>
+          <tr><td><b>Epoche</b></td><td>alle Trainingsdaten einmal durchlaufen</td><td>10.000 Beispiele, Batch 100 → 100 Iterationen je Epoche</td></tr>
+          <tr><td><b>Lernrate</b></td><td>Schrittweite der Aktualisierung</td><td>0,001</td></tr>
+          <tr><td><b>Optimierer</b></td><td>Regel für die Aktualisierung</td><td>SGD, SGD mit Momentum, Adam</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Adam</b> passt die Schrittweite je Parameter automatisch an und ist der verbreitete Standard. <b>Momentum</b> nimmt Schwung aus vorherigen Schritten mit, wie eine Kugel, die einen Hang hinunterrollt. <b>Lernratenpläne</b> verkleinern die Lernrate im Lauf des Trainings.</p>
+        <p>Training läuft meist auf <b>GPUs</b> oder spezialisierten Beschleunigern, weil sie viele Matrixrechnungen parallel ausführen. Die Batchgröße wird oft durch den Grafikspeicher begrenzt.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Eine Epoche = alle Daten einmal; Iterationen je Epoche = Anzahl Beispiele / Batchgröße.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie ein Beispiel: 50.000 Bilder, Batch 250, 20 Epochen → 200 Iterationen je Epoche, 4.000 insgesamt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Typische Trainingsprobleme" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 30 Minuten</span><h2>Typische Trainingsprobleme und Gegenmittel</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Problem</th><th>Erkennbar an</th><th>Gegenmittel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Overfitting</b></td><td>Validierungsfehler steigt, Trainingsfehler sinkt weiter</td><td>mehr Daten, <b>Datenaugmentation</b> (Bilder drehen, spiegeln, aufhellen), <b>Dropout</b>, Regularisierung, <b>Early Stopping</b></td></tr>
+          <tr><td><b>Verschwindende Gradienten</b></td><td>vordere Schichten lernen kaum</td><td>ReLU statt Sigmoid, Batch-Normalisierung, Residualverbindungen (Abkürzungen zwischen Schichten)</td></tr>
+          <tr><td><b>Explodierende Gradienten</b></td><td>Verlust springt, wird „NaN“</td><td>kleinere Lernrate, Gradient Clipping</td></tr>
+          <tr><td><b>Zu wenig Daten</b></td><td>schlechte Validierungswerte trotz Tuning</td><td>Transfer Learning (Lektion 11), Augmentation, synthetische Daten</td></tr>
+          <tr><td><b>Kein Lernfortschritt</b></td><td>Verlust bleibt gleich</td><td>Lernrate prüfen, Daten und Labels prüfen, Skalierung der Eingaben</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Dropout</b> schaltet während des Trainings zufällig einen Anteil der Neuronen ab (z. B. 20 %). Das Netz kann sich dadurch nicht auf einzelne Neuronen verlassen und verallgemeinert besser. Bei der Vorhersage sind alle Neuronen aktiv.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Dropout, Augmentation und Early Stopping sind die Standardmittel gegen Overfitting in neuronalen Netzen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Dropout erklärt man gut mit einem Team, in dem jeden Tag zufällig jemand fehlt: Das Wissen muss sich auf viele Köpfe verteilen.</p>
+      </aside>
+    </section>
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Faltungsnetze (CNN)" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 35 Minuten</span><h2>Faltungsnetze (CNN) für Bilder</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer ein Suchbild löst, schiebt den Blick Stück für Stück über das Bild und sucht immer dasselbe Muster – etwa eine rote Mütze. Wo sie auftaucht, ist egal. Genau so arbeitet ein Faltungsfilter.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Convolutional Neural Network</b> (CNN) nutzt kleine <b>Filter</b> (z. B. 3×3 Gewichte), die über das Bild gleiten. Jeder Filter erzeugt eine <b>Merkmalskarte</b>, die zeigt, wo sein Muster vorkommt. <b>Pooling</b> verkleinert die Karten. Tiefe Schichten kombinieren einfache Muster zu Objekten.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/cnn-filter.gif" width="640" height="380" alt="Animation: Ein 3×3-Filter mit Werten minus 1, 0 und 1 gleitet über ein 8×8-Bild mit einer senkrechten Hell-Dunkel-Kante. Rechts füllt sich eine 6×6-Merkmalskarte; nur in den Spalten an der Kante stehen hohe Werte." loading="lazy">
+        <figcaption>Der Filter reagiert stark, wo eine senkrechte Kante ist.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Gewichtsteilung</b>: Derselbe Filter wird an jeder Stelle verwendet – viel weniger Parameter als eine voll verbundene Schicht. Ein 3×3-Filter auf einem Graustufenbild hat 9 Gewichte + 1 Bias.</li>
+          <li><b>Verschiebungsinvarianz</b>: Ein Muster wird überall erkannt.</li>
+          <li><b>Ausgabegröße</b> ohne Rand (Padding) und Schrittweite 1: (Bildbreite − Filterbreite + 1); 8×8 mit 3×3 → 6×6.</li>
+          <li><b>Max-Pooling 2×2</b>: nimmt aus jedem 2×2-Block den größten Wert, halbiert Breite und Höhe.</li>
+        </ul>
+        <p><b>Einsatz:</b> Qualitätsprüfung in der Produktion, medizinische Bilder, Dokumentenerkennung, Fahrerassistenz. Heute konkurrieren auch Vision-Transformer mit CNNs.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>CNN: Filter gleiten über das Bild und finden Muster – von Kanten über Formen bis zu Objekten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie einen Feldwert der Merkmalskarte: Filterwerte mal Pixelwerte, aufaddieren. Dann die Brücke zur Produktion: Kratzer, Risse, Verfärbungen sind genau solche Muster.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Rekurrente Netze" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 25 Minuten</span><h2>Rekurrente Netze (RNN, LSTM) für Folgen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Beim Lesen eines Romans merken Sie sich, wer wer ist und was vorher passiert ist. Jedes neue Kapitel verstehen Sie im Licht des Bisherigen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>rekurrentes neuronales Netz</b> (RNN) verarbeitet Folgen Schritt für Schritt und gibt einen <b>Zustand</b> (Gedächtnis) an den nächsten Schritt weiter. <b>LSTM</b> (Long Short-Term Memory) und GRU haben Tore (Gates), die steuern, was behalten, vergessen oder ausgegeben wird – so werden längere Zusammenhänge lernbar.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>Einsatz:</b> Zeitreihen (Sensoren, Absatz, Energieverbrauch), Sprache und Text – bis etwa 2017 Standard für Übersetzung. <b>Grenzen:</b> Verarbeitung nur nacheinander (schlecht parallelisierbar), sehr lange Abhängigkeiten bleiben schwierig. Deshalb haben Transformer sie bei Sprache weitgehend abgelöst; für kleinere Zeitreihen-Aufgaben sind LSTMs weiter verbreitet.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>RNN/LSTM: ein Netz mit Gedächtnis, das Folgen Schritt für Schritt liest.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Kurz halten – die Prüfung fragt eher den Unterschied RNN gegenüber Transformer als Details der Gates.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Transformer und Attention" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 35 Minuten</span><h2>Transformer und Aufmerksamkeit (Attention)</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Im Satz „Die Maschine stoppte, weil sie überhitzte“ wissen Sie sofort, dass „sie“ die Maschine meint. Ihr Kopf schaut bei jedem Wort auf die anderen Wörter, die dafür wichtig sind.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Der <b>Transformer</b> (2017, „Attention Is All You Need“) berechnet für jedes Element einer Folge, wie stark es auf jedes andere achten soll (<b>Self-Attention</b>). Alle Positionen werden gleichzeitig verarbeitet – das ist schnell auf GPUs und erfasst auch weit entfernte Bezüge.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/attention.gif" width="640" height="380" alt="Animation: Der Satz Die Maschine stoppte, weil sie überhitzte. Vom Wort sie gehen Bögen zu allen anderen Wörtern; der dickste Bogen mit Gewicht 0,71 führt zu Maschine." loading="lazy">
+        <figcaption>Attention-Gewichte: „sie“ achtet vor allem auf „Maschine“.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Query, Key, Value</b>: Jedes Wort stellt eine „Frage“ (Query), vergleicht sie mit den „Schlüsseln“ (Keys) der anderen und sammelt deren „Werte“ (Values) gewichtet ein.</li>
+          <li><b>Mehrere Köpfe</b> (Multi-Head Attention) achten auf verschiedene Beziehungen gleichzeitig (Grammatik, Bedeutung, Bezüge).</li>
+          <li><b>Positionskodierung</b> gibt die Wortreihenfolge mit, weil alles parallel verarbeitet wird.</li>
+          <li><b>Encoder</b> (verstehen, z. B. BERT), <b>Decoder</b> (erzeugen, z. B. GPT-artige Sprachmodelle), oder beides (Übersetzung).</li>
+          <li>Der Rechenaufwand der Attention wächst mit dem Quadrat der Folgenlänge – ein Grund, warum lange Kontexte teuer sind.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Transformer verarbeiten alle Wörter gleichzeitig und lernen über Attention, welche Wörter füreinander wichtig sind – die Grundlage heutiger Sprachmodelle.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Typische Frage: „Nennen Sie zwei Vorteile von Transformern gegenüber RNNs.“ – parallele Verarbeitung (schnelleres Training) und bessere Erfassung weit entfernter Bezüge.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Animation genügt für das Prinzip. Query/Key/Value nur als Bild erklären: Bibliothek – Ihre Frage (Query), Buchrücken (Keys), Buchinhalt (Values).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Transfer Learning" data-part="Teil B · Architekturen">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 25 Minuten</span><h2>Transfer Learning und vortrainierte Modelle</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer Gitarre spielen kann, lernt Ukulele in Tagen statt Jahren. Das Wissen über Akkorde und Rhythmus wird übertragen, nur die Feinheiten sind neu.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Beim <b>Transfer Learning</b> nutzt man ein auf großen Daten vortrainiertes Modell und passt es mit wenigen eigenen Beispielen an. Varianten: nur die letzten Schichten neu trainieren (<b>Feature Extraction</b>) oder das ganze Netz behutsam weitertrainieren (<b>Fine-Tuning</b>).</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel:</b> Ein Hersteller will Kratzer auf Gehäusen erkennen, hat aber nur 800 Fotos. Ein auf Millionen Alltagsbildern vortrainiertes CNN kennt bereits Kanten und Texturen; man ersetzt die Ausgabeschicht (z. B. „Kratzer/kein Kratzer“) und trainiert sie mit den 800 Bildern. Ergebnis in Tagen statt Monaten.</p>
+        <p><b>Parametereffizientes Fine-Tuning</b> (z. B. LoRA) passt bei großen Sprachmodellen nur einen kleinen Zusatz an Parametern an – spart Rechenleistung und Speicher.</p>
+        <p><b>Zu prüfen:</b> Lizenz des vortrainierten Modells (gewerbliche Nutzung erlaubt?), Herkunft der Trainingsdaten, mögliche Verzerrungen (Bias), die mitübertragen werden.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Nicht bei null anfangen: Vortrainierte Modelle mit wenigen eigenen Daten anpassen spart Daten, Zeit und Geld.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Für Unternehmen ist Transfer Learning der Normalfall. Die Lizenzfrage ist ein Bachelor-Thema – Brücke zu Modul 12 (Urheberrecht, Lizenzen).</p>
+      </aside>
+    </section>
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Große Sprachmodelle" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 35 Minuten</span><h2>Große Sprachmodelle: Token, Kontextfenster, Wahrscheinlichkeiten</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Die Wortvorschläge auf dem Handy raten das nächste Wort. Ein großes Sprachmodell macht im Prinzip dasselbe – nur mit Milliarden Parametern, riesigen Textmengen und so gut, dass ganze Absätze sinnvoll klingen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Large Language Model</b> (LLM) ist ein Transformer-Decoder, der selbstüberwacht auf sehr großen Textmengen gelernt hat, das <b>nächste Token</b> vorherzusagen. Danach wird es mit Anweisungen und menschlichem Feedback (RLHF) zum hilfreichen Assistenten verfeinert.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/naechstes-token.gif" width="640" height="380" alt="Animation: Für den Satz Morgens trinke ich eine Tasse erscheinen Balken mit Wahrscheinlichkeiten für Kaffee, Tee, Wasser, Milch und Saft. Bei Temperatur 0,3 dominiert Kaffee, bei Temperatur 1,8 sind die Balken ausgeglichener." loading="lazy">
+        <figcaption>Die Temperatur steuert, wie zufällig das nächste Token gewählt wird.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+        <tbody>
+          <tr><td><b>Token</b></td><td>Textbaustein: ein Wort, ein Wortteil oder ein Zeichen. Deutsche Texte brauchen meist mehr Tokens pro Wort als englische. Abgerechnet wird oft je Token.</td></tr>
+          <tr><td><b>Kontextfenster</b></td><td>maximale Tokenzahl, die das Modell auf einmal berücksichtigt (Eingabe + Ausgabe) – bei aktuellen Modellen oft Hunderttausende Tokens.</td></tr>
+          <tr><td><b>Temperatur</b></td><td>niedrig: vorhersehbar, sachlich; hoch: kreativer, aber fehleranfälliger.</td></tr>
+          <tr><td><b>Embedding</b></td><td>Zahlenvektor, der die Bedeutung eines Tokens oder Textes abbildet.</td></tr>
+          <tr><td><b>Halluzination</b></td><td>flüssige, plausibel klingende, aber falsche Aussage.</td></tr>
+          <tr><td><b>Multimodal</b></td><td>verarbeitet neben Text auch Bilder, Audio oder Video.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Sprachmodell berechnet Wahrscheinlichkeiten für das nächste Token – es „weiß“ nicht, ob ein Satz wahr ist. Deshalb sind Halluzinationen möglich.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Das Wissen eines Modells endet mit seinen Trainingsdaten (Wissensstand). Fragen zu aktuellen Preisen, Gesetzesänderungen oder internen Dokumenten beantwortet es ohne Zusatzquellen nicht zuverlässig.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Gruppe einen Satz Wort für Wort „wie ein LLM“ fortsetzen – jeder sagt ein Wort. So wird klar, warum Ergebnisse flüssig, aber nicht unbedingt wahr sind.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Prompt Engineering" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Prompt Engineering</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein neuer Kollege macht genau das, worum Sie ihn bitten – aber nur so gut, wie Sie es erklären. „Mach mal was zur Messe“ bringt etwas anderes als „Schreib eine Einladung an Stammkunden, 120 Wörter, mit Standnummer und QR-Code-Hinweis“.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Prompt Engineering</b> heißt, Eingaben so zu gestalten, dass ein Sprachmodell zuverlässig die gewünschte Ausgabe liefert. Der <b>Systemprompt</b> legt Rolle und Regeln fest, der Nutzerprompt die konkrete Aufgabe.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Baustein</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>Rolle und Ziel</td><td>„Du bist Assistent im Kundenservice eines Heizungsherstellers.“</td></tr>
+          <tr><td>Kontext</td><td>Auszug aus der Bedienungsanleitung, Kundendaten (nur, was nötig ist)</td></tr>
+          <tr><td>Aufgabe und Format</td><td>„Antworte in höchstens fünf Sätzen, Sie-Form, mit nummerierten Schritten.“</td></tr>
+          <tr><td>Beispiele (Few-Shot)</td><td>zwei gute Beispielantworten</td></tr>
+          <tr><td>Grenzen</td><td>„Wenn die Antwort nicht im Kontext steht, sage das und verweise an die Hotline.“</td></tr>
+          <tr><td>Schrittweises Vorgehen</td><td>„Prüfe zuerst …, dann …“ (bei komplexen Aufgaben)</td></tr>
+          <tr><td>Strukturierte Ausgabe</td><td>„Gib JSON mit den Feldern kategorie, dringlichkeit, antwort zurück.“</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gute Prompts sind konkret: Rolle, Kontext, Aufgabe, Format, Beispiele und Grenzen.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p><b>Prompt Injection</b>: Ein Dokument oder eine Nutzereingabe enthält versteckte Anweisungen („Ignoriere alle Regeln und …“). Externe Inhalte nie als Anweisung behandeln, Rechte des Systems begrenzen, Ausgaben prüfen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Übung: Die Gruppe verbessert einen schlechten Prompt („Schreib was über unser Produkt“) mit den Bausteinen der Tabelle. Vergleichen Sie die Ergebnisse, wenn ein Werkzeug verfügbar ist.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="RAG" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 35 Minuten</span><h2>RAG: Wissen aus eigenen Dokumenten</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Bei einer Open-Book-Prüfung muss man nicht alles auswendig wissen – man muss die richtige Seite finden und sie richtig wiedergeben. RAG gibt dem Sprachmodell ein offenes Buch.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Retrieval-Augmented Generation</b> (RAG) sucht zu jeder Frage passende Abschnitte aus eigenen Dokumenten und gibt sie dem Sprachmodell zusammen mit der Frage. Das Modell antwortet auf dieser Grundlage und kann die Quellen nennen.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/rag.gif" width="640" height="380" alt="Animation: Eine Frage zur Garantie geht an eine Suche mit Embeddings und Vektordatenbank. Zwei passende Dokumente werden ausgewählt und mit der Frage an das Sprachmodell gegeben, das antwortet: Die Garantie gilt 24 Monate ab Kaufdatum, Quelle Garantiebedingungen Paragraf 3." loading="lazy">
+        <figcaption>Suchen, auswählen, antworten – mit Quellenangabe.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span><b>Vorbereiten</b>: Dokumente in Abschnitte (Chunks) teilen, je Abschnitt ein Embedding berechnen, in einer <b>Vektordatenbank</b> speichern.</span></li>
+        <li><span><b>Suchen</b>: Frage einbetten, ähnlichste Abschnitte finden (Kosinus-Ähnlichkeit, oft kombiniert mit Stichwortsuche).</span></li>
+        <li><span><b>Erweitern</b>: Frage + gefundene Abschnitte + Anweisung („nur auf Basis der Quellen antworten“) an das Modell.</span></li>
+        <li><span><b>Antworten</b>: mit Quellenangabe; ohne passende Quelle ehrlich „weiß ich nicht“.</span></li>
+      </ol>
+      <div class="prose">
+        <p><b>Qualität hängt ab von</b>: Dokumentqualität und Aktualität, sinnvoller Abschnittsgröße, Suchqualität (Recall der Suche!), Zugriffsrechten (wer darf welches Dokument sehen?) und einer Prüfung der Antworten an Testfragen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>RAG bringt aktuelles, internes Wissen mit Quellenangabe ins Sprachmodell – ohne das Modell neu zu trainieren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Viele Transferarbeiten drehen sich um RAG-Assistenten. Betonen Sie die Zugriffsrechte: Ein RAG-System darf einer Auszubildenden keine Gehaltslisten zeigen, nur weil sie danach fragt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Prompting, RAG oder Fine-Tuning?" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 30 Minuten</span><h2>Prompting, RAG oder Fine-Tuning? Entscheidung und Kosten</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Prompting</th><th>RAG</th><th>Fine-Tuning</th></tr></thead>
+        <tbody>
+          <tr><td>Was ändert sich?</td><td>nur die Eingabe</td><td>Eingabe + abgerufenes Wissen</td><td>die Modellgewichte</td></tr>
+          <tr><td>Gut für</td><td>allgemeine Aufgaben, schnelle Prototypen</td><td>aktuelles, internes, belegbares Wissen</td><td>festes Verhalten, Stil, Format, Fachsprache, Spezialaufgaben</td></tr>
+          <tr><td>Aufwand</td><td>gering</td><td>mittel (Datenaufbereitung, Suche, Rechte)</td><td>hoch (gelabelte Beispiele, Training, Bewertung)</td></tr>
+          <tr><td>Aktualisierung</td><td>sofort</td><td>Dokumente austauschen</td><td>neu trainieren</td></tr>
+          <tr><td>Quellenangabe</td><td>nein</td><td>ja</td><td>nein</td></tr>
+          <tr><td>Laufende Kosten</td><td>Tokens je Anfrage</td><td>Tokens + Suche + Datenbank</td><td>Training + Betrieb des eigenen Modells</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Faustregel:</b> Immer mit gutem Prompting beginnen. Fehlt <b>Wissen</b> → RAG. Fehlt <b>Verhalten</b> (Stil, Format, Fachaufgabe) → Fine-Tuning. Oft wird beides kombiniert.</p>
+        <p><b>Kostenbeispiel:</b> 2.000 Anfragen täglich, je 3.000 Eingabe- und 400 Ausgabetokens. Bei angenommen 2 € je Million Eingabe- und 8 € je Million Ausgabetokens: <span class="calcline">2.000 · (3.000 · 2 + 400 · 8) / 1.000.000 = 2.000 · 0,0092 € ≈ 18,40 € pro Tag</span>, rund 550 € im Monat. Preise sind Annahmen – echte Preise unterscheiden sich stark je Anbieter und Modell.</p>
+        <p>Weitere Entscheidungskriterien: Datenschutz (Cloud-API oder eigenes Modell vor Ort?), Abhängigkeit von einem Anbieter, Antwortzeit, Erklärbarkeit und Kosten je Anfrage.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Wissen fehlt → RAG. Verhalten fehlt → Fine-Tuning. Beginnen immer mit Prompting.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Situationsaufgaben fragen gern: „Ein Unternehmen will einen Assistenten für seine 3.000 Produktdatenblätter. Begründen Sie Ihr Vorgehen.“ Antwort: RAG, weil sich Datenblätter ändern und Quellen nötig sind – mit Kosten, Datenschutz und Rechtekonzept.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie die Kosten gemeinsam und variieren Sie die Annahmen (doppelte Tokenmenge, zehnfache Anfragen). Brücke zu Modul 13 und 14: Das ist eine Kosten-Nutzen-Frage.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Anwendungen von Deep Learning" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 30 Minuten</span><h2>Anwendungen von Deep Learning: Bild, Sprache, Text, Zeitreihen, Agenten</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Bild und Video</h3><p>Qualitätsprüfung, Objekterkennung, Segmentierung (welches Pixel gehört wozu), Dokumenten- und Texterkennung (OCR).</p></div>
+        <div class="card"><h3>Sprache</h3><p>Spracherkennung (Diktat, Protokolle), Sprachausgabe, Übersetzung gesprochener Sprache.</p></div>
+        <div class="card"><h3>Text</h3><p>Klassifizieren, Zusammenfassen, Informationen extrahieren, Entwürfe schreiben, Code erzeugen.</p></div>
+        <div class="card"><h3>Zeitreihen</h3><p>Last- und Absatzprognosen, Anomalien in Sensordaten, vorausschauende Wartung.</p></div>
+        <div class="card"><h3>Generative Bildmodelle</h3><p>Bilder aus Text (Diffusionsmodelle), Produktvisualisierung, synthetische Trainingsdaten.</p></div>
+        <div class="card"><h3>Autoencoder</h3><p>komprimieren und rekonstruieren; schlecht rekonstruierte Fälle sind auffällig → Anomalieerkennung.</p></div>
+        <div class="card"><h3>Empfehlungssysteme</h3><p>Embeddings von Kunden und Produkten, „passt zu Ihnen“.</p></div>
+        <div class="card"><h3>KI-Agenten</h3><p>planen mehrere Schritte und rufen Werkzeuge auf (Suche, Datenbank, E-Mail). Risiken: Fehlerketten, Kosten, Sicherheit – menschliche Freigaben für folgenreiche Aktionen.</p></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Deep Learning ist stark bei unstrukturierten Daten – Bild, Ton, Text – und dort heute Stand der Technik.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie jede Person eine Anwendung für den eigenen Betrieb auswählen und mit Lernart, Datenart und Ausgabe beschreiben. Agenten kritisch diskutieren: Was darf ein Agent ohne Freigabe tun?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 17 -->
+    <section class="lesson" id="l17" data-title="Ressourcen und Betrieb" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 17 · 25 Minuten</span><h2>Ressourcen: GPUs, Energiebedarf, Cloud oder vor Ort</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Lkw für den Umzug mietet man; einen eigenen kauft nur, wer jeden Tag fährt. Bei KI-Rechenleistung ist es genauso.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Training großer Modelle braucht viele GPUs über Tage bis Monate; der <b>Betrieb</b> (Inferenz) kostet bei vielen Anfragen auf Dauer oft mehr als das Training. Rechenleistung, Speicher, Energie und Kühlung sind relevante Kosten- und Nachhaltigkeitsfaktoren.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Cloud-API (Modell als Dienst)</th><th>Eigene Infrastruktur / eigenes Modell</th></tr></thead>
+        <tbody>
+          <tr><td>Start</td><td>sofort, ohne Investition</td><td>Hardware, Einrichtung, Fachpersonal</td></tr>
+          <tr><td>Kosten</td><td>variabel je Nutzung</td><td>hohe Fixkosten, günstig bei hoher Auslastung</td></tr>
+          <tr><td>Datenschutz</td><td>Auftragsverarbeitung, Serverstandort, Datennutzung prüfen</td><td>Daten bleiben im Haus</td></tr>
+          <tr><td>Modellqualität</td><td>Zugriff auf leistungsstärkste Modelle</td><td>meist kleinere, offene Modelle</td></tr>
+          <tr><td>Abhängigkeit</td><td>Anbieter, Preisänderungen, Verfügbarkeit</td><td>eigene Wartung, Sicherheit</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Sparsam rechnen:</b> kleinstes ausreichendes Modell wählen, Antworten zwischenspeichern (Caching), Quantisierung (Gewichte mit weniger Bits), Batch-Verarbeitung statt Echtzeit, wo möglich. Für die Nachhaltigkeitsbewertung (Modul 14) zählen auch Energiequelle und Standort des Rechenzentrums.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Training ist einmalig teuer, Betrieb laufend – Cloud für schnellen Start und schwankende Last, eigene Infrastruktur bei hoher, stabiler Auslastung und strengen Datenschutzanforderungen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diese Lektion verbindet Technik mit Modul 14 (Investitionsrechnung, Make or Buy). Lassen Sie für ein Beispiel Vor- und Nachteile beider Wege abwägen.</p>
+      </aside>
+    </section>
+    <!-- Übungen -->
+    <section class="lesson" id="uebungen" data-title="Übungen">
+      <div class="lesson-head"><span class="meta">Übungen · 150 Minuten</span><h2>Übungen mit Musterlösung</h2></div>
+      <p>Rechnen Sie mit Taschenrechner (e^x-Taste) und tragen Sie die Ergebnisse ein. Der Neuron-Rechner in Lektion 1 hilft bei der Kontrolle.</p>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 1: Ein Neuron rechnen</h3><span class="points">4 Punkte</span></div>
+        <p>Eingaben x = (1; 4; 2), Gewichte w = (0,3; −0,5; 1,2), Bias b = −0,4. Berechnen Sie z, die Ausgabe mit ReLU und die Ausgabe mit Sigmoid (in %, eine Nachkommastelle).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>z = 0,3 − 2,0 + 2,4 − 0,4 = <b>0,3</b> (2 P.). ReLU(0,3) = <b>0,3</b> (1 P.). σ(0,3) = 1 / (1 + e^(−0,3)) ≈ <b>57,4 %</b> (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 2: Parameter zählen</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Netz hat 10 Eingänge, zwei verdeckte Schichten mit 16 und 8 Neuronen und 3 Ausgänge (alle voll verbunden). Wie viele Parameter hat es?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>10·16 + 16 = 176; 16·8 + 8 = 136; 8·3 + 3 = 27; zusammen <b>339</b> Parameter (je Schicht 1 P., Summe 1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 3: Ausgabeschicht wählen</h3><span class="points">3 Punkte</span></div>
+        <p>Welche Aktivierung gehört in die Ausgabeschicht? 1. Ein Netz schätzt den Preis einer Immobilie. 2. Ein Netz erkennt, ob eine Mail Spam ist. 3. Ein Netz ordnet ein Foto einer von sieben Fehlerarten zu.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. linear (keine Begrenzung) · 2. Sigmoid · 3. Softmax. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 4: Softmax</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Netz liefert für zwei Klassen die Werte z = (2; 0). Berechnen Sie mit Softmax die Wahrscheinlichkeit der ersten Klasse (in %, eine Nachkommastelle).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>e² ≈ 7,389; e⁰ = 1; 7,389 / 8,389 ≈ <b>88,1 %</b> (3 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 5: Epochen und Iterationen</h3><span class="points">3 Punkte</span></div>
+        <p>24.000 Trainingsbilder, Batchgröße 64, 12 Epochen. Wie viele Iterationen je Epoche und insgesamt?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>24.000 / 64 = <b>375</b> je Epoche (1,5 P.); 375 · 12 = <b>4.500</b> insgesamt (1,5 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 6: Kreuzentropie</h3><span class="points">3 Punkte</span></div>
+        <p>Das Netz gibt der richtigen Klasse a) 0,8 und b) 0,05 Wahrscheinlichkeit. Berechnen Sie jeweils den Verlust −ln(p) (drei Nachkommastellen) und erklären Sie den Unterschied.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) −ln 0,8 ≈ <b>0,223</b> (1 P.); b) −ln 0,05 ≈ <b>2,996</b> (1 P.). Je weniger Wahrscheinlichkeit die richtige Klasse bekommt, desto stärker wächst der Verlust – selbstsichere Fehler werden hart bestraft (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 7: Faltungsschicht</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Farbbild hat 32×32 Pixel und 3 Farbkanäle. Ein 5×5-Filter läuft ohne Rand (Padding) mit Schrittweite 1 darüber. a) Wie groß ist die Merkmalskarte? b) Wie viele Parameter hat ein Filter (mit Bias)?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 32 − 5 + 1 = <b>28 × 28</b> (2 P.). b) 5 · 5 · 3 + 1 = <b>76</b> Parameter (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 8: Overfitting im Netz</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Bildklassifikator für Schweißnähte erreicht 99 % im Training und 78 % auf Validierungsdaten. Es gibt 1.200 Bilder. Nennen Sie vier Maßnahmen und erklären Sie zwei davon.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Datenaugmentation, Dropout, Early Stopping, Transfer Learning mit vortrainiertem Netz, Regularisierung, mehr Daten (2 P.). Erklärung z. B.: Augmentation erzeugt aus vorhandenen Bildern Varianten (Drehung, Helligkeit), sodass das Netz nicht einzelne Bilder auswendig lernt; Dropout schaltet zufällig Neuronen ab und erzwingt verteiltes Wissen (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 9: Transformer und RNN</h3><span class="points">4 Punkte</span></div>
+        <p>Erklären Sie das Prinzip der Self-Attention und nennen Sie zwei Vorteile von Transformern gegenüber RNNs.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Self-Attention: Für jedes Token wird berechnet, wie stark es auf jedes andere Token achten soll; die Information wird entsprechend gewichtet zusammengeführt (2 P.). Vorteile: parallele Verarbeitung aller Positionen (schnelleres Training auf GPUs) und bessere Erfassung weit entfernter Bezüge (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 10: Prompting, RAG oder Fine-Tuning?</h3><span class="points">3 Punkte</span></div>
+        <p>Was passt am besten? 1. Ein Assistent soll Fragen zu 4.000 wöchentlich aktualisierten Produktdatenblättern mit Quelle beantworten. 2. Ein Modell soll Arztbriefe stets im festen Hausformat mit Fachvokabular formulieren; es gibt 20.000 Beispielbriefe. 3. Ein Team will schnell testen, ob ein Modell Meeting-Notizen brauchbar zusammenfasst.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. RAG · 2. Fine-Tuning · 3. Prompting. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 11: Tokenkosten</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Kundenservice-Assistent bekommt 5.000 Anfragen pro Tag mit je 1.500 Eingabe- und 300 Ausgabetokens. Preis: 3 € je Million Eingabe- und 12 € je Million Ausgabetokens. Berechnen Sie die Kosten je Anfrage, je Tag und je Monat (30 Tage).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Je Anfrage 1.500 · 3 / 10⁶ + 300 · 12 / 10⁶ = 0,0045 + 0,0036 = <b>0,0081 €</b> (2 P.); je Tag 5.000 · 0,0081 = <b>40,50 €</b> (1 P.); je Monat <b>1.215 €</b> (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 12: Situationsaufgabe Wissensassistent</h3><span class="points">8 Punkte</span></div>
+        <p>Die Muster Maschinenbau GmbH (900 Beschäftigte) will einen KI-Assistenten, der Servicetechnikern Fragen zu 12.000 Seiten Handbüchern, Wartungsberichten und internen Richtlinien beantwortet. Einige Dokumente sind vertraulich (Kalkulationen, Personal). Entwerfen Sie die Lösung: Vorgehen (Prompting/RAG/Fine-Tuning) mit Begründung, Ablauf in vier Schritten, zwei Risiken mit Gegenmaßnahmen und zwei Kennzahlen für die Erfolgsmessung.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p><b>Vorgehen</b> (2 P.): RAG, weil Wissen intern und veränderlich ist und Antworten belegbar sein müssen; Fine-Tuning höchstens später für Stil/Fachsprache. <b>Ablauf</b> (2 P.): Dokumente aufbereiten und in Abschnitte teilen, Embeddings in Vektordatenbank, Suche mit Rechteprüfung, Antwort mit Quellenangabe und „weiß ich nicht“-Regel. <b>Risiken</b> (2 P.): Halluzinationen → nur aus Quellen antworten, Quellen anzeigen, Testfragenkatalog; Zugriff auf Vertrauliches → Rechte je Dokument bei der Suche durchsetzen; ggf. Prompt Injection, Datenschutz bei Cloud-API. <b>Kennzahlen</b> (2 P.): Anteil korrekt beantworteter Testfragen, Zeit bis zur Lösung eines Servicefalls, Nutzung und Zufriedenheit der Techniker, Kosten je Anfrage.</p>
+        </details>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Aufgaben 1 bis 7 und 11 sind Rechenaufgaben für Teil 1, Bereich B. Aufgabe 12 eignet sich als Gruppenarbeit und als Vorlage für eine Transferarbeit.</p>
+      </aside>
+    </section>
+
+    <!-- Quiz -->
+    <section class="lesson" id="quiz" data-title="Abschlussquiz">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 25 Minuten</span><h2>Abschlussquiz Modul 5</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="flow-a"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Wer unter 14 liegt, wiederholt die Lektionen zu den falschen Antworten.</p>
+      </aside>
+    </section>
+
+    <!-- Zusammenfassung -->
+    <section class="lesson" id="summary" data-title="Zusammenfassung">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Neuron</h3><p>gewichtete Summe + Bias + Aktivierung.</p></div>
+        <div class="card"><h3>Aktivierungen</h3><p>innen ReLU; außen Sigmoid, Softmax oder linear.</p></div>
+        <div class="card"><h3>Netz</h3><p>Schichten; Parameter = Eingänge · Neuronen + Neuronen.</p></div>
+        <div class="card"><h3>Training</h3><p>Verlust → Backpropagation → Optimierer (Adam); Batch, Epoche.</p></div>
+        <div class="card"><h3>Gegen Overfitting</h3><p>Augmentation, Dropout, Early Stopping, Transfer Learning.</p></div>
+        <div class="card"><h3>CNN</h3><p>Filter finden Muster in Bildern; Pooling verkleinert.</p></div>
+        <div class="card"><h3>RNN / Transformer</h3><p>Folgen mit Gedächtnis / Attention parallel über alle Positionen.</p></div>
+        <div class="card"><h3>LLM</h3><p>nächstes Token; Kontextfenster, Temperatur, Halluzination.</p></div>
+        <div class="card"><h3>Prompting, RAG, Fine-Tuning</h3><p>Wissen fehlt → RAG; Verhalten fehlt → Fine-Tuning.</p></div>
+        <div class="card"><h3>Betrieb</h3><p>Inferenzkosten je Token, Cloud oder vor Ort, Energie.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Glossar Modul 5</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+          <tbody>
+            <tr><td>Adam</td><td>Verbreiteter Optimierer mit angepasster Schrittweite je Parameter</td></tr>
+            <tr><td>Attention</td><td>Gewichtung, wie stark ein Element auf andere achtet</td></tr>
+            <tr><td>Backpropagation</td><td>Rückwärtsberechnung der Gradienten mit der Kettenregel</td></tr>
+            <tr><td>Dropout</td><td>Zufälliges Abschalten von Neuronen im Training</td></tr>
+            <tr><td>Embedding</td><td>Bedeutungsvektor eines Tokens oder Textes</td></tr>
+            <tr><td>Epoche</td><td>Ein Durchlauf durch alle Trainingsdaten</td></tr>
+            <tr><td>Kontextfenster</td><td>Maximale Tokenanzahl, die ein Sprachmodell berücksichtigt</td></tr>
+            <tr><td>LoRA</td><td>Parametereffizientes Fine-Tuning großer Modelle</td></tr>
+            <tr><td>Softmax</td><td>Wandelt Werte in Wahrscheinlichkeiten mit Summe 1 um</td></tr>
+            <tr><td>Token</td><td>Textbaustein, den ein Sprachmodell verarbeitet</td></tr>
+            <tr><td>Vektordatenbank</td><td>Speichert Embeddings und findet ähnliche Einträge</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Weiter mit Modul 6:</b> Chancen und Herausforderungen der KI – Bias, Erklärbarkeit und Robustheit.</p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Reihum je eine Karte erklären. Ausblick: Je mächtiger die Modelle, desto wichtiger sind Fairness, Erklärbarkeit und Robustheit.</p>
+      </aside>
+    </section>
+<!--SCRIPTS-->
+<script type="application/json" id="quiz-data">
+[
+ ["Was berechnet ein künstliches Neuron?", ["Nur das Maximum der Eingaben", "Eine gewichtete Summe der Eingaben plus Bias, danach eine Aktivierungsfunktion", "Den Mittelwert aller Eingaben", "Eine Zufallszahl"], 1, "z = Σ wᵢxᵢ + b, a = f(z)."],
+ ["Warum braucht ein Netz nichtlineare Aktivierungsfunktionen?", ["Sonst wären alle Schichten zusammen nur eine lineare Funktion", "Wegen der DSGVO", "Damit es weniger Parameter hat", "Damit es schneller rechnet"], 0, "Nur so können Kurven und komplexe Muster gelernt werden."],
+ ["Welche Aktivierung ist Standard in verdeckten Schichten tiefer Netze?", ["Softmax", "Sprungfunktion", "Sigmoid", "ReLU"], 3, "ReLU vermeidet verschwindende Gradienten weitgehend und ist schnell."],
+ ["Welche Ausgabeaktivierung passt zu einer Klassifikation mit sechs Klassen?", ["ReLU", "tanh", "Softmax", "Linear"], 2, "Softmax liefert Wahrscheinlichkeiten mit Summe 1."],
+ ["Wie viele Parameter hat eine voll verbundene Schicht mit 50 Eingängen und 20 Neuronen?", ["1.020", "1.000", "70", "1.050"], 0, "50 · 20 + 20 = 1.020."],
+ ["Welche Verlustfunktion nutzt man typischerweise für Klassifikation?", ["MAE", "R²", "Kreuzentropie", "MSE"], 2, "Kreuzentropie bestraft selbstsichere Fehler stark."],
+ ["Was leistet Backpropagation?", ["Sie sammelt neue Trainingsdaten", "Sie berechnet mit der Kettenregel, wie stark jedes Gewicht zum Fehler beiträgt", "Sie wählt die Netzarchitektur", "Sie entfernt Ausreißer"], 1, "Danach passt der Optimierer die Gewichte an."],
+ ["10.000 Beispiele, Batchgröße 50. Wie viele Iterationen hat eine Epoche?", ["200", "50", "500", "10.000"], 0, "10.000 / 50 = 200."],
+ ["Was macht Dropout?", ["Entfernt Schichten dauerhaft", "Schaltet im Training zufällig Neuronen ab und wirkt so gegen Overfitting", "Senkt die Lernrate", "Löscht schlechte Trainingsdaten"], 1, "Bei der Vorhersage sind alle Neuronen aktiv."],
+ ["Wofür sind Faltungsnetze (CNN) besonders geeignet?", ["Datenbankabfragen", "Steuerberechnung", "Bilder und andere Daten mit räumlicher Struktur", "Tabellendaten mit wenigen Merkmalen"], 2, "Filter erkennen lokale Muster wie Kanten und Formen."],
+ ["Was ist ein Vorteil der Gewichtsteilung in CNNs?", ["Viel weniger Parameter, und ein Muster wird an jeder Stelle erkannt", "Bessere Erklärbarkeit als ein Entscheidungsbaum", "Mehr Parameter", "Keine Trainingsdaten nötig"], 0, "Derselbe Filter wird überall verwendet."],
+ ["Was ist ein zentraler Vorteil von Transformern gegenüber RNNs?", ["Sie verarbeiten alle Positionen parallel und erfassen weit entfernte Bezüge besser", "Sie brauchen keine Daten", "Sie funktionieren nur mit Bildern", "Sie sind immer kleiner"], 0, "Self-Attention über alle Positionen gleichzeitig."],
+ ["Was bedeutet Transfer Learning?", ["Ein Modell auf einen anderen Server kopieren", "Gewichte zufällig neu setzen", "Ein vortrainiertes Modell mit wenigen eigenen Daten anpassen", "Daten zwischen Firmen übertragen"], 2, "Spart Daten, Zeit und Kosten."],
+ ["Was sagt ein großes Sprachmodell grundsätzlich vorher?", ["Den Wahrheitsgehalt eines Satzes", "Das nächste Token anhand von Wahrscheinlichkeiten", "Den Aktienkurs", "Die Stimmung des Nutzers"], 1, "Deshalb sind Halluzinationen möglich."],
+ ["Was bewirkt eine niedrige Temperatur bei einem Sprachmodell?", ["Kreativere, zufälligere Antworten", "Schnellere Antworten", "Vorhersehbarere, sachlichere Antworten", "Kürzere Antworten"], 2, "Das wahrscheinlichste Token wird fast immer gewählt."],
+ ["Was ist eine Halluzination?", ["Ein Fehler beim Speichern", "Ein langsamer Server", "Eine flüssige, plausibel klingende, aber falsche Ausgabe", "Ein Bild, das ein Modell erzeugt"], 2, "Gegenmittel: RAG mit Quellen, Prüfung, klare Grenzen im Prompt."],
+ ["Was ist Prompt Injection?", ["Das Training eines Modells", "Eine Datenbankabfrage", "Versteckte Anweisungen in Eingaben oder Dokumenten, die das System zu unerwünschtem Verhalten bringen", "Ein besonders guter Prompt"], 2, "Externe Inhalte nie als Anweisung behandeln."],
+ ["Ein Assistent soll Fragen zu sich wöchentlich ändernden internen Richtlinien mit Quelle beantworten. Was passt?", ["RAG", "Ein neues Modell von Grund auf trainieren", "Fine-Tuning", "Nur ein längerer Prompt"], 0, "Wissen fehlt und ändert sich → RAG."],
+ ["Wann ist Fine-Tuning eher sinnvoll als RAG?", ["Nie", "Wenn ein festes Verhalten, Format oder eine Fachsprache gelernt werden soll", "Wenn Quellenangaben nötig sind", "Wenn aktuelles Wissen fehlt"], 1, "Fine-Tuning ändert das Verhalten, RAG liefert Wissen."],
+ ["Was kostet bei vielen Anfragen auf Dauer oft am meisten?", ["Die Lizenz für Python", "Der Monitor des Entwicklers", "Der laufende Betrieb (Inferenz)", "Das einmalige Training"], 2, "Jede Anfrage verursacht Rechen- bzw. Tokenkosten."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Muss ich neuronale Netze für die Prüfung programmieren können?", "a": "Nein, aber Sie müssen Aufbau, Training und Architekturen erklären und einfache Rechnungen wie ein Neuron, Softmax oder die Parameterzahl einer Schicht ausführen können. Für Transferarbeit und Fachgespräch kommt die Begründung der Verfahrenswahl hinzu."}
+ ],
+ "l1": [
+  {"q": "Wie funktioniert ein künstliches Neuron?", "a": "Es multipliziert jede Eingabe mit einem Gewicht, addiert alles und einen Bias und schickt das Ergebnis durch eine Aktivierungsfunktion wie ReLU oder Sigmoid."},
+  {"q": "Was ist der Bias in einem Neuron?", "a": "Ein zusätzlicher lernbarer Wert, der unabhängig von den Eingaben addiert wird. Er verschiebt die Schwelle, ab der das Neuron stark reagiert."}
+ ],
+ "l2": [
+  {"q": "Wozu dienen Aktivierungsfunktionen?", "a": "Sie bringen Nichtlinearität ins Netz. Ohne sie wäre jedes noch so tiefe Netz nur eine lineare Funktion und könnte keine komplexen Muster lernen."},
+  {"q": "Welche Aktivierung gehört in die Ausgabeschicht?", "a": "Bei Regression linear, bei zwei Klassen Sigmoid, bei mehreren Klassen Softmax. In verdeckten Schichten ist ReLU der Standard."}
+ ],
+ "l3": [
+  {"q": "Wie berechnet man die Anzahl der Parameter eines neuronalen Netzes?", "a": "Je voll verbundener Schicht: Eingänge mal Neuronen plus ein Bias je Neuron. Die Werte aller Schichten werden addiert."},
+  {"q": "Was bedeutet „deep“ in Deep Learning?", "a": "Dass das Netz viele verdeckte Schichten hat. Jede Schicht baut aus den Merkmalen der vorigen abstraktere Merkmale."}
+ ],
+ "l4": [
+  {"q": "Welche Verlustfunktion nutzt man für Klassifikation?", "a": "Die Kreuzentropie: −log der Wahrscheinlichkeit, die das Netz der richtigen Klasse gibt. Für Regression nutzt man meist den mittleren quadratischen Fehler."}
+ ],
+ "l5": [
+  {"q": "Was ist Backpropagation?", "a": "Ein Verfahren, das den Fehler von der Ausgabe rückwärts durch die Schichten verteilt und mit der Kettenregel für jedes Gewicht seinen Gradienten berechnet. Danach passt der Optimierer die Gewichte an."}
+ ],
+ "l6": [
+  {"q": "Was ist der Unterschied zwischen Epoche, Batch und Iteration?", "a": "Ein Batch ist eine Teilmenge der Daten für einen Schritt, eine Iteration ist ein solcher Schritt, und eine Epoche ist ein Durchlauf durch alle Trainingsdaten."},
+  {"q": "Was ist der Adam-Optimierer?", "a": "Ein verbreiteter Optimierer, der die Schrittweite je Parameter automatisch anpasst und Schwung aus vorherigen Schritten mitnimmt."}
+ ],
+ "l7": [
+  {"q": "Was hilft gegen Overfitting bei neuronalen Netzen?", "a": "Mehr Daten, Datenaugmentation, Dropout, Regularisierung, Early Stopping und Transfer Learning von vortrainierten Modellen."},
+  {"q": "Was sind verschwindende Gradienten?", "a": "In tiefen Netzen werden die Lernsignale für vordere Schichten sehr klein, sodass diese kaum lernen. ReLU, Batch-Normalisierung und Residualverbindungen helfen."}
+ ],
+ "l8": [
+  {"q": "Wie funktioniert ein Faltungsnetz (CNN)?", "a": "Kleine Filter gleiten über das Bild und erzeugen Merkmalskarten, die zeigen, wo ein Muster vorkommt. Tiefere Schichten kombinieren Kanten zu Formen und Objekten."},
+  {"q": "Wie groß ist die Merkmalskarte nach einer Faltung?", "a": "Ohne Rand und mit Schrittweite 1 gilt: Bildbreite minus Filterbreite plus 1. Ein 8×8-Bild mit 3×3-Filter ergibt eine 6×6-Karte."}
+ ],
+ "l9": [
+  {"q": "Wofür nutzt man rekurrente Netze und LSTM?", "a": "Für Folgen wie Zeitreihen und Text. Sie lesen Schritt für Schritt und geben ein Gedächtnis weiter; bei Sprache wurden sie weitgehend von Transformern abgelöst."}
+ ],
+ "l10": [
+  {"q": "Was ist ein Transformer?", "a": "Eine Netzarchitektur, die mit Self-Attention für jedes Element einer Folge berechnet, wie stark es auf alle anderen achten soll, und alle Positionen parallel verarbeitet. Sie ist die Grundlage heutiger Sprachmodelle."},
+  {"q": "Was ist Self-Attention?", "a": "Ein Mechanismus, bei dem jedes Token Gewichte für alle anderen Tokens berechnet und deren Information entsprechend gewichtet einsammelt, zum Beispiel um zu erkennen, worauf sich ein Pronomen bezieht."}
+ ],
+ "l11": [
+  {"q": "Was ist Transfer Learning?", "a": "Ein auf großen Daten vortrainiertes Modell wird mit wenigen eigenen Beispielen an eine neue Aufgabe angepasst. So braucht man viel weniger Daten und Rechenzeit."},
+  {"q": "Worauf muss man bei vortrainierten Modellen achten?", "a": "Auf die Lizenz (gewerbliche Nutzung), die Herkunft der Trainingsdaten und mögliche Verzerrungen, die das Modell mitbringt."}
+ ],
+ "l12": [
+  {"q": "Wie funktioniert ein großes Sprachmodell?", "a": "Es ist ein Transformer, der auf sehr großen Textmengen gelernt hat, das nächste Token vorherzusagen, und danach mit Anweisungen und menschlichem Feedback verfeinert wurde. Es erzeugt Text Token für Token nach Wahrscheinlichkeiten."},
+  {"q": "Was ist ein Token?", "a": "Ein Textbaustein, den das Modell verarbeitet: ein Wort, ein Wortteil oder ein Zeichen. Deutsche Texte brauchen meist mehr Tokens pro Wort als englische; viele Anbieter rechnen je Token ab."},
+  {"q": "Warum halluzinieren Sprachmodelle?", "a": "Weil sie wahrscheinliche Fortsetzungen berechnen und nicht prüfen, ob eine Aussage stimmt. Ohne passende Quellen erzeugen sie manchmal plausible, aber falsche Antworten."}
+ ],
+ "l13": [
+  {"q": "Was macht einen guten Prompt aus?", "a": "Rolle, Kontext, klare Aufgabe, gewünschtes Format, Beispiele und Grenzen, etwa was zu tun ist, wenn die Antwort nicht im Kontext steht."},
+  {"q": "Was ist Prompt Injection?", "a": "Ein Angriff, bei dem versteckte Anweisungen in Eingaben oder Dokumenten das Sprachmodell zu unerwünschtem Verhalten verleiten. Externe Inhalte dürfen nie als Anweisungen behandelt werden."}
+ ],
+ "l14": [
+  {"q": "Was ist RAG?", "a": "Retrieval-Augmented Generation: Zu jeder Frage werden passende Abschnitte aus eigenen Dokumenten gesucht und mit der Frage an das Sprachmodell gegeben, das darauf gestützt antwortet und Quellen nennt."},
+  {"q": "Was ist eine Vektordatenbank?", "a": "Eine Datenbank, die Embeddings speichert und zu einer Anfrage die ähnlichsten Einträge findet, etwa per Kosinus-Ähnlichkeit. Sie ist der Suchbaustein von RAG-Systemen."}
+ ],
+ "l15": [
+  {"q": "Wann wähle ich Prompting, RAG oder Fine-Tuning?", "a": "Beginnen Sie mit Prompting. Fehlt aktuelles oder internes Wissen, nehmen Sie RAG. Soll das Modell ein festes Verhalten, Format oder eine Fachsprache lernen, ist Fine-Tuning sinnvoll."},
+  {"q": "Wie berechnet man die Kosten eines Sprachmodell-Dienstes?", "a": "Anzahl Anfragen mal (Eingabetokens mal Eingabepreis plus Ausgabetokens mal Ausgabepreis). Bei 2.000 Anfragen täglich mit 3.000 und 400 Tokens und 2 bzw. 8 € je Million Tokens sind das etwa 18,40 € pro Tag."}
+ ],
+ "l16": [
+  {"q": "Wo wird Deep Learning in Unternehmen eingesetzt?", "a": "In der Bild- und Videoanalyse, der Sprach- und Texterkennung, bei Zeitreihenprognosen, generativen Anwendungen, Empfehlungen und zunehmend in KI-Agenten, die mehrere Schritte mit Werkzeugen ausführen."},
+  {"q": "Was ist ein KI-Agent?", "a": "Ein System, das auf ein Ziel hin selbstständig mehrere Schritte plant und Werkzeuge wie Suche, Datenbanken oder E-Mail aufruft. Folgenreiche Aktionen sollten eine menschliche Freigabe brauchen."}
+ ],
+ "l17": [
+  {"q": "Cloud-KI oder eigenes Modell vor Ort?", "a": "Cloud-Dienste bieten schnellen Start, starke Modelle und variable Kosten, erfordern aber Prüfung von Datenschutz und Abhängigkeit. Eigene Infrastruktur lohnt sich bei hoher, stabiler Auslastung und strengen Anforderungen an die Daten."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 5 */
+(function () {
+  function parseList(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(",", "."); }).filter(function (t) { return t !== ""; }).map(Number).filter(function (n) { return isFinite(n); }); }
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 4 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+  var ix = document.getElementById("nX"), iw = document.getElementById("nW"), ib = document.getElementById("nB"), ifn = document.getElementById("nF");
+  function rechne() {
+    var x = parseList(ix.value), w = parseList(iw.value), b = parseList(ib.value)[0] || 0, out = document.getElementById("nOut");
+    if (!x.length || x.length !== w.length) { out.innerHTML = kpi("Hinweis", "gleich viele x und w"); return; }
+    var z = b;
+    for (var i = 0; i < x.length; i++) z += x[i] * w[i];
+    var f = ifn.value, a;
+    if (f === "relu") a = Math.max(0, z);
+    else if (f === "sigmoid") a = 1 / (1 + Math.exp(-z));
+    else if (f === "tanh") a = Math.tanh(z);
+    else a = z;
+    out.innerHTML = kpi("Summe z", fmt(z)) + kpi("Ausgabe a", fmt(a)) + (f === "sigmoid" ? kpi("als Prozent", fmt(a * 100, 1) + " %") : "");
+  }
+  [ix, iw, ib].forEach(function (e) { e.addEventListener("input", rechne); }); ifn.addEventListener("change", rechne); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 5 */
+(function () {
+  var AK = ["linear", "Sigmoid", "Softmax", "ReLU"];
+  var VW = ["Prompting", "RAG", "Fine-Tuning"];
+  window.UEBUNGEN = {
+    modul: 5,
+    aufgaben: {
+      a1: { teile: [
+        { id: "z", label: "z", typ: "zahl", punkte: 2, wert: 0.3, tol: 0.001 },
+        { id: "relu", label: "Ausgabe mit ReLU", typ: "zahl", punkte: 1, wert: 0.3, tol: 0.001 },
+        { id: "sig", label: "Ausgabe mit Sigmoid in %", typ: "zahl", punkte: 1, wert: 57.4, tol: 0.1, einheit: "%" }
+      ] },
+      a2: { teile: [{ id: "par", label: "Anzahl Parameter", typ: "zahl", punkte: 4, wert: 339, tol: 0 }] },
+      a3: { teile: [
+        { id: "o1", label: "1. Immobilienpreis", typ: "wahl", punkte: 1, optionen: AK, richtig: 0 },
+        { id: "o2", label: "2. Spam ja/nein", typ: "wahl", punkte: 1, optionen: AK, richtig: 1 },
+        { id: "o3", label: "3. Sieben Fehlerarten", typ: "wahl", punkte: 1, optionen: AK, richtig: 2 }
+      ] },
+      a4: { teile: [{ id: "p", label: "Wahrscheinlichkeit Klasse 1 in %", typ: "zahl", punkte: 3, wert: 88.1, tol: 0.1, einheit: "%" }] },
+      a5: { teile: [
+        { id: "ie", label: "Iterationen je Epoche", typ: "zahl", punkte: 1.5, wert: 375, tol: 0 },
+        { id: "ig", label: "Iterationen insgesamt", typ: "zahl", punkte: 1.5, wert: 4500, tol: 0 }
+      ] },
+      a6: { teile: [
+        { id: "la", label: "a) Verlust bei p = 0,8", typ: "zahl", punkte: 1, wert: 0.223, tol: 0.002 },
+        { id: "lb", label: "b) Verlust bei p = 0,05", typ: "zahl", punkte: 1, wert: 2.996, tol: 0.002 },
+        { id: "erk", label: "Erklärung des Unterschieds", typ: "text", punkte: 1, erwartung: "Je kleiner die Wahrscheinlichkeit der richtigen Klasse, desto stärker wächst der Verlust; selbstsichere Fehler werden hart bestraft." }
+      ] },
+      a7: { teile: [
+        { id: "groesse", label: "a) Breite (= Höhe) der Merkmalskarte", typ: "zahl", punkte: 2, wert: 28, tol: 0, einheit: "Pixel" },
+        { id: "par", label: "b) Parameter je Filter", typ: "zahl", punkte: 2, wert: 76, tol: 0 }
+      ] },
+      a8: { teile: [{ id: "mass", label: "Vier Maßnahmen, zwei davon erklärt", typ: "text", punkte: 4, erwartung: "Augmentation, Dropout, Early Stopping, Transfer Learning, Regularisierung, mehr Daten (2 P.); zwei schlüssig erklärt (2 P.)." }] },
+      a9: { teile: [{ id: "tr", label: "Prinzip und zwei Vorteile", typ: "text", punkte: 4, erwartung: "Self-Attention gewichtet für jedes Token alle anderen Tokens und sammelt deren Information (2 P.); Vorteile: parallele Verarbeitung, weit entfernte Bezüge (2 P.)." }] },
+      a10: { teile: [
+        { id: "v1", label: "1. Produktdatenblätter mit Quelle", typ: "wahl", punkte: 1, optionen: VW, richtig: 1 },
+        { id: "v2", label: "2. Arztbriefe im Hausformat", typ: "wahl", punkte: 1, optionen: VW, richtig: 2 },
+        { id: "v3", label: "3. Schnelltest Zusammenfassungen", typ: "wahl", punkte: 1, optionen: VW, richtig: 0 }
+      ] },
+      a11: { teile: [
+        { id: "ka", label: "Kosten je Anfrage", typ: "zahl", punkte: 2, wert: 0.0081, tol: 0.00005, einheit: "€" },
+        { id: "kt", label: "Kosten je Tag", typ: "zahl", punkte: 1, wert: 40.5, tol: 0.01, einheit: "€" },
+        { id: "km", label: "Kosten je Monat", typ: "zahl", punkte: 1, wert: 1215, tol: 0.5, einheit: "€" }
+      ] },
+      a12: { teile: [{ id: "konzept", label: "Ihr Lösungskonzept", typ: "text", punkte: 8, erwartung: "RAG mit Begründung (intern, veränderlich, Quellen) (2 P.); Ablauf: Aufbereiten/Chunks, Embeddings/Vektor-DB, Suche mit Rechteprüfung, Antwort mit Quelle/'weiß ich nicht' (2 P.); Risiken Halluzination und Vertraulichkeit mit Gegenmaßnahmen (2 P.); Kennzahlen z. B. korrekte Testfragen, Lösungszeit, Nutzung, Kosten je Anfrage (2 P.)." }] }
+    }
+  };
+})();
+</script>

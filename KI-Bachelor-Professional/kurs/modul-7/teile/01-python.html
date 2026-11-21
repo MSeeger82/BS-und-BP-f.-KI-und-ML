@@ -1,0 +1,248 @@
+<!--META {"nr": 7, "titel": "Programmierung und KI-Systementwicklung", "lektionen": 17, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 7 von 17 · ca. 50 Lernstunden</span>
+      <h1 id="introTitle">Programmierung und KI-Systementwicklung: vom Python-Notebook zum betriebsfähigen System</h1>
+      <p>Sie müssen keine Softwareentwicklerin werden – aber Sie müssen Code lesen, einfache Auswertungen selbst schreiben und mit Entwicklungsteams auf Augenhöhe sprechen können. Dieses Modul führt Sie in Python ein, zeigt Datenanalyse mit pandas und Modelltraining mit scikit-learn und erklärt dann, was aus einem Modell ein verlässliches KI-System macht: Architektur, Schnittstellen, Versionierung, MLOps, Anwendungen mit Sprachmodellen sowie Qualität und Sicherheit.</p>
+      <div class="facts">
+        <span class="chip">17 Lektionen in 4 Teilen</span><span class="chip">7 Animationen</span><span class="chip">viele Codebeispiele</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 5</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--code-bg);"></i><span><b>Code</b> – zum Nachlesen und Ausprobieren</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Warum Python?" data-part="Teil A · Python-Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 25 Minuten</span><h2>Warum Python? Werkzeuge: Jupyter, VS Code, Pakete</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Englisch ist nicht die schönste Sprache, aber man kommt damit fast überall durch. Python ist das Englisch der Datenwelt: leicht zu lesen, und für fast jede Aufgabe gibt es fertige Bausteine.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Python</b> ist eine interpretierte, leicht lesbare Programmiersprache. Für KI ist sie Standard, weil es ausgereifte <b>Bibliotheken</b> gibt: NumPy (Rechnen), pandas (Tabellen), Matplotlib (Diagramme), scikit-learn (klassisches ML), PyTorch und TensorFlow (Deep Learning).</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Werkzeug</th><th>Wofür</th></tr></thead>
+        <tbody>
+          <tr><td><b>Jupyter Notebook</b></td><td>Code, Ergebnisse und Text in Zellen – ideal zum Erkunden und Erklären</td></tr>
+          <tr><td><b>VS Code</b> (oder PyCharm)</td><td>Entwicklungsumgebung für richtige Programme, Tests und Projekte</td></tr>
+          <tr><td><b>pip / conda</b></td><td>Pakete installieren: <code>pip install pandas scikit-learn</code></td></tr>
+          <tr><td><b>Virtuelle Umgebung</b></td><td>eigene Paketversionen je Projekt (<code>python -m venv .venv</code>)</td></tr>
+          <tr><td><b>requirements.txt</b></td><td>Liste der Pakete mit Versionen – macht Projekte reproduzierbar</td></tr>
+          <tr><td><b>Git</b></td><td>Versionsverwaltung für Code (Lektion 14)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Notebook zum Erkunden, Entwicklungsumgebung und Git für alles, was in Betrieb gehen soll.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Notebooks, die nur auf einem Laptop laufen, sind kein Produkt. Ohne festgelegte Paketversionen liefert derselbe Code ein halbes Jahr später andere Ergebnisse oder läuft gar nicht mehr.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Wenn möglich, eine Online-Umgebung (z. B. ein gehostetes Notebook) zeigen, damit niemand installieren muss. Ziel des Moduls ist Lesekompetenz und Grundfertigkeit, nicht Softwareentwicklung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Variablen und Datentypen" data-part="Teil A · Python-Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 30 Minuten</span><h2>Variablen, Datentypen, Listen und Dictionaries</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Variable ist ein beschriftetes Fach im Regal: Auf dem Schild steht „umsatz“, im Fach liegt 1250. Eine Liste ist ein Regalbrett mit nummerierten Fächern, ein Dictionary ein Karteikasten mit Stichwörtern.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Variablen bekommen Werte mit <code>=</code>. Python erkennt den <b>Datentyp</b> selbst. Die wichtigsten: <code>int</code> (ganze Zahl), <code>float</code> (Kommazahl, mit Punkt geschrieben), <code>str</code> (Text), <code>bool</code> (True/False), <code>list</code>, <code>dict</code>.</p>
+        </div>
+      </div>
+      <pre class="code">umsatz = 1250              <span class="c"># int</span>
+preis = 19.99              <span class="c"># float – Dezimalpunkt, kein Komma!</span>
+kunde = <span class="s">"Muster GmbH"</span>       <span class="c"># str</span>
+aktiv = <span class="k">True</span>              <span class="c"># bool</span>
+
+filialen = [<span class="s">"Köln"</span>, <span class="s">"Bonn"</span>, <span class="s">"Ulm"</span>]     <span class="c"># list – Zählung beginnt bei 0</span>
+filialen[0]                          <span class="c"># 'Köln'</span>
+filialen.append(<span class="s">"Kiel"</span>)               <span class="c"># Element anhängen</span>
+<span class="k">len</span>(filialen)                        <span class="c"># 4</span>
+
+kunde_info = {<span class="s">"name"</span>: <span class="s">"Muster GmbH"</span>, <span class="s">"umsatz"</span>: 1250}   <span class="c"># dict – Schlüssel: Wert</span>
+kunde_info[<span class="s">"umsatz"</span>]                                   <span class="c"># 1250</span>
+<span class="k">print</span>(<span class="s">f"{kunde} hat {umsatz} € Umsatz."</span>)              <span class="c"># f-String</span></pre>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Listen zählen ab 0, Dictionaries finden Werte über Schlüssel, Kommazahlen schreibt man mit Punkt.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p><code>"5" + "5"</code> ergibt <code>"55"</code> (Text wird verkettet), <code>5 + 5</code> ergibt 10. Zahlen aus CSV-Dateien oder Formularen sind oft Text und müssen erst umgewandelt werden (<code>int()</code>, <code>float()</code>).</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Was gibt <code>filialen[2]</code> für <code>["Köln", "Bonn", "Ulm"]</code> aus?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">"Bonn"</button>
+          <button type="button" class="opt" data-right="true">"Ulm"</button>
+          <button type="button" class="opt">einen Fehler</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig: Index 0 = Köln, 1 = Bonn, 2 = Ulm." data-no="Nicht ganz. Python zählt ab 0: Index 2 ist das dritte Element, also Ulm."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Zählung ab 0 ist die häufigste Anfängerfalle. Lassen Sie jede Person drei Zeilen tippen und ausführen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Bedingungen und Schleifen" data-part="Teil A · Python-Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Bedingungen und Schleifen</h2></div>
+      <figure class="board">
+        <img src="gifs/schleife.gif" width="640" height="380" alt="Animation: Ein Python-Programm summiert die Liste 120, 80, 45, 200. Die aktuelle Zeile ist hervorgehoben, daneben ändern sich die Variablen u und summe Schritt für Schritt bis 445." loading="lazy">
+        <figcaption>Die Schleife nimmt nacheinander jedes Element und addiert es zur Summe.</figcaption>
+      </figure>
+      <pre class="code">umsaetze = [120, 80, 45, 200]
+summe = 0
+<span class="k">for</span> u <span class="k">in</span> umsaetze:              <span class="c"># für jedes Element</span>
+    summe = summe + u            <span class="c"># eingerückt = gehört zur Schleife</span>
+<span class="k">print</span>(summe)                     <span class="c"># 445</span>
+
+<span class="k">for</span> u <span class="k">in</span> umsaetze:
+    <span class="k">if</span> u &gt;= 150:
+        <span class="k">print</span>(u, <span class="s">"großer Auftrag"</span>)
+    <span class="k">elif</span> u &gt;= 80:
+        <span class="k">print</span>(u, <span class="s">"mittel"</span>)
+    <span class="k">else</span>:
+        <span class="k">print</span>(u, <span class="s">"klein"</span>)
+
+grosse = [u <span class="k">for</span> u <span class="k">in</span> umsaetze <span class="k">if</span> u &gt; 100]   <span class="c"># List Comprehension: [120, 200]</span></pre>
+      <div class="prose">
+        <p>Vergleiche: <code>==</code> (gleich), <code>!=</code>, <code>&lt;</code>, <code>&gt;=</code>; verknüpfen mit <code>and</code>, <code>or</code>, <code>not</code>. <code>while</code>-Schleifen laufen, solange eine Bedingung gilt – Achtung vor Endlosschleifen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>In Python bildet die Einrückung den Block: Alles, was eingerückt unter <code>for</code> oder <code>if</code> steht, gehört dazu.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p><code>=</code> weist zu, <code>==</code> vergleicht. <code>if u = 150:</code> ist ein Syntaxfehler.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Schleife „im Kopf ausführen“ wie in der Animation – eine Spalte je Variable. Das ist auch die Technik, mit der man in der Prüfung Code-Ausgaben bestimmt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Funktionen und Module" data-part="Teil A · Python-Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Funktionen und Module</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Rezept für Pfannkuchen schreibt man einmal auf und kocht es beliebig oft, mal für zwei, mal für zehn Personen. Eine Funktion ist ein solches Rezept mit Zutaten (Parametern) und Ergebnis (Rückgabewert).</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Mit <code>def</code> definiert man eine <b>Funktion</b>; <code>return</code> gibt das Ergebnis zurück. <b>Module</b> sind Python-Dateien mit Funktionen; mit <code>import</code> nutzt man eigene oder fremde Module (Bibliotheken).</p>
+        </div>
+      </div>
+      <pre class="code"><span class="k">def</span> brutto(netto, satz=0.19):
+    <span class="s">"""Bruttobetrag aus Nettobetrag; Standard-Steuersatz 19 %."""</span>
+    <span class="k">return</span> <span class="k">round</span>(netto * (1 + satz), 2)
+
+brutto(100)          <span class="c"># 119.0</span>
+brutto(100, 0.07)    <span class="c"># 107.0</span>
+
+<span class="k">import</span> math
+math.sqrt(16)        <span class="c"># 4.0</span>
+<span class="k">from</span> statistics <span class="k">import</span> median
+median([2, 9, 4])    <span class="c"># 4</span></pre>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Funktionen machen Code wiederverwendbar und testbar; Module und Bibliotheken bringen fertige Funktionen ins Projekt.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Aufgaben wie „Was gibt <code>brutto(200, 0.07)</code> zurück?“ lösen Sie, indem Sie die Parameter einsetzen: 200 · 1,07 = 214,0.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Brücke zu Modul 11: Die Brutto-Funktion verbindet Programmierung und Umsatzsteuer. Lassen Sie eine eigene Funktion für die Amortisationszeit schreiben (Investition / jährliche Einsparung).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="NumPy" data-part="Teil B · Datenanalyse mit Python">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 25 Minuten</span><h2>NumPy: Rechnen mit Arrays</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Taschenrechner rechnet eine Zahl nach der anderen. Eine Tabellenkalkulation rechnet eine ganze Spalte auf einmal. NumPy ist die Tabellenkalkulation in Python – nur viel schneller.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>NumPy</b> stellt <b>Arrays</b> bereit: Vektoren und Matrizen, mit denen man ohne Schleife rechnet (vektorisiert). Fast alle Datenbibliotheken bauen darauf auf.</p>
+        </div>
+      </div>
+      <pre class="code"><span class="k">import</span> numpy <span class="k">as</span> np
+preise = np.array([10.0, 20.0, 30.0])
+mengen = np.array([3, 1, 2])
+preise * mengen               <span class="c"># array([30., 20., 60.]) – elementweise</span>
+(preise * mengen).<span class="k">sum</span>()       <span class="c"># 110.0</span>
+preise @ mengen               <span class="c"># 110.0 – Skalarprodukt (Modul 3)</span>
+preise.mean(), preise.std()   <span class="c"># Mittelwert 20.0, Standardabweichung (Grundgesamtheit)</span>
+X = np.array([[1, 2], [3, 4]]) <span class="c"># Matrix 2×2</span>
+X.shape                       <span class="c"># (2, 2)</span></pre>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>NumPy rechnet mit ganzen Arrays auf einmal – schneller und kürzer als Schleifen.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p><code>np.std()</code> teilt standardmäßig durch n (Grundgesamtheit), pandas’ <code>.std()</code> durch n − 1 (Stichprobe). Unterschiedliche Ergebnisse sind kein Fehler – sondern eine Einstellung.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Falle mit der Standardabweichung verbindet zu Modul 2. Wer sie kennt, wirkt im Fachgespräch souverän.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="pandas: laden, filtern, gruppieren" data-part="Teil B · Datenanalyse mit Python">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 40 Minuten</span><h2>pandas: Daten laden, filtern, gruppieren</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>pandas ist wie Excel, nur dass jeder Schritt als Befehl aufgeschrieben wird. Dadurch kann man ihn beliebig oft und nachvollziehbar wiederholen – auch mit 10 Millionen Zeilen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>DataFrame</b> ist eine Tabelle mit benannten Spalten (Series). pandas liest CSV, Excel, SQL-Abfragen und mehr und bietet Filter, Gruppierung, Verknüpfung und Umformung.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/dataframe.gif" width="640" height="380" alt="Animation: Eine Tabelle mit Region, Alter und Umsatz. Zuerst werden die Zeilen mit Alter über 40 hervorgehoben, dann wird je Region der mittlere Umsatz berechnet: Nord 200, Süd 115, West 90." loading="lazy">
+        <figcaption>Filtern wie WHERE, gruppieren wie GROUP BY.</figcaption>
+      </figure>
+      <pre class="code"><span class="k">import</span> pandas <span class="k">as</span> pd
+df = pd.read_csv(<span class="s">"kunden.csv"</span>, sep=<span class="s">";"</span>, decimal=<span class="s">","</span>)   <span class="c"># deutsches CSV</span>
+df.head()                     <span class="c"># erste 5 Zeilen</span>
+df.info()                     <span class="c"># Spalten, Datentypen, fehlende Werte</span>
+df.describe()                 <span class="c"># Kennzahlen je Zahlenspalte</span>
+df[<span class="s">"umsatz"</span>].mean()           <span class="c"># Mittelwert einer Spalte</span>
+df[df[<span class="s">"alter"</span>] &gt; 40]           <span class="c"># Zeilen filtern</span>
+df[(df[<span class="s">"region"</span>] == <span class="s">"Süd"</span>) &amp; (df[<span class="s">"umsatz"</span>] &gt; 100)]   <span class="c"># mehrere Bedingungen: &amp; und |</span>
+df.groupby(<span class="s">"region"</span>)[<span class="s">"umsatz"</span>].agg([<span class="s">"count"</span>, <span class="s">"mean"</span>])
+df.sort_values(<span class="s">"umsatz"</span>, ascending=<span class="k">False</span>)
+df.merge(bestellungen, on=<span class="s">"kunden_id"</span>, how=<span class="s">"left"</span>)   <span class="c"># wie LEFT JOIN</span></pre>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>pandas = Tabellen in Python: <code>read_csv</code>, filtern mit Bedingungen, <code>groupby</code>, <code>merge</code>.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Mehrere Bedingungen verknüpft man in pandas mit <code>&amp;</code> und <code>|</code> und setzt jede Bedingung in Klammern – <code>and</code> und <code>or</code> führen hier zu einem Fehler.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Stellen Sie SQL und pandas nebeneinander: WHERE ↔ Filter, GROUP BY ↔ groupby, JOIN ↔ merge. Wer Modul 2 verstanden hat, liest pandas sofort.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Daten bereinigen mit pandas" data-part="Teil B · Datenanalyse mit Python">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 30 Minuten</span><h2>Daten bereinigen mit pandas</h2></div>
+      <pre class="code">df.isna().<span class="k">sum</span>()                                 <span class="c"># fehlende Werte je Spalte</span>
+df = df.drop_duplicates()                        <span class="c"># doppelte Zeilen entfernen</span>
+df[<span class="s">"plz"</span>] = df[<span class="s">"plz"</span>].astype(<span class="k">str</span>).str.zfill(5)  <span class="c"># Postleitzahl als Text mit führender Null</span>
+df[<span class="s">"datum"</span>] = pd.to_datetime(df[<span class="s">"datum"</span>], dayfirst=<span class="k">True</span>)
+df[<span class="s">"ort"</span>] = df[<span class="s">"ort"</span>].str.strip().str.title()     <span class="c"># „ köln“ → „Köln“</span>
+df = df[df[<span class="s">"menge"</span>] &gt;= 0]                          <span class="c"># unmögliche Werte entfernen</span>
+df[<span class="s">"monat"</span>] = df[<span class="s">"datum"</span>].dt.month               <span class="c"># neues Merkmal</span>
+df = pd.get_dummies(df, columns=[<span class="s">"tarif"</span>])        <span class="c"># One-Hot-Kodierung</span></pre>
+      <div class="prose">
+        <p>Jeder Bereinigungsschritt wird im Code festgehalten – das ist der große Vorteil gegenüber Handarbeit in Excel: nachvollziehbar, wiederholbar, prüfbar. In echten Projekten gehören Imputation und Skalierung in eine Pipeline (Lektion 10), damit sie nur aus Trainingsdaten lernen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bereinigung im Code ist dokumentiert und wiederholbar – jeder Schritt lässt sich prüfen und auf neue Daten anwenden.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Postleitzahlen wie 01067 werden beim Einlesen als Zahl 1067. Kennungen immer als Text einlesen (<code>dtype={"plz": str}</code>).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Verbinden Sie jede Zeile mit der Datenqualitätsdimension aus Modul 2 (Eindeutigkeit, Konsistenz, Korrektheit).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Visualisieren mit Matplotlib" data-part="Teil B · Datenanalyse mit Python">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 25 Minuten</span><h2>Visualisieren mit Matplotlib</h2></div>
+      <pre class="code"><span class="k">import</span> matplotlib.pyplot <span class="k">as</span> plt
+
+je_region = df.groupby(<span class="s">"region"</span>)[<span class="s">"umsatz"</span>].<span class="k">sum</span>()
+je_region.plot(kind=<span class="s">"bar"</span>, title=<span class="s">"Umsatz je Region 2026"</span>)   <span class="c"># Balken: Vergleich</span>
+plt.ylabel(<span class="s">"Umsatz in T€"</span>)
+plt.tight_layout()
+plt.savefig(<span class="s">"umsatz_region.png"</span>, dpi=150)
+
+df[<span class="s">"lieferzeit"</span>].plot(kind=<span class="s">"hist"</span>, bins=20)      <span class="c"># Histogramm: Verteilung</span>
+df.plot(kind=<span class="s">"scatter"</span>, x=<span class="s">"werbung"</span>, y=<span class="s">"umsatz"</span>)  <span class="c"># Streudiagramm: Zusammenhang</span></pre>
+      <div class="prose">
+        <p>Die Regeln aus Modul 2 gelten unverändert: Diagrammtyp nach Frage, Achsen beschriften, Einheiten nennen, Balken bei null beginnen lassen. Weitere Bibliotheken: seaborn (statistische Grafiken), Plotly (interaktiv).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Diagramm im Code lässt sich mit neuen Daten jederzeit identisch neu erzeugen – ideal für wiederkehrende Berichte.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie ein Balkendiagramm aus der Gruppierung der vorigen Lektion erzeugen. Das ist eine typische „erste Auswertung“ im Projekt.</p>
+      </aside>
+    </section>

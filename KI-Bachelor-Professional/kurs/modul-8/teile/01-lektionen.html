@@ -1,0 +1,419 @@
+<!--META {"nr": 8, "titel": "Prozessmanagement", "lektionen": 15, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 8 von 17 · ca. 30 Lernstunden</span>
+      <h1 id="introTitle">Prozessmanagement: Prozesse verstehen, gestalten, steuern – und KI richtig einbetten</h1>
+      <p>Die meisten KI-Projekte scheitern nicht am Modell, sondern am Prozess drumherum. Wer KI einführen will, muss zuerst verstehen, wie Arbeit heute fließt: Wer macht was, in welcher Reihenfolge, wie lange, mit welchen Fehlern? Dieses Modul zeigt, wie Sie KI-relevante Prozessziele festlegen, Prozesse erheben, mit BPMN modellieren und analysieren, Ressourcen disponieren und Prozesse mit Kennzahlen, Monitoring und kontinuierlicher Verbesserung steuern.</p>
+      <div class="facts">
+        <span class="chip">15 Lektionen in 3 Teilen</span><span class="chip">7 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 5 Nr. 1</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--violet-soft); outline: 2px solid var(--violet);"></i><span><b>Prüfungstipp</b> – so wird es abgefragt</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Was ist ein Prozess?" data-part="Teil A · Prozesse verstehen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 20 Minuten</span><h2>Was ist ein Prozess? Input, Tätigkeit, Output, Kunde</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Kaffee kochen ist ein Prozess: Bohnen und Wasser rein (Input), mahlen, aufbrühen (Tätigkeiten), Kaffee raus (Output) – für jemanden, der ihn trinken will (Kunde). Jeden Morgen gleich, mit klarem Anfang und Ende.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Geschäftsprozess</b> ist eine wiederkehrende, logisch zusammenhängende Folge von Tätigkeiten mit definiertem Anfang (Auslöser) und Ende (Ergebnis), die einen Input in einen Output mit Wert für einen internen oder externen <b>Kunden</b> umwandelt.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/prozess.gif" width="640" height="380" alt="Animation: Input Kundenanfrage, Tätigkeiten prüfen und kalkulieren, Output Angebot, Kunde. Darunter: Anfang und Ende definiert, wiederholt sich, erzeugt Wert; Prozesseigner und Kennzahl." loading="lazy">
+        <figcaption>Jeder Prozess hat einen Kunden, einen Eigner und eine Kennzahl.</figcaption>
+      </figure>
+      <div class="prose">
+        <p><b>Prozess oder Projekt?</b> Ein Prozess wiederholt sich (Rechnungen prüfen), ein Projekt ist einmalig (KI-System für die Rechnungsprüfung einführen). Prozessorientierung heißt: Man denkt vom Kunden her über Abteilungsgrenzen hinweg – statt jede Abteilung einzeln zu optimieren.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Prozess = wiederkehrende Folge von Tätigkeiten mit Auslöser, Ergebnis und Kunde.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie jede Person einen Prozess aus dem eigenen Arbeitsalltag mit Input, Output, Kunde und Eigner beschreiben. Diese Prozesse dienen im ganzen Modul als Übungsmaterial.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Prozessarten und Prozesslandkarte" data-part="Teil A · Prozesse verstehen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 25 Minuten</span><h2>Prozessarten und Prozesslandkarte</h2></div>
+      <figure class="board">
+        <img src="gifs/landkarte.gif" width="640" height="380" alt="Animation: Eine Prozesslandkarte entsteht: oben Managementprozesse, in der Mitte die Kernprozesse Vertrieb, Auftrag, Produktion, Versand und Service als Pfeilkette vom Kunden zum Kunden, unten Unterstützungsprozesse." loading="lazy">
+        <figcaption>Die Prozesslandkarte zeigt das Unternehmen auf einer Seite.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Prozessart</th><th>Zweck</th><th>Beispiele</th></tr></thead>
+        <tbody>
+          <tr><td><b>Kernprozesse</b> (Wertschöpfung)</td><td>schaffen direkt Wert für den externen Kunden</td><td>Vertrieb, Auftragsabwicklung, Produktion, Service</td></tr>
+          <tr><td><b>Unterstützungsprozesse</b></td><td>ermöglichen die Kernprozesse</td><td>Personal, IT, Einkauf, Buchhaltung, Instandhaltung</td></tr>
+          <tr><td><b>Managementprozesse</b> (Führung)</td><td>steuern das Unternehmen</td><td>Strategie, Planung, Controlling, Qualitätsmanagement</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Prozesse werden hierarchisch verfeinert: Prozesslandkarte → Hauptprozess → Teilprozess → Aktivität → Arbeitsschritt. Für KI-Projekte arbeitet man meist auf Ebene der Teilprozesse und Aktivitäten.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kernprozesse schaffen Kundenwert, Unterstützungsprozesse ermöglichen ihn, Managementprozesse steuern.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Wo im eigenen Unternehmen würde KI am meisten bewirken – im Kern-, Unterstützungs- oder Managementprozess? Oft ist der Hebel in Unterstützungsprozessen groß, weil sie viel Routine enthalten.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Prozessziele und Kennzahlen" data-part="Teil A · Prozesse verstehen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>KI-relevante Prozessziele festlegen: SMART und Kennzahlen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>„Ich will fitter werden“ ist ein Wunsch. „Bis 1. Juni laufe ich 10 km unter einer Stunde“ ist ein Ziel – man weiß, ob man es erreicht hat.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Prozessziele werden <b>SMART</b> formuliert: <b>s</b>pezifisch, <b>m</b>essbar, <b>a</b>ttraktiv/akzeptiert, <b>r</b>ealistisch, <b>t</b>erminiert. Jedes Ziel bekommt eine <b>Kennzahl</b> (KPI), einen Ausgangswert und einen Zielwert.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Zieldimension</th><th>Kennzahl (Beispiele)</th></tr></thead>
+        <tbody>
+          <tr><td>Zeit</td><td>Durchlaufzeit, Bearbeitungszeit, Antwortzeit, Termintreue</td></tr>
+          <tr><td>Qualität</td><td>Fehlerquote, Reklamationen, Erstlösungsquote, Nacharbeit</td></tr>
+          <tr><td>Kosten</td><td>Kosten je Vorgang, Personalstunden je Fall</td></tr>
+          <tr><td>Kunde</td><td>Zufriedenheit, Beschwerden, Wiederkauf</td></tr>
+          <tr><td>KI-spezifisch</td><td>Automatisierungsquote, Anteil manueller Nachprüfung, Modellgüte, Fehlalarme je Tag</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Beispiel:</b> „Bis 30.06.2027 sinkt die durchschnittliche Durchlaufzeit einer Eingangsrechnung von 6 auf 2 Arbeitstage; mindestens 70 % der Rechnungen werden ohne manuellen Eingriff verarbeitet, bei höchstens 1 % Fehlbuchungen.“</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ohne messbares Prozessziel mit Ausgangs- und Zielwert lässt sich der Nutzen von KI weder planen noch nachweisen.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>„Die KI soll den Prozess effizienter machen“ ist kein Ziel. In Prüfung und Transferarbeit bekommt nur ein SMART-Ziel mit Zahlen volle Punkte.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie für den eigenen Prozess aus Lektion 1 ein SMART-Ziel mit KI-Bezug schreiben und gegenseitig prüfen: Ist jeder Buchstabe erfüllt?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Prozesse erheben" data-part="Teil B · Erheben, modellieren, analysieren">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Prozesse erheben: Interview, Beobachtung, Dokumente, Daten</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Methode</th><th>Stärke</th><th>Schwäche</th></tr></thead>
+        <tbody>
+          <tr><td><b>Interview</b></td><td>Hintergründe, Gründe, Probleme</td><td>beschreibt den Soll-Ablauf, nicht den echten</td></tr>
+          <tr><td><b>Workshop</b></td><td>mehrere Sichten, gemeinsames Bild</td><td>Gruppendynamik, laute Stimmen dominieren</td></tr>
+          <tr><td><b>Beobachtung</b> (Gemba, „vor Ort“)</td><td>zeigt, wie wirklich gearbeitet wird</td><td>aufwendig, Beobachtete verhalten sich anders</td></tr>
+          <tr><td><b>Dokumentenanalyse</b></td><td>Formulare, Anweisungen, Organigramme</td><td>oft veraltet</td></tr>
+          <tr><td><b>Datenanalyse / Process Mining</b></td><td>objektiv, alle Fälle, Zeiten exakt</td><td>nur was im System protokolliert ist</td></tr>
+          <tr><td><b>Zeitaufnahme</b>, Selbstaufschreibung</td><td>belastbare Zeiten</td><td>Aufwand, Akzeptanz (Mitbestimmung beachten!)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Methoden kombinieren: Interviews für das Warum, Beobachtung und Daten für das tatsächliche Wie.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Zeit- und Leistungserfassungen einzelner Beschäftigter berühren die Mitbestimmung des Betriebsrats (§ 87 Abs. 1 Nr. 6 BetrVG). Früh einbinden, Daten aggregieren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Lücke zwischen „wie es im Handbuch steht“ und „wie es wirklich läuft“ ist der wichtigste Erkenntnisgewinn jeder Prozessaufnahme – und oft schon die halbe Verbesserung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="SIPOC und Wertstrom" data-part="Teil B · Erheben, modellieren, analysieren">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 25 Minuten</span><h2>SIPOC und Wertstromanalyse</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Bevor man ein Haus renoviert, braucht man einen Grundriss auf einer Seite – nicht gleich jede Steckdose. SIPOC ist der Grundriss eines Prozesses.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>SIPOC</b> beschreibt einen Prozess grob in fünf Spalten: Suppliers (Lieferanten), Inputs, Process (5–7 Hauptschritte), Outputs, Customers. Die <b>Wertstromanalyse</b> (aus dem Lean Management) zeigt Material- und Informationsfluss mit Zeiten und trennt wertschöpfende von nicht wertschöpfenden Tätigkeiten.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>S – Lieferant</th><th>I – Input</th><th>P – Prozess</th><th>O – Output</th><th>C – Kunde</th></tr></thead>
+        <tbody>
+          <tr><td>Lieferanten, Post</td><td>Eingangsrechnung (PDF, Papier)</td><td>empfangen → auslesen → mit Bestellung abgleichen → freigeben → buchen → zahlen</td><td>gebuchte, bezahlte Rechnung</td><td>Lieferant, Buchhaltung, Controlling</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Sieben Arten der Verschwendung</b> (Lean, „Muda“): Überproduktion, Wartezeiten, Transport, Überbearbeitung, Bestände, unnötige Bewegung, Fehler/Nacharbeit. In Büroprozessen kommen Medienbrüche (Papier → Abtippen) und Suchzeiten dazu – genau dort setzt KI häufig an.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>SIPOC grenzt den Prozess ab, die Wertstromanalyse zeigt, wo Zeit und Wert verloren gehen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie für den eigenen Prozess ein SIPOC auf eine Seite schreiben. Das dauert zehn Minuten und klärt oft schon die Projektgrenzen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Modellieren mit BPMN 2.0" data-part="Teil B · Erheben, modellieren, analysieren">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 40 Minuten</span><h2>Modellieren mit BPMN 2.0</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Fahrplan zeigt allen dasselbe: welche Züge, welche Halte, wo umsteigen. BPMN ist der Fahrplan eines Prozesses – mit festen Symbolen, die alle gleich lesen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>BPMN 2.0</b> (Business Process Model and Notation, Standard der OMG, auch ISO/IEC 19510) ist die verbreitetste Notation für Geschäftsprozesse. Sie ist für Fachleute lesbar und präzise genug für die Automatisierung.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/bpmn.gif" width="640" height="380" alt="Animation: Ein BPMN-Diagramm wird aufgebaut. Startereignis Rechnung eingegangen, Aktivität Daten auslesen in der Bahn KI-System, exklusives Gateway Bestellung passt; ja führt zu Zahlung freigeben, nein zu Abweichung klären in der Bahn Buchhaltung; beide enden in Endereignissen." loading="lazy">
+        <figcaption>Ein BPMN-Prozess mit zwei Bahnen und einer Verzweigung.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Symbol</th><th>Bedeutung</th></tr></thead>
+        <tbody>
+          <tr><td>Startereignis</td><td>dünner Kreis</td><td>Auslöser des Prozesses</td></tr>
+          <tr><td>Zwischenereignis</td><td>doppelter Kreis</td><td>etwas passiert unterwegs (z. B. Frist, Nachricht)</td></tr>
+          <tr><td>Endereignis</td><td>dicker Kreis</td><td>Prozessende</td></tr>
+          <tr><td>Aktivität (Task)</td><td>abgerundetes Rechteck</td><td>eine Tätigkeit; Typen z. B. Benutzer-, Service-, Skript-Task</td></tr>
+          <tr><td>Exklusives Gateway</td><td>Raute mit X</td><td>genau ein Weg wird gewählt (entweder – oder)</td></tr>
+          <tr><td>Paralleles Gateway</td><td>Raute mit +</td><td>alle Wege gleichzeitig; schließendes Gateway wartet auf alle</td></tr>
+          <tr><td>Inklusives Gateway</td><td>Raute mit Kreis</td><td>ein oder mehrere Wege</td></tr>
+          <tr><td>Pool / Lane</td><td>Rahmen / Bahn</td><td>Organisation / Rolle, die die Aktivitäten ausführt</td></tr>
+          <tr><td>Sequenzfluss</td><td>durchgezogener Pfeil</td><td>Reihenfolge innerhalb eines Pools</td></tr>
+          <tr><td>Nachrichtenfluss</td><td>gestrichelter Pfeil</td><td>Kommunikation zwischen Pools</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>BPMN: Kreise sind Ereignisse, Rechtecke Aktivitäten, Rauten Entscheidungen, Bahnen Zuständigkeiten.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Sequenzflüsse dürfen keine Pool-Grenzen überqueren – zwischen Unternehmen (z. B. Kunde und Lieferant) verwendet man Nachrichtenflüsse.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie den eigenen Prozess mit höchstens zehn Elementen in BPMN skizzieren (Papier oder ein kostenloses Werkzeug wie bpmn.io). Wichtig ist, KI-Schritte als eigene Bahn sichtbar zu machen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="EPK im Vergleich" data-part="Teil B · Erheben, modellieren, analysieren">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 20 Minuten</span><h2>Ereignisgesteuerte Prozesskette (EPK) im Vergleich</h2></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>EPK</b> stammt aus dem ARIS-Konzept (Scheer) und ist in Deutschland, besonders im SAP-Umfeld, verbreitet. Ereignisse (Sechsecke) und Funktionen (abgerundete Rechtecke) wechseln sich ab; logische Verknüpfungen sind UND (∧), ODER (∨) und exklusives ODER (XOR).</p>
+        </div>
+        <div class="box tipp"><span class="box-label">Prüfungstipp</span>
+          <p>Regel der EPK: Auf ein Ereignis folgt eine Funktion, auf eine Funktion ein Ereignis. Nach einem Ereignis darf keine ODER- oder XOR-Verzweigung kommen – Ereignisse können nicht entscheiden.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>BPMN 2.0</th><th>EPK</th></tr></thead>
+        <tbody>
+          <tr><td>Standard</td><td>international (OMG, ISO)</td><td>ARIS, kein internationaler Standard</td></tr>
+          <tr><td>Zuständigkeiten</td><td>Pools und Lanes</td><td>erweiterte EPK (eEPK) mit Organisationseinheiten</td></tr>
+          <tr><td>Automatisierung</td><td>direkt ausführbar in Workflow-Systemen</td><td>vor allem Dokumentation</td></tr>
+          <tr><td>Lesbarkeit</td><td>kompakt</td><td>viele Ereignisse, lang</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>EPK: Ereignis – Funktion – Ereignis im Wechsel; BPMN ist der internationale Standard und automatisierbar.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeichnen Sie denselben Mini-Prozess einmal als EPK und einmal als BPMN. Die Regel „Ereignisse entscheiden nicht“ ist eine typische Prüfungsfrage.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Prozesse analysieren" data-part="Teil B · Erheben, modellieren, analysieren">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 35 Minuten</span><h2>Prozesse analysieren: Engpässe, Verschwendung, Medienbrüche</h2></div>
+      <figure class="board">
+        <img src="gifs/durchlaufzeit.gif" width="640" height="380" alt="Animation: Ein Zeitstrahl füllt sich mit kurzen violetten Bearbeitungsabschnitten, einem Transportabschnitt und langen grauen Wartezeiten von 300 und 600 Minuten. Ergebnis: 40 Minuten Bearbeitung bei 965 Minuten Durchlaufzeit, Effizienz 4,1 Prozent." loading="lazy">
+        <figcaption>Meist wird gewartet, nicht gearbeitet.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Durchlaufzeit = Bearbeitungszeit + Wartezeit (Liegezeit) + Transportzeit</div>
+        <div class="eq">Prozesseffizienz = <span class="frac"><span>Bearbeitungszeit</span><span>Durchlaufzeit</span></span></div>
+        <div class="eq">Kapazität je Tag = <span class="frac"><span>verfügbare Arbeitszeit</span><span>Bearbeitungszeit je Fall</span></span></div>
+        <div class="legend-eq"><span>Der langsamste Schritt (Engpass) bestimmt, wie viele Fälle der ganze Prozess schafft.</span></div>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Prozesskennzahlen</span>
+        <div class="calc-row">
+          <div class="field"><label for="prB">Bearbeitungszeit je Fall (min)</label><input type="number" id="prB" value="40" min="0"></div>
+          <div class="field"><label for="prW">Wartezeit je Fall (min)</label><input type="number" id="prW" value="900" min="0"></div>
+          <div class="field"><label for="prT">Transportzeit je Fall (min)</label><input type="number" id="prT" value="25" min="0"></div>
+        </div>
+        <div class="calc-row">
+          <div class="field"><label for="prF">Fälle je Tag</label><input type="number" id="prF" value="120" min="0"></div>
+          <div class="field"><label for="prK">Personalkosten je Stunde (€)</label><input type="number" id="prK" value="48" min="0"></div>
+          <div class="field"><label for="prA">verfügbare Stunden je Person und Tag</label><input type="number" id="prA" value="7" min="0" step="0.5"></div>
+        </div>
+        <div class="kpis" id="prOut"></div>
+        <p class="calc-note" id="prNote"></p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Schwachstelle</th><th>Woran man sie erkennt</th><th>KI-Ansatz</th></tr></thead>
+        <tbody>
+          <tr><td>Medienbruch</td><td>Daten werden abgetippt (Papier, PDF, E-Mail)</td><td>Dokumentenerkennung, Extraktion</td></tr>
+          <tr><td>Engpass</td><td>Stau vor einem Schritt</td><td>Priorisierung, Vorsortierung, Prognose der Last</td></tr>
+          <tr><td>Schleifen / Nacharbeit</td><td>Rückfragen, Korrekturen</td><td>Plausibilitätsprüfung am Anfang</td></tr>
+          <tr><td>Suchzeiten</td><td>Wissen steckt in Köpfen und Ordnern</td><td>Wissensassistent mit RAG</td></tr>
+          <tr><td>Schnittstellen</td><td>viele Übergaben zwischen Abteilungen</td><td>erst Prozess verbessern, dann automatisieren</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Die meiste Zeit geht in Wartezeiten und Übergaben verloren – dort liegt der Hebel, nicht im schnelleren Arbeiten.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Einen schlechten Prozess zu automatisieren macht ihn nur schneller schlecht. Erst vereinfachen, dann mit KI unterstützen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Spielen Sie mit dem Rechner: Halbieren Sie die Bearbeitungszeit – die Effizienz ändert sich kaum. Halbieren Sie die Wartezeit – die Durchlaufzeit sinkt dramatisch.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Wo passt KI in den Prozess?" data-part="Teil B · Erheben, modellieren, analysieren">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 30 Minuten</span><h2>Wo passt KI in den Prozess? Automatisieren, unterstützen, vorhersagen</h2></div>
+      <figure class="board">
+        <img src="gifs/ki-im-prozess.gif" width="640" height="380" alt="Animation: Oben fünf manuelle Schritte der Rechnungsbearbeitung mit 12 Minuten je Rechnung. Darunter erscheint der neue Ablauf: KI liest aus, KI gleicht ab, Mensch prüft Ausnahmen, Freigeben – 3 Minuten je Rechnung." loading="lazy">
+        <figcaption>KI übernimmt die Routine, Menschen die Ausnahmen.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rolle der KI</th><th>Was sie tut</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Automatisieren</b></td><td>erledigt einen Schritt selbst</td><td>Daten aus Rechnungen auslesen</td></tr>
+          <tr><td><b>Unterstützen</b></td><td>schlägt vor, Mensch entscheidet</td><td>Antwortentwurf für Kundenmails</td></tr>
+          <tr><td><b>Vorhersagen</b></td><td>liefert Prognosen für Planung</td><td>Auftragseingang nächste Woche</td></tr>
+          <tr><td><b>Priorisieren / Sortieren</b></td><td>bringt Wichtiges nach vorn</td><td>dringende Störungsmeldungen zuerst</td></tr>
+          <tr><td><b>Prüfen</b></td><td>findet Auffälligkeiten</td><td>Abweichungen zwischen Rechnung und Bestellung</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Eignungsfragen</b> für einen Prozessschritt: Kommt er häufig vor? Gibt es Daten? Sind Regeln schwer zu formulieren, aber Beispiele vorhanden? Ist ein Fehler verkraftbar oder abfangbar? Lässt sich der Nutzen messen? Je mehr „ja“, desto besser.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>KI im Prozess: Routine automatisieren, Entscheidungen unterstützen, Ausnahmen bewusst an Menschen geben.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Wenden Sie die Eignungsfragen auf den eigenen Prozess an und markieren Sie im BPMN-Modell, wo KI sitzen soll. Das ist das Herzstück vieler Transferarbeiten.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Prozessressourcen disponieren" data-part="Teil C · Steuern und verbessern">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 25 Minuten</span><h2>Prozessressourcen disponieren: Personal, Maschinen, Rechenleistung, Budget</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Restaurant plant für Samstagabend mehr Köche ein als für Dienstagmittag. Wer zu wenig plant, hat lange Wartezeiten; wer zu viel plant, bezahlt Leerlauf.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Disponieren</b> heißt, Ressourcen so zuzuteilen, dass die Prozessziele bei vertretbaren Kosten erreicht werden. Grundlage sind erwartete Mengen, Bearbeitungszeiten und verfügbare Kapazitäten.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>Rechenbeispiel Personalbedarf:</b> 600 Fälle pro Tag, 6 Minuten je Fall, 7 produktive Stunden je Person: <span class="calcline">600 · 6 / 60 = 60 Stunden → 60 / 7 ≈ 8,6 → 9 Personen</span>. Mit KI-Vorsortierung (3 Minuten je Fall): <span class="calcline">30 Stunden → 4,3 → 5 Personen</span> – die frei werdende Kapazität wird umgeplant (Weiterbildung, andere Aufgaben), nicht automatisch gestrichen.</p>
+        <p><b>KI-spezifische Ressourcen:</b> Rechenleistung (GPU, Cloud-Kontingente), Tokenbudget, Speicher, Lizenzen, Daten- und Labelaufwand sowie Personal für Betrieb und Nachprüfung. Lastspitzen planen (Monatsende, Saison).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ressourcenbedarf = Menge × Zeit je Fall / verfügbare Zeit – mit Puffer für Spitzen und Ausfälle.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diskutieren Sie die Personalfrage offen: Was passiert mit der frei werdenden Kapazität? Das ist ein Führungs- und Mitbestimmungsthema (Module 15, 16).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Prozesskennzahlen" data-part="Teil C · Steuern und verbessern">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 25 Minuten</span><h2>Prozesskennzahlen und Kennzahlensysteme</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kennzahl</th><th>Berechnung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>Durchlaufzeit</td><td>Ende − Start je Fall, Mittelwert/Median</td><td>Median 2,5 Tage</td></tr>
+          <tr><td>Termintreue</td><td>pünktliche Fälle / alle Fälle</td><td>94 %</td></tr>
+          <tr><td>Fehlerquote</td><td>fehlerhafte / alle Fälle</td><td>1,8 %</td></tr>
+          <tr><td>Erstlösungsquote</td><td>ohne Rückfrage gelöste / alle</td><td>82 %</td></tr>
+          <tr><td>Kosten je Fall</td><td>Prozesskosten / Fallzahl</td><td>4,20 €</td></tr>
+          <tr><td>Automatisierungsquote</td><td>ohne manuellen Eingriff / alle</td><td>68 %</td></tr>
+          <tr><td>Durchsatz</td><td>erledigte Fälle je Zeiteinheit</td><td>140 je Tag</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Gute Kennzahlen</b> sind relevant für das Ziel, eindeutig definiert, automatisch erhebbar und beeinflussbar. Sie werden in Systemen zusammengefasst, z. B. der <b>Balanced Scorecard</b> mit vier Perspektiven: Finanzen, Kunden, Prozesse, Lernen und Entwicklung (Modul 14).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Wenige, klar definierte Kennzahlen je Prozess – mit Zielwert, Verantwortlichem und Messrhythmus.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Was gemessen wird, wird optimiert – auch auf Kosten anderer Ziele. Wer nur die Bearbeitungszeit misst, bekommt schnelle, aber fehlerhafte Arbeit. Kennzahlen immer im Paar (Zeit <b>und</b> Qualität).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Falle ist dieselbe wie beim bestärkenden Lernen (Modul 1, Belohnung austricksen) – nur bei Menschen. Ein gutes Gesprächsthema über Führung mit Kennzahlen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Prozessüberwachung" data-part="Teil C · Steuern und verbessern">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 25 Minuten</span><h2>Prozessüberwachung, -prüfung und -bewertung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Die Heizung im Haus hat ein Thermostat: Sie misst ständig, vergleicht mit dem Sollwert und regelt nach. Prozesse brauchen genau diesen Regelkreis.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Prozessüberwachung</b> (Monitoring) vergleicht laufend Ist- mit Sollwerten und löst bei Abweichungen Maßnahmen aus. <b>Prüfungen</b> (Audits) bewerten in Abständen, ob Prozesse wirksam, regelkonform und dokumentiert sind.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Instrument</th><th>Zweck</th></tr></thead>
+        <tbody>
+          <tr><td>Dashboard mit Ampel</td><td>Kennzahlen auf einen Blick, Abweichungen sichtbar</td></tr>
+          <tr><td>Regelkarte (Statistische Prozesskontrolle)</td><td>Werte außerhalb Mittelwert ± 3σ zeigen Störungen (Modul 3)</td></tr>
+          <tr><td>Internes Audit</td><td>Abläufe gegen Vorgaben prüfen (z. B. ISO 9001)</td></tr>
+          <tr><td>Management-Review</td><td>Leitung bewertet Prozessleistung und entscheidet Maßnahmen</td></tr>
+          <tr><td>KI-Monitoring</td><td>Modellgüte, Drift, Anteil Nachprüfung, Fehlalarme (Modul 6, 7)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Messen – vergleichen – eingreifen: Ohne Regelkreis bleibt jedes Prozessziel ein Wunsch.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>§ 5 nennt ausdrücklich „(Veranlassen von) KI-relevanten Prozessüberwachungen, -prüfungen und -bewertungen“. Nennen Sie in Antworten immer, <b>wer</b> überwacht, <b>was</b> gemessen wird und <b>was bei Abweichung</b> passiert.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Verknüpfen Sie Prozess- und KI-Monitoring: Wenn die Automatisierungsquote sinkt, kann das an Drift im Modell liegen – zwei Sichten auf dasselbe Problem.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="PDCA, KVP und Six Sigma" data-part="Teil C · Steuern und verbessern">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Kontinuierliche Verbesserung: PDCA, KVP, Six Sigma (DMAIC)</h2></div>
+      <figure class="board">
+        <img src="gifs/pdca.gif" width="640" height="380" alt="Animation: Ein Rad mit den vier Feldern Plan, Do, Check, Act rollt eine Rampe hinauf; ein Keil darunter steht für den Standard, der das Erreichte sichert." loading="lazy">
+        <figcaption>Der Deming-Kreis rollt bergauf, der Standard verhindert das Zurückrollen.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Ansatz</th><th>Ablauf</th><th>Eignung</th></tr></thead>
+        <tbody>
+          <tr><td><b>PDCA</b> (Deming)</td><td>Plan (planen) – Do (im Kleinen umsetzen) – Check (prüfen) – Act (standardisieren)</td><td>jede Verbesserung, auch KI-Piloten</td></tr>
+          <tr><td><b>KVP / Kaizen</b></td><td>viele kleine Verbesserungen durch alle Beschäftigten</td><td>Kulturthema, dauerhaft</td></tr>
+          <tr><td><b>Six Sigma – DMAIC</b></td><td>Define – Measure – Analyze – Improve – Control</td><td>datengetriebene Projekte mit messbarem Qualitätsproblem</td></tr>
+          <tr><td><b>Lean</b></td><td>Verschwendung beseitigen, Fluss herstellen</td><td>Durchlaufzeiten, Bestände</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>„Six Sigma“ steht für ein Qualitätsniveau von etwa 3,4 Fehlern pro Million Möglichkeiten. DMAIC passt gut zu KI-Projekten: Problem definieren, Ist messen, Ursachen mit Daten analysieren, verbessern (z. B. mit einem Modell), Ergebnis dauerhaft absichern (Monitoring).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>PDCA im Kleinen, DMAIC für datengetriebene Verbesserungsprojekte – und immer mit einem Standard absichern.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie, wie ein KI-Pilot ein PDCA-Zyklus ist: Plan (Ziel, Messgröße), Do (Pilot an einem Standort), Check (Vergleich mit Baseline), Act (Rollout oder Abbruch).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Process Mining" data-part="Teil C · Steuern und verbessern">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 30 Minuten</span><h2>Process Mining: der Prozess, wie er wirklich läuft</h2></div>
+      <figure class="board">
+        <img src="gifs/process-mining.gif" width="640" height="380" alt="Animation: Links füllt sich ein Ereignisprotokoll mit Fall-ID, Aktivität und Zeit für zwei Aufträge. Rechts entsteht daraus eine Prozesskarte: Auftrag angelegt, Kredit geprüft, Ware versandt, mit einer Schleife über Auftrag geändert." loading="lazy">
+        <figcaption>Aus Ereignisprotokollen wird der tatsächliche Ablauf sichtbar.</figcaption>
+      </figure>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Process Mining</b> rekonstruiert Prozesse aus den Ereignisprotokollen (Event Logs) der IT-Systeme. Mindestens nötig: <b>Fall-ID</b>, <b>Aktivität</b>, <b>Zeitstempel</b>. Ergebnis: die tatsächlichen Abläufe mit Häufigkeiten, Varianten, Schleifen, Wartezeiten und Engpässen.</p>
+        </div>
+        <div class="box tipp"><span class="box-label">Prüfungstipp</span>
+          <p>Drei Typen: <b>Discovery</b> (Prozess entdecken), <b>Conformance Checking</b> (Ist gegen Soll prüfen), <b>Enhancement</b> (Modell mit Zeiten, Kosten, Engpässen anreichern).</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p>Process Mining ist ideal vor einem KI-Projekt (Wo hakt es wirklich?) und danach (Hat sich der Ablauf verbessert?). Werkzeuge: z. B. Celonis, Signavio, Disco, PM4Py (Python). Bei personenbezogenen Protokollen gelten Datenschutz und Mitbestimmung – Auswertungen auf Prozess-, nicht auf Personenebene.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Fall-ID + Aktivität + Zeitstempel genügen, um den echten Prozess sichtbar zu machen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Welche Systeme im eigenen Betrieb protokollieren schon Fall-ID, Aktivität und Zeit (ERP, Ticketsystem, Workflow)? Dort liegt ein schneller Einstieg.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Rollen im Prozessmanagement" data-part="Teil C · Steuern und verbessern">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 20 Minuten</span><h2>Rollen: Prozesseigner, Prozessverantwortliche, Beteiligte</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rolle</th><th>Aufgabe</th></tr></thead>
+        <tbody>
+          <tr><td><b>Prozesseigner</b> (Process Owner)</td><td>verantwortet Ziele, Kennzahlen und Weiterentwicklung des gesamten Prozesses über Abteilungsgrenzen</td></tr>
+          <tr><td><b>Prozessmanager / -koordinator</b></td><td>steuert den Prozess im Alltag, beobachtet Kennzahlen, stößt Verbesserungen an</td></tr>
+          <tr><td><b>Prozessbeteiligte</b></td><td>führen Aktivitäten aus, melden Probleme, bringen Verbesserungen ein</td></tr>
+          <tr><td><b>Methodenexperte</b> (z. B. Lean, Six Sigma)</td><td>unterstützt Analyse und Verbesserung</td></tr>
+          <tr><td><b>KI-Verantwortlicher / Model Owner</b></td><td>verantwortet das Modell im Prozess: Güte, Monitoring, Neutraining, Dokumentation</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>In einer <b>RACI-Matrix</b> (Modul 9) wird je Aufgabe festgelegt, wer verantwortlich (Responsible), rechenschaftspflichtig (Accountable), zu konsultieren (Consulted) und zu informieren (Informed) ist. Für KI-Prozesse ist besonders wichtig, wer bei Modellfehlern entscheidet – Prozesseigner oder Model Owner.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Jeder Prozess braucht einen Eigner mit Verantwortung über Abteilungsgrenzen – und jedes Modell im Prozess einen Verantwortlichen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Abschluss: Lassen Sie für den eigenen Prozess Eigner, Model Owner und Eskalationsweg bei Modellfehlern festlegen. Das gehört in jede Transferarbeit.</p>
+      </aside>
+    </section>

@@ -1,0 +1,176 @@
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Wie eine Maschine lernt" data-part="Teil B · Wie Maschinen lernen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 30 Minuten</span><h2>Modell, Parameter, Fehler: Wie eine Maschine lernt</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Einem Kind erklärt niemand per Regel, was einen Hund von einer Katze unterscheidet. Es sieht viele Tiere, jemand sagt „Hund“ oder „Katze“, das Kind liegt manchmal falsch, wird korrigiert – und irgendwann erkennt es neue Tiere sicher.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Modell</b> ist eine Rechenvorschrift mit vielen Stellschrauben, den <b>Parametern</b>. Beim <b>Training</b> vergleicht das Verfahren die Vorhersagen mit den richtigen Antworten, misst den <b>Fehler</b> (Verlust, englisch <i>loss</i>) und verstellt die Parameter so, dass der Fehler kleiner wird. Das wiederholt sich viele Male.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/regeln-vs-lernen.gif" width="640" height="380" alt="Animation: Oben schreibt ein Mensch Regeln, ein Programm erzeugt daraus Antworten. Unten gehen Daten und bekannte Antworten in das Lernen, heraus kommen die Regeln als Modell." loading="lazy">
+        <figcaption>Klassisch: Regeln rein, Antworten raus. Maschinelles Lernen: Beispiele rein, Regeln raus.</figcaption>
+      </figure>
+      <figure class="board">
+        <img src="gifs/training.gif" width="640" height="380" alt="Animation: Eine Gerade dreht und verschiebt sich Schritt für Schritt, bis sie gut durch eine Punktwolke passt. Rechts fällt die Fehlerkurve." loading="lazy">
+        <figcaption>Training: Fehler messen, Stellschrauben anpassen, wiederholen.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Die Bausteine des Lernens</h3>
+        <ol class="steps">
+          <li><span><b>Modell wählen</b> – z. B. eine Gerade y = b₀ + b₁·x. Die Parameter b₀ und b₁ sind noch unbekannt.</span></li>
+          <li><span><b>Vorhersagen</b> für alle Trainingsbeispiele berechnen.</span></li>
+          <li><span><b>Fehler messen</b> mit einer Verlustfunktion, z. B. dem mittleren quadratischen Fehler.</span></li>
+          <li><span><b>Parameter anpassen</b> in die Richtung, in der der Fehler sinkt (Gradientenabstieg, Modul 3).</span></li>
+          <li><span><b>Wiederholen</b>, bis der Fehler nicht mehr deutlich sinkt.</span></li>
+        </ol>
+        <p><b>Parameter</b> lernt das Modell selbst. <b>Hyperparameter</b> legen Menschen vorher fest – etwa wie schnell gelernt wird (Lernrate) oder wie tief ein Entscheidungsbaum werden darf.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Lernen heißt: Parameter so lange verstellen, bis die Vorhersagen auf den Trainingsbeispielen möglichst wenig falsch sind.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Erklären Sie den Unterschied zwischen Parameter und Hyperparameter“ ist eine Standardfrage. Kurz: Parameter werden gelernt, Hyperparameter werden vorgegeben.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie zuerst die obere Animation und betonen Sie die Umkehrung: Beim maschinellen Lernen sind die Regeln das Ergebnis. Dann die Trainingsanimation: Die roten Striche sind die Fehler je Beispiel. Fragen Sie: „Wann ist die Gerade fertig?“ – Wenn der Fehler kaum noch sinkt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Training, Validierung, Test" data-part="Teil B · Wie Maschinen lernen">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Training, Validierung, Test – und warum man nie mit Testdaten lernt</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer für eine Prüfung nur die Musterlösungen auswendig lernt, schreibt eine glatte 1 – solange genau diese Aufgaben drankommen. Bei neuen Aufgaben fällt er durch. Ehrlich ist nur eine Prüfung mit Aufgaben, die man vorher <b>nicht</b> gesehen hat.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die Daten werden vor dem Training aufgeteilt: <b>Trainingsdaten</b> zum Lernen der Parameter, <b>Validierungsdaten</b> zum Einstellen der Hyperparameter und zum Vergleichen von Modellen, <b>Testdaten</b> nur ganz am Ende für eine ehrliche Schätzung, wie gut das Modell bei neuen Fällen ist.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/datensplit.gif" width="640" height="380" alt="Animation: 100 Kästchen werden zufällig in drei Gruppen sortiert: 70 Training, 15 Validierung, 15 Test." loading="lazy">
+        <figcaption>Typische Aufteilung: 70 / 15 / 15 – je nach Datenmenge auch 80 / 10 / 10.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Was dabei schiefgehen kann</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Was passiert</th><th>Erkennbar an</th></tr></thead>
+          <tbody>
+            <tr><td><b>Overfitting</b> (Überanpassung)</td><td>Modell lernt Trainingsbeispiele samt Zufall auswendig</td><td>Training sehr gut, Test deutlich schlechter</td></tr>
+            <tr><td><b>Underfitting</b> (Unteranpassung)</td><td>Modell ist zu einfach für den Zusammenhang</td><td>Training und Test schlecht</td></tr>
+            <tr><td><b>Data Leakage</b></td><td>Informationen aus den Testdaten oder aus der Zukunft gelangen ins Training</td><td>Unglaublich gute Testwerte, später Enttäuschung im Betrieb</td></tr>
+          </tbody>
+        </table></div>
+        <p>Bei <b>Zeitreihen</b> (z. B. Absatz je Woche) wird nicht zufällig, sondern zeitlich getrennt: mit der Vergangenheit trainieren, mit dem jüngsten Zeitraum testen. Sonst „kennt“ das Modell die Zukunft.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Testdaten sind wie die echte Prüfung: Sie bleiben bis zum Schluss verschlossen – sonst ist das Ergebnis geschönt.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>„Wir haben auf allen Daten trainiert und auf allen Daten 99 % erreicht.“ Diese Zahl sagt nichts darüber, wie gut das Modell neue Fälle erkennt. In Situationsaufgaben wird genau dieser Fehler gern versteckt.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Modell erreicht 99 % im Training und 72 % im Test. Was liegt vor?</p>
+        <div class="check-opts">
+          <button type="button" class="opt" data-right="true">Overfitting</button>
+          <button type="button" class="opt">Underfitting</button>
+          <button type="button" class="opt">Ein sehr gutes Modell</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Die große Lücke zwischen Training und Test zeigt Auswendiglernen." data-no="Nicht ganz. Underfitting wäre in beiden Fällen schlecht. Die große Lücke zwischen Training und Test ist das Zeichen für Overfitting."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Prüfungsbeispiel mit der Musterlösung bleibt hängen. Ergänzen Sie: Validierungsdaten sind wie Probeklausuren – man darf sich an ihnen orientieren, aber dann sind sie „verbraucht“ und taugen nicht mehr als ehrliche Endprüfung. Details zu Kreuzvalidierung folgen in Modul 4.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Regression" data-part="Teil B · Wie Maschinen lernen">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 20 Minuten</span><h2>Regression: Zahlen vorhersagen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Maklerin schätzt den Preis einer Wohnung: größer, neuer und zentraler heißt teurer. Sie gibt eine <b>Zahl</b> an, keinen Daumen hoch oder runter.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Bei der <b>Regression</b> ist die Zielgröße <b>metrisch</b> – eine Zahl auf einer durchgehenden Skala: Preis, Absatzmenge, Temperatur, Restlebensdauer, Lieferzeit. Das Modell lernt, wie sich die Zielgröße mit den Merkmalen verändert.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/regression-klassifikation.gif" width="640" height="380" alt="Animation: Links wird eine Gerade durch Punkte gelegt, um einen Preis zu schätzen. Rechts trennt eine Linie rote Spam-Punkte von grünen Nicht-Spam-Punkten." loading="lazy">
+        <figcaption>Links Regression (eine Zahl), rechts Klassifikation (eine Kategorie).</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Beispiel</h3>
+        <p>Ein Modell schätzt den Mietpreis: <span class="calcline">Miete = 120 € + 11,50 € · Wohnfläche</span>. Für 70 m² ergibt sich <span class="calcline">120 + 11,50 · 70 = 925 €</span>. Die Zahl 11,50 heißt: Jeder zusätzliche Quadratmeter erhöht die geschätzte Miete um 11,50 €.</p>
+        <h3>Typische Regressionsaufgaben im Betrieb</h3>
+        <ul>
+          <li>Absatz der nächsten Woche je Filiale schätzen</li>
+          <li>Energieverbrauch einer Halle für morgen vorhersagen</li>
+          <li>Restlebensdauer eines Lagers in Betriebsstunden</li>
+          <li>Bearbeitungszeit eines Auftrags</li>
+        </ul>
+        <p>Wie gut eine Regression ist, misst man mit dem durchschnittlichen Fehler, z. B. MAE oder RMSE (Modul 4).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Regression = Vorhersage einer Zahl.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie das Mietbeispiel im Kopf rechnen. Fragen Sie nach Beispielen aus dem eigenen Betrieb, bei denen eine Zahl geschätzt wird. Die Rechnung selbst (Methode der kleinsten Quadrate) kommt in Modul 3.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Klassifikation" data-part="Teil B · Wie Maschinen lernen">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 20 Minuten</span><h2>Klassifikation: Kategorien vorhersagen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Am Flughafen wird jeder Koffer einem Band zugeordnet: Frankfurt, München, Hamburg. Es gibt nur feste Fächer – kein „ein bisschen Frankfurt“.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Bei der <b>Klassifikation</b> ist die Zielgröße eine <b>Kategorie</b> (Klasse). Viele Verfahren geben zusätzlich eine <b>Wahrscheinlichkeit</b> aus, z. B. „Spam mit 93 %“. Erst eine <b>Schwelle</b> (etwa 50 %) macht daraus eine Entscheidung.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Art</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Binär</b></td><td>genau zwei Klassen</td><td>Kündigt ja/nein, Bauteil in Ordnung/Ausschuss</td></tr>
+          <tr><td><b>Mehrklassen</b></td><td>eine von mehreren Klassen</td><td>Anfrage → Abteilung Vertrieb, Technik oder Buchhaltung</td></tr>
+          <tr><td><b>Multi-Label</b></td><td>mehrere Klassen gleichzeitig möglich</td><td>Ein Foto zeigt „Person“ und „Fahrrad“ und „Straße“</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Klassifikation = Vorhersage einer Kategorie. Die Wahrscheinlichkeit dahinter wird über eine Schwelle zur Entscheidung.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Die <b>logistische Regression</b> ist trotz ihres Namens ein <b>Klassifikationsverfahren</b> – sie schätzt die Wahrscheinlichkeit einer Klasse. Eine beliebte Prüfungsfrage.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Modell schätzt die Wahrscheinlichkeit, dass ein Kunde in den nächsten 90 Tagen kündigt. Welcher Aufgabentyp ist das?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Regression, weil eine Zahl herauskommt</button>
+          <button type="button" class="opt" data-right="true">Binäre Klassifikation</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Die Zielgröße ist „kündigt ja/nein“. Die Wahrscheinlichkeit ist nur die Stärke der Einschätzung." data-no="Nicht ganz. Entscheidend ist die Zielgröße: „kündigt ja/nein“ ist eine Kategorie. Die ausgegebene Wahrscheinlichkeit macht daraus keine Regression."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Kontrollfrage ist die häufigste Verwechslung überhaupt. Merkregel: Schauen Sie auf die Zielgröße in den Trainingsdaten, nicht auf die Ausgabe des Modells.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Überwachtes Lernen" data-part="Teil C · Arten des maschinellen Lernens">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 20 Minuten</span><h2>Überwachtes Lernen: Lernen mit richtigen Antworten</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Fahrschülerin fährt, der Fahrlehrer sagt bei jedem Fehler sofort, was richtig gewesen wäre. Lernen mit Lehrer – das ist überwachtes Lernen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Beim <b>überwachten Lernen</b> (supervised learning) enthält jedes Trainingsbeispiel die <b>richtige Antwort</b> (Label). Das Modell lernt die Abbildung von den Merkmalen auf das Label. Die beiden Aufgabentypen sind <b>Regression</b> und <b>Klassifikation</b>.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/lernarten.gif" width="640" height="380" alt="Animation: Drei Felder. Überwacht: farbig markierte Punkte werden durch eine Linie getrennt. Unüberwacht: graue Punkte färben sich in zwei Gruppen. Bestärkend: ein Agent läuft durch ein Gitter zum Belohnungsfeld." loading="lazy">
+        <figcaption>Die drei klassischen Lernarten – sie unterscheiden sich darin, welche Information beim Lernen vorliegt.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Woher kommen die Labels?</h3>
+        <ul>
+          <li><b>Aus dem Geschäftsprozess</b>: Hat der Kunde gekündigt? Wurde die Rechnung bezahlt? – entsteht nebenbei.</li>
+          <li><b>Von Fachleuten</b>: Ärzte bewerten Röntgenbilder, Prüfer markieren fehlerhafte Bauteile – teuer und langsam.</li>
+          <li><b>Aus der Zukunft</b>: Der tatsächliche Absatz von gestern wird zum Label für die Prognose von gestern.</li>
+        </ul>
+        <p>Labels kosten oft am meisten Zeit und Geld in einem KI-Projekt. Fehlerhafte Labels („Label-Rauschen“) begrenzen, wie gut ein Modell werden kann.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Überwacht = mit Labels. Ergebnis: eine Zahl (Regression) oder eine Kategorie (Klassifikation).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Betonen Sie die Kosten der Labels – das ist ein Bachelor-Thema: Wer ein KI-Projekt plant, muss Zeit und Budget für das Labeln einplanen und die Qualität der Labels sichern.</p>
+      </aside>
+    </section>

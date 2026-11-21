@@ -1,0 +1,223 @@
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Unüberwachtes Lernen" data-part="Teil C · Arten des maschinellen Lernens">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 20 Minuten</span><h2>Unüberwachtes Lernen: Muster ohne Vorgaben finden</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Sie kippen eine Kiste mit Legosteinen aus und sortieren, ohne dass jemand Fächer vorgibt. Am Ende liegen ähnliche Steine zusammen – nach Farbe, Form oder Größe. Welche Ordnung „richtig“ ist, entscheiden Sie erst danach.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Beim <b>unüberwachten Lernen</b> gibt es <b>keine Labels</b>. Das Verfahren sucht selbst nach Strukturen in den Daten. Typische Aufgaben:</p>
+          <ul>
+            <li><b>Clustering</b>: ähnliche Beispiele zu Gruppen zusammenfassen (z. B. k-Means).</li>
+            <li><b>Dimensionsreduktion</b>: viele Merkmale auf wenige verdichten (z. B. PCA).</li>
+            <li><b>Anomalieerkennung</b>: ungewöhnliche Fälle finden.</li>
+            <li><b>Assoziationsregeln</b>: „Wer A kauft, kauft oft auch B“.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Beispiel Kundensegmente</h3>
+        <p>Ein Onlinehändler gruppiert seine Kundschaft nach Kaufhäufigkeit, Warenkorbwert und Zeit seit dem letzten Kauf. Heraus kommen etwa „Stammkunden mit hohem Umsatz“, „Schnäppchenjäger“ und „Eingeschlafene“. Die Namen vergibt danach ein Mensch – das Verfahren liefert nur die Gruppen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Unüberwacht = ohne Labels. Das Verfahren findet Gruppen, Ausreißer oder Vereinfachungen; die Bedeutung legt ein Mensch fest.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Clustering ist <b>keine</b> Klassifikation. Bei der Klassifikation sind die Klassen vorher bekannt und in den Trainingsdaten markiert; beim Clustering entstehen die Gruppen erst.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie noch einmal das mittlere Feld der Lernarten-Animation. Fragen Sie: „Wie viele Gruppen gibt es?“ – Die Antwort ist nicht eindeutig. Genau deshalb braucht unüberwachtes Lernen fachliche Deutung (Modul 4).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Bestärkendes Lernen" data-part="Teil C · Arten des maschinellen Lernens">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 20 Minuten</span><h2>Bestärkendes Lernen: Lernen durch Belohnung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Hund lernt „Sitz“, weil es danach ein Leckerli gibt. Niemand zeigt ihm die Bewegung – er probiert, und was belohnt wird, macht er öfter.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Beim <b>bestärkenden Lernen</b> (Reinforcement Learning, RL) handelt ein <b>Agent</b> in einer <b>Umgebung</b>. Er beobachtet einen <b>Zustand</b>, wählt eine <b>Aktion</b> und erhält eine <b>Belohnung</b> (positiv oder negativ). Ziel ist eine <b>Strategie</b> (Policy), die die Summe der Belohnungen auf lange Sicht maximiert.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Wo es eingesetzt wird</h3>
+        <ul>
+          <li>Robotik: Greifen, Laufen, Balancieren</li>
+          <li>Steuerung: Klimaanlagen in Rechenzentren, Ampelschaltungen, Lagerroboter</li>
+          <li>Spiele: Schach, Go, Computerspiele</li>
+          <li>Feinschliff von Sprachmodellen: <b>RLHF</b> – Reinforcement Learning from Human Feedback; Menschen bewerten Antworten, das Modell lernt daraus, hilfreichere Antworten zu geben</li>
+        </ul>
+        <p><b>Zielkonflikt Erkunden oder Ausnutzen</b> (exploration vs. exploitation): Probiert der Agent Neues aus, oder nutzt er, was sich bewährt hat?</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bestärkend = ein Agent lernt durch Ausprobieren, welche Handlungen sich langfristig lohnen.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Eine schlecht gewählte Belohnung wird ausgetrickst: Belohnt man einen Reinigungsroboter für „keinen Schmutz sehen“, lernt er womöglich, die Kamera abzudecken. Die Belohnung muss das eigentliche Ziel treffen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Beispiel mit dem Reinigungsroboter zeigt ein echtes Führungsthema: Auch bei Menschen führen falsch gesetzte Kennzahlen zu falschem Verhalten. Diese Brücke zu Modul 15 lohnt sich.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Selbstüberwachtes Lernen" data-part="Teil C · Arten des maschinellen Lernens">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 20 Minuten</span><h2>Selbstüberwachtes Lernen und Foundation Models</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Lückentext: „Morgens trinke ich eine Tasse ___.“ Sie wissen sofort: Kaffee oder Tee. Niemand musste Ihnen die Lösung geben – die Sprache selbst liefert die Aufgabe und die Antwort.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Beim <b>selbstüberwachten Lernen</b> (self-supervised learning) erzeugt das Verfahren die Labels <b>aus den Daten selbst</b>: Ein Teil wird verdeckt, das Modell soll ihn vorhersagen – etwa das nächste Wort in einem Text. So kann man mit riesigen Mengen ungelabelter Daten lernen.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Foundation Models</h3>
+        <p>So entstehen <b>Foundation Models</b> (Basismodelle): sehr große Modelle, die auf breiten Daten vortrainiert sind und für viele Aufgaben angepasst werden können. Große Sprachmodelle sind das bekannteste Beispiel. Die EU-KI-Verordnung nennt sie <b>KI-Modelle mit allgemeinem Verwendungszweck</b> und stellt eigene Pflichten an ihre Anbieter (Modul 12).</p>
+        <h3>Weitere Mischformen</h3>
+        <ul>
+          <li><b>Halbüberwachtes Lernen</b>: wenige gelabelte und viele ungelabelte Beispiele zusammen.</li>
+          <li><b>Transfer Learning</b>: ein vortrainiertes Modell wird mit wenigen eigenen Beispielen auf eine neue Aufgabe angepasst.</li>
+          <li><b>Aktives Lernen</b>: das Modell fragt gezielt nach Labels für die Fälle, bei denen es am unsichersten ist.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Selbstüberwacht = die Daten liefern ihre Aufgaben selbst. So entstehen große Basismodelle, die man danach anpasst.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Fragt die Prüfung nach den „drei Lernparadigmen“, sind überwacht, unüberwacht und bestärkend gemeint. Selbstüberwacht dürfen Sie als moderne Ergänzung nennen – das zeigt Bachelor-Niveau.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Machen Sie das Lückentext-Spiel mit drei Sätzen. Dann: Ein Sprachmodell hat genau das milliardenfach gemacht. Transfer Learning ist für Betriebe besonders wichtig – man muss nicht bei null anfangen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Algorithmen im Überblick" data-part="Teil D · KI im Einsatz">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Algorithmen im Überblick</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Für jede Aufgabe gibt es das passende Werkzeug im Werkzeugkasten: Schraubenzieher, Zange, Säge. Mit allem kann man irgendwie arbeiten – aber nicht mit allem gleich gut.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Algorithmus</b> ist eine eindeutige Handlungsvorschrift in endlich vielen Schritten. Im ML unterscheidet man den <b>Lernalgorithmus</b> (wie trainiert wird) vom fertigen <b>Modell</b> (dem Ergebnis mit gelernten Parametern).</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Familie</th><th>Idee</th><th>Typisch für</th><th>Erklärbar?</th></tr></thead>
+        <tbody>
+          <tr><td><b>Lineare Modelle</b> (lineare, logistische Regression)</td><td>gewichtete Summe der Merkmale</td><td>Prognosen, Wahrscheinlichkeiten, Basismodell</td><td>gut</td></tr>
+          <tr><td><b>Entscheidungsbäume</b></td><td>Folge von Ja/Nein-Fragen</td><td>Tabellendaten, Regeln für Fachabteilungen</td><td>gut</td></tr>
+          <tr><td><b>Ensembles</b> (Random Forest, Gradient Boosting)</td><td>viele Bäume stimmen ab</td><td>Tabellendaten mit hoher Genauigkeit</td><td>mittel</td></tr>
+          <tr><td><b>Nachbarschaftsverfahren</b> (k-nächste Nachbarn)</td><td>„Sag mir, wer deine Nachbarn sind“</td><td>Empfehlungen, kleine Datensätze</td><td>mittel</td></tr>
+          <tr><td><b>Clusterverfahren</b> (k-Means, DBSCAN)</td><td>ähnliche Punkte gruppieren</td><td>Segmente, Anomalien</td><td>mittel</td></tr>
+          <tr><td><b>Neuronale Netze</b> (Deep Learning)</td><td>viele Schichten künstlicher Neuronen</td><td>Bild, Sprache, Text, sehr große Daten</td><td>gering</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Faustregel:</b> Bei Tabellendaten zuerst ein einfaches, erklärbares Modell als <b>Baseline</b> – oft schlagen Gradient-Boosting-Verfahren dort neuronale Netze. Bei Bildern, Sprache und Text sind neuronale Netze Stand der Technik.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Es gibt nicht „den besten“ Algorithmus. Gewählt wird nach Datenart, Datenmenge, geforderter Genauigkeit und Erklärbarkeit.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Begründen Sie eine Verfahrenswahl immer mit mindestens zwei Kriterien aus der Situation, z. B.: „Tabellendaten mit 20.000 Zeilen und Erklärungspflicht gegenüber dem Kunden – daher Entscheidungsbaum oder logistische Regression statt neuronalem Netz.“</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Verfahren werden in Modul 3 bis 5 einzeln erklärt und gerechnet. Hier reicht die Landkarte. Wichtig für Führungskräfte: Ein erklärbares Modell mit 2 % weniger Genauigkeit ist oft die bessere Geschäftsentscheidung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Einsatz von KI-Modellen" data-part="Teil D · KI im Einsatz">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 25 Minuten</span><h2>Einsatz von KI-Modellen: Inferenz, Betrieb, Lebenszyklus</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein frisch ausgebildeter Mitarbeiter arbeitet nicht für immer allein vor sich hin: Er wird eingearbeitet, bekommt Rückmeldung, wird nachgeschult, wenn sich Produkte ändern. Mit einem KI-Modell ist es genauso.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ist ein Modell trainiert, wird es auf neue Daten angewendet – das heißt <b>Inferenz</b>. Damit es im Betrieb nützt, muss es in Prozesse und IT-Systeme eingebunden, überwacht und regelmäßig aktualisiert werden.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/lebenszyklus.gif" width="640" height="380" alt="Animation: Sechs Stationen im Kreis leuchten nacheinander auf: Problem, Daten, Modell, Bewertung, Einsatz, Überwachung – dann schließt sich der Kreis." loading="lazy">
+        <figcaption>Ein Modell ist nie „fertig“: Daten und Welt ändern sich.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Einsatzform</th><th>Wie</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Batch</b></td><td>regelmäßig viele Fälle auf einmal</td><td>Jede Nacht Kündigungswahrscheinlichkeit für alle Kunden</td></tr>
+          <tr><td><b>Echtzeit (online)</b></td><td>Anfrage → Antwort in Millisekunden, meist über eine Schnittstelle (API)</td><td>Betrugsprüfung bei jeder Kartenzahlung</td></tr>
+          <tr><td><b>Edge</b></td><td>direkt auf dem Gerät, ohne Cloud</td><td>Kamera an der Fertigungslinie, Smartphone</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Im Betrieb ändert sich die Welt: neue Produkte, neues Kundenverhalten, neue Sensoren. Dann passen die gelernten Zusammenhänge nicht mehr – man spricht von <b>Drift</b>. Deshalb wird überwacht und bei Bedarf neu trainiert. Das systematische Vorgehen dafür heißt <b>MLOps</b> (Modul 7). Als Vorgehensmodell für Datenprojekte ist <b>CRISP-DM</b> verbreitet: Geschäftsverständnis, Datenverständnis, Datenvorbereitung, Modellierung, Evaluation, Bereitstellung.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Training ist einmalig, Inferenz läuft täglich – und Überwachung hört nie auf.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Viele KI-Projekte scheitern nicht am Modell, sondern am Weg in den Betrieb. Fragen Sie: „Wer ist in Ihrem Unternehmen zuständig, wenn das Modell nach einem Jahr schlechter wird?“ – Diese Frage taucht im Fachgespräch auf.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Beispielanwendungen nach Branchen" data-part="Teil D · KI im Einsatz">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 25 Minuten</span><h2>Typische Beispielanwendungen nach Branchen</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Industrie</h3><p>Vorausschauende Wartung aus Sensordaten (Regression), optische Qualitätsprüfung (Klassifikation, Deep Learning), Prozessoptimierung.</p></div>
+        <div class="card"><h3>Handel</h3><p>Absatzprognose (Regression), Empfehlungen (Nachbarschaft), Kundensegmente (Clustering), dynamische Preise.</p></div>
+        <div class="card"><h3>Banken und Versicherungen</h3><p>Betrugserkennung (Klassifikation, Anomalien), Bonitätsbewertung (Hochrisiko nach EU-KI-Verordnung), Schadenschätzung.</p></div>
+        <div class="card"><h3>Gesundheit</h3><p>Bildauswertung in der Radiologie, Terminplanung, Dokumentation per Spracherkennung.</p></div>
+        <div class="card"><h3>Logistik</h3><p>Routenoptimierung, Ankunftszeiten schätzen, Lagerroboter (bestärkendes Lernen).</p></div>
+        <div class="card"><h3>Verwaltung und Service</h3><p>Belege auslesen, Anfragen klassifizieren, Antworten entwerfen mit generativer KI und RAG.</p></div>
+        <div class="card"><h3>Personal</h3><p>Dienstplanung, Wissenssuche; Bewerberauswahl ist nach EU-KI-Verordnung Hochrisiko.</p></div>
+        <div class="card"><h3>Energie</h3><p>Last- und Einspeiseprognosen für Wind und Sonne, Netzsteuerung.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Wie man einen Anwendungsfall beschreibt</h3>
+        <p>Ein guter Use Case beantwortet fünf Fragen: <b>Welches Problem</b> lösen wir? <b>Welche Entscheidung</b> unterstützt das Modell? <b>Welche Daten</b> haben wir? <b>Was gibt das Modell aus</b> (Zahl, Klasse, Text)? <b>Woran messen wir den Nutzen</b> (z. B. weniger Ausschuss, kürzere Bearbeitungszeit)?</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein KI-Anwendungsfall ist erst dann gut beschrieben, wenn klar ist, welche Entscheidung besser wird und woran man das misst.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Für die Transferarbeit suchen Sie genau so einen Anwendungsfall in Ihrem eigenen Betrieb. Notieren Sie schon jetzt Ideen – die fünf Fragen sind ein guter Start für den Themenvorschlag.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie jede Person einen Anwendungsfall aus ihrem Betrieb mit den fünf Fragen beschreiben. Sammeln Sie die besten an der Wand – das ist der Ideenspeicher für spätere Transferarbeiten.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Die richtige Lernart wählen" data-part="Teil D · KI im Einsatz">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 20 Minuten</span><h2>Die richtige Lernart wählen – ein Entscheidungsweg</h2></div>
+      <div class="flow">
+        <div class="flow-step"><p class="flow-q">1. Soll ein System durch Handeln in einer Umgebung lernen, mit Belohnung für Erfolg?</p><div class="flow-a"><span class="yes">Ja → bestärkendes Lernen</span><span class="no">Nein → weiter</span></div></div>
+        <div class="flow-step"><p class="flow-q">2. Gibt es für die Trainingsbeispiele die richtige Antwort (Label)?</p><div class="flow-a"><span class="yes">Ja → überwachtes Lernen, weiter mit 3</span><span class="no">Nein → unüberwachtes Lernen, weiter mit 4</span></div></div>
+        <div class="flow-step"><p class="flow-q">3. Ist die Antwort eine Zahl oder eine Kategorie?</p><div class="flow-a"><span class="yes">Zahl → Regression</span><span class="yes">Kategorie → Klassifikation</span></div></div>
+        <div class="flow-step"><p class="flow-q">4. Was wollen Sie finden?</p><div class="flow-a"><span class="yes">Gruppen → Clustering</span><span class="yes">Ausreißer → Anomalieerkennung</span><span class="yes">weniger Merkmale → Dimensionsreduktion</span></div></div>
+        <div class="flow-step"><p class="flow-q">5. Soll neuer Inhalt entstehen (Text, Bild, Code)?</p><div class="flow-a"><span class="yes">Ja → generative KI, meist ein angepasstes Basismodell</span></div></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erst fragen: Handeln mit Belohnung? Dann: Gibt es Labels? Dann: Zahl oder Kategorie?</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>„Wir haben keine Labels, also unüberwacht“ – oft lassen sich Labels aus dem Prozess gewinnen (wer hat tatsächlich gekündigt?). Prüfen Sie das, bevor Sie zum schwächeren Verfahren greifen.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Energieversorger hat Verbrauchsdaten von 50.000 Haushalten ohne weitere Angaben und will ungewöhnliche Verbräuche (z. B. defekte Zähler) entdecken. Welche Lernart?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Überwacht, Klassifikation</button>
+          <button type="button" class="opt" data-right="true">Unüberwacht, Anomalieerkennung</button>
+          <button type="button" class="opt">Bestärkend</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Es gibt keine markierten Defekte, gesucht sind Ausreißer." data-no="Nicht ganz. Es liegen keine Labels vor, und niemand handelt in einer Umgebung. Gesucht sind ungewöhnliche Fälle: unüberwachte Anomalieerkennung."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Gehen Sie mit den Anwendungsfällen aus Lektion 15 durch den Entscheidungsweg. Jede Gruppe stellt einen Fall vor, die anderen bestimmen Lernart und Aufgabentyp.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 17 -->
+    <section class="lesson" id="l17" data-title="Geschichte in Meilensteinen" data-part="Teil D · KI im Einsatz">
+      <div class="lesson-head"><span class="meta">Lektion 17 · 15 Minuten</span><h2>Kurze Geschichte der KI in Meilensteinen</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Jahr</th><th>Ereignis</th><th>Warum es wichtig ist</th></tr></thead>
+        <tbody>
+          <tr><td class="r">1950</td><td>Alan Turing schlägt den „Turing-Test“ vor</td><td>Frage: Kann eine Maschine denken?</td></tr>
+          <tr><td class="r">1956</td><td>Dartmouth-Konferenz – der Begriff „Artificial Intelligence“ entsteht</td><td>Geburtsstunde des Fachgebiets</td></tr>
+          <tr><td class="r">1958</td><td>Perzeptron von Frank Rosenblatt</td><td>erstes lernendes künstliches Neuron</td></tr>
+          <tr><td class="r">1970er, 1980er</td><td>Expertensysteme; danach „KI-Winter“</td><td>regelbasierte KI stößt an Grenzen, Förderung bricht ein</td></tr>
+          <tr><td class="r">1986</td><td>Backpropagation wird bekannt (Rumelhart, Hinton, Williams)</td><td>mehrschichtige Netze werden trainierbar</td></tr>
+          <tr><td class="r">1997</td><td>Deep Blue schlägt Schachweltmeister Kasparow</td><td>Rechenkraft und Suche statt Lernen</td></tr>
+          <tr><td class="r">2012</td><td>AlexNet gewinnt den ImageNet-Wettbewerb deutlich</td><td>Durchbruch des Deep Learning dank GPUs und großer Daten</td></tr>
+          <tr><td class="r">2016</td><td>AlphaGo besiegt den Go-Spitzenspieler Lee Sedol</td><td>Deep Learning + bestärkendes Lernen</td></tr>
+          <tr><td class="r">2017</td><td>Transformer-Architektur („Attention Is All You Need“)</td><td>Grundlage heutiger Sprachmodelle</td></tr>
+          <tr><td class="r">2022</td><td>ChatGPT wird öffentlich</td><td>generative KI erreicht die breite Masse</td></tr>
+          <tr><td class="r">2024</td><td>EU-KI-Verordnung tritt in Kraft (1. August)</td><td>erster umfassender Rechtsrahmen für KI</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Drei Dinge haben den Durchbruch gebracht: viele Daten, viel Rechenleistung (GPUs) und bessere Verfahren (Backpropagation, Transformer).</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Jahreszahlen werden selten einzeln abgefragt. Wichtiger ist die Begründung, <b>warum</b> KI seit etwa 2012 so stark wurde – die drei Treiber aus dem Merksatz.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Der KI-Winter ist eine Lehre für Führungskräfte: Überzogene Erwartungen führen zu Enttäuschung und Budgetkürzungen. Gute KI-Projekte versprechen messbaren Nutzen, keine Wunder.</p>
+      </aside>
+    </section>

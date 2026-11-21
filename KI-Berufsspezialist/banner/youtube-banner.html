@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTube Banner – KI Berufsspezialist IHK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 2560px;
+      height: 1440px;
+      overflow: hidden;
+      background: #070b12;
+    }
+    .banner {
+      width: 2560px;
+      height: 1440px;
+      position: relative;
+      background:
+        radial-gradient(ellipse 90% 70% at 18% 55%, rgba(14, 116, 144, 0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 60% at 82% 40%, rgba(30, 64, 175, 0.22) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 100%, rgba(6, 78, 59, 0.15) 0%, transparent 45%),
+        linear-gradient(165deg, #0a1018 0%, #0c1522 40%, #0a1220 70%, #080e16 100%);
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: #f1f5f9;
+      overflow: hidden;
+    }
+
+    /* subtle grid */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, black 20%, transparent 75%);
+      pointer-events: none;
+    }
+
+    /* neural dots / nodes decoration left */
+    .nodes {
+      position: absolute;
+      left: 80px;
+      top: 200px;
+      width: 520px;
+      height: 900px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .nodes svg { width: 100%; height: 100%; }
+
+    /* right side abstract ML bars */
+    .bars {
+      position: absolute;
+      right: 120px;
+      top: 280px;
+      width: 420px;
+      height: 720px;
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .bars span {
+      flex: 1;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(to top, rgba(34, 211, 238, 0.15), rgba(34, 211, 238, 0.55));
+      box-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
+    }
+    .bars span:nth-child(1) { height: 28%; }
+    .bars span:nth-child(2) { height: 48%; }
+    .bars span:nth-child(3) { height: 38%; }
+    .bars span:nth-child(4) { height: 72%; }
+    .bars span:nth-child(5) { height: 55%; }
+    .bars span:nth-child(6) { height: 88%; }
+    .bars span:nth-child(7) { height: 62%; }
+    .bars span:nth-child(8) { height: 45%; }
+    .bars span:nth-child(9) { height: 78%; }
+    .bars span:nth-child(10) { height: 35%; }
+
+    /* glow orb */
+    .orb {
+      position: absolute;
+      width: 640px;
+      height: 640px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.14) 0%, transparent 68%);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -42%);
+      pointer-events: none;
+    }
+
+    /* SAFE AREA: center ~1546 x 423 — keep critical text here */
+    .safe {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 1546px;
+      height: 423px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      background: rgba(8, 20, 30, 0.75);
+      color: #67e8f9;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22d3ee;
+      box-shadow: 0 0 12px #22d3ee;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #f8fafc;
+      max-width: 1400px;
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+    h1 .accent {
+      background: linear-gradient(105deg, #22d3ee 0%, #67e8f9 40%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .sub {
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.35;
+      color: #94a3b8;
+      max-width: 1200px;
+      margin-bottom: 0;
+    }
+    .sub strong {
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    /* edge labels outside safe area (desktop/TV still see them) */
+    .edge-left {
+      position: absolute;
+      left: 72px;
+      bottom: 72px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 18px;
+      color: #64748b;
+      letter-spacing: 0.04em;
+      z-index: 5;
+    }
+    .edge-right {
+      position: absolute;
+      right: 72px;
+      bottom: 72px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 18px;
+      color: #64748b;
+      letter-spacing: 0.04em;
+      text-align: right;
+      z-index: 5;
+    }
+
+    .top-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent 5%, #0891b2 25%, #22d3ee 50%, #0891b2 75%, transparent 95%);
+      opacity: 0.85;
+    }
+
+    .bottom-fade {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 120px;
+      background: linear-gradient(to top, rgba(7, 11, 18, 0.9), transparent);
+      pointer-events: none;
+    }
+
+    /* corner brackets */
+    .bracket {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border-color: rgba(34, 211, 238, 0.35);
+      border-style: solid;
+      z-index: 6;
+    }
+    .bracket.tl { top: 48px; left: 48px; border-width: 2px 0 0 2px; }
+    .bracket.tr { top: 48px; right: 48px; border-width: 2px 2px 0 0; }
+    .bracket.bl { bottom: 48px; left: 48px; border-width: 0 0 2px 2px; }
+    .bracket.br { bottom: 48px; right: 48px; border-width: 0 2px 2px 0; }
+  </style>
+</head>
+<body>
+  <div class="banner" id="banner">
+    <div class="top-line"></div>
+    <div class="grid"></div>
+    <div class="orb"></div>
+
+    <div class="nodes" aria-hidden="true">
+      <svg viewBox="0 0 400 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="rgba(34,211,238,0.35)" stroke-width="1.2">
+          <line x1="60" y1="80" x2="160" y2="180"/>
+          <line x1="160" y1="180" x2="90" y2="300"/>
+          <line x1="160" y1="180" x2="280" y2="220"/>
+          <line x1="90" y1="300" x2="200" y2="400"/>
+          <line x1="280" y1="220" x2="200" y2="400"/>
+          <line x1="200" y1="400" x2="120" y2="520"/>
+          <line x1="200" y1="400" x2="310" y2="480"/>
+          <line x1="120" y1="520" x2="220" y2="620"/>
+          <line x1="310" y1="480" x2="220" y2="620"/>
+          <line x1="280" y1="220" x2="340" y2="120"/>
+          <line x1="90" y1="300" x2="40" y2="420"/>
+        </g>
+        <g fill="#22d3ee">
+          <circle cx="60" cy="80" r="5" opacity="0.9"/>
+          <circle cx="160" cy="180" r="7" opacity="1"/>
+          <circle cx="90" cy="300" r="5" opacity="0.85"/>
+          <circle cx="280" cy="220" r="6" opacity="0.9"/>
+          <circle cx="200" cy="400" r="8" opacity="1"/>
+          <circle cx="120" cy="520" r="5" opacity="0.8"/>
+          <circle cx="310" cy="480" r="6" opacity="0.85"/>
+          <circle cx="220" cy="620" r="5" opacity="0.9"/>
+          <circle cx="340" cy="120" r="4" opacity="0.7"/>
+          <circle cx="40" cy="420" r="4" opacity="0.65"/>
+        </g>
+        <g fill="none" stroke="rgba(103,232,249,0.25)" stroke-width="1">
+          <circle cx="200" cy="400" r="28"/>
+          <circle cx="160" cy="180" r="18"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="bars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="bracket tl"></div>
+    <div class="bracket tr"></div>
+    <div class="bracket bl"></div>
+    <div class="bracket br"></div>
+
+    <div class="safe">
+      <div class="badge">IHK · KI &amp; MASCHINELLES LERNEN</div>
+      <h1>
+        Kompletter Lehrstoff als<br />
+        <span class="accent">Erklärvideos</span>
+      </h1>
+      <p class="sub">
+        <strong>Berufsspezialist</strong> &amp; <strong>Bachelor Professional</strong> in KI und ML (IHK)
+      </p>
+    </div>
+
+    <div class="edge-left">Prüfungsorientiert · Praxisnah · Strukturiert</div>
+    <div class="edge-right">DQR 5 · DQR 6</div>
+    <div class="bottom-fade"></div>
+  </div>
+</body>
+</html>

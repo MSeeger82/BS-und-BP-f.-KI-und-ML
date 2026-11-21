@@ -1,0 +1,753 @@
+ 
+ 
+Besondere Rechtsvorschriften für die Fortbildungsprüfung zu einer/einem 
+„Bachelor Professional in Künstlicher Intelligenz und Maschinellem Lernen 
+(IHK Region Stuttgart)“  
+ 
+Die Industrie- und Handelskammer Region Stuttgart erlässt aufgrund des Beschlusses 
+des Berufsbildungsausschusses vom 16. November 2022, geändert aufgrund Beschlus-
+ses vom 14. März 2024, als zuständige Stelle nach § 54 in Verbindung mit § 79 Absatz 4 
+Berufsbildungsgesetz (BBiG) in der Fassung der Bekanntmachung vom 4. Mai 2020 
+(BGBl. I S. 920), zuletzt geändert durch Artikel 10a des Gesetzes vom 16. August 2023 
+(BGBl. 2023 I Nr. 217) folgende besondere Rechtsvorschriften für die Fortbildungsprü-
+fung „Bachelor Professional in Künstlicher Intelligenz und Maschinellem Lernen (IHK Re-
+gion Stuttgart)“: 
+ 
+§ 1 Ziel der Prüfung und Bezeichnung des Abschlusses 
+ 
+(1) Zum Nachweis von Kenntnissen, Fertigkeiten und Fähigkeiten, die durch die berufliche 
+Fortbildung zum Bachelor Professional in Künstlicher Intelligenz und Maschinellem Ler-
+nen erworben worden sind, kann die zuständige Stelle Prüfungen nach den §§ 2 bis 12 
+durchführen. 
+ 
+(2) Ziel der Prüfung ist der Nachweis der Qualifikation zur/zum Bachelor Professional in 
+Künstlicher Intelligenz und Maschinellem Lernen und damit die Befähigung, mit der erfor-
+derlichen unternehmerischen Handlungskompetenz zielgerichtet dynamische, digitale, 
+datenbasierte und interdisziplinäre Unternehmensprozesse hinsichtlich Künstlicher Intel-
+ligenz (KI) und Maschinellen Lernens zu identifizieren, zu planen, zu gestalten, zu imple-
+mentieren und zu sichern. Ebenso ist durch die Prüfung festzustellen, ob die zu prüfende 
+Person Fähigkeiten und Kompetenzen zur innovativen Lösungsentwicklung, Gestaltung 
+von datenbasierten Prozessen hat und Prozesse zur digitalen Transformation gestalten 
+kann. Zudem ist durch die Prüfung festzustellen, ob die zu prüfende Person in der Lage 
+ist, in Unternehmen unterschiedlicher Größe sowie in verschiedenen Bereichen und Tä-
+tigkeitsfeldern eines Unternehmens Fach- und Führungsfunktionen zu übernehmen. 
+ 
+(3) Zu den in Absatz 2 beschriebenen Kompetenzen, Fähigkeiten, Fertigkeiten und Kennt-
+nissen gehört insbesondere, folgende miteinander in Zusammenhang stehende Aufga-
+ben selbstständig und eigenverantwortlich wahrnehmen zu können: 
+ 
+1. Erkennen von Entwicklungen und Einsatzmöglichkeiten Künstlicher Intelligenz und 
+Maschinellen Lernens, 
+2. Erkennen von Daten als Ressource sowie deren Bewertung, das Clustern, das Aus-
+werten und Interpretieren, 
+3. Beurteilen und Entscheiden der Verfolgung und Umsetzen von Unternehmens-/ 
+Handlungsstrategien unter Berücksichtigung wirtschaftlicher, rechtlicher, ökologi-
+scher und sozialer Aspekte auf Basis analysierter, ausgewerteter und interpretierter 
+Daten, 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 2 
+ 
+4. Organisieren, Koordinieren, Gestalten, Anwenden und Leiten von KI-Prozessen und 
+KI-Projekten in den Handlungsfeldern Entwicklung, Transformation und Digitalisie-
+rung sowie Weiterentwickeln, Realisieren und Auswerten von neuen (KI-)Lösungen, 
+5. Entscheiden für individuell optimierte Handlungsstrategien, 
+6. deren adressatengerechtes Kommunizieren, 
+7. selbstständiges und eigenverantwortliches Wahrnehmen von fachlichen (Führungs-) 
+Aufgaben im Prozess der Leistungserstellung KI-bezogener Produkte und Dienstleis-
+tungen, 
+8. die Skalierung von (KI-)Projekten, 
+9. personelles Organisieren, Koordinieren und Führen von interdisziplinären und agilen 
+Projektteams. 
+ 
+(4) Die erfolgreich abgelegte Prüfung führt unter Vorbehalt der Bestätigung der obersten Lan-
+desbehörde zum anerkannten Abschluss „Bachelor Professional in Künstlicher Intelligenz 
+und Maschinellem Lernen (IHK)“. 
+ 
+(5) Für den Erwerb der in Absatz 3 bezeichneten Kompetenzen, Fertigkeiten, Kenntnisse 
+und Fähigkeiten bedarf es in der Regel eines Lernumfangs von insgesamt mindestens 
+1.200 Stunden. Die Lehr-/Lerninhalte bestimmen sich nach den Anforderungen der Prü-
+fungsteile in §§ 4 bis 9. 
+ 
+ 
+§ 2 Zulassungsvoraussetzungen 
+ 
+(1) Zur Prüfung ist zuzulassen, wer die Anforderungen des § 53c des Berufsbildungsgeset-
+zes erfüllt und Folgendes nachweist: 
+ 
+1. eine mit Erfolg abgelegte Abschlussprüfung in einem anerkannten auf mindestens 
+drei Jahre ausgelegten gewerblich-technischen oder kaufmännischen Ausbildungs-
+beruf nach § 4 Absatz 2 BBiG oder 
+2. eine mit Erfolg abgelegte Abschlussprüfung in einem anerkannten auf mindestens 
+zwei Jahre ausgelegten gewerblich-technischen oder kaufmännischen Ausbildungs-
+beruf nach § 4 Absatz 2 BBiG und eine auf die Berufsausbildung folgende mindes-
+tens einjährige Berufspraxis oder 
+3. den Erwerb von mindestens 90 Leistungspunkten nach dem Europäischen System 
+zur Übertragung und Akkumulierung von Studienleistungen aus Prüfungsteilen eines 
+fachverwandten Studiengangs und zusätzlich eine mindestens sechsmonatige ein-
+schlägige Berufspraxis oder 
+4. eine mit Erfolg abgelegte Fortbildungsprüfung zur/zum „Geprüften Berufsspezialis-
+tin/Geprüften Berufsspezialisten für Künstliche Intelligenz und Maschinelles Lernen 
+(IHK)“ oder 
+5. eine mindestens vierjährige einschlägige Berufspraxis. 
+ 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 3 
+ 
+(2) Die geforderte Einschlägigkeit nach Absatz 1 Nr. 3 und 5 muss wesentliche Bezüge zu 
+einem gewerblich-technischen oder kaufmännischen Ausbildungsberuf im Sinne des Ab-
+satz 1 Nr. 1 haben. 
+ 
+(3) Abweichend von den in Absatz 1 und 2 genannten Voraussetzungen kann zur Prüfung 
+auch zugelassen werden, wer durch Vorlage von Zeugnissen oder auf andere Weise 
+glaubhaft macht, Fertigkeiten, Kenntnisse und Fähigkeiten (berufliche Handlungsfähig-
+keit) erworben zu haben, die die Zulassung zur Prüfung rechtfertigen.  
+ 
+ 
+§ 3 Gliederung und Durchführung der Prüfung 
+ 
+(1) Die Prüfung besteht aus einem schriftlichen Prüfungsteil und einem transferbezogenem 
+Prüfungsteil. 
+ 
+(2) Das Prüfungsverfahren ist innerhalb von drei Jahren, beginnend mit dem Tag der ersten 
+Prüfungsleistung, abzuschließen. Bei Überschreiten der Frist müssen alle Prüfungsleis-
+tungen erneut abgelegt werden. 
+ 
+(3) Wird im Einzelfall die Frist des Absatzes 2 Satz 1 nicht eingehalten und hat dies die 
+zuständige Stelle zu vertreten, ist die Prüfung ohne Beachtung der Frist zu Ende zu füh-
+ren. 
+ 
+(4) Die Prüfung bezieht sich auf die Handlungsbereiche: 
+1. Implementierung und Anwendungsmöglichkeiten von datenbasierten KI-Modellen 
+(§ 4) 
+a) Grundbegriffe von KI und Maschinellem Lernen 
+b) Chancen & Herausforderungen der KI 
+c) Umgang mit Daten 
+d) Datenanalyse & Maschinelles Lernen 
+e) Grundkenntnisse Programmierung zu Maschinellem Lernen (z. B. Python) 
+ 
+2. Gestalten von (Veränderungs-)Prozessen und Leiten von Projekten (§ 5) 
+a) Prozessmanagement 
+b) Projektmanagementmethoden  
+c) Innovationsmanagement 
+d) Digitales Transformationsmanagement 
+ 
+3. Rechtliche Grundlagen (§ 6) 
+a) Unternehmensrechtsformen und Vertragsarten  
+b) Datenschutz- und Datensicherheitsfragen  
+c) Steuerarten und -berechnungen 
+d) Urheber- und Patentrecht 
+e) EU-Richtlinien zu KI-Anwendungen 
+f) Arten von Arbeitsverhältnissen 
+g) Betriebsverfassungsrecht 
+ 
+4. Abwägung und Beurteilung ökonomischer Aspekte (§ 7) 
+a) Abwägungsmethoden 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 4 
+ 
+b) Ökonomische Aspekte 
+ 
+5. Mitarbeitendenführung und Personalmanagement (§ 8)  
+a) Personalauswahl- und Personaleinsatzplanungsprozesse 
+b) Agile Mitarbeitenden-/Teamführungsmethoden 
+c) Berücksichtigung von arbeitsrechtlichen Bestimmungen 
+d) Beteiligungsrechte betriebsverfassungsrechtlicher Organe 
+ 
+6. Zukunftskompetenzen (§ 9) 
+a) Metakompetenzen 
+b) Interaktive Kompetenzen 
+c) Transformative Kompetenzen 
+ 
+ 
+Schriftlicher Prüfungsteil 
+ 
+(5) Die schriftliche Prüfung zum Thema „Implementierung und Anwendungsmöglichkeiten 
+von datenbasierten KI-Modellen“ nach § 4 gliedert sich in zwei Prüfungsteile, deren erster 
+Teil sich in zwei Bereiche gliedert: 
+Der erste Teil der schriftlichen Prüfung bezieht sich auf Grundlagen der KI mit einem 
+Prüfungsumfang von 60 Minuten, und zum anderen berücksichtigt er die in der ange-
+strebten Fortbildungsstufe vermittelten Vertiefungen der KI-Inhalte mit einem Prüfungs-
+umfang von 120 Minuten.  
+(6) Der zweite Teil der schriftlichen Prüfung besteht aus einer weiteren Klausur mit einer 
+vorgesehenen Bearbeitungszeit von 240 Minuten. Im Rahmen dieser Klausur sind auf 
+Basis einer betrieblichen Situationsbeschreibung daraus abgeleitete Aufgabenstellungen 
+zu bearbeiten, wobei neben KI-Inhalten auch Handlungsbereiche aus den §§ 5 bis 9 the-
+matisiert werden.  
+ 
+Transferbezogener Prüfungsteil 
+ 
+(7) Zum transferbezogenen Prüfungsteil wird nur zugelassen, wer den schriftlichen Prüfungs-
+teil abgelegt hat. 
+(8) Über die schriftlichen Prüfungsteile hinaus hat die zu prüfende Person eine praxisbezo-
+gene Transferarbeit zu formulieren. In dieser Arbeit soll die zu prüfende Person die Fä-
+higkeit nachweisen, eine komplexe Problemstellung der betrieblichen Praxis erfassen, 
+analysieren und datenbasierte Lösungsmöglichkeiten unter Beachtung der maßgeben-
+den ökonomischen und rechtlichen Einflussfaktoren entwickeln, bewerten und vertreten 
+zu können.  
+Zudem sollen die Qualifikationsinhalte der § 5 (Gestalten von (Veränderungs-)Prozessen 
+und Leiten von Projekten), § 7 (Abwägung und Umsetzung ökonomischer Aspekte), § 8 
+(Mitarbeitendenführung und Personalmanagement) und § 9 (Zukunftskompetenzen) be-
+sonders berücksichtigt werden. Hierbei sollen agile KI-Prozesse und/oder KI-Projekte und 
+deren (geplante) Umsetzungen thematisiert, erläutert und begründet werden. 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 5 
+ 
+(9) Das Thema für die transferbezogene Praxisarbeit muss dem Ziel der Qualifikationsinhalte 
+der Rechtsvorschrift entsprechen. Es wird von der zu prüfenden Person selbst gewählt 
+und mit einer Kurzbeschreibung des Themas und der Gliederung mit aussagekräftigen 
+Unterpunkten zum Termin der zweiten schriftlichen Prüfung eingereicht. Für die Einrei-
+chung des Themenvorschlags ist die Formatvorlage der IHK zu verwenden. 
+(10) Der zuständige Prüfungsausschuss prüft, ob das vorgeschlagene Thema geeignet ist, 
+das geforderte Qualifikationsniveau (DQR 6) erfüllen zu können. Hierbei kann der Prü-
+fungsausschuss der zu prüfenden Person auch Auflagen erteilen, die für die Ausgestal-
+tung der Arbeit zu berücksichtigen sind. Diese sind selbstständig in die Arbeit einzufügen 
+und werden nicht mehr mit der IHK besprochen bzw. abgestimmt. 
+(11) Die praxisbezogene Transferarbeit ist mit einem Umfang von 20 Seiten (+/- 10%) zu er-
+stellen. Hierbei ist die vorgegebene Formatvorlage der IHK zu verwenden. 
+(12) Die Bearbeitungszeit für die praxisbezogene Transferarbeit beträgt 30 Tage ab der Frei-
+gabe des Themas durch den Prüfungsausschuss. 
+(13) Im Rahmen einer Präsentation mit anschließendem situationsbezogenem Fachgespräch 
+zu der praxisbezogenen Transferarbeit hat die zu prüfende Person außerdem nachzu-
+weisen, dass sie eine komplexe Problemstellung der betrieblichen Praxis unterschiedli-
+chen Zielgruppen gegenüber angemessen präsentieren, argumentativ vertreten und auf 
+entsprechende Nachfragen sachgerecht reagieren kann. 
+(14) Voraussetzung für die Zulassung zur Präsentation mit situationsbezogenem Fachge-
+spräch ist, dass alle anderen Prüfungsteile bestanden sind. 
+Die Präsentation und das anschließende situationsbezogene Fachgespräch gehen zu glei-
+chen Teilen in die Gewichtung ein und sollen jeweils für sich 20 Minuten nicht unter-, insge-
+samt aber 60 Minuten pro zu prüfender Person nicht überschreiten. 
+ 
+ 
+§ 4 Prüfungsinhalt „Implementierung und Anwendungsmöglichkeiten von da-
+tenbasierten KI-Modellen“ 
+ 
+Im Rahmen des Handlungsbereichs „Implementierung und Anwendungsmöglichkeiten von 
+datenbasierten KI-Modellen“ sollen Kenntnisse und Kompetenzen in den folgenden Themen-
+bereichen nachgewiesen werden und können geprüft werden: 
+1. Modul: Grundbegriffe von KI und Maschinellem Lernen 
+• Regression und Klassifikation 
+• Daten als Repräsentation von Wissen 
+• Training und Maschinelles Lernen 
+• Einsatz von KI-Modellen  
+• Arten von Maschinellem Lernen  
+• Algorithmen 
+• Typische Beispielanwendungen 
+ 
+2. Modul: Umgang mit Daten 
+• Grundzüge relationaler Datenbanken 
+• Datenvorverarbeitung 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 6 
+ 
+• Deskriptive Statistik 
+• Visualisierung 
+• Sicherheit 
+• Datenerhebung/Datenschutz 
+ 
+3. Modul: Datenanalyse & Maschinelles Lernen 
+• Mathematische Grundlagen 
+• Einfache Lernverfahren 
+• Evaluierung von datenbasierten KI-Modellen 
+• Clustering 
+• Neuronale Netze und Deep Learning 
+• Training bei Deep-Learning-Verfahren 
+• Anwendungen von Deep Learning 
+ 
+4. Modul: Chancen & Herausforderungen der KI 
+• Algorithmischer Bias 
+• Erklärbarkeit 
+• Robustheit von neuronalen Netzen 
+ 
+5. Modul: Grundkenntnisse Programmierung und KI-Systementwicklung 
+• Grundzüge der Programmierung z. B. mit Python 
+• Datenanalyse und Modelltraining z. B. mit Python 
+• Grundlagen der Entwicklung von KI-Systemen 
+ 
+ 
+§ 5 Prüfungsinhalt „Mitgestalten und Umsetzen von (Veränderungs-)Prozessen und 
+Projekten“ 
+ 
+Im Rahmen des Handlungsbereichs „Prozess- und Projektmanagement“ sollen folgende Fä-
+higkeiten nachgewiesen werden und können geprüft werden: 
+1. Modul: Prozessmanagement unter Berücksichtigung der folgenden Punkte:  
+• Klären und Festlegen von KI-relevanten Prozesszielen, 
+• Identifizieren, Definieren, Analysieren und Dokumentieren von geeigneten Pro-
+zessen zur Zielerreichung, 
+• Disponieren und Steuern von Prozessressourcen,  
+• (Veranlassen von) (KI-relevanten) Prozessüberwachungen, -prüfungen und -be-
+wertungen 
+ 
+2. Modul: Anwenden von Projektmanagementmethoden:  
+• Initiieren von (KI-relevanten) Projekten und Festlegen der Projektziele,  
+• Strukturieren dieser Projekte, Zusammenstellen von Projektteams, Überwachen 
+und Steuern der Projektabläufe, 
+• Skalierung von (KI-)Projekten, 
+• (KI-gestütztes) Aufbereiten, Bewerten und Berücksichtigen der Projektergeb-
+nisse und deren Präsentation,  
+• Erkennen und Begrenzen von Risiken eines (KI-)Projekts, 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 7 
+ 
+• Erstellen von Zwischen- bzw. Abschlussberichten unter Berücksichtigung techni-
+scher, organisatorischer und betriebswirtschaftlicher Zusammenhänge sowie un-
+ter Beachtung von vertraglichen Vorgaben, rechtlichen Regelungen und Nach-
+haltigkeitsaspekten, 
+• Anwenden von agilen Projektmanagementmethoden, beispielsweise Kenntnisse 
+von verschiedenen Rollen, Aufgaben und Verantwortungsbereichen innerhalb 
+der Methoden. 
+ 
+3. Modul: Innovationsmanagement 
+• Kennen und Berücksichtigen der Phasen eines Innovationsprozesses, 
+• Erfassen, Verstehen und Anwenden der Aufgaben des Innovationsmanage-
+ments und dessen angewandter Systeme 
+ 
+4. Modul: Digitales Transformationsmanagement 
+• Entwicklung eines digitalen Zielbildes inklusive der zugehörigen Geschäftsmo-
+delle und deren Implementierung, 
+• Analyse, Entwicklung und Implementierung von digitalen und datenbasierten 
+Strategien, 
+• Entwicklung einer digitalen Denkweise (Mindsets) 
+ 
+ 
+§ 6 Prüfungsinhalt „Rechtliche Grundlagen“ 
+ 
+Im Rahmen des Handlungsbereichs „Rechtliche Grundlagen“ sollen folgende Fähigkeiten 
+nachgewiesen werden und können geprüft werden: 
+• Kennen und Unterscheiden von Unternehmensrechtsformen und Vertragsarten und 
+deren Anwendungsbereichen 
+• Kennen und Reflektieren von Datenschutz- und Datensicherheitsfragen unter Be-
+rücksichtigung der Rechtsform des Unternehmens 
+• Kennen von relevanten Steuerarten und -berechnungen in Bezug auf die Angebots-
+auswahl von Dienstleistungen 
+• Kennen der relevanten Grundlagen von Urheber- und Patentrecht 
+• Kennen von EU-Richtlinien zu KI-Anwendungen 
+• Kennen, Unterscheiden und Auswählen von Arten von Arbeitsverhältnissen 
+• Kennen und Beachten von betriebsverfassungsgesetzlichen Grundlagen 
+ 
+ 
+§ 7 Prüfungsinhalt „Abwägung und Beurteilung ökonomischer Aspekte“ 
+ 
+Im Rahmen des Handlungsbereichs „Abwägung und Beurteilung ökonomischer Aspekte“ sol-
+len folgende Fähigkeiten nachgewiesen werden und können geprüft werden: 
+1. Modul: Abwägungsmethoden 
+• Kennen der Einsatzmöglichkeiten und Grenzen von Kosten-Nutzen-Analysen  
+• Kennen und Auswählen geeigneter Verfahren und Arten zur Erstellung von Kosten-
+Nutzen-Analysen 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 8 
+ 
+• Erkennen und Auswählen der für konkrete Kosten-Nutzen-Analysen jeweils potenzi-
+ell passenden Einflussfaktoren und Entscheidungsparameter 
+• Durchführung von Kosten-Nutzen- bzw. Qualitätsanalysen 
+• Aufbereitung und Interpretation der Analyseergebnisse insbesondere im Hinblick auf 
+sich ändernde Rahmenbedingungen 
+ 
+2. Modul: Ökonomische Aspekte 
+• Grundzüge des Controllings und der Kosten-Leistungs-Rechnung kennen und an-
+wenden können 
+• Grundsätzliche Branchenspezifika kennen und in Abwägungsprozesse einbringen 
+können 
+• Kennen und Beachten von Grundlagen der Investitionsrechnung und Aspekten der 
+Nachhaltigkeit  
+• Kennen der Grundlagen der Finanzierung und Finanzierungsarten  
+ 
+ 
+§ 8 Prüfungsinhalt „Mitarbeitendenführung und Personalmanagement“ 
+ 
+Im Rahmen des Handlungsbereichs „Mitarbeitendenführung und Personalmanagement“ sol-
+len folgende Fähigkeiten nachgewiesen werden und können geprüft werden: 
+1. Modul: Personalauswahl- und Personaleinsatzplanung 
+• Auswählen, Anwenden und Beurteilen von Personalstrategien unter Beachtung 
+dynamischer Problemlösekompetenzen und des Talentmanagements, 
+• Kennen und Berücksichtigen von Organisationsanalyse(-modellen) 
+ 
+2. Modul: Mitarbeitenden-/Teamführung 
+• Anwenden von Führungsmethoden, unter Beachtung und Förderung der Leis-
+tungsbereitschaft und Zusammenarbeit der Mitarbeitenden, 
+• Beachten und Anwenden von Konfliktmanagementmethoden, 
+• Entwickeln und Umsetzen von Selbstmanagementmethoden von Führungskräf-
+ten 
+ 
+3. Modul: Arbeits- und betriebsverfassungsrechtliche Bestimmungen 
+• Kennen unterschiedlicher Arten von Arbeitsverhältnissen und deren Eigenschaf-
+ten sowie das Auswählen und Gestalten der individuell relevanten Formen, 
+• Kennen von Rechten und Pflichten aus dem Arbeitsverhältnis, 
+• Kennen der Beendigungsmöglichkeiten von Arbeitsverhältnissen und die daraus 
+folgenden gegenseitigen Rechte und Pflichten, 
+• Gestalten von Veränderungsprozessen unter Berücksichtigung der Vorschriften 
+des Betriebsverfassungsgesetzes, insbesondere der Beteiligungsrechte der be-
+triebsverfassungsrechtlichen Organe 
+ 
+ 
+ 
+ 
+ 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 9 
+ 
+§ 9 Prüfungsinhalt „Zukunftskompetenzen“ 
+ 
+Im Rahmen des Prüfungsthemas „Zukunftskompetenzen“ sollen folgende Fähigkeiten nach-
+gewiesen werden und können geprüft werden: 
+1. Modul: Metakompetenzen 
+• Überblicken, Beherrschen und Einsetzen von Methoden zur Selbstorganisation, 
+• Kennen und Beachten von Faktoren, zur Förderung der Resilienz der Mitarbei-
+tenden, 
+• Critical Thinking: Kennen, Verstehen und Umsetzen geeigneter Methoden, 
+• Anwendung von Selbstreflexionsmethoden 
+ 
+2. Modul: Interaktive Kompetenzen 
+• Einleiten, Beherrschen und Sicherstellen von kollaborativem Arbeiten, 
+• Kennen der positiven Einflussfaktoren von interdisziplinären Projektteams auf 
+die Effektivität und Produktivität von Teams sowie deren Förderung, 
+• Beherrschen geeigneter Problemlösemethoden 
+• Kennen, Verstehen und Anwenden der Kommunikationsmethoden 
+ 
+3. Modul: Agiles Arbeiten 
+• Kennen und Anwenden der Bedingungen für eine gute interkulturelle Zusam-
+menarbeit und deren Förderung, 
+• Kennen und Anwenden von Methoden zur Verbesserung des Zeitmanagements, 
+• Kennen, Anwenden und Sicherstellen von Interdisziplinarität in den Teams 
+ 
+ 
+§ 10 Anrechnung anderer bzw. Befreiung von anderen Prüfungsleistungen 
+ 
+(1) Auf Antrag kann die zuständige Stelle in entsprechender Anwendung des § 56 Absatz 2 
+des Berufsbildungsgesetzes die zu prüfende Person von der Prüfung in einzelnen Prü-
+fungsteilen freistellen. Eine vollständige Freistellung ist nicht zulässig. 
+ 
+(2) Im Besonderen kann die Prüfungsleistung aus der Zusatzqualifikation „Künstliche Intelli-
+genz und Maschinelles Lernen für Auszubildende aller Fachrichtungen“ in vollem Umfang 
+auf die Prüfungsleistung des angestrebten Fortbildungsabschlusses “Bachelor Professi-
+onal in Künstlicher Intelligenz und Maschinellem Lernen“ angerechnet werden. Die er-
+brachte Prüfungsleistung aus der Zusatzqualifikation für Auszubildende kann bei dem 
+schriftlichen Prüfungsteil nach § 3 Absatz 5 Satz 2 1. Halbsatz „Implementierung und 
+Anwendungsmöglichkeiten von datenbasierten KI-Modellen“ dieser Fortbildung auf die 
+erste Prüfung zu den Grundlagen der KI (Teil 1) in vollem Umfang angerechnet werden. 
+Zudem können Zertifikate angerechnet werden, wenn deren Inhalt und Umfang, Prü-
+fungsleistung bzw. lehrgangsinterne Tests der oben genannten Zusatzqualifikation ent-
+sprechen. 
+ 
+(3) Im Besonderen kann auch die Prüfungsleistung aus dem Fortbildungsabschluss „Ge-
+prüfte Berufsspezialistin/Geprüfter Berufsspezialist für Künstliche Intelligenz und Maschi-
+nelles Lernen (IHK)“ aus den schriftlichen Prüfungsteilen nach § 4 „Implementierung und 
+Anwendungsmöglichkeiten von datenbasierten KI-Modellen“ in Verbindung mit § 3 Ab-
+satz 5 Satz 2 dieser Rechtsvorschrift auf die Prüfungsleistung des angestrebten 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 10 
+ 
+Fortbildungsabschlusses „Bachelor Professional in Künstlicher Intelligenz und Maschinel-
+lem Lernen“ vollständig angerechnet werden. 
+ 
+(4) Wird die zu prüfende Person nach Absatz 1 von der Ablegung einzelner Prüfungsbe-
+standteile befreit, bleiben diese Prüfungsbestandteile für die Anwendung der §§ 11 und 
+12 außer Betracht. Für die übrigen Prüfungsbestandteile erhöhen sich die Anteile ent-
+sprechend ihrem Verhältnis zueinander. Allein diese Prüfungsbestandteile sind den Ent-
+scheidungen des Prüfungsausschusses zugrunde zu legen. 
+ 
+ 
+§ 11 Bestehen der Prüfung und Zeugnis 
+ 
+(1) Die Prüfung nach § 3 ist bestanden, wenn jeder Prüfungsteil mit mindestens der Note 
+„ausreichend“ (50 Punkte) bewertet worden ist. 
+ 
+(2) Ist die Prüfung bestanden, sind die folgenden Punktebewertungen jeweils kaufmännisch 
+auf eine ganze Zahl zu runden: 
+1. die Bewertung der schriftlichen Prüfung nach § 11 Absatz 3 Nr. 1, Nr. 2 und Nr. 3, 
+2. die Bewertung der transferbezogenen Prüfung nach § 11 Absatz 3 Nr. 4 und 5. 
+ 
+(3) Für die Bildung einer Gesamtnote ist als Gesamtpunktzahl das gewichtete arithmetische 
+Mittel zu berechnen. 
+ 
+Die Teilprüfungen fließen mit folgenden Anteilen in das Gesamtergebnis der Prüfung ein: 
+1. die Teilprüfung eins „Implementierung und Anwendungsmöglichkeiten von datenba-
+sierten KI-Modellen“ nach § 3 Absatz 5 Nr. 1 mit zehn Prozent, 
+2. die Teilprüfung zwei „Implementierung und Anwendungsmöglichkeiten von datenba-
+sierten KI-Modellen“ nach § 3 Absatz 5 Nr. 2 mit zehn Prozent, 
+3. die situationsbezogene schriftliche Prüfung nach § 3 Absatz 6 mit dreißig Prozent, 
+4. die praxisbezogene Transferarbeit nach § 3 Absatz 8 mit fünfundzwanzig Prozent, 
+5. die Präsentation der praxisbezogenen Transferarbeit samt Fachgespräch nach § 3 
+Absatz 13 mit insgesamt fünfundzwanzig Prozent, wobei Präsentation und Fachge-
+spräch je zu gleichen Teilen in die Berechnung eingehen. 
+ 
+(4) Das Prüfungsverfahren ist innerhalb von drei Jahren beginnend mit dem Tag der Abgabe 
+der ersten Prüfungsleistung abzuschließen. Bei Überschreiten der Frist müssen alle Prü-
+fungsteile erneut abgelegt werden. 
+ 
+(5) Ist die Prüfung bestanden, stellt die zuständige Stelle ein Zeugnis aus. 
+ 
+ 
+§ 12 Wiederholung der Prüfung 
+ 
+(1) Jeder nicht bestandene Prüfungsteil gemäß § 11 Absatz Nr. 1 bzw. gemäß § 11 Absatz 
+2 Nr. 2 kann zweimal wiederholt werden. 
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 11 
+ 
+ 
+(2) Mit dem Antrag auf Wiederholung der Prüfung wird die zu prüfende Person von einzelnen 
+Prüfungsteilen befreit, wenn die darin in einer vorangegangenen Prüfung erbrachten Leis-
+tungen mindestens mit der Note „ausreichend“ bewertet worden sind und die zu prüfende 
+Person sich innerhalb von zwei Jahren, gerechnet vom Tage der nicht bestandenen Prü-
+fung an, zur Wiederholungsprüfung angemeldet hat. Dabei können auch bestandene Prü-
+fungsteile auf Antrag einmal wiederholt werden. In diesem Fall gilt das Ergebnis der letz-
+ten Prüfung. 
+ 
+ 
+§ 13 Inkrafttreten 
+ 
+Diese Besonderen Rechtsvorschriften für die Fortbildungsprüfung zum anerkannten Ab-
+schluss „Bachelor Professional in Künstlicher Intelligenz und Maschinellem Lernen (IHK Re-
+gion Stuttgart)“ treten am Tag nach ihrer Verkündung im Magazin Wirtschaft, dem Mitteilungs-
+blatt der IHK Region Stuttgart, in Kraft.  
+ 
+ 
+ 
+ 
+Ausgefertigt: Stuttgart, den  
+ 
+gez.        gez. 
+Der Präsident       Die Hauptgeschäftsführerin 
+Claus Paal       Dr. Susanne Herre  
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 12 
+ 
+ 
+Anlage 1 (zu § 11)  
+Bewertungsmaßstab und -schlüssel 
+ 
+ 
+Punkte Note als Dezimalzahl Note in Worten Definition 
+100 1,0  
+ 
+ 
+sehr gut 
+ 
+ 
+eine Leistung, die den Anforderungen in be-
+sonderem Maß entspricht 
+98 und 99 1,1 
+96 und 97 1,2 
+94 und 95 1,3 
+92 und 93 1,4 
+91 1,5  
+ 
+ 
+ 
+ 
+ 
+gut 
+ 
+ 
+ 
+ 
+ 
+ 
+eine Leistung, die den Anforderungen voll 
+entspricht 
+90 1,6 
+89 1,7 
+88 1,8 
+87 1,9 
+85 und 86 2,0 
+84 2,1 
+83 2,2 
+82 2,3 
+81 2,4 
+79 und 80 2,5  
+ 
+ 
+ 
+befriedigend 
+ 
+ 
+ 
+ 
+eine Leistung, die den Anforderungen im Allge-
+meinen entspricht 
+78 2,6 
+77 2,7 
+75 und 76 2,8 
+74 2,9 
+72 und 73 3,0 
+71 3,1 
+ 
+  
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 13 
+ 
+Punkte Note als Dezimalzahl Note in Worten Definition 
+70 3,2   
+68 und 69 3,3 
+67 3,4 
+65 und 66 3,5  
+ 
+ 
+ 
+ 
+ 
+ausreichend 
+ 
+ 
+ 
+ 
+ 
+ 
+eine Leistung, die zwar Mängel aufweist, aber im 
+Ganzen den Anforderungen noch entspricht 
+63 und 64 3,6 
+62 3,7 
+60 und 61 3,8 
+58 und 59 3,9 
+56 und 57 4,0 
+55 4,1 
+53 und 54 4,2 
+51 und 52 4,3 
+50 4,4 
+48 und 49 4,5  
+ 
+ 
+ 
+ 
+ 
+mangelhaft 
+ 
+ 
+ 
+ 
+ 
+eine Leistung, die den Anforderungen nicht 
+entspricht, jedoch erkennen lässt, dass gewisse 
+Grundkenntnisse noch vorhanden sind 
+46 und 47 4,6 
+44 und 45 4,7 
+42 und 43 4,8 
+40 und 41 4,9 
+38 und 39 5,0 
+36 und 37 5,1 
+34 und 35 5,2 
+32 und 33 5,3 
+30 und 31 5,4 
+25 bis 29 5,5  
+ 
+ 
+ungenügend 
+ 
+ 
+ 
+eine Leistung, die den Anforderungen nicht 
+entspricht und bei der selbst Grundkenntnisse 
+fehlen 
+20 bis 24 5,6 
+15 bis 19 5,7 
+10 bis 14 5,8 
+5 bis 9 5,9 
+0 bis 4 6,0 
+ 
+  
+
+=== SEITE ===
+  
+ 
+ 
+ 
+Seite 14 
+ 
+Anlage 2 (zu § 11) 
+Zeugnisinhalte 
+ 
+ 
+ 
+Teil A – Zeugnis ohne Prüfungsergebnisse:  
+1. Bezeichnung der ausstellenden Behörde, 
+ 
+2. Name und Geburtsdatum der zu prüfenden Person, Datum des Bestehens der Prü-
+fung, 
+3. Bezeichnung des erworbenen Fortbildungsabschlusses nach § 1 Absatz 4, 
+4. Bezeichnung und Fundstelle dieser Fortbildungsordnung nach den Angaben im 
+Bundesgesetzblatt unter Berücksichtigung erfolgter Änderungen dieser Verord-
+nung, 
+5. Datum der Ausstellung des Zeugnisses samt Unterschrift der zuständigen Stelle. 
+ 
+Teil B – Zeugnis mit Prüfungsergebnissen:  
+ 
+Alle Angaben des Teils A sowie zusätzlich: 
+ 
+1. Zu den Teilprüfungen “Implementierung und Anwendungsmöglichkeiten von da-
+tenbasierten KI-Modellen“  
+a) Benennung des Prüfungsteils und Bewertung mit Punkten und als Note sowie 
+b) Benennung der zwei Prüfungsbereiche und Bewertung mit Punkten und als 
+Note, 
+2. zum Prüfungsteil “Rechtliche Grundlagen“ Benennung und Bewertung mit Punkten 
+und als Note 
+3. zur praxisbezogenen Transferarbeit Benennung inkl. des Themas und Bewertung mit 
+Punkten und als Note 
+4. zur praxisbezogene Abschlussarbeit Benennung inkl. des Themas und Bewertung mit 
+Punkten und als Note 
+5. zur Präsentation der Abschlussarbeit samt Fachgespräch Benennung sowie Bewer-
+tung mit Punkten und als Note 
+6. die errechnete Gesamtpunktzahl für die gesamte Prüfung, 
+7. die Gesamtnote als Dezimalzahl, 
+8. die Gesamtnote in Worten, 
+9. Befreiungen nach § 6. 
+ 

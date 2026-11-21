@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.15" y2="1">
+      <stop offset="0%" stop-color="#070b12"/>
+      <stop offset="45%" stop-color="#0c1522"/>
+      <stop offset="100%" stop-color="#080e16"/>
+    </linearGradient>
+    <radialGradient id="glowL" cx="18%" cy="55%" r="35%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#070b12" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowR" cx="82%" cy="40%" r="30%">
+      <stop offset="0%" stop-color="#1e40af" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#070b12" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="48%" r="28%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#070b12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="topLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#0891b2"/>
+      <stop offset="50%" stop-color="#22d3ee"/>
+      <stop offset="75%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="accentText" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#67e8f9"/>
+      <stop offset="100%" stop-color="#a5f3fc"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="2560" height="1440" fill="url(#bg)"/>
+  <rect width="2560" height="1440" fill="url(#glowL)"/>
+  <rect width="2560" height="1440" fill="url(#glowR)"/>
+  <rect width="2560" height="1440" fill="url(#glowC)"/>
+  <rect width="2560" height="4" fill="url(#topLine)"/>
+
+  <!-- grid -->
+  <g stroke="#94a3b8" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 64H2560M0 128H2560M0 192H2560M0 256H2560M0 320H2560M0 384H2560M0 448H2560M0 512H2560M0 576H2560M0 640H2560M0 704H2560M0 768H2560M0 832H2560M0 896H2560M0 960H2560M0 1024H2560M0 1088H2560M0 1152H2560M0 1216H2560M0 1280H2560M0 1344H2560"/>
+    <path d="M64 0V1440M128 0V1440M192 0V1440M256 0V1440M320 0V1440M384 0V1440M448 0V1440M512 0V1440M576 0V1440M640 0V1440M704 0V1440M768 0V1440M832 0V1440M896 0V1440M960 0V1440M1024 0V1440M1088 0V1440M1152 0V1440M1216 0V1440M1280 0V1440M1344 0V1440M1408 0V1440M1472 0V1440M1536 0V1440M1600 0V1440M1664 0V1440M1728 0V1440M1792 0V1440M1856 0V1440M1920 0V1440M1984 0V1440M2048 0V1440M2112 0V1440M2176 0V1440M2240 0V1440M2304 0V1440M2368 0V1440M2432 0V1440M2496 0V1440"/>
+  </g>
+
+  <!-- corner brackets -->
+  <g fill="none" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="2">
+    <path d="M48 96 V48 H96"/>
+    <path d="M2464 48 H2512 V96"/>
+    <path d="M48 1344 V1392 H96"/>
+    <path d="M2464 1392 H2512 V1344"/>
+  </g>
+
+  <!-- neural net left -->
+  <g fill="none" stroke="#22d3ee" stroke-opacity="0.28" stroke-width="1.5">
+    <path d="M120 380 L280 340 L460 420 M120 380 L300 480 L480 560
+             M90 520 L280 340 L460 420 M90 520 L300 480 L480 560 M90 520 L290 620 L450 700
+             M130 660 L300 480 L480 560 M130 660 L290 620 L450 700 M130 660 L310 760 L470 840
+             M100 800 L290 620 L450 700 M100 800 L310 760 L470 840 M100 800 L280 900
+             M280 340 L300 480 L290 620 L310 760 L280 900
+             M460 420 L480 560 L450 700 L470 840"/>
+  </g>
+  <g fill="#22d3ee">
+    <circle cx="120" cy="380" r="5.5" opacity="0.9"/>
+    <circle cx="90" cy="520" r="5.5" opacity="0.9"/>
+    <circle cx="130" cy="660" r="5.5" opacity="0.9"/>
+    <circle cx="100" cy="800" r="5.5" opacity="0.9"/>
+    <circle cx="280" cy="340" r="7" opacity="0.95"/>
+    <circle cx="300" cy="480" r="7" opacity="1"/>
+    <circle cx="290" cy="620" r="7" opacity="0.95"/>
+    <circle cx="310" cy="760" r="7" opacity="0.95"/>
+    <circle cx="280" cy="900" r="7" opacity="0.9"/>
+    <circle cx="460" cy="420" r="5.5" opacity="0.9"/>
+    <circle cx="480" cy="560" r="7" opacity="1"/>
+    <circle cx="450" cy="700" r="5.5" opacity="0.9"/>
+    <circle cx="470" cy="840" r="5.5" opacity="0.9"/>
+  </g>
+  <g fill="none" stroke="#67e8f9" stroke-opacity="0.35" stroke-width="1.5">
+    <circle cx="300" cy="480" r="19"/>
+    <circle cx="480" cy="560" r="19"/>
+  </g>
+
+  <!-- bars right -->
+  <g fill="url(#barGrad)">
+    <rect x="2080" y="922" width="26" height="118" rx="5"/>
+    <rect x="2120" y="838" width="26" height="202" rx="5"/>
+    <rect x="2160" y="880" width="26" height="160" rx="5"/>
+    <rect x="2200" y="738" width="26" height="302" rx="5"/>
+    <rect x="2240" y="809" width="26" height="231" rx="5"/>
+    <rect x="2280" y="670" width="26" height="370" rx="5"/>
+    <rect x="2320" y="780" width="26" height="260" rx="5"/>
+    <rect x="2360" y="851" width="26" height="189" rx="5"/>
+    <rect x="2400" y="712" width="26" height="328" rx="5"/>
+    <rect x="2440" y="893" width="26" height="147" rx="5"/>
+  </g>
+
+  <!-- SAFE AREA center text -->
+  <!-- badge -->
+  <rect x="968" y="558" width="624" height="44" rx="22" fill="#08141e" fill-opacity="0.8" stroke="#22d3ee" stroke-opacity="0.4" stroke-width="1.5"/>
+  <circle cx="998" cy="580" r="5" fill="#22d3ee"/>
+  <text x="1280" y="586" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#67e8f9" letter-spacing="2">IHK  ·  KI &amp; MASCHINELLES LERNEN</text>
+
+  <text x="1280" y="680" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="70" font-weight="700" fill="#f8fafc">Kompletter Lehrstoff als</text>
+  <text x="1280" y="762" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="76" font-weight="700" fill="url(#accentText)">Erklärvideos</text>
+
+  <text x="1280" y="838" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="28" font-weight="500" fill="#94a3b8">Berufsspezialist  &amp;  Bachelor Professional in KI und ML (IHK)</text>
+
+  <!-- chips -->
+  <g font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="20" font-weight="600">
+    <rect x="1004" y="880" width="140" height="38" rx="12" fill="#0f2837" fill-opacity="0.75" stroke="#22d3ee" stroke-opacity="0.4"/>
+    <text x="1074" y="905" text-anchor="middle" fill="#a5f3fc">12 Module</text>
+    <rect x="1160" y="880" width="170" height="38" rx="12" fill="#0f2837" fill-opacity="0.75" stroke="#22d3ee" stroke-opacity="0.4"/>
+    <text x="1245" y="905" text-anchor="middle" fill="#a5f3fc">Praxisprojekte</text>
+    <rect x="1346" y="880" width="140" height="38" rx="12" fill="#0f2837" fill-opacity="0.75" stroke="#22d3ee" stroke-opacity="0.4"/>
+    <text x="1416" y="905" text-anchor="middle" fill="#a5f3fc">Prüfungsfit</text>
+  </g>
+
+  <!-- footers -->
+  <circle cx="64" cy="1384" r="4" fill="#22d3ee"/>
+  <text x="78" y="1391" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="22" font-weight="500" fill="#64748b">Prüfungsorientiert  ·  Praxisnah  ·  Strukturiert</text>
+  <circle cx="2496" cy="1384" r="4" fill="#2dd4bf"/>
+  <text x="2482" y="1391" text-anchor="end" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="22" font-weight="500" fill="#64748b">DQR 5  ·  DQR 6</text>
+</svg>

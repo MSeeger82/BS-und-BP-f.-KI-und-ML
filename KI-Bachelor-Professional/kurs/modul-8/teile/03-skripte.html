@@ -1,0 +1,159 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Was unterscheidet einen Prozess von einem Projekt?", ["Prozesse sind immer teurer", "Ein Prozess wiederholt sich, ein Projekt ist einmalig", "Es gibt keinen Unterschied", "Projekte haben keinen Kunden"], 1, "Rechnungen prüfen ist ein Prozess, ein KI-System einführen ein Projekt."],
+ ["Welche Prozessart schafft direkt Wert für den externen Kunden?", ["Kernprozess", "Managementprozess", "Hilfsprozess", "Unterstützungsprozess"], 0, "Kern- oder Wertschöpfungsprozesse."],
+ ["Wofür steht das „M“ in SMART?", ["Monatlich", "Messbar", "Manuell", "Modern"], 1, "spezifisch, messbar, attraktiv, realistisch, terminiert."],
+ ["Welche Erhebungsmethode zeigt am objektivsten, wie Prozesse in IT-Systemen tatsächlich ablaufen?", ["Workshop", "Process Mining", "Interview", "Fragebogen"], 1, "Es nutzt Ereignisprotokolle aller Fälle."],
+ ["Was steht im „P“ von SIPOC?", ["Preis", "Planung", "Process – die 5 bis 7 Hauptschritte", "Personal"], 2, "Suppliers, Inputs, Process, Outputs, Customers."],
+ ["Welches BPMN-Symbol steht für eine Entscheidung, bei der genau ein Weg gewählt wird?", ["abgerundetes Rechteck", "Raute mit +", "dicker Kreis", "Raute mit X"], 3, "Exklusives Gateway."],
+ ["Was zeigen Lanes in BPMN?", ["Die Kosten", "Die Zuständigkeit (Rolle oder Abteilung)", "Die Reihenfolge", "Die Dauer"], 1, "Bahnen innerhalb eines Pools."],
+ ["Was gilt in einer EPK?", ["Ereignisse treffen Entscheidungen", "Ereignisse und Funktionen wechseln sich ab; Ereignisse entscheiden nicht", "Sie ist ein ISO-Standard", "Es gibt keine Verknüpfer"], 1, "Nach einem Ereignis darf keine ODER-/XOR-Verzweigung folgen."],
+ ["Bearbeitungszeit 20 min, Durchlaufzeit 400 min. Wie hoch ist die Prozesseffizienz?", ["20 %", "50 %", "5 %", "2 %"], 2, "20 / 400 = 5 %."],
+ ["Was ist ein Medienbruch?", ["Eine Pressemitteilung", "Ein kaputter Bildschirm", "Ein Stromausfall", "Ein Wechsel des Informationsträgers, z. B. Daten aus einem PDF abtippen"], 3, "Typischer Ansatzpunkt für KI-Dokumentenerkennung."],
+ ["Was bestimmt die Kapazität eines Prozesses?", ["Das Budget allein", "Der schnellste Schritt", "Die Anzahl der Lanes", "Der Engpass (langsamster Schritt)"], 3, "Der Engpass begrenzt den Durchsatz."],
+ ["Was gilt beim Automatisieren schlechter Prozesse?", ["Sie werden nur schneller schlecht – erst vereinfachen, dann automatisieren", "KI repariert sie", "Sie sollten nie geändert werden", "Sie werden automatisch gut"], 0, "Prozess vor Technik."],
+ ["480 Fälle, 6 Minuten je Fall, 8 Stunden je Person. Wie viele Personen?", ["10", "4", "8", "6"], 3, "480 · 6 / 60 = 48 h; 48 / 8 = 6."],
+ ["Warum misst man Kennzahlen im Paar, z. B. Zeit und Qualität?", ["Weil es schöner aussieht", "Weil Dashboards zwei Spalten haben", "Wegen der DSGVO", "Weil die Optimierung einer Kennzahl sonst auf Kosten anderer Ziele geht"], 3, "Was gemessen wird, wird optimiert."],
+ ["Wofür steht PDCA?", ["Plan, Design, Code, Audit", "Plan, Do, Check, Act", "Prüfen, Dokumentieren, Controllen, Abschließen", "Prozess, Daten, Controlling, Audit"], 1, "Der Deming-Kreis."],
+ ["In welcher DMAIC-Phase werden Ursachen mit Daten ermittelt?", ["Measure", "Analyze", "Define", "Control"], 1, "Messen kommt vorher, Verbessern danach."],
+ ["Welche drei Angaben braucht Process Mining mindestens?", ["Fall-ID, Aktivität, Zeitstempel", "Name, Gehalt, Abteilung", "Kunde, Preis, Menge", "Server, Port, Protokoll"], 0, "Damit lassen sich Abläufe rekonstruieren."],
+ ["Was ist Conformance Checking?", ["Prozess neu entdecken", "Kosten senken", "Daten anonymisieren", "Tatsächlichen Ablauf mit dem Soll-Prozess vergleichen"], 3, "Abweichungen vom Soll werden sichtbar."],
+ ["Wer verantwortet einen Prozess über Abteilungsgrenzen hinweg?", ["Der Prozesseigner", "Der Lieferant", "Der Betriebsrat", "Der IT-Leiter"], 0, "Process Owner."],
+ ["Was muss bei Zeitaufnahmen einzelner Beschäftigter beachtet werden?", ["Die Mitbestimmung des Betriebsrats bei Leistungs- und Verhaltenskontrolle", "Nur das Wetter", "Nichts", "Die Umsatzsteuer"], 0, "§ 87 Abs. 1 Nr. 6 BetrVG."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Was gehört zum Prozessmanagement in der Bachelor-Prüfung?", "a": "§ 5 Nr. 1 nennt das Festlegen KI-relevanter Prozessziele, das Identifizieren, Analysieren und Dokumentieren von Prozessen, das Disponieren von Ressourcen sowie Prozessüberwachung, -prüfung und -bewertung."}
+ ],
+ "l1": [
+  {"q": "Was ist ein Geschäftsprozess?", "a": "Eine wiederkehrende Folge von Tätigkeiten mit definiertem Auslöser und Ergebnis, die einen Input in einen Output mit Wert für einen internen oder externen Kunden umwandelt."}
+ ],
+ "l2": [
+  {"q": "Welche Prozessarten gibt es?", "a": "Kernprozesse schaffen direkt Wert für den Kunden, Unterstützungsprozesse ermöglichen sie, Managementprozesse steuern das Unternehmen. Eine Prozesslandkarte zeigt alle auf einen Blick."}
+ ],
+ "l3": [
+  {"q": "Wie formuliert man ein gutes Prozessziel für ein KI-Projekt?", "a": "SMART: spezifisch, messbar, attraktiv, realistisch und terminiert, mit Kennzahl, Ausgangswert und Zielwert – zum Beispiel Durchlaufzeit von 6 auf 2 Tage bis zu einem Datum bei höchstens 1 % Fehlern."}
+ ],
+ "l4": [
+  {"q": "Wie erhebt man einen Ist-Prozess?", "a": "Durch eine Kombination aus Interviews, Workshops, Beobachtung vor Ort, Dokumentenanalyse und Datenauswertung, etwa Process Mining. Interviews erklären das Warum, Beobachtung und Daten zeigen das tatsächliche Wie."}
+ ],
+ "l5": [
+  {"q": "Was ist ein SIPOC?", "a": "Eine einseitige Prozessübersicht in fünf Spalten: Suppliers, Inputs, Process, Outputs und Customers. Sie grenzt einen Prozess vor der detaillierten Modellierung ab."}
+ ],
+ "l6": [
+  {"q": "Was ist BPMN 2.0?", "a": "Die international verbreitete Standardnotation für Geschäftsprozesse. Ereignisse sind Kreise, Aktivitäten abgerundete Rechtecke, Gateways Rauten und Zuständigkeiten Pools und Lanes."},
+  {"q": "Was ist der Unterschied zwischen exklusivem und parallelem Gateway?", "a": "Beim exklusiven Gateway (Raute mit X) wird genau ein Weg gewählt. Beim parallelen Gateway (Raute mit +) werden alle Wege gleichzeitig durchlaufen."}
+ ],
+ "l7": [
+  {"q": "Was ist eine EPK?", "a": "Die ereignisgesteuerte Prozesskette aus dem ARIS-Konzept. Ereignisse und Funktionen wechseln sich ab, verknüpft mit UND, ODER und XOR; Ereignisse dürfen keine Entscheidungen auslösen."}
+ ],
+ "l8": [
+  {"q": "Wie berechnet man die Durchlaufzeit?", "a": "Durchlaufzeit gleich Bearbeitungszeit plus Warte- oder Liegezeit plus Transportzeit. Die Prozesseffizienz ist das Verhältnis von Bearbeitungszeit zu Durchlaufzeit."},
+  {"q": "Wo liegen typische Schwachstellen in Prozessen?", "a": "In Wartezeiten, Engpässen, Medienbrüchen, Schleifen und Nacharbeit, Suchzeiten und vielen Übergaben zwischen Abteilungen."}
+ ],
+ "l9": [
+  {"q": "Welche Rollen kann KI in einem Prozess übernehmen?", "a": "Sie kann Schritte automatisieren, Entscheidungen unterstützen, Vorhersagen für die Planung liefern, Vorgänge priorisieren oder Auffälligkeiten prüfen. Ausnahmen sollten bewusst an Menschen gehen."}
+ ],
+ "l10": [
+  {"q": "Wie berechnet man den Personalbedarf eines Prozesses?", "a": "Fallzahl mal Bearbeitungszeit je Fall ergibt die benötigte Arbeitszeit; geteilt durch die verfügbare Zeit je Person ergibt die Personenzahl, aufgerundet und mit Puffer für Spitzen."}
+ ],
+ "l11": [
+  {"q": "Welche Prozesskennzahlen sind wichtig?", "a": "Zum Beispiel Durchlaufzeit, Termintreue, Fehlerquote, Erstlösungsquote, Kosten je Fall, Durchsatz und bei KI die Automatisierungsquote. Kennzahlen sollten im Paar aus Zeit und Qualität gemessen werden."}
+ ],
+ "l12": [
+  {"q": "Wie überwacht man Prozesse?", "a": "Mit einem Regelkreis aus Messen, Vergleichen mit Sollwerten und Eingreifen, unterstützt durch Dashboards, Regelkarten, interne Audits und Management-Reviews; bei KI zusätzlich mit Modell-Monitoring."}
+ ],
+ "l13": [
+  {"q": "Was ist der PDCA-Zyklus?", "a": "Ein Kreislauf der kontinuierlichen Verbesserung: Plan, Do, Check, Act. Verbesserungen werden im Kleinen erprobt, geprüft und dann als neuer Standard festgeschrieben."},
+  {"q": "Was bedeutet DMAIC?", "a": "Das Vorgehen von Six Sigma: Define, Measure, Analyze, Improve, Control. Es eignet sich für datengetriebene Verbesserungsprojekte, auch mit KI."}
+ ],
+ "l14": [
+  {"q": "Was ist Process Mining?", "a": "Die Rekonstruktion tatsächlicher Prozessabläufe aus Ereignisprotokollen mit Fall-ID, Aktivität und Zeitstempel. Es zeigt Varianten, Schleifen, Wartezeiten und Abweichungen vom Soll."}
+ ],
+ "l15": [
+  {"q": "Was macht ein Prozesseigner?", "a": "Er verantwortet Ziele, Kennzahlen und Weiterentwicklung eines Prozesses über Abteilungsgrenzen hinweg. Bei KI-gestützten Prozessen braucht es zusätzlich einen Verantwortlichen für das Modell."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 8 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 1 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+  var el = ["prB", "prW", "prT", "prF", "prK", "prA"].map(function (id) { return document.getElementById(id); });
+  function rechne() {
+    var v = el.map(function (e) { return Math.max(0, +e.value || 0); });
+    var b = v[0], w = v[1], t = v[2], f = v[3], k = v[4], a = v[5];
+    var dlz = b + w + t, eff = dlz ? b / dlz : NaN, std = f * b / 60, pers = a ? std / a : NaN;
+    document.getElementById("prOut").innerHTML = kpi("Durchlaufzeit", fmt(dlz, 0) + " min") + kpi("= Arbeitstage (8 h)", fmt(dlz / 480, 2)) + kpi("Prozesseffizienz", fmt(eff * 100) + " %") +
+      kpi("Arbeitsstunden je Tag", fmt(std)) + kpi("Personen (aufgerundet)", isFinite(pers) ? Math.ceil(pers - 1e-9) : "–") + kpi("Kosten je Fall", fmt(b / 60 * k, 2) + " €") + kpi("Kosten je Tag", fmt(std * k, 0) + " €");
+    document.getElementById("prNote").textContent = "Durchlaufzeit = Bearbeitung + Warten + Transport; Personen = Fälle · Bearbeitungszeit / verfügbare Zeit.";
+  }
+  el.forEach(function (e) { e.addEventListener("input", rechne); }); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 8 */
+(function () {
+  var PP = ["Prozess", "Projekt"];
+  var PA = ["Kernprozess", "Unterstützungsprozess", "Managementprozess"];
+  var BP = ["exklusives Gateway", "paralleles Gateway", "Endereignis", "Nachrichtenfluss", "Aktivität"];
+  var KR = ["automatisieren", "unterstützen", "vorhersagen"];
+  var DM = ["Define", "Measure", "Analyze", "Improve", "Control"];
+  window.UEBUNGEN = {
+    modul: 8,
+    aufgaben: {
+      a1: { teile: [
+        { id: "p1", label: "1. Monatlicher Rechnungsversand", typ: "wahl", punkte: 1, optionen: PP, richtig: 0 },
+        { id: "p2", label: "2. Einführung KI-Chatbot", typ: "wahl", punkte: 1, optionen: PP, richtig: 1 },
+        { id: "p3", label: "3. Reklamationsbearbeitung", typ: "wahl", punkte: 1, optionen: PP, richtig: 0 }
+      ] },
+      a2: { teile: [
+        { id: "a1", label: "1. Lohnabrechnung", typ: "wahl", punkte: 1, optionen: PA, richtig: 1 },
+        { id: "a2", label: "2. Montage", typ: "wahl", punkte: 1, optionen: PA, richtig: 0 },
+        { id: "a3", label: "3. Jahresplanung", typ: "wahl", punkte: 1, optionen: PA, richtig: 2 },
+        { id: "a4", label: "4. IT-Support", typ: "wahl", punkte: 1, optionen: PA, richtig: 1 }
+      ] },
+      a3: { teile: [{ id: "ziel", label: "Ihr SMART-Ziel", typ: "text", punkte: 4, erwartung: "Spezifisch (welche Anfragen), messbar (Quote/Zeit mit Zahlen), realistisch, terminiert (Datum), möglichst mit Qualitätskennzahl." }] },
+      a4: { teile: [
+        { id: "b1", label: "1. Raute mit X", typ: "wahl", punkte: 1, optionen: BP, richtig: 0 },
+        { id: "b2", label: "2. Raute mit +", typ: "wahl", punkte: 1, optionen: BP, richtig: 1 },
+        { id: "b3", label: "3. dicker Kreis", typ: "wahl", punkte: 1, optionen: BP, richtig: 2 },
+        { id: "b4", label: "4. gestrichelter Pfeil zwischen Pools", typ: "wahl", punkte: 1, optionen: BP, richtig: 3 }
+      ] },
+      a5: { teile: [
+        { id: "dlz", label: "Durchlaufzeit", typ: "zahl", punkte: 2, wert: 500, tol: 0, einheit: "min" },
+        { id: "eff", label: "Prozesseffizienz in %", typ: "zahl", punkte: 2, wert: 6, tol: 0.05, einheit: "%" }
+      ] },
+      a6: { teile: [
+        { id: "pa", label: "a) Personen ohne KI", typ: "zahl", punkte: 2, wert: 11, tol: 0 },
+        { id: "pb", label: "b) Personen mit KI", typ: "zahl", punkte: 2, wert: 5, tol: 0 }
+      ] },
+      a7: { teile: [
+        { id: "aq", label: "Automatisierungsquote in %", typ: "zahl", punkte: 1.5, wert: 68, tol: 0.05, einheit: "%" },
+        { id: "fq", label: "Fehlerquote in %", typ: "zahl", punkte: 1.5, wert: 1.8, tol: 0.05, einheit: "%" }
+      ] },
+      a8: { teile: [{ id: "epk", label: "Fehler und Korrektur", typ: "text", punkte: 3, erwartung: "Ereignisse entscheiden nicht; nach einem Ereignis kein XOR (1 P.). Funktion 'Antrag prüfen' einfügen, dann XOR mit Ereignissen genehmigungsfähig / nicht genehmigungsfähig und danach die Funktionen (2 P.)." }] },
+      a9: { teile: [
+        { id: "k1", label: "1. Lieferscheine auslesen und buchen", typ: "wahl", punkte: 1, optionen: KR, richtig: 0 },
+        { id: "k2", label: "2. Tourenvorschlag, Disponent entscheidet", typ: "wahl", punkte: 1, optionen: KR, richtig: 1 },
+        { id: "k3", label: "3. Retourenzahl schätzen", typ: "wahl", punkte: 1, optionen: KR, richtig: 2 }
+      ] },
+      a10: { teile: [
+        { id: "d1", label: "1. Ausschussquote erheben", typ: "wahl", punkte: 1, optionen: DM, richtig: 1 },
+        { id: "d2", label: "2. Projektauftrag festlegen", typ: "wahl", punkte: 1, optionen: DM, richtig: 0 },
+        { id: "d3", label: "3. KI-Prüfstation einführen", typ: "wahl", punkte: 1, optionen: DM, richtig: 3 },
+        { id: "d4", label: "4. Regelkarte und Monitoring", typ: "wahl", punkte: 1, optionen: DM, richtig: 4 },
+        { id: "d5", label: "5. Ursachen mit Daten ermitteln", typ: "wahl", punkte: 1, optionen: DM, richtig: 2 }
+      ] },
+      a11: { teile: [
+        { id: "felder", label: "Drei Pflichtangaben", typ: "text", punkte: 3, erwartung: "Fall-ID, Aktivität, Zeitstempel" },
+        { id: "typ", label: "Typ für Ist-Soll-Vergleich", typ: "wahl", punkte: 1, optionen: ["Discovery", "Conformance Checking", "Enhancement"], richtig: 1 }
+      ] },
+      a12: { teile: [{ id: "vorgehen", label: "Ihr Vorgehen", typ: "text", punkte: 8, erwartung: "Erhebung mit mehreren Methoden inkl. Daten/Process Mining und BPMN-Ist (2 P.); zwei plausible Schwachstellen wie Medienbruch, Liegezeiten, Rückfragen (2 P.); SMART-Ziel mit Zahlen und Termin (1 P.); Soll-Prozess mit KI für Klassifikation, Extraktion, Vollständigkeitsprüfung, Priorisierung, Ausnahmen an Menschen, parallele Prüfung (2 P.); Überwachung mit Kennzahlen, Eigner, Modell-Monitoring (1 P.)." }] }
+    }
+  };
+})();
+</script>

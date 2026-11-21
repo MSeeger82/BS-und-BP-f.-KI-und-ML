@@ -1,0 +1,203 @@
+<!--META {"nr": 2, "titel": "Umgang mit Daten", "lektionen": 16, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 2 von 17 · ca. 35 Lernstunden</span>
+      <h1 id="introTitle">Umgang mit Daten: speichern, abfragen, säubern, beschreiben, schützen</h1>
+      <p>Ein Modell ist nur so gut wie seine Daten. In echten KI-Projekten steckt oft der größte Teil der Arbeit in der Datenaufbereitung. In diesem Modul lernen Sie, wie Daten in relationalen Datenbanken liegen und wie Sie sie mit SQL abfragen, wie Sie ihre Qualität prüfen und sie für ein Modell vorbereiten, wie Sie Daten mit Kennzahlen und Diagrammen beschreiben – und welche Sicherheits- und Datenschutzregeln schon bei der Erhebung gelten.</p>
+      <div class="facts">
+        <span class="chip">16 Lektionen in 4 Teilen</span><span class="chip">8 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 2</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--code-bg);"></i><span><b>Code</b> – so sieht es in SQL oder Python aus</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Datenarten und Skalenniveaus" data-part="Teil A · Daten speichern und abfragen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 25 Minuten</span><h2>Datenarten und Skalenniveaus</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Mit Hausnummern rechnet niemand: Nummer 8 ist nicht „doppelt so viel“ wie Nummer 4. Mit Preisen schon: 8 € sind doppelt so viel wie 4 €. Zahlen sind also nicht gleich Zahlen – es kommt darauf an, was sie bedeuten.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Das <b>Skalenniveau</b> eines Merkmals legt fest, welche Rechenoperationen sinnvoll sind – und welche Kennzahlen, Diagramme und Vorverarbeitungsschritte passen.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Skala</th><th>Eigenschaft</th><th>Beispiele</th><th>Sinnvolle Lagemaße</th></tr></thead>
+        <tbody>
+          <tr><td><b>Nominal</b></td><td>nur Kategorien, keine Reihenfolge</td><td>Farbe, Abteilung, Postleitzahl</td><td>Modus</td></tr>
+          <tr><td><b>Ordinal</b></td><td>Reihenfolge, Abstände unklar</td><td>Schulnote, Zufriedenheit „gering/mittel/hoch“</td><td>Modus, Median</td></tr>
+          <tr><td><b>Intervall</b></td><td>gleiche Abstände, kein natürlicher Nullpunkt</td><td>Temperatur in °C, Kalenderjahr</td><td>+ Mittelwert</td></tr>
+          <tr><td><b>Verhältnis</b></td><td>gleiche Abstände und echter Nullpunkt</td><td>Umsatz, Gewicht, Dauer, Alter</td><td>+ Mittelwert, Verhältnisse („doppelt so viel“)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Nominal und ordinal heißen zusammen <b>kategorial</b> (qualitativ), Intervall und Verhältnis <b>metrisch</b> (quantitativ). Metrische Merkmale sind <b>diskret</b> (zählbar: Anzahl Bestellungen) oder <b>stetig</b> (jeder Zwischenwert möglich: Gewicht).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erst das Skalenniveau bestimmen, dann rechnen: Mit Postleitzahlen bildet man keinen Mittelwert.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Postleitzahl, Kundennummer und Artikelnummer sehen aus wie Zahlen, sind aber <b>nominal</b>. Für ein Modell müssen sie als Kategorien behandelt (oder weggelassen) werden.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Welches Skalenniveau hat eine Kundenzufriedenheit von 1 („sehr unzufrieden“) bis 5 („sehr zufrieden“)?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Nominal</button>
+          <button type="button" class="opt" data-right="true">Ordinal</button>
+          <button type="button" class="opt">Verhältnis</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Es gibt eine Reihenfolge, aber ob der Abstand von 1 zu 2 so groß ist wie von 4 zu 5, ist unklar." data-no="Nicht ganz. Die Werte haben eine Reihenfolge (also nicht nominal), aber keine gesicherten gleichen Abstände und keinen echten Nullpunkt: ordinal."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Gruppe Merkmale aus einem eigenen Datensatz (z. B. Personalakte, Auftragsliste) den vier Skalen zuordnen. Die Hausnummer ist ein guter Lacher – und bleibt hängen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Relationale Datenbanken" data-part="Teil A · Daten speichern und abfragen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 30 Minuten</span><h2>Relationale Datenbanken: Tabelle, Schlüssel, Beziehung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Im Adressbuch steht jede Person einmal. Auf der Rechnung steht nur die Kundennummer – wer die Adresse braucht, schlägt im Adressbuch nach. Ändert sich die Adresse, ändert man sie an genau einer Stelle.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Eine <b>relationale Datenbank</b> speichert Daten in Tabellen (Relationen). Jede Zeile ist ein Datensatz, jede Spalte ein Attribut. Ein <b>Primärschlüssel (PK)</b> identifiziert jede Zeile eindeutig. Ein <b>Fremdschlüssel (FK)</b> verweist auf den Primärschlüssel einer anderen Tabelle und stellt so Beziehungen her.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/relationen.gif" width="640" height="380" alt="Animation: Links eine Kundentabelle, rechts eine Bestelltabelle. Nacheinander zeigt ein Pfeil von jeder Bestellung über die Kundennummer auf den passenden Kunden." loading="lazy">
+        <figcaption>Der Fremdschlüssel kunden_id in der Bestellung zeigt auf genau einen Kunden.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Beziehung</th><th>Bedeutung</th><th>Umsetzung</th></tr></thead>
+        <tbody>
+          <tr><td><b>1:1</b></td><td>ein Datensatz gehört zu genau einem anderen</td><td>Mitarbeiter – Dienstwagen (wenn jeder höchstens einen hat)</td></tr>
+          <tr><td><b>1:n</b></td><td>einer hat viele</td><td>Kunde – Bestellungen: FK in der „n“-Tabelle</td></tr>
+          <tr><td><b>n:m</b></td><td>viele haben viele</td><td>Bestellungen – Artikel: eigene <b>Zwischentabelle</b> (Bestellposition) mit zwei Fremdschlüsseln</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Datenbanken arbeiten mit <b>Transaktionen</b>, die die <b>ACID</b>-Eigenschaften erfüllen: atomar (ganz oder gar nicht), konsistent, isoliert, dauerhaft. Für KI-Projekte werden Daten oft aus mehreren Systemen in ein <b>Data Warehouse</b> (strukturiert, für Auswertungen) oder einen <b>Data Lake</b> (Rohdaten aller Art) geladen – der Vorgang heißt ETL (Extract, Transform, Load).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Primärschlüssel = eindeutige Kennung einer Zeile. Fremdschlüssel = Verweis auf eine Zeile in einer anderen Tabelle.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Wie bilden Sie eine n:m-Beziehung ab?“ – Antwort: mit einer Zwischentabelle, die die Primärschlüssel beider Tabellen als Fremdschlüssel enthält (zusammen oft als zusammengesetzter Primärschlüssel).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeichnen Sie das Adressbuch-Beispiel an die Tafel. Fragen Sie: „Was passiert, wenn die Adresse auf jeder Rechnung steht und der Kunde umzieht?“ – Das ist die Überleitung zur Normalisierung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Normalisierung" data-part="Teil A · Daten speichern und abfragen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Normalisierung: jede Information nur einmal</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Excel-Liste, in der bei jeder Bestellung Name, Adresse und Telefonnummer des Kunden neu eingetippt werden: Irgendwann stehen dort drei verschiedene Schreibweisen derselben Straße. Welche stimmt?</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Normalisierung</b> zerlegt Tabellen so, dass Daten nicht doppelt gespeichert werden (<b>Redundanz</b>). Sie verhindert <b>Anomalien</b> beim Einfügen, Ändern und Löschen.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Normalform</th><th>Regel</th><th>Verstoß (Beispiel)</th></tr></thead>
+        <tbody>
+          <tr><td><b>1. NF</b></td><td>Jedes Feld enthält genau einen (atomaren) Wert</td><td>Spalte „Artikel“ mit „Stuhl, Tisch, Lampe“</td></tr>
+          <tr><td><b>2. NF</b></td><td>1. NF + jedes Nicht-Schlüssel-Attribut hängt vom <b>ganzen</b> Primärschlüssel ab</td><td>In Bestellposition (bestell_nr, artikel_nr) steht der Artikelname – er hängt nur von artikel_nr ab</td></tr>
+          <tr><td><b>3. NF</b></td><td>2. NF + kein Nicht-Schlüssel-Attribut hängt von einem anderen Nicht-Schlüssel-Attribut ab (keine transitiven Abhängigkeiten)</td><td>In Kunde stehen PLZ und Ort – der Ort hängt von der PLZ ab</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Anomalie</th><th>Was passiert</th></tr></thead>
+        <tbody>
+          <tr><td>Einfügeanomalie</td><td>Ein neuer Artikel kann nicht angelegt werden, solange ihn niemand bestellt hat</td></tr>
+          <tr><td>Änderungsanomalie</td><td>Eine Adresse muss in vielen Zeilen geändert werden; vergisst man eine, ist der Bestand widersprüchlich</td></tr>
+          <tr><td>Löschanomalie</td><td>Löscht man die letzte Bestellung eines Kunden, sind auch seine Kontaktdaten weg</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Normalisieren für die Speicherung, zusammenführen (JOIN) für die Auswertung.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Für ML-Modelle braucht man meist <b>eine</b> breite Tabelle mit einer Zeile je Beispiel. Die entsteht durch JOINs aus den normalisierten Tabellen – in der Praxis oft „Feature-Tabelle“ genannt.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie eine unnormalisierte Bestellliste in Gruppen in die 3. Normalform bringen. Ergebnis: Kunde, Bestellung, Bestellposition, Artikel – und ggf. Ort.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="SQL I: Abfragen und Filtern" data-part="Teil A · Daten speichern und abfragen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 35 Minuten</span><h2>SQL I: SELECT, WHERE, ORDER BY</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>„Zeig mir alle Bestellungen aus Köln über 100 €, die teuerste zuerst.“ Genau so einen Satz schreibt man in SQL – nur in einer festen Grammatik.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>SQL</b> (Structured Query Language) ist die Standardsprache für relationale Datenbanken. Man beschreibt, <b>was</b> man haben will, nicht wie die Datenbank es findet (deklarativ).</p>
+        </div>
+      </div>
+      <pre class="code"><span class="k">SELECT</span> best_id, kunden_id, betrag     <span class="c">-- welche Spalten</span>
+<span class="k">FROM</span>   bestellung                       <span class="c">-- aus welcher Tabelle</span>
+<span class="k">WHERE</span>  betrag &gt; 100                     <span class="c">-- welche Zeilen</span>
+  <span class="k">AND</span>  datum &gt;= <span class="s">'2026-01-01'</span>
+<span class="k">ORDER BY</span> betrag <span class="k">DESC</span>                   <span class="c">-- Sortierung: absteigend</span>
+<span class="k">LIMIT</span>  10;                              <span class="c">-- nur die ersten 10</span></pre>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Baustein</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;=</code></td><td>Vergleich</td><td><code>ort = 'Köln'</code></td></tr>
+          <tr><td><code>AND</code>, <code>OR</code>, <code>NOT</code></td><td>Bedingungen verknüpfen</td><td><code>betrag &gt; 100 AND ort = 'Köln'</code></td></tr>
+          <tr><td><code>IN (…)</code></td><td>in einer Liste</td><td><code>ort IN ('Köln', 'Bonn')</code></td></tr>
+          <tr><td><code>BETWEEN … AND …</code></td><td>Bereich (Grenzen eingeschlossen)</td><td><code>betrag BETWEEN 50 AND 100</code></td></tr>
+          <tr><td><code>LIKE</code></td><td>Textmuster, % = beliebig viele Zeichen</td><td><code>name LIKE 'Sch%'</code></td></tr>
+          <tr><td><code>IS NULL</code></td><td>Wert fehlt</td><td><code>email IS NULL</code></td></tr>
+          <tr><td><code>DISTINCT</code></td><td>Doppelte Zeilen entfernen</td><td><code>SELECT DISTINCT ort FROM kunde</code></td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>SELECT = Spalten, FROM = Tabelle, WHERE = Zeilen, ORDER BY = Reihenfolge.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Fehlende Werte prüft man mit <code>IS NULL</code>, nicht mit <code>= NULL</code>. Ein Vergleich mit NULL ergibt nie „wahr“ – die Abfrage liefert dann stillschweigend keine Zeilen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Wenn möglich, eine kleine Datenbank im Browser zeigen (z. B. SQLite-Online-Werkzeug). Die Teilnehmenden formulieren Fragen auf Deutsch, die Gruppe übersetzt sie in SQL.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="SQL II: Verknüpfen und Gruppieren" data-part="Teil A · Daten speichern und abfragen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 40 Minuten</span><h2>SQL II: JOIN, GROUP BY, HAVING</h2></div>
+      <figure class="board">
+        <img src="gifs/join.gif" width="640" height="380" alt="Animation: Eine Kundentabelle und eine Bestelltabelle werden über die Kundennummer zu einer Ergebnistabelle mit Bestellnummer, Name und Betrag zusammengeführt. Ein Kunde ohne Bestellung fehlt im Ergebnis." loading="lazy">
+        <figcaption>INNER JOIN: nur Zeilen mit passendem Schlüssel in beiden Tabellen.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>JOIN-Art</th><th>Ergebnis</th></tr></thead>
+        <tbody>
+          <tr><td><b>INNER JOIN</b></td><td>nur Zeilen, die in beiden Tabellen einen Partner haben</td></tr>
+          <tr><td><b>LEFT JOIN</b></td><td>alle Zeilen der linken Tabelle; fehlt rechts ein Partner, stehen dort NULL-Werte</td></tr>
+          <tr><td><b>RIGHT JOIN</b></td><td>alle Zeilen der rechten Tabelle</td></tr>
+          <tr><td><b>FULL OUTER JOIN</b></td><td>alle Zeilen beider Tabellen</td></tr>
+        </tbody>
+      </table></div>
+      <figure class="board">
+        <img src="gifs/group-by.gif" width="640" height="380" alt="Animation: Sieben Verkaufszeilen ordnen sich in drei Gruppen Nord, Süd und West; für jede Gruppe erscheinen Summe und Anzahl." loading="lazy">
+        <figcaption>GROUP BY fasst Zeilen zusammen; Aggregatfunktionen berechnen eine Zahl je Gruppe.</figcaption>
+      </figure>
+      <pre class="code"><span class="k">SELECT</span>   k.ort, <span class="k">COUNT</span>(*) <span class="k">AS</span> anzahl, <span class="k">AVG</span>(b.betrag) <span class="k">AS</span> schnitt
+<span class="k">FROM</span>     bestellung b
+<span class="k">JOIN</span>     kunde k <span class="k">ON</span> b.kunden_id = k.kunden_id
+<span class="k">WHERE</span>    b.datum &gt;= <span class="s">'2026-01-01'</span>       <span class="c">-- Zeilen vorher filtern</span>
+<span class="k">GROUP BY</span> k.ort
+<span class="k">HAVING</span>   <span class="k">COUNT</span>(*) &gt; 50                <span class="c">-- Gruppen nachher filtern</span>
+<span class="k">ORDER BY</span> schnitt <span class="k">DESC</span>;</pre>
+      <div class="prose">
+        <p>Aggregatfunktionen: <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>. Logische Auswertungsreihenfolge: <b>FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT</b>. Deshalb darf in WHERE keine Aggregatfunktion stehen – die Gruppen gibt es dort noch nicht.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>WHERE filtert Zeilen vor dem Gruppieren, HAVING filtert Gruppen danach.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Jede Spalte im SELECT muss entweder im GROUP BY stehen oder in einer Aggregatfunktion. <code>SELECT ort, name, COUNT(*) … GROUP BY ort</code> ist fehlerhaft – welcher Name soll für die ganze Gruppe gelten?</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Sie wollen alle Kunden auflisten, auch solche ohne Bestellung, mit ihrer Bestellanzahl. Welcher JOIN?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">INNER JOIN</button>
+          <button type="button" class="opt" data-right="true">kunde LEFT JOIN bestellung</button>
+          <button type="button" class="opt">bestellung LEFT JOIN kunde</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Der LEFT JOIN behält alle Kunden; für Kunden ohne Bestellung ergibt COUNT(b.best_id) 0." data-no="Nicht ganz. INNER JOIN würde Kunden ohne Bestellung verlieren. Die Kunden müssen links stehen: kunde LEFT JOIN bestellung."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Reihenfolge der Auswertung ist der Schlüssel zu fast allen SQL-Fehlern. Schreiben Sie sie gut sichtbar an. Detail für Fortgeschrittene: Mit <code>COUNT(b.best_id)</code> statt <code>COUNT(*)</code> zählt man beim LEFT JOIN Kunden ohne Bestellung korrekt mit 0.</p>
+      </aside>
+    </section>

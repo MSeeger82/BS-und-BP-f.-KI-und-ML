@@ -1,0 +1,1113 @@
+<!--META {"nr": 4, "titel": "Überwachtes Lernen", "lektionen": 15, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 4 von 12 · ca. 24 Lernstunden</span>
+      <h1 id="introTitle">Überwachtes Lernen: Die wichtigsten Verfahren verstehen, rechnen und auswählen</h1>
+      <p>Jetzt lernen die Maschinen. In diesem Modul lernen Sie die Standardverfahren des überwachten Lernens kennen – von der geraden Linie (lineare Regression) über Entscheidungsbäume und ganze Wälder davon bis zu Support Vector Machines. Für jedes Verfahren erfahren Sie: Wie funktioniert es, wie rechnet man ein Beispiel von Hand, wo sind Stärken und Schwächen, und wann wählt man es in der Praxis?</p>
+      <div class="facts">
+        <span class="chip">15 Lektionen in 4 Teilen</span><span class="chip">6 Animationen</span><span class="chip">3 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4: einfache Lernverfahren, Algorithmen</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--warm); border-radius: 50%;"></i><span><b>Rechenweg</b> – Schritt für Schritt</span></div>
+        <div><i style="background: var(--surface); outline: 2px dashed var(--accent);"></i><span><b>Rechner</b> – selbst ausprobieren</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Prüfungsfalle</b></span></div>
+      </div>
+    </section>
+
+    <div class="part-head"><span>Teil A · Lektionen 1–3</span><h2>Lineare Modelle</h2><p>Die einfachsten und am besten erklärbaren Verfahren – und der Maßstab, an dem sich alle anderen messen lassen müssen.</p></div>
+
+    <section class="lesson" id="l1" data-title="Der Ablauf" data-part="A · Lineare Modelle">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 30 Minuten</span><h2>Wie überwachtes Lernen abläuft</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Eine neue Kollegin in der Kreditabteilung bekommt 500 alte Kreditakten mit dem Vermerk, ob der Kredit zurückgezahlt wurde. Sie studiert sie, entwickelt ein Gespür („hohe Schulden plus kurzer Job = riskant“) und entscheidet danach neue Anträge. Ein überwachtes Lernverfahren macht dasselbe – nur mit 500.000 Akten und in Sekunden.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Ziel festlegen:</b> Was soll vorhergesagt werden (Label)? Zahl → Regression, Kategorie → Klassifikation.</div></li>
+        <li><div><b>Daten vorbereiten:</b> Merkmale, Bereinigung, Aufteilung (Modul 3).</div></li>
+        <li><div><b>Baseline bestimmen:</b> Wie gut ist die einfachste denkbare Lösung? (immer die häufigste Klasse, immer der Mittelwert, „wie letzte Woche“)</div></li>
+        <li><div><b>Verfahren wählen und trainieren:</b> <code>fit(X_train, y_train)</code></div></li>
+        <li><div><b>Vorhersagen:</b> <code>predict(X_val)</code>, mit Validierungsdaten bewerten und Hyperparameter anpassen.</div></li>
+        <li><div><b>Abschlusstest</b> mit Testdaten, dann Einsatz und Überwachung.</div></li>
+      </ol>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Was ein Modell eigentlich ist</span>
+          <p>Ein Modell ist eine Funktion <i>f</i>, die aus Merkmalen <i>x</i> eine Vorhersage <i>ŷ</i> = <i>f</i>(<i>x</i>) macht. Jedes Verfahren hat eine eigene Form dieser Funktion (Linie, Baum, Abstandsregel) und eigene <b>Parameter</b>, die beim Training gelernt werden.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Warum eine Baseline?</span>
+          <p>Ein Modell mit 92 % Accuracy klingt gut. Wenn aber 90 % aller Fälle „kein Ausfall“ sind, schafft die simple Regel „immer kein Ausfall“ schon 90 %. Erst der Vergleich mit der Baseline zeigt, ob ML überhaupt etwas bringt.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Der Ablauf an zwei Aufgaben und die Baseline</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ausfall einer Pumpe vorhersagen – die sechs Schritte konkret</span>
+        <ol class="steps">
+          <li><div><b>Ziel:</b> „Fällt die Pumpe in den nächsten 7 Tagen aus?“ Antwort ja/nein → Klassifikation.</div></li>
+          <li><div><b>Daten:</b> Vibration, Temperatur, Betriebsstunden; Label aus dem Wartungsprotokoll. Zeitlich aufteilen.</div></li>
+          <li><div><b>Baseline:</b> „Immer kein Ausfall.“ Bei 2 % Ausfällen ergibt das 98 % Accuracy und 0 % Recall.</div></li>
+          <li><div><b>Training:</b> z. B. Random Forest mit <code>fit(X_train, y_train)</code>.</div></li>
+          <li><div><b>Validierung:</b> Recall und Precision auf den Validierungsdaten; Hyperparameter anpassen.</div></li>
+          <li><div><b>Test und Einsatz:</b> einmalig auf den Testdaten, dann Überwachung im Betrieb.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Baseline bei einer Zahlenprognose</span>
+        <p>Ein Händler sagt den Wochenabsatz voraus. Die einfachste Regel („wie in der Vorwoche“) liegt im Schnitt 12 Stück daneben (MAE 12). Ein Modell erreicht MAE 8. Verbesserung: <span class="calcline">(12 − 8) : 12 ≈ 33 %</span>. Erreichte das Modell dagegen nur 11,5, wäre der Aufwand kaum gerechtfertigt. Erst der Abstand zur Baseline macht die Leistung greifbar.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum 93 % manchmal nichts bedeuten</span>
+        <p>Bei einer Kündigungsvorhersage kündigen 8 % der Kunden. Die Baseline „bleibt immer“ schafft 92 %. Ein Modell mit 93 % ist nur einen Punkt besser – möglicherweise nutzlos. Wichtiger ist, wie viele der Kündigenden es <i>findet</i> (Recall). Genau deshalb kommt in Schritt 3 die Baseline, noch bevor das erste Modell trainiert wird.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Die Testdaten mehrfach benutzen, um Einstellungen zu verbessern (Schritt 5 gehört zur Validierung).</li>
+          <li>Keine Baseline festlegen und „gute“ Zahlen nicht einordnen können.</li>
+          <li>Mit Schritt 4 beginnen und Ziel und Daten vernachlässigen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie die Schritte des überwachten Lernens und erklären Sie, wozu eine Baseline dient.</p>
+        <p><b>Musterlösung:</b> Ziel festlegen, Daten vorbereiten, Baseline bestimmen, Modell trainieren, mit Validierungsdaten bewerten und einstellen, einmal testen und einsetzen (3 Punkte). Die Baseline ist die einfachste denkbare Lösung (z. B. immer die häufigste Klasse); nur wenn das Modell sie deutlich schlägt, bringt Machine Learning einen Nutzen (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ziel festlegen, Daten vorbereiten, Baseline messen, trainieren, validieren, einmal testen. Ohne Baseline kein Urteil über ein Modell.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Dieser Ablauf ist das Gerüst für alle folgenden Lektionen und für die Transferarbeit. Lassen Sie die Teilnehmenden für ihr eigenes Projektthema die Baseline formulieren – das wird oft vergessen und bringt in der Präsentation Punkte.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l2" data-title="Lineare Regression" data-part="A · Lineare Modelle">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 60 Minuten</span><h2>Lineare Regression: Die beste gerade Linie</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Taxi kostet 4 € Grundgebühr plus 2 € pro Kilometer. Für 10 km zahlen Sie 24 €. Das ist eine lineare Formel: fester Startwert plus Steigung mal Menge. Die lineare Regression findet so eine Formel aus Beispielen, wenn man die Preisliste nicht kennt, sondern nur viele Quittungen hat.</p>
+      </div>
+      <div class="formula"><span class="box-label">Modell</span>
+        <div class="eq"><i>ŷ</i> = <i>w</i><sub>0</sub> + <i>w</i><sub>1</sub><i>x</i><sub>1</sub> + <i>w</i><sub>2</sub><i>x</i><sub>2</sub> + … + <i>w</i><sub>n</sub><i>x</i><sub>n</sub></div>
+        <div class="legend-eq"><span><i>w</i><sub>0</sub> = Achsenabschnitt (Grundgebühr), <i>w</i><sub>1</sub> … <i>w</i><sub>n</sub> = Gewichte (Preis pro Einheit jedes Merkmals).</span></div>
+      </div>
+      <h3>Wie die Linie gefunden wird: Methode der kleinsten Quadrate</h3>
+      <p>Für jede mögliche Linie misst man den Abstand jedes Punktes zur Linie (Residuum), quadriert und addiert. Die beste Linie hat die kleinste Summe – das ist genau der MSE aus Modul 2. Bei einem Merkmal gibt es dafür eine direkte Formel, bei vielen Merkmalen nutzt man Matrixrechnung oder Gradientenabstieg.</p>
+      <div class="formula"><span class="box-label">Steigung und Achsenabschnitt (ein Merkmal)</span>
+        <div class="eq"><i>w</i><sub>1</sub> = <span class="frac"><span>Σ (<i>x</i> − <i>x̄</i>)(<i>y</i> − <i>ȳ</i>)</span><span>Σ (<i>x</i> − <i>x̄</i>)²</span></span> &nbsp;&nbsp; <i>w</i><sub>0</sub> = <i>ȳ</i> − <i>w</i><sub>1</sub> · <i>x̄</i></div>
+      </div>
+      <h3>Rechenweg: Punkte (1 | 2), (2 | 4), (3 | 5)</h3>
+      <ol class="steps">
+        <li><div>Mittelwerte: <span class="calcline">x̄ = 2 · ȳ = (2 + 4 + 5) : 3 ≈ 3,667</span></div></li>
+        <li><div>Abweichungen x: −1, 0, 1 · y: −1,667; 0,333; 1,333</div></li>
+        <li><div>Zähler: <span class="calcline">(−1)(−1,667) + 0 · 0,333 + 1 · 1,333 = 3</span> · Nenner: <span class="calcline">1 + 0 + 1 = 2</span></div></li>
+        <li><div>Steigung: <span class="calcline">w₁ = 3 : 2 = 1,5</span> · Achsenabschnitt: <span class="calcline">w₀ = 3,667 − 1,5 · 2 ≈ 0,667</span></div></li>
+        <li><div>Modell: <span class="result">ŷ = 0,667 + 1,5 · x</span> → Vorhersage für x = 4: 0,667 + 6 = 6,667</div></li>
+      </ol>
+      <h3>Die Gewichte deuten</h3>
+      <p>Mietmodell: <b>Miete = 200 + 10 · Fläche − 3 · Entfernung zur Innenstadt (km)</b>. Jeder zusätzliche Quadratmeter erhöht die Miete um 10 € – <i>bei gleicher Entfernung</i>. Jeder Kilometer weiter draußen senkt sie um 3 €. Diese Deutbarkeit ist die große Stärke linearer Modelle.</p>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Annahmen</span>
+          <ul><li>Zusammenhang ist (annähernd) linear</li><li>Merkmale nicht stark untereinander korreliert (sonst Multikollinearität: Gewichte werden unzuverlässig)</li><li>Fehler zufällig, ohne Muster</li></ul>
+        </div>
+        <div class="box fach"><span class="box-label">Erweiterungen</span>
+          <ul><li><b>Polynomiale Regression</b>: auch <i>x</i>², <i>x</i>³ als Merkmale → Kurven</li><li><b>Ridge, Lasso</b>: mit Regularisierung gegen Overfitting (Modul 6)</li></ul>
+        </div>
+      </div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Gewichte nur vergleichen, wenn die Merkmale gleich skaliert sind. „Fläche: 10“ und „Entfernung: −3“ sagen nichts darüber, welches Merkmal wichtiger ist, denn Quadratmeter und Kilometer sind verschiedene Einheiten.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Die Regression mit Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Dieselbe Mietaufgabe wie in Modul 1, jetzt gerechnet</span>
+        <p>Drei Wohnungen: 40 m² → 520 €, 60 m² → 700 €, 80 m² → 960 €.</p>
+        <ol class="steps">
+          <li><div>Mittelwerte: <span class="calcline">x̄ = 60 · ȳ = (520 + 700 + 960) : 3 ≈ 726,67</span></div></li>
+          <li><div>Abweichungen x: −20, 0, +20; y: −206,67; −26,67; +233,33</div></li>
+          <li><div>Zähler: <span class="calcline">(−20)(−206,67) + 0 + 20 · 233,33 = 4.133 + 4.667 = 8.800</span> · Nenner: <span class="calcline">400 + 0 + 400 = 800</span></div></li>
+          <li><div>Steigung <span class="calcline">w₁ = 8.800 : 800 = 11</span>, Achsenabschnitt <span class="calcline">w₀ = 726,67 − 11 · 60 ≈ 66,67</span></div></li>
+          <li><div><span class="result">Modell: Miete ≈ 66,67 + 11 · Fläche.</span> Für 70 m²: <span class="calcline">66,67 + 770 ≈ 836,67 €</span></div></li>
+        </ol>
+        <p><b>Fehler des Modells:</b> 40 m² → Vorhersage 506,67 (Fehler +13,33); 60 m² → 726,67 (−26,67); 80 m² → 946,67 (+13,33). Die Residuen summieren sich zu 0. MSE = <span class="calcline">(177,8 + 711,1 + 177,8) : 3 ≈ 355,6</span>, RMSE ≈ 18,9 €.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mehrere Merkmale deuten</span>
+        <p>Ein Modell für den Preis eines Gebrauchtwagens: <b>Preis = 24.000 − 1.800 · Alter (Jahre) − 0,06 · Kilometer + 1.200 · Automatik (0/1)</b>.</p>
+        <ul>
+          <li>Jedes Jahr Alter senkt den Preis um 1.800 € – bei gleichem Kilometerstand und gleicher Schaltung.</li>
+          <li>Jeder Kilometer kostet 6 Cent Wertverlust.</li>
+          <li>Ein Automatikgetriebe erhöht den Preis um 1.200 €.</li>
+          <li>Beispiel: 5 Jahre, 80.000 km, Automatik: <span class="calcline">24.000 − 9.000 − 4.800 + 1.200 = 11.400 €</span></li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die Grenzen der Linie – Extrapolation</span>
+        <p>Das Mietmodell wurde mit Wohnungen von 40 bis 80 m² trainiert. Für 300 m² liefert es <span class="calcline">66,67 + 11 · 300 ≈ 3.367 €</span>. Ob das stimmt, weiß niemand: Große Villen folgen anderen Regeln als kleine Wohnungen. Ein Modell sollte nur im Bereich eingesetzt werden, den die Trainingsdaten abdecken. Außerhalb davon ist jede Vorhersage eine Vermutung.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Modell lautet Umsatz = 20 + 4 · Werbung (Werbung in Tausend €, Umsatz in Tausend €). Berechnen Sie den Umsatz für 12 und erklären Sie die Zahlen 20 und 4.</p>
+        <p><b>Musterlösung:</b> 20 + 4 · 12 = 68 (Tausend €) (2 Punkte). 20 ist der Achsenabschnitt: der Umsatz ohne Werbung (1,5 Punkte). 4 ist die Steigung: Jede weitere Tausend Euro Werbung erhöht den Umsatz im Mittel um 4 Tausend Euro (1,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Lineare Regression = gewichtete Summe der Merkmale plus Achsenabschnitt; gelernt durch kleinste Fehlerquadrate. Jedes Gewicht heißt: so viel ändert sich ŷ pro Einheit, alles andere gleich.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Taxibeispiel ist sofort verständlich. Rechnen Sie den Rechenweg an der Tafel mit; er ist anspruchsvoller als die übrigen. Wichtiger als die Formel ist die Deutung der Gewichte – die kommt in Prüfungen häufig.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l3" data-title="Logistische Regression" data-part="A · Lineare Modelle">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 50 Minuten</span><h2>Logistische Regression: Ja oder Nein mit Wahrscheinlichkeit</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Dimmer statt eines Lichtschalters: Statt nur „an“ oder „aus“ kann er alle Helligkeiten dazwischen. Die logistische Regression liefert nicht nur „Ausfall ja/nein“, sondern eine Wahrscheinlichkeit zwischen 0 und 1. Erst eine Schwelle macht daraus die Entscheidung – wie der Punkt am Dimmer, ab dem Sie „hell genug“ sagen.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/logistische-regression.gif" width="640" height="380" alt="Animation: Kreditnehmer mit 0 bis 10 Mahnungen, ausgefallene oben bei 1, zurückgezahlte unten bei 0. Eine S-förmige Kurve passt sich an. Eine waagerechte Schwelle bei 0,5 wird auf 0,3 gesenkt, wodurch die Entscheidungsgrenze nach links wandert." loading="lazy">
+        <figcaption>Die S-Kurve (Sigmoid) übersetzt eine Punktzahl in eine Wahrscheinlichkeit. Die Schwelle entscheidet.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">So rechnet das Modell</span>
+        <div class="eq"><i>z</i> = <i>w</i><sub>0</sub> + <i>w</i><sub>1</sub><i>x</i><sub>1</sub> + … &nbsp;&nbsp;&nbsp; P(<i>y</i> = 1) = σ(<i>z</i>) = <span class="frac"><span>1</span><span>1 + <i>e</i><sup>−z</sup></span></span></div>
+        <div class="legend-eq"><span>Zuerst wie bei der linearen Regression eine Punktzahl z, dann drückt die Sigmoid-Funktion sie in den Bereich 0 bis 1.</span></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th class="r">z</th><th class="r">−2</th><th class="r">−1</th><th class="r">0</th><th class="r">1</th><th class="r">2</th><th class="r">4</th></tr></thead>
+        <tbody><tr><td>σ(z)</td><td class="r">0,119</td><td class="r">0,269</td><td class="r">0,500</td><td class="r">0,731</td><td class="r">0,881</td><td class="r">0,982</td></tr></tbody>
+      </table></div>
+      <h3>Rechenweg: z = −3 + 0,8 · Mahnungen, Kunde mit 5 Mahnungen</h3>
+      <ol class="steps">
+        <li><div><span class="calcline">z = −3 + 0,8 · 5 = 1</span></div></li>
+        <li><div><span class="calcline">σ(1) = 1 / (1 + e⁻¹) = 1 / (1 + 0,368) ≈ 0,731</span></div></li>
+        <li><div>Mit Schwelle 0,5: <span class="result">73 % → Vorhersage „Ausfall“</span></div></li>
+      </ol>
+      <div class="calc" id="calcSig"><span class="box-label">Rechner: logistische Regression</span>
+        <div class="calc-row">
+          <div class="field"><label for="sgW0">w₀ (Achsenabschnitt)</label><input type="number" id="sgW0" value="-3" step="0.1"></div>
+          <div class="field"><label for="sgW1">w₁ (Gewicht)</label><input type="number" id="sgW1" value="0.8" step="0.1"></div>
+          <div class="field"><label for="sgX">x (Merkmal)</label><input type="number" id="sgX" value="5" step="0.5"></div>
+          <div class="field"><label for="sgT">Schwelle</label><input type="range" id="sgT" min="0.05" max="0.95" step="0.05" value="0.5"><output id="sgTOut"></output></div>
+        </div>
+        <div class="kpis" id="sgOut"></div>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Die Schwelle verschieben</span>
+          <p>Standard ist 0,5. Ist ein übersehener Fall teuer (Betrug, Krankheit), senkt man die Schwelle: mehr Fälle werden erkannt (Recall steigt), dafür mehr Fehlalarme (Precision sinkt). Die Wahl der Schwelle ist eine <b>betriebswirtschaftliche</b> Entscheidung.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Mehr als zwei Klassen</span>
+          <p>Mit <b>Softmax</b> statt Sigmoid bekommt jede Klasse eine Wahrscheinlichkeit, zusammen 100 %: „Rechnung 70 % · Technik 25 % · Kündigung 5 %“. Die höchste gewinnt.</p>
+        </div>
+      </div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Die logistische Regression heißt „Regression“, ist aber ein <b>Klassifikations</b>verfahren. Sie ist gut erklärbar: Ein positives Gewicht erhöht die Wahrscheinlichkeit der Klasse 1. Darum ist sie bei Kreditentscheidungen und in regulierten Bereichen beliebt.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Wahrscheinlichkeiten, Schwellen und mehrere Klassen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Dasselbe Modell, drei Kunden</span>
+        <p>Das Modell lautet <span class="calcline">z = −3 + 0,8 · Mahnungen</span>.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Mahnungen</th><th class="r">z</th><th class="r">σ(z)</th><th>Entscheidung (Schwelle 0,5)</th></tr></thead>
+          <tbody>
+            <tr><td class="r">2</td><td class="r">−1,4</td><td class="r">≈ 0,198</td><td>kein Ausfall</td></tr>
+            <tr><td class="r">5</td><td class="r">1,0</td><td class="r">≈ 0,731</td><td>Ausfall</td></tr>
+            <tr><td class="r">8</td><td class="r">3,4</td><td class="r">≈ 0,968</td><td>Ausfall</td></tr>
+          </tbody>
+        </table></div>
+        <p>Je mehr Mahnungen, desto höher die Wahrscheinlichkeit – aber nie genau 0 oder 1. Die Sigmoid-Kurve schmiegt sich an beide Grenzen an.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Schwelle aus den Kosten ableiten</span>
+        <p>Ein Betrugsfall verursacht im Mittel 500 € Schaden, die manuelle Prüfung einer Zahlung kostet 20 €. Prüfen lohnt sich, sobald <span class="calcline">Wahrscheinlichkeit · 500 € &gt; 20 €</span>, also ab <span class="calcline">p &gt; 20 : 500 = 0,04</span>. Die sinnvolle Schwelle liegt hier bei 4 %, <b>nicht</b> bei 50 %. Bei einem Modell, dessen Fehlalarme fast nichts kosten, senkt man die Schwelle stark; bei teuren Fehlalarmen (z. B. Kunden grundlos sperren) hebt man sie an.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Softmax bei drei Klassen</span>
+        <p>Ein Modell bewertet eine Kundenmail mit den Punktzahlen: Rechnung 2, Technik 1, Kündigung 0. Softmax macht daraus Wahrscheinlichkeiten: <span class="calcline">e² ≈ 7,39 · e¹ ≈ 2,72 · e⁰ = 1</span>, Summe ≈ 11,11. Ergebnis: Rechnung ≈ 66,5 %, Technik ≈ 24,5 %, Kündigung ≈ 9,0 % (zusammen 100 %). Die Mail wird der Rechnungsabteilung zugeordnet.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Modell berechnet z = −1 + 0,5 · x. Für x = 4: Berechnen Sie die Wahrscheinlichkeit σ(z) und geben Sie die Klasse bei Schwelle 0,5 an. Warum ist es trotz des Namens kein Regressionsverfahren?</p>
+        <p><b>Musterlösung:</b> z = −1 + 2 = 1; σ(1) ≈ 0,731 (2 Punkte). 0,731 &gt; 0,5: Klasse 1 (1 Punkt). Die logistische Regression sagt eine Kategorie voraus (über eine Wahrscheinlichkeit und eine Schwelle), nicht eine beliebige Zahl; sie ist daher ein Klassifikationsverfahren (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Logistische Regression: gewichtete Summe → Sigmoid → Wahrscheinlichkeit → Schwelle → Klasse. Klassifikation, kein Regressionsverfahren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie im Rechner die Schwelle bewegen und fragen Sie: „Für eine Krebsvorsorge – wo würden Sie die Schwelle setzen? Für eine automatische Kontosperrung?“ So wird klar, dass die Schwelle vom Schaden eines Fehlers abhängt.</p>
+      </aside>
+    </section>
+
+    <div class="part-head"><span>Teil B · Lektionen 4–6</span><h2>Bäume und Ensembles</h2><p>Die Arbeitspferde für Tabellendaten: verständliche Bäume und die starken Teams aus vielen Bäumen.</p></div>
+
+    <section class="lesson" id="l4" data-title="Entscheidungsbaum" data-part="B · Bäume">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 60 Minuten</span><h2>Der Entscheidungsbaum: Fragen über Fragen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Das Spiel „Wer bin ich?“: Mit geschickten Ja/Nein-Fragen („Ist die Person männlich?“, „Lebt sie noch?“) findet man schnell die Lösung. Gute Spieler stellen zuerst die Frage, die die Möglichkeiten am stärksten aufteilt. Genau so baut ein Algorithmus einen Entscheidungsbaum.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/entscheidungsbaum.gif" width="640" height="380" alt="Animation: Kreditanträge als Punkte nach Einkommen und Berufsjahren. Eine senkrechte Linie bei Einkommen 5 teilt den Raum, dann zwei waagerechte Linien bei Berufsjahren 4 und 8. Rechts wächst der passende Baum mit vier Blättern Ablehnen und Zusagen." loading="lazy">
+        <figcaption>Jede Frage zerschneidet den Raum. Jedes Blatt ist eine Region mit einer Entscheidung.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Wie der Baum seine Fragen auswählt</h3>
+        <p>Für jedes Merkmal und jeden möglichen Schwellenwert prüft der Algorithmus: Wie „rein“ sind die beiden entstehenden Gruppen? Die Frage mit der größten Verbesserung gewinnt. Das wird für jede Gruppe wiederholt, bis eine Abbruchregel greift.</p>
+      </div>
+      <div class="formula"><span class="box-label">Maße für Unreinheit</span>
+        <div class="eq">Gini = 1 − Σ <i>p</i><sub>k</sub>² &nbsp;&nbsp;&nbsp; Entropie = − Σ <i>p</i><sub>k</sub> · log₂ <i>p</i><sub>k</sub></div>
+        <div class="legend-eq"><span><i>p</i><sub>k</sub> = Anteil der Klasse k im Knoten. Reiner Knoten: beide 0. Bei zwei Klassen 50/50: Gini 0,5, Entropie 1.</span></div>
+      </div>
+      <h3>Rechenweg: Lohnt sich die Frage? (Informationsgewinn mit Gini)</h3>
+      <p>Ausgangsknoten: 10 Anträge, 5 Zusage, 5 Ablehnung. Die Frage teilt in links 4 Anträge (4 Zusage, 0 Ablehnung) und rechts 6 (1 Zusage, 5 Ablehnung).</p>
+      <ol class="steps">
+        <li><div>Gini vorher: <span class="calcline">1 − (0,5² + 0,5²) = 0,5</span></div></li>
+        <li><div>Gini links: <span class="calcline">1 − (1² + 0²) = 0</span> · rechts: <span class="calcline">1 − ((1/6)² + (5/6)²) = 1 − 26/36 ≈ 0,278</span></div></li>
+        <li><div>Gewichtet nach Größe: <span class="calcline">0,4 · 0 + 0,6 · 0,278 ≈ 0,167</span></div></li>
+        <li><div>Gewinn: <span class="calcline">0,5 − 0,167 ≈ 0,333</span> → <span class="result">gute Frage, sie macht die Gruppen deutlich reiner</span></div></li>
+      </ol>
+      <div class="calc" id="calcGini"><span class="box-label">Rechner: Gini und Informationsgewinn einer Frage</span>
+        <div class="calc-row">
+          <div class="field"><label for="giLa">Links: Klasse A</label><input type="number" id="giLa" value="4" min="0"></div>
+          <div class="field"><label for="giLb">Links: Klasse B</label><input type="number" id="giLb" value="0" min="0"></div>
+          <div class="field"><label for="giRa">Rechts: Klasse A</label><input type="number" id="giRa" value="1" min="0"></div>
+          <div class="field"><label for="giRb">Rechts: Klasse B</label><input type="number" id="giRb" value="5" min="0"></div>
+        </div>
+        <div class="kpis" id="giOut"></div>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Stärken</span>
+          <ul><li>Sehr gut erklärbar (Pfad vorlesen)</li><li>Keine Skalierung nötig</li><li>Kommt mit Zahlen und Kategorien zurecht</li><li>Findet Wechselwirkungen von allein</li></ul>
+        </div>
+        <div class="box falle"><span class="box-label">Schwäche: Overfitting</span>
+          <p>Ein Baum ohne Grenzen wächst, bis jedes Blatt nur noch ein einziges Beispiel enthält – er lernt die Trainingsdaten auswendig. Gegenmittel: <b>maximale Tiefe</b> (max_depth), <b>Mindestanzahl je Blatt</b> (min_samples_leaf), <b>Pruning</b> (nachträgliches Zurückschneiden). Außerdem ist ein einzelner Baum instabil: Kleine Datenänderungen ergeben einen ganz anderen Baum.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Gini, Splits vergleichen und Overfitting</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gini für verschiedene Mischungen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Knoten (Zusage / Ablehnung)</th><th>Rechnung</th><th class="r">Gini</th></tr></thead>
+          <tbody>
+            <tr><td>10 / 0 (rein)</td><td>1 − (1² + 0²)</td><td class="r">0</td></tr>
+            <tr><td>9 / 1</td><td>1 − (0,9² + 0,1²) = 1 − 0,82</td><td class="r">0,18</td></tr>
+            <tr><td>7 / 3</td><td>1 − (0,7² + 0,3²) = 1 − 0,58</td><td class="r">0,42</td></tr>
+            <tr><td>5 / 5 (maximal gemischt)</td><td>1 − (0,5² + 0,5²)</td><td class="r">0,50</td></tr>
+          </tbody>
+        </table></div>
+        <p>Je gleichmäßiger die Mischung, desto höher der Gini-Wert (maximal 0,5 bei zwei Klassen). Der Baum sucht nach Fragen, die den Wert verkleinern.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Zwei mögliche Fragen im Vergleich</span>
+        <p>Ein Knoten hat 20 Anträge: 10 Zusagen, 10 Ablehnungen (Gini 0,5).</p>
+        <ul>
+          <li><b>Frage A (Einkommen):</b> links 12 Anträge (9 Zusagen, 3 Ablehnungen), rechts 8 (1 Zusage, 7 Ablehnungen). Gini links: <span class="calcline">1 − (0,75² + 0,25²) = 0,375</span>; rechts: <span class="calcline">1 − (0,125² + 0,875²) ≈ 0,219</span>. Gewichtet: <span class="calcline">0,6 · 0,375 + 0,4 · 0,219 ≈ 0,3125</span>. Gewinn: <b>0,5 − 0,3125 = 0,1875</b>.</li>
+          <li><b>Frage B (Wohnort):</b> links 10 (6 / 4), rechts 10 (4 / 6). Gini je 0,48, gewichtet 0,48. Gewinn: <b>0,02</b>.</li>
+        </ul>
+        <p>Der Baum wählt Frage A: Sie trennt die Gruppen deutlich besser. Die Frage B bringt fast nichts.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Overfitting sichtbar machen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>max_depth</th><th class="r">Genauigkeit Training</th><th class="r">Genauigkeit Validierung</th><th>Deutung</th></tr></thead>
+          <tbody>
+            <tr><td>2</td><td class="r">80 %</td><td class="r">78 %</td><td>zu einfach (Underfitting)</td></tr>
+            <tr><td>5</td><td class="r">90 %</td><td class="r">86 %</td><td><b>beste Validierung</b></td></tr>
+            <tr><td>10</td><td class="r">98 %</td><td class="r">82 %</td><td>beginnt auswendig zu lernen</td></tr>
+            <tr><td>unbegrenzt</td><td class="r">100 %</td><td class="r">79 %</td><td>Overfitting</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Abstand zwischen Training und Validierung wächst mit der Tiefe. Gewählt wird die Tiefe mit der besten <b>Validierung</b>, nicht die mit dem besten Trainingsergebnis.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein Knoten mit 3 A und 1 B wird verglichen mit einem Knoten mit 8 A und 2 B. Berechnen Sie jeweils den Gini-Wert und sagen Sie, welcher reiner ist.</p>
+        <p><b>Musterlösung:</b> Knoten 1: 1 − (0,75² + 0,25²) = 1 − 0,625 = 0,375 (2 Punkte). Knoten 2: 1 − (0,8² + 0,2²) = 1 − 0,68 = 0,32 (2 Punkte). Knoten 2 ist reiner, weil der Gini-Wert kleiner ist (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Baum wählt die Frage, die die Gruppen am reinsten macht (Gini oder Entropie). Erklärbar, aber ohne Tiefenbegrenzung stark überangepasst.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Spielen Sie zur Einstimmung zwei Runden „Wer bin ich?“. Dann die Animation. Den Gini-Rechenweg unbedingt einmal komplett vorrechnen – diese Aufgabe kommt sehr häufig in Prüfungen. Mit dem Rechner kann man testen, welche Aufteilung den größten Gewinn bringt.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l5" data-title="Random Forest" data-part="B · Bäume">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 40 Minuten</span><h2>Random Forest: die Weisheit der vielen Bäume</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Bei einer Quizshow kann man das Publikum befragen. Einzelne Zuschauer liegen oft daneben, aber die Mehrheit hat erstaunlich oft recht – vorausgesetzt, die Leute denken unabhängig voneinander. Ein Random Forest ist ein Publikum aus vielen, bewusst unterschiedlichen Entscheidungsbäumen.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/random-forest.gif" width="640" height="380" alt="Animation: Sieben kleine Bäume erscheinen, jeder mit zwei zufällig gewählten Merkmalen wie Einkommen und Alter. Jeder Baum stimmt mit Zusagen oder Ablehnen ab. Fünf stimmen für Zusagen, zwei für Ablehnen, das Ergebnis lautet Zusagen." loading="lazy">
+        <figcaption>Jeder Baum ist anders, weil er andere Daten und andere Merkmale sieht. Die Mehrheit entscheidet.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Zwei Zufallsquellen machen die Bäume verschieden</h3>
+        <ol>
+          <li><b>Bootstrap-Stichprobe</b> (Bagging = Bootstrap Aggregating): Jeder Baum bekommt eine zufällige Stichprobe der Trainingsdaten, mit Zurücklegen gezogen – manche Zeilen doppelt, andere gar nicht.</li>
+          <li><b>Zufällige Merkmalsauswahl</b>: Bei jeder Frage darf der Baum nur unter einer zufälligen Teilmenge der Merkmale wählen.</li>
+        </ol>
+        <p>Klassifikation: Mehrheitsentscheid. Regression: Mittelwert der Vorhersagen aller Bäume.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Hyperparameter</th><th>Bedeutung</th><th>Typischer Wert</th></tr></thead>
+        <tbody>
+          <tr><td><code>n_estimators</code></td><td>Anzahl Bäume – mehr ist stabiler, aber langsamer</td><td>100–500</td></tr>
+          <tr><td><code>max_depth</code></td><td>maximale Tiefe jedes Baums</td><td>unbegrenzt bis 20</td></tr>
+          <tr><td><code>max_features</code></td><td>Merkmale pro Frage</td><td>Wurzel aus Merkmalszahl</td></tr>
+          <tr><td><code>min_samples_leaf</code></td><td>Mindestbeispiele pro Blatt</td><td>1–10</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Stärken</span><ul><li>Sehr robust, wenig Overfitting</li><li>Gute Ergebnisse ohne viel Feineinstellung</li><li>Liefert <b>Feature Importance</b>: welche Merkmale wie wichtig sind</li><li>Out-of-Bag-Schätzung: Die nicht gezogenen Zeilen dienen als eingebaute Testdaten</li></ul></div>
+        <div class="box fach"><span class="box-label">Schwächen</span><ul><li>Schwerer erklärbar als ein einzelner Baum</li><li>Größer und langsamer bei der Vorhersage</li><li>Kann nicht über den Wertebereich der Trainingsdaten hinaus extrapolieren</li></ul></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Zufall im Wald</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Abstimmung und Wahrscheinlichkeit</span>
+        <p>Ein Random Forest mit 100 Bäumen beurteilt einen Kreditantrag. 62 Bäume stimmen für „Zusage“, 38 für „Ablehnung“. Entscheidung: Zusage. Zusätzlich liefert der Wald eine Schätzung: <span class="calcline">62 : 100 = 62 %</span> Zusage. Bei 52 : 48 wäre der Wald unsicher, bei 95 : 5 sehr sicher. Diese Zahl kann man als Schwelle für die Weitergabe an einen Menschen nutzen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viel sieht jeder Baum? (Bootstrap)</span>
+        <p>Aus 10 Trainingszeilen wird für einen Baum 10-mal mit Zurücklegen gezogen. Die Chance, dass eine bestimmte Zeile <b>nicht</b> gezogen wird, ist bei jedem Zug 9/10; nach 10 Zügen <span class="calcline">0,9¹⁰ ≈ 0,35</span>. Bei großen Datensätzen nähert sich der Wert 0,368 (etwa 37 %). Ein Baum sieht also etwa 63 % der Zeilen, und etwa 37 % der Zeilen sind für ihn „Testdaten“ (<b>Out-of-Bag</b>). So bekommt man eine ehrliche Schätzung des Fehlers, ohne Daten abzutrennen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Feature Importance lesen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th class="r">Wichtigkeit</th></tr></thead>
+          <tbody>
+            <tr><td>Schuldenquote</td><td class="r">0,32</td></tr>
+            <tr><td>Einkommen</td><td class="r">0,25</td></tr>
+            <tr><td>Beschäftigungsdauer</td><td class="r">0,18</td></tr>
+            <tr><td>Kredithöhe</td><td class="r">0,15</td></tr>
+            <tr><td>Laufzeit</td><td class="r">0,10</td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Werte ergeben zusammen 1. Die Schuldenquote trägt am meisten zu den Entscheidungen bei. <b>Wichtig:</b> Das sagt nicht, in welche Richtung ein Merkmal wirkt (höhere Schulden senken die Zusage-Chance), nur wie stark es genutzt wird. Und: Stark korrelierte Merkmale teilen sich ihre Wichtigkeit.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie, wie ein Random Forest arbeitet und warum mehrere Bäume bessere Ergebnisse liefern als einer.</p>
+        <p><b>Musterlösung:</b> Viele Entscheidungsbäume werden auf zufälligen Stichproben der Trainingsdaten (Bootstrap) trainiert, und bei jeder Frage steht nur eine zufällige Teilmenge der Merkmale zur Wahl (2 Punkte). Die Bäume sind dadurch verschieden; bei Klassifikation entscheidet die Mehrheit, bei Regression der Mittelwert (2 Punkte). Die Fehler einzelner Bäume gleichen sich aus, das senkt die Varianz und das Overfitting (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Random Forest = viele Bäume auf Zufallsstichproben mit Zufallsmerkmalen, Mehrheitsentscheid. Bagging senkt die Varianz.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Publikumsfrage aus Quizshows kennt jeder. Betonen Sie die Bedingung „unabhängig“: Hätten alle Bäume dieselben Daten, würden sie dieselben Fehler machen – deshalb der doppelte Zufall.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l6" data-title="Boosting" data-part="B · Bäume">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 45 Minuten</span><h2>Boosting: Aus Fehlern lernen, Runde für Runde</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Eine Schülerin übt für die Prüfung. Nach jedem Übungstest schaut sie, welche Aufgaben sie falsch hatte, und übt genau diese beim nächsten Mal intensiver. Jede Runde verbessert die Schwächen der vorherigen. Das ist Boosting.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/boosting.gif" width="640" height="380" alt="Animation in drei Runden: Neun Punkte, Kreise und Quadrate, auf einer Linie. Ein einfacher Baum mit einer einzigen Schwelle teilt sie, falsch eingeordnete Punkte werden orange umrandet und in der nächsten Runde größer gezeichnet, weil sie mehr Gewicht bekommen." loading="lazy">
+        <figcaption>Jede Runde konzentriert sich auf die Fehler der vorherigen. Am Ende stimmen alle gewichtet ab.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Bagging (Random Forest)</th><th>Boosting (z. B. Gradient Boosting)</th></tr></thead>
+        <tbody>
+          <tr><td>Training</td><td>parallel, Bäume unabhängig</td><td>nacheinander, jeder korrigiert den vorigen</td></tr>
+          <tr><td>Bäume</td><td>tief, einzeln überangepasst</td><td>flach, einzeln schwach („Stümpfe“)</td></tr>
+          <tr><td>Senkt vor allem</td><td>Varianz</td><td>Bias</td></tr>
+          <tr><td>Overfitting-Risiko</td><td>gering</td><td>höher – Lernrate und Rundenzahl begrenzen</td></tr>
+          <tr><td>Bekannte Umsetzungen</td><td>scikit-learn RandomForest</td><td>AdaBoost, XGBoost, LightGBM, CatBoost</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Gradient Boosting in einem Satz</span>
+        <p>Der erste Baum macht eine grobe Vorhersage, der zweite Baum lernt die verbleibenden Fehler (Residuen) des ersten, der dritte die Fehler von beiden zusammen – und so weiter. Jeder Beitrag wird mit einer kleinen <b>Lernrate</b> multipliziert, damit das Modell vorsichtig lernt. Bei Tabellendaten gehört Gradient Boosting oft zu den genauesten Verfahren überhaupt.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Stacking</span>
+        <p>Eine dritte Ensemble-Art: Verschiedene Modelle (z. B. logistische Regression, Random Forest, kNN) machen Vorhersagen, und ein übergeordnetes Meta-Modell lernt, wie man diese am besten kombiniert.</p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Boosting mit Zahlen und die Wahl zwischen den Ensembles</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gradient Boosting an drei Mieten</span>
+        <p>Wahre Mieten: 500, 700 und 900 €. Lernrate 0,5.</p>
+        <ol class="steps">
+          <li><div><b>Start:</b> Alle Vorhersagen sind der Mittelwert 700. Fehler (Residuen): <span class="calcline">−200 · 0 · +200</span>.</div></li>
+          <li><div><b>Runde 1:</b> Ein kleiner Baum lernt die Residuen und sagt −180, 0, +180 voraus. Neue Vorhersage: <span class="calcline">700 + 0,5 · (−180) = 610 · 700 · 790</span>. Neue Fehler: −110, 0, +110.</div></li>
+          <li><div><b>Runde 2:</b> Der nächste Baum lernt die neuen Fehler (−100, 0, +100). Neue Vorhersage: <span class="calcline">610 − 50 = 560 · 700 · 790 + 50 = 840</span>. Fehler: −60, 0, +60.</div></li>
+          <li><div><span class="result">Der Fehler schrumpft von 200 über 110 auf 60.</span> Nach vielen Runden ist er sehr klein.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum die Lernrate klein bleibt</span>
+        <p>Mit Lernrate 1 würde der erste Baum seine Fehler sofort in voller Höhe „korrigieren“ – und dabei auch das Rauschen mitlernen. Mit Lernrate 0,1 sind mehr Runden nötig, aber jeder Schritt ist vorsichtig, das Ergebnis verallgemeinert besser. Typisch: kleine Lernrate (0,05–0,1) und viele Runden (einige hundert), mit Früh-Abbruch, wenn die Validierung nicht mehr besser wird.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Bagging oder Boosting?</span>
+        <ul>
+          <li><b>Viele verrauschte Messwerte, Overfitting-Gefahr, wenig Zeit zum Einstellen:</b> Random Forest – robust ohne große Feinarbeit.</li>
+          <li><b>Tabellendaten, höchste Genauigkeit, Zeit zum Feintuning:</b> Gradient Boosting (XGBoost, LightGBM).</li>
+          <li><b>Mehrere gute, unterschiedliche Modelle liegen bereits vor:</b> Stacking mit einem Meta-Modell.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Unterschiede zwischen Bagging (Random Forest) und Boosting.</p>
+        <p><b>Musterlösung:</b> Bagging trainiert die Bäume parallel und unabhängig, Boosting nacheinander, wobei jeder Baum die Fehler der vorherigen korrigiert (2 Punkte). Bagging nutzt tiefe Bäume, Boosting flache, schwache Bäume (2 Punkte). Bagging senkt vor allem die Varianz, Boosting den Bias; Boosting neigt eher zu Overfitting (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bagging: parallel, unabhängig, senkt Varianz. Boosting: nacheinander, korrigiert Fehler, senkt Bias. Stacking: ein Meta-Modell kombiniert verschiedene Modelle.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Der Vergleich Bagging gegen Boosting ist ein Prüfungsklassiker. Lassen Sie die Tabelle als Lernkarte abschreiben. Betonen Sie: Ein Stumpf allein ist schlecht – aber 500 Stümpfe, die jeweils die Fehler der vorigen ausbügeln, sind hervorragend.</p>
+      </aside>
+    </section>
+
+    <div class="part-head"><span>Teil C · Lektionen 7–9</span><h2>Abstand, Grenzen und Wahrscheinlichkeiten</h2><p>Drei ganz unterschiedliche Ideen: Nachbarn fragen, die breiteste Straße finden, Wahrscheinlichkeiten multiplizieren.</p></div>
+
+    <section class="lesson" id="l7" data-title="k-Nächste-Nachbarn" data-part="C · Weitere Verfahren">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 40 Minuten</span><h2>k-Nächste-Nachbarn: Sag mir, wer deine Nachbarn sind</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Sie ziehen in eine neue Stadt und wollen wissen, welche Partei in Ihrer Straße gewählt wird. Sie fragen die fünf nächsten Nachbarn: Drei sagen A, zwei sagen B – Ihre beste Schätzung ist A. Mehr steckt hinter kNN nicht.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/knn.gif" width="640" height="380" alt="Animation: Kreise und Quadrate in zwei Gruppen, dazwischen ein schwarzes Dreieck als neuer Kunde. Ein oranger Kreis um das Dreieck wächst, bis er k gleich 1, 3, 5 und 7 Nachbarn umfasst. Je nach k ändert sich die Mehrheit." loading="lazy">
+        <figcaption>Das Ergebnis hängt von k ab. Kleines k reagiert auf Einzelfälle, großes k glättet.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><div>Abstand des neuen Punktes zu <b>allen</b> Trainingspunkten berechnen (meist euklidisch, Modul 2).</div></li>
+        <li><div>Die k nächsten auswählen.</div></li>
+        <li><div>Klassifikation: Mehrheit der k Nachbarn. Regression: Mittelwert ihrer Zielwerte.</div></li>
+      </ol>
+      <div class="calc" id="calcKnn"><span class="box-label">Rechner: kNN an sechs bekannten Kunden</span>
+        <p class="calc-note">Bekannte Kunden (Alter in Jahrzehnten, Käufe pro Monat → Klasse): A (2; 1) Nein · B (3; 2) Nein · C (2,5; 4) Ja · D (5; 5) Ja · E (4; 1) Nein · F (4,5; 4) Ja</p>
+        <div class="calc-row">
+          <div class="field"><label for="knX">Neuer Kunde: Alter (Jahrzehnte)</label><input type="number" id="knX" value="3.5" step="0.5"></div>
+          <div class="field"><label for="knY">Käufe pro Monat</label><input type="number" id="knY" value="3" step="0.5"></div>
+          <div class="field"><label for="knK">k</label><select id="knK"><option>1</option><option selected>3</option><option>5</option></select></div>
+        </div>
+        <div class="table-wrap" id="knOut"></div>
+        <p class="calc-note" id="knNote"></p>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Die Wahl von k</span>
+          <p>k = 1: sehr empfindlich, ein einzelner Ausreißer entscheidet (Overfitting). Großes k: zu grob, Details gehen verloren (Underfitting). Bei zwei Klassen ein ungerades k wählen, damit es kein Unentschieden gibt. k über Validierung bestimmen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Eigenschaften</span>
+          <ul><li>„Lazy Learner“: kein Training, alles passiert bei der Vorhersage</li><li>Vorhersage wird bei vielen Daten langsam</li><li><b>Skalierung ist Pflicht</b></li><li>Leidet stark unter dem Fluch der Dimensionalität</li></ul>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>kNN mit dem Rechner nachrechnen</h3>
+        <p>Die sechs bekannten Kunden aus dem Rechner: A (2 | 1) Nein, B (3 | 2) Nein, C (2,5 | 4) Ja, D (5 | 5) Ja, E (4 | 1) Nein, F (4,5 | 4) Ja. Der neue Kunde hat die Werte (3,5 | 3).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Abstände und Nachbarn von Hand</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kunde</th><th>Rechnung</th><th class="r">Abstand</th><th>Klasse</th></tr></thead>
+          <tbody>
+            <tr><td>B</td><td>√(0,5² + 1²) = √1,25</td><td class="r">1,12</td><td>Nein</td></tr>
+            <tr><td>C</td><td>√(1² + 1²) = √2</td><td class="r">1,41</td><td>Ja</td></tr>
+            <tr><td>F</td><td>√(1² + 1²) = √2</td><td class="r">1,41</td><td>Ja</td></tr>
+            <tr><td>E</td><td>√(0,5² + 2²) = √4,25</td><td class="r">2,06</td><td>Nein</td></tr>
+            <tr><td>A</td><td>√(1,5² + 2²) = √6,25</td><td class="r">2,50</td><td>Nein</td></tr>
+            <tr><td>D</td><td>√(1,5² + 2²) = √6,25</td><td class="r">2,50</td><td>Ja</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><b>k = 1:</b> B → <b>Nein</b></li>
+          <li><b>k = 3:</b> B, C, F → Nein, Ja, Ja → <b>Ja</b></li>
+          <li><b>k = 5:</b> B, C, F, E, A → 2 × Ja, 3 × Nein → <b>Nein</b></li>
+        </ul>
+        <p>Je nach k ändert sich die Antwort. Deshalb wählt man k anhand von Validierungsdaten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: kNN für Zahlen (Regression)</span>
+        <p>Man will den Preis einer Wohnung schätzen. Die drei ähnlichsten Wohnungen kosteten 200.000 €, 220.000 € und 240.000 €. Vorhersage: <span class="calcline">(200 + 220 + 240) : 3 = 220</span> Tausend €. Man kann auch nach Entfernung gewichten, sodass nähere Nachbarn stärker zählen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum kNN langsam wird</span>
+        <p>Bei jeder einzelnen Vorhersage muss der Abstand zu <b>allen</b> Trainingspunkten berechnet werden. Bei 1 Million Trainingspunkten sind das 1 Million Abstandsberechnungen pro Anfrage – bei 10.000 Anfragen pro Sekunde viel zu langsam. Deshalb nutzt man Suchstrukturen oder wählt andere Verfahren. Dafür braucht kNN <b>kein Training</b>.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum ist beim kNN-Verfahren die Skalierung der Merkmale wichtig, und wie wählt man k?</p>
+        <p><b>Musterlösung:</b> kNN beruht auf Abständen; Merkmale mit großen Zahlenwerten (z. B. Einkommen in Euro) würden den Abstand dominieren und kleine (Alter) kaum zählen (2 Punkte). Man standardisiert vorher (1 Punkt). k wird mit Validierungsdaten (oder Kreuzvalidierung) bestimmt; bei zwei Klassen ungerades k wählen, um Unentschieden zu vermeiden (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>kNN: k nächste Nachbarn suchen, Mehrheit nehmen. Kein Training, Skalierung Pflicht, k per Validierung wählen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Animation zweimal laufen und fragen Sie bei jedem k: „Wie entscheidet das Modell jetzt?“ Mit dem Rechner verschiebt man den neuen Kunden und sieht live, wie sich Abstände und Mehrheit ändern.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l8" data-title="Support Vector Machine" data-part="C · Weitere Verfahren">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 45 Minuten</span><h2>Support Vector Machine: die breiteste Straße</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Zwischen zwei verfeindeten Dörfern soll eine Straße gebaut werden – möglichst breit, damit sich niemand zu nahe kommt. Die Lage der Straße bestimmen nur die Häuser, die ganz am Rand stehen. Alle anderen Häuser könnte man verschieben, ohne dass sich die Straße ändert. Diese Randhäuser heißen bei der SVM Support-Vektoren.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/svm-margin.gif" width="640" height="380" alt="Animation: Kreise links oben, Quadrate rechts unten. Drei verschiedene Trennlinien werden ausprobiert, jeweils mit einer Straße aus zwei parallelen Linien. Die Straßenbreite wächst von Versuch zu Versuch. Im besten Versuch sind die Punkte am Straßenrand als Support-Vektoren markiert." loading="lazy">
+        <figcaption>Gesucht ist die Trennlinie mit dem größten Abstand (Margin) zu beiden Klassen.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Wichtige Begriffe</h3>
+        <ul>
+          <li><b>Hyperebene</b>: die Trennlinie (in 2D eine Gerade, in 3D eine Ebene, darüber „Hyperebene“).</li>
+          <li><b>Margin</b>: die Breite der Straße. Größer ist besser, weil neue Punkte dann sicherer richtig landen.</li>
+          <li><b>Support-Vektoren</b>: die Punkte am Rand der Straße. Nur sie bestimmen das Modell.</li>
+          <li><b>Parameter C</b>: wie streng Punkte in der Straße oder auf der falschen Seite bestraft werden. Großes C: wenig Fehler erlaubt, schmale Straße (Overfitting-Gefahr). Kleines C: breitere Straße, einige Fehler toleriert (Soft Margin).</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Der Kernel-Trick</span>
+        <p>Manchmal lassen sich Klassen nicht durch eine Gerade trennen – etwa wenn eine Klasse als Ring um die andere liegt. Der Kernel-Trick rechnet die Daten gedanklich in einen höherdimensionalen Raum um, in dem sie trennbar werden. Beispiel: Fügt man den Abstand zur Mitte als dritte Dimension hinzu, liegt der Ring „höher“ als die Mitte und lässt sich mit einer flachen Ebene abschneiden. Übliche Kernel: <b>linear</b>, <b>polynomial</b>, <b>RBF</b> (radiale Basisfunktion, der Standard).</p>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Stärken</span><ul><li>Sehr gut bei vielen Merkmalen und mittleren Datenmengen (z. B. Textklassifikation)</li><li>Mit Kernel auch für gekrümmte Grenzen</li></ul></div>
+        <div class="box fach"><span class="box-label">Schwächen</span><ul><li>Langsam bei sehr vielen Datenpunkten</li><li>Skalierung Pflicht</li><li>Schwer erklärbar, liefert keine echten Wahrscheinlichkeiten</li></ul></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Trennlinie, Straßenbreite und Kernel</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Eine Trennlinie anwenden</span>
+        <p>Die Trennlinie lautet <span class="calcline">x₁ + x₂ − 5 = 0</span>. Für einen neuen Punkt setzt man ein: Punkt (1 | 2): <span class="calcline">1 + 2 − 5 = −2</span> → negativ → Klasse „Kreis“. Punkt (4 | 3): <span class="calcline">4 + 3 − 5 = +2</span> → positiv → Klasse „Quadrat“. Das Vorzeichen entscheidet, der Betrag zeigt, wie weit der Punkt von der Linie entfernt ist. Die Straßenbreite beträgt hier <span class="calcline">2 : √(1² + 1²) = 2 : 1,41 ≈ 1,41</span> Einheiten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wirkung des Parameters C</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th>Kleines C</th><th>Großes C</th></tr></thead>
+          <tbody>
+            <tr><td>Straße</td><td>breit</td><td>schmal</td></tr>
+            <tr><td>Fehler im Training</td><td>einige erlaubt</td><td>kaum erlaubt</td></tr>
+            <tr><td>Risiko</td><td>Underfitting</td><td>Overfitting (Ausreißer bestimmen die Linie)</td></tr>
+            <tr><td>Wann?</td><td>verrauschte Daten</td><td>saubere, gut getrennte Daten</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Kernel-Trick an einer Zahlenachse</span>
+        <p>Auf einer Zahlenachse liegen Klasse A bei x = −1, 0, +1 und Klasse B bei x = −3 und +3. Keine einzelne Schwelle trennt sie (A liegt in der Mitte). Fügt man ein zweites Merkmal x² hinzu, entstehen Punkte: A (−1 | 1), (0 | 0), (1 | 1) und B (−3 | 9), (3 | 9). Jetzt trennt die waagerechte Linie <span class="calcline">x² = 5</span> beide Klassen sauber. Der Kernel-Trick leistet dieses „Hinzufügen“ von Merkmalen rechnerisch geschickt, ohne sie wirklich auszurechnen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die Begriffe Margin und Support-Vektor einer SVM und die Wirkung eines großen Wertes für C.</p>
+        <p><b>Musterlösung:</b> Der Margin ist der Abstand der Trennlinie zu den nächsten Punkten beider Klassen; die SVM maximiert ihn (2 Punkte). Support-Vektoren sind die Punkte direkt am Rand der „Straße“; nur sie bestimmen die Lage der Linie (1 Punkt). Ein großes C bestraft Fehler stark, der Margin wird schmal, die Gefahr von Overfitting steigt (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>SVM sucht die Trennlinie mit dem größten Abstand. Nur die Support-Vektoren zählen. Der Kernel-Trick macht nicht lineare Grenzen möglich.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Dorf-Bild trägt gut. Den Kernel-Trick an einem Gummituch zeigen: Liegt eine Münze in der Mitte eines Rings aus Murmeln, hebt man das Tuch in der Mitte an – jetzt kann man mit einer flachen Ebene Münze und Murmeln trennen.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l9" data-title="Naive Bayes" data-part="C · Weitere Verfahren">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 40 Minuten</span><h2>Naive Bayes: Indizien multiplizieren</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Eine Detektivin sammelt Indizien: Das Wort „gratis“ macht eine Mail verdächtiger, ein bekannter Absender macht sie unverdächtiger. Jedes Indiz verschiebt die Einschätzung ein Stück. Naive Bayes rechnet genau so – „naiv“, weil es so tut, als hätten die Indizien nichts miteinander zu tun.</p>
+      </div>
+      <div class="formula"><span class="box-label">Grundidee (Satz von Bayes, Modul 2)</span>
+        <div class="eq">P(Spam | Wörter) ∝ P(Spam) · P(Wort₁ | Spam) · P(Wort₂ | Spam) · …</div>
+        <div class="legend-eq"><span>∝ heißt „proportional zu“: Man rechnet für jede Klasse dieses Produkt aus und nimmt die Klasse mit dem größten Wert.</span></div>
+      </div>
+      <h3>Rechenweg: Ist eine Mail mit dem Wort „gratis“ Spam?</h3>
+      <p>Aus den Trainingsdaten: 30 % der Mails sind Spam. „gratis“ steht in 40 % der Spam-Mails und in 5 % der normalen Mails.</p>
+      <ol class="steps">
+        <li><div>Spam-Seite: <span class="calcline">P(Spam) · P(gratis | Spam) = 0,3 · 0,4 = 0,12</span></div></li>
+        <li><div>Normal-Seite: <span class="calcline">P(Normal) · P(gratis | Normal) = 0,7 · 0,05 = 0,035</span></div></li>
+        <li><div>Normieren: <span class="calcline">0,12 : (0,12 + 0,035) = 0,12 : 0,155 ≈ 0,774</span></div></li>
+        <li><div><span class="result">Mit 77,4 % Spam.</span> Weitere Wörter würden als zusätzliche Faktoren hinzumultipliziert.</div></li>
+      </ol>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Stärken</span><ul><li>Extrem schnell, auch mit sehr vielen Merkmalen (Wörtern)</li><li>Braucht wenig Trainingsdaten</li><li>Klassiker für Textklassifikation und Spamfilter</li></ul></div>
+        <div class="box fach"><span class="box-label">Schwächen</span><ul><li>Die Unabhängigkeitsannahme stimmt fast nie („Kredit“ und „Zinsen“ kommen gemeinsam vor)</li><li>Wahrscheinlichkeiten oft übertrieben sicher</li><li>Ein Wort, das im Training nie in einer Klasse vorkam, hätte Wahrscheinlichkeit 0 → <b>Laplace-Glättung</b> (überall +1 zählen)</li></ul></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Naive Bayes mit mehreren Wörtern und Glättung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Zwei Indizien statt einem</span>
+        <p>30 % der Mails sind Spam. Das Wort „gratis“ steht in 40 % der Spam- und 5 % der normalen Mails, das Wort „Gewinn“ in 25 % der Spam- und 1 % der normalen Mails. Eine Mail enthält beide Wörter.</p>
+        <ol class="steps">
+          <li><div>Spam-Seite: <span class="calcline">0,3 · 0,4 · 0,25 = 0,030</span></div></li>
+          <li><div>Normal-Seite: <span class="calcline">0,7 · 0,05 · 0,01 = 0,00035</span></div></li>
+          <li><div>Normieren: <span class="calcline">0,030 : (0,030 + 0,00035) ≈ 0,988</span> → <span class="result">98,8 % Spam</span></div></li>
+        </ol>
+        <p>Ein einzelnes Indiz brachte 77 %, zwei Indizien zusammen fast 99 %. Das ist die Stärke: Viele schwache Hinweise addieren sich.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Das Problem der Wahrscheinlichkeit null</span>
+        <p>Das Wort „Zertifikat“ kam in den Trainingsdaten in 0 von 100 Spam-Mails vor. Dann wäre <span class="calcline">P(Zertifikat | Spam) = 0</span>, und das gesamte Produkt würde 0: Jede Mail mit diesem Wort gälte als „kein Spam“, egal wie viele andere Hinweise es gibt. Die <b>Laplace-Glättung</b> verhindert das, indem man überall etwas hinzuzählt, z. B. <span class="calcline">(0 + 1) : (100 + 2) ≈ 0,0098</span>. Ein ungesehenes Wort ist dann selten, aber nicht unmöglich.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Naive Bayes bei Kundenmails mit drei Klassen</span>
+        <p>Eine Firma ordnet Mails den Klassen „Rechnung“, „Technik“ und „Kündigung“ zu. Für jede Klasse speichert das Verfahren, wie häufig jedes Wort dort vorkommt. Eine neue Mail mit „Zahlung“, „Rechnung“ und „offen“ erhält für „Rechnung“ ein viel größeres Produkt als für die anderen und wird dorthin sortiert. Das funktioniert auch mit einigen hundert Beispielen pro Klasse erstaunlich gut und ist in Millisekunden trainiert.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> 20 % der Mails sind Spam. Das Wort „Angebot“ steht in 50 % der Spam-Mails und in 10 % der normalen Mails. Wie wahrscheinlich ist eine Mail mit „Angebot“ Spam?</p>
+        <p><b>Musterlösung:</b> Spam-Seite: 0,2 · 0,5 = 0,10 (1,5 Punkte). Normal-Seite: 0,8 · 0,1 = 0,08 (1,5 Punkte). Normiert: 0,10 : (0,10 + 0,08) = 0,556, also etwa 55,6 % (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Naive Bayes multipliziert die Grundrate mit den Wahrscheinlichkeiten jedes Merkmals je Klasse. Schnell, gut für Text, aber „naiv“ unabhängig.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Verknüpfen Sie ausdrücklich mit dem Bayes-Rechenweg aus Modul 2. Der Rechenweg hier ist fast identisch mit Übung 8 – lassen Sie ihn zuerst selbstständig versuchen.</p>
+      </aside>
+    </section>
+
+    <div class="part-head"><span>Teil D · Lektionen 10–15</span><h2>Vom Verfahren zur Lösung</h2><p>Parameter einstellen, das richtige Verfahren wählen, erklären, programmieren – und ein vollständiger Fall von A bis Z.</p></div>
+
+    <section class="lesson" id="l10" data-title="Parameter und Hyperparameter" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 35 Minuten</span><h2>Parameter und Hyperparameter</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Beim Backen stellen Sie vorher Temperatur und Backzeit ein – das sind die Einstellungen von außen. Wie der Teig dabei aufgeht, ergibt sich von selbst. Hyperparameter sind die Ofeneinstellungen, die der Mensch wählt. Parameter sind das, was im Training von selbst entsteht.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Parameter (gelernt)</th><th>Wichtige Hyperparameter (eingestellt)</th></tr></thead>
+        <tbody>
+          <tr><td>Lineare / logistische Regression</td><td>Gewichte w₀ … wₙ</td><td>Regularisierungsstärke (alpha bzw. C)</td></tr>
+          <tr><td>Entscheidungsbaum</td><td>Fragen und Schwellenwerte</td><td>max_depth, min_samples_leaf, Kriterium Gini/Entropie</td></tr>
+          <tr><td>Random Forest</td><td>alle Bäume</td><td>n_estimators, max_depth, max_features</td></tr>
+          <tr><td>Gradient Boosting</td><td>alle Bäume</td><td>Lernrate, Anzahl Runden, Baumtiefe</td></tr>
+          <tr><td>kNN</td><td>– (speichert nur Daten)</td><td>k, Abstandsmaß</td></tr>
+          <tr><td>SVM</td><td>Lage der Hyperebene, Support-Vektoren</td><td>C, Kernel, gamma</td></tr>
+          <tr><td>Neuronales Netz</td><td>Gewichte, Bias</td><td>Lernrate, Schichten, Neuronen, Epochen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Hyperparameter suchen</span>
+        <ul>
+          <li><b>Grid Search</b>: alle Kombinationen eines Rasters ausprobieren (gründlich, aber langsam)</li>
+          <li><b>Random Search</b>: zufällige Kombinationen (oft genauso gut, schneller)</li>
+          <li><b>Bayes’sche Optimierung</b>: lernt aus bisherigen Versuchen, wo es sich lohnt zu suchen</li>
+          <li>Bewertung immer auf Validierungsdaten oder per Kreuzvalidierung (Modul 6) – nie auf Testdaten</li>
+        </ul>
+      </div>
+      <pre class="code"><span class="k">from</span> sklearn.model_selection <span class="k">import</span> GridSearchCV
+<span class="k">from</span> sklearn.ensemble <span class="k">import</span> RandomForestClassifier
+raster = {<span class="s">"n_estimators"</span>: [100, 300], <span class="s">"max_depth"</span>: [5, 10, <span class="k">None</span>]}
+suche = GridSearchCV(RandomForestClassifier(random_state=42), raster, cv=5, scoring=<span class="s">"f1"</span>)
+suche.fit(X_train, y_train)
+print(suche.best_params_, suche.best_score_)</pre>
+      <div class="prose">
+        <h3>Weitere Beispiele: Parameter, Hyperparameter und die Suche danach</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Parameter oder Hyperparameter?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Größe</th><th>Art</th><th>Begründung</th></tr></thead>
+          <tbody>
+            <tr><td>Gewicht w₁ in der linearen Regression</td><td>Parameter</td><td>wird im Training gelernt</td></tr>
+            <tr><td>Anzahl k der Nachbarn bei kNN</td><td>Hyperparameter</td><td>vorher vom Menschen eingestellt</td></tr>
+            <tr><td>Schwellenwert „Einkommen &gt; 5“ in einem Baum</td><td>Parameter</td><td>vom Algorithmus gefunden</td></tr>
+            <tr><td>Maximale Tiefe des Baums</td><td>Hyperparameter</td><td>Einstellung des Menschen</td></tr>
+            <tr><td>Lernrate beim Gradientenabstieg</td><td>Hyperparameter</td><td>Einstellung des Menschen</td></tr>
+            <tr><td>Gewichte eines neuronalen Netzes</td><td>Parameter</td><td>werden trainiert</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viel Rechenarbeit eine Grid Search macht</span>
+        <p>Raster: <code>n_estimators</code> ∈ {100, 300} und <code>max_depth</code> ∈ {5, 10, None}. Das sind <span class="calcline">2 · 3 = 6</span> Kombinationen. Mit 5-facher Kreuzvalidierung wird jede Kombination fünfmal trainiert: <span class="calcline">6 · 5 = 30</span> Trainings. Kommt ein weiterer Hyperparameter mit 4 Werten hinzu, sind es schon <span class="calcline">6 · 4 · 5 = 120</span>. Die Zahl wächst schnell – deshalb ist Random Search bei vielen Einstellungen oft die klügere Wahl.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die Validierungskurve lesen</span>
+        <p>Beim Random Forest wird die Baumtiefe variiert. Training: 0,80 / 0,92 / 0,99 / 1,00; Validierung: 0,78 / 0,87 / 0,83 / 0,80 (für Tiefe 2 / 5 / 10 / unbegrenzt). Ausgewählt wird die Tiefe 5 mit der höchsten Validierung (0,87). Bei größerer Tiefe steigt nur noch das Trainingsergebnis – das Modell lernt Details auswendig. Anschließend wird <b>einmal</b> mit den Testdaten geprüft.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie den Unterschied zwischen Parametern und Hyperparametern. Nennen Sie je ein Beispiel. Wie viele Trainings entstehen bei einer Grid Search mit 3 Werten für max_depth, 4 Werten für n_estimators und 5-facher Kreuzvalidierung?</p>
+        <p><b>Musterlösung:</b> Parameter werden im Training gelernt (z. B. die Gewichte einer Regression), Hyperparameter vom Menschen vorab eingestellt (z. B. max_depth oder k) (3 Punkte). Kombinationen: 3 · 4 = 12; Trainings: 12 · 5 = 60 (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Parameter lernt das Modell, Hyperparameter wählt der Mensch – per Validierung, nie per Testdaten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Zuordnung Parameter/Hyperparameter ist eine sichere Prüfungsfrage (Übung 11). Lassen Sie die Tabelle als Lernkarte nutzen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l11" data-title="Das richtige Verfahren wählen" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 40 Minuten</span><h2>Welches Verfahren wann?</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Für eine Schraube nimmt man einen Schraubendreher, für einen Nagel einen Hammer. Es gibt kein bestes Werkzeug für alles – in der KI heißt das „No Free Lunch“: Kein Verfahren ist bei allen Aufgaben das beste. Die Wahl hängt von Daten, Ziel und Rahmenbedingungen ab.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Situation</th><th>Empfehlung</th><th>Begründung</th></tr></thead>
+        <tbody>
+          <tr><td>Entscheidung muss begründet werden (Kredit, Personal, Behörde)</td><td>Logistische Regression, flacher Entscheidungsbaum</td><td>Gewichte und Regeln sind direkt erklärbar</td></tr>
+          <tr><td>Tabellendaten, höchste Genauigkeit</td><td>Gradient Boosting, Random Forest</td><td>sehr stark auf Tabellen, wenig Vorverarbeitung</td></tr>
+          <tr><td>Wenig Daten, viele Merkmale, Text</td><td>Naive Bayes, lineare SVM, logistische Regression</td><td>kommen mit wenig Beispielen aus</td></tr>
+          <tr><td>Bilder, Audio, freie Sprache</td><td>Neuronale Netze (Modul 7), vortrainierte Modelle</td><td>lernen Merkmale selbst</td></tr>
+          <tr><td>Erster schneller Vergleich</td><td>Baseline + logistische Regression + Random Forest</td><td>zeigt schnell, wie viel Potenzial da ist</td></tr>
+          <tr><td>Sehr wenig Rechenzeit bei der Vorhersage (Gerät, Echtzeit)</td><td>lineares Modell, kleiner Baum</td><td>schnell und klein</td></tr>
+        </tbody>
+      </table></div>
+      <div class="flow">
+        <div class="flow-step"><span class="flow-q">1. Muss die Entscheidung im Einzelfall erklärt werden?</span><div class="flow-a"><span class="yes">Ja → erklärbare Modelle bevorzugen</span><span class="no">Nein → weiter</span></div></div>
+        <div class="flow-step"><span class="flow-q">2. Sind es Tabellendaten?</span><div class="flow-a"><span class="yes">Ja → Boosting / Random Forest</span><span class="no">Nein (Bild, Ton, Text) → neuronale Netze</span></div></div>
+        <div class="flow-step"><span class="flow-q">3. Gibt es nur wenige hundert Beispiele?</span><div class="flow-a"><span class="yes">Ja → einfache Modelle, Regularisierung, vortrainierte Modelle</span><span class="no">Nein → komplexere Modelle möglich</span></div></div>
+      </div>
+      <div class="box tipp"><span class="box-label">So begründen Sie in der Prüfung</span><p>Immer drei Teile: Verfahren nennen – Eigenschaft des Verfahrens – Bezug zum Fall. Beispiel: „Ich empfehle einen Random Forest, weil er auf Tabellendaten robust gute Ergebnisse liefert und über die Feature Importance zeigt, welche Maschinendaten den Ausfall vorhersagen. Das hilft der Instandhaltung bei der Ursachensuche.“</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Systematisch entscheiden</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Drei Fälle, drei Empfehlungen</span>
+        <ul>
+          <li><b>Personalauswahl:</b> Bewerbungen sollen vorsortiert werden; jede Absage muss begründbar sein. → Logistische Regression oder flacher Baum, weil sich Entscheidungen erklären lassen; ein wissenschaftlich sauberer Fairness-Check ist Pflicht.</li>
+          <li><b>Maschinenüberwachung:</b> 40 Sensormerkmale, 100.000 Messreihen, Ziel: Ausfall in 7 Tagen. → Gradient Boosting oder Random Forest: stark auf Tabellendaten, Feature Importance hilft der Instandhaltung.</li>
+          <li><b>Spamfilter für 50.000 Wörter:</b> sehr viele Merkmale, wenig Zeit. → Naive Bayes oder lineare SVM: schnell und gut bei Text.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Entscheidungsmatrix</span>
+        <p>Bewertung von 1 (schlecht) bis 5 (sehr gut):</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Verfahren</th><th class="r">Erklärbarkeit</th><th class="r">Genauigkeit</th><th class="r">Tempo</th></tr></thead>
+          <tbody>
+            <tr><td>Logistische Regression</td><td class="r">5</td><td class="r">3</td><td class="r">5</td></tr>
+            <tr><td>Random Forest</td><td class="r">3</td><td class="r">4</td><td class="r">3</td></tr>
+            <tr><td>Gradient Boosting</td><td class="r">2</td><td class="r">5</td><td class="r">3</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><b>Gewichte 0,5 / 0,3 / 0,2</b> (Erklärbarkeit wichtig, z. B. bei Kreditentscheidungen): Logistisch <span class="calcline">2,5 + 0,9 + 1,0 = 4,4</span>; Forest <span class="calcline">1,5 + 1,2 + 0,6 = 3,3</span>; Boosting <span class="calcline">1,0 + 1,5 + 0,6 = 3,1</span> → <b>Logistische Regression</b>.</li>
+          <li><b>Gewichte 0,1 / 0,7 / 0,2</b> (Genauigkeit entscheidet, z. B. Absatzprognose): Logistisch 3,6; Forest 3,7; Boosting <span class="calcline">0,2 + 3,5 + 0,6 = 4,3</span> → <b>Gradient Boosting</b>.</li>
+        </ul>
+        <p>Die Wahl hängt von den Gewichten ab – und diese kommen aus dem Anwendungsfall, nicht aus der Technik.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Nie ohne Vergleich</span>
+        <p>Ein Betrieb testet drei Modelle auf denselben Daten: Baseline F1 0,00; logistisch 0,47; Random Forest 0,51; Boosting 0,52. Der Unterschied zwischen Forest und Boosting beträgt einen Punkt – kaum aussagekräftig. Dann entscheiden andere Kriterien: Wie schnell ist die Vorhersage? Wie gut lässt sich das Modell erklären? Wie aufwendig ist die Pflege? Die Genauigkeit allein entscheidet selten.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Eine Versicherung will Betrugsverdacht bei Schadensmeldungen vorhersagen; Entscheidungen müssen später gegenüber der Aufsicht begründbar sein. Welches Verfahren empfehlen Sie und warum?</p>
+        <p><b>Musterlösung:</b> Logistische Regression oder ein flacher Entscheidungsbaum (2 Punkte), weil die Entscheidung über Gewichte bzw. Regeln im Einzelfall erklärbar ist (2 Punkte). Zusätzlich zum Vergleich ein Random Forest oder Boosting, um zu sehen, wie viel Leistung die Erklärbarkeit kostet (1 Punkt); Baseline nicht vergessen (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kein Verfahren ist immer das beste. Erklärbarkeit → linear oder flacher Baum; Tabellen → Boosting/Forest; Bilder und Sprache → neuronale Netze; immer gegen eine Baseline vergleichen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Lektion ist das Herzstück für Fallaufgaben und Fachgespräch. Spielen Sie drei Fälle durch, die die Gruppe selbst vorschlägt.</p></aside>
+    </section>
+
+    <section class="lesson" id="l12" data-title="Erklärbarkeit und Leistung" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 30 Minuten</span><h2>Erklärbarkeit gegen Leistung abwägen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein erfahrener Arzt sagt: „Ich habe ein ungutes Gefühl, wir machen weitere Tests.“ Ein Lehrbuch sagt: „Bei Fieber über 39 Grad und Ausschlag: Test X.“ Das Bauchgefühl ist oft treffsicherer, das Lehrbuch nachvollziehbarer. Bei KI-Modellen gibt es dasselbe Spannungsfeld.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Erklärbarkeit</th><th>Typische Leistung auf Tabellen</th></tr></thead>
+        <tbody>
+          <tr><td>Lineare / logistische Regression</td><td>sehr hoch (Gewichte)</td><td>gut, wenn Zusammenhänge annähernd linear</td></tr>
+          <tr><td>Flacher Entscheidungsbaum</td><td>sehr hoch (Regeln)</td><td>mittel</td></tr>
+          <tr><td>kNN</td><td>mittel („diese ähnlichen Fälle“)</td><td>mittel</td></tr>
+          <tr><td>Random Forest</td><td>mittel (Feature Importance)</td><td>hoch</td></tr>
+          <tr><td>Gradient Boosting</td><td>gering bis mittel</td><td>sehr hoch</td></tr>
+          <tr><td>SVM mit Kernel, neuronales Netz</td><td>gering</td><td>hoch</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Auch „Blackboxen“ lassen sich erklären</span>
+        <p>Mit Verfahren der erklärbaren KI (XAI) kann man auch komplexe Modelle nachträglich erklären: <b>Feature Importance</b> (welche Merkmale zählen insgesamt), <b>SHAP</b> und <b>LIME</b> (warum diese eine Entscheidung). Details in Modul 10. Wo das Gesetz eine Begründung im Einzelfall verlangt (DSGVO Art. 22, Hochrisiko-Systeme im AI Act), ist ein von Natur aus erklärbares Modell oft die sicherere Wahl.</p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Erklärungen im Einzelfall</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gewichte als Begründung</span>
+        <p>Die logistische Regression einer Bank hat die Gewichte: Schuldenquote +1,2, Beschäftigungsdauer −0,4 (je Jahr), Einkommen −0,6 (je 10.000 €). Einem abgelehnten Antragsteller kann man sagen: „Ihre hohe Schuldenquote und die kurze Beschäftigungsdauer haben die Einschätzung am stärksten verschlechtert; ein höheres Einkommen hätte sie verbessert.“ Das ist eine Begründung, die ein Mensch versteht – und die die Bank auch gegenüber einer Behörde vorlegen kann.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Einzelfall-Erklärung mit SHAP (vereinfacht)</span>
+        <p>Ein Boosting-Modell schätzt das Ausfallrisiko eines Antrags auf 17 %. Das durchschnittliche Risiko im Bestand beträgt 6 %. SHAP zerlegt die Differenz in Beiträge der Merkmale:</p>
+        <p><span class="calcline">6 % + 9 (Schuldenquote) + 5 (kurze Beschäftigung) − 3 (hohes Einkommen) = 17 %</span></p>
+        <p>So lässt sich auch ein komplexes Modell Fall für Fall erklären: Die Schuldenquote erhöht das Risiko am stärksten, das Einkommen wirkt dämpfend.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wann Erklärbarkeit Pflicht ist</span>
+        <ul>
+          <li><b>Kredit, Versicherung, Bewerbung:</b> Entscheidungen mit erheblicher Wirkung auf Personen; Betroffene haben Rechte auf Auskunft über die Logik (DSGVO) und die Systeme gelten oft als Hochrisiko nach dem AI Act.</li>
+          <li><b>Medizin:</b> Ärzte müssen eine Empfehlung einordnen können.</li>
+          <li><b>Filmempfehlung:</b> Fehler harmlos, eine Erklärung nicht nötig; hier zählt die Leistung.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum kann es sinnvoll sein, ein etwas weniger genaues, aber erklärbares Modell zu wählen? Nennen Sie zwei Verfahren zur nachträglichen Erklärung.</p>
+        <p><b>Musterlösung:</b> Wenn Entscheidungen im Einzelfall begründet werden müssen (z. B. Kredit, Personal; DSGVO, AI Act) oder wenn Vertrauen und Fehlersuche wichtig sind, ist Erklärbarkeit wichtiger als wenige Prozentpunkte Genauigkeit (3 Punkte). Nachträgliche Erklärung: SHAP und LIME; außerdem Feature Importance (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Je leistungsstärker das Modell, desto schwerer meist die Erklärung. Die Abwägung hängt von rechtlichen Vorgaben und dem Schaden falscher Entscheidungen ab.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fragen Sie: „Würden Sie einen Kredit ablehnen lassen, wenn niemand sagen kann, warum?“ Diese Diskussion leitet zu Modul 10 über.</p></aside>
+    </section>
+
+    <section class="lesson" id="l13" data-title="scikit-learn in der Praxis" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 45 Minuten</span><h2>scikit-learn: Alle Verfahren mit derselben Bedienung</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Jedes Auto hat Gas, Bremse und Lenkrad an derselben Stelle – egal welche Marke. scikit-learn ist so gebaut: Jedes Verfahren hat dieselben Bedienelemente <code>fit</code>, <code>predict</code> und <code>score</code>. Wer eins beherrscht, kann alle fahren.</p>
+      </div>
+      <pre class="code"><span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="k">from</span> sklearn.dummy <span class="k">import</span> DummyClassifier
+<span class="k">from</span> sklearn.linear_model <span class="k">import</span> LogisticRegression
+<span class="k">from</span> sklearn.tree <span class="k">import</span> DecisionTreeClassifier
+<span class="k">from</span> sklearn.ensemble <span class="k">import</span> RandomForestClassifier, GradientBoostingClassifier
+<span class="k">from</span> sklearn.neighbors <span class="k">import</span> KNeighborsClassifier
+<span class="k">from</span> sklearn.metrics <span class="k">import</span> f1_score
+
+modelle = {
+    <span class="s">"Baseline"</span>:      DummyClassifier(strategy=<span class="s">"most_frequent"</span>),
+    <span class="s">"Logistisch"</span>:    LogisticRegression(max_iter=1000),
+    <span class="s">"Baum"</span>:          DecisionTreeClassifier(max_depth=4),
+    <span class="s">"Random Forest"</span>: RandomForestClassifier(n_estimators=300, random_state=42),
+    <span class="s">"Boosting"</span>:      GradientBoostingClassifier(),
+    <span class="s">"kNN"</span>:           KNeighborsClassifier(n_neighbors=5),
+}
+<span class="k">for</span> name, m <span class="k">in</span> modelle.items():
+    m.fit(X_train, y_train)                    <span class="c"># lernen</span>
+    vorhersage = m.predict(X_val)              <span class="c"># vorhersagen</span>
+    print(name, round(f1_score(y_val, vorhersage), 3))
+
+<span class="c"># Wahrscheinlichkeiten statt Klassen:</span>
+wahrsch = modelle[<span class="s">"Logistisch"</span>].predict_proba(X_val)[:, 1]
+<span class="c"># Wichtigkeit der Merkmale im Random Forest:</span>
+print(modelle[<span class="s">"Random Forest"</span>].feature_importances_)</pre>
+      <p class="code-cap">Hinweis: Für kNN und die logistische Regression gehört eine Skalierung in eine Pipeline (Modul 3), hier aus Platzgründen weggelassen.</p>
+      <div class="prose">
+        <h3>Weitere Beispiele: scikit-learn lesen und prüfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Was die Schleife ausgibt</span>
+        <p>Der Code aus der Lektion trainiert sechs Modelle und gibt jeweils den F1-Wert aus. Eine mögliche Ausgabe:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Modell</th><th class="r">F1 (Validierung)</th></tr></thead>
+          <tbody>
+            <tr><td>Baseline</td><td class="r">0,000</td></tr>
+            <tr><td>Logistisch</td><td class="r">0,470</td></tr>
+            <tr><td>Baum</td><td class="r">0,440</td></tr>
+            <tr><td>Random Forest</td><td class="r">0,510</td></tr>
+            <tr><td>Boosting</td><td class="r">0,520</td></tr>
+            <tr><td>kNN</td><td class="r">0,400</td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Baseline erreicht F1 = 0, weil sie nie die seltene Klasse vorhersagt. Alle anderen schlagen sie deutlich. Zwischen Random Forest und Boosting ist der Unterschied klein.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Zeile Code erklären</span>
+        <pre class="code">wahrsch = modelle["Logistisch"].predict_proba(X_val)[:, 1]</pre>
+        <p><b>Erklärung:</b> <code>predict_proba</code> liefert für jeden Validierungsfall eine Tabelle mit den Wahrscheinlichkeiten für jede Klasse (Spalte 0 = Klasse 0, Spalte 1 = Klasse 1). Mit <code>[:, 1]</code> wird nur die Spalte der Klasse 1 ausgewählt, also die Wahrscheinlichkeit für „Ausfall“. So lässt sich später eine eigene Schwelle anlegen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Typische Fehler im Code</span>
+        <ul>
+          <li><b>fit auf den Testdaten:</b> <code>m.fit(X_test, y_test)</code> ist Leakage – gelernt wird nur mit Trainingsdaten.</li>
+          <li><b>Skalierung vergessen:</b> kNN und logistische Regression brauchen eine Pipeline mit Skalierer.</li>
+          <li><b>Accuracy bei seltenen Klassen:</b> <code>m.score(...)</code> liefert Accuracy – bei 2 % Ausfällen irreführend; besser <code>f1_score</code> oder <code>recall_score</code>.</li>
+          <li><b>Zufall nicht festgelegt:</b> ohne <code>random_state</code> ändern sich die Ergebnisse bei jedem Lauf.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die Aufgaben der drei Methoden fit, predict und predict_proba.</p>
+        <p><b>Musterlösung:</b> fit trainiert das Modell mit den übergebenen Trainingsdaten (Merkmale und Labels) (2 Punkte). predict liefert für neue Fälle die vorhergesagte Klasse bzw. Zahl (1,5 Punkte). predict_proba liefert die Wahrscheinlichkeiten je Klasse, auf die man eine eigene Schwelle anwenden kann (1,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>scikit-learn: <code>fit</code> lernt, <code>predict</code> sagt vorher, <code>predict_proba</code> liefert Wahrscheinlichkeiten. Immer eine Baseline mitlaufen lassen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Wenn möglich live in Google Colab mit einem öffentlichen Datensatz (z. B. dem Titanic- oder Brustkrebs-Datensatz aus scikit-learn) vorführen. Die Teilnehmenden sollen den Code lesen und erklären können.</p></aside>
+    </section>
+
+    <section class="lesson" id="l14" data-title="Prognosen über die Zeit" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 35 Minuten</span><h2>Prognosen über die Zeit: Absatz, Bedarf, Auslastung</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Die Bäckerei weiß: Samstags werden mehr Brötchen verkauft, im August weniger, und bei Regen kommen weniger Laufkunden. Wer morgen backen will, schaut auf letzte Woche, den Wochentag und den Wetterbericht. Zeitreihenprognose ist überwachtes Lernen mit Merkmalen aus der Vergangenheit.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bestandteil</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Trend</b></td><td>langfristige Richtung</td><td>Onlineshop wächst jedes Jahr</td></tr>
+          <tr><td><b>Saisonalität</b></td><td>wiederkehrende Muster</td><td>Wochentag, Monat, Weihnachten</td></tr>
+          <tr><td><b>Zufall</b></td><td>nicht erklärbare Schwankung</td><td>Einzelereignisse</td></tr>
+          <tr><td><b>Externe Einflüsse</b></td><td>bekannte Zusatzinformationen</td><td>Wetter, Feiertage, Werbeaktion</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Merkmale aus der Vergangenheit (Lags)</span>
+          <p>Absatz gestern, Absatz vor 7 Tagen, Durchschnitt der letzten 4 Wochen, Wochentag, Feiertag ja/nein. Damit kann jedes Verfahren aus diesem Modul (z. B. Gradient Boosting) Prognosen machen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Baselines für Zeitreihen</span>
+          <p><b>Naive Prognose</b>: morgen wie heute. <b>Saisonal naiv</b>: Samstag wie letzter Samstag. Ein Modell, das diese einfachen Regeln nicht schlägt, ist nutzlos. Spezielle Verfahren: ARIMA, exponentielle Glättung, neuronale Netze (LSTM, Modul 7).</p>
+        </div>
+      </div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Merkmale dürfen nur bekannte Vergangenheit enthalten. „Absatz am Vorhersagetag“ als Merkmal ist Leakage. Und: Aufteilung immer zeitlich (Modul 3).</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Prognosen prüfen und Merkmale bauen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Naive und saisonal-naive Prognose</span>
+        <p>Brötchenabsatz einer Bäckerei (Stück): Mo 100, Di 110, Mi 105, Do 120; in der Vorwoche war der Donnerstag 115.</p>
+        <ul>
+          <li><b>Naive Prognose</b> („wie gestern“) für Donnerstag: 105 (der Mittwochswert). Fehler gegen 120: <span class="calcline">|120 − 105| = 15</span>.</li>
+          <li><b>Saisonal-naive Prognose</b> („wie letzter Donnerstag“): 115. Fehler: <span class="calcline">|120 − 115| = 5</span>.</li>
+        </ul>
+        <p>Die saisonale Regel ist hier deutlich besser. Ein ML-Modell müsste noch genauer sein, sonst lohnt der Aufwand nicht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Lag-Tabelle für ein Modell</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tag</th><th class="r">Absatz (Ziel)</th><th class="r">Absatz gestern</th><th class="r">Absatz vor 7 Tagen</th><th class="r">Ø der letzten 3 Tage</th><th>Wochentag</th></tr></thead>
+          <tbody>
+            <tr><td>Do</td><td class="r">120</td><td class="r">105</td><td class="r">115</td><td class="r">(100 + 110 + 105) : 3 = 105</td><td>Do</td></tr>
+          </tbody>
+        </table></div>
+        <p>Jede Zeile enthält nur Informationen, die am Vorhersagetag <b>bereits bekannt</b> sind. Der heutige Absatz selbst kommt nicht als Merkmal vor.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Externe Einflüsse einbeziehen</span>
+        <p>Der Absatz schwankt mit dem Wetter: bei Regen −10 %, bei Sonne am Wochenende +15 %. Fügt man die Wettervorhersage als Merkmal hinzu, kann das Modell darauf reagieren. Achtung: Man darf nur die <b>Vorhersage</b> des Wetters nutzen, die man auch am Vorhersagetag hat, nicht das tatsächliche Wetter, das erst später bekannt wird (sonst Leakage).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Für die Prognose des Wochenabsatzes wollen Sie ein Modell trainieren. Nennen Sie drei geeignete Merkmale, eine Baseline und die richtige Aufteilung der Daten.</p>
+        <p><b>Musterlösung:</b> Merkmale: Absatz der Vorwoche, Durchschnitt der letzten vier Wochen, Kalenderwoche oder Feiertag (je 1 Punkt, max. 3). Baseline: „wie in der Vorwoche“ (1 Punkt). Aufteilung: zeitlich, ältere Wochen Training, jüngste Wochen Test, kein zufälliges Mischen (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Zeitreihen: Trend + Saison + Zufall. Lag-Merkmale bauen, zeitlich aufteilen, gegen „wie letzte Woche“ vergleichen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Absatzprognosen sind eines der häufigsten Themen für Transferarbeiten. Ermutigen Sie Teilnehmende aus Handel und Produktion, dieses Thema zu wählen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l15" data-title="Fallstudie Kreditprüfung" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 50 Minuten</span><h2>Fallstudie: Kreditprüfung von A bis Z</h2></div>
+      <div class="box alltag"><span class="box-label">Ausgangslage</span>
+        <p>Eine Regionalbank bearbeitet 2.000 Kleinkreditanträge pro Monat von Hand. 6 % der Kredite fallen aus. Die Bank möchte eine KI-Unterstützung, die das Ausfallrisiko einschätzt. Die Sachbearbeitung entscheidet weiterhin selbst.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Ziel:</b> binäre Klassifikation „Ausfall innerhalb von 24 Monaten ja/nein“; Ausgabe als Wahrscheinlichkeit. Erfolgsmaß: Recall für Ausfälle mindestens 70 % bei vertretbarer Precision; Bearbeitungszeit halbieren.</div></li>
+        <li><div><b>Daten:</b> 30.000 abgeschlossene Kredite aus 5 Jahren. Merkmale: Einkommen, Schuldenquote, Beschäftigungsdauer, Kredithöhe, Laufzeit, bisherige Zahlungserfahrung. Nicht verwenden: Geschlecht, Nationalität (Diskriminierung), Mahnstufe (Leakage).</div></li>
+        <li><div><b>Vorbereitung:</b> Lücken mit Median füllen, Kategorien One-Hot, Skalierung für die logistische Regression, zeitliche Aufteilung (ältere Jahre Training, jüngstes Jahr Test).</div></li>
+        <li><div><b>Baseline:</b> „immer zurückgezahlt“ – Accuracy 94 %, Recall 0 %. Wertlos, aber der Maßstab.</div></li>
+        <li><div><b>Modelle:</b> logistische Regression (erklärbar) und Gradient Boosting (stark). Ergebnis Validierung: Boosting F1 0,52, logistisch F1 0,47.</div></li>
+        <li><div><b>Entscheidung:</b> Weil Ablehnungen begründet werden müssen und es sich nach AI Act um ein Hochrisiko-System handelt, wählt die Bank die logistische Regression. Der kleine Leistungsunterschied ist der Preis der Erklärbarkeit.</div></li>
+        <li><div><b>Schwelle:</b> Ein Ausfall kostet im Schnitt 4.000 €, eine zusätzliche Prüfung 30 €. Die Schwelle wird deshalb auf 0,25 gesenkt.</div></li>
+        <li><div><b>Einsatz:</b> Modell schlägt vor, Mensch entscheidet; Ablehnungsgründe aus den Gewichten; Überwachung auf Drift und Fairness (Modul 9 und 10).</div></li>
+      </ol>
+      <div class="box tipp"><span class="box-label">Für Ihre Transferarbeit</span><p>Genau diese Gliederung – Ziel, Daten, Vorbereitung, Baseline, Modelle, Entscheidung mit Begründung, Schwelle aus Kosten, Einsatz und Überwachung – ist eine sehr gute Vorlage für die Präsentation in der Prüfung.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Was die Fallstudie in Zahlen bedeutet</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Bilanz des Kreditmodells (vereinfacht)</span>
+        <p>Die Bank bearbeitet 2.000 Anträge pro Monat, 6 % fallen aus: <span class="calcline">2.000 · 0,06 = 120</span> Ausfälle, im Mittel je 4.000 € Verlust, zusammen <span class="calcline">120 · 4.000 = 480.000 €</span>.</p>
+        <ul>
+          <li><b>Das Modell findet 70 % der Ausfälle</b> (Recall 0,7): <span class="calcline">0,7 · 120 = 84</span> Fälle werden erkannt. Bei Ablehnung oder besserer Absicherung könnte etwa <span class="calcline">84 · 4.000 = 336.000 €</span> Schaden vermieden werden.</li>
+          <li><b>Der Preis:</b> Bei einer Precision von 25 % sind unter den markierten Anträgen <span class="calcline">84 : 0,25 = 336</span> Fälle, 252 davon zu Unrecht. Jede zusätzliche Prüfung kostet 30 €: <span class="calcline">336 · 30 = 10.080 €</span>.</li>
+          <li><b>Grobe Bilanz:</b> 336.000 € − 10.080 € ≈ <b>325.920 €</b> pro Monat – ohne die entgangenen Erträge guter Kunden, die zu Unrecht abgelehnt werden. Diese Gegenrechnung gehört in jede ehrliche Wirtschaftlichkeitsbetrachtung (Modul 11).</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum die Schwelle 0,25 statt 0,5 gewählt wurde</span>
+        <p>Ein übersehener Ausfall kostet 4.000 €, eine zusätzliche Prüfung 30 €. Das Verhältnis ist etwa 133 : 1. Prüft man schon ab einer Ausfallwahrscheinlichkeit von 0,25 statt 0,5, werden deutlich mehr Ausfälle erkannt (Recall steigt), dafür gibt es mehr Fehlalarme (Precision sinkt). Weil ein Fehlalarm so viel billiger ist als ein Ausfall, ist die niedrigere Schwelle wirtschaftlich sinnvoll.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Fairness im Blick behalten</span>
+        <p>Obwohl Geschlecht und Nationalität nicht als Merkmal verwendet werden, können andere Merkmale (z. B. Wohnort oder Teilzeit) damit zusammenhängen und indirekt benachteiligen. Deshalb wird nach dem Training geprüft: Sind Ablehnungsquoten und Fehlerquoten für verschiedene Gruppen vergleichbar? Zeigt sich eine auffällige Differenz, muss das Modell überarbeitet werden (Modul 10).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie in der richtigen Reihenfolge sechs Bausteine eines KI-Projekts, wie sie in der Fallstudie vorkommen, und begründen Sie die Wahl der logistischen Regression.</p>
+        <p><b>Musterlösung:</b> Ziel, Daten und Merkmale, Vorbereitung und Aufteilung, Baseline, Modelle vergleichen, Entscheidung mit Schwelle und Einsatz/Überwachung (3 Punkte). Die logistische Regression wurde gewählt, weil Ablehnungen begründet werden müssen und die Gewichte die Entscheidung erklären; der kleine Leistungsverlust gegenüber Boosting ist der Preis der Erklärbarkeit (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein gutes KI-Projekt begründet jede Entscheidung: welches Ziel, welche Daten, welches Modell, welche Schwelle – und warum.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Gehen Sie die Fallstudie als Rollenspiel durch: Eine Person ist Fachbereich, eine Datenschutz, eine IT. Jede Entscheidung muss gegenüber allen drei begründet werden. Das ist die beste Vorbereitung auf das Fachgespräch.</p></aside>
+    </section>
+
+    <section class="lesson" id="uebungen" data-title="Übungen" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Übungen · 120 Minuten</span><h2>12 Übungen mit Antwortfeldern</h2></div>
+      <p>Tragen Sie Ihre Antworten in die Felder ein. Zahlen und Auswahl prüft die Seite selbst, Freitext bewertet auf Knopfdruck die KI wie ein IHK-Prüfer. Öffnen Sie die Musterlösung erst danach.</p>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 1: Lineare Regression anwenden</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Modell für die Heizkosten eines Gebäudes lautet: Kosten = 150 + 8,5 · Heizgradtage. Berechnen Sie die Kosten für einen Monat mit 60 Heizgradtagen und erklären Sie die Bedeutung von 8,5.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>150 + 8,5 · 60 = 150 + 510 = <b>660 €</b> (2 P.). 8,5 bedeutet: Jeder zusätzliche Heizgradtag erhöht die Kosten um 8,50 € (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 2: Mehrere Merkmale</h3><span class="points">2 Punkte</span></div>
+        <p>Hauspreis = 50.000 + 2.000 · Wohnfläche − 1.500 · Alter des Hauses. Welcher Preis ergibt sich für 100 m² und ein 10 Jahre altes Haus?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>50.000 + 200.000 − 15.000 = <b>235.000 €</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 3: Logistische Regression</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Modell berechnet z = −2 + 0,5 · x. Für einen Kunden ist x = 6. Berechnen Sie die Wahrscheinlichkeit σ(z) auf drei Nachkommastellen. Welche Klasse wird bei der Schwelle 0,5 vorhergesagt?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>z = −2 + 3 = 1; σ(1) = 1 / (1 + e⁻¹) ≈ <b>0,731</b> (2 P.). Da 0,731 &gt; 0,5: Klasse 1 (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 4: Gini eines Knotens</h3><span class="points">2 Punkte</span></div>
+        <p>Ein Knoten enthält 6 Zusagen und 4 Ablehnungen. Berechnen Sie die Gini-Unreinheit.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>1 − (0,6² + 0,4²) = 1 − (0,36 + 0,16) = <b>0,48</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 5: Informationsgewinn</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Knoten mit 5 A und 5 B (Gini 0,5) wird geteilt in links 4 A / 0 B und rechts 1 A / 5 B. Berechnen Sie (a) die gewichtete Gini-Unreinheit nach der Teilung und (b) den Gewinn, jeweils auf zwei Nachkommastellen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Links Gini 0, rechts 1 − (1/36 + 25/36) ≈ 0,278. (a) 0,4 · 0 + 0,6 · 0,278 ≈ <b>0,17</b>. (b) 0,5 − 0,167 ≈ <b>0,33</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 6: Entropie</h3><span class="points">2 Punkte</span></div>
+        <p>Wie groß ist die Entropie (log₂) eines Knotens mit (a) 50 % / 50 % und (b) 100 % / 0 %?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) <b>1</b> (maximale Unordnung bei zwei Klassen). (b) <b>0</b> (reiner Knoten).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 7: kNN</h3><span class="points">3 Punkte</span></div>
+        <p>Die Abstände eines neuen Punktes zu fünf Trainingspunkten: A 1,0 (rot), B 1,5 (blau), C 2,0 (blau), D 2,2 (rot), E 3,0 (rot). Welche Klasse wird vorhergesagt bei k = 1, k = 3 und k = 5?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>k = 1: A → <b>rot</b>. k = 3: A, B, C → 2 × blau → <b>blau</b>. k = 5: 3 × rot, 2 × blau → <b>rot</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 8: Naive Bayes</h3><span class="points">3 Punkte</span></div>
+        <p>30 % aller Mails sind Spam. Das Wort „gratis“ steht in 40 % der Spam-Mails und in 5 % der normalen Mails. Mit welcher Wahrscheinlichkeit ist eine Mail mit „gratis“ Spam (in Prozent, eine Nachkommastelle)?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>0,3 · 0,4 = 0,12; 0,7 · 0,05 = 0,035; 0,12 : 0,155 ≈ <b>77,4 %</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 9: Bagging und Boosting</h3><span class="points">4 Punkte</span></div>
+        <p>Erklären Sie den Unterschied zwischen Bagging und Boosting. Nennen Sie je ein Verfahren.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Bagging trainiert viele Modelle parallel und unabhängig auf Zufallsstichproben und mittelt bzw. stimmt ab – senkt die Varianz (Beispiel Random Forest) (2 P.). Boosting trainiert nacheinander, jedes Modell konzentriert sich auf die Fehler der vorigen – senkt den Bias (Beispiel Gradient Boosting, XGBoost, AdaBoost) (2 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 10: Verfahren wählen</h3><span class="points">3 Punkte</span></div>
+        <p>Welches Verfahren passt am besten? (1) Eine Bank muss jede Kreditablehnung begründen. (2) Ein Händler will bei Tabellendaten die höchste Prognosegenauigkeit. (3) Ein kleiner Betrieb will mit wenigen hundert Beispielen Mails nach Spam filtern.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) Logistische Regression (oder flacher Baum). (2) Gradient Boosting (oder Random Forest). (3) Naive Bayes.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 11: Parameter oder Hyperparameter?</h3><span class="points">4 Punkte</span></div>
+        <p>Ordnen Sie zu: (1) maximale Baumtiefe, (2) Gewicht w₁ einer linearen Regression, (3) k bei kNN, (4) der im Training gefundene Schwellenwert einer Baumfrage.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) Hyperparameter, (2) Parameter, (3) Hyperparameter, (4) Parameter.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 12: Support Vector Machine</h3><span class="points">3 Punkte</span></div>
+        <p>Erklären Sie die Begriffe Margin, Support-Vektoren und Kernel-Trick in je einem Satz.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Margin: der Abstand (die Straßenbreite) zwischen Trennlinie und den nächsten Punkten beider Klassen, den die SVM maximiert (1 P.). Support-Vektoren: die Punkte am Rand der Straße, die allein die Lage der Trennlinie bestimmen (1 P.). Kernel-Trick: Die Daten werden rechnerisch in einen höherdimensionalen Raum abgebildet, in dem sie linear trennbar werden (1 P.).</p></details></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Rechenaufgaben 3 bis 8 sind typisch für die schriftliche Prüfung Teil 2. Lassen Sie sie mit Taschenrechner und vollständigem Rechenweg auf Papier lösen.</p></aside>
+    </section>
+
+    <section class="lesson" id="quiz" data-title="Abschlussquiz" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 30 Minuten</span><h2>Abschlussquiz Modul 4</h2></div>
+      <p>20 Fragen, jeweils eine richtige Antwort. Ab 14 richtigen Antworten sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="btnrow"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Ohne Unterlagen, mit Taschenrechner. Besprechen Sie anschließend die Fragen zu Bagging und Boosting gemeinsam.</p></aside>
+    </section>
+
+    <section class="lesson" id="summary" data-title="Zusammenfassung" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Alle Verfahren auf einen Blick</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Idee</th><th>Aufgabe</th><th>Stärke</th><th>Schwäche</th></tr></thead>
+        <tbody>
+          <tr><td>Lineare Regression</td><td>gewichtete Summe, kleinste Quadrate</td><td>Regression</td><td>erklärbar</td><td>nur lineare Zusammenhänge</td></tr>
+          <tr><td>Logistische Regression</td><td>Summe → Sigmoid → Wahrscheinlichkeit</td><td>Klassifikation</td><td>erklärbar, Wahrscheinlichkeiten</td><td>lineare Grenze</td></tr>
+          <tr><td>Entscheidungsbaum</td><td>Fragen nach Gini/Entropie</td><td>beides</td><td>Regeln vorlesbar</td><td>Overfitting, instabil</td></tr>
+          <tr><td>Random Forest</td><td>viele Zufallsbäume, Mehrheit</td><td>beides</td><td>robust</td><td>weniger erklärbar</td></tr>
+          <tr><td>Gradient Boosting</td><td>Bäume korrigieren Vorgänger</td><td>beides</td><td>sehr genau</td><td>Einstellung aufwendig</td></tr>
+          <tr><td>kNN</td><td>Mehrheit der k Nachbarn</td><td>beides</td><td>einfach, kein Training</td><td>langsam, Skalierung nötig</td></tr>
+          <tr><td>SVM</td><td>breiteste Straße, Kernel</td><td>Klassifikation</td><td>viele Merkmale</td><td>langsam bei vielen Daten</td></tr>
+          <tr><td>Naive Bayes</td><td>Bayes mit Unabhängigkeit</td><td>Klassifikation</td><td>schnell, Text</td><td>„naive“ Annahme</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Weiter mit Modul 5:</b> Unüberwachtes Lernen und Reinforcement Learning – Lernen ohne Lösungsheft.</p>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Tabelle ist die wichtigste Lernkarte des Moduls. Lassen Sie sie aus dem Gedächtnis rekonstruieren.</p></aside>
+    </section>
+<!--SCRIPTS-->
+<script type="application/json" id="quiz-data">[
+["Wozu dient eine Baseline?", ["Als Speicherort der Daten", "Als einfacher Vergleichsmaßstab, den ein Modell schlagen muss", "Als Hyperparameter", "Zur Skalierung"], 1, "Ohne Baseline weiß man nicht, ob ML überhaupt etwas bringt. Lektion 1."],
+["Was bedeutet das Gewicht 10 in „Miete = 200 + 10 · Fläche“?", ["Die Miete beträgt immer 10 €", "Pro zusätzlichem Quadratmeter steigt die Miete um 10 €", "10 % Fehler", "Die Fläche ist 10 m²"], 1, "Gewicht = Änderung pro Einheit. Lektion 2."],
+["Wie findet die lineare Regression ihre Linie?", ["Durch Mehrheitsentscheid", "Durch Minimieren der Summe der quadrierten Fehler", "Durch Zufall", "Durch den größten Abstand zu beiden Klassen"], 1, "Methode der kleinsten Quadrate. Lektion 2."],
+["Welche Aufgabe löst die logistische Regression?", ["Regression von Zahlen", "Klassifikation", "Clustering", "Dimensionsreduktion"], 1, "Trotz des Namens: Klassifikation. Lektion 3."],
+["Welchen Wert hat σ(0)?", ["0", "0,5", "1", "−1"], 1, "Die Sigmoid-Funktion schneidet bei z = 0 die 0,5. Lektion 3."],
+["Was bewirkt das Senken der Schwelle von 0,5 auf 0,3?", ["Weniger positive Vorhersagen", "Mehr erkannte positive Fälle, aber mehr Fehlalarme", "Keine Änderung", "Das Modell wird neu trainiert"], 1, "Recall steigt, Precision sinkt. Lektion 3."],
+["Gini-Unreinheit eines reinen Knotens?", ["0", "0,5", "1", "unendlich"], 0, "Nur eine Klasse: 1 − 1² = 0. Lektion 4."],
+["Wie verhindert man Overfitting bei Entscheidungsbäumen?", ["Tiefe begrenzen, Mindestgröße der Blätter, Pruning", "Mehr Merkmale hinzufügen", "Skalieren", "Die Lernrate erhöhen"], 0, "Ein unbegrenzter Baum lernt auswendig. Lektion 4."],
+["Welche zwei Zufallsquellen nutzt ein Random Forest?", ["Zufällige Lernrate und zufällige Schwelle", "Bootstrap-Stichproben der Zeilen und zufällige Merkmalsauswahl", "Zufällige Labels und zufällige Tests", "Keine"], 1, "Damit werden die Bäume unterschiedlich. Lektion 5."],
+["Was senkt Bagging vor allem?", ["Bias", "Varianz", "Rechenzeit", "Datenmenge"], 1, "Mitteln vieler unabhängiger Modelle senkt die Varianz. Lektion 5/6."],
+["Wie arbeitet Boosting?", ["Alle Modelle parallel und unabhängig", "Modelle nacheinander, jedes korrigiert die Fehler der vorigen", "Nur ein großer Baum", "Ohne Trainingsdaten"], 1, "Sequenziell, senkt den Bias. Lektion 6."],
+["Was ist bei kNN unbedingt nötig?", ["Ein langes Training", "Skalierung der Merkmale", "Ein Kernel", "Boosting"], 1, "kNN arbeitet mit Abständen. Lektion 7."],
+["Was passiert bei kNN mit k = 1?", ["Das Modell ist sehr glatt", "Das Modell reagiert sehr empfindlich auf einzelne Punkte (Overfitting-Gefahr)", "Es gibt keine Vorhersage", "Alle Punkte zählen gleich"], 1, "Ein einziger Nachbar entscheidet. Lektion 7."],
+["Was sind Support-Vektoren?", ["Alle Trainingspunkte", "Die Punkte am Rand der Straße, die die Trennlinie bestimmen", "Die Gewichte eines Netzes", "Fehlende Werte"], 1, "Nur sie bestimmen die Lage der Hyperebene. Lektion 8."],
+["Wozu dient der Kernel-Trick?", ["Daten zu löschen", "Nicht linear trennbare Daten in einem höherdimensionalen Raum trennbar zu machen", "Die Lernrate anzupassen", "Daten zu verschlüsseln"], 1, "Lektion 8."],
+["Warum heißt Naive Bayes „naiv“?", ["Weil es nur Anfängern hilft", "Weil es annimmt, dass Merkmale voneinander unabhängig sind", "Weil es keine Wahrscheinlichkeiten nutzt", "Weil es nicht trainiert wird"], 1, "Die Unabhängigkeitsannahme ist selten erfüllt. Lektion 9."],
+["Welches ist ein Hyperparameter?", ["Das Gewicht w₁", "Die Anzahl der Bäume im Random Forest", "Ein gelernter Schwellenwert im Baum", "Die Support-Vektoren"], 1, "Wird vor dem Training gewählt. Lektion 10."],
+["Auf welchen Daten werden Hyperparameter ausgewählt?", ["Testdaten", "Validierungsdaten oder per Kreuzvalidierung", "Neuen Produktionsdaten", "Gar nicht"], 1, "Der Test bleibt unberührt. Lektion 10."],
+["Eine Behörde muss jede Ablehnung begründen. Welches Verfahren eignet sich besonders?", ["Gradient Boosting mit 2.000 Bäumen", "Logistische Regression oder flacher Entscheidungsbaum", "SVM mit RBF-Kernel", "Tiefes neuronales Netz"], 1, "Von Natur aus erklärbar. Lektion 11/12."],
+["Welche Methode liefert in scikit-learn Wahrscheinlichkeiten?", ["fit", "predict", "predict_proba", "score"], 2, "predict_proba gibt Klassenwahrscheinlichkeiten. Lektion 13."]
+]</script>
+<script>
+/* Antwortfelder der Übungen in Modul 4 */
+(function () {
+  function z(id, label, punkte, wert, tol, einheit) { return { id: id, label: label, typ: "zahl", punkte: punkte, wert: wert, tol: tol, einheit: einheit }; }
+  var PH = ["Parameter", "Hyperparameter"];
+  var VERF = ["Logistische Regression", "Gradient Boosting", "Naive Bayes", "kNN", "SVM mit RBF-Kernel"];
+  window.UEBUNGEN = {
+    modul: 4,
+    aufgaben: {
+      a1: { teile: [z("k", "Heizkosten", 2, 660, 0.01, "€"), { id: "w", label: "Bedeutung von 8,5", typ: "text", punkte: 1, erwartung: "Pro zusätzlichem Heizgradtag steigen die Kosten um 8,50 €." }] },
+      a2: { teile: [z("p", "Hauspreis", 2, 235000, 0.5, "€")] },
+      a3: { teile: [z("s", "σ(z)", 2, 0.731, 0.002), { id: "k", label: "Vorhergesagte Klasse", typ: "wahl", punkte: 1, optionen: ["Klasse 0", "Klasse 1"], richtig: 1 }] },
+      a4: { teile: [z("g", "Gini-Unreinheit", 2, 0.48, 0.001)] },
+      a5: { teile: [z("gw", "(a) gewichtete Gini-Unreinheit", 2, 0.17, 0.006), z("gain", "(b) Gewinn", 2, 0.33, 0.006)] },
+      a6: { teile: [z("a", "(a) Entropie 50/50", 1, 1, 0.001), z("b", "(b) Entropie 100/0", 1, 0, 0.001)] },
+      a7: { teile: [
+        { id: "k1", label: "k = 1", typ: "wahl", punkte: 1, optionen: ["rot", "blau"], richtig: 0 },
+        { id: "k3", label: "k = 3", typ: "wahl", punkte: 1, optionen: ["rot", "blau"], richtig: 1 },
+        { id: "k5", label: "k = 5", typ: "wahl", punkte: 1, optionen: ["rot", "blau"], richtig: 0 }] },
+      a8: { teile: [z("p", "Wahrscheinlichkeit Spam", 3, 77.4, 0.15, "%")] },
+      a9: { teile: [{ id: "t", label: "Unterschied und Beispiele", typ: "text", punkte: 4, erwartung: "Bagging: parallel, unabhängig auf Zufallsstichproben, Mittelung/Mehrheit, senkt Varianz, Beispiel Random Forest (2 P.). Boosting: sequenziell, korrigiert Fehler der Vorgänger, senkt Bias, Beispiel Gradient Boosting/XGBoost/AdaBoost (2 P.)." }] },
+      a10: { teile: [
+        { id: "f1", label: "(1) Begründungspflicht", typ: "wahl", punkte: 1, optionen: VERF, richtig: 0 },
+        { id: "f2", label: "(2) höchste Genauigkeit auf Tabellen", typ: "wahl", punkte: 1, optionen: VERF, richtig: 1 },
+        { id: "f3", label: "(3) Spam mit wenig Daten", typ: "wahl", punkte: 1, optionen: VERF, richtig: 2 }] },
+      a11: { teile: [
+        { id: "p1", label: "(1) maximale Baumtiefe", typ: "wahl", punkte: 1, optionen: PH, richtig: 1 },
+        { id: "p2", label: "(2) Gewicht w₁", typ: "wahl", punkte: 1, optionen: PH, richtig: 0 },
+        { id: "p3", label: "(3) k bei kNN", typ: "wahl", punkte: 1, optionen: PH, richtig: 1 },
+        { id: "p4", label: "(4) gelernter Schwellenwert im Baum", typ: "wahl", punkte: 1, optionen: PH, richtig: 0 }] },
+      a12: { teile: [{ id: "t", label: "Margin, Support-Vektoren, Kernel-Trick", typ: "text", punkte: 3, erwartung: "Margin = Abstand/Straßenbreite zwischen Trennlinie und nächsten Punkten, wird maximiert (1 P.); Support-Vektoren = Randpunkte, die die Linie bestimmen (1 P.); Kernel-Trick = Abbildung in höherdimensionalen Raum für nicht lineare Trennung (1 P.)." }] }
+    }
+  };
+})();
+</script>
+<script>
+/* Rechner in Modul 4 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 3 : d }) : "–"; }
+  function kpi(l, v) { return '<div class="kpi"><span>' + l + "</span><b>" + v + "</b></div>"; }
+  function num(id) { var v = parseFloat(String(document.getElementById(id).value).replace(",", ".")); return isFinite(v) ? v : 0; }
+
+  function sig() {
+    var w0 = num("sgW0"), w1 = num("sgW1"), x = num("sgX"), t = num("sgT");
+    document.getElementById("sgTOut").textContent = fmt(t, 2);
+    var z = w0 + w1 * x, p = 1 / (1 + Math.exp(-z));
+    document.getElementById("sgOut").innerHTML = kpi("z = w₀ + w₁ · x", fmt(z)) + kpi("Wahrscheinlichkeit σ(z)", fmt(p)) + kpi("Entscheidung", p >= t ? "Klasse 1" : "Klasse 0");
+  }
+  ["sgW0", "sgW1", "sgX", "sgT"].forEach(function (i) { document.getElementById(i).addEventListener("input", sig); }); sig();
+
+  function gini(a, b) { var n = a + b; return n ? 1 - (a / n) * (a / n) - (b / n) * (b / n) : 0; }
+  function gi() {
+    var la = Math.max(0, num("giLa")), lb = Math.max(0, num("giLb")), ra = Math.max(0, num("giRa")), rb = Math.max(0, num("giRb"));
+    var nl = la + lb, nr = ra + rb, n = nl + nr;
+    if (!n) { document.getElementById("giOut").innerHTML = ""; return; }
+    var g0 = gini(la + ra, lb + rb), gl = gini(la, lb), gr = gini(ra, rb), gw = nl / n * gl + nr / n * gr;
+    document.getElementById("giOut").innerHTML = kpi("Gini vorher", fmt(g0)) + kpi("Gini links", fmt(gl)) + kpi("Gini rechts", fmt(gr)) + kpi("gewichtet nachher", fmt(gw)) + kpi("Gewinn", fmt(g0 - gw));
+  }
+  ["giLa", "giLb", "giRa", "giRb"].forEach(function (i) { document.getElementById(i).addEventListener("input", gi); }); gi();
+
+  var data = [["A", 2, 1, "Nein"], ["B", 3, 2, "Nein"], ["C", 2.5, 4, "Ja"], ["D", 5, 5, "Ja"], ["E", 4, 1, "Nein"], ["F", 4.5, 4, "Ja"]];
+  function knn() {
+    var x = num("knX"), y = num("knY"), k = +document.getElementById("knK").value;
+    var rows = data.map(function (d) { return { n: d[0], dist: Math.hypot(d[1] - x, d[2] - y), c: d[3], dx: d[1] - x, dy: d[2] - y }; })
+      .sort(function (a, b) { return a.dist - b.dist; });
+    var h = '<table><thead><tr><th>Kunde</th><th>Rechnung</th><th class="r">Abstand</th><th>Klasse</th><th>unter den k nächsten?</th></tr></thead><tbody>';
+    rows.forEach(function (r, i) {
+      h += "<tr><td>" + r.n + "</td><td>√(" + fmt(r.dx, 2) + "² + " + fmt(r.dy, 2) + "²)</td><td class=\"r\">" + fmt(r.dist) + "</td><td>" + r.c + "</td><td>" + (i < k ? "<b>ja</b>" : "–") + "</td></tr>";
+    });
+    document.getElementById("knOut").innerHTML = h + "</tbody></table>";
+    var ja = rows.slice(0, k).filter(function (r) { return r.c === "Ja"; }).length;
+    document.getElementById("knNote").textContent = "Unter den " + k + " nächsten: " + ja + " × Ja, " + (k - ja) + " × Nein → Vorhersage: " + (ja > k - ja ? "Ja (kauft)" : "Nein (kauft nicht)") + ".";
+  }
+  ["knX", "knY", "knK"].forEach(function (i) { document.getElementById(i).addEventListener("input", knn); }); knn();
+})();
+</script>

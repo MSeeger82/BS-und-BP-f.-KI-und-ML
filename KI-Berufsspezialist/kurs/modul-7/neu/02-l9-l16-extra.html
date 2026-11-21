@@ -1,0 +1,225 @@
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Eine Faltung von Hand ausrechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Kantenfilter auf einem kleinen Bild</span>
+        <p>Ein 4 × 4-Bild: Die linke Hälfte ist hell (10), die rechte dunkel (0). Der Filter (3 × 3) lautet: in jeder Zeile (1, 0, −1) – er reagiert auf Übergänge von hell nach dunkel.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Bild</th><th>Filter</th></tr></thead>
+          <tbody>
+            <tr><td>10 10 0 0<br>10 10 0 0<br>10 10 0 0<br>10 10 0 0</td><td>1 0 −1<br>1 0 −1<br>1 0 −1</td></tr>
+          </tbody>
+        </table></div>
+        <ol class="steps">
+          <li><div>Position oben links (Spalten 1–3): jede Zeile <span class="calcline">10 · 1 + 10 · 0 + 0 · (−1) = 10</span>, drei Zeilen: <span class="calcline">30</span>.</div></li>
+          <li><div>Position oben rechts (Spalten 2–4): jede Zeile <span class="calcline">10 · 1 + 0 · 0 + 0 · (−1) = 10</span>, drei Zeilen: <span class="calcline">30</span>.</div></li>
+          <li><div>Die Merkmalskarte ist 2 × 2 groß und enthält überall 30: Der Filter hat die senkrechte Kante gefunden.</div></li>
+        </ol>
+        <p>Auf einer einfarbigen Fläche (alle Pixel 10) ergäbe jede Position <span class="calcline">10 + 10 + 10 − 10 − 10 − 10 = 0</span>: keine Kante, keine Reaktion.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Größen berechnen</span>
+        <ul>
+          <li>Bild 28 × 28, Filter 5 × 5, Stride 1, ohne Padding: <span class="calcline">(28 − 5) : 1 + 1 = 24</span> → 24 × 24.</li>
+          <li>Mit Padding 2: <span class="calcline">(28 − 5 + 4) : 1 + 1 = 28</span> → die Größe bleibt erhalten („same“).</li>
+          <li>Danach Max-Pooling 2 × 2: <span class="calcline">24 : 2 = 12</span> → 12 × 12.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum Filter Parameter sparen</span>
+        <p>Ein Farbbild mit 32 × 32 Pixeln hat <span class="calcline">32 · 32 · 3 = 3.072</span> Eingabewerte. Eine Dense-Schicht mit 16 Neuronen bräuchte <span class="calcline">3.072 · 16 + 16 = 49.168</span> Parameter. Eine Faltungsschicht mit 16 Filtern der Größe 3 × 3 über 3 Kanäle hat nur <span class="calcline">(3 · 3 · 3 + 1) · 16 = 448</span> Parameter – gut 100-mal weniger. Dazu erkennt sie ein Muster an jeder Stelle des Bildes, weil derselbe Filter überall angewendet wird.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Bild hat 64 × 64 Pixel, der Filter 5 × 5, Stride 1, Padding 0. Wie groß ist die Merkmalskarte, und wie groß nach Max-Pooling 2 × 2? Erklären Sie die Aufgabe des Poolings.</p>
+        <p><b>Musterlösung:</b> (64 − 5) : 1 + 1 = 60 → 60 × 60 (2 Punkte); nach Pooling 30 × 30 (1 Punkt). Pooling verkleinert die Karte, behält den stärksten Wert je Fenster und macht das Netz robuster gegen kleine Verschiebungen (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Aufgaben der Bildverarbeitung unterscheiden</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Vier Fragen, vier Aufgaben</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Frage</th><th>Aufgabe</th></tr></thead>
+          <tbody>
+            <tr><td>„Ist das Teil in Ordnung?“</td><td>Bildklassifikation</td></tr>
+            <tr><td>„Wie viele Pakete liegen auf dem Band, und wo?“</td><td>Objekterkennung</td></tr>
+            <tr><td>„Wie groß ist die beschädigte Lackfläche in cm²?“</td><td>Segmentierung</td></tr>
+            <tr><td>„Welche Zahl steht auf dem Typenschild?“</td><td>Texterkennung (OCR)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie gut ist ein Rahmen? (IoU)</span>
+        <p>Bei der Objekterkennung vergleicht man den vorhergesagten Rahmen mit dem richtigen. Die „Intersection over Union“ ist die Überlappung geteilt durch die Gesamtfläche beider Rahmen. Überlappen zwei Rahmen mit je 100 Flächeneinheiten auf 50 Einheiten, ist die Vereinigung <span class="calcline">100 + 100 − 50 = 150</span>, also <span class="calcline">IoU = 50 : 150 ≈ 0,33</span>. Ab einer IoU von etwa 0,5 wird ein Treffer üblicherweise als richtig gewertet.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das seltene Fehlerbild</span>
+        <p>Ein Betrieb besitzt 5.000 Fotos von Gehäuseteilen, davon nur 100 mit Kratzern (2 %). Das Netz lernt „immer in Ordnung“ und erreicht 98 %. Hilfen: Kratzerbilder gezielt nachsammeln, per Augmentation vervielfachen, Klassengewichte setzen oder das Problem als Anomalieerkennung formulieren (ein Autoencoder lernt „normal“ und meldet Abweichungen). Als Maß dienen Recall und Precision für die Fehlerklasse, nicht die Accuracy.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie den Unterschied zwischen Bildklassifikation, Objekterkennung und Segmentierung und nennen Sie ein Beispiel für die Objekterkennung.</p>
+        <p><b>Musterlösung:</b> Klassifikation: eine Klasse pro Bild (was?) (1 Punkt). Objekterkennung: Rahmen mit Klasse um jedes Objekt (was und wo?) (1,5 Punkte), z. B. Personen im Gefahrenbereich einer Anlage (1 Punkt). Segmentierung: Klasse für jeden einzelnen Pixel, z. B. die genaue Fläche eines Schadens (1,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Das Gedächtnis eines RNN in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein einfaches RNN und das verblassende Signal</span>
+        <p>Der Zustand wird so berechnet: <span class="calcline">hₜ = tanh(0,5 · xₜ + 0,8 · hₜ₋₁)</span>, Start h₀ = 0. Eingabefolge: 1, 0, 0.</p>
+        <ol class="steps">
+          <li><div>Schritt 1: <span class="calcline">h₁ = tanh(0,5 · 1 + 0) = tanh(0,5) ≈ 0,46</span></div></li>
+          <li><div>Schritt 2: <span class="calcline">h₂ = tanh(0 + 0,8 · 0,46) = tanh(0,37) ≈ 0,35</span></div></li>
+          <li><div>Schritt 3: <span class="calcline">h₃ = tanh(0,8 · 0,35) = tanh(0,28) ≈ 0,28</span></div></li>
+        </ol>
+        <p>Die Information der ersten Eingabe (1) wird mit jedem Schritt schwächer: 0,46 → 0,35 → 0,28. Nach vielen Schritten ist sie praktisch verschwunden. Das ist das Gedächtnisproblem des einfachen RNN; LSTM-Zellen halten wichtige Information gezielt fest.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Tore einer LSTM-Zelle am Satz</span>
+        <p>Satz: „Im Dezember stieg der Umsatz stark an, weil …“. Das Wort „Dezember“ ist für den weiteren Verlauf wichtig (Saison). Das <b>Eingangstor</b> speichert es im Langzeitspeicher, das <b>Vergessenstor</b> löscht dagegen bei „stieg der“ unwichtige Füllwörter, das <b>Ausgangstor</b> gibt bei der Vorhersage des nächsten Wortes nur das Relevante weiter. So bleibt „Dezember“ auch nach zehn Wörtern verfügbar.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Eine Zeitreihe mit LSTM</span>
+        <p>Ein Versorger will den Stromverbrauch der nächsten Stunde vorhersagen. Eingabe: die letzten 24 Stundenwerte. Das LSTM verarbeitet sie in der Reihenfolge, erkennt den Tagesrhythmus (morgens Anstieg, nachts Tief) und liefert den Wert für die nächste Stunde. Eine Baseline („wie in der gleichen Stunde gestern“) bleibt als Vergleichsmaßstab.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum haben einfache RNN Probleme mit langen Folgen, und wie hilft ein LSTM?</p>
+        <p><b>Musterlösung:</b> Bei langen Folgen verblasst die Information von früheren Schritten, weil der Gradient beim Rückwärtsrechnen immer wieder multipliziert wird und schrumpft (verschwindender Gradient) (2 Punkte). Ein LSTM besitzt einen eigenen Langzeitspeicher und drei Tore (Vergessen, Eingang, Ausgang), die steuern, was behalten, gespeichert und weitergegeben wird (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Attention in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Gewichte für das Wort „sie“</span>
+        <p>Im Satz „Die Katze jagte die Maus, weil sie hungrig war“ vergleicht das Wort „sie“ seine Frage mit den Schlüsseln der anderen Wörter. Angenommene Ähnlichkeitswerte: Katze 2,0 · jagte 0,5 · Maus 1,0 · hungrig 0,5. Softmax macht daraus Gewichte:</p>
+        <ul>
+          <li><span class="calcline">e²·⁰ ≈ 7,39 · e⁰·⁵ ≈ 1,65 · e¹·⁰ ≈ 2,72 · e⁰·⁵ ≈ 1,65</span>; Summe ≈ 13,41</li>
+          <li>Katze ≈ <b>55 %</b>, Maus ≈ 20 %, jagte ≈ 12 %, hungrig ≈ 12 %</li>
+        </ul>
+        <p>Das neue Verständnis von „sie“ ist die gewichtete Mischung der Inhalte aller Wörter, in der „Katze“ am stärksten vertreten ist – so löst das Netz den Bezug auf.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum lange Texte teuer sind</span>
+        <p>Bei Self-Attention vergleicht jedes Wort sich mit jedem anderen: Bei 1.000 Wörtern sind das <span class="calcline">1.000² = 1.000.000</span> Paare, bei 10.000 Wörtern <span class="calcline">10.000² = 100.000.000</span> – hundertmal so viele für zehnmal so viel Text. Deshalb sind lange Dokumente aufwendig, und es gibt Varianten, die den Aufwand begrenzen. Das erklärt auch, warum Sprachmodelle eine maximale „Kontextlänge“ haben.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Encoder oder Decoder?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Aufgabe</th><th>Passende Familie</th></tr></thead>
+          <tbody>
+            <tr><td>Kundenmails nach Thema sortieren</td><td>Encoder (z. B. BERT)</td></tr>
+            <tr><td>Ähnliche Dokumente in einer Wissensdatenbank finden</td><td>Encoder (Embeddings)</td></tr>
+            <tr><td>Einen Antwortentwurf schreiben</td><td>Decoder (GPT-artig)</td></tr>
+            <tr><td>Einen Text ins Englische übersetzen</td><td>Encoder-Decoder (oder großer Decoder)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Vorteile des Transformers gegenüber einem RNN und einen Nachteil.</p>
+        <p><b>Musterlösung:</b> Vorteile: alle Wörter werden parallel verarbeitet, das Training ist auf GPUs sehr schnell (1,5 Punkte); lange Abhängigkeiten werden direkt über Attention erfasst (1,5 Punkte); gute Skalierbarkeit auf riesige Datenmengen (1,5 Punkte). Nachteil: Der Rechenaufwand wächst quadratisch mit der Textlänge (1,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Rekonstruktionsfehler und Generatoren</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Autoencoder als Anomaliedetektor</span>
+        <p>Ein Autoencoder wird mit Bildern fehlerfreier Teile trainiert. Er presst jedes Bild auf einen kleinen Code zusammen und baut es wieder auf. Für ein normales Teil beträgt der mittlere Rekonstruktionsfehler 0,02. Für ein Teil mit einem Riss, den er nie gesehen hat, ist der Fehler 0,35, denn das Netz kann den Riss nicht nachbauen. Mit einer Schwelle von 0,10 (aus Validierungsdaten gewählt) wird dieses Teil als Anomalie markiert. Das Verfahren braucht nur Bilder gesunder Teile, keine Fehlerbilder.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Kompression im Autoencoder</span>
+        <p>Ein Bild mit 28 × 28 = 784 Pixeln wird auf einen Code mit 32 Zahlen reduziert: <span class="calcline">784 : 32 = 24,5</span> – der Code ist etwa 25-mal kleiner. Gelingt die Rekonstruktion gut, enthält der Code das Wesentliche. Ähnlich wie PCA (Modul 5), aber nichtlinear und damit leistungsfähiger.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das Spiel von Fälscher und Prüfer (GAN)</span>
+        <ol class="steps">
+          <li><div>Der <b>Generator</b> erzeugt aus Zufallszahlen ein Bild (am Anfang nur Rauschen).</div></li>
+          <li><div>Der <b>Diskriminator</b> bekommt echte und gefälschte Bilder und soll sie unterscheiden.</div></li>
+          <li><div>Der Diskriminator verbessert sich; der Generator wird für jede erkannte Fälschung „bestraft“ und lernt, überzeugendere Bilder zu erzeugen.</div></li>
+          <li><div>Das Spiel läuft, bis die Fälschungen kaum noch erkennbar sind.</div></li>
+        </ol>
+        <p>Einsatz in der Praxis: synthetische Bilder von seltenen Fehlerarten, um Trainingsdaten zu ergänzen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Wie lässt sich ein Autoencoder zur Anomalieerkennung nutzen?</p>
+        <p><b>Musterlösung:</b> Man trainiert ihn nur mit normalen Daten, sodass er diese gut rekonstruiert (2 Punkte). Bei neuen Daten berechnet man den Rekonstruktionsfehler; ist er größer als eine festgelegte Schwelle, weicht der Fall vom Normalen ab und wird als Anomalie gemeldet (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Transfer Learning im Betrieb</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Daten- und Parameterbedarf im Vergleich</span>
+        <p>Ein Betrieb will Bilder von Holzoberflächen in zwei Klassen („in Ordnung“ und „Fehler“) einteilen.</p>
+        <ul>
+          <li><b>Von null trainiert:</b> Ein Bildnetz bräuchte mehrere zehntausend Bilder – der Betrieb hat 600.</li>
+          <li><b>Mit Transfer Learning:</b> Das vortrainierte Netz (z. B. EfficientNet-B0, vortrainiert auf Millionen Fotos) liefert 1.280 Merkmale je Bild. Die neue Entscheidungsschicht hat nur <span class="calcline">1.280 · 2 + 2 = 2.562</span> trainierbare Parameter, während die rund 4 Millionen Parameter des Basisnetzes eingefroren bleiben. 600 Bilder genügen oft.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wann Fine-Tuning sinnvoll ist</span>
+        <p>Nach dem Training der neuen Schicht erreicht das Modell 88 % auf den Validierungsdaten. Nun „taut“ man die oberen Schichten des Basisnetzes auf und trainiert sie mit einer sehr kleinen Lernrate (z. B. 0,00001) weiter, damit sie sich an Holzmaserungen anpassen. Ergebnis: 93 %. Mit einer zu großen Lernrate würde man das wertvolle Vorwissen zerstören („katastrophales Vergessen“).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wenn das Vorwissen nicht passt</span>
+        <p>Ein auf Alltagsfotos vortrainiertes Netz soll Wärmebildkameras auswerten. Farben und Formen unterscheiden sich stark von den Fotos. Hier hilft Transfer Learning weniger; man braucht mehr eigene Daten oder ein Modell, das auf ähnlichen Bildern vortrainiert wurde. Ebenso sind <b>Lizenz</b> und <b>mitgebrachte Verzerrungen</b> des Basismodells zu prüfen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein Mittelständler hat 500 beschriftete Fotos und will Fehler erkennen. Beschreiben Sie das Vorgehen mit Transfer Learning in vier Schritten und nennen Sie einen Vorteil.</p>
+        <p><b>Musterlösung:</b> Vortrainiertes Modell wählen; letzte Schicht durch eine neue mit den eigenen Klassen ersetzen; zunächst nur die neue Schicht trainieren (übrige eingefroren); optional obere Schichten mit kleiner Lernrate fein abstimmen (4 Punkte). Vorteil: kommt mit wenigen Daten aus, spart Zeit und Rechenkosten (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l15-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Overfitting bei Deep Learning erkennen und bekämpfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Verlustkurven lesen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Epoche</th><th class="r">Trainingsverlust</th><th class="r">Validierungsverlust</th><th>Beobachtung</th></tr></thead>
+          <tbody>
+            <tr><td class="r">1</td><td class="r">0,90</td><td class="r">0,92</td><td>beide sinken</td></tr>
+            <tr><td class="r">5</td><td class="r">0,40</td><td class="r">0,45</td><td>passend</td></tr>
+            <tr><td class="r">10</td><td class="r">0,20</td><td class="r"><b>0,43</b></td><td>Validierung stagniert, Abstand wächst</td></tr>
+            <tr><td class="r">15</td><td class="r">0,05</td><td class="r">0,61</td><td>Overfitting: Validierungsverlust steigt</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Netz sollte um Epoche 10 gestoppt werden (Early Stopping). Danach lernt es nur noch die Trainingsdaten auswendig.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Augmentation vervielfacht die Daten</span>
+        <p>Ein Betrieb hat 2.000 Bilder. Zufällig werden sie gedreht (± 15°), gespiegelt, leicht aufgehellt und zugeschnitten. Bei fünf zufälligen Varianten je Epoche sieht das Netz über 20 Epochen nie zweimal dasselbe Bild: effektiv <span class="calcline">2.000 · 20 = 40.000</span> unterschiedliche Trainingsbeispiele. <b>Vorsicht bei der Wahl der Veränderungen:</b> Eine gespiegelte Schraube ist noch eine Schraube; ein gedrehtes Warnschild (Pfeil nach links statt rechts) bedeutet etwas anderes.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Dropout konkret</span>
+        <p>Eine Schicht hat 200 Neuronen, Dropout 0,3. In jedem Trainingsschritt sind zufällig etwa <span class="calcline">200 · 0,3 = 60</span> Neuronen abgeschaltet. Das Netz kann sich nicht darauf verlassen, dass bestimmte Neuronen immer anwesend sind, und lernt breiter verteilte, robustere Merkmale. Beim Einsatz sind alle 200 aktiv.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein neuronales Netz erreicht im Training 99 % und in der Validierung 74 %. Nennen Sie drei Maßnahmen und begründen Sie eine.</p>
+        <p><b>Musterlösung:</b> Datenaugmentation, Dropout, Early Stopping, L2-Regularisierung, Transfer Learning oder ein kleineres Netz (je 1 Punkt, max. 3). Begründung z. B. Dropout: Das zufällige Abschalten von Neuronen verhindert, dass das Netz einzelne Trainingsbeispiele auswendig lernt (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l16-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Kosten, Hardware und Verkleinerung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Trainings- und Betriebskosten abschätzen</span>
+        <ul>
+          <li><b>Training:</b> 20 GPU-Stunden zu 2,50 € ergeben <span class="calcline">20 · 2,50 = 50 €</span> – für ein kleines, vortrainiertes Bildmodell absolut üblich.</li>
+          <li><b>Betrieb:</b> 1 Million Vorhersagen im Monat zu 0,002 € je Anfrage ergeben <span class="calcline">2.000 € pro Monat</span>. Auf das Jahr gerechnet 24.000 € – eine Größe, die in die Wirtschaftlichkeitsrechnung (Modul 11) gehört.</li>
+          <li>Oft übersteigen die laufenden Betriebskosten die Trainingskosten.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Quantisierung spart Platz und Zeit</span>
+        <p>Ein Modell speichert seine Gewichte als 32-Bit-Zahlen (4 Byte). Quantisiert auf 8 Bit (1 Byte) schrumpft es auf ein Viertel: aus 100 MB werden <span class="calcline">100 : 4 = 25 MB</span>. Die Vorhersage wird schneller, die Genauigkeit sinkt meist nur geringfügig. So passt ein Modell auf eine kleine Kamera direkt an der Maschine.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Edge oder Cloud?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Anforderung</th><th>Eher am Gerät (Edge)</th><th>Eher in der Cloud</th></tr></thead>
+          <tbody>
+            <tr><td>Antwort in unter 20 ms an der Maschine</td><td>ja</td><td>nein (Netzwerk-Verzögerung)</td></tr>
+            <tr><td>Sensible Daten, die den Betrieb nicht verlassen sollen</td><td>ja</td><td>nur mit Vertragsabsicherung</td></tr>
+            <tr><td>Sehr großes Modell, selten genutzt</td><td>nein</td><td>ja</td></tr>
+            <tr><td>Häufige Modellupdates für viele Standorte</td><td>aufwendiger</td><td>einfacher</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum eignen sich GPUs besonders für neuronale Netze, und nennen Sie zwei Möglichkeiten, ein Modell für den Einsatz zu verkleinern.</p>
+        <p><b>Musterlösung:</b> GPUs führen sehr viele gleichartige Rechenschritte (Matrixmultiplikationen) gleichzeitig aus, wie sie in neuronalen Netzen ständig vorkommen (2 Punkte). Verkleinerung: Quantisierung (kleinere Zahlenformate), Pruning (unwichtige Verbindungen entfernen), Destillation (ein kleines Modell lernt vom großen) (je 1,5 Punkte für zwei).</p>
+      </div>
+<!--/EXTRA-->

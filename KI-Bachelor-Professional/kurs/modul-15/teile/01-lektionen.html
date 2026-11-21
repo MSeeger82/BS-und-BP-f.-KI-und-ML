@@ -1,0 +1,348 @@
+<!--META {"nr": 15, "titel": "Personalmanagement und Führung", "lektionen": 16, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 15 von 17 · ca. 40 Lernstunden</span>
+      <h1 id="introTitle">Personalmanagement und Führung: Menschen für KI gewinnen, führen und entwickeln</h1>
+      <p>KI-Projekte scheitern seltener an der Technik als an Menschen: fehlende Fachkräfte, unklare Rollen, Widerstände, Konflikte. Als Bachelor Professional planen Sie Personal, gewinnen und entwickeln Talente, analysieren Organisationen, führen Teams situativ und agil, motivieren, geben Feedback, lösen Konflikte – und organisieren sich selbst.</p>
+      <div class="facts">
+        <span class="chip">16 Lektionen in 3 Teilen</span><span class="chip">7 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 8 Nr. 1 und 2</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--violet-soft); outline: 2px solid var(--violet);"></i><span><b>Prüfungstipp</b> – so wird es abgefragt</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Personalmanagement im Überblick" data-part="Teil A · Personal">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 20 Minuten</span><h2>Personalmanagement im Überblick</h2></div>
+      <figure class="board">
+        <img src="gifs/personalprozess.gif" width="640" height="380" alt="Animation: Sechs Kästen im Kreis: Bedarf planen, Beschaffen und auswählen, Einsetzen, Entwickeln, Führen und binden, Freisetzen; in der Mitte Strategie und Talentmanagement." loading="lazy">
+        <figcaption>Die Aufgaben der Personalarbeit greifen ineinander.</figcaption>
+      </figure>
+      <div class="prose">
+        <p>Personalmanagement sorgt dafür, dass zur richtigen Zeit die richtigen Menschen mit den richtigen Kompetenzen am richtigen Ort sind – zu vertretbaren Kosten und unter Beachtung von Arbeitsrecht und Mitbestimmung (Modul 16). Aufgaben: <b>Personalplanung</b>, <b>-beschaffung</b> und <b>-auswahl</b>, <b>-einsatz</b>, <b>-entwicklung</b>, <b>-führung</b> und <b>-bindung</b>, <b>-freisetzung</b>, dazu Verwaltung und Controlling.</p>
+        <p><b>KI verändert Personalarbeit doppelt:</b> Sie braucht neue Kompetenzen (Data Science, KI-Kompetenz für alle) und sie wird selbst eingesetzt (Bewerbungsvorauswahl, Chatbots für HR-Fragen, Skill-Analysen) – dort oft als Hochrisiko-KI.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Personalmanagement: planen, gewinnen, einsetzen, entwickeln, führen, binden, freisetzen – strategisch ausgerichtet.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: An welcher Stelle des Kreislaufs hakt es im eigenen Unternehmen bei KI-Fachkräften am meisten?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Personalbedarf planen" data-part="Teil A · Personal">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 30 Minuten</span><h2>Personalbedarf planen: quantitativ und qualitativ</h2></div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Bruttopersonalbedarf = <span class="frac"><span>benötigte Arbeitsstunden</span><span>verfügbare Stunden je Vollzeitkraft</span></span> (+ Reserve)</div>
+        <div class="eq">Nettopersonalbedarf = Bruttopersonalbedarf − (aktueller Bestand − Abgänge + feststehende Zugänge)</div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel:</b> In 12 Monaten werden 18 Data Scientists gebraucht; heute sind es 12, zwei gehen in Rente, eine Einstellung ist zugesagt. <span class="calcline">18 − (12 − 2 + 1) = 7</span> zusätzliche Stellen.</p>
+        <p><b>Qualitativ:</b> Welche Kompetenzen werden gebraucht? Skill-Inventur (Ist) gegen Anforderungsprofile (Soll). KI verschiebt Bedarfe: weniger Routine-Sachbearbeitung, mehr Prüfung, Ausnahmebearbeitung, Datenkompetenz.</p>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Personalbedarf</span>
+        <div class="calc-row">
+          <div class="field"><label for="pbS">benötigte Arbeitsstunden je Jahr</label><input type="number" id="pbS" value="28000"></div>
+          <div class="field"><label for="pbV">verfügbare Stunden je Vollzeitkraft</label><input type="number" id="pbV" value="1600"></div>
+          <div class="field"><label for="pbR">Reserve (%)</label><input type="number" id="pbR" value="0"></div>
+        </div>
+        <div class="calc-row">
+          <div class="field"><label for="pbB">aktueller Bestand</label><input type="number" id="pbB" value="12"></div>
+          <div class="field"><label for="pbA">Abgänge</label><input type="number" id="pbA" value="2"></div>
+          <div class="field"><label for="pbZ">feststehende Zugänge</label><input type="number" id="pbZ" value="1"></div>
+        </div>
+        <div class="kpis" id="pbOut"></div>
+        <p class="calc-note" id="pbNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Netto = Brutto − (Bestand − Abgänge + Zugänge). Qualitativ: Kompetenzlücken zwischen Soll- und Ist-Profil.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Berechnen Sie mit dem Rechner, wie sich der Bedarf ändert, wenn KI die benötigten Stunden um 30 % senkt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Personalstrategien" data-part="Teil A · Personal">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Personalstrategien: Make or Buy, Talentmanagement, Employer Branding</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Strategie</th><th>Inhalt</th><th>Vor- und Nachteile</th></tr></thead>
+        <tbody>
+          <tr><td>Make (intern entwickeln)</td><td>eigene Beschäftigte weiterbilden (Upskilling, Reskilling)</td><td>Bindung, Prozesswissen bleibt; dauert, braucht Lernzeit</td></tr>
+          <tr><td>Buy (extern gewinnen)</td><td>Fachkräfte einstellen</td><td>schnell neues Wissen; teuer, knapper Markt</td></tr>
+          <tr><td>Borrow (leihen)</td><td>Berater, Freelancer, Dienstleister</td><td>flexibel; Wissen geht wieder, Scheinselbstständigkeit beachten</td></tr>
+          <tr><td>Bot (automatisieren)</td><td>Aufgaben durch KI erledigen lassen</td><td>skalierbar; Akzeptanz, Kontrolle, Mitbestimmung</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Talentmanagement</b>: Schlüsselpositionen und Talente identifizieren, gezielt entwickeln, binden und Nachfolge planen. Gesucht sind neben Fachwissen <b>dynamische Problemlösekompetenz</b> – die Fähigkeit, in neuen, unklaren Situationen Lösungen zu entwickeln. <b>Employer Branding</b>: als attraktiver Arbeitgeber erkennbar werden (spannende Daten und Aufgaben, Lernzeit, moderne Werkzeuge, flexible Arbeit, Sinn).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>KI-Kompetenz entsteht meist im Mix: wenige Spezialisten einstellen, viele Beschäftigte weiterbilden, gezielt extern ergänzen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Was macht Ihr Unternehmen für Data Scientists attraktiv – außer Gehalt? Herzberg (Lektion 11) liefert die Antwort.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Kompetenzen für KI-Teams" data-part="Teil A · Personal">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Kompetenzen für KI-Teams: Rollen und Skill-Profile</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rolle</th><th>Kernaufgaben</th><th>Kompetenzen</th></tr></thead>
+        <tbody>
+          <tr><td>Data Engineer</td><td>Datenzugang, Pipelines, Datenqualität</td><td>SQL, Datenbanken, Cloud, Programmierung</td></tr>
+          <tr><td>Data Scientist</td><td>Analyse, Modelle, Experimente</td><td>Statistik, ML, Python, Fachverständnis</td></tr>
+          <tr><td>ML Engineer / MLOps</td><td>Modelle in Betrieb bringen, überwachen</td><td>Softwaretechnik, Automatisierung, Monitoring</td></tr>
+          <tr><td>Product Owner / Business Analyst</td><td>Nutzen, Anforderungen, Prioritäten</td><td>Fachdomäne, Kommunikation, Wirtschaftlichkeit</td></tr>
+          <tr><td>KI-Governance, Recht, Datenschutz</td><td>Regeln, Risiko, Nachweise</td><td>KI-Verordnung, DSGVO, Risikomanagement</td></tr>
+          <tr><td>Alle Beschäftigten</td><td>KI-Werkzeuge sicher nutzen</td><td>KI-Kompetenz (Art. 4 KI-Verordnung): Chancen, Grenzen, Regeln</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p><b>T-förmige Profile</b>: tiefes Wissen in einem Gebiet, breites Verständnis für die Nachbarrollen. Skill-Profile beschreiben Fach-, Methoden-, Sozial- und Selbstkompetenz mit Ausprägungen (z. B. Grundlagen, Anwender, Experte).</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein KI-Team ist interdisziplinär: Daten, Modelle, Betrieb, Fachbereich und Governance – plus KI-Kompetenz für alle Nutzer.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie ein Skill-Profil für eine Rolle im eigenen Unternehmen erstellen und mit dem Ist-Stand einer Person vergleichen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Personalauswahl" data-part="Teil A · Personal">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 30 Minuten</span><h2>Personalauswahl: Anforderungsprofil, Verfahren, strukturiertes Interview, AGG</h2></div>
+      <ol class="steps">
+        <li><span><b>Anforderungsprofil</b>: Muss- und Kann-Anforderungen aus der Aufgabe ableiten.</span></li>
+        <li><span><b>Ausschreibung</b> intern und extern, neutral formuliert (m/w/d, keine Altersgrenzen).</span></li>
+        <li><span><b>Vorauswahl</b> nach Unterlagen – bei KI-Unterstützung: Hochrisiko-KI, menschliche Prüfung, Bias-Kontrolle.</span></li>
+        <li><span><b>Auswahlverfahren</b>: strukturiertes Interview, Arbeitsprobe (z. B. Datenanalyse-Aufgabe), Assessment Center, Tests.</span></li>
+        <li><span><b>Entscheidung</b> nach vorher festgelegten Kriterien, Mitbestimmung des Betriebsrats (§ 99 BetrVG), Absagen ohne Begründungsrisiko formulieren.</span></li>
+      </ol>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Strukturiertes Interview</span>
+          <p>Alle Bewerbenden bekommen die gleichen, anforderungsbezogenen Fragen, Antworten werden mit verankerten Skalen bewertet, möglichst von mehreren Personen. Es hat eine deutlich höhere Vorhersagekraft als ein freies Gespräch.</p>
+        </div>
+        <div class="box falle"><span class="box-label">AGG</span>
+          <p>Keine Benachteiligung wegen ethnischer Herkunft, Geschlecht, Religion oder Weltanschauung, Behinderung, Alter, sexueller Identität. Auch mittelbare Benachteiligung zählt – etwa wenn ein KI-System aus früheren Einstellungen lernt, überwiegend Männer vorzuschlagen. Folge: Entschädigung nach § 15 AGG – höchstens drei Monatsgehälter, wenn die Person auch ohne Benachteiligung nicht eingestellt worden wäre; Frist zur Geltendmachung zwei Monate.</p>
+        </div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gute Auswahl: klares Anforderungsprofil, strukturierte Verfahren, festgelegte Kriterien, AGG-konform – auch wenn KI hilft.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie fünf Interviewfragen für eine Data-Engineer-Stelle formulieren, je mit Bewertungsanker für schwach, mittel, stark.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Personaleinsatz und -entwicklung" data-part="Teil A · Personal">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Personaleinsatz planen und Personal entwickeln</h2></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Personaleinsatz</span>
+          <p>Die richtigen Personen den Aufgaben zuordnen: nach Qualifikation, Verfügbarkeit, Belastung und Entwicklungszielen. Instrumente: Einsatz- und Schichtpläne, Kapazitätsplanung, Job Rotation, Job Enlargement (mehr gleichartige Aufgaben), Job Enrichment (mehr Verantwortung).</p>
+        </div>
+        <div class="box fach"><span class="box-label">Personalentwicklung</span>
+          <p>Bedarf ermitteln (Soll-Ist-Profile) → Maßnahmen planen → durchführen → Transfer sichern → Erfolg bewerten. Formen: <b>on the job</b> (Projekte, Coaching), <b>near the job</b> (Qualitätszirkel), <b>off the job</b> (Seminare, E-Learning), <b>along the job</b> (Karrierepfade).</p>
+        </div>
+      </div>
+      <div class="prose"><p><b>KI-Kompetenz aufbauen</b>: Grundlagenschulung für alle, Vertiefung für Key User, Spezialisierung für Expertinnen; Lernzeit einplanen, Praxisaufgaben, interne Community. Erfolg messen: Nutzung, Qualität, Zufriedenheit – nicht nur Teilnahmezahlen.</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Entwicklung wirkt nur mit Transfer in die Arbeit: Lernen, Anwenden, Feedback.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Entwerfen Sie ein dreistufiges KI-Qualifizierungsprogramm für ein Unternehmen mit 300 Beschäftigten.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Organisationsanalyse" data-part="Teil B · Organisation und Führung">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 25 Minuten</span><h2>Organisationsanalyse: Aufbau- und Ablauforganisation, Organigramm</h2></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Aufbauorganisation</span>
+          <p>Wer ist wofür zuständig? Stellen, Abteilungen, Leitungsbeziehungen, Kompetenzen – dargestellt im <b>Organigramm</b>. Leitungsspanne (Mitarbeitende je Führungskraft) und Leitungstiefe (Hierarchieebenen) sind Kennzahlen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Ablauforganisation</span>
+          <p>Wie laufen Prozesse? Reihenfolge, Zeit, Ort, Schnittstellen (Modul 8). KI-Projekte verändern oft vor allem die Abläufe – die Aufbauorganisation muss dann nachziehen (z. B. neue Rolle „KI-Prüfer“).</p>
+        </div>
+      </div>
+      <div class="prose"><p><b>Analysefragen:</b> Wo entstehen Doppelarbeit und Wartezeiten? Sind Verantwortungen eindeutig? Passt die Struktur zur Strategie? Wo sitzt KI-Kompetenz – zentral (Kompetenzzentrum), dezentral in den Fachbereichen oder als Hub-and-Spoke-Modell (zentrales Team plus KI-Verantwortliche in den Bereichen)?</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Aufbau: Wer? Ablauf: Wie? Beide gemeinsam analysieren und an der Strategie ausrichten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeichnen Sie das Organigramm Ihres Bereichs und markieren Sie, wo KI-Verantwortung heute liegt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Organisationsmodelle und 7-S" data-part="Teil B · Organisation und Führung">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 35 Minuten</span><h2>Organisationsmodelle: Linie, Matrix, Projekt und das 7-S-Modell</h2></div>
+      <figure class="board">
+        <img src="gifs/orgformen.gif" width="640" height="380" alt="Animation in drei Phasen: Linienorganisation als Baum, Matrixorganisation mit Abteilungen als Spalten und KI-Projekten als Zeilen mit Kreuzungspunkten, reine Projektorganisation mit eigenem Projektteam neben den Abteilungen." loading="lazy">
+        <figcaption>Linie, Matrix, reines Projekt.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Modell</th><th>Vorteil</th><th>Nachteil</th></tr></thead>
+        <tbody>
+          <tr><td>Einlinienorganisation</td><td>klare Zuständigkeit</td><td>lange Wege, Abteilungsdenken</td></tr>
+          <tr><td>Stablinienorganisation</td><td>Experten beraten die Leitung</td><td>Stab hat keine Weisungsbefugnis</td></tr>
+          <tr><td>Matrixorganisation</td><td>Fach- und Projektwissen verbunden</td><td>zwei Vorgesetzte, Konflikte</td></tr>
+          <tr><td>Reine Projektorganisation</td><td>volle Konzentration, schnelle Entscheidungen</td><td>Ressourcen gebunden, Rückkehr der Beteiligten</td></tr>
+        </tbody>
+      </table></div>
+      <figure class="board">
+        <img src="gifs/sieben-s.gif" width="640" height="380" alt="Animation: Im Zentrum Selbstverständnis und gemeinsame Werte, außen herum die harten Faktoren Strategie, Struktur, Systeme und die weichen Faktoren Stil, Stammpersonal und Spezialkenntnisse, alle miteinander verbunden." loading="lazy">
+        <figcaption>McKinsey-7-S-Modell.</figcaption>
+      </figure>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Die Organisationsform folgt der Aufgabe; das 7-S-Modell zeigt, dass Strategie, Struktur und Systeme nur mit Stil, Personal, Kenntnissen und Werten zusammen wirken.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Analysieren Sie eine KI-Einführung mit dem 7-S-Modell: Welche weichen Faktoren werden oft vergessen?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Führungsstile und -theorien" data-part="Teil B · Organisation und Führung">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 25 Minuten</span><h2>Führungsstile und Führungstheorien</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Stil (Lewin)</th><th>Merkmal</th><th>passt bei</th></tr></thead>
+        <tbody>
+          <tr><td>autoritär</td><td>Führungskraft entscheidet allein</td><td>Krisen, Zeitdruck, Sicherheitsfragen</td></tr>
+          <tr><td>kooperativ / demokratisch</td><td>Beteiligung, gemeinsame Entscheidung</td><td>Wissensarbeit, komplexe Probleme</td></tr>
+          <tr><td>laissez-faire</td><td>kaum Führung</td><td>selten sinnvoll; Risiko von Orientierungslosigkeit</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Weitere Ansätze:</b> Eigenschaftstheorie (Führung als Persönlichkeit – wenig belastbar), Verhaltenstheorien (Mitarbeiter- vs. Aufgabenorientierung, Verhaltensgitter nach Blake/Mouton), situative Ansätze (Lektion 10), <b>transformationale Führung</b> (Vision, Vorbild, individuelle Förderung, intellektuelle Anregung) und <b>transaktionale Führung</b> (Ziele gegen Belohnung).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Es gibt keinen besten Führungsstil – wirksam ist, was zu Aufgabe, Person und Lage passt.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Welche Führungskraft hat Sie am meisten geprägt – und welchen Stil hatte sie?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Situatives Führen" data-part="Teil B · Organisation und Führung">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 30 Minuten</span><h2>Situatives Führen nach Hersey und Blanchard</h2></div>
+      <figure class="board">
+        <img src="gifs/situativ.gif" width="640" height="380" alt="Animation: Vier Felder: S1 unterweisen bei geringem Können und Wollen, S2 verkaufen oder trainieren bei geringem Können, aber Wollen, S3 beteiligen oder unterstützen bei Können, aber Unsicherheit, S4 delegieren bei Können und Wollen." loading="lazy">
+        <figcaption>Der Stil folgt dem Reifegrad.</figcaption>
+      </figure>
+      <div class="prose">
+        <p>Der <b>Reifegrad</b> (Fähigkeit und Bereitschaft) bezieht sich auf eine konkrete Aufgabe. Dieselbe erfahrene Entwicklerin kann beim neuen KI-Framework R2 sein und bei der Code-Review R4.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>R1 → S1 unterweisen, R2 → S2 verkaufen/trainieren, R3 → S3 beteiligen/unterstützen, R4 → S4 delegieren.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Eine erfahrene Entwicklerin ist hochkompetent, aber nach einer Umstrukturierung unmotiviert“ → R3 → <b>beteiligen/unterstützen</b>: wenig Anweisung, viel Beziehung.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Ordnen Sie drei Personen aus dem eigenen Team je für zwei Aufgaben einen Reifegrad zu. Der Stil wechselt je nach Aufgabe.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Motivation" data-part="Teil B · Organisation und Führung">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 30 Minuten</span><h2>Motivation: Maslow, Herzberg, intrinsisch und extrinsisch</h2></div>
+      <figure class="board">
+        <img src="gifs/herzberg.gif" width="640" height="380" alt="Animation: Links Hygienefaktoren wie Gehalt, Bedingungen, Sicherheit, Führungsstil, Firmenpolitik; rechts Motivatoren wie Anerkennung, Verantwortung, Arbeitsinhalt, Erfolg, Entwicklung. Hygienefaktoren verhindern Unzufriedenheit, Motivatoren erzeugen Zufriedenheit." loading="lazy">
+        <figcaption>Zwei-Faktoren-Theorie.</figcaption>
+      </figure>
+      <div class="prose">
+        <p><b>Maslow</b>: Bedürfnispyramide aus Grundbedürfnissen, Sicherheit, sozialen Bedürfnissen, Wertschätzung und Selbstverwirklichung; höhere Bedürfnisse werden wichtiger, wenn niedrigere erfüllt sind. <b>Herzberg</b>: Hygienefaktoren verhindern Unzufriedenheit, Motivatoren erzeugen Zufriedenheit. <b>Intrinsisch</b> motiviert ist, wer eine Aufgabe um ihrer selbst willen tut; <b>extrinsisch</b> wirken Belohnungen von außen.</p>
+        <p><b>KI-Einführung und Motivation:</b> Wird Arbeit durch KI anspruchsvoller (Ausnahmen, Beratung) oder nur kontrollierter (Kennzahlen je Person)? Ersteres stärkt Motivatoren, Letzteres gefährdet Hygienefaktoren (Sicherheit, Führungsstil).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gehalt und Bedingungen vermeiden Unzufriedenheit; Anerkennung, Verantwortung und sinnvolle Inhalte motivieren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Was motiviert Sie an Ihrer Arbeit am meisten? Ordnen Sie die Antworten den Faktoren nach Herzberg zu.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Agile Führung und OKR" data-part="Teil B · Organisation und Führung">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 30 Minuten</span><h2>Agile Führung: Servant Leadership, Selbstorganisation, OKR</h2></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Servant Leadership</span>
+          <p>Die Führungskraft dient dem Team: schafft Rahmenbedingungen, beseitigt Hindernisse, fördert Entwicklung, gibt Orientierung über Ziele statt über Einzelanweisungen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Selbstorganisation</span>
+          <p>Das Team entscheidet selbst, wie es Ziele erreicht. Voraussetzungen: klare Ziele und Grenzen (Entscheidungsrahmen), Kompetenz, Transparenz, Vertrauen. Delegationsstufen klären, wer was entscheidet (z. B. „informieren“, „beraten“, „zustimmen“, „selbst entscheiden“).</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>OKR (Objectives and Key Results)</b>: ein qualitatives, motivierendes Ziel (Objective) mit 2–5 messbaren Schlüsselergebnissen (Key Results), meist je Quartal, transparent für alle. Beispiel: <i>Objective</i> „Unser Kundenservice antwortet blitzschnell und hilfreich.“ <i>Key Results</i>: Erstantwortzeit von 18 auf 2 Stunden, 40 % der Anfragen ohne Weiterleitung gelöst, Zufriedenheit mindestens 4,3 von 5.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Agile Führung gibt Richtung und Rahmen, das Team findet den Weg; OKR verbinden Sinn (Objective) mit Messbarkeit (Key Results).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Formulieren Sie ein OKR für ein KI-Vorhaben. Key Results sind Ergebnisse, keine Tätigkeiten („Modell trainieren“ ist kein Key Result).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Feedback und Mitarbeitergespräche" data-part="Teil C · Konflikte und Selbstmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 25 Minuten</span><h2>Feedback und Mitarbeitergespräche</h2></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Feedback-Regeln</span>
+          <p>Zeitnah, konkret und beschreibend statt wertend, Ich-Botschaften, auf veränderbares Verhalten bezogen, mit Wirkung und Wunsch. Muster <b>Situation – Verhalten – Wirkung</b>: „Im Review gestern (Situation) hast du die Testergebnisse nicht gezeigt (Verhalten); dadurch konnte der Fachbereich nicht entscheiden (Wirkung). Ich wünsche mir, dass …“</p>
+        </div>
+        <div class="box fach"><span class="box-label">Mitarbeitergespräch</span>
+          <p>Jährlich oder häufiger: Rückblick, Leistung und Zusammenarbeit, Ziele, Entwicklung, Wünsche. Vorbereitung beider Seiten, Gesprächsführung mit offenen Fragen und aktivem Zuhören, Vereinbarungen dokumentieren.</p>
+        </div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gutes Feedback ist konkret, beschreibend, zeitnah und nach vorn gerichtet.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Personenbezogene KI-Kennzahlen (z. B. Bearbeitungszeit je Person) im Gespräch zu verwenden, ist mitbestimmungspflichtig und wirkt schnell als Überwachung – vorher Regeln mit dem Betriebsrat vereinbaren (Modul 16).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Üben Sie in Paaren Feedback nach dem Muster Situation – Verhalten – Wirkung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Konflikte erkennen" data-part="Teil C · Konflikte und Selbstmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 30 Minuten</span><h2>Konflikte erkennen: Arten und Eskalationsstufen nach Glasl</h2></div>
+      <figure class="board">
+        <img src="gifs/glasl.gif" width="640" height="380" alt="Animation: Neun Stufen führen treppenförmig abwärts: Verhärtung, Debatte, Taten statt Worte (win-win), Koalitionen, Gesichtsverlust, Drohstrategien (win-lose), begrenzte Vernichtungsschläge, Zersplitterung, gemeinsam in den Abgrund (lose-lose)." loading="lazy">
+        <figcaption>Je tiefer, desto schwerer lösbar.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konfliktart</th><th>Beispiel im KI-Projekt</th></tr></thead>
+        <tbody>
+          <tr><td>Sachkonflikt</td><td>Welche Metrik zählt: Recall oder Präzision?</td></tr>
+          <tr><td>Ziel- und Interessenkonflikt</td><td>Fachbereich will Tempo, Datenschutz will Prüfung</td></tr>
+          <tr><td>Verteilungskonflikt</td><td>zwei Projekte, ein Data-Science-Team</td></tr>
+          <tr><td>Rollenkonflikt</td><td>Matrix: Abteilungsleitung und Projektleitung geben widersprüchliche Aufträge</td></tr>
+          <tr><td>Beziehungskonflikt</td><td>gegenseitige Abwertung, Misstrauen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Glasl: 9 Stufen, 3 Ebenen. Stufen 1–3 lösen die Beteiligten meist selbst, 4–6 brauchen Moderation oder Mediation, 7–9 einen Machteingriff.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Sachkonflikte werden oft zu Beziehungskonflikten, wenn sie nicht früh geklärt werden. Fragen Sie nach Beispielen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Konflikte lösen" data-part="Teil C · Konflikte und Selbstmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 30 Minuten</span><h2>Konflikte lösen: Harvard-Konzept, Moderation, Mediation</h2></div>
+      <ol class="steps">
+        <li><span><b>Menschen und Probleme getrennt behandeln</b>: respektvoll mit den Personen, hart in der Sache.</span></li>
+        <li><span><b>Interessen statt Positionen</b>: Warum will jemand etwas? („Wir brauchen das Team ab März“ → Interesse: Messeauftritt mit Demo.)</span></li>
+        <li><span><b>Optionen zum beiderseitigen Vorteil</b> entwickeln, bevor entschieden wird.</span></li>
+        <li><span><b>Neutrale Beurteilungskriterien</b> vereinbaren (Nutzen, Risiko, Fristen).</span></li>
+      </ol>
+      <div class="prose">
+        <p><b>Moderation</b>: eine neutrale Person steuert das Gespräch, die Beteiligten lösen selbst. <b>Mediation</b>: strukturiertes Verfahren mit allparteilicher Mediatorin, Phasen von Klärung über Interessen bis zur Vereinbarung. <b>Eskalation</b> an die nächsthöhere Ebene, wenn eine Entscheidung nötig ist.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Harvard-Konzept: Mensch und Sache trennen, Interessen klären, Optionen sammeln, objektive Kriterien nutzen.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Zwei Teams streiten über die Priorität ihrer KI-Projekte“ → Interessen hinter den Positionen klären, gemeinsame Kriterien (Nutzen, Risiko, Termine) vereinbaren, Optionen sammeln (gestaffelte Umsetzung, externe Unterstützung), Entscheidung dokumentieren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Spielen Sie den Prioritätenstreit als Rollenspiel mit Moderator durch.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Selbstmanagement" data-part="Teil C · Konflikte und Selbstmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 25 Minuten</span><h2>Selbstmanagement für Führungskräfte: Prioritäten, Zeit, Energie</h2></div>
+      <figure class="board">
+        <img src="gifs/eisenhower.gif" width="640" height="380" alt="Animation: Eisenhower-Matrix mit vier Feldern. Datenpanne melden und Ausfall des Produktivsystems landen bei sofort selbst erledigen; KI-Strategie und Weiterbildung bei einplanen; Rückruf eines Lieferanten bei delegieren; Newsletter sortieren bei weglassen." loading="lazy">
+        <figcaption>Wichtig vor dringend.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Methode</th><th>Kern</th></tr></thead>
+        <tbody>
+          <tr><td>Eisenhower-Matrix</td><td>nach wichtig und dringend sortieren: erledigen, einplanen, delegieren, weglassen</td></tr>
+          <tr><td>ALPEN</td><td>Aufgaben notieren, Länge schätzen, Pufferzeit (etwa 40 %) einplanen, Entscheidungen treffen, Nachkontrolle</td></tr>
+          <tr><td>Pareto-Prinzip</td><td>80 % des Ergebnisses mit 20 % des Aufwands – die wirksamen 20 % zuerst</td></tr>
+          <tr><td>Zeitblöcke</td><td>feste Zeiten für konzentrierte Arbeit, Besprechungen bündeln</td></tr>
+          <tr><td>Energie</td><td>Pausen, Schlaf, Bewegung, Grenzen für Erreichbarkeit (Modul 17: Resilienz)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Wer führt, schützt Zeit für das Wichtige, delegiert konsequent und achtet auf die eigene Energie.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die eigene Aufgabenliste in die Eisenhower-Matrix eintragen. Welche Aufgaben lassen sich mit KI-Unterstützung schneller erledigen oder delegieren?</p>
+      </aside>
+    </section>

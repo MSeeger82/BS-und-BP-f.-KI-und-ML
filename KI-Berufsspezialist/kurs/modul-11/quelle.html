@@ -1,0 +1,1115 @@
+<!--META {"nr": 11, "titel": "Wirtschaftlichkeit, Kommunikation und Prüfungsvorbereitung", "lektionen": 14, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 11 von 12 · ca. 18 Lernstunden</span>
+      <h1 id="introTitle">Rechnet sich das? KI-Vorhaben bewerten, Menschen mitnehmen, die Prüfung bestehen</h1>
+      <p>Ein gutes Modell nützt nichts, wenn es sich nicht rechnet oder niemand es nutzt. In diesem Modul lernen Sie, Anwendungsfälle zu finden und zu bewerten, Kosten und Nutzen ehrlich zu beziffern, Amortisation, ROI und Kapitalwert zu rechnen und Ergebnisse so zu kommunizieren, dass Geschäftsführung und Fachabteilung sie verstehen. Der dritte Teil bereitet Sie gezielt auf den transferbezogenen Prüfungsteil vor: Themenwahl, Transferarbeit, Präsentation und Fachgespräch – zusammen 50 % Ihrer Note.</p>
+      <div class="facts">
+        <span class="chip">14 Lektionen in 3 Teilen</span><span class="chip">6 Animationen</span><span class="chip">3 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 3 Abs. 7–9, § 5, § 7</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b></span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b></span></div>
+        <div><i style="background: var(--warm); border-radius: 50%;"></i><span><b>Rechenweg</b></span></div>
+        <div><i style="background: var(--surface); outline: 2px dashed var(--accent);"></i><span><b>Rechner</b></span></div>
+        <div><i style="background: var(--violet-soft); outline: 2px solid var(--violet);"></i><span><b>Prüfungstipp</b></span></div>
+      </div>
+    </section>
+
+    <div class="part-head"><span>Teil A · Lektionen 1–7</span><h2>Wirtschaftlichkeit von KI-Vorhaben</h2></div>
+
+    <section class="lesson" id="l1" data-title="Anwendungsfälle finden" data-part="A · Wirtschaftlichkeit">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 35 Minuten</span><h2>Anwendungsfälle finden</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wer seine Wohnung renovieren will, fängt nicht mit dem Werkzeugkasten an, sondern mit der Frage: Was stört mich? Gute KI-Projekte beginnen genauso – mit einem Problem, nicht mit der Technik.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Suchfeld</th><th>Woran erkennbar</th><th>Typische KI-Lösung</th></tr></thead>
+        <tbody>
+          <tr><td>Wiederkehrende Routinearbeit</td><td>viele gleichartige Vorgänge, Abtippen, Sortieren</td><td>Dokumentenerkennung, Klassifikation, Sprachmodell</td></tr>
+          <tr><td>Fehler und Ausschuss</td><td>teure Nacharbeit, Reklamationen</td><td>Bildprüfung, Anomalieerkennung</td></tr>
+          <tr><td>Planungsunsicherheit</td><td>zu viel oder zu wenig Lager, Personal</td><td>Prognose</td></tr>
+          <tr><td>Wissen ist schwer zugänglich</td><td>lange Suche in Handbüchern, Rückfragen</td><td>RAG-Wissensassistent</td></tr>
+          <tr><td>Kundenkontakt</td><td>viele gleiche Fragen, lange Wartezeiten</td><td>Chatbot, E-Mail-Vorsortierung</td></tr>
+          <tr><td>Ungeplante Ausfälle</td><td>Stillstände, teure Notreparaturen</td><td>Predictive Maintenance</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Methoden</span><ul><li><b>Prozessanalyse</b>: Ist-Prozess aufnehmen, Zeitfresser und Medienbrüche markieren (Modul 12)</li><li><b>Workshops</b> mit der Fachabteilung: „Was kostet Sie am meisten Zeit oder Nerven?“</li><li><b>Kennzahlen</b> auswerten: Fehlerquoten, Durchlaufzeiten, Kosten je Vorgang</li><li><b>Benchmarking</b>: Was machen andere in der Branche?</li></ul></div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Nicht jedes Problem braucht KI. Wenn klare, stabile Regeln reichen, ist klassische Automatisierung billiger, schneller und verlässlicher (Modul 1). Diese Abwägung gehört in jede Bewertung.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Vom Alltagsproblem zum KI-Kandidaten</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Den Zeitfresser im Prozess finden</span>
+        <p>Der Eingangsrechnungsprozess eines Betriebs wird Schritt für Schritt aufgenommen:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Schritt</th><th class="r">Minuten je Rechnung</th></tr></thead>
+          <tbody>
+            <tr><td>Post oder Mail öffnen, sortieren</td><td class="r">2</td></tr>
+            <tr><td>Daten abtippen (Lieferant, Betrag, Datum, Positionen)</td><td class="r">6</td></tr>
+            <tr><td>Kontierung prüfen</td><td class="r">3</td></tr>
+            <tr><td>Freigabe einholen</td><td class="r">4</td></tr>
+            <tr><td>Buchen und ablegen</td><td class="r">1</td></tr>
+            <tr><td><b>Summe</b></td><td class="r"><b>16</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Abtippen macht <span class="calcline">6 : 16 = 37,5 %</span> der Zeit aus und ist reine Routine – ein guter Kandidat für Dokumentenerkennung. Bei 48 € Stundensatz kostet eine Rechnung <span class="calcline">16 : 60 · 48 = 12,80 €</span> Bearbeitungszeit. Die Freigabe hingegen ist eine Entscheidung und bleibt beim Menschen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Drei Betriebe, drei Kandidaten</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Betrieb</th><th>Problem</th><th>KI-Idee</th><th>Daten vorhanden?</th></tr></thead>
+          <tbody>
+            <tr><td>Kfz-Werkstatt</td><td>Annahmegespräche dauern lange, Beschreibungen der Kunden sind ungenau</td><td>Sprachmodell erstellt aus der Kundenbeschreibung einen strukturierten Auftrag</td><td>ja: frühere Aufträge</td></tr>
+            <tr><td>Bäckerei-Kette</td><td>Zu viele Reste bei Brötchen, abends leere Regale bei Kuchen</td><td>Absatzprognose je Filiale und Wochentag</td><td>ja: Kassendaten</td></tr>
+            <tr><td>Steuerkanzlei</td><td>Mandanten stellen immer dieselben Fragen</td><td>Wissensassistent (RAG) auf Basis eigener Merkblätter</td><td>ja: Merkblätter, Mandantenmails</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Braucht es überhaupt KI?</span>
+        <p>Ein Betrieb möchte „mit KI“ Bestellungen automatisch in die Warenwirtschaft übernehmen. Prüfung: Die Bestellungen kommen alle im gleichen Format (CSV aus dem Webshop). Regeln genügen vollständig: Spalten zuordnen, Pflichtfelder prüfen. Das ist klassische Automatisierung – schneller, billiger, vollständig nachvollziehbar. KI wäre erst nötig, wenn Bestellungen als freie Texte oder gescannte Formulare unterschiedlicher Art eingingen.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Mit einer Technik („Wir wollen ein Sprachmodell einsetzen“) statt mit einem Problem beginnen.</li>
+          <li>Ideen nur im Kopf der Geschäftsführung sammeln und die Fachabteilung nicht fragen.</li>
+          <li>Probleme wählen, für die keine Daten existieren.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie drei Suchfelder für KI-Anwendungsfälle mit je einer passenden Lösung und erklären Sie, wann klassische Automatisierung besser ist.</p>
+        <p><b>Musterlösung:</b> Routinearbeit → Dokumentenerkennung; Fehler und Ausschuss → Bildprüfung; Planungsunsicherheit → Prognose; (weitere: Wissenszugang → RAG, Kundenkontakt → Chatbot, Ausfälle → Predictive Maintenance); je 1 Punkt, max. 3. Klassische Automatisierung ist besser, wenn klare, stabile Regeln genügen: günstiger, schneller, nachvollziehbar (2 Punkte).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Beobachten Sie eine Woche lang, wo Sie oder Kollegen Informationen abtippen, suchen oder sortieren. Notieren Sie je Vorgang die Minuten und die Häufigkeit – das ist der Rohstoff für Ihre erste Bewertung in Lektion 2.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Vom Problem zur Technik, nicht umgekehrt. Gute Kandidaten: viel Routine, teure Fehler, unsichere Planung, verstecktes Wissen – und genug Daten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie jede Person drei Kandidaten aus dem eigenen Betrieb sammeln. Diese Liste ist die Grundlage für die Transferarbeit.</p></aside>
+    </section>
+
+    <section class="lesson" id="l2" data-title="Anwendungsfälle bewerten" data-part="A · Wirtschaftlichkeit">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 40 Minuten</span><h2>Anwendungsfälle bewerten und priorisieren</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Von zehn Renovierungsideen macht man zuerst die, die viel bringen und leicht gehen: neue Glühbirnen vor dem neuen Badezimmer. Bei KI-Ideen ist es genauso.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/nutzen-machbarkeit.gif" width="640" height="380" alt="Animation: Acht Ideen werden in eine Matrix mit Nutzen nach rechts und Machbarkeit nach oben eingetragen. Rechnungserfassung landet bei den Quick Wins, Predictive Maintenance bei den strategischen Projekten, Social-Media-Texte bei den Füllprojekten, Logo-Generator bei Zurückstellen." loading="lazy">
+        <figcaption>Quick Wins zuerst, strategische Projekte vorbereiten.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kriterium</th><th>Prüffragen</th></tr></thead>
+        <tbody>
+          <tr><td><b>Nutzen</b></td><td>Wie viel Zeit, Geld, Qualität? Wie viele Vorgänge pro Jahr? Strategische Bedeutung?</td></tr>
+          <tr><td><b>Datenlage</b></td><td>Gibt es Daten, mit Labels, in ausreichender Qualität und Menge? Dürfen wir sie nutzen?</td></tr>
+          <tr><td><b>Technische Machbarkeit</b></td><td>Gibt es bewährte Verfahren? Integration in Systeme?</td></tr>
+          <tr><td><b>Risiko</b></td><td>Folgen von Fehlern? Risikoklasse nach AI Act? Akzeptanz?</td></tr>
+          <tr><td><b>Aufwand</b></td><td>Zeit, Budget, Know-how, externe Hilfe?</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Gewichtete Bewertung (Nutzwertanalyse)</span><p>Kriterien gewichten (z. B. Nutzen 40 %, Datenlage 25 %, Machbarkeit 20 %, Risiko 15 %), jede Idee auf einer Skala von 1 bis 10 bewerten, Punkte mal Gewicht addieren. Ausführlich mit Rechenbeispiel in Modul 12.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Bewerten mit Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Eine Nutzwertanalyse Schritt für Schritt</span>
+        <p>Gewichte: Nutzen 40 %, Datenlage 25 %, Machbarkeit 20 %, Risiko 15 %. Bewertung von 1 bis 10 (beim Risiko: 10 = geringes Risiko).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Idee</th><th class="r">Nutzen (0,40)</th><th class="r">Daten (0,25)</th><th class="r">Machbarkeit (0,20)</th><th class="r">Risiko (0,15)</th><th class="r">Nutzwert</th></tr></thead>
+          <tbody>
+            <tr><td>A Rechnungserfassung</td><td class="r">8</td><td class="r">9</td><td class="r">8</td><td class="r">9</td><td class="r"><b>8,40</b></td></tr>
+            <tr><td>B Vorhersage von Maschinenausfällen</td><td class="r">9</td><td class="r">5</td><td class="r">5</td><td class="r">7</td><td class="r"><b>6,90</b></td></tr>
+            <tr><td>C Social-Media-Texte</td><td class="r">3</td><td class="r">8</td><td class="r">9</td><td class="r">8</td><td class="r"><b>6,20</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>Rechnung für A: <span class="calcline">0,40 · 8 + 0,25 · 9 + 0,20 · 8 + 0,15 · 9 = 3,20 + 2,25 + 1,60 + 1,35 = 8,40</span>. Für B: <span class="calcline">3,60 + 1,25 + 1,00 + 1,05 = 6,90</span>. Für C: <span class="calcline">1,20 + 2,00 + 1,80 + 1,20 = 6,20</span>. Reihenfolge: A, B, C. B hat den größten Nutzen, scheitert aber an der Datenlage – ein strategisches Projekt, für das man zuerst Daten sammelt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Matrix lesen</span>
+        <ul>
+          <li><b>Quick Win</b> (hoher Nutzen, hohe Machbarkeit): Rechnungserfassung – sofort starten.</li>
+          <li><b>Strategisch</b> (hoher Nutzen, geringe Machbarkeit): Ausfallvorhersage – vorbereiten, Daten sammeln, Pilot planen.</li>
+          <li><b>Füllprojekt</b> (geringer Nutzen, hohe Machbarkeit): Social-Media-Texte – nebenbei, wenn Kapazität da ist.</li>
+          <li><b>Zurückstellen</b> (geringer Nutzen, geringe Machbarkeit): Logo-Generator – nicht verfolgen.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ausschlusskriterien vor der Punktevergabe</span>
+        <p>Manche Fragen werden nicht mit Punkten abgewogen, sondern vorab geprüft: Ist der Einsatz verboten (AI Act Art. 5)? Dürfen die Daten überhaupt verarbeitet werden? Ist ein Anbieter ohne Auftragsverarbeitungsvertrag die einzige Option? Fällt ein Muss-Kriterium aus, scheidet die Idee aus – auch bei hohem Nutzwert.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Die Gewichte so wählen, dass die Lieblingsidee gewinnt. Gewichte vor der Bewertung festlegen und begründen.</li>
+          <li>Das Risiko in die falsche Richtung bewerten (hohes Risiko = hoher Wert).</li>
+          <li>Den Nutzwert als Euro-Betrag missverstehen; er ist nur eine Rangordnung.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Idee X erhält Nutzen 7, Daten 6, Machbarkeit 8, Risiko 9. Gewichte: Nutzen 40 %, Daten 25 %, Machbarkeit 20 %, Risiko 15 %. Berechnen Sie den Nutzwert und ordnen Sie X in die Nutzen-Machbarkeits-Matrix ein.</p>
+        <p><b>Musterlösung:</b> 0,40 · 7 + 0,25 · 6 + 0,20 · 8 + 0,15 · 9 = 2,80 + 1,50 + 1,60 + 1,35 = <b>7,25</b> (4 Punkte). Nutzen mittel bis hoch, Machbarkeit hoch → eher Quick Win (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bewerten nach Nutzen und Machbarkeit (Daten, Technik, Risiko, Aufwand). Quick Wins zuerst – sie schaffen Vertrauen und Erfahrung.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie die drei Kandidaten aus Lektion 1 in die Matrix einordnen. Wer einen Quick Win findet, hat ein gutes Transferthema.</p></aside>
+    </section>
+
+    <section class="lesson" id="l3" data-title="Kosten: TCO" data-part="A · Wirtschaftlichkeit">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 35 Minuten</span><h2>Was ein KI-Projekt wirklich kostet</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Drucker kostet 80 €, die Patronen über die Jahre 600 €. Wer nur den Kaufpreis vergleicht, entscheidet falsch. Bei KI sind die Lizenzkosten oft der Druckerpreis – der Rest steckt in Daten, Integration und Betrieb.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/kosten-eisberg.gif" width="640" height="380" alt="Animation eines Eisbergs: Über der Wasserlinie stehen Lizenz- und API-Kosten sowie Hardware oder Cloud. Unter Wasser erscheinen nacheinander Datenaufbereitung, Integration, Schulung und Change Management, Betrieb und Nachtraining, Rechtsprüfung und Dokumentation sowie interne Arbeitszeit." loading="lazy">
+        <figcaption>Total Cost of Ownership: Der größte Teil der Kosten ist unsichtbar.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Einmalig</th><th>Laufend</th></tr></thead>
+        <tbody>
+          <tr><td>Analyse und Konzept</td><td>Lizenzen, API-Tokens, Cloud</td></tr>
+          <tr><td>Datenaufbereitung und Labeling</td><td>Betrieb, Monitoring, Support</td></tr>
+          <tr><td>Entwicklung oder Anpassung</td><td>Nachtraining, Datenpflege</td></tr>
+          <tr><td>Integration in ERP, CRM, Prozesse</td><td>Wartung der Schnittstellen</td></tr>
+          <tr><td>Hardware, Einrichtung</td><td>Energie, Abschreibung</td></tr>
+          <tr><td>Rechtsprüfung, DSFA, Dokumentation</td><td>Audits, Dokumentation aktualisieren</td></tr>
+          <tr><td>Schulung, Change Management</td><td>Schulung neuer Mitarbeitender</td></tr>
+          <tr><td>Interne Arbeitszeit der Fachabteilung</td><td>Prüfung von KI-Ergebnissen durch Menschen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Die Gesamtkosten (TCO) berechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: TCO über drei Jahre</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Einmalig</th><th class="r">Euro</th><th>Laufend pro Jahr</th><th class="r">Euro</th></tr></thead>
+          <tbody>
+            <tr><td>Analyse und Konzept</td><td class="r">8.000</td><td>Lizenz / API</td><td class="r">12.000</td></tr>
+            <tr><td>Datenaufbereitung</td><td class="r">25.000</td><td>Betrieb, Monitoring</td><td class="r">9.000</td></tr>
+            <tr><td>Entwicklung, Anpassung</td><td class="r">40.000</td><td>Nachtraining, Datenpflege</td><td class="r">6.000</td></tr>
+            <tr><td>Integration</td><td class="r">20.000</td><td>Menschliche Prüfung der Ergebnisse</td><td class="r">15.000</td></tr>
+            <tr><td>Rechtsprüfung, DSFA</td><td class="r">7.000</td><td></td><td class="r"></td></tr>
+            <tr><td>Schulung</td><td class="r">10.000</td><td></td><td class="r"></td></tr>
+            <tr><td><b>Summe</b></td><td class="r"><b>110.000</b></td><td><b>Summe</b></td><td class="r"><b>42.000</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>TCO über 3 Jahre: <span class="calcline">110.000 + 3 · 42.000 = 236.000 €</span>. Das Angebot des Anbieters nennt nur die Lizenz: <span class="calcline">3 · 12.000 = 36.000 €</span>, also <span class="calcline">36.000 : 236.000 ≈ 15 %</span> der Gesamtkosten. Wer nur auf den Lizenzpreis schaut, unterschätzt die Kosten um mehr als das Sechsfache.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die interne Arbeitszeit sichtbar machen</span>
+        <p>Die Fachabteilung bringt in den ersten Monaten 120 Stunden für Workshops, Tests und Feedback ein. Es gibt keine Rechnung dafür, aber die Zeit fehlt an anderer Stelle: <span class="calcline">120 h · 48 € = 5.760 €</span>. Solche Kosten gehören in die Kalkulation, auch wenn niemand eine Rechnung dafür schreibt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Fragen an den Anbieter</span>
+        <ol>
+          <li>Welche Kosten entstehen zusätzlich zur Lizenz (Einrichtung, Schnittstellen, Support, Schulung)?</li>
+          <li>Wie ändern sich die Preise bei steigender Nutzung (pro Token, Nutzer oder Vorgang)?</li>
+          <li>Welche Mindestlaufzeit gilt, und was kostet der Ausstieg einschließlich Datenrückgabe?</li>
+          <li>Was kostet eine Anpassung bei geänderten Anforderungen?</li>
+        </ol>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Nur einmalige Kosten betrachten und den Betrieb vergessen.</li>
+          <li>Preise ohne Mehrwertsteuer und ohne Datum aus dem Internet übernehmen.</li>
+          <li>Die menschliche Prüfung der KI-Ergebnisse als „kostenlos“ ansehen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Einmalige Kosten 80.000 €, laufende Kosten 30.000 € pro Jahr. Berechnen Sie die TCO über vier Jahre und nennen Sie drei oft vergessene Kostenarten.</p>
+        <p><b>Musterlösung:</b> 80.000 + 4 · 30.000 = <b>200.000 €</b> (2 Punkte). Oft vergessen: Datenaufbereitung, Integration, Schulung und Change Management, interne Arbeitszeit, Betrieb und Nachtraining, Rechtsprüfung, menschliche Prüfung (je 1 Punkt, max. 3).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gesamtkosten (TCO) = einmalige + laufende Kosten über die Nutzungsdauer. Die interne Arbeitszeit und die menschliche Prüfung nicht vergessen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fragen Sie: „Welche dieser Kosten werden in Angeboten von KI-Anbietern meist nicht genannt?“ Übung 6 vertieft das.</p></aside>
+    </section>
+
+    <section class="lesson" id="l4" data-title="Nutzen beziffern" data-part="A · Wirtschaftlichkeit">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 40 Minuten</span><h2>Den Nutzen in Euro übersetzen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>„Spart viel Zeit“ überzeugt keine Geschäftsführung. „Spart 1.600 Arbeitsstunden im Jahr, das sind rund 77.000 €“ schon.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Nutzenart</th><th>Formel</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>Zeitersparnis</td><td>Vorgänge · gesparte Zeit · Stundensatz</td><td>Rechnungserfassung</td></tr>
+          <tr><td>Weniger Fehler</td><td>vermiedene Fehler · Kosten je Fehler</td><td>Ausschuss, Reklamationen</td></tr>
+          <tr><td>Vermiedene Ausfälle</td><td>vermiedene Ausfälle · Kosten je Ausfall − Kosten der Vorsorge</td><td>Predictive Maintenance</td></tr>
+          <tr><td>Mehr Umsatz</td><td>zusätzliche Verkäufe · Deckungsbeitrag</td><td>Empfehlungen, Kündigungsprävention</td></tr>
+          <tr><td>Geringere Bestände</td><td>Bestandssenkung · Kapitalkosten-/Lagersatz</td><td>bessere Prognose</td></tr>
+          <tr><td>Qualitativer Nutzen</td><td>schwer in Euro, aber wichtig</td><td>Zufriedenheit, Sicherheit, Image, Wissenssicherung</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg: Rechnungserfassung</h3>
+      <p>4.000 Rechnungen im Monat, je 6 Minuten gespart, Stundensatz (Vollkosten) 48 €.</p>
+      <ol class="steps">
+        <li><div><span class="calcline">4.000 · 6 min = 24.000 min = 400 Stunden pro Monat</span></div></li>
+        <li><div><span class="calcline">400 h · 48 € = 19.200 € pro Monat</span> → <span class="result">230.400 € pro Jahr</span></div></li>
+      </ol>
+      <div class="calc" id="calcNutzen"><span class="box-label">Rechner: Zeitersparnis in Euro</span>
+        <div class="calc-row">
+          <div class="field"><label for="nuV">Vorgänge pro Monat</label><input type="number" id="nuV" value="4000" min="0"></div>
+          <div class="field"><label for="nuM">gesparte Minuten je Vorgang</label><input type="number" id="nuM" value="6" min="0" step="0.5"></div>
+          <div class="field"><label for="nuS">Stundensatz (€)</label><input type="number" id="nuS" value="48" min="0"></div>
+          <div class="field"><label for="nuQ">Anteil, den die KI wirklich übernimmt (%)</label><input type="number" id="nuQ" value="100" min="0" max="100"></div>
+        </div>
+        <div class="kpis" id="nuOut"></div>
+      </div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Eingesparte Zeit ist nur dann Geld, wenn sie anders genutzt wird (andere Aufgaben, weniger Überstunden, Wachstum ohne Neueinstellungen). Und: Nicht jeder Vorgang wird automatisch erledigt – mit einer realistischen Quote rechnen (im Rechner: „Anteil“). Annahmen immer offenlegen.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Nutzen ehrlich beziffern</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Weniger Ausschuss</span>
+        <p>Ein Betrieb fertigt 200.000 Teile im Jahr. Die Ausschussquote soll von 4,2 % auf 3,0 % sinken; ein Ausschussteil verursacht 18 € Kosten.</p>
+        <ol class="steps">
+          <li><div>Vermiedene Ausschussteile: <span class="calcline">200.000 · (0,042 − 0,030) = 200.000 · 0,012 = 2.400</span></div></li>
+          <li><div>Nutzen: <span class="calcline">2.400 · 18 € = 43.200 € pro Jahr</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Vermiedene Ausfälle</span>
+        <p>20 ungeplante Stillstände im Jahr, je 15.000 €. Das Modell erkennt 60 % davon rechtzeitig; die vorbeugende Wartung kostet je Fall 3.000 €.</p>
+        <ol class="steps">
+          <li><div>Vermiedene Ausfälle: <span class="calcline">20 · 0,6 = 12</span></div></li>
+          <li><div>Ersparnis je Fall: <span class="calcline">15.000 − 3.000 = 12.000 €</span> → <span class="calcline">12 · 12.000 = 144.000 € pro Jahr</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Realistisch rechnen statt Bestwert</span>
+        <p>Zurück zur Rechnungserfassung (4.000 Rechnungen im Monat, 6 Minuten gespart, 48 € Stundensatz, Bestwert 19.200 € im Monat). Realistisch übernimmt die KI nur 70 % der Fälle, und 15 % der Rechnungen müssen 4 Minuten nachbearbeitet werden.</p>
+        <ol class="steps">
+          <li><div>Nutzen bei 70 %: <span class="calcline">19.200 · 0,7 = 13.440 €</span></div></li>
+          <li><div>Nachbearbeitung: <span class="calcline">4.000 · 0,15 = 600 Fälle · 4 min = 2.400 min = 40 h · 48 € = 1.920 €</span></div></li>
+          <li><div>Realer Nutzen: <span class="calcline">13.440 − 1.920 = 11.520 € pro Monat</span> → <span class="result">138.240 € pro Jahr</span> statt 230.400 €</div></li>
+        </ol>
+        <p>Der vorsichtigere Wert ist immer noch beeindruckend – und viel glaubwürdiger.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Mehr Umsatz durch Kündigungsprävention</span>
+        <p>Pro Jahr kündigen 1.000 Kunden. Das Modell erkennt Wechselwillige, ein Team spricht sie gezielt an; erfahrungsgemäß bleiben 20 % von ihnen. Ein gehaltener Kunde bringt 300 € Deckungsbeitrag im Jahr, die Aktion kostet 15.000 €.</p>
+        <p><span class="calcline">1.000 · 0,2 = 200 gehaltene Kunden · 300 € = 60.000 €</span>, abzüglich Aktionskosten <span class="calcline">60.000 − 15.000 = 45.000 € Nettonutzen</span>.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Umsatz statt Deckungsbeitrag ansetzen. Vom Umsatz gehen Kosten ab.</li>
+          <li>Die gesparte Zeit zu 100 % als Geld rechnen, obwohl sie nirgendwo eingespart wird.</li>
+          <li>Annahmen („60 % der Ausfälle erkannt“) nicht nennen oder nicht aus dem Pilot ableiten.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> 2.500 Bestellungen im Monat werden je 4 Minuten schneller bearbeitet. Stundensatz 42 €. Die KI übernimmt realistisch 80 % der Fälle. Berechnen Sie den Nutzen pro Jahr.</p>
+        <p><b>Musterlösung:</b> 2.500 · 4 = 10.000 min = 166,7 h; · 42 € = 7.000 € pro Monat; · 0,8 = 5.600 €; · 12 = <b>67.200 € pro Jahr</b> (4 Punkte). Hinweis: Nutzen entsteht nur, wenn die Zeit anders genutzt wird (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Nutzen in Euro: Menge × Effekt × Wert. Annahmen offenlegen, realistische Automatisierungsquote, qualitativen Nutzen zusätzlich nennen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie im Rechner den Anteil auf 70 % setzen – realistischer, und der Nutzen bleibt beeindruckend. Prüfende mögen offen genannte, vorsichtige Annahmen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l5" data-title="ROI und Amortisation" data-part="A · Wirtschaftlichkeit">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 45 Minuten</span><h2>ROI und Amortisationszeit</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Eine Solaranlage kostet 15.000 € und spart 1.500 € Strom im Jahr. Nach 10 Jahren ist sie bezahlt – danach verdient sie Geld. Genau so rechnet man bei KI-Projekten.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/amortisation.gif" width="640" height="380" alt="Animation eines Säulendiagramms über 36 Monate: Der kumulierte Saldo beginnt bei minus 120.000 Euro und steigt jeden Monat um 6.000 Euro. In Monat 20 wird die Nulllinie erreicht und als Amortisationszeitpunkt markiert." loading="lazy">
+        <figcaption>Ab dem Schnitt mit der Nulllinie hat sich die Investition bezahlt gemacht.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Amortisationszeit = <span class="frac"><span>Investition</span><span>Nettonutzen je Periode</span></span> &nbsp;&nbsp; ROI = <span class="frac"><span>Gesamtnutzen − Gesamtkosten</span><span>Gesamtkosten (Investition)</span></span></div>
+        <div class="legend-eq"><span>Nettonutzen = Nutzen − laufende Kosten. Der ROI wird immer für einen bestimmten Zeitraum angegeben.</span></div>
+      </div>
+      <h3>Rechenweg aus dem Lehrplan</h3>
+      <p>Investition 60.000 €, laufende Kosten 1.000 €/Monat, Nutzen: zwei Vollzeitkräfte à 4.000 €/Monat werden zu 50 % entlastet.</p>
+      <ol class="steps">
+        <li><div>Nutzen: <span class="calcline">2 · 4.000 · 0,5 = 4.000 €/Monat</span> · netto: <span class="calcline">4.000 − 1.000 = 3.000 €/Monat</span></div></li>
+        <li><div>Amortisation: <span class="calcline">60.000 / 3.000 = 20 Monate</span></div></li>
+        <li><div>ROI nach 3 Jahren: <span class="calcline">36 · 3.000 = 108.000 € · (108.000 − 60.000) / 60.000 = 80 %</span></div></li>
+      </ol>
+      <div class="calc" id="calcRoi"><span class="box-label">Rechner: Amortisation und ROI</span>
+        <div class="calc-row">
+          <div class="field"><label for="roI">Investition (€)</label><input type="number" id="roI" value="60000" min="0"></div>
+          <div class="field"><label for="roL">laufende Kosten (€/Monat)</label><input type="number" id="roL" value="1000" min="0"></div>
+          <div class="field"><label for="roN">Nutzen (€/Monat)</label><input type="number" id="roN" value="4000" min="0"></div>
+          <div class="field"><label for="roM">Betrachtungszeitraum (Monate)</label><input type="number" id="roM" value="36" min="1"></div>
+        </div>
+        <div class="kpis" id="roOut"></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Amortisation und ROI rechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Rechnung mit anderen Zahlen</span>
+        <p>Investition 90.000 €, Nutzen 9.000 € pro Monat, laufende Kosten 1.500 € pro Monat.</p>
+        <ol class="steps">
+          <li><div>Nettonutzen: <span class="calcline">9.000 − 1.500 = 7.500 € pro Monat</span></div></li>
+          <li><div>Amortisation: <span class="calcline">90.000 : 7.500 = 12 Monate</span></div></li>
+          <li><div>ROI nach 24 Monaten: <span class="calcline">24 · 7.500 = 180.000 € · (180.000 − 90.000) : 90.000 = 100 %</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn der Nutzen später beginnt</span>
+        <p>Dasselbe Projekt, aber die ersten drei Monate sind Aufbauzeit: Es fallen schon laufende Kosten an (1.500 € pro Monat), aber noch kein Nutzen.</p>
+        <ol class="steps">
+          <li><div>Stand nach Monat 3: <span class="calcline">−90.000 − 3 · 1.500 = −94.500 €</span></div></li>
+          <li><div>Danach +7.500 € pro Monat: <span class="calcline">94.500 : 7.500 = 12,6</span> → 13 weitere Monate</div></li>
+          <li><div>Amortisation: <span class="calcline">3 + 13 = 16 Monate</span> statt 12 auf dem Papier</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Zwei Projekte im Vergleich</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th class="r">Projekt 1</th><th class="r">Projekt 2</th></tr></thead>
+          <tbody>
+            <tr><td>Investition</td><td class="r">50.000 €</td><td class="r">120.000 €</td></tr>
+            <tr><td>Nettonutzen pro Monat</td><td class="r">2.000 €</td><td class="r">8.000 €</td></tr>
+            <tr><td>Amortisation</td><td class="r">25 Monate</td><td class="r">15 Monate</td></tr>
+            <tr><td>Nettonutzen nach 36 Monaten</td><td class="r">72.000 €</td><td class="r">288.000 €</td></tr>
+            <tr><td>ROI nach 36 Monaten</td><td class="r">44 %</td><td class="r">140 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Rechnung Projekt 2: <span class="calcline">120.000 : 8.000 = 15</span>; <span class="calcline">(288.000 − 120.000) : 120.000 = 1,4</span>. Das größere Projekt amortisiert sich hier sogar schneller. Wichtig ist immer, Zeitraum und Annahmen zu nennen.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Laufende Kosten vergessen und mit dem Bruttonutzen rechnen.</li>
+          <li>ROI ohne Zeitraum angeben („ROI 80 %“ ist ohne „nach 3 Jahren“ wertlos).</li>
+          <li>Die Aufbauzeit ohne Nutzen nicht berücksichtigen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Investition 75.000 €, laufende Kosten 1.500 € pro Monat, Nutzen 6.000 € pro Monat. Berechnen Sie die Amortisationszeit und den ROI nach 24 Monaten.</p>
+        <p><b>Musterlösung:</b> Nettonutzen 4.500 € pro Monat (1 Punkt); Amortisation 75.000 : 4.500 ≈ <b>16,7 Monate</b> (2 Punkte); Nettonutzen nach 24 Monaten 108.000 €; ROI = (108.000 − 75.000) : 75.000 = <b>44 %</b> (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Amortisation = Investition ÷ monatlicher Nettonutzen. ROI = (Nutzen − Kosten) ÷ Investition für einen genannten Zeitraum.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese beiden Rechnungen kommen in fast jeder Prüfung vor. Rechnen Sie zusätzlich die Probeprüfungsaufgabe aus dem Lehrplan (Amortisation ca. 3 Monate) zur Übung.</p></aside>
+    </section>
+
+    <section class="lesson" id="l6" data-title="Kapitalwert und Szenarien" data-part="A · Wirtschaftlichkeit">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 40 Minuten</span><h2>Kapitalwert und Szenarien</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Würden Sie lieber 1.000 € heute oder 1.000 € in drei Jahren bekommen? Heute – denn Sie könnten das Geld anlegen. Darum ist Geld in der Zukunft heute weniger wert. Der Kapitalwert berücksichtigt das.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/kapitalwert.gif" width="640" height="380" alt="Animation: Eine Investition von 100.000 Euro heute als roter Balken, dazu drei Rückflüsse von je 40.000 Euro in den Jahren 1 bis 3. Die Rückflüsse schrumpfen beim Abzinsen mit 8 Prozent auf 37.037, 34.294 und 31.753 Euro. Barwert 103.084 Euro, Kapitalwert plus 3.084 Euro." loading="lazy">
+        <figcaption>Rückflüsse werden auf heute abgezinst. Kapitalwert &gt; 0: Die Investition lohnt sich.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Kapitalwert (Net Present Value)</span>
+        <div class="eq">KW = −<i>I</i><sub>0</sub> + <span class="frac"><span><i>R</i><sub>1</sub></span><span>(1 + <i>i</i>)<sup>1</sup></span></span> + <span class="frac"><span><i>R</i><sub>2</sub></span><span>(1 + <i>i</i>)<sup>2</sup></span></span> + …</div>
+        <div class="legend-eq"><span>I₀ = Investition, R = Rückfluss (Nutzen − laufende Kosten) je Jahr, i = Kalkulationszins.</span></div>
+      </div>
+      <h3>Rechenweg: 100.000 € Investition, 3 × 40.000 € Rückfluss, 8 %</h3>
+      <ol class="steps">
+        <li><div><span class="calcline">40.000 / 1,08 = 37.037 · 40.000 / 1,1664 = 34.294 · 40.000 / 1,2597 = 31.753</span></div></li>
+        <li><div>Barwert: <span class="calcline">103.084 €</span> · Kapitalwert: <span class="calcline">103.084 − 100.000 = 3.084 €</span> → <span class="result">lohnt sich knapp</span></div></li>
+      </ol>
+      <div class="calc" id="calcKw"><span class="box-label">Rechner: Kapitalwert</span>
+        <div class="calc-row">
+          <div class="field"><label for="kwI">Investition (€)</label><input type="number" id="kwI" value="100000" min="0"></div>
+          <div class="field"><label for="kwR">Rückflüsse je Jahr (€, mit ; trennen)</label><input type="text" id="kwR" value="40000; 40000; 40000"></div>
+          <div class="field"><label for="kwZ">Zins (%)</label><input type="number" id="kwZ" value="8" min="0" step="0.5"></div>
+        </div>
+        <div class="kpis" id="kwOut"></div>
+      </div>
+      <div class="box fach"><span class="box-label">Szenarien und Sensitivität</span><p>Jede Wirtschaftlichkeitsrechnung beruht auf Annahmen. Deshalb rechnet man drei Szenarien: <b>vorsichtig</b> (z. B. 60 % des erwarteten Nutzens, 20 % höhere Kosten), <b>erwartet</b>, <b>optimistisch</b>. Und man fragt: Bei welchem Nutzen wäre der Kapitalwert gerade null? Die Rechtsvorschrift verlangt ausdrücklich die Interpretation „im Hinblick auf sich ändernde Rahmenbedingungen“.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Kapitalwert und Szenarien</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein zweites Rechenbeispiel</span>
+        <p>Investition 60.000 €, Rückflüsse 25.000 € in jedem der Jahre 1 bis 3, Zins 10 %.</p>
+        <ol class="steps">
+          <li><div>Jahr 1: <span class="calcline">25.000 : 1,1 = 22.727</span></div></li>
+          <li><div>Jahr 2: <span class="calcline">25.000 : 1,21 = 20.661</span></div></li>
+          <li><div>Jahr 3: <span class="calcline">25.000 : 1,331 = 18.783</span></div></li>
+          <li><div>Barwert: <span class="calcline">22.727 + 20.661 + 18.783 = 62.171</span> · Kapitalwert: <span class="calcline">62.171 − 60.000 = 2.171 €</span> → lohnt sich knapp</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Derselbe Fall mit höherem Zins</span>
+        <p>Bei 12 % Zins: <span class="calcline">25.000 : 1,12 = 22.321 · 25.000 : 1,2544 = 19.930 · 25.000 : 1,4049 = 17.795</span>, Summe 60.046 €. Kapitalwert ≈ <b>46 €</b> – praktisch null. Der Zins, bei dem der Kapitalwert gerade null ist, heißt interner Zinsfuß; er liegt hier bei etwa 12 %. Das Projekt „verzinst“ das eingesetzte Geld also mit rund 12 % pro Jahr. Ist die Verzinsung der Alternative (Zinssatz, den der Betrieb verlangt) höher, lohnt es sich nicht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Drei Szenarien</span>
+        <p>Der Abzinsungsfaktor für drei Jahre bei 10 % beträgt <span class="calcline">1/1,1 + 1/1,21 + 1/1,331 = 2,487</span>.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Szenario</th><th class="r">Rückfluss je Jahr</th><th class="r">Barwert</th><th class="r">Kapitalwert</th></tr></thead>
+          <tbody>
+            <tr><td>vorsichtig (60 % des Erwarteten)</td><td class="r">15.000 €</td><td class="r">37.303 €</td><td class="r">−22.697 €</td></tr>
+            <tr><td>erwartet</td><td class="r">25.000 €</td><td class="r">62.171 €</td><td class="r">+2.171 €</td></tr>
+            <tr><td>optimistisch</td><td class="r">32.000 €</td><td class="r">79.579 €</td><td class="r">+19.579 €</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Projekt ist nur im erwarteten und optimistischen Fall wirtschaftlich. Wie viel Spielraum gibt es? Gesucht ist der Rückfluss, bei dem der Kapitalwert null ist: <span class="calcline">60.000 : 2,487 = 24.127 €</span>. Der Nutzen darf nur um <span class="calcline">(25.000 − 24.127) : 25.000 ≈ 3,5 %</span> unter der Erwartung liegen. Das Projekt ist also sehr empfindlich – eine wichtige Aussage für die Entscheidung.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Rückflüsse einfach addieren, ohne abzuzinsen.</li>
+          <li>Den Zinssatz ohne Begründung wählen; er sollte zur Renditeerwartung des Betriebs passen.</li>
+          <li>Nur ein Szenario zeigen, das gewünschte.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Investition 50.000 €, Rückflüsse 30.000 € in Jahr 1 und 30.000 € in Jahr 2, Zins 10 %. Berechnen Sie den Kapitalwert und bewerten Sie das Ergebnis.</p>
+        <p><b>Musterlösung:</b> 30.000 : 1,1 = 27.273; 30.000 : 1,21 = 24.793; Barwert 52.066 €; Kapitalwert = 52.066 − 50.000 = <b>2.066 €</b> (4 Punkte). Positiv: Die Investition lohnt sich knapp; wegen der Annahmenempfindlichkeit Szenarien rechnen (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kapitalwert = abgezinste Rückflüsse minus Investition; &gt; 0 lohnt sich. Immer Szenarien rechnen und Annahmen offenlegen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Im Rechner den Zins von 8 auf 12 % erhöhen – der Kapitalwert wird negativ. Daran sieht man, wie knapp die Entscheidung ist. Gutes Argument für das Fachgespräch.</p></aside>
+    </section>
+
+    <section class="lesson" id="l7" data-title="Make or Buy" data-part="A · Wirtschaftlichkeit">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 30 Minuten</span><h2>Selbst entwickeln oder einkaufen?</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Man kann sein Brot selbst backen oder beim Bäcker kaufen. Selbst backen lohnt sich, wenn man es oft, besonders oder günstiger braucht – und die Zeit und das Können hat.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Eigenentwicklung (Make)</th><th>Fertige Lösung / SaaS (Buy)</th></tr></thead>
+        <tbody>
+          <tr><td>Passgenauigkeit</td><td>genau auf den eigenen Prozess</td><td>Standard, begrenzt anpassbar</td></tr>
+          <tr><td>Zeit bis Nutzen</td><td>lang</td><td>kurz</td></tr>
+          <tr><td>Kosten</td><td>hoch am Anfang, eigene Leute</td><td>laufende Gebühren</td></tr>
+          <tr><td>Know-how</td><td>entsteht im Haus</td><td>bleibt beim Anbieter</td></tr>
+          <tr><td>Daten und Kontrolle</td><td>bleiben im Haus</td><td>Datenschutz und Vertrag prüfen</td></tr>
+          <tr><td>Abhängigkeit</td><td>von eigenen Fachkräften</td><td>vom Anbieter (Preise, Fortbestand)</td></tr>
+          <tr><td>Wettbewerbsvorteil</td><td>möglich, wenn Kernprozess</td><td>gering – Konkurrenz kann dasselbe kaufen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Kriterien für die Anbieterauswahl</span><ul><li>Funktionen und Qualität (Testlauf mit eigenen Daten!)</li><li>Datenschutz: AVV, Verarbeitung in der EU, Nutzung der Daten zum Training?</li><li>AI-Act-Konformität und Dokumentation</li><li>Schnittstellen, Integration</li><li>Gesamtkosten, Vertragslaufzeit, Ausstieg und Datenrückgabe</li><li>Referenzen, Stabilität des Anbieters, Support</li></ul></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Make or Buy rechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kostenvergleich über die Zeit</span>
+        <ul>
+          <li><b>Make:</b> Entwicklung 150.000 € einmalig, Betrieb und Pflege 30.000 € pro Jahr.</li>
+          <li><b>Buy:</b> Einführung und Integration 20.000 € einmalig, Gebühr 4.000 € pro Monat = 48.000 € pro Jahr.</li>
+        </ul>
+        <ol class="steps">
+          <li><div>Kosten nach 3 Jahren: Make <span class="calcline">150.000 + 3 · 30.000 = 240.000 €</span>, Buy <span class="calcline">20.000 + 3 · 48.000 = 164.000 €</span></div></li>
+          <li><div>Gleichstand: <span class="calcline">150.000 + 30.000 · t = 20.000 + 48.000 · t</span> → <span class="calcline">130.000 = 18.000 · t</span> → <span class="calcline">t ≈ 7,2 Jahre</span></div></li>
+        </ol>
+        <p>Rein nach Kosten ist Buy bis ins siebte Jahr günstiger. Make lohnt sich nur, wenn Passgenauigkeit, Datenhoheit oder ein Wettbewerbsvorteil die Mehrkosten rechtfertigen – oder die Nutzung stark wächst.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Anbieter vergleichen</span>
+        <p>Kriterien und Gewichte: Funktion 35 %, Datenschutz 30 %, Kosten 20 %, Support 15 %. Bewertung von 1 bis 10.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Anbieter</th><th class="r">Funktion</th><th class="r">Datenschutz</th><th class="r">Kosten</th><th class="r">Support</th><th class="r">Nutzwert</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td class="r">8</td><td class="r">6</td><td class="r">7</td><td class="r">9</td><td class="r">7,35</td></tr>
+            <tr><td>B</td><td class="r">7</td><td class="r">9</td><td class="r">6</td><td class="r">7</td><td class="r">7,40</td></tr>
+            <tr><td>C</td><td class="r">9</td><td class="r">4</td><td class="r">8</td><td class="r">6</td><td class="r">6,85</td></tr>
+          </tbody>
+        </table></div>
+        <p>Rechnung für B: <span class="calcline">0,35 · 7 + 0,30 · 9 + 0,20 · 6 + 0,15 · 7 = 2,45 + 2,70 + 1,20 + 1,05 = 7,40</span>. A und B liegen nahezu gleichauf; hier entscheidet ein Testlauf mit eigenen Daten. Anbieter C hat zwar die beste Funktion, aber einen Datenschutzwert von nur 4 – wenn Datenschutz ein Muss-Kriterium ist, scheidet er aus.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Mittelweg</span>
+        <p>Eine Kanzlei kauft ein Sprachmodell als API (Buy), baut aber den Wissensassistenten mit den eigenen Merkblättern selbst (Make: RAG und Oberfläche). So bleibt das Wissen im Haus, die schwierige Technik kommt vom Anbieter, und der Aufwand bleibt überschaubar.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>„Selbst bauen ist billiger“ ohne Betrieb, Wartung und Fachkräfte einzurechnen.</li>
+          <li>Einen Anbieter nach der Vorführung wählen statt nach einem Test mit eigenen Daten.</li>
+          <li>Den Ausstieg (Datenrückgabe, Exportformate) nicht vertraglich regeln.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Betrieb möchte eine KI-Texterkennung für Lieferscheine. Begründen Sie, ob Make oder Buy besser passt, und nennen Sie zwei Kriterien für die Anbieterauswahl.</p>
+        <p><b>Musterlösung:</b> Buy: Es handelt sich um eine Standardaufgabe, schneller Nutzen, kein Wettbewerbsvorteil durch Eigenentwicklung, geringe Anfangskosten (3 Punkte). Kriterien: Testlauf mit eigenen Dokumenten, Datenschutz (AVV, EU-Verarbeitung), Schnittstellen, Kosten und Ausstieg, Referenzen (je 1 Punkt, max. 2).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Buy für Standardaufgaben und schnellen Nutzen, Make für Kernprozesse mit Wettbewerbsvorteil. Immer mit eigenen Daten testen und Ausstieg vertraglich regeln.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Häufig ist die Antwort ein Mittelweg: fertige Bausteine (Sprachmodell-API, vortrainierte Modelle) plus eigene Anpassung (RAG, Fine-Tuning, Integration).</p></aside>
+    </section>
+
+    <div class="part-head"><span>Teil B · Lektionen 8–10</span><h2>Menschen mitnehmen</h2></div>
+
+    <section class="lesson" id="l8" data-title="Stakeholder" data-part="B · Menschen">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 35 Minuten</span><h2>Stakeholder erkennen und einbinden</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wer in einem Mehrfamilienhaus den Garten umgestalten will, fragt den Vermieter (entscheidet), spricht mit den Nachbarn (sind betroffen) und informiert den Hausmeister (muss es pflegen). Wer jemanden vergisst, bekommt Ärger.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/stakeholder-karte.gif" width="640" height="380" alt="Animation einer Matrix mit Einfluss nach rechts und Interesse nach oben. Geschäftsführung, Betriebsrat und Datenschutz landen bei eng einbinden, Sachbearbeitung bei informieren, IT-Betrieb bei zufriedenstellen, Kunden und externer Dienstleister bei beobachten." loading="lazy">
+        <figcaption>Je nach Einfluss und Interesse braucht jede Gruppe eine andere Art der Einbindung.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Feld</th><th>Strategie</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>hoher Einfluss, hohes Interesse</td><td><b>eng einbinden</b>: Lenkungskreis, Entscheidungen gemeinsam</td><td>Geschäftsführung, Betriebsrat</td></tr>
+          <tr><td>geringer Einfluss, hohes Interesse</td><td><b>informieren</b>: regelmäßig berichten, Feedback einholen, schulen</td><td>Sachbearbeitung, die das System nutzt</td></tr>
+          <tr><td>hoher Einfluss, geringes Interesse</td><td><b>zufriedenstellen</b>: Anforderungen erfüllen, kurz berichten</td><td>IT-Betrieb, Einkauf</td></tr>
+          <tr><td>geringer Einfluss, geringes Interesse</td><td><b>beobachten</b></td><td>externe Dienstleister</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Stakeholder-Karte und Kommunikationsplan</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Stakeholder eines Wissensassistenten</span>
+        <p>Ein Maschinenbauer führt einen KI-Assistenten für das Servicehandbuch ein. Einfluss und Interesse werden jeweils von 1 (niedrig) bis 5 (hoch) eingeschätzt:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Stakeholder</th><th class="r">Einfluss</th><th class="r">Interesse</th><th>Strategie</th></tr></thead>
+          <tbody>
+            <tr><td>Geschäftsführung</td><td class="r">5</td><td class="r">4</td><td>eng einbinden (Lenkungskreis)</td></tr>
+            <tr><td>Betriebsrat</td><td class="r">4</td><td class="r">5</td><td>eng einbinden (Betriebsvereinbarung)</td></tr>
+            <tr><td>Servicetechniker (Nutzer)</td><td class="r">2</td><td class="r">5</td><td>informieren, beteiligen, schulen</td></tr>
+            <tr><td>IT-Betrieb</td><td class="r">4</td><td class="r">2</td><td>zufriedenstellen (Sicherheits- und Betriebsanforderungen)</td></tr>
+            <tr><td>Einkauf</td><td class="r">3</td><td class="r">2</td><td>kurz informieren, bei Lizenzen einbinden</td></tr>
+            <tr><td>Externer Dienstleister</td><td class="r">2</td><td class="r">2</td><td>beobachten, vertraglich steuern</td></tr>
+          </tbody>
+        </table></div>
+        <p>Einordnung: hoher Wert bedeutet 4 oder 5; beim Betriebsrat sind beide Werte hoch, deshalb „eng einbinden“.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Kommunikationsplan</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Zielgruppe</th><th>Inhalt</th><th>Wie oft</th><th>Kanal</th></tr></thead>
+          <tbody>
+            <tr><td>Lenkungskreis</td><td>Fortschritt, Kosten, Entscheidungen</td><td>monatlich</td><td>Sitzung, Kurzbericht</td></tr>
+            <tr><td>Betriebsrat</td><td>Datenflüsse, Auswertungen, Schutzmaßnahmen</td><td>zu Beginn und bei Änderungen</td><td>Gespräch, Betriebsvereinbarung</td></tr>
+            <tr><td>Servicetechniker</td><td>Nutzen, Bedienung, Grenzen, Feedbackwege</td><td>vor dem Start, wöchentlich im Pilot</td><td>Workshop, Kurzvideos, Sprechstunde</td></tr>
+            <tr><td>IT-Betrieb</td><td>Architektur, Sicherheit, Betrieb</td><td>nach Bedarf</td><td>Dokumentation, Abstimmung</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Konflikt zwischen Gruppen</span>
+        <p>Die Geschäftsführung möchte möglichst schnell starten, der Betriebsrat verlangt zuerst eine Betriebsvereinbarung, die Techniker fürchten zusätzliche Kontrolle. Lösung: gemeinsamer Termin im Lenkungskreis, ein Pilot mit 8 freiwilligen Technikern unter vereinbarten Regeln (keine Auswertung auf Personenebene), Betriebsvereinbarung parallel. So kommen Tempo und Vertrauen zusammen.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Nutzer als „geringen Einfluss“ abtun und deshalb nicht einbinden. Wer das System täglich nutzt, entscheidet über seinen Erfolg.</li>
+          <li>Stakeholder einmal einordnen und später nicht mehr aktualisieren.</li>
+          <li>Den Betriebsrat erst zur Abstimmung der fertigen Lösung einladen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ordnen Sie vier Stakeholder eines KI-Einführungsprojekts nach Einfluss und Interesse ein und nennen Sie die passende Strategie.</p>
+        <p><b>Musterlösung:</b> Geschäftsführung (hoher Einfluss, hohes Interesse): eng einbinden. Betriebsrat (hoch/hoch): eng einbinden. Sachbearbeitung als Nutzer (geringer Einfluss, hohes Interesse): informieren und beteiligen. IT-Betrieb (hoher Einfluss, geringes Interesse): zufriedenstellen. Externer Dienstleister (gering/gering): beobachten. Je Stakeholder mit Strategie 1,5 Punkte (max. 6).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Stakeholder nach Einfluss und Interesse einordnen; daraus folgt der Kommunikationsplan: wer, was, wie oft, über welchen Weg.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Eine Stakeholder-Karte ist eine sehr gute Folie für die Transferarbeit – sie zeigt den Prüfenden, dass Sie über die Technik hinausdenken.</p></aside>
+    </section>
+
+    <section class="lesson" id="l9" data-title="Change Management" data-part="B · Menschen">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 35 Minuten</span><h2>Veränderung begleiten: Akzeptanz schaffen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wenn im Supermarkt plötzlich Selbstbedienungskassen stehen, reagieren Menschen unterschiedlich: Neugier, Skepsis, Angst um den Job. Bei KI im Betrieb ist es genauso – und die Sorgen sind ernst zu nehmen.</p>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Typische Sorgen</span><ul><li>„Werde ich ersetzt?“</li><li>„Werde ich überwacht?“</li><li>„Ich verstehe nicht, was die KI macht.“</li><li>„Ich bin schuld, wenn die KI Fehler macht.“</li><li>„Noch ein neues System, das nicht funktioniert.“</li></ul></div>
+        <div class="box fach"><span class="box-label">Was hilft</span><ul><li>Früh und ehrlich informieren: Ziel, Grenzen, Folgen für Arbeitsplätze</li><li>Nutzer beteiligen: Anforderungen, Tests, Feedback</li><li>Schulung (auch Pflicht nach AI Act Art. 4)</li><li>Verantwortung klären: Wer entscheidet, wer haftet?</li><li>Schnelle Erfolge sichtbar machen</li><li>Betriebsrat früh einbinden</li><li>Fürsprecher („Champions“) in den Teams</li></ul></div>
+      </div>
+      <div class="box fach"><span class="box-label">Phasen der Veränderung (vereinfacht)</span><p>Unfreezing (Notwendigkeit verstehen) → Moving (neue Abläufe ausprobieren, unterstützen) → Refreezing (neue Routinen festigen) – nach Kurt Lewin. Widerstand ist normal und oft ein Hinweis auf echte Probleme.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Akzeptanz schaffen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Hinter dem Widerstand steckt oft ein Grund</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Äußerung</th><th>Vermutlicher Grund</th><th>Mögliche Antwort</th></tr></thead>
+          <tbody>
+            <tr><td>„Das System macht sowieso Fehler.“</td><td>Unsicherheit über die Qualität, schlechte Erfahrung mit früheren Systemen</td><td>Qualität offen zeigen (Testsatz, Kennzahlen), Fehler melden und beheben</td></tr>
+            <tr><td>„Will man mich damit überwachen?“</td><td>Angst vor Kontrolle</td><td>Betriebsvereinbarung, klarer Zweck, keine Auswertung auf Personenebene</td></tr>
+            <tr><td>„Dann braucht man mich bald nicht mehr.“</td><td>Angst um den Arbeitsplatz</td><td>ehrliche Auskunft zu Folgen, Weiterbildung, neue Aufgaben</td></tr>
+            <tr><td>„Ich habe keine Zeit, das zu lernen.“</td><td>Überlastung, fehlender Nutzen aus Sicht des Einzelnen</td><td>Schulung in der Arbeitszeit, kurzer Einstieg, Entlastung zuerst bei lästigen Aufgaben</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Lewins drei Phasen an einer Einführung</span>
+        <ul>
+          <li><b>Unfreezing:</b> Der Betrieb zeigt, warum die Veränderung nötig ist („Jede Anfrage dauert heute 18 Minuten, Kunden warten zwei Tage“) und was sie nicht bedeutet.</li>
+          <li><b>Moving:</b> Pilotgruppe nutzt das System, Rückmeldungen fließen wöchentlich ein, Fehler werden behoben, Fürsprecher berichten.</li>
+          <li><b>Refreezing:</b> Neue Abläufe werden in Arbeitsanweisungen festgeschrieben, Schulung für Neue gehört zum Einstieg, Erfolge werden gefeiert.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Akzeptanz messen</span>
+        <p>80 Mitarbeitende können das System nutzen, 52 tun es wöchentlich: <span class="calcline">52 : 80 = 65 %</span> Nutzungsquote. Ziel nach sechs Monaten: 80 %. Zusätzlich fragt eine kurze Umfrage nach Nützlichkeit (Skala 1–5) und Hindernissen. Die Schulung kostet <span class="calcline">80 · 3 h = 240 h · 48 € = 11.520 €</span> – eine Position, die in die Kalkulation (Lektion 3) gehört.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Widerstand als „Störung“ behandeln statt als Information.</li>
+          <li>Die Einführung per Rundmail verkünden und Schulung nach Bedarf anbieten.</li>
+          <li>Zu viel auf einmal: alle Funktionen, alle Teams, sofort.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie drei typische Sorgen von Beschäftigten bei der Einführung von KI und je eine Maßnahme.</p>
+        <p><b>Musterlösung:</b> „Werde ich ersetzt?“ → ehrliche Information zu Folgen, Weiterbildung. „Werde ich überwacht?“ → Betriebsvereinbarung, klarer Zweck. „Ich verstehe es nicht.“ → Schulung, Erklärungen. (Weitere: Verantwortungsfrage → klare Regeln; Zusatzbelastung → Entlastung zeigen.) Je Sorge mit Maßnahme 1,5 Punkte, max. 5.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Überlegen Sie, wer in Ihrem Betrieb als Fürsprecher („Champion“) für ein neues System geeignet wäre – meist jemand mit Ansehen im Team, nicht unbedingt in der IT.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Akzeptanz entsteht durch Information, Beteiligung, Schulung, klare Verantwortung und sichtbare Erfolge – nicht durch Anordnung.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fragen Sie nach eigenen Erfahrungen mit Systemeinführungen. Was ist gut gelaufen, was nicht? Die Antworten decken sich meist mit der Liste.</p></aside>
+    </section>
+
+    <section class="lesson" id="l10" data-title="Ergebnisse kommunizieren" data-part="B · Menschen">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 40 Minuten</span><h2>Ergebnisse adressatengerecht kommunizieren</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Arzt erklärt eine Diagnose dem Patienten anders als dem Kollegen. Beide Erklärungen sind richtig, aber nur eine passt jeweils zum Zuhörer. Die Rechtsvorschrift nennt „adressatengerechtes Kommunizieren“ ausdrücklich als Kompetenz.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Zielgruppe</th><th>will wissen</th><th>so sprechen</th></tr></thead>
+        <tbody>
+          <tr><td>Geschäftsführung</td><td>Nutzen, Kosten, Risiko, Entscheidung</td><td>Ergebnis zuerst, Euro, eine Seite, klare Empfehlung</td></tr>
+          <tr><td>Fachabteilung</td><td>Was ändert sich für mich? Wie bediene ich es? Wo sind Grenzen?</td><td>konkrete Abläufe, Beispiele, Schulung</td></tr>
+          <tr><td>IT</td><td>Schnittstellen, Betrieb, Sicherheit</td><td>Architektur, technische Details</td></tr>
+          <tr><td>Datenschutz, Betriebsrat</td><td>Daten, Rechte, Überwachungsmöglichkeit</td><td>Zweck, Datenflüsse, Schutzmaßnahmen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Kennzahlen übersetzen</span><ul><li>„Recall 0,9“ → „findet 9 von 10 defekten Teilen“</li><li>„Precision 0,8“ → „von 10 Alarmen sind 8 berechtigt“</li><li>„MAE 120 Stück“ → „die Prognose liegt im Schnitt 120 Stück daneben – bei 3.000 Stück Wochenabsatz“</li><li>„AUC 0,91“ → besser nicht für Laien – lieber Beispiele</li></ul></div>
+        <div class="box fach"><span class="box-label">Pyramidenprinzip</span><p>Erst die Kernaussage („Wir empfehlen die Einführung; Amortisation in 20 Monaten“), dann die drei wichtigsten Begründungen, dann die Details. Wer nur den ersten Satz hört, hat das Wichtigste.</p></div>
+      </div>
+      <div class="box fach"><span class="box-label">Gute Folien</span><ul><li>Eine Botschaft pro Folie – als Satz in der Überschrift</li><li>Diagramm statt Tabelle, wenn ein Muster gezeigt werden soll (Modul 2, Lektion 7)</li><li>Wenig Text, große Schrift, Quellen angeben</li><li>Grenzen und Risiken offen zeigen – das schafft Vertrauen</li></ul></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Dasselbe Ergebnis, drei Zuhörer</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kennzahlen in Alltagssprache</span>
+        <p>Eine Qualitätsprüfung betrachtet 1.000 Teile, davon 20 defekt. Das Modell schlägt bei 30 Teilen Alarm; 18 davon sind wirklich defekt.</p>
+        <ul>
+          <li><b>Recall:</b> <span class="calcline">18 : 20 = 0,9</span> → „Das System findet 9 von 10 defekten Teilen.“</li>
+          <li><b>Precision:</b> <span class="calcline">18 : 30 = 0,6</span> → „Von 10 Alarmen sind 6 berechtigt, 4 sind unnötig.“</li>
+          <li><b>Übersehen:</b> 2 defekte Teile gehen durch – „bei 1.000 Teilen rutschen etwa 2 durch“.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Botschaft für drei Zielgruppen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Zuhörer</th><th>Formulierung</th></tr></thead>
+          <tbody>
+            <tr><td>Geschäftsführung</td><td>„Wir empfehlen die Einführung. Sie spart rund 140.000 € im Jahr und amortisiert sich nach 17 Monaten. Das Risiko ist beherrschbar: Ein Pilot mit klaren Abbruchkriterien kommt zuerst.“</td></tr>
+            <tr><td>Fachabteilung</td><td>„Das System füllt ab sofort die Rechnungsdaten vor. Sie prüfen und korrigieren nur noch. Bei unklaren Belegen meldet es sich, dann entscheiden Sie wie bisher.“</td></tr>
+            <tr><td>Betriebsrat</td><td>„Das System verarbeitet nur Rechnungsdaten, keine Daten über Beschäftigte. Es gibt keine Auswertung, wer wie schnell arbeitet. Die Regeln halten wir in einer Betriebsvereinbarung fest.“</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Folienüberschriften</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Schwach (Thema)</th><th>Stark (Botschaft)</th></tr></thead>
+          <tbody>
+            <tr><td>Kosten</td><td>Das Projekt kostet im ersten Jahr 110.000 €, danach 42.000 € pro Jahr</td></tr>
+            <tr><td>Ergebnisse des Modells</td><td>Das Modell erkennt 9 von 10 Ausfällen drei Tage im Voraus</td></tr>
+            <tr><td>Risiken</td><td>Datenschutz und Betriebsrat sind die größten Hürden – beide sind von Anfang an eingebunden</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Technische Kennzahlen unübersetzt zeigen („AUC 0,91“).</li>
+          <li>Mit der Methode beginnen statt mit dem Ergebnis.</li>
+          <li>Grenzen und Risiken verschweigen – Prüfende und Entscheidungsträger bemerken es und verlieren Vertrauen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Modell hat Recall 0,8 und Precision 0,5. Erklären Sie beide Werte in Alltagssprache für die Geschäftsführung.</p>
+        <p><b>Musterlösung:</b> Recall 0,8: Das System findet 8 von 10 der tatsächlichen Fälle (z. B. defekte Teile) (2 Punkte). Precision 0,5: Jeder zweite Alarm ist unberechtigt; das bedeutet Prüfaufwand für die Fehlalarme (2 Punkte). Hinweis auf Kosten der Fehlalarme gegen den Nutzen gefundener Fälle (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Zielgruppe zuerst. Ergebnis vorne, Kennzahlen in Alltagssprache, eine Botschaft pro Folie, Grenzen offen nennen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Übung 9 übt das Übersetzen. Lassen Sie jede Person ihr Transferthema in einem Satz für die Geschäftsführung formulieren.</p></aside>
+    </section>
+
+    <div class="part-head"><span>Teil C · Lektionen 11–14</span><h2>Der transferbezogene Prüfungsteil</h2><p>Präsentation und Fachgespräch machen zusammen die Hälfte Ihrer Note aus. Hier lernen Sie, wie Sie sich gezielt vorbereiten.</p></div>
+
+    <section class="lesson" id="l11" data-title="Thema und Themenvorschlag" data-part="C · Transfer">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 45 Minuten</span><h2>Das Thema der Transferarbeit finden und einreichen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Meisterstück zeigt, was man kann – an einer echten Aufgabe. Die Transferarbeit ist Ihr Meisterstück: ein selbst gewähltes, praxisbezogenes KI-Thema, möglichst aus dem eigenen Betrieb.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Vorgabe (Rechtsvorschrift § 3 Abs. 7–9)</th><th>Bedeutung für Sie</th></tr></thead>
+        <tbody>
+          <tr><td>Selbst gewähltes, praxisbezogenes Thema</td><td>echtes betriebliches Problem, kein Lehrbuchbeispiel</td></tr>
+          <tr><td>Schwerpunkt auf KI-Inhalten (§ 4), unter Einbeziehung von §§ 5–8</td><td>Technik plus Prozess/Projekt, Recht, Wirtschaftlichkeit, Zukunftskompetenzen</td></tr>
+          <tr><td>Betriebspraktische Probleme analysieren, datenbasierte Lösungen entwickeln, bewerten, vertreten – unter Beachtung ökonomischer und rechtlicher Einflussfaktoren</td><td>Ist-Analyse, Lösung, Bewertung, Wirtschaftlichkeit, Recht</td></tr>
+          <tr><td>Visualisierte Form (z. B. Foliensatz)</td><td>Folien, die auch ohne Vortrag verständlich sind</td></tr>
+          <tr><td>Themenvorschlag mit Kurzbeschreibung und Gliederung mit aussagekräftigen Unterpunkten</td><td>sorgfältig formulieren – der Ausschuss prüft die Eignung (DQR 5)</td></tr>
+          <tr><td>Auflagen des Ausschusses</td><td>selbstständig einarbeiten</td></tr>
+          <tr><td>28 Tage Bearbeitungszeit ab dem Tag nach der Genehmigung</td><td>gut planen (Lektion 12)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Gute Themen erkennen</span><ul><li>Echtes Problem mit messbarem Nutzen</li><li>Daten vorhanden oder beschaffbar (Datenschutz klären!)</li><li>Weder zu groß („KI-Strategie für den Konzern“) noch zu klein („Excel-Formel“)</li><li>Mehrere Handlungsbereiche lassen sich sinnvoll einbeziehen</li><li>Sie können es in 28 Tagen ausarbeiten</li></ul></div>
+      <h3>Beispiel eines Themenvorschlags</h3>
+      <div class="box tipp"><span class="box-label">Muster</span>
+        <p><b>Thema:</b> Konzept für eine KI-gestützte Vorhersage ungeplanter Ausfälle an den Spritzgießmaschinen der Muster GmbH.</p>
+        <p><b>Kurzbeschreibung:</b> An 12 Spritzgießmaschinen treten jährlich rund 20 ungeplante Stillstände auf (Kosten ca. 15.000 € je Ausfall). Seit zwei Jahren werden Temperatur, Druck und Zykluszeit erfasst. Die Arbeit analysiert die Datenlage, entwickelt ein Konzept für ein Vorhersagemodell, bewertet Wirtschaftlichkeit, rechtliche Rahmenbedingungen und die Einführung im Instandhaltungsprozess.</p>
+        <p><b>Gliederung:</b> 1 Ausgangslage und Ziel (Ist-Prozess Instandhaltung, Kosten der Ausfälle, SMART-Ziel) · 2 Daten (Quellen, Qualität, Aufbereitung) · 3 Lösungsansatz (Verfahrenswahl, Bewertungskriterien, Prototyp-Ergebnisse) · 4 Wirtschaftlichkeit (Kosten, Nutzen, Amortisation, Szenarien) · 5 Recht und Risiken (AI Act, Datenschutz, Betriebsrat) · 6 Einführung (Projektplan, Stakeholder, Schulung, Monitoring) · 7 Fazit und Empfehlung</p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Themenvorschläge prüfen und verbessern</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gut, zu groß, zu klein</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Thema</th><th>Beurteilung</th></tr></thead>
+          <tbody>
+            <tr><td>„KI-Strategie für den Gesamtkonzern“</td><td>zu groß: in 28 Tagen nicht seriös zu bearbeiten</td></tr>
+            <tr><td>„Eine Excel-Formel zur Berechnung des Lagerbestands“</td><td>zu klein, keine KI-Inhalte nach § 4</td></tr>
+            <tr><td>„Konzept für eine KI-gestützte Vorsortierung der Kundenanfragen im Service der Beispiel AG“</td><td>passend: klar begrenzt, echtes Problem, Daten vorhanden, Wirtschaftlichkeit und Recht gut einbeziehbar</td></tr>
+            <tr><td>„Wie funktionieren neuronale Netze?“</td><td>Lehrbuchthema ohne Praxisbezug</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein zweiter Themenvorschlag</span>
+        <p><b>Thema:</b> Konzept für die KI-gestützte Vorsortierung eingehender Kundenanfragen im Service der Beispiel AG.</p>
+        <p><b>Kurzbeschreibung:</b> Im Kundenservice gehen monatlich rund 1.800 E-Mails ein, die von Hand an vier Teams verteilt werden (durchschnittlich 3 Minuten je Mail). Fehlverteilungen führen zu Wartezeiten von bis zu zwei Tagen. Die Arbeit analysiert die vorhandenen Daten (24 Monate beschriftete Mails), entwickelt ein Klassifikationskonzept, bewertet Wirtschaftlichkeit, Datenschutz und AI-Act-Einordnung und plant die Einführung mit Betriebsrat und Schulung.</p>
+        <p><b>Gliederung:</b> 1 Ausgangslage und Ziel (Ist-Prozess, SMART-Ziel: Fehlverteilung von 15 % auf unter 5 %) · 2 Daten (Quellen, Qualität, Datenschutz) · 3 Lösung (Verfahren, Kennzahlen, Grenzen) · 4 Wirtschaftlichkeit (Kosten, Nutzen, Amortisation, Szenarien) · 5 Recht und Risiken (AI Act, DSGVO, Betriebsrat) · 6 Einführung (Pilot, Stakeholder, Schulung, Monitoring) · 7 Fazit.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Selbsttest vor dem Einreichen</span>
+        <ol>
+          <li>Ist das Problem echt und mit einer Zahl beschrieben?</li>
+          <li>Sind Daten vorhanden, und ist geklärt, ob ich sie nutzen darf (anonymisiert, Zustimmung des Arbeitgebers)?</li>
+          <li>Lässt sich die Arbeit in 28 Tagen leisten?</li>
+          <li>Kommen Technik (§ 4) und die weiteren Handlungsbereiche (§§ 5–8: Prozess und Projekt, Wirtschaftlichkeit, Recht, Zukunftskompetenzen) sinnvoll in der Gliederung vor?</li>
+          <li>Sind die Unterpunkte aussagekräftig, nicht nur „Einleitung“, „Hauptteil“, „Schluss“?</li>
+        </ol>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Die Gliederung nur technisch aufbauen und Wirtschaftlichkeit, Recht, Einführung weglassen.</li>
+          <li>Ein Thema wählen, für das es im Betrieb keine Daten gibt oder deren Nutzung nicht erlaubt ist.</li>
+          <li>Die Kurzbeschreibung ohne konkrete Zahlen schreiben.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie fünf Merkmale eines gut geeigneten Themas für die Transferarbeit und zwei Bestandteile des Themenvorschlags.</p>
+        <p><b>Musterlösung:</b> Echtes betriebliches Problem, messbarer Nutzen, vorhandene oder beschaffbare Daten (Datenschutz geklärt), passender Umfang, mehrere Handlungsbereiche einbeziehbar, in 28 Tagen bearbeitbar (je 0,7 Punkte, max. 3,5). Themenvorschlag: Kurzbeschreibung und Gliederung mit aussagekräftigen Unterpunkten (je 0,75 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Echtes Problem, messbarer Nutzen, verfügbare Daten, passender Umfang. Themenvorschlag mit klarer Kurzbeschreibung und aussagekräftiger Gliederung über alle Handlungsbereiche.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie alle einen Entwurf ihres Themenvorschlags schreiben (Übung 10) und in Kleingruppen gegenseitig prüfen. Je nach IHK muss der Vorschlag schon zum Termin der schriftlichen Prüfung eingereicht werden – rechtzeitig anfangen!</p></aside>
+    </section>
+
+    <section class="lesson" id="l12" data-title="Transferarbeit erstellen" data-part="C · Transfer">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 40 Minuten</span><h2>Die Transferarbeit erstellen: Plan und Aufbau</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>28 Tage klingen viel – bis man merkt, dass Urlaub, Arbeit und eine Rückfrage beim Datenschutz dazwischenkommen. Ein Zeitplan mit Puffer ist die halbe Miete.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/transferarbeit-zeitplan.gif" width="640" height="380" alt="Animation eines Zeitplans: Vor der Genehmigung Thema, Kurzbeschreibung und Gliederung. Dann Genehmigung als Raute. Danach Balken für Ist-Analyse, Lösungskonzept und Prototyp, Wirtschaftlichkeit und Recht, Folien erstellen sowie Probevortrag und Abgabe bis Tag 28." loading="lazy">
+        <figcaption>Ein Vorschlag für die Einteilung der 28 Tage – mit Überschneidungen und Puffer.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Folienteil</th><th>Inhalt</th><th>ca. Folien</th></tr></thead>
+        <tbody>
+          <tr><td>Titel, Agenda</td><td>Thema, Name, Gliederung</td><td>2</td></tr>
+          <tr><td>Ausgangslage und Ziel</td><td>Problem, Kosten, Ist-Prozess, SMART-Ziel</td><td>2–3</td></tr>
+          <tr><td>Daten</td><td>Quellen, Qualität, Aufbereitung, EDA-Diagramm</td><td>2</td></tr>
+          <tr><td>Lösung</td><td>Verfahren und Begründung, Ergebnisse mit Kennzahlen, Grenzen</td><td>3–4</td></tr>
+          <tr><td>Wirtschaftlichkeit</td><td>Kosten, Nutzen, Amortisation/Kapitalwert, Szenarien</td><td>2</td></tr>
+          <tr><td>Recht und Risiken</td><td>AI-Act-Klasse, Datenschutz, Fairness, Betriebsrat</td><td>1–2</td></tr>
+          <tr><td>Einführung</td><td>Projektplan, Stakeholder, Change, Monitoring</td><td>2</td></tr>
+          <tr><td>Fazit</td><td>Empfehlung, nächste Schritte</td><td>1</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box falle"><span class="box-label">Häufige Fehler</span><ul><li>Zu viel Technik, zu wenig Wirtschaftlichkeit und Recht</li><li>Keine Baseline, keine Grenzen des Modells</li><li>Folien als Textwüste</li><li>Annahmen nicht offengelegt</li><li>Auflagen des Ausschusses nicht eingearbeitet</li><li>Vertrauliche Firmendaten ungeschützt – anonymisieren oder mit Zustimmung des Arbeitgebers</li></ul></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Zeitplan und Aufbau der Arbeit</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: 28 Tage in Arbeitsstunden übersetzt</span>
+        <p>Berufsbegleitend stehen an 20 Werktagen je 2 Stunden und an den 8 Wochenendtagen je 4 Stunden zur Verfügung: <span class="calcline">20 · 2 + 8 · 4 = 40 + 32 = 72 Stunden</span>.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Teil</th><th class="r">Stunden</th></tr></thead>
+          <tbody>
+            <tr><td>Ist-Analyse, Ziel</td><td class="r">8</td></tr>
+            <tr><td>Daten (Prüfung, Aufbereitung, Diagramme)</td><td class="r">10</td></tr>
+            <tr><td>Lösung (Verfahren, Ergebnisse, Grenzen)</td><td class="r">16</td></tr>
+            <tr><td>Wirtschaftlichkeit</td><td class="r">10</td></tr>
+            <tr><td>Recht und Risiken</td><td class="r">6</td></tr>
+            <tr><td>Folien gestalten</td><td class="r">12</td></tr>
+            <tr><td>Probevortrag</td><td class="r">6</td></tr>
+            <tr><td>Puffer</td><td class="r">4</td></tr>
+            <tr><td><b>Summe</b></td><td class="r"><b>72</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>Wer die Stunden vorher aufteilt, merkt früh, ob der Umfang des Themas zu groß ist. Der Puffer (hier 4 Stunden, rund 5 %) sollte eher größer sein; Rückfragen beim Datenschutz oder fehlende Daten kosten schnell Tage.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Annahmen auf einer Folie offenlegen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Annahme</th><th>Wert</th><th>Quelle</th></tr></thead>
+          <tbody>
+            <tr><td>Vorgänge pro Monat</td><td>1.800</td><td>Auswertung Ticketsystem 2025</td></tr>
+            <tr><td>Zeitersparnis je Vorgang</td><td>2 Minuten</td><td>Messung im Pilot (30 Fälle)</td></tr>
+            <tr><td>Automatisierungsquote</td><td>75 %</td><td>Testergebnis Genauigkeit 0,75 bei sicherer Zuordnung</td></tr>
+            <tr><td>Stundensatz</td><td>42 €</td><td>Angabe Controlling (Vollkosten)</td></tr>
+          </tbody>
+        </table></div>
+        <p>Eine solche Tabelle macht die Rechnung prüfbar und zeigt Sorgfalt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Vertrauliche Daten schützen</span>
+        <p>Die Arbeit enthält Kundennamen, Umsatzzahlen und Maschinendaten des Arbeitgebers. Vor der Abgabe: Zustimmung des Arbeitgebers einholen, Personenbezug entfernen, Firmennamen ggf. ändern („Beispiel AG“), Zahlen auf plausible, aber verfremdete Größenordnungen anpassen, wenn nötig. Wichtig ist, dass die Methodik nachvollziehbar bleibt.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Die ersten zwei Wochen mit Technik verbringen und Wirtschaftlichkeit und Recht auf die letzten zwei Tage schieben.</li>
+          <li>Ein Prototyp-Ergebnis ohne Baseline und ohne Grenzen zeigen.</li>
+          <li>Auflagen des Ausschusses „später“ einarbeiten und dann vergessen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Beschreiben Sie den Aufbau einer Transferarbeit (Foliensatz) und nennen Sie drei häufige Fehler.</p>
+        <p><b>Musterlösung:</b> Titel und Agenda; Ausgangslage und Ziel; Daten; Lösung mit Ergebnissen und Grenzen; Wirtschaftlichkeit; Recht und Risiken; Einführung; Fazit mit Empfehlung (3 Punkte). Fehler: zu viel Technik, keine Baseline, Textwüste, nicht offengelegte Annahmen, fehlende Auflagen-Umsetzung (je 1 Punkt, max. 2).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Zeitplan mit Puffer; Aufbau entlang Ausgangslage – Daten – Lösung – Wirtschaftlichkeit – Recht – Einführung – Fazit; Grenzen und Annahmen offen zeigen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Gliederung entspricht CRISP-DM plus Wirtschaftlichkeit und Recht – damit sind alle Handlungsbereiche abgedeckt.</p></aside>
+    </section>
+
+    <section class="lesson" id="l13" data-title="Präsentieren" data-part="C · Transfer">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 35 Minuten</span><h2>Die Präsentation: 10 bis 15 Minuten überzeugen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Musiker übt sein Stück so oft, bis er nicht mehr an die Noten denken muss – dann kann er auf das Publikum achten. Eine Präsentation gelingt genauso: durch Proben.</p>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Aufbau</span><ul><li><b>Einstieg</b> (1 min): Problem mit einer Zahl („20 Stillstände kosten 300.000 € im Jahr“)</li><li><b>Hauptteil</b> (10 min): Lösung, Ergebnisse, Wirtschaftlichkeit, Recht</li><li><b>Schluss</b> (1–2 min): klare Empfehlung, nächste Schritte</li></ul></div>
+        <div class="box fach"><span class="box-label">Vortragen</span><ul><li>Frei sprechen, Stichwortkarten erlaubt</li><li>Blickkontakt zum Ausschuss</li><li>Auf die Folie zeigen, nicht vorlesen</li><li>Fachbegriffe sicher und kurz erklären</li><li>Zeit einhalten – mit Uhr üben</li><li>Ruhig bleiben bei Technikpannen (Ausdruck dabei)</li></ul></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Mindestens drei Probevorträge mit Stoppuhr, einer davor vor fremden Zuhörern. Bewertet werden Inhalt, Struktur, Visualisierung, Auftreten und die Fähigkeit, die Lösung zu vertreten (Verteidigung).</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Eine Präsentation vorbereiten</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Redezeit je Teil</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Teil</th><th class="r">Minuten</th></tr></thead>
+          <tbody>
+            <tr><td>Einstieg (Problem in Zahlen)</td><td class="r">1,0</td></tr>
+            <tr><td>Ausgangslage und Ziel</td><td class="r">1,5</td></tr>
+            <tr><td>Daten</td><td class="r">1,5</td></tr>
+            <tr><td>Lösung und Ergebnisse</td><td class="r">3,0</td></tr>
+            <tr><td>Wirtschaftlichkeit</td><td class="r">2,0</td></tr>
+            <tr><td>Recht und Risiken</td><td class="r">1,0</td></tr>
+            <tr><td>Einführung</td><td class="r">1,5</td></tr>
+            <tr><td>Fazit und Empfehlung</td><td class="r">1,0</td></tr>
+            <tr><td><b>Summe</b></td><td class="r"><b>12,5</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>12,5 Minuten liegen mitten im vorgesehenen Rahmen von 10 bis 15 Minuten. Bei etwa 14 Folien sind das <span class="calcline">12,5 : 14 ≈ 0,9 Minuten</span> je Folie – genug, um eine Botschaft zu vermitteln, ohne zu hetzen. Als Orientierung: Bei etwa 130 gesprochenen Wörtern pro Minute entspricht das gut 1.600 Wörtern Vortrag.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Einstieg</span>
+        <ul>
+          <li><b>Schwach:</b> „Guten Tag, ich möchte Ihnen heute meine Arbeit zum Thema Predictive Maintenance vorstellen.“</li>
+          <li><b>Stark:</b> „An zwölf Maschinen fallen bei uns pro Jahr 20 Mal ungeplant Anlagen aus. Jeder Stillstand kostet 15.000 €, zusammen 300.000 €. Ich zeige Ihnen, wie wir den Großteil davon vermeiden können.“</li>
+        </ul>
+        <p>Der starke Einstieg nennt das Problem und eine Zahl, weckt Interesse und führt direkt in die Arbeit.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Feedbackbogen für Probevorträge</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kriterium</th><th>Frage an die Zuhörer</th></tr></thead>
+          <tbody>
+            <tr><td>Inhalt</td><td>Habe ich Ziel, Lösung, Wirtschaftlichkeit und Recht verstanden?</td></tr>
+            <tr><td>Struktur</td><td>War der rote Faden erkennbar?</td></tr>
+            <tr><td>Folien</td><td>Eine Botschaft je Folie? Lesbar? Diagramme verständlich?</td></tr>
+            <tr><td>Auftreten</td><td>Freie Rede, Blickkontakt, Tempo, Verständlichkeit?</td></tr>
+            <tr><td>Zeit</td><td>Zeit eingehalten? Wo wurde gehetzt?</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Folien ablesen und den Prüfenden den Rücken zuwenden.</li>
+          <li>Viel zu lange bei der Technik verweilen und Wirtschaftlichkeit und Recht in einer Minute abhandeln.</li>
+          <li>Nie mit Stoppuhr geübt und deshalb abgebrochen werden.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Wie bauen Sie eine zwölfminütige Präsentation auf, und wie bereiten Sie sich vor?</p>
+        <p><b>Musterlösung:</b> Einstieg mit dem Problem in Zahlen (1 Min.), Hauptteil entlang der Gliederung (Lösung, Ergebnisse, Wirtschaftlichkeit, Recht, Einführung; rund 10 Min.), Schluss mit Empfehlung und nächsten Schritten (1 Min.) (3 Punkte). Vorbereitung: mindestens drei Probevorträge mit Stoppuhr, einer vor fremden Zuhörern, Feedback einarbeiten, Ausdruck als Rückfallebene (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Einstieg mit dem Problem in Zahlen, Hauptteil entlang der Gliederung, Schluss mit klarer Empfehlung. Proben, proben, proben – mit Stoppuhr.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Organisieren Sie Probevorträge in der Gruppe mit gegenseitigem Feedback nach festen Kriterien: Inhalt, Struktur, Folien, Auftreten, Zeit.</p></aside>
+    </section>
+
+    <section class="lesson" id="l14" data-title="Das Fachgespräch" data-part="C · Transfer">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 45 Minuten</span><h2>Das transferbezogene Fachgespräch</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Nach einem Vortrag fragt das Publikum nach – nicht um Sie vorzuführen, sondern weil es verstehen will, wie gut Sie Ihr Thema durchdrungen haben. Im Fachgespräch (ca. 20 Minuten) zeigen Sie, dass Sie eine komplexe Aufgabe „unter Einbeziehung der §§ 4 bis 8 erfassen, darstellen, beurteilen und kommunizieren“ können.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bereich</th><th>Typische Fragen</th></tr></thead>
+        <tbody>
+          <tr><td>Technik</td><td>Warum dieses Verfahren und kein neuronales Netz? Wie haben Sie Overfitting und Leakage ausgeschlossen? Welche Kennzahl und warum?</td></tr>
+          <tr><td>Daten</td><td>Wie gut sind die Daten? Was fehlt? Wie gehen Sie mit unbalancierten Klassen um?</td></tr>
+          <tr><td>Prozess, Projekt</td><td>Wer nutzt das Ergebnis wie? Wie sieht der Projektplan aus? Wer ist beteiligt?</td></tr>
+          <tr><td>Wirtschaftlichkeit</td><td>Welche Annahmen stecken in Ihrer Rechnung? Was passiert, wenn der Nutzen nur halb so groß ist?</td></tr>
+          <tr><td>Recht, Ethik</td><td>Welche Risikoklasse? Welche Daten sind personenbezogen? Was sagt der Betriebsrat?</td></tr>
+          <tr><td>Betrieb</td><td>Woran erkennen Sie, dass neu trainiert werden muss?</td></tr>
+          <tr><td>Zukunftskompetenzen</td><td>Wie haben Sie Ihre Arbeit organisiert? Was würden Sie heute anders machen? Wie erklären Sie das einem skeptischen Meister?</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Antworttechnik</span><ol class="prose"><li>Frage kurz wiederholen oder umformulieren (gewinnt Zeit, sichert Verständnis)</li><li>Kernaussage zuerst</li><li>Begründung mit Bezug zum eigenen Fall</li><li>Gegebenenfalls Alternative und Abwägung nennen</li></ol></div>
+        <div class="box fach"><span class="box-label">Wenn Sie etwas nicht wissen</span><p>Ehrlich bleiben und laut denken: „Das habe ich nicht untersucht. Ich würde so vorgehen: …“ Prüfende bewerten auch den Lösungsweg. Raten oder Ausweichen kostet mehr Punkte als eine ehrliche, durchdachte Antwort.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Fragen im Fachgespräch beantworten</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: „Was passiert, wenn der Nutzen nur halb so groß ist?“</span>
+        <p>Ausgangswerte der Arbeit: Investition 60.000 €, laufende Kosten 1.000 € pro Monat, Nutzen 4.000 € pro Monat.</p>
+        <p><b>Antwort:</b> „Dann sinkt der Nutzen auf 2.000 € pro Monat, der Nettonutzen auf 1.000 €. Die Amortisation verlängert sich von 20 auf <span class="calcline">60.000 : 1.000 = 60 Monate</span>, also fünf Jahre. Nach 36 Monaten läge der ROI bei <span class="calcline">(36.000 − 60.000) : 60.000 = −40 %</span>. Das Projekt wäre in diesem Fall nicht wirtschaftlich. Deshalb empfehle ich einen Pilot mit festgelegtem Mindestnutzen, bevor die volle Investition erfolgt.“ Die Antwort nennt Zahlen, eine Konsequenz und eine Maßnahme.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: „Woran erkennen Sie, dass neu trainiert werden muss?“</span>
+        <p><b>Antwort in vier Schritten:</b> (1) Kernaussage: „An Monitoring-Alarmen.“ (2) Begründung: „Ich überwache die Eingabedaten mit dem PSI; über 0,25 prüfe ich die Daten. Zusätzlich beobachte ich Recall, sobald echte Ergebnisse vorliegen; fällt er unter 70 %, löse ich eine Analyse aus.“ (3) Bezug zum Fall: „Bei den Spritzgießmaschinen sind Werkzeugwechsel ein typischer Auslöser.“ (4) Abwägung: „Zusätzlich trainiere ich spätestens alle sechs Monate neu.“</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Eine Frage, die man nicht beantworten kann</span>
+        <p>Frage: „Haben Sie Differential Privacy für die Daten erwogen?“ Man hat sich damit nicht beschäftigt. <b>Schwach:</b> „Äh, nein … das war nicht Thema.“ <b>Stark:</b> „Das habe ich nicht untersucht, weil die Daten bei uns bereits aggregiert und anonymisiert sind. Wenn ich personenbezogene Daten nutzen würde, würde ich zuerst Pseudonymisierung und Datenminimierung prüfen und Differential Privacy als zusätzliche Maßnahme bewerten.“ Ehrlich, strukturiert, mit erkennbarem Verständnis.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Fragen aus verschiedenen Bereichen vorbereiten</span>
+        <ul>
+          <li><b>Technik:</b> „Warum ein Entscheidungsbaum und kein neuronales Netz?“ → wenig Daten, Erklärbarkeit, Baseline-Vergleich.</li>
+          <li><b>Daten:</b> „Wie gehen Sie mit seltenen Ausfällen um?“ → unbalancierte Klassen, Gewichtung, Recall im Fokus.</li>
+          <li><b>Recht:</b> „Welche Risikoklasse hat Ihre Lösung?“ → begründete Einstufung, Pflichten.</li>
+          <li><b>Betrieb:</b> „Wer ist nach dem Pilot verantwortlich?“ → Rollen, Betrieb, Monitoring.</li>
+        </ul>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Ausweichen oder raten statt ehrlich zu antworten.</li>
+          <li>Nur den Bereich vorbereiten, in dem man sich sicher fühlt. Die Fragen verteilen sich auf alle Handlungsbereiche.</li>
+          <li>Lange Monologe ohne Kernaussage.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Beschreiben Sie eine Antworttechnik für das Fachgespräch und erklären Sie, wie Sie mit einer unbekannten Frage umgehen.</p>
+        <p><b>Musterlösung:</b> Frage kurz wiederholen; Kernaussage zuerst; Begründung mit Bezug zum eigenen Fall; ggf. Alternative und Abwägung nennen (3 Punkte). Unbekannte Frage: ehrlich sagen, dass man es nicht untersucht hat, und laut denken, wie man vorgehen würde; Ausweichen oder Raten kostet mehr Punkte (2 Punkte).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Lassen Sie sich von zwei Kolleginnen oder Kollegen zu Ihrem Thema befragen – am besten von Personen aus Technik und Verwaltung. Die Fragen, bei denen Sie ins Stocken geraten, zeigen, wo Sie noch nacharbeiten sollten.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Im Fachgespräch: Kernaussage, Begründung, Bezug zum eigenen Fall, Abwägung. Alle Handlungsbereiche vorbereiten. Bei Unwissen: ehrlich und strukturiert weiterdenken.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Simulieren Sie Fachgespräche in Dreiergruppen: eine Person präsentiert kurz, zwei fragen nach der Tabelle. Danach Rollen tauschen. Übung 12 trainiert eine typische Frage.</p></aside>
+    </section>
+
+    <section class="lesson" id="uebungen" data-title="Übungen" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Übungen · 120 Minuten</span><h2>12 Übungen mit Antwortfeldern</h2></div>
+      <p>Tragen Sie Ihre Antworten in die Felder ein. Freitext bewertet die KI wie ein IHK-Prüfer. Öffnen Sie die Musterlösung erst danach.</p>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 1: Amortisation</h3><span class="points">2 Punkte</span></div>
+        <p>Ein KI-Projekt kostet einmalig 120.000 € und laufend 2.000 € pro Monat. Es spart 8.000 € pro Monat. Nach wie vielen Monaten hat es sich amortisiert?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Netto 6.000 €/Monat; 120.000 / 6.000 = <b>20 Monate</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 2: ROI</h3><span class="points">3 Punkte</span></div>
+        <p>Investition 60.000 €, laufende Kosten 1.000 €/Monat, Nutzen 4.000 €/Monat. Berechnen Sie (a) den monatlichen Nettonutzen, (b) den Nettonutzen nach 36 Monaten, (c) den ROI nach 36 Monaten in Prozent.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) <b>3.000 €</b>, (b) <b>108.000 €</b>, (c) (108.000 − 60.000) / 60.000 = <b>80 %</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 3: Nutzen der Zeitersparnis</h3><span class="points">2 Punkte</span></div>
+        <p>4.000 Rechnungen im Monat, je 6 Minuten gespart, Stundensatz 48 €. Wie hoch ist der Nutzen pro Monat?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>400 Stunden · 48 € = <b>19.200 €</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 4: Kapitalwert</h3><span class="points">4 Punkte</span></div>
+        <p>Investition 100.000 €, Rückflüsse 40.000 € in jedem der Jahre 1 bis 3, Kalkulationszins 8 %. Berechnen Sie den Kapitalwert (auf ganze Euro). Lohnt sich die Investition?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>37.037 + 34.294 + 31.753 = 103.084; KW ≈ <b>3.084 €</b> (3 P.) → lohnt sich (knapp) (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 5: Priorisieren</h3><span class="points">4 Punkte</span></div>
+        <p>Ordnen Sie in die Nutzen-Machbarkeits-Matrix ein: (1) hoher Nutzen, hohe Machbarkeit, (2) hoher Nutzen, geringe Machbarkeit, (3) geringer Nutzen, hohe Machbarkeit, (4) geringer Nutzen, geringe Machbarkeit.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) Quick Win, (2) strategisches Projekt, (3) Füllprojekt, (4) zurückstellen.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 6: Versteckte Kosten</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Anbieter bietet eine KI-Lösung für 500 € im Monat an. Nennen Sie vier Kostenarten, die in diesem Preis vermutlich nicht enthalten sind.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Je 1 P.: Datenaufbereitung, Integration in bestehende Systeme, Schulung und Change Management, interne Arbeitszeit, Betrieb/Monitoring/Nachtraining, Rechtsprüfung/DSFA/Dokumentation, menschliche Prüfung der Ergebnisse.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 7: Make or Buy</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Maschinenbauer überlegt, ob er eine KI-Qualitätsprüfung selbst entwickelt oder einkauft. Nennen Sie je ein Argument für Make und für Buy und ein Kriterium für die Entscheidung.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Make: passgenau, Know-how und Wettbewerbsvorteil im Kernprozess, Daten bleiben im Haus (1 P.). Buy: schneller Nutzen, geringere Anfangskosten, erprobte Lösung (1 P.). Kriterium: Kernprozess/Wettbewerbsvorteil, vorhandenes Know-how, Gesamtkosten, Datenschutz/Abhängigkeit (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 8: Stakeholder einordnen</h3><span class="points">4 Punkte</span></div>
+        <p>Welche Strategie passt? (1) Geschäftsführung, (2) Betriebsrat, (3) Sachbearbeitung, die das System täglich nutzen soll (wenig Einfluss, stark betroffen), (4) externer IT-Dienstleister mit geringem Interesse und Einfluss.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) eng einbinden, (2) eng einbinden, (3) informieren (und beteiligen), (4) beobachten.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 9: Kennzahl übersetzen</h3><span class="points">2 Punkte</span></div>
+        <p>Erklären Sie der Geschäftsführung in zwei Sätzen, was ein Recall von 0,85 und eine Precision von 0,6 bei einer Betrugserkennung bedeuten.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Das System findet 85 von 100 Betrugsfällen (1 P.). Von 10 Alarmen sind 6 berechtigt, 4 sind Fehlalarme, die kurz geprüft werden müssen (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 10: Themenvorschlag</h3><span class="points">5 Punkte</span></div>
+        <p>Formulieren Sie einen Themenvorschlag für Ihre eigene Transferarbeit: Thema, Kurzbeschreibung (3–5 Sätze) und Gliederung mit Unterpunkten.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Bewertet werden (je 1 P.): praxisbezogenes, abgegrenztes Thema; Kurzbeschreibung mit Problem, Zahlen und Ziel; Datenlage genannt; Gliederung mit aussagekräftigen Unterpunkten; Einbeziehung der Handlungsbereiche (KI-Lösung, Prozess/Projekt, Wirtschaftlichkeit, Recht, Zukunftskompetenzen). Vergleichen Sie mit dem Muster in Lektion 11.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 11: Bearbeitungszeit</h3><span class="points">2 Punkte</span></div>
+        <p>Ihr Thema wird am 3. März genehmigt. Die Bearbeitungszeit beträgt 28 Tage und beginnt einen Tag nach der Genehmigung. Welcher Tag im März ist der letzte Bearbeitungstag?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Beginn 4. März (Tag 1), Tag 28 = <b>31. März</b>. Den genauen Abgabemodus erfahren Sie von Ihrer IHK.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 12: Fachgesprächsfrage</h3><span class="points">3 Punkte</span></div>
+        <p>Im Fachgespräch fragt die Prüferin: „Warum haben Sie einen Random Forest gewählt und kein neuronales Netz?“ Formulieren Sie eine gute Antwort für ein Projekt mit 4.000 Datensätzen aus Maschinensensoren.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Beispiel: „Es handelt sich um Tabellendaten mit rund 4.000 Datensätzen. Darauf liefern Baumverfahren erfahrungsgemäß sehr gute Ergebnisse und überfitten weniger als ein neuronales Netz, das deutlich mehr Daten bräuchte. Außerdem zeigt die Feature Importance der Instandhaltung, welche Sensorwerte auf Ausfälle hinweisen. Ein neuronales Netz habe ich als Vergleich geprüft; es war nicht besser.“ – Je 1 P.: Kernaussage, fallbezogene Begründung (Datenart/Menge), Abwägung bzw. Zusatznutzen (Erklärbarkeit, Vergleich).</p></details></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Aufgabe 10 ist die wichtigste Übung dieses Moduls – der Entwurf kann direkt zum echten Themenvorschlag werden. Nutzen Sie die KI-Korrektur für eine erste Rückmeldung und besprechen Sie die Entwürfe zusätzlich persönlich.</p></aside>
+    </section>
+
+    <section class="lesson" id="quiz" data-title="Abschlussquiz" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 30 Minuten</span><h2>Abschlussquiz Modul 11</h2></div>
+      <p>20 Fragen, jeweils eine richtige Antwort. Ab 14 richtigen Antworten sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="btnrow"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Ohne Unterlagen, mit Taschenrechner.</p></aside>
+    </section>
+
+    <section class="lesson" id="summary" data-title="Zusammenfassung" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Anwendungsfälle</h3><p>Vom Problem zur Technik; Nutzen × Machbarkeit; Quick Wins zuerst.</p></div>
+        <div class="card"><h3>Kosten</h3><p>TCO: einmalig + laufend; versteckte Kosten beachten.</p></div>
+        <div class="card"><h3>Nutzen</h3><p>Menge × Effekt × Wert; Annahmen offenlegen.</p></div>
+        <div class="card"><h3>Kennzahlen</h3><p>Amortisation, ROI für Zeitraum, Kapitalwert &gt; 0, Szenarien.</p></div>
+        <div class="card"><h3>Make or Buy</h3><p>Kernprozess → Make; Standard → Buy; Ausstieg regeln.</p></div>
+        <div class="card"><h3>Stakeholder</h3><p>Einfluss × Interesse → Kommunikationsplan.</p></div>
+        <div class="card"><h3>Change</h3><p>Informieren, beteiligen, schulen, Verantwortung klären.</p></div>
+        <div class="card"><h3>Kommunikation</h3><p>Ergebnis zuerst, Kennzahlen übersetzen, eine Botschaft je Folie.</p></div>
+        <div class="card"><h3>Prüfung</h3><p>Themenvorschlag, 28 Tage, 10–15 min Vortrag, 20 min Fachgespräch.</p></div>
+      </div>
+      <p><b>Weiter mit Modul 12:</b> Ergänzungen laut Rechtsvorschrift – Robustheit, Prozessmanagement, Rechtsformen, Verträge, Urheber- und Patentrecht, Steuern, Kostenrechnung, Finanzierung und Zukunftskompetenzen.</p>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Ab jetzt sollte jede Person an ihrem Themenvorschlag arbeiten.</p></aside>
+    </section>
+<!--SCRIPTS-->
+<script type="application/json" id="quiz-data">[
+["Womit sollte die Suche nach KI-Anwendungsfällen beginnen?", ["Mit der neuesten Technik", "Mit einem betrieblichen Problem", "Mit dem Budget", "Mit einem Anbieterkatalog"], 1, "Lektion 1."],
+["Wann ist klassische Automatisierung meist besser als KI?", ["Bei klaren, stabilen Regeln", "Bei Bilderkennung", "Bei Freitext", "Nie"], 0, "Lektion 1."],
+["Hoher Nutzen und hohe Machbarkeit – welches Feld?", ["Zurückstellen", "Füllprojekt", "Quick Win", "Strategisches Projekt"], 2, "Lektion 2."],
+["Was bedeutet TCO?", ["Total Cost of Ownership – Gesamtkosten über die Nutzungsdauer", "Technical Change Order", "Time to Customer Output", "Total Customer Orientation"], 0, "Lektion 3."],
+["Welcher Kostenblock ist bei KI-Projekten oft der größte versteckte?", ["Stromrechnung", "Datenaufbereitung", "Bürobedarf", "Porto"], 1, "Lektion 3."],
+["1.000 Vorgänge im Monat, je 3 Minuten gespart, 60 €/h. Nutzen pro Monat?", ["1.800 €", "3.000 €", "180 €", "30.000 €"], 1, "50 h · 60 €. Lektion 4."],
+["Warum ist gesparte Zeit nicht automatisch gespartes Geld?", ["Weil Zeit nichts kostet", "Weil sie nur zählt, wenn sie anders genutzt wird", "Weil KI Zeit kostet", "Es ist immer gespartes Geld"], 1, "Lektion 4."],
+["Investition 90.000 €, Nettonutzen 4.500 €/Monat. Amortisation?", ["10 Monate", "20 Monate", "4,5 Monate", "45 Monate"], 1, "Lektion 5."],
+["Investition 50.000 €, Nettonutzen über 2 Jahre 75.000 €. ROI für 2 Jahre?", ["25 %", "50 %", "150 %", "75 %"], 1, "(75 − 50) / 50. Lektion 5."],
+["Ein positiver Kapitalwert bedeutet …", ["Die Investition lohnt sich beim gewählten Zins", "Die Investition ist verboten", "Der Zins ist zu hoch", "Es gibt keine Kosten"], 0, "Lektion 6."],
+["Was passiert mit dem Kapitalwert, wenn der Zins steigt?", ["Er steigt", "Er sinkt", "Er bleibt gleich", "Er wird immer null"], 1, "Lektion 6."],
+["Warum rechnet man Szenarien?", ["Um die Rechnung länger zu machen", "Weil die Ergebnisse von unsicheren Annahmen abhängen", "Weil die IHK es nicht verlangt", "Weil KI es so will"], 1, "Lektion 6."],
+["Welches ist ein Argument für „Buy“?", ["Wettbewerbsvorteil im Kernprozess", "Schneller Nutzen bei Standardaufgaben", "Know-how bleibt im Haus", "Volle Datenhoheit"], 1, "Lektion 7."],
+["Stakeholder mit hohem Einfluss und hohem Interesse …", ["beobachten", "informieren", "eng einbinden", "zufriedenstellen"], 2, "Lektion 8."],
+["Was hilft am meisten gegen Widerstand bei einer KI-Einführung?", ["Anordnung von oben", "Frühe Information, Beteiligung und Schulung", "Geheimhaltung", "Möglichst schnelle Einführung ohne Pilot"], 1, "Lektion 9."],
+["Wie präsentiert man nach dem Pyramidenprinzip?", ["Details zuerst", "Kernaussage zuerst, dann Begründungen, dann Details", "Chronologisch", "Nur mit Tabellen"], 1, "Lektion 10."],
+["Was muss der Themenvorschlag der Transferarbeit enthalten?", ["Nur den Titel", "Thema, Kurzbeschreibung und Gliederung mit aussagekräftigen Unterpunkten", "Den fertigen Foliensatz", "Ein Gutachten des Arbeitgebers"], 1, "Lektion 11."],
+["Wie lange ist die Bearbeitungszeit der Transferarbeit laut Rechtsvorschrift?", ["7 Tage", "14 Tage", "28 Tage", "3 Monate"], 2, "Lektion 11/12."],
+["Wie lang ist die Vorstellung der Ergebnisse in der Prüfung etwa?", ["2–3 Minuten", "10–15 Minuten", "45 Minuten", "2 Stunden"], 1, "Lektion 13."],
+["Was tun, wenn man im Fachgespräch etwas nicht weiß?", ["Raten", "Schweigen", "Ehrlich sagen und laut strukturiert weiterdenken", "Das Thema wechseln"], 2, "Lektion 14."]
+]</script>
+<script>
+/* Antwortfelder der Übungen in Modul 11 */
+(function () {
+  function z(id, label, punkte, wert, tol, einheit) { return { id: id, label: label, typ: "zahl", punkte: punkte, wert: wert, tol: tol, einheit: einheit }; }
+  var MX = ["Quick Win", "Strategisches Projekt", "Füllprojekt", "Zurückstellen"];
+  var ST = ["eng einbinden", "informieren", "zufriedenstellen", "beobachten"];
+  window.UEBUNGEN = {
+    modul: 11,
+    aufgaben: {
+      a1: { teile: [z("m", "Amortisation", 2, 20, 0.01, "Monate")] },
+      a2: { teile: [z("a", "(a) Nettonutzen pro Monat", 1, 3000, 0.5, "€"), z("b", "(b) Nettonutzen 36 Monate", 1, 108000, 0.5, "€"), z("c", "(c) ROI", 1, 80, 0.01, "%")] },
+      a3: { teile: [z("n", "Nutzen pro Monat", 2, 19200, 0.5, "€")] },
+      a4: { teile: [z("kw", "Kapitalwert", 3, 3084, 15, "€"), { id: "l", label: "Lohnt sich die Investition?", typ: "wahl", punkte: 1, optionen: ["Ja", "Nein"], richtig: 0 }] },
+      a5: { teile: [
+        { id: "q1", label: "(1) hoher Nutzen, hohe Machbarkeit", typ: "wahl", punkte: 1, optionen: MX, richtig: 0 },
+        { id: "q2", label: "(2) hoher Nutzen, geringe Machbarkeit", typ: "wahl", punkte: 1, optionen: MX, richtig: 1 },
+        { id: "q3", label: "(3) geringer Nutzen, hohe Machbarkeit", typ: "wahl", punkte: 1, optionen: MX, richtig: 2 },
+        { id: "q4", label: "(4) geringer Nutzen, geringe Machbarkeit", typ: "wahl", punkte: 1, optionen: MX, richtig: 3 }] },
+      a6: { teile: [{ id: "t", label: "Vier versteckte Kostenarten", typ: "text", punkte: 4, erwartung: "Je 1 P. (max. 4): Datenaufbereitung, Integration, Schulung/Change, interne Arbeitszeit, Betrieb/Monitoring/Nachtraining, Rechtsprüfung/DSFA/Dokumentation, menschliche Prüfung der Ergebnisse." }] },
+      a7: { teile: [{ id: "t", label: "Make-Argument, Buy-Argument, Kriterium", typ: "text", punkte: 3, erwartung: "Make: passgenau/Know-how/Wettbewerbsvorteil/Datenhoheit (1 P.); Buy: schneller Nutzen/geringere Anfangskosten/erprobt (1 P.); Kriterium: Kernprozess, Know-how, Gesamtkosten, Datenschutz/Abhängigkeit (1 P.)." }] },
+      a8: { teile: [
+        { id: "s1", label: "(1) Geschäftsführung", typ: "wahl", punkte: 1, optionen: ST, richtig: 0 },
+        { id: "s2", label: "(2) Betriebsrat", typ: "wahl", punkte: 1, optionen: ST, richtig: 0 },
+        { id: "s3", label: "(3) Sachbearbeitung", typ: "wahl", punkte: 1, optionen: ST, richtig: 1 },
+        { id: "s4", label: "(4) externer IT-Dienstleister", typ: "wahl", punkte: 1, optionen: ST, richtig: 3 }] },
+      a9: { teile: [{ id: "t", label: "Ihre Erklärung in zwei Sätzen", typ: "text", punkte: 2, erwartung: "Recall 0,85: findet 85 von 100 Betrugsfällen (1 P.). Precision 0,6: 6 von 10 Alarmen berechtigt, 4 Fehlalarme (1 P.). Alltagssprache ohne Fachbegriffe." }] },
+      a10: { teile: [{ id: "t", label: "Thema, Kurzbeschreibung, Gliederung", typ: "text", punkte: 5, hinweis: "Thema: … / Kurzbeschreibung: … / Gliederung: 1 … 2 …", erwartung: "Je 1 P.: praxisbezogenes, abgegrenztes Thema; Kurzbeschreibung mit Problem, Zahlen, Ziel; Datenlage; Gliederung mit aussagekräftigen Unterpunkten; Einbeziehung von KI-Lösung, Prozess/Projekt, Wirtschaftlichkeit, Recht, Zukunftskompetenzen." }] },
+      a11: { teile: [z("t", "Letzter Bearbeitungstag (Tag im März)", 2, 31, 0.001)] },
+      a12: { teile: [{ id: "t", label: "Ihre Antwort", typ: "text", punkte: 3, erwartung: "Je 1 P.: Kernaussage; fallbezogene Begründung (Tabellendaten, nur 4.000 Datensätze, NN braucht mehr Daten/überfittet); Abwägung oder Zusatznutzen (Feature Importance/Erklärbarkeit, Vergleich durchgeführt)." }] }
+    }
+  };
+})();
+</script>
+<script>
+/* Rechner in Modul 11 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 0 : d }) : "–"; }
+  function kpi(l, v) { return '<div class="kpi"><span>' + l + "</span><b>" + v + "</b></div>"; }
+  function num(id) { var v = parseFloat(String(document.getElementById(id).value).replace(",", ".")); return isFinite(v) ? v : 0; }
+  function list(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(/\./g, "").replace(",", "."); }).filter(Boolean).map(Number).filter(isFinite); }
+
+  function nutzen() {
+    var v = num("nuV"), m = num("nuM"), s = num("nuS"), q = num("nuQ") / 100;
+    var h = v * m / 60 * q;
+    document.getElementById("nuOut").innerHTML = kpi("Stunden pro Monat", fmt(h, 1)) + kpi("Nutzen pro Monat", fmt(h * s) + " €") + kpi("Nutzen pro Jahr", fmt(h * s * 12) + " €") + kpi("Vollzeitstellen (ca. 160 h)", fmt(h / 160, 1));
+  }
+  ["nuV", "nuM", "nuS", "nuQ"].forEach(function (i) { document.getElementById(i).addEventListener("input", nutzen); }); nutzen();
+
+  function roi() {
+    var I = num("roI"), L = num("roL"), N = num("roN"), M = Math.max(1, num("roM"));
+    var net = N - L, am = net > 0 ? I / net : NaN, total = net * M;
+    document.getElementById("roOut").innerHTML = kpi("Nettonutzen / Monat", fmt(net) + " €") + kpi("Amortisation", net > 0 ? fmt(am, 1) + " Monate" : "nie") +
+      kpi("Nettonutzen im Zeitraum", fmt(total) + " €") + kpi("ROI im Zeitraum", I ? fmt((total - I) / I * 100, 1) + " %" : "–");
+  }
+  ["roI", "roL", "roN", "roM"].forEach(function (i) { document.getElementById(i).addEventListener("input", roi); }); roi();
+
+  function kw() {
+    var I = num("kwI"), R = list(document.getElementById("kwR").value), z = num("kwZ") / 100;
+    var pv = R.map(function (r, i) { return r / Math.pow(1 + z, i + 1); }), bar = pv.reduce(function (a, b) { return a + b; }, 0);
+    document.getElementById("kwOut").innerHTML = pv.map(function (v, i) { return kpi("Jahr " + (i + 1) + " abgezinst", fmt(v) + " €"); }).join("") +
+      kpi("Barwert", fmt(bar) + " €") + kpi("Kapitalwert", fmt(bar - I) + " €") + kpi("Bewertung", bar - I > 0 ? "lohnt sich" : "lohnt sich nicht");
+  }
+  ["kwI", "kwR", "kwZ"].forEach(function (i) { document.getElementById(i).addEventListener("input", kw); }); kw();
+})();
+</script>

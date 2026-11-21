@@ -1,0 +1,167 @@
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Große Sprachmodelle" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 35 Minuten</span><h2>Große Sprachmodelle: Token, Kontextfenster, Wahrscheinlichkeiten</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Die Wortvorschläge auf dem Handy raten das nächste Wort. Ein großes Sprachmodell macht im Prinzip dasselbe – nur mit Milliarden Parametern, riesigen Textmengen und so gut, dass ganze Absätze sinnvoll klingen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Large Language Model</b> (LLM) ist ein Transformer-Decoder, der selbstüberwacht auf sehr großen Textmengen gelernt hat, das <b>nächste Token</b> vorherzusagen. Danach wird es mit Anweisungen und menschlichem Feedback (RLHF) zum hilfreichen Assistenten verfeinert.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/naechstes-token.gif" width="640" height="380" alt="Animation: Für den Satz Morgens trinke ich eine Tasse erscheinen Balken mit Wahrscheinlichkeiten für Kaffee, Tee, Wasser, Milch und Saft. Bei Temperatur 0,3 dominiert Kaffee, bei Temperatur 1,8 sind die Balken ausgeglichener." loading="lazy">
+        <figcaption>Die Temperatur steuert, wie zufällig das nächste Token gewählt wird.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+        <tbody>
+          <tr><td><b>Token</b></td><td>Textbaustein: ein Wort, ein Wortteil oder ein Zeichen. Deutsche Texte brauchen meist mehr Tokens pro Wort als englische. Abgerechnet wird oft je Token.</td></tr>
+          <tr><td><b>Kontextfenster</b></td><td>maximale Tokenzahl, die das Modell auf einmal berücksichtigt (Eingabe + Ausgabe) – bei aktuellen Modellen oft Hunderttausende Tokens.</td></tr>
+          <tr><td><b>Temperatur</b></td><td>niedrig: vorhersehbar, sachlich; hoch: kreativer, aber fehleranfälliger.</td></tr>
+          <tr><td><b>Embedding</b></td><td>Zahlenvektor, der die Bedeutung eines Tokens oder Textes abbildet.</td></tr>
+          <tr><td><b>Halluzination</b></td><td>flüssige, plausibel klingende, aber falsche Aussage.</td></tr>
+          <tr><td><b>Multimodal</b></td><td>verarbeitet neben Text auch Bilder, Audio oder Video.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Sprachmodell berechnet Wahrscheinlichkeiten für das nächste Token – es „weiß“ nicht, ob ein Satz wahr ist. Deshalb sind Halluzinationen möglich.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Das Wissen eines Modells endet mit seinen Trainingsdaten (Wissensstand). Fragen zu aktuellen Preisen, Gesetzesänderungen oder internen Dokumenten beantwortet es ohne Zusatzquellen nicht zuverlässig.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Gruppe einen Satz Wort für Wort „wie ein LLM“ fortsetzen – jeder sagt ein Wort. So wird klar, warum Ergebnisse flüssig, aber nicht unbedingt wahr sind.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Prompt Engineering" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Prompt Engineering</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein neuer Kollege macht genau das, worum Sie ihn bitten – aber nur so gut, wie Sie es erklären. „Mach mal was zur Messe“ bringt etwas anderes als „Schreib eine Einladung an Stammkunden, 120 Wörter, mit Standnummer und QR-Code-Hinweis“.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Prompt Engineering</b> heißt, Eingaben so zu gestalten, dass ein Sprachmodell zuverlässig die gewünschte Ausgabe liefert. Der <b>Systemprompt</b> legt Rolle und Regeln fest, der Nutzerprompt die konkrete Aufgabe.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Baustein</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>Rolle und Ziel</td><td>„Du bist Assistent im Kundenservice eines Heizungsherstellers.“</td></tr>
+          <tr><td>Kontext</td><td>Auszug aus der Bedienungsanleitung, Kundendaten (nur, was nötig ist)</td></tr>
+          <tr><td>Aufgabe und Format</td><td>„Antworte in höchstens fünf Sätzen, Sie-Form, mit nummerierten Schritten.“</td></tr>
+          <tr><td>Beispiele (Few-Shot)</td><td>zwei gute Beispielantworten</td></tr>
+          <tr><td>Grenzen</td><td>„Wenn die Antwort nicht im Kontext steht, sage das und verweise an die Hotline.“</td></tr>
+          <tr><td>Schrittweises Vorgehen</td><td>„Prüfe zuerst …, dann …“ (bei komplexen Aufgaben)</td></tr>
+          <tr><td>Strukturierte Ausgabe</td><td>„Gib JSON mit den Feldern kategorie, dringlichkeit, antwort zurück.“</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gute Prompts sind konkret: Rolle, Kontext, Aufgabe, Format, Beispiele und Grenzen.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p><b>Prompt Injection</b>: Ein Dokument oder eine Nutzereingabe enthält versteckte Anweisungen („Ignoriere alle Regeln und …“). Externe Inhalte nie als Anweisung behandeln, Rechte des Systems begrenzen, Ausgaben prüfen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Übung: Die Gruppe verbessert einen schlechten Prompt („Schreib was über unser Produkt“) mit den Bausteinen der Tabelle. Vergleichen Sie die Ergebnisse, wenn ein Werkzeug verfügbar ist.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="RAG" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 35 Minuten</span><h2>RAG: Wissen aus eigenen Dokumenten</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Bei einer Open-Book-Prüfung muss man nicht alles auswendig wissen – man muss die richtige Seite finden und sie richtig wiedergeben. RAG gibt dem Sprachmodell ein offenes Buch.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Retrieval-Augmented Generation</b> (RAG) sucht zu jeder Frage passende Abschnitte aus eigenen Dokumenten und gibt sie dem Sprachmodell zusammen mit der Frage. Das Modell antwortet auf dieser Grundlage und kann die Quellen nennen.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/rag.gif" width="640" height="380" alt="Animation: Eine Frage zur Garantie geht an eine Suche mit Embeddings und Vektordatenbank. Zwei passende Dokumente werden ausgewählt und mit der Frage an das Sprachmodell gegeben, das antwortet: Die Garantie gilt 24 Monate ab Kaufdatum, Quelle Garantiebedingungen Paragraf 3." loading="lazy">
+        <figcaption>Suchen, auswählen, antworten – mit Quellenangabe.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span><b>Vorbereiten</b>: Dokumente in Abschnitte (Chunks) teilen, je Abschnitt ein Embedding berechnen, in einer <b>Vektordatenbank</b> speichern.</span></li>
+        <li><span><b>Suchen</b>: Frage einbetten, ähnlichste Abschnitte finden (Kosinus-Ähnlichkeit, oft kombiniert mit Stichwortsuche).</span></li>
+        <li><span><b>Erweitern</b>: Frage + gefundene Abschnitte + Anweisung („nur auf Basis der Quellen antworten“) an das Modell.</span></li>
+        <li><span><b>Antworten</b>: mit Quellenangabe; ohne passende Quelle ehrlich „weiß ich nicht“.</span></li>
+      </ol>
+      <div class="prose">
+        <p><b>Qualität hängt ab von</b>: Dokumentqualität und Aktualität, sinnvoller Abschnittsgröße, Suchqualität (Recall der Suche!), Zugriffsrechten (wer darf welches Dokument sehen?) und einer Prüfung der Antworten an Testfragen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>RAG bringt aktuelles, internes Wissen mit Quellenangabe ins Sprachmodell – ohne das Modell neu zu trainieren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Viele Transferarbeiten drehen sich um RAG-Assistenten. Betonen Sie die Zugriffsrechte: Ein RAG-System darf einer Auszubildenden keine Gehaltslisten zeigen, nur weil sie danach fragt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Prompting, RAG oder Fine-Tuning?" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 30 Minuten</span><h2>Prompting, RAG oder Fine-Tuning? Entscheidung und Kosten</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Prompting</th><th>RAG</th><th>Fine-Tuning</th></tr></thead>
+        <tbody>
+          <tr><td>Was ändert sich?</td><td>nur die Eingabe</td><td>Eingabe + abgerufenes Wissen</td><td>die Modellgewichte</td></tr>
+          <tr><td>Gut für</td><td>allgemeine Aufgaben, schnelle Prototypen</td><td>aktuelles, internes, belegbares Wissen</td><td>festes Verhalten, Stil, Format, Fachsprache, Spezialaufgaben</td></tr>
+          <tr><td>Aufwand</td><td>gering</td><td>mittel (Datenaufbereitung, Suche, Rechte)</td><td>hoch (gelabelte Beispiele, Training, Bewertung)</td></tr>
+          <tr><td>Aktualisierung</td><td>sofort</td><td>Dokumente austauschen</td><td>neu trainieren</td></tr>
+          <tr><td>Quellenangabe</td><td>nein</td><td>ja</td><td>nein</td></tr>
+          <tr><td>Laufende Kosten</td><td>Tokens je Anfrage</td><td>Tokens + Suche + Datenbank</td><td>Training + Betrieb des eigenen Modells</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Faustregel:</b> Immer mit gutem Prompting beginnen. Fehlt <b>Wissen</b> → RAG. Fehlt <b>Verhalten</b> (Stil, Format, Fachaufgabe) → Fine-Tuning. Oft wird beides kombiniert.</p>
+        <p><b>Kostenbeispiel:</b> 2.000 Anfragen täglich, je 3.000 Eingabe- und 400 Ausgabetokens. Bei angenommen 2 € je Million Eingabe- und 8 € je Million Ausgabetokens: <span class="calcline">2.000 · (3.000 · 2 + 400 · 8) / 1.000.000 = 2.000 · 0,0092 € ≈ 18,40 € pro Tag</span>, rund 550 € im Monat. Preise sind Annahmen – echte Preise unterscheiden sich stark je Anbieter und Modell.</p>
+        <p>Weitere Entscheidungskriterien: Datenschutz (Cloud-API oder eigenes Modell vor Ort?), Abhängigkeit von einem Anbieter, Antwortzeit, Erklärbarkeit und Kosten je Anfrage.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Wissen fehlt → RAG. Verhalten fehlt → Fine-Tuning. Beginnen immer mit Prompting.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Situationsaufgaben fragen gern: „Ein Unternehmen will einen Assistenten für seine 3.000 Produktdatenblätter. Begründen Sie Ihr Vorgehen.“ Antwort: RAG, weil sich Datenblätter ändern und Quellen nötig sind – mit Kosten, Datenschutz und Rechtekonzept.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie die Kosten gemeinsam und variieren Sie die Annahmen (doppelte Tokenmenge, zehnfache Anfragen). Brücke zu Modul 13 und 14: Das ist eine Kosten-Nutzen-Frage.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Anwendungen von Deep Learning" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 30 Minuten</span><h2>Anwendungen von Deep Learning: Bild, Sprache, Text, Zeitreihen, Agenten</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Bild und Video</h3><p>Qualitätsprüfung, Objekterkennung, Segmentierung (welches Pixel gehört wozu), Dokumenten- und Texterkennung (OCR).</p></div>
+        <div class="card"><h3>Sprache</h3><p>Spracherkennung (Diktat, Protokolle), Sprachausgabe, Übersetzung gesprochener Sprache.</p></div>
+        <div class="card"><h3>Text</h3><p>Klassifizieren, Zusammenfassen, Informationen extrahieren, Entwürfe schreiben, Code erzeugen.</p></div>
+        <div class="card"><h3>Zeitreihen</h3><p>Last- und Absatzprognosen, Anomalien in Sensordaten, vorausschauende Wartung.</p></div>
+        <div class="card"><h3>Generative Bildmodelle</h3><p>Bilder aus Text (Diffusionsmodelle), Produktvisualisierung, synthetische Trainingsdaten.</p></div>
+        <div class="card"><h3>Autoencoder</h3><p>komprimieren und rekonstruieren; schlecht rekonstruierte Fälle sind auffällig → Anomalieerkennung.</p></div>
+        <div class="card"><h3>Empfehlungssysteme</h3><p>Embeddings von Kunden und Produkten, „passt zu Ihnen“.</p></div>
+        <div class="card"><h3>KI-Agenten</h3><p>planen mehrere Schritte und rufen Werkzeuge auf (Suche, Datenbank, E-Mail). Risiken: Fehlerketten, Kosten, Sicherheit – menschliche Freigaben für folgenreiche Aktionen.</p></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Deep Learning ist stark bei unstrukturierten Daten – Bild, Ton, Text – und dort heute Stand der Technik.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie jede Person eine Anwendung für den eigenen Betrieb auswählen und mit Lernart, Datenart und Ausgabe beschreiben. Agenten kritisch diskutieren: Was darf ein Agent ohne Freigabe tun?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 17 -->
+    <section class="lesson" id="l17" data-title="Ressourcen und Betrieb" data-part="Teil C · Sprachmodelle und Anwendungen">
+      <div class="lesson-head"><span class="meta">Lektion 17 · 25 Minuten</span><h2>Ressourcen: GPUs, Energiebedarf, Cloud oder vor Ort</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Lkw für den Umzug mietet man; einen eigenen kauft nur, wer jeden Tag fährt. Bei KI-Rechenleistung ist es genauso.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Training großer Modelle braucht viele GPUs über Tage bis Monate; der <b>Betrieb</b> (Inferenz) kostet bei vielen Anfragen auf Dauer oft mehr als das Training. Rechenleistung, Speicher, Energie und Kühlung sind relevante Kosten- und Nachhaltigkeitsfaktoren.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Cloud-API (Modell als Dienst)</th><th>Eigene Infrastruktur / eigenes Modell</th></tr></thead>
+        <tbody>
+          <tr><td>Start</td><td>sofort, ohne Investition</td><td>Hardware, Einrichtung, Fachpersonal</td></tr>
+          <tr><td>Kosten</td><td>variabel je Nutzung</td><td>hohe Fixkosten, günstig bei hoher Auslastung</td></tr>
+          <tr><td>Datenschutz</td><td>Auftragsverarbeitung, Serverstandort, Datennutzung prüfen</td><td>Daten bleiben im Haus</td></tr>
+          <tr><td>Modellqualität</td><td>Zugriff auf leistungsstärkste Modelle</td><td>meist kleinere, offene Modelle</td></tr>
+          <tr><td>Abhängigkeit</td><td>Anbieter, Preisänderungen, Verfügbarkeit</td><td>eigene Wartung, Sicherheit</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Sparsam rechnen:</b> kleinstes ausreichendes Modell wählen, Antworten zwischenspeichern (Caching), Quantisierung (Gewichte mit weniger Bits), Batch-Verarbeitung statt Echtzeit, wo möglich. Für die Nachhaltigkeitsbewertung (Modul 14) zählen auch Energiequelle und Standort des Rechenzentrums.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Training ist einmalig teuer, Betrieb laufend – Cloud für schnellen Start und schwankende Last, eigene Infrastruktur bei hoher, stabiler Auslastung und strengen Datenschutzanforderungen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diese Lektion verbindet Technik mit Modul 14 (Investitionsrechnung, Make or Buy). Lassen Sie für ein Beispiel Vor- und Nachteile beider Wege abwägen.</p>
+      </aside>
+    </section>

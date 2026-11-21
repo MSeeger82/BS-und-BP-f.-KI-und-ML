@@ -1,0 +1,218 @@
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Bias, Varianz und der Gesamtfehler</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der Gesamtfehler als Summe</span>
+        <p>Der erwartete Fehler eines Modells setzt sich zusammen aus <b>Bias²</b> (systematischer Fehler), <b>Varianz</b> (Empfindlichkeit gegenüber den Trainingsdaten) und <b>Rauschen</b> (nicht vermeidbarer Zufall in den Daten).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Modell</th><th class="r">Bias²</th><th class="r">Varianz</th><th class="r">Rauschen</th><th class="r">Gesamtfehler</th></tr></thead>
+          <tbody>
+            <tr><td>A: sehr einfach (Gerade)</td><td class="r">16</td><td class="r">2</td><td class="r">4</td><td class="r">22</td></tr>
+            <tr><td>B: mittel (Polynom Grad 3)</td><td class="r">4</td><td class="r">5</td><td class="r">4</td><td class="r"><b>13</b></td></tr>
+            <tr><td>C: sehr komplex (Grad 11)</td><td class="r">1</td><td class="r">20</td><td class="r">4</td><td class="r">25</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das einfache Modell hat hohen Bias, das komplexe hohe Varianz. Das mittlere Modell erreicht den kleinsten Gesamtfehler. Das Rauschen (4) kann kein Modell beseitigen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Zielscheiben zuordnen</span>
+        <ul>
+          <li><b>Eng in der Mitte:</b> niedriger Bias, niedrige Varianz – das Ziel.</li>
+          <li><b>Verstreut rund um die Mitte:</b> niedriger Bias, hohe Varianz → Overfitting (z. B. ein tiefer Baum).</li>
+          <li><b>Eng, aber daneben:</b> hoher Bias, niedrige Varianz → Underfitting (z. B. eine Gerade bei gekrümmten Daten).</li>
+          <li><b>Verstreut und daneben:</b> beides hoch, meist schlechte Daten oder ungeeignetes Modell.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Hohe Varianz bei kleinen Datenmengen</span>
+        <p>Trainiert man ein tiefes Modell dreimal mit je 50 anderen Kunden, erhält man drei sehr verschiedene Modelle, die für denselben Neukunden Vorhersagen von 20 %, 55 % und 80 % liefern: hohe Varianz. Mit 5.000 Kunden liegen die drei Modelle nah beieinander. Mehr Daten senken die Varianz, aber nicht den Bias.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie Bias und Varianz und beschreiben Sie den Kompromiss bei steigender Modellkomplexität.</p>
+        <p><b>Musterlösung:</b> Bias ist ein systematischer Fehler durch zu einfache Annahmen (Underfitting) (1,5 Punkte). Varianz ist die Empfindlichkeit gegenüber den Trainingsdaten (Overfitting) (1,5 Punkte). Mit wachsender Komplexität sinkt der Bias, die Varianz steigt; der Gesamtfehler ist am kleinsten bei mittlerer Komplexität (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Lernkurven in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Hilft mehr Daten? (Fehlerrate über der Datenmenge)</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Trainingsdaten</th><th class="r">Fehler Training</th><th class="r">Fehler Validierung</th></tr></thead>
+          <tbody>
+            <tr><td class="r">100</td><td class="r">2 %</td><td class="r">25 %</td></tr>
+            <tr><td class="r">500</td><td class="r">5 %</td><td class="r">15 %</td></tr>
+            <tr><td class="r">2.000</td><td class="r">7 %</td><td class="r">11 %</td></tr>
+            <tr><td class="r">10.000</td><td class="r">8 %</td><td class="r">9 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Abstand schrumpft mit mehr Daten: Das Modell überanpasst weniger. Bei 10.000 Beispielen liegen beide Fehler nahe beieinander; weitere Daten bringen kaum noch etwas. Wären beide Fehler hoch (z. B. 25 % und 28 %), wäre mehr Datenmenge sinnlos – dann braucht es ein besseres Modell oder bessere Merkmale.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Early Stopping an einer Epochenkurve</span>
+        <p>Validierungsverlust nach Epoche 1 bis 7: 0,90 · 0,60 · 0,45 · <b>0,40</b> · 0,41 · 0,43 · 0,46. Mit Geduld 3 bricht man nach Epoche 7 ab (drei Epochen ohne Verbesserung seit dem Minimum in Epoche 4) und nimmt die Gewichte von <b>Epoche 4</b>. Trainiert man stur weiter, steigt der Validierungsverlust, während der Trainingsverlust weiter fällt: Das Netz lernt die Trainingsdaten auswendig.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was die Kurve für das Projekt bedeutet</span>
+        <p>Ein Betrieb überlegt, 20.000 € in zusätzliches Labeling zu investieren. Die Lernkurve zeigt: Zwischen 2.000 und 10.000 Beispielen sank der Validierungsfehler nur noch von 11 % auf 9 %. Ein weiteres Verdoppeln bringt vermutlich weniger als einen halben Punkt. Die Investition in bessere Merkmale oder ein anderes Modell wäre wirksamer. Lernkurven machen solche Entscheidungen mit Zahlen begründbar.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Die Fehler eines Modells sind für Training und Validierung beide hoch und liegen nah beieinander, auch bei wachsender Datenmenge. Welche Diagnose stellen Sie, und was empfehlen Sie?</p>
+        <p><b>Musterlösung:</b> Underfitting (hoher Bias) (2 Punkte). Mehr Daten helfen nicht; stattdessen ein komplexeres Modell, aussagekräftigere Merkmale oder geringere Regularisierung (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Regularisierung an Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der Strafterm von Ridge und Lasso</span>
+        <p>Ein Modell hat die Gewichte 3, −2 und 0,5; der MSE auf den Trainingsdaten beträgt 4; λ = 0,1.</p>
+        <ul>
+          <li><b>Ridge (L2):</b> Σ w² = 9 + 4 + 0,25 = 13,25 → Strafe <span class="calcline">0,1 · 13,25 = 1,325</span> → Gesamtverlust <span class="calcline">4 + 1,325 = 5,325</span></li>
+          <li><b>Lasso (L1):</b> Σ |w| = 3 + 2 + 0,5 = 5,5 → Strafe <span class="calcline">0,1 · 5,5 = 0,55</span> → Gesamtverlust <span class="calcline">4 + 0,55 = 4,55</span></li>
+        </ul>
+        <p>Das Training sucht Gewichte, die MSE <i>und</i> Strafe zusammen klein halten. Große Gewichte werden dadurch „teuer“ – besonders bei Ridge, weil das Quadrat große Werte stark bestraft.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Lasso wählt Merkmale aus</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th class="r">Gewicht ohne Regularisierung</th><th class="r">Gewicht mit Lasso</th></tr></thead>
+          <tbody>
+            <tr><td>Einkommen</td><td class="r">1,20</td><td class="r">1,00</td></tr>
+            <tr><td>Alter</td><td class="r">0,80</td><td class="r">0,50</td></tr>
+            <tr><td>Schuhgröße</td><td class="r">0,30</td><td class="r"><b>0</b></td></tr>
+            <tr><td>Zufallszahl</td><td class="r">0,10</td><td class="r"><b>0</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>Lasso setzt die unwichtigen Merkmale auf genau 0 und liefert so nebenbei eine Merkmalsauswahl. Ridge würde sie nur verkleinern (z. B. 0,3 → 0,1).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Dropout und Augmentation</span>
+        <ul>
+          <li><b>Dropout 0,5</b> bei einer Schicht mit 100 Neuronen: In jedem Trainingsschritt sind zufällig etwa 50 Neuronen abgeschaltet. Kein Neuron kann sich auf bestimmte andere „verlassen“, das Netz wird robuster. Beim späteren Einsatz sind alle Neuronen aktiv.</li>
+          <li><b>Datenaugmentation:</b> 1.000 Bilder werden gedreht, gespiegelt und etwas aufgehellt. Mit vier Veränderungen je Bild stehen <span class="calcline">1.000 · (1 + 4) = 5.000</span> Trainingsbeispiele zur Verfügung, ohne ein neues Foto zu machen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Unterscheiden Sie L1- und L2-Regularisierung und nennen Sie je eine Wirkung.</p>
+        <p><b>Musterlösung:</b> L2 (Ridge) addiert die Summe der quadrierten Gewichte als Strafe und verkleinert alle Gewichte, setzt sie aber selten auf null (2,5 Punkte). L1 (Lasso) addiert die Summe der Beträge und setzt unwichtige Gewichte auf genau null; damit wählt sie Merkmale aus (2,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Kreuzvalidierung rechnen und planen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Mittelwert und Streuung der fünf Durchläufe</span>
+        <p>Die fünf F1-Werte: 0,82, 0,85, 0,80, 0,84, 0,79.</p>
+        <ol class="steps">
+          <li><div>Mittelwert: <span class="calcline">(0,82 + 0,85 + 0,80 + 0,84 + 0,79) : 5 = 4,10 : 5 = 0,82</span></div></li>
+          <li><div>Abweichungen: 0, +0,03, −0,02, +0,02, −0,03; Quadrate: 0, 0,0009, 0,0004, 0,0004, 0,0009; Summe 0,0026</div></li>
+          <li><div>Standardabweichung: <span class="calcline">√(0,0026 : 4) ≈ 0,025</span> → <span class="result">F1 = 0,82 ± 0,03</span></div></li>
+        </ol>
+        <p>Die Streuung zeigt, wie stabil das Modell ist. Ein Wert von 0,82 ± 0,02 ist verlässlicher als 0,82 ± 0,10.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viele Trainings entstehen?</span>
+        <p>Ein Team will drei Modellarten mit je vier Hyperparameter-Kombinationen vergleichen, 5-fach kreuzvalidiert: <span class="calcline">3 · 4 · 5 = 60</span> Trainings. Dauert eines 2 Minuten, sind das 120 Minuten – zwei Stunden. Bei großen Modellen (Stunden pro Training) wird die Kreuzvalidierung zu teuer, dann reicht ein einzelner Validierungsdatensatz.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Kreuzvalidierung für Zeitreihen</span>
+        <p>Bei Monatsdaten über 24 Monate wird <b>nicht</b> gemischt, sondern „rollierend“ geprüft:</p>
+        <ul>
+          <li>Training: Monat 1–12 → Prüfung: Monat 13</li>
+          <li>Training: Monat 1–13 → Prüfung: Monat 14</li>
+          <li>Training: Monat 1–14 → Prüfung: Monat 15 … und so weiter</li>
+        </ul>
+        <p>So lernt das Modell immer nur aus der Vergangenheit und wird mit der unmittelbar folgenden Periode geprüft – genau wie im Einsatz.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die 5-fache Kreuzvalidierung. Wie oft wird trainiert, und warum bleibt trotzdem ein Testdatensatz zurückgelegt?</p>
+        <p><b>Musterlösung:</b> Die Trainingsdaten werden in fünf gleich große Teile geteilt; fünfmal wird mit vier Teilen trainiert und mit dem fünften geprüft; das Ergebnis ist der Mittelwert der fünf Scores samt Streuung (3 Punkte). Es wird fünfmal trainiert (1 Punkt). Der Testdatensatz bleibt für die einmalige, ehrliche Abschlussbewertung zurückgelegt, weil die Kreuzvalidierung bereits zur Auswahl und Einstellung gedient hat (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Eine Modellauswahl begründen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ist der Unterschied echt?</span>
+        <p>Random Forest erreicht in der Kreuzvalidierung F1 = 0,76 ± 0,03, Gradient Boosting 0,77 ± 0,04. Der Unterschied von 0,01 ist kleiner als jede der beiden Streuungen. Mit anderen Daten könnte die Rangfolge umgekehrt ausfallen. Man darf daher <b>nicht</b> behaupten, Boosting sei besser. Bei Gleichstand entscheiden Kosten, Tempo, Erklärbarkeit und Wartbarkeit.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Nettonutzen statt nur F1</span>
+        <p>Der geschätzte Jahresnutzen (Ersparnis durch gefundene Defekte) beträgt für die logistische Regression 40.000 €, den Random Forest 46.000 € und Gradient Boosting 46.500 €. Die Kosten für Betrieb und Pflege: 500 €, 1.500 € und 1.500 €.</p>
+        <ul>
+          <li>Logistische Regression: <span class="calcline">40.000 − 500 = 39.500 €</span></li>
+          <li>Random Forest: <span class="calcline">46.000 − 1.500 = 44.500 €</span></li>
+          <li>Gradient Boosting: <span class="calcline">46.500 − 1.500 = 45.000 €</span></li>
+        </ul>
+        <p>Boosting liegt nur 500 € vor dem Forest – bei der Unsicherheit der Schätzung ein Gleichstand. Der Random Forest ist mit 15 ms schnell genug und stabil; Boosting braucht mehr Feintuning. Eine Empfehlung kann daher auf den Forest fallen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Verschiedene Betriebe, verschiedene Antworten</span>
+        <ul>
+          <li><b>Bank (Kreditentscheidung):</b> logistische Regression, weil jede Ablehnung begründet werden muss. F1 ist etwas niedriger, aber das ist der Preis der Erklärbarkeit.</li>
+          <li><b>Onlineshop (Produktempfehlung):</b> Gradient Boosting, weil Fehler harmlos sind und jedes Prozent mehr Klicks Geld bringt.</li>
+          <li><b>Industrie (Echtzeit an der Maschine):</b> kleines, schnelles Modell, weil die Antwort innerhalb von Millisekunden vorliegen muss.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Zwei Modelle haben F1 0,80 ± 0,05 und 0,82 ± 0,05. Das zweite ist teurer. Wie entscheiden Sie?</p>
+        <p><b>Musterlösung:</b> Der Unterschied von 0,02 liegt innerhalb der Streuung und ist nicht aussagekräftig (2 Punkte). Bei Gleichstand wählt man das einfachere, günstigere und besser erklärbare Modell, also das erste (2 Punkte); ein Blick auf das Geschäftsziel bleibt maßgeblich (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Kalibrierung, Fairness und Robustheit prüfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Eine Kalibrierungstabelle lesen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Vorhergesagte Wahrscheinlichkeit</th><th class="r">Fälle</th><th class="r">tatsächlich positiv</th><th class="r">Anteil</th></tr></thead>
+          <tbody>
+            <tr><td>10–20 %</td><td class="r">500</td><td class="r">70</td><td class="r">14 %</td></tr>
+            <tr><td>40–50 %</td><td class="r">300</td><td class="r">126</td><td class="r">42 %</td></tr>
+            <tr><td>70–80 %</td><td class="r">200</td><td class="r">104</td><td class="r">52 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Im unteren und mittleren Bereich stimmen Vorhersage und Wirklichkeit gut überein. Bei den hohen Werten ist das Modell <b>überoptimistisch</b>: Es sagt 70–80 % voraus, tatsächlich sind es nur 52 %. Wer auf Basis dieser Wahrscheinlichkeiten Entscheidungen trifft (z. B. Versicherungsprämien), macht Fehler. Abhilfe: nachträgliche Kalibrierung.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Fairness in Zahlen</span>
+        <p>Ein Bewerbungsfilter findet bei Gruppe A 80 % der geeigneten Personen (Recall 0,80), bei Gruppe B nur 60 % (Recall 0,60). Der Abstand von 20 Prozentpunkten zeigt: Geeignete Personen der Gruppe B werden systematisch häufiger übersehen. Auch wenn kein Merkmal wie Geschlecht verwendet wird, kann das Modell indirekt benachteiligen. Deshalb werden Kennzahlen immer auch <b>getrennt nach Gruppen</b> betrachtet (Modul 10).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Robustheitstest</span>
+        <p>Man verfälscht die Testdaten künstlich: 5 % Rauschen auf den Messwerten, 10 % der Werte fehlen. Modell A fällt von F1 0,76 auf 0,74, Modell B von 0,77 auf 0,55. Modell A ist robust, Modell B empfindlich: Im Betrieb, wo Sensoren ausfallen und Messungen schwanken, wird Modell B überraschen. Bei der Auswahl zählt diese Eigenschaft mit.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Eigenschaften eines guten Modells neben der Genauigkeit und erklären Sie eine davon.</p>
+        <p><b>Musterlösung:</b> z. B. Kalibrierung, Robustheit, Fairness, Stabilität im Betrieb, Effizienz, Erklärbarkeit (3 Punkte für drei Nennungen). Beispiel Kalibrierung: Die ausgegebenen Wahrscheinlichkeiten stimmen mit der tatsächlichen Häufigkeit überein, sodass man auf ihrer Basis planen kann (3 Punkte für eine verständliche Erklärung).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l15-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Den Bericht variieren und üben</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Was passiert, wenn man die Schwelle senkt?</span>
+        <p>Das Ausgangsmodell: TP = 18, FN = 6, FP = 22, TN = 954; Kosten 252.000 €. Senkt man die Schwelle, erhält man zum Beispiel TP = 21, FN = 3, FP = 60, TN = 916 (Summe 1.000).</p>
+        <ul>
+          <li>Recall: <span class="calcline">21 : 24 = 87,5 %</span> (vorher 75 %).</li>
+          <li>Precision: <span class="calcline">21 : 81 ≈ 25,9 %</span> (vorher 45 %).</li>
+          <li>Kosten: <span class="calcline">3 · 40.000 + (21 + 60) · 300 = 120.000 + 24.300 = 144.300 €</span> – deutlich weniger als 252.000 €.</li>
+        </ul>
+        <p>Obwohl Precision und F1 sinken, sind die Gesamtkosten fast halbiert, weil ein übersehener Ausfall so viel mehr kostet als eine Inspektion. Das ist das Beispiel dafür, warum die Kosten die Entscheidung bestimmen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Musterantwort in vier Absätzen</span>
+        <ol>
+          <li><b>Kennzahlen:</b> „Accuracy 97,2 %, Precision 45 %, Recall 75 %, F1 56,3 %.“ (mit Rechenweg)</li>
+          <li><b>Einordnung:</b> „Die Accuracy ist wegen der Seltenheit der Ausfälle (2,4 %) kaum aussagekräftig. Entscheidend sind Recall und Precision.“</li>
+          <li><b>Euro:</b> „Mit Modell 252.000 €, ohne Modell 960.000 €: Ersparnis rund 708.000 € auf 1.000 Maschinentage.“</li>
+          <li><b>Empfehlung:</b> „Schwelle senken, um den Recall zu erhöhen, Kosten auf Validierungsdaten prüfen, Betrieb überwachen.“</li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Typische Fehler in Bewertungsberichten</span>
+        <ul>
+          <li>Nur die Accuracy nennen und die Seltenheit der Klasse nicht beachten.</li>
+          <li>Kennzahlen aus den Trainingsdaten statt aus den Testdaten berichten.</li>
+          <li>Kennzahlen ohne Übersetzung in den Nutzen für das Unternehmen stehen lassen.</li>
+          <li>Keine Baseline angeben.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (9 Punkte):</b> Testdaten: 1.000 Maschinentage mit TP = 30, FN = 10, FP = 40, TN = 920. Ein Ausfall kostet 25.000 €, eine Inspektion 200 €. Berechnen Sie Accuracy, Precision, Recall und F1, die Kosten mit und ohne Modell und geben Sie eine Empfehlung.</p>
+        <p><b>Musterlösung:</b> Accuracy 950 : 1.000 = 95 % (1 Punkt). Precision 30 : 70 ≈ 42,9 % (1 Punkt). Recall 30 : 40 = 75 % (1 Punkt). F1 = 2 · 0,429 · 0,75 : 1,179 ≈ 54,5 % (1 Punkt). Kosten mit Modell: 10 · 25.000 + (30 + 40) · 200 = 250.000 + 14.000 = 264.000 € (2 Punkte). Ohne Modell: 40 · 25.000 = 1.000.000 € (1 Punkt). Ersparnis ca. 736.000 € (1 Punkt). Empfehlung: Modell einsetzen; Recall weiter erhöhen, weil Fehlalarme (200 €) viel billiger sind als übersehene Ausfälle (25.000 €); Schwelle auf Validierungsdaten kostenoptimal wählen (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->

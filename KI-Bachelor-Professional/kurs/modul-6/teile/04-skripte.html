@@ -1,0 +1,166 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Woher stammt algorithmischer Bias am häufigsten?", ["Aus den Daten, der Zielgröße und dem Einsatzkontext", "Aus der Programmiersprache", "Aus zu hoher Rechenleistung", "Aus Rechenfehlern der Hardware"], 0, "Der Algorithmus übernimmt Muster aus den Daten."],
+ ["Was ist ein Proxy im Zusammenhang mit Bias?", ["Ein Testdatensatz", "Eine Fairnesskennzahl", "Ein scheinbar neutrales Merkmal, das ein geschütztes Merkmal indirekt abbildet", "Ein Server"], 2, "Beispiel: Postleitzahl als Stellvertreter für Herkunft."],
+ ["Was bezeichnet historischer Bias?", ["Fehler in alten Computern", "Veraltete Software", "Fehlende Zeitstempel", "Vergangene Ungerechtigkeit, die sich in den Trainingsdaten widerspiegelt"], 3, "Das Modell lernt die Muster der Vergangenheit."],
+ ["Was fordert Demographic Parity?", ["Gleiche Precision", "Gleiche Auswahlquote je Gruppe", "Gleichen Recall je Gruppe", "Gleiche Gruppengrößen"], 1, "Ausgewählt / alle ist in allen Gruppen gleich."],
+ ["Gruppe A: 40 % Auswahlquote, Gruppe B: 28 %. Wie hoch ist das Verhältnis B/A?", ["0,8", "0,7", "0,12", "1,4"], 1, "28 / 40 = 0,7 – unter der 80-%-Schwelle."],
+ ["Was fordert Equal Opportunity?", ["Gleiche Accuracy", "Gleicher Recall – Geeignete werden in allen Gruppen gleich oft erkannt", "Gleiches Alter", "Gleiche Auswahlquote"], 1, "TP / (TP + FN) je Gruppe gleich."],
+ ["Warum reicht es nicht, das Merkmal Geschlecht zu löschen?", ["Weil andere Merkmale es als Proxy weitertragen können", "Weil es gesetzlich verboten ist", "Es reicht immer", "Weil das Modell sonst nicht trainiert"], 0, "Fairness muss je Gruppe gemessen werden."],
+ ["Welche Aussage zu Fairnessmaßen stimmt?", ["Nicht alle lassen sich gleichzeitig erfüllen; man muss ein Ziel wählen und begründen", "Es gibt nur ein Fairnessmaß", "Alle lassen sich immer gleichzeitig erfüllen", "Fairness ist rein technisch"], 0, "Unterschiedliche Basisraten machen Zielkonflikte unvermeidlich."],
+ ["Was liefert eine globale Erklärung?", ["Die Trainingsdauer", "Welche Merkmale das Modell insgesamt am stärksten nutzt", "Den Grund für eine einzelne Entscheidung", "Die Rechtsgrundlage"], 1, "Etwa Permutation Importance."],
+ ["Wie funktioniert Permutation Importance?", ["Gewichte verdoppeln", "Merkmal zufällig durchmischen und messen, wie stark die Modellgüte sinkt", "Merkmale alphabetisch sortieren", "Merkmal löschen und Modell neu bauen"], 1, "Je stärker der Einbruch, desto wichtiger das Merkmal."],
+ ["Ausgangswert 25 %, SHAP-Beiträge +10, −4, +6. Wie lautet die Vorhersage?", ["31 %", "37 %", "45 %", "25 %"], 1, "25 + 10 − 4 + 6 = 37 %."],
+ ["Was ist eine gegenfaktische Erklärung?", ["Ein Testdatensatz", "Eine Fairnesskennzahl", "Die Angabe, was anders sein müsste, damit das Ergebnis anders ausfällt", "Eine falsche Erklärung"], 2, "Für Betroffene oft am hilfreichsten."],
+ ["Was ist Konzeptdrift?", ["Die Eingabedaten ändern sich", "Der Server zieht um", "Das Modell wird größer", "Der Zusammenhang zwischen Eingaben und Zielgröße ändert sich"], 3, "Datendrift betrifft nur die Eingaben."],
+ ["Was ist ein Adversarial Example?", ["Ein Fehler im Code", "Ein Beispiel aus einem Wettbewerb", "Ein besonders gutes Trainingsbeispiel", "Eine gezielt minimal veränderte Eingabe, die das Modell täuscht"], 3, "Für Menschen unauffällig, für das Modell folgenreich."],
+ ["Was ist Data Poisoning?", ["Daten in der Cloud speichern", "Manipulation der Trainingsdaten, um das Modell zu verändern", "Verschlüsseln von Daten", "Löschen von Daten"], 1, "Schutz: Datenherkunft, Zugriffsrechte, Qualitätsprüfung."],
+ ["Was schützt am besten gegen Prompt Injection bei einem KI-Agenten?", ["Externe Inhalte nie als Anweisung behandeln, Rechte begrenzen und folgenreiche Aktionen freigeben lassen", "Mehr Trainingsdaten", "Längere Prompts", "Höhere Temperatur"], 0, "Minimale Rechte und Freigaben."],
+ ["Was bedeutet Human-on-the-loop?", ["Ein Mensch überwacht das laufende System und kann eingreifen", "Ein Mensch entscheidet, ob KI eingesetzt wird", "Ein Mensch entscheidet jeden Fall", "Es gibt keinen Menschen"], 0, "In-the-loop: entscheidet; in-command: entscheidet über den Einsatz."],
+ ["Seit wann müssen Anbieter und Betreiber nach der EU-KI-Verordnung für KI-Kompetenz ihres Personals sorgen?", ["Ab 2. August 2027", "Seit 1. August 2024", "Gar nicht", "Seit 2. Februar 2025"], 3, "Art. 4 gilt seit 2. Februar 2025."],
+ ["Welche Anforderung gehört NICHT zu den sieben EU-Leitlinien für vertrauenswürdige KI?", ["Technische Robustheit und Sicherheit", "Transparenz", "Rechenschaftspflicht", "Gewinnmaximierung"], 3, "Gewinn ist kein Kriterium für Vertrauenswürdigkeit."],
+ ["Welche Norm beschreibt ein Managementsystem für KI?", ["ISO 9001", "DIN 69901", "ISO/IEC 42001", "ISO 14001"], 2, "ISO/IEC 42001 ist das KI-Managementsystem."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Was gehört zu „Chancen und Herausforderungen der KI“ in der Prüfung?", "a": "§ 4 Nr. 4 der Rechtsvorschrift nennt algorithmischen Bias, Erklärbarkeit und die Robustheit neuronaler Netze. In Situationsaufgaben wird zudem erwartet, Chancen und Risiken eines KI-Einsatzes abzuwägen."}
+ ],
+ "l1": [
+  {"q": "Welche Chancen bietet KI für Unternehmen?", "a": "Vor allem Effizienz durch Automatisierung von Routine, höhere und gleichmäßigere Qualität, bessere Vorhersagen, erschlossenes Wissen und neue datenbasierte Angebote. Jede Chance sollte mit einer Messgröße verbunden werden."}
+ ],
+ "l2": [
+  {"q": "Welche Risiken hat KI im Unternehmen?", "a": "Fehler und Halluzinationen, Bias und Diskriminierung, Intransparenz, mangelnde Robustheit, Datenschutz- und Rechtsrisiken, Abhängigkeit von Anbietern sowie Akzeptanzprobleme und ökologische Kosten."}
+ ],
+ "l3": [
+  {"q": "Was ist algorithmischer Bias?", "a": "Eine systematische Verzerrung, durch die ein KI-System bestimmte Personen oder Gruppen benachteiligt. Sie entsteht meist in den Daten, in der Wahl der Zielgröße oder durch Rückkopplung im Einsatz."},
+  {"q": "Welche Arten von Bias gibt es?", "a": "Unter anderem historischen Bias, Stichproben- bzw. Auswahlbias, Messbias, Proxy-Bias, Bias durch Rückkopplung und Automation Bias beim Menschen."}
+ ],
+ "l4": [
+  {"q": "Warum ist KI in der Personalauswahl besonders heikel?", "a": "Weil historische Daten frühere Benachteiligungen enthalten und Entscheidungen über Arbeit Menschen stark betreffen. Die EU-KI-Verordnung stuft KI in der Personalauswahl als Hochrisiko ein."}
+ ],
+ "l5": [
+  {"q": "Wie misst man Fairness eines KI-Modells?", "a": "Mit Kennzahlen je Gruppe, etwa der Auswahlquote (Demographic Parity), dem Recall (Equal Opportunity) oder Recall und Falsch-Positiv-Rate zusammen (Equalized Odds)."},
+  {"q": "Was ist die 80-%-Regel?", "a": "Eine US-Faustregel: Liegt die Auswahlquote einer Gruppe unter 80 % der Quote der bevorzugten Gruppe, gilt das als Hinweis auf Benachteiligung. In Deutschland gibt das AGG keine feste Grenze vor, die Regel ist aber ein nützlicher Prüfpunkt."}
+ ],
+ "l6": [
+  {"q": "Wie kann man Bias in KI-Systemen reduzieren?", "a": "Fairnessziel festlegen, Daten auf Repräsentativität und Proxys prüfen, Kennzahlen je Gruppe messen, gegebenenfalls Daten oder Training anpassen, im Betrieb überwachen und alles dokumentieren."}
+ ],
+ "l7": [
+  {"q": "Was bedeutet Erklärbarkeit von KI?", "a": "Dass Menschen nachvollziehen können, warum ein KI-System zu einem Ergebnis kommt. Welche Erklärung nötig ist, hängt von der Zielgruppe ab: Betroffene, Fachanwender, Entwickler oder Aufsicht."},
+  {"q": "Gibt es ein Recht auf Erklärung von KI-Entscheidungen?", "a": "Bei automatisierten Entscheidungen nach Art. 22 DSGVO müssen aussagekräftige Informationen über die Logik gegeben werden; der EuGH hat das 2025 konkretisiert. Die EU-KI-Verordnung sieht in Art. 86 ein Recht auf Erläuterung bei bestimmten Hochrisiko-Entscheidungen vor."}
+ ],
+ "l8": [
+  {"q": "Was ist Permutation Importance?", "a": "Ein modellunabhängiges Verfahren: Ein Merkmal wird zufällig durchmischt, und man misst, wie stark die Modellgüte sinkt. Je größer der Einbruch, desto wichtiger ist das Merkmal."}
+ ],
+ "l9": [
+  {"q": "Was ist SHAP?", "a": "Ein Erklärverfahren auf Basis der Shapley-Werte aus der Spieltheorie. Es verteilt eine einzelne Vorhersage auf die Merkmale; Ausgangswert plus alle Beiträge ergeben genau die Vorhersage."},
+  {"q": "Was ist der Unterschied zwischen LIME und SHAP?", "a": "LIME nähert das Modell in der Umgebung eines Falls mit einem einfachen Ersatzmodell an. SHAP berechnet faire Beiträge jedes Merkmals, die sich zur Vorhersage aufsummieren."}
+ ],
+ "l10": [
+  {"q": "Sollte man erklärbare Modelle oder Blackbox-Modelle verwenden?", "a": "Bei Entscheidungen über Menschen mit Begründungspflicht sind interpretierbare Modelle meist vorzuziehen, wenn sie fast gleich gut sind. Blackbox-Modelle mit Erklärverfahren eignen sich, wenn ihre Genauigkeit deutlich höher ist und die Erklärung für die Kontrolle ausreicht."}
+ ],
+ "l11": [
+  {"q": "Was ist der Unterschied zwischen Datendrift und Konzeptdrift?", "a": "Bei Datendrift ändern sich die Eingabedaten, etwa durch neue Kundengruppen. Bei Konzeptdrift ändert sich der Zusammenhang zwischen Eingaben und Zielgröße, etwa das Kaufverhalten nach einer Preisänderung."}
+ ],
+ "l12": [
+  {"q": "Was sind Adversarial Examples?", "a": "Gezielt minimal veränderte Eingaben, die ein Modell zu falschen Ausgaben bringen, obwohl Menschen keinen Unterschied sehen. Schutz bieten Adversarial Training, Eingabeprüfung, mehrere Sensoren und menschliche Kontrolle."}
+ ],
+ "l13": [
+  {"q": "Welche Angriffe gibt es auf KI-Systeme?", "a": "Unter anderem Data Poisoning (manipulierte Trainingsdaten), Prompt Injection, Jailbreaks, Modelldiebstahl durch viele Anfragen, Membership Inference und Angriffe über die Lieferkette vortrainierter Modelle."}
+ ],
+ "l14": [
+  {"q": "Wie macht man ein KI-System robust?", "a": "Durch realistische Tests mit Randfällen, Datenaugmentation, Adversarial Training, Ausgabe von Unsicherheit, eine Rückfallebene für Ausfälle sowie laufendes Monitoring und Red Teaming."}
+ ],
+ "l15": [
+  {"q": "Was bedeutet Human-in-the-loop?", "a": "Ein Mensch entscheidet jeden Fall oder alle unsicheren Fälle, die KI macht nur Vorschläge. Bei Human-on-the-loop überwacht ein Mensch das laufende System und kann eingreifen."},
+  {"q": "Was verlangt die EU-KI-Verordnung zur menschlichen Aufsicht?", "a": "Für Hochrisiko-KI wirksame menschliche Aufsicht (Art. 14): Aufsichtspersonen müssen das System verstehen, Automation Bias kennen und Ausgaben übergehen oder das System anhalten können."}
+ ],
+ "l16": [
+  {"q": "Was macht KI vertrauenswürdig?", "a": "Nach den EU-Leitlinien von 2019: menschliche Aufsicht, Robustheit und Sicherheit, Datenschutz, Transparenz, Fairness, gesellschaftliches und ökologisches Wohlergehen sowie Rechenschaftspflicht."},
+  {"q": "Was ist KI-Governance im Unternehmen?", "a": "Die Regeln und Strukturen für den KI-Einsatz: Leitlinie, Inventar aller KI-Anwendungen mit Risikoeinstufung, Verantwortliche, Freigabeprozesse, Schulungen und zum Beispiel ein Managementsystem nach ISO/IEC 42001."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 6 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 1 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+  var el = ["faNa", "faSa", "faNb", "faSb"].map(function (id) { return document.getElementById(id); });
+  function rechne() {
+    var v = el.map(function (e) { return Math.max(0, +e.value || 0); });
+    var qa = v[0] ? v[1] / v[0] : NaN, qb = v[2] ? v[3] / v[2] : NaN;
+    var lo = Math.min(qa, qb), hi = Math.max(qa, qb), ratio = hi ? lo / hi : NaN;
+    document.getElementById("faOut").innerHTML = kpi("Auswahlquote A", fmt(qa * 100) + " %") + kpi("Auswahlquote B", fmt(qb * 100) + " %") +
+      kpi("Verhältnis niedrig/hoch", fmt(ratio, 2)) + kpi("Differenz", fmt(Math.abs(qa - qb) * 100) + " Pp.");
+    document.getElementById("faNote").textContent = isFinite(ratio) ? (ratio < 0.8 ? "Unter 0,8: nach der 80-%-Regel ein Hinweis auf Benachteiligung – Ursachen prüfen." : "Mindestens 0,8: nach der 80-%-Regel unauffällig. Andere Fairnessmaße trotzdem prüfen.") : "";
+  }
+  el.forEach(function (e) { e.addEventListener("input", rechne); }); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 6 */
+(function () {
+  var BI = ["historischer Bias", "Stichproben-/Auswahlbias", "Messbias", "Proxy-Bias", "Automation Bias"];
+  var GL = ["global", "lokal"];
+  var DR = ["Datendrift", "Konzeptdrift"];
+  var AN = ["Prompt Injection", "Data Poisoning", "Modelldiebstahl", "Adversarial Example"];
+  var HU = ["Human-in-the-loop", "Human-on-the-loop", "Human-in-command"];
+  window.UEBUNGEN = {
+    modul: 6,
+    aufgaben: {
+      a1: { teile: [
+        { id: "b1", label: "1. Dialekt", typ: "wahl", punkte: 1, optionen: BI, richtig: 1 },
+        { id: "b2", label: "2. Beförderungen der letzten 20 Jahre", typ: "wahl", punkte: 1, optionen: BI, richtig: 0 },
+        { id: "b3", label: "3. Postleitzahl", typ: "wahl", punkte: 1, optionen: BI, richtig: 3 },
+        { id: "b4", label: "4. Empfehlung ungeprüft übernommen", typ: "wahl", punkte: 1, optionen: BI, richtig: 4 }
+      ] },
+      a2: { teile: [{ id: "proxy", label: "Stellungnahme und zwei Proxys", typ: "text", punkte: 3, erwartung: "Reicht nicht, Proxys tragen Information weiter (1 P.); z. B. Vorname, Teilzeit, Elternzeit-Lücken, Abschlussjahr, Hobbys (2 P.)." }] },
+      a3: { teile: [
+        { id: "qa", label: "Auswahlquote A in %", typ: "zahl", punkte: 1, wert: 30, tol: 0.1, einheit: "%" },
+        { id: "qb", label: "Auswahlquote B in %", typ: "zahl", punkte: 1, wert: 18, tol: 0.1, einheit: "%" },
+        { id: "r", label: "Verhältnis B/A", typ: "zahl", punkte: 1, wert: 0.6, tol: 0.005 },
+        { id: "bew", label: "Einschätzung nach 80-%-Regel", typ: "wahl", punkte: 1, optionen: ["unauffällig", "Hinweis auf Benachteiligung"], richtig: 1 }
+      ] },
+      a4: { teile: [
+        { id: "ra", label: "Recall Gruppe A", typ: "zahl", punkte: 1, wert: 0.8, tol: 0.001 },
+        { id: "rb", label: "Recall Gruppe B", typ: "zahl", punkte: 1, wert: 0.6, tol: 0.001 },
+        { id: "d", label: "Differenz", typ: "zahl", punkte: 1, wert: 0.2, tol: 0.001 }
+      ] },
+      a5: { teile: [
+        { id: "g1", label: "1. Warum mein Antrag?", typ: "wahl", punkte: 1, optionen: GL, richtig: 1 },
+        { id: "g2", label: "2. Wichtigste Merkmale insgesamt", typ: "wahl", punkte: 1, optionen: GL, richtig: 0 },
+        { id: "g3", label: "3. Was müsste sich ändern?", typ: "wahl", punkte: 1, optionen: GL, richtig: 1 }
+      ] },
+      a6: { teile: [
+        { id: "p", label: "a) Vorhergesagte Kündigungswahrscheinlichkeit in %", typ: "zahl", punkte: 2, wert: 42, tol: 0, einheit: "%" },
+        { id: "satz", label: "b) Satz für das Serviceteam", typ: "text", punkte: 2, erwartung: "Verständlich: Hauptgründe kurze Laufzeit und Beschwerden, Treueprogramm wirkt dagegen, Gespräch zu Beschwerden als Hebel." }
+      ] },
+      a7: { teile: [
+        { id: "d1", label: "1. Viele neue junge Kunden", typ: "wahl", punkte: 1, optionen: DR, richtig: 0 },
+        { id: "d2", label: "2. Anderes Kaufverhalten nach Gesetzesänderung", typ: "wahl", punkte: 1, optionen: DR, richtig: 1 },
+        { id: "erk", label: "Wie erkennt man Drift?", typ: "text", punkte: 2, erwartung: "Eingabeverteilungen mit Trainingsdaten vergleichen, Modellgüte laufend messen, Warnschwellen und Zuständige." }
+      ] },
+      a8: { teile: [
+        { id: "a1", label: "1. Unsichtbare Anweisung im Dokument", typ: "wahl", punkte: 1, optionen: AN, richtig: 0 },
+        { id: "a2", label: "2. Gefälschte Bewertungen im Training", typ: "wahl", punkte: 1, optionen: AN, richtig: 1 },
+        { id: "a3", label: "3. Millionen Anfragen, Modell nachgebaut", typ: "wahl", punkte: 1, optionen: AN, richtig: 2 },
+        { id: "a4", label: "4. Aufkleber täuschen Kamera", typ: "wahl", punkte: 1, optionen: AN, richtig: 3 }
+      ] },
+      a9: { teile: [
+        { id: "h1", label: "1. Sachbearbeiterin entscheidet jeden Fall", typ: "wahl", punkte: 1, optionen: HU, richtig: 0 },
+        { id: "h2", label: "2. Leitstand überwacht und übernimmt bei Bedarf", typ: "wahl", punkte: 1, optionen: HU, richtig: 1 },
+        { id: "h3", label: "3. Vorstand entscheidet über Einsatzbereiche", typ: "wahl", punkte: 1, optionen: HU, richtig: 2 }
+      ] },
+      a10: { teile: [
+        { id: "wahl", label: "Empfohlenes Modell", typ: "wahl", punkte: 1, optionen: ["Logistische Regression", "Gradient Boosting"], richtig: 0 },
+        { id: "begr", label: "Zwei Argumente", typ: "text", punkte: 3, erwartung: "Kleiner Leistungsunterschied; Entscheidungen über Menschen müssen nachvollziehbar und auf Diskriminierung prüfbar sein (DSGVO, AGG); einfaches Modell direkt erklärbar." }
+      ] },
+      a11: { teile: [{ id: "abw", label: "Chancen, Risiken und Empfehlung", typ: "text", punkte: 5, erwartung: "Zwei Chancen (z. B. kürzere Fahrten, mehr Pflegezeit) (2 P.), zwei Risiken (z. B. Leistungskontrolle/Mitbestimmung, Gesundheitsdaten, Akzeptanz) (2 P.), Empfehlung mit Bedingungen (Pilot, Betriebsvereinbarung, Anpassbarkeit) (1 P.)." }] },
+      a12: { teile: [{ id: "konzept", label: "Ihr Konzept", typ: "text", punkte: 8, erwartung: "Recht: Hochrisiko (Anhang III), Betreiberpflichten, DSGVO/Art. 22/DSFA, AGG, Mitbestimmung (2 P.). Vor Start: Fairness-Test je Gruppe, Proxy-Prüfung, Anbieter-Dokumentation (2 P.). Aufsicht: Menschen entscheiden, geschult, mit Zeit, Erklärungen (2 P.). Betrieb: Monitoring je Gruppe, Beschwerdeweg, Audits, Betriebsvereinbarung (2 P.)." }] }
+    }
+  };
+})();
+</script>

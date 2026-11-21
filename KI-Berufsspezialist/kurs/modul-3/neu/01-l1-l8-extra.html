@@ -1,0 +1,276 @@
+<!--EXTRA l1-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Datenarten, Quellen und Datenmengen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Webshop und seine Daten</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Datenbestand</th><th>Art</th><th>Typisches Format</th><th>Für ML nutzbar als</th></tr></thead>
+          <tbody>
+            <tr><td>Bestelltabelle (Nummer, Datum, Betrag)</td><td>strukturiert</td><td>Datenbank</td><td>Merkmale für Absatzprognose</td></tr>
+            <tr><td>Warenkorb mit beliebig vielen Artikeln</td><td>semistrukturiert</td><td>JSON</td><td>Aufgerollt zu Anzahl Artikel, Warenwert</td></tr>
+            <tr><td>Kundenmails und Bewertungen</td><td>unstrukturiert</td><td>Text</td><td>Stimmungsanalyse, Themenzuordnung</td></tr>
+            <tr><td>Produktfotos</td><td>unstrukturiert</td><td>Bilddateien</td><td>Automatische Kategorisierung</td></tr>
+            <tr><td>Klicks im Shop (Zeitstempel, Seite)</td><td>semistrukturiert (Log)</td><td>Logdatei, JSON</td><td>Empfehlungen, Abbruchprognose</td></tr>
+          </tbody>
+        </table></div>
+        <p>Man sieht: Ein einziger Webshop erzeugt alle drei Datenarten. Für ein Modell müssen sie meist erst in eine Tabelle mit Zahlen gebracht werden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Volume und Velocity bei Sensordaten</span>
+        <p>Eine Anlage hat 200 Sensoren, die jeweils 10 Messwerte pro Sekunde liefern.</p>
+        <ol class="steps">
+          <li><div>Werte pro Sekunde: <span class="calcline">200 · 10 = 2.000</span></div></li>
+          <li><div>Werte pro Tag: <span class="calcline">2.000 · 86.400 s = 172.800.000</span> (172,8 Millionen)</div></li>
+          <li><div>Speicher bei 8 Byte je Wert: <span class="calcline">172.800.000 · 8 ≈ 1,38 GB pro Tag</span>, im Jahr etwa 500 GB</div></li>
+        </ol>
+        <p>Das ist <b>Volume</b> (Menge) und <b>Velocity</b> (Geschwindigkeit) zugleich. Solche Datenmengen verlangen von Anfang an eine Überlegung: Speichern wir jede Messung oder nur Zusammenfassungen (z. B. Mittelwert je Minute)?</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ist die Datenlage tragfähig? Fünf Fragen vor dem Projekt</span>
+        <ol>
+          <li>Welche Daten gibt es, <b>wo liegen sie</b>, wer verantwortet sie?</li>
+          <li>Sind sie <b>aktuell und vollständig</b> genug (Lektion 6)?</li>
+          <li>Gibt es zum Ziel eine <b>Antwort in der Vergangenheit</b> (Label)?</li>
+          <li>Dürfen wir sie <b>rechtlich</b> für diesen Zweck nutzen (Lektion 5)?</li>
+          <li>Wie viele Beispiele gibt es von dem <b>seltenen, aber wichtigen</b> Fall?</li>
+        </ol>
+        <p>Scheitert das Projekt später, liegt es erfahrungsgemäß öfter an einer dieser Fragen als an der Auswahl des Algorithmus.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie je ein Beispiel und ein typisches Format für strukturierte, semistrukturierte und unstrukturierte Daten.</p>
+        <p><b>Musterlösung:</b> Strukturiert: Kundentabelle in einer Datenbank oder CSV-Datei (2 Punkte). Semistrukturiert: Bestellung mit beliebig vielen Artikeln als JSON oder XML (2 Punkte). Unstrukturiert: E-Mails oder Fotos als Text- bzw. Bilddateien (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l2-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Tabellen, Schlüssel und Normalisierung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Warum Normalisierung Arbeit spart</span>
+        <p>Frau Meier hat 500 Bestellungen aufgegeben und zieht von Köln nach Bonn. In der <b>einen großen Tabelle</b> steht der Ort in jeder der 500 Zeilen: 500 Änderungen, und wenn eine vergessen wird, hat dieselbe Kundin zwei Orte. In der <b>normalisierten</b> Lösung steht der Ort einmal in der Tabelle <code>kunde</code>: <b>eine</b> Änderung genügt. Das nennt man das Vermeiden von Redundanz und Änderungsanomalien.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein kleines Datenmodell für einen Shop</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tabelle</th><th>Spalten</th><th>Primärschlüssel</th><th>Fremdschlüssel</th></tr></thead>
+          <tbody>
+            <tr><td><code>kunde</code></td><td>id, name, ort</td><td>id</td><td>–</td></tr>
+            <tr><td><code>bestellung</code></td><td>nr, kunde_id, datum</td><td>nr</td><td>kunde_id → kunde.id</td></tr>
+            <tr><td><code>artikel</code></td><td>id, name, preis</td><td>id</td><td>–</td></tr>
+            <tr><td><code>position</code></td><td>bestellung_nr, artikel_id, menge</td><td>(bestellung_nr, artikel_id)</td><td>bestellung_nr → bestellung.nr; artikel_id → artikel.id</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Beziehungen:</b> Ein Kunde hat viele Bestellungen (1:n). Eine Bestellung enthält viele Artikel, ein Artikel steckt in vielen Bestellungen (n:m) – deshalb die Zwischentabelle <code>position</code>.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Welcher Schlüssel eignet sich?</span>
+        <p>Als Primärschlüssel der Tabelle <code>kunde</code> könnte man die E-Mail-Adresse nehmen. Das ist riskant: Sie kann sich ändern, und dann müssten alle Verweise angepasst werden. Üblich ist eine <b>künstliche, unveränderliche ID</b> (laufende Nummer oder zufällige Kennung). Gute Primärschlüssel sind eindeutig, nie leer und ändern sich nie.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die Begriffe Primärschlüssel und Fremdschlüssel am Beispiel der Tabellen kunde und bestellung.</p>
+        <p><b>Musterlösung:</b> Der Primärschlüssel identifiziert jede Zeile einer Tabelle eindeutig, z. B. kunde.id (2 Punkte). Der Fremdschlüssel in bestellung, nämlich kunde_id, verweist auf den Primärschlüssel kunde.id und stellt die Beziehung her: Ein Kunde kann viele Bestellungen haben (1:n) (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>SQL an einer kleinen Tabelle durchspielen</h3>
+        <p>Am besten lernt man SQL, indem man das Ergebnis selbst vorhersagt. Wir nutzen eine Tabelle mit sechs Kunden:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>id</th><th>name</th><th>ort</th><th class="r">umsatz</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Meier</td><td>Köln</td><td class="r">1.200</td></tr>
+            <tr><td>2</td><td>Yilmaz</td><td>Bonn</td><td class="r">800</td></tr>
+            <tr><td>3</td><td>Schulz</td><td>Köln</td><td class="r">450</td></tr>
+            <tr><td>4</td><td>Weber</td><td>Aachen</td><td class="r">2.100</td></tr>
+            <tr><td>5</td><td>Kaya</td><td>Köln</td><td class="r">1.500</td></tr>
+            <tr><td>6</td><td>Berg</td><td>Bonn</td><td class="r">300</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Filtern und Sortieren</span>
+        <pre class="code">SELECT name, umsatz
+FROM   kunde
+WHERE  ort = 'Köln' AND umsatz &gt; 1000
+ORDER BY umsatz DESC;</pre>
+        <p><b>Schritt für Schritt:</b> Zuerst werden die Zeilen mit Ort Köln gesucht (Meier, Schulz, Kaya), dann davon die mit Umsatz über 1.000 (Meier 1.200 und Kaya 1.500). Schließlich wird absteigend sortiert. <b>Ergebnis:</b> Kaya 1.500, Meier 1.200.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Gruppieren und Gruppen filtern</span>
+        <pre class="code">SELECT   ort, COUNT(*) AS anzahl, AVG(umsatz) AS mittel
+FROM     kunde
+GROUP BY ort
+HAVING   COUNT(*) &gt;= 2
+ORDER BY mittel DESC;</pre>
+        <div class="table-wrap"><table>
+          <thead><tr><th>ort</th><th class="r">anzahl</th><th class="r">mittel</th><th>bleibt nach HAVING?</th></tr></thead>
+          <tbody>
+            <tr><td>Köln</td><td class="r">3</td><td class="r">(1.200 + 450 + 1.500) : 3 = 1.050</td><td>ja</td></tr>
+            <tr><td>Bonn</td><td class="r">2</td><td class="r">(800 + 300) : 2 = 550</td><td>ja</td></tr>
+            <tr><td>Aachen</td><td class="r">1</td><td class="r">2.100</td><td>nein (nur 1 Kunde)</td></tr>
+          </tbody>
+        </table></div>
+        <p>Ergebnis: Köln (1.050) vor Bonn (550). Aachen wird von HAVING herausgefiltert, obwohl Weber den höchsten Einzelumsatz hat.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Von der Frage zur Abfrage</span>
+        <ul>
+          <li><b>„Wie viele Kunden haben wir?“</b> → <code>SELECT COUNT(*) FROM kunde;</code> (6)</li>
+          <li><b>„Wie hoch ist der Gesamtumsatz?“</b> → <code>SELECT SUM(umsatz) FROM kunde;</code> (6.350)</li>
+          <li><b>„Welche Orte kommen vor?“</b> → <code>SELECT DISTINCT ort FROM kunde;</code> (Köln, Bonn, Aachen)</li>
+          <li><b>„Die drei umsatzstärksten Kunden“</b> → <code>SELECT name, umsatz FROM kunde ORDER BY umsatz DESC LIMIT 3;</code> (Weber, Kaya, Meier)</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Schreiben Sie eine Abfrage, die für jeden Ort die Anzahl der Kunden und den Gesamtumsatz liefert, aber nur für Orte mit einem Gesamtumsatz über 2.000.</p>
+        <p><b>Musterlösung:</b> SELECT ort, COUNT(*) AS anzahl, SUM(umsatz) AS gesamt FROM kunde GROUP BY ort HAVING SUM(umsatz) &gt; 2000; (je 1 Punkt für SELECT mit Aggregaten, GROUP BY ort, HAVING statt WHERE, richtige Bedingung, richtige Syntax). Ergebnis bei der obigen Tabelle: Köln (3 / 3.150) und Aachen (1 / 2.100).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l4-->
+      <div class="prose">
+        <h3>JOINs an Beispieltabellen durchspielen</h3>
+        <p>Zwei kleine Tabellen: Kunden (1 Meier, 2 Yilmaz, 3 Schulz) und Bestellungen (Nr. 10: Kunde 1, 120 €; Nr. 11: Kunde 1, 80 €; Nr. 12: Kunde 2, 200 €). Schulz hat noch nichts bestellt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: INNER JOIN gegen LEFT JOIN</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>JOIN</th><th>Zeilen im Ergebnis</th><th>Wer fehlt oder steht mit NULL?</th></tr></thead>
+          <tbody>
+            <tr><td><code>INNER JOIN</code></td><td>3: Meier 120, Meier 80, Yilmaz 200</td><td>Schulz fehlt ganz</td></tr>
+            <tr><td><code>LEFT JOIN</code> (Kunde links)</td><td>4: wie oben plus Schulz mit Betrag NULL</td><td>Schulz erscheint, der Betrag ist leer</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Unterschied ist wichtig für ML: Mit dem INNER JOIN <b>verliert</b> man alle Kunden ohne Bestellung – oft genau die gefährdeten Kunden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Zeile pro Kunde für das Modell</span>
+        <pre class="code">SELECT   k.name, COUNT(b.nr) AS anzahl, COALESCE(SUM(b.betrag), 0) AS umsatz
+FROM     kunde k
+LEFT JOIN bestellung b ON b.kunde_id = k.id
+GROUP BY k.id, k.name;</pre>
+        <div class="table-wrap"><table>
+          <thead><tr><th>name</th><th class="r">anzahl</th><th class="r">umsatz</th></tr></thead>
+          <tbody>
+            <tr><td>Meier</td><td class="r">2</td><td class="r">200</td></tr>
+            <tr><td>Yilmaz</td><td class="r">1</td><td class="r">200</td></tr>
+            <tr><td>Schulz</td><td class="r">0</td><td class="r">0</td></tr>
+          </tbody>
+        </table></div>
+        <p>Jetzt gibt es genau eine Zeile pro Kunde, und Schulz hat den Umsatz 0 statt „leer“ (dank <code>COALESCE</code>). So sieht eine Trainingstabelle aus.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Fehler ohne Verbindungsbedingung</span>
+        <p>Vergisst man das <code>ON b.kunde_id = k.id</code>, verbindet die Datenbank <b>jede Zeile mit jeder</b>: 3 Kunden × 3 Bestellungen = 9 Zeilen, in denen Meier plötzlich Bestellungen von Yilmaz hat. Man nennt das ein kartesisches Produkt. Bei großen Tabellen (1 Million × 1 Million Zeilen) bringt das die Datenbank zum Stillstand. Merke: Jeder JOIN braucht eine Bedingung.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Sie wollen alle Kunden sehen, auch die ohne Bestellung, jeweils mit der Anzahl ihrer Bestellungen. Welche JOIN-Art nutzen Sie, und warum ist INNER JOIN hier falsch?</p>
+        <p><b>Musterlösung:</b> LEFT JOIN von kunde auf bestellung (2 Punkte), danach GROUP BY und COUNT (1 Punkt). Ein INNER JOIN liefert nur Kunden mit mindestens einer Bestellung; Kunden ohne Bestellung würden aus dem Ergebnis verschwinden (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l5-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Verzerrung, Pseudonymisierung und Datenminimierung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Umfrage, die nur Zufriedene beantworten</span>
+        <p>Ein Händler bittet 1.000 Kunden per E-Mail um eine Bewertung. 120 antworten, 108 davon sind zufrieden: Das sind <span class="calcline">108 : 120 = 90 %</span>. Aber die 880 Nicht-Antwortenden fehlen. Unzufriedene Kunden antworten oft gar nicht oder haben den Händler schon verlassen. Die 90 % bilden <b>nicht die Wirklichkeit</b> ab (Auswahlverzerrung). Ein Modell, das auf diesen Daten lernt, wäre zu optimistisch. Gegenmittel: Nicht-Antwortende gezielt nachfragen oder die Verzerrung bei der Deutung offenlegen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Pseudonymisierung und Anonymisierung im Vergleich</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Original</th><th>Pseudonymisiert</th><th>Anonymisiert (aggregiert)</th></tr></thead>
+          <tbody>
+            <tr><td>Hannah Meier, 34, Köln, 1.250 €</td><td>K-4711, 34, 50667, 1.250 €<br><i>Zuordnungstabelle K-4711 → Hannah Meier liegt getrennt und geschützt</i></td><td>Altersgruppe 30–39, Region West, Mittelwert 1.180 € (Gruppe von 250)</td></tr>
+          </tbody>
+        </table></div>
+        <p>Bei der <b>Pseudonymisierung</b> kann der Personenbezug mit der Zuordnungstabelle wiederhergestellt werden: Es sind weiterhin personenbezogene Daten, und die DSGVO gilt. Bei echter <b>Anonymisierung</b> ist niemand mehr identifizierbar, die DSGVO gilt nicht mehr. Aber: Anonymisieren ist schwer, denn Kombinationen aus Alter, Ort und Beruf können einzelne Personen verraten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Datenminimierung im Projekt</span>
+        <p>Für eine Kündigungsprognose reichen Vertragsdaten und Nutzungsverhalten. <b>Name, Straße und Telefonnummer</b> braucht das Modell nicht: Man lässt sie weg oder ersetzt sie durch eine Kennung. Das reduziert das Risiko, falls Daten abfließen, und erfüllt den Grundsatz der Datenminimierung. Fragen Sie bei jedem Merkmal: <b>Brauche ich es wirklich für das Ziel?</b></p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie den Unterschied zwischen Pseudonymisierung und Anonymisierung und sagen Sie, ob die DSGVO jeweils gilt.</p>
+        <p><b>Musterlösung:</b> Bei der Pseudonymisierung wird ein Merkmal (z. B. Name) durch eine Kennung ersetzt; die Zuordnung ist getrennt gespeichert und der Personenbezug kann wiederhergestellt werden – die DSGVO gilt weiter (3 Punkte). Bei der Anonymisierung kann niemand mehr identifiziert werden – die DSGVO gilt nicht mehr (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>Datenqualität messen: konkrete Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Qualitätskennzahlen für eine Kundentabelle</span>
+        <p>Eine Tabelle enthält 1.000 Kunden.</p>
+        <ul>
+          <li><b>Vollständigkeit:</b> Das Alter fehlt bei 150 Kunden. <span class="calcline">(1.000 − 150) : 1.000 = 85 %</span> vollständig.</li>
+          <li><b>Gültigkeit:</b> 25 Postleitzahlen haben nicht fünf Ziffern. <span class="calcline">975 : 1.000 = 97,5 %</span> gültig.</li>
+          <li><b>Eindeutigkeit:</b> 40 Kunden kommen doppelt vor. <span class="calcline">(1.000 − 40) : 1.000 = 96 %</span> eindeutig.</li>
+        </ul>
+        <p>Mit solchen Zahlen lässt sich Qualität über die Zeit verfolgen und gegen Ziele (z. B. mindestens 95 % Vollständigkeit) prüfen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mängel richtig zuordnen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Mangel</th><th>Dimension</th></tr></thead>
+          <tbody>
+            <tr><td>Bei 20 % der Aufträge fehlt das Lieferdatum</td><td>Vollständigkeit</td></tr>
+            <tr><td>Alter eines Kunden: 212 Jahre</td><td>Korrektheit (Gültigkeit)</td></tr>
+            <tr><td>Lieferdatum liegt vor dem Bestelldatum</td><td>Konsistenz</td></tr>
+            <tr><td>Adressen stammen aus dem Jahr 2015</td><td>Aktualität</td></tr>
+            <tr><td>Ein Kunde steht zweimal in der Datei</td><td>Eindeutigkeit</td></tr>
+            <tr><td>Nur Großkunden in den Trainingsdaten, das Modell soll aber alle bewerten</td><td>Repräsentativität</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was ein Fehler kosten kann</span>
+        <p>Ein Versandhändler bewirbt Kunden mit Rabattcode, aber 3 % der Adressen sind veraltet. Bei 100.000 Briefen zu je 0,80 € gehen <span class="calcline">3.000 · 0,80 € = 2.400 €</span> ins Leere. Wichtiger: Ein Modell, das auf veralteten Adressen trainiert wurde, kann Kunden falsch einordnen. Ein kleiner Mangel multipliziert sich durch jeden Schritt der Verarbeitung.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Dimensionen der Datenqualität und je einen typischen Mangel.</p>
+        <p><b>Musterlösung:</b> Vollständigkeit – fehlende Werte, z. B. Alter bei 20 % der Kunden leer; Konsistenz – widersprüchliche Angaben, z. B. Lieferdatum vor Bestelldatum; Eindeutigkeit – Dubletten, z. B. Kunde doppelt angelegt (je 1 Punkt Dimension, 1 Punkt Mangel). Weitere zulässige Dimensionen: Korrektheit, Aktualität, Repräsentativität.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l7-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Befunde der EDA lesen und umsetzen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein EDA-Befund und die Konsequenzen</span>
+        <p>Für eine Kündigungsprognose liegt eine Tabelle mit 10.000 Kunden und 12 Spalten vor. Die EDA liefert:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Befund</th><th>Bedeutung</th><th>Entscheidung</th></tr></thead>
+          <tbody>
+            <tr><td>Alter fehlt bei 3 %</td><td>wenige Lücken</td><td>mit Median füllen, Indikatorspalte</td></tr>
+            <tr><td>Umsatz: Median 420 €, Maximum 95.000 €</td><td>Ausreißer oder Tippfehler</td><td>bei Fachabteilung klären</td></tr>
+            <tr><td>Spalte „einkommen“ zu 62 % leer</td><td>kaum nutzbar</td><td>Spalte entfernen</td></tr>
+            <tr><td>Kündigungen: 8 % der Kunden</td><td>unbalanciert</td><td>stratifiziert aufteilen, Recall und Precision nutzen</td></tr>
+            <tr><td>„Tarif“ hat die Werte „Basic“, „basic“, „BASIC“</td><td>uneinheitliche Schreibweise</td><td>vereinheitlichen</td></tr>
+          </tbody>
+        </table></div>
+        <p>Jede Zeile ist ein kleiner Auftrag. Die EDA ist erst abgeschlossen, wenn zu jedem Befund eine Entscheidung dokumentiert ist.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Datentyp-Fehler</span>
+        <p>Die Spalte „Umsatz“ enthält Werte wie „1.200“ und „1.200,50“. Das Programm liest sie als <b>Text</b>, weil der Punkt als Tausendertrenner nicht als Zahl erkannt wird. Folge: Der Mittelwert lässt sich nicht berechnen, oder „900“ steht alphabetisch hinter „1.200“. Der Blick auf <code>df.info()</code> zeigt den Typ „object“ statt „float“. Lösung: Zeichen bereinigen und in eine Zahl umwandeln.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Zielvariable prüfen</span>
+        <p>Von 10.000 Kunden haben 800 gekündigt: <span class="calcline">800 : 10.000 = 8 %</span>. Ein „Modell“, das immer „bleibt“ sagt, hätte 92 % Accuracy – und wäre nutzlos. Dieser Befund aus der EDA entscheidet über die Bewertungskennzahlen (Modul 6) und die Aufteilung der Daten (Lektion 14).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie vier Schritte der explorativen Datenanalyse und erklären Sie, warum die Verteilung der Zielvariable wichtig ist.</p>
+        <p><b>Musterlösung:</b> Größe und Datentypen prüfen, fehlende Werte zählen, Kennzahlen berechnen, Verteilungen und Ausreißer ansehen, Zusammenhänge prüfen (4 Punkte, je 1 Punkt). Die Verteilung der Zielvariable zeigt, ob die Klassen ausgewogen sind; bei seltenen Klassen sind besondere Maßnahmen nötig (stratifizieren, andere Metriken) (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l8-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Lücken füllen oder Zeilen löschen?</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Median oder Mittelwert?</span>
+        <p>Die bekannten Gehälter einer Abteilung: 2.800, 3.000, 3.100, 3.200 und 12.000 € (ein Geschäftsführer). Bei einer weiteren Person fehlt der Wert.</p>
+        <ul>
+          <li>Mittelwert: <span class="calcline">24.100 : 5 = 4.820 €</span> – klingt nach „Durchschnitt“, entspricht aber niemandem der vier Beschäftigten.</li>
+          <li>Median: sortiert 2.800, 3.000, <b>3.100</b>, 3.200, 12.000 → <span class="calcline">3.100 €</span></li>
+        </ul>
+        <p>Mit dem Median 3.100 € füllt man die Lücke vernünftig; der Mittelwert hätte einen unrealistisch hohen Wert eingesetzt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn das Fehlen selbst eine Information ist</span>
+        <p>Bei 200 von 1.000 Kunden fehlt das Einkommen. Die Kündigungsquote bei fehlendem Einkommen beträgt 12 %, bei vorhandenem Einkommen 5 %. Kündigungen insgesamt: <span class="calcline">200 · 0,12 + 800 · 0,05 = 24 + 40 = 64</span>, also 6,4 %. Würde man die 200 einfach löschen oder mit dem Median füllen, ginge die Information verloren, dass <b>fehlende Angaben</b> mit höherem Kündigungsrisiko einhergehen. Besser: Einkommen füllen <b>und</b> eine Spalte „einkommen_fehlt“ (0/1) ergänzen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum Zeilen löschen teurer sein kann, als es aussieht</span>
+        <p>Ein Datensatz hat 8 Spalten. In jeder fehlen unabhängig voneinander nur 4 % der Werte. Wie viele Zeilen sind komplett?</p>
+        <p><span class="calcline">0,96⁸ ≈ 0,72</span> – nur <b>72 %</b> der Zeilen sind vollständig, <b>28 % gehen verloren</b>, wenn man jede Zeile mit einer Lücke löscht. Je mehr Spalten, desto schlimmer. Deshalb füllt man in der Praxis meistens, statt zu löschen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> In einer Spalte stehen die Werte 10, 12, (leer), 14, 100. Welchen Wert setzen Sie ein und warum?</p>
+        <p><b>Musterlösung:</b> Bekannte Werte sortiert: 10, 12, 14, 100. Median = (12 + 14) : 2 = 13; Mittelwert = 136 : 4 = 34 (2 Punkte). Der Ausreißer 100 verzerrt den Mittelwert; man füllt mit dem Median 13 (2 Punkte), berechnet nur aus den Trainingsdaten (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->

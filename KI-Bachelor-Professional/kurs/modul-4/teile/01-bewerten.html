@@ -1,0 +1,339 @@
+<!--META {"nr": 4, "titel": "Evaluierung und Clustering", "lektionen": 16, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 4 von 17 · ca. 40 Lernstunden</span>
+      <h1 id="introTitle">Evaluierung und Clustering: Modelle ehrlich bewerten, Gruppen ohne Labels finden</h1>
+      <p>Ein Modell ist erst dann nützlich, wenn man weiß, wie gut es auf neuen Daten ist – und ob diese Güte für das Geschäft reicht. In diesem Modul lernen Sie die wichtigsten Kennzahlen für Klassifikation und Regression, erkennen Über- und Unteranpassung, wählen Validierungsverfahren und Hyperparameter und übersetzen Modellgüte in Euro. Im dritten Teil finden Sie mit k-Means, hierarchischem Clustering und DBSCAN Gruppen in Daten ohne Labels und verdichten viele Merkmale mit PCA.</p>
+      <div class="facts">
+        <span class="chip">16 Lektionen in 3 Teilen</span><span class="chip">8 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 3</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--surface-2);"></i><span><b>Formel</b> – mit Rechenbeispiel</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Konfusionsmatrix" data-part="Teil A · Modelle bewerten">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 25 Minuten</span><h2>Konfusionsmatrix: richtig und falsch, positiv und negativ</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Rauchmelder kann sich auf zwei Arten irren: Er piept, obwohl es nicht brennt (Fehlalarm), oder er bleibt still, obwohl es brennt (übersehen). Beide Fehler sind schlecht – aber unterschiedlich schlimm.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>Konfusionsmatrix</b> (Verwechslungsmatrix) zählt bei binärer Klassifikation die vier möglichen Ausgänge. „Positiv“ ist die Klasse, nach der gesucht wird (Betrug, Defekt, Kündigung) – nicht etwas „Gutes“.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/konfusionsmatrix.gif" width="640" height="380" alt="Animation: 100 Vorhersagen fallen in vier Felder: 40 richtig positiv, 10 falsch positiv, 20 falsch negativ, 30 richtig negativ. Darunter erscheinen Precision 80 Prozent und Recall 67 Prozent." loading="lazy">
+        <figcaption>Zeilen = Vorhersage, Spalten = Wirklichkeit (manche Bücher drehen das um – auf die Beschriftung achten).</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>tatsächlich positiv</th><th>tatsächlich negativ</th></tr></thead>
+        <tbody>
+          <tr><td><b>vorhergesagt positiv</b></td><td><b>TP</b> richtig positiv – Treffer</td><td><b>FP</b> falsch positiv – Fehlalarm (Fehler 1. Art)</td></tr>
+          <tr><td><b>vorhergesagt negativ</b></td><td><b>FN</b> falsch negativ – übersehen (Fehler 2. Art)</td><td><b>TN</b> richtig negativ – korrekt Entwarnung</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erstes Wort = ob die Vorhersage stimmt (richtig/falsch), zweites Wort = was vorhergesagt wurde (positiv/negativ).</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Prüfen Sie immer, ob Zeilen oder Spalten die Wirklichkeit zeigen. scikit-learn legt die Wirklichkeit in die Zeilen – viele Lehrbücher in die Spalten. Wer vertauscht, vertauscht Precision und Recall.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Eselsbrücke im Merksatz löst die meisten Verwechslungen. Lassen Sie für das Beispiel „Kündigerprognose“ alle vier Felder in eigenen Worten benennen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Accuracy, Precision, Recall, F1" data-part="Teil A · Modelle bewerten">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 40 Minuten</span><h2>Accuracy, Precision, Recall, F1 – und wann welche zählt</h2></div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Accuracy = <span class="frac"><span>TP + TN</span><span>TP + TN + FP + FN</span></span> &nbsp;&nbsp; Precision = <span class="frac"><span>TP</span><span>TP + FP</span></span> &nbsp;&nbsp; Recall = <span class="frac"><span>TP</span><span>TP + FN</span></span></div>
+        <div class="eq">F1 = <span class="frac"><span>2 · Precision · Recall</span><span>Precision + Recall</span></span> &nbsp;&nbsp; Spezifität = <span class="frac"><span>TN</span><span>TN + FP</span></span></div>
+        <div class="legend-eq"><span>Precision: „Wie oft stimmt ein Alarm?“ Recall (Sensitivität, Trefferquote): „Wie viele echte Fälle finden wir?“ F1: harmonisches Mittel beider.</span></div>
+      </div>
+      <div class="prose">
+        <h3>Durchgerechnet (TP 40, FP 10, FN 20, TN 30)</h3>
+        <ul>
+          <li>Accuracy = (40 + 30) / 100 = <span class="result">70 %</span></li>
+          <li>Precision = 40 / 50 = <span class="result">80 %</span></li>
+          <li>Recall = 40 / 60 ≈ <span class="result">66,7 %</span></li>
+          <li>F1 = 2 · 0,8 · 0,667 / (0,8 + 0,667) ≈ <span class="result">0,727</span></li>
+          <li>Spezifität = 30 / 40 = <span class="result">75 %</span></li>
+        </ul>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wenn teurer ist …</th><th>dann wichtig</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td>ein übersehener Fall (FN)</td><td>Recall</td><td>Krebsvorsorge, Betrug, sicherheitskritische Defekte</td></tr>
+            <tr><td>ein Fehlalarm (FP)</td><td>Precision</td><td>Spamfilter (wichtige Mail im Spam), Rückrufaktion, Kontosperrung</td></tr>
+            <tr><td>beides ähnlich</td><td>F1</td><td>Themenzuordnung von Anfragen</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Konfusionsmatrix</span>
+        <div class="calc-row">
+          <div class="field"><label for="cmTP">TP</label><input type="number" id="cmTP" value="40" min="0"></div>
+          <div class="field"><label for="cmFP">FP</label><input type="number" id="cmFP" value="10" min="0"></div>
+          <div class="field"><label for="cmFN">FN</label><input type="number" id="cmFN" value="20" min="0"></div>
+          <div class="field"><label for="cmTN">TN</label><input type="number" id="cmTN" value="30" min="0"></div>
+        </div>
+        <div class="calc-row">
+          <div class="field"><label for="cmKfn">Kosten je FN (€, optional)</label><input type="number" id="cmKfn" value="0" min="0"></div>
+          <div class="field"><label for="cmKfp">Kosten je FP (€, optional)</label><input type="number" id="cmKfp" value="0" min="0"></div>
+        </div>
+        <div class="kpis" id="cmOut"></div>
+        <p class="calc-note" id="cmNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Precision fragt nach der Qualität der Alarme, Recall nach der Vollständigkeit der Treffer. Welche wichtiger ist, entscheiden die Kosten der Fehler.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Rechenaufgaben zur Konfusionsmatrix kommen in fast jeder Prüfung. Schreiben Sie immer die Formel, die eingesetzten Zahlen und das Ergebnis in Prozent auf – und einen Satz, was es für den Betrieb bedeutet.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Beispiel gemeinsam und prüfen Sie mit dem Rechner. Tragen Sie dann Kosten ein (FN 500 €, FP 20 €) und zeigen Sie, wie sich die Bewertung verschiebt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="ROC-Kurve und AUC" data-part="Teil A · Modelle bewerten">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Schwelle verschieben: ROC-Kurve und AUC</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Metalldetektor am Flughafen kann man empfindlicher stellen: Dann findet er jedes Messer – aber piept auch bei jedem Gürtel. Stellt man ihn unempfindlich, gibt es wenig Fehlalarme, aber Gefährliches rutscht durch.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die meisten Klassifikatoren liefern eine Wahrscheinlichkeit; erst die <b>Schwelle</b> macht daraus eine Entscheidung. Die <b>ROC-Kurve</b> zeigt für alle Schwellen den Recall (True-Positive-Rate) gegen die Falsch-Positiv-Rate (FPR = FP / (FP + TN)). Die Fläche darunter heißt <b>AUC</b>.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/roc.gif" width="640" height="380" alt="Animation: Links liegen rote positive und grüne negative Fälle auf einer Achse der Modellwahrscheinlichkeit; eine Schwelle wandert von rechts nach links. Rechts entsteht dabei Punkt für Punkt die ROC-Kurve." loading="lazy">
+        <figcaption>Niedrigere Schwelle: mehr Treffer, aber auch mehr Fehlalarme.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>AUC</th><th>Bedeutung</th></tr></thead>
+        <tbody>
+          <tr><td>0,5</td><td>Zufall (Diagonale)</td></tr>
+          <tr><td>0,7 – 0,8</td><td>brauchbar</td></tr>
+          <tr><td>0,8 – 0,9</td><td>gut</td></tr>
+          <tr><td>über 0,9</td><td>sehr gut – bei schwierigen Aufgaben auf Data Leakage prüfen</td></tr>
+          <tr><td>1,0</td><td>perfekt</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Die AUC ist <b>unabhängig von der Schwelle</b> – gut zum Vergleichen von Modellen. Anschaulich: die Wahrscheinlichkeit, dass das Modell einem zufälligen positiven Fall einen höheren Wert gibt als einem zufälligen negativen. Bei sehr unausgewogenen Klassen ist zusätzlich die <b>Precision-Recall-Kurve</b> aussagekräftiger.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Die ROC-Kurve zeigt alle Schwellen auf einmal; die AUC fasst sie in einer Zahl zusammen. Die Schwelle für den Betrieb wählt man danach nach Kosten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Animation zweimal laufen. Fragen Sie: Wo auf der Kurve würden Sie für Betrugserkennung arbeiten, wo für eine Kontosperrung? Es gibt keine allgemein richtige Schwelle.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Unausgewogene Klassen" data-part="Teil A · Modelle bewerten">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Unausgewogene Klassen: warum 99 % Accuracy nichts heißen kann</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Wetterfrosch sagt in der Wüste jeden Tag „kein Regen“ voraus und liegt an 360 von 365 Tagen richtig. Beeindruckend? Nein – die wenigen Regentage, um die es eigentlich geht, verpasst er alle.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Bei <b>unausgewogenen Klassen</b> (class imbalance) ist eine Klasse viel seltener. Accuracy wird dann von der häufigen Klasse dominiert und ist irreführend. Typisch: Betrug, Ausfälle, Kündigungen, seltene Krankheiten.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel:</b> 1.000 Zahlungen, 10 betrügerisch. Ein „Modell“, das immer „kein Betrug“ sagt: <span class="calcline">Accuracy = 990 / 1.000 = 99 %</span>, <span class="calcline">Recall = 0 / 10 = 0 %</span>. Wertlos.</p>
+        <h3>Was hilft</h3>
+        <ul>
+          <li><b>Passende Kennzahlen</b>: Recall, Precision, F1, PR-AUC, Kosten pro Entscheidung statt Accuracy.</li>
+          <li><b>Stratifiziert aufteilen</b>: Der seltene Anteil ist in Training und Test gleich groß.</li>
+          <li><b>Klassen gewichten</b> (class_weight): Fehler bei der seltenen Klasse zählen im Training mehr.</li>
+          <li><b>Resampling</b>: seltene Klasse vervielfachen (Oversampling, z. B. SMOTE) oder häufige ausdünnen (Undersampling) – nur auf den Trainingsdaten!</li>
+          <li><b>Schwelle anpassen</b> und mit Kosten begründen.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bei seltenen Ereignissen nie nur die Accuracy nennen – erst Recall und Precision zeigen, ob das Modell die wichtigen Fälle findet.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Oversampling vor dem Train-Test-Split ist Data Leakage: Kopien desselben Falls landen in Training und Test, das Ergebnis wird geschönt.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diese Lektion ist Gold für die Situationsaufgabe: In vielen Prüfungsfällen wird eine hohe Accuracy präsentiert, und die Kandidaten sollen erkennen, dass sie nichts aussagt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Regressionsmetriken" data-part="Teil A · Modelle bewerten">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 30 Minuten</span><h2>Regressionsmetriken: MAE, MSE, RMSE, R², MAPE</h2></div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">MAE = <span class="frac"><span>Σ |yᵢ − ŷᵢ|</span><span>n</span></span> &nbsp;&nbsp; MSE = <span class="frac"><span>Σ (yᵢ − ŷᵢ)²</span><span>n</span></span> &nbsp;&nbsp; RMSE = √MSE</div>
+        <div class="eq">MAPE = <span class="frac"><span>100 %</span><span>n</span></span> · Σ <span class="frac"><span>|yᵢ − ŷᵢ|</span><span>|yᵢ|</span></span></div>
+        <div class="legend-eq"><span>MAE: mittlerer absoluter Fehler in der Einheit der Zielgröße. RMSE: bestraft große Fehler stärker. MAPE: mittlerer prozentualer Fehler (nicht nutzbar, wenn y = 0 vorkommt).</span></div>
+      </div>
+      <div class="prose">
+        <h3>Durchgerechnet</h3>
+        <p>Tatsächlicher Absatz 10, 12, 8; Prognose 11, 15, 8. Fehler −1, −3, 0.</p>
+        <ul>
+          <li>MAE = (1 + 3 + 0) / 3 ≈ <span class="result">1,33</span> Stück</li>
+          <li>MSE = (1 + 9 + 0) / 3 ≈ <span class="result">3,33</span></li>
+          <li>RMSE = √3,33 ≈ <span class="result">1,83</span> Stück</li>
+          <li>MAPE = (10 % + 25 % + 0 %) / 3 ≈ <span class="result">11,7 %</span></li>
+        </ul>
+        <p>Liegt der RMSE deutlich über dem MAE, gibt es einzelne große Fehler. Welche Kennzahl man optimiert, folgt aus dem Geschäft: Sind große Fehler besonders teuer (Lagerausfall), nimmt man RMSE.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>MAE ist leicht zu erklären, RMSE bestraft Ausreißer, R² zeigt den erklärten Anteil, MAPE spricht in Prozent.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Welche Kennzahl würden Sie einer Geschäftsführerin nennen? Meist MAE in Stück oder Euro oder MAPE in Prozent – nicht MSE, dessen Einheit „Stück zum Quadrat“ niemand versteht.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Overfitting und Underfitting" data-part="Teil B · Gut verallgemeinern">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 30 Minuten</span><h2>Overfitting, Underfitting und die Bias-Varianz-Abwägung</h2></div>
+      <figure class="board">
+        <img src="gifs/fitting.gif" width="640" height="380" alt="Animation: Drei Felder mit denselben Punkten. Links eine flache Gerade, die den Bogen verfehlt; Mitte eine glatte Kurve durch die Punktwolke; rechts eine zackige Linie durch jeden Punkt." loading="lazy">
+        <figcaption>Links zu einfach, in der Mitte passend, rechts lernt das Modell das Rauschen.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Underfitting</th><th>Overfitting</th></tr></thead>
+        <tbody>
+          <tr><td>Fehlerbild</td><td>Training schlecht, Test schlecht</td><td>Training sehr gut, Test deutlich schlechter</td></tr>
+          <tr><td>Ursache</td><td>Modell zu einfach, wichtige Merkmale fehlen</td><td>Modell zu komplex, zu wenig Daten, zu lange trainiert</td></tr>
+          <tr><td>Fachbegriff</td><td>hoher <b>Bias</b> (systematischer Fehler)</td><td>hohe <b>Varianz</b> (reagiert stark auf Zufall in den Daten)</td></tr>
+          <tr><td>Gegenmittel</td><td>komplexeres Modell, bessere Merkmale, weniger Regularisierung</td><td>mehr Daten, einfacheres Modell, Regularisierung, Early Stopping, Dropout, Kreuzvalidierung</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gesucht ist die Komplexität, bei der der Fehler auf neuen Daten am kleinsten ist – nicht auf den Trainingsdaten.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>„Bias“ heißt hier systematischer Fehler eines zu einfachen Modells – nicht dasselbe wie algorithmischer Bias im Sinne von Diskriminierung (Modul 6). Im Fachgespräch die Bedeutung klar machen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das rechte Feld der Animation ist der Schüler, der die Musterlösungen auswendig gelernt hat. Fragen Sie, welche Kurve in einem Monat mit neuen Daten am besten wäre.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Lernkurven" data-part="Teil B · Gut verallgemeinern">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 20 Minuten</span><h2>Lernkurven lesen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer Klavier lernt, merkt anfangs schnelle Fortschritte, später nur noch kleine. Ob mehr Übung noch etwas bringt, sieht man am Verlauf – nicht an einem einzelnen Tag.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Eine <b>Lernkurve</b> zeigt den Fehler auf Trainings- und Validierungsdaten in Abhängigkeit von der Datenmenge oder – bei neuronalen Netzen – von den Trainingsepochen.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bild</th><th>Deutung</th><th>Maßnahme</th></tr></thead>
+        <tbody>
+          <tr><td>Beide Kurven hoch, nah beieinander</td><td>Underfitting</td><td>stärkeres Modell, bessere Merkmale – mehr Daten helfen kaum</td></tr>
+          <tr><td>Training niedrig, Validierung hoch, große Lücke</td><td>Overfitting</td><td>mehr Daten helfen; Regularisierung</td></tr>
+          <tr><td>Validierungsfehler sinkt erst, steigt dann wieder (über Epochen)</td><td>ab dem Wendepunkt Overfitting</td><td>Early Stopping am Minimum</td></tr>
+          <tr><td>Beide Kurven niedrig und nah</td><td>gute Generalisierung</td><td>fertig – auf Testdaten bestätigen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Die Lücke zwischen Trainings- und Validierungskurve zeigt Overfitting; beide hoch zeigen Underfitting.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Lernkurven sind ein starkes Argument im Projekt: „Mehr Daten zu labeln lohnt sich“ oder „lohnt sich nicht“ lässt sich damit belegen – und das ist eine Budgetentscheidung.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Skizzieren Sie die vier Bilder an der Tafel und lassen Sie zuordnen. Verbinden Sie es mit der Frage nach Budget für mehr Labels.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Kreuzvalidierung" data-part="Teil B · Gut verallgemeinern">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 30 Minuten</span><h2>Kreuzvalidierung und Zeitreihen-Validierung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Weinprobe mit nur einem Glas sagt wenig. Erst wer mehrere Gläser probiert, kann den Jahrgang fair beurteilen. Genauso wird ein Modell fairer bewertet, wenn es mehrmals auf unterschiedlichen Prüfdaten getestet wird.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Bei der <b>k-fachen Kreuzvalidierung</b> werden die Trainingsdaten in k gleich große Teile (Folds) geteilt. In k Runden ist jeweils ein Teil Prüfdaten, die übrigen sind Trainingsdaten. Das Ergebnis ist der Mittelwert (und die Streuung) der k Bewertungen.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/kreuzvalidierung.gif" width="640" height="380" alt="Animation: Fünf Zeilen mit je fünf Blöcken. In jeder Runde ist ein anderer Block rot als Test markiert, daneben steht das Ergebnis. Am Ende erscheint der Mittelwert 0,818." loading="lazy">
+        <figcaption>Jeder Datenteil ist genau einmal Prüfdaten.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Stratifiziert</b>: Jeder Fold hat denselben Klassenanteil – wichtig bei unausgewogenen Klassen.</li>
+          <li><b>Gruppiert</b>: Fälle derselben Person, Maschine oder Filiale bleiben im selben Fold.</li>
+          <li><b>Zeitreihen</b>: vorwärts rollierend – mit Jan–Mrz trainieren, April prüfen; mit Jan–Apr trainieren, Mai prüfen usw. Nie mit der Zukunft trainieren.</li>
+          <li>Die echten <b>Testdaten</b> bleiben trotzdem außen vor: Kreuzvalidierung dient der Modellauswahl, der Test der Schlussbewertung.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kreuzvalidierung macht die Bewertung stabiler, weil jedes Beispiel einmal geprüft wird – bei Zeitreihen nur vorwärts in der Zeit.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Weisen Sie auf die Streuung der Runden hin (0,79 bis 0,84): Ohne Kreuzvalidierung hätte man je nach Zufall ein anderes Ergebnis berichtet.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Hyperparameter-Tuning" data-part="Teil B · Gut verallgemeinern">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 25 Minuten</span><h2>Hyperparameter-Tuning: Grid Search, Random Search und mehr</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Beim Backen probiert man Temperatur und Backzeit: 170 °C 30 Minuten, 180 °C 25 Minuten … Systematisch alle Kombinationen durchzuprobieren dauert lange; geschickt ausgewählte Versuche führen schneller zum guten Kuchen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Hyperparameter-Tuning</b> sucht die Einstellungen, mit denen ein Modell auf Validierungsdaten (meist per Kreuzvalidierung) am besten abschneidet.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Vorgehen</th><th>Eigenschaft</th></tr></thead>
+        <tbody>
+          <tr><td><b>Grid Search</b></td><td>alle Kombinationen eines Rasters</td><td>gründlich, aber teuer: 3 Parameter mit je 5 Werten und 5 Folds = 625 Trainingsläufe</td></tr>
+          <tr><td><b>Random Search</b></td><td>zufällige Kombinationen in festem Budget</td><td>findet oft gleich gute Werte mit viel weniger Läufen</td></tr>
+          <tr><td><b>Bayes’sche Optimierung</b></td><td>lernt aus bisherigen Versuchen, wo es sich zu suchen lohnt</td><td>effizient bei teuren Modellen (z. B. Optuna)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Hyperparameter werden auf Validierungsdaten gesucht und auf Testdaten nur noch bestätigt.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Wer so lange tunt, bis das Testergebnis passt, hat die Testdaten zu Validierungsdaten gemacht. Das Testergebnis ist dann zu optimistisch.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie die 625 Läufe vor (5 · 5 · 5 · 5). Das ist auch eine Kosten- und Energiefrage – Brücke zu Modul 14 (Nachhaltigkeit).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Regularisierung" data-part="Teil B · Gut verallgemeinern">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 25 Minuten</span><h2>Regularisierung: L1 (Lasso), L2 (Ridge), Early Stopping</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Reisebudget zwingt zu einfachen Entscheidungen: Man nimmt nur mit, was wirklich zählt. Regularisierung ist ein „Budget“ für die Größe der Modellparameter.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Regularisierung</b> ergänzt die Verlustfunktion um einen Strafterm für große Parameter. Das Modell wird einfacher und neigt weniger zu Overfitting. Die Stärke λ (in scikit-learn oft alpha bzw. C = 1/λ) ist ein Hyperparameter.</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Ridge (L2): Verlust + λ · Σ wⱼ² &nbsp;&nbsp; Lasso (L1): Verlust + λ · Σ |wⱼ|</div>
+        <div class="legend-eq"><span>L2 macht alle Gewichte kleiner. L1 setzt unwichtige Gewichte auf genau null – wählt also Merkmale aus. Elastic Net kombiniert beide.</span></div>
+      </div>
+      <div class="prose">
+        <p>Weitere Formen: <b>Early Stopping</b> (Training beenden, wenn der Validierungsfehler wieder steigt), <b>Dropout</b> in neuronalen Netzen (Modul 5), Begrenzung der Baumtiefe, Datenaugmentation.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Regularisierung bestraft Komplexität: L2 schrumpft alle Gewichte, L1 wirft unwichtige Merkmale ganz hinaus.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Für die Prüfung reicht: Was macht L1, was L2, wozu dient λ. L1 als „automatische Merkmalsauswahl“ ist ein beliebtes Prüfungsstichwort.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Baseline und Geschäftskennzahlen" data-part="Teil B · Gut verallgemeinern">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 35 Minuten</span><h2>Baseline und Geschäftskennzahlen: Ist das Modell besser als nichts?</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein neues Navi lohnt sich nur, wenn es Sie schneller ans Ziel bringt als der Weg, den Sie ohnehin kennen. Der vertraute Weg ist die Messlatte.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Eine <b>Baseline</b> ist der einfachste sinnvolle Vergleich: die häufigste Klasse, der Mittelwert, der Vorjahreswert, eine bestehende Faustregel oder das heutige manuelle Verfahren. Ein KI-Modell muss sie deutlich schlagen – in einer Kennzahl, die für das Geschäft zählt.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Von Modellkennzahlen zu Euro</h3>
+        <p>Betrugsprüfung: Ein übersehener Betrug kostet im Schnitt 500 €, eine unnötige Prüfung 20 €.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th class="r">FN</th><th class="r">FP</th><th class="r">Kosten</th><th class="r">Accuracy</th></tr></thead>
+          <tbody>
+            <tr><td>Modell A</td><td class="r">20</td><td class="r">10</td><td class="r">20 · 500 + 10 · 20 = 10.200 €</td><td class="r">höher</td></tr>
+            <tr><td>Modell B</td><td class="r">8</td><td class="r">60</td><td class="r">8 · 500 + 60 · 20 = 5.200 €</td><td class="r">niedriger</td></tr>
+          </tbody>
+        </table></div>
+        <p>Modell B ist trotz schlechterer Accuracy fast 5.000 € günstiger. Solche <b>Kostenmatrizen</b> machen aus einer Technikentscheidung eine Geschäftsentscheidung – und gehören in jede Transferarbeit.</p>
+        <p>Weitere Geschäftskennzahlen: eingesparte Bearbeitungszeit, Umsatz durch gehaltene Kunden, Ausschussquote, Antwortzeit. Gemessen wird am besten im <b>A/B-Test</b> oder Pilotbetrieb gegen den bisherigen Prozess.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erst die Baseline, dann das Modell – und bewertet wird in der Währung des Betriebs: Euro, Zeit, Qualität.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Hier treffen § 4 (KI) und § 7 (ökonomische Aspekte) aufeinander. Wer in der Situationsaufgabe Modellkennzahlen in Kosten übersetzt, zeigt genau die Verknüpfung, die DQR 6 verlangt.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Kostenrechnung im Rechner aus Lektion 2 nachvollziehen. Diskutieren Sie: Wer liefert die Kostensätze? – Controlling und Fachabteilung.</p>
+      </aside>
+    </section>

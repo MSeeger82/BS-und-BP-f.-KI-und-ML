@@ -1,0 +1,1351 @@
+<!--META {"nr": 3, "titel": "Daten: Qualität, Vorverarbeitung, Feature Engineering", "lektionen": 16, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 3 von 12 · ca. 18 Lernstunden</span>
+      <h1 id="introTitle">Daten: Woher sie kommen, wie man sie säubert und für ein Modell vorbereitet</h1>
+      <p>Ein Modell ist nur so gut wie seine Daten. In der Praxis stecken 60 bis 80 Prozent der Arbeit eines KI-Projekts in der Datenaufbereitung. In diesem Modul lernen Sie, Daten aus Datenbanken zu holen (SQL), ihre Qualität zu prüfen, Fehler zu beheben, Merkmale so umzuwandeln, dass ein Modell sie versteht, und die Daten sauber aufzuteilen, ohne in die gefährlichste Falle zu tappen: Data Leakage.</p>
+      <div class="facts">
+        <span class="chip">16 Lektionen in 4 Teilen</span><span class="chip">6 Animationen</span><span class="chip">3 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4: Umgang mit Daten, Programmierung</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--code-bg);"></i><span><b>Code</b> – so sieht es in Python oder SQL aus</span></div>
+        <div><i style="background: var(--surface); outline: 2px dashed var(--accent);"></i><span><b>Rechner</b> – selbst ausprobieren</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Prüfungsfalle</b> – hier gehen Punkte verloren</span></div>
+      </div>
+    </section>
+
+    <div class="part-head"><span>Teil A · Lektionen 1–5</span><h2>Woher kommen die Daten?</h2><p>Datenquellen, Datenbanken, SQL und die Regeln, unter denen man Daten überhaupt erheben darf.</p></div>
+
+    <section class="lesson" id="l1" data-title="Daten als Rohstoff" data-part="A · Datenquellen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 30 Minuten</span><h2>Daten als Rohstoff: Arten und Quellen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Koch braucht gute Zutaten. Aus verdorbenem Gemüse wird auch mit dem besten Rezept kein gutes Essen. Für eine KI sind Daten die Zutaten und der Algorithmus das Rezept. Fachleute sagen deshalb: <b>„Garbage in, garbage out“</b> – Müll rein, Müll raus.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Datenart</th><th>Merkmal</th><th>Beispiele</th><th>Typisches Format</th></tr></thead>
+        <tbody>
+          <tr><td><b>Strukturiert</b></td><td>Feste Spalten und Zeilen, jeder Wert hat seinen Platz</td><td>Kundentabelle, Buchungen, Sensormesswerte</td><td>Datenbank, CSV, Excel</td></tr>
+          <tr><td><b>Semistrukturiert</b></td><td>Hat Bezeichner, aber keine starre Tabelle</td><td>Bestellung mit beliebig vielen Artikeln, Logdateien</td><td>JSON, XML</td></tr>
+          <tr><td><b>Unstrukturiert</b></td><td>Kein festes Schema</td><td>E-Mails, Fotos, Sprachaufnahmen, PDFs</td><td>Text-, Bild-, Audiodateien</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Interne Quellen</span>
+          <ul><li>ERP-System (Aufträge, Lager, Buchhaltung)</li><li>CRM-System (Kunden, Kontakte)</li><li>Maschinensteuerungen und Sensoren</li><li>Ticketsystem, E-Mail-Postfächer</li></ul>
+        </div>
+        <div class="box fach"><span class="box-label">Externe Quellen</span>
+          <ul><li>Offene Daten (z. B. Wetter, Statistisches Bundesamt)</li><li>Gekaufte Datensätze, Datenanbieter</li><li>Programmierschnittstellen (APIs)</li><li>Web-Daten – nur unter Beachtung von Urheberrecht und Nutzungsbedingungen</li></ul>
+        </div>
+      </div>
+      <div class="box fach"><span class="box-label">Die 5 V von Big Data</span>
+        <p><b>Volume</b> (Menge), <b>Velocity</b> (Geschwindigkeit, z. B. Sensordaten im Millisekundentakt), <b>Variety</b> (Vielfalt der Formate), <b>Veracity</b> (Verlässlichkeit, Qualität), <b>Value</b> (Nutzen). Für die Prüfung reicht: Man kann die Begriffe nennen und an einem Beispiel erklären.</p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Datenarten, Quellen und Datenmengen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Webshop und seine Daten</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Datenbestand</th><th>Art</th><th>Typisches Format</th><th>Für ML nutzbar als</th></tr></thead>
+          <tbody>
+            <tr><td>Bestelltabelle (Nummer, Datum, Betrag)</td><td>strukturiert</td><td>Datenbank</td><td>Merkmale für Absatzprognose</td></tr>
+            <tr><td>Warenkorb mit beliebig vielen Artikeln</td><td>semistrukturiert</td><td>JSON</td><td>Aufgerollt zu Anzahl Artikel, Warenwert</td></tr>
+            <tr><td>Kundenmails und Bewertungen</td><td>unstrukturiert</td><td>Text</td><td>Stimmungsanalyse, Themenzuordnung</td></tr>
+            <tr><td>Produktfotos</td><td>unstrukturiert</td><td>Bilddateien</td><td>Automatische Kategorisierung</td></tr>
+            <tr><td>Klicks im Shop (Zeitstempel, Seite)</td><td>semistrukturiert (Log)</td><td>Logdatei, JSON</td><td>Empfehlungen, Abbruchprognose</td></tr>
+          </tbody>
+        </table></div>
+        <p>Man sieht: Ein einziger Webshop erzeugt alle drei Datenarten. Für ein Modell müssen sie meist erst in eine Tabelle mit Zahlen gebracht werden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Volume und Velocity bei Sensordaten</span>
+        <p>Eine Anlage hat 200 Sensoren, die jeweils 10 Messwerte pro Sekunde liefern.</p>
+        <ol class="steps">
+          <li><div>Werte pro Sekunde: <span class="calcline">200 · 10 = 2.000</span></div></li>
+          <li><div>Werte pro Tag: <span class="calcline">2.000 · 86.400 s = 172.800.000</span> (172,8 Millionen)</div></li>
+          <li><div>Speicher bei 8 Byte je Wert: <span class="calcline">172.800.000 · 8 ≈ 1,38 GB pro Tag</span>, im Jahr etwa 500 GB</div></li>
+        </ol>
+        <p>Das ist <b>Volume</b> (Menge) und <b>Velocity</b> (Geschwindigkeit) zugleich. Solche Datenmengen verlangen von Anfang an eine Überlegung: Speichern wir jede Messung oder nur Zusammenfassungen (z. B. Mittelwert je Minute)?</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ist die Datenlage tragfähig? Fünf Fragen vor dem Projekt</span>
+        <ol>
+          <li>Welche Daten gibt es, <b>wo liegen sie</b>, wer verantwortet sie?</li>
+          <li>Sind sie <b>aktuell und vollständig</b> genug (Lektion 6)?</li>
+          <li>Gibt es zum Ziel eine <b>Antwort in der Vergangenheit</b> (Label)?</li>
+          <li>Dürfen wir sie <b>rechtlich</b> für diesen Zweck nutzen (Lektion 5)?</li>
+          <li>Wie viele Beispiele gibt es von dem <b>seltenen, aber wichtigen</b> Fall?</li>
+        </ol>
+        <p>Scheitert das Projekt später, liegt es erfahrungsgemäß öfter an einer dieser Fragen als an der Auswahl des Algorithmus.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie je ein Beispiel und ein typisches Format für strukturierte, semistrukturierte und unstrukturierte Daten.</p>
+        <p><b>Musterlösung:</b> Strukturiert: Kundentabelle in einer Datenbank oder CSV-Datei (2 Punkte). Semistrukturiert: Bestellung mit beliebig vielen Artikeln als JSON oder XML (2 Punkte). Unstrukturiert: E-Mails oder Fotos als Text- bzw. Bilddateien (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Strukturiert = Tabelle, semistrukturiert = JSON/XML, unstrukturiert = Text, Bild, Ton. Die Qualität der Daten begrenzt die Qualität jedes Modells.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie die Gruppe, welche Daten in ihrem Betrieb anfallen, und ordnen Sie sie gemeinsam den drei Arten zu. Fast immer kommen E-Mails (unstrukturiert), Excel-Listen (strukturiert) und Exporte aus Webshops (oft JSON) vor.</p>
+        <p>Das Kochbild trägt durch das ganze Modul: Datenquellen = Einkauf, Bereinigung = Waschen und Schneiden, Feature Engineering = Zubereiten, Aufteilung = Probierportion zurückhalten.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l2" data-title="Relationale Datenbanken" data-part="A · Datenquellen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 40 Minuten</span><h2>Relationale Datenbanken: Tabellen, die miteinander sprechen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Eine Bibliothek führt eine Kartei der Bücher und eine Kartei der Leser. Auf dem Ausleihzettel steht nicht die ganze Adresse des Lesers, sondern nur seine Lesernummer. Wer die Adresse braucht, schlägt in der Leserkartei nach. Genau so arbeiten relationale Datenbanken: Jede Information steht nur an <b>einer</b> Stelle, verbunden über Nummern.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Tabelle (Relation)</b></td><td>Sammlung gleichartiger Datensätze</td><td><code>kunde</code>, <code>bestellung</code></td></tr>
+          <tr><td><b>Datensatz (Zeile, Tupel)</b></td><td>Ein Eintrag</td><td>Kundin Meier</td></tr>
+          <tr><td><b>Attribut (Spalte)</b></td><td>Eine Eigenschaft</td><td><code>name</code>, <code>ort</code></td></tr>
+          <tr><td><b>Primärschlüssel</b></td><td>Eindeutige Kennung jeder Zeile</td><td><code>kunde.id</code></td></tr>
+          <tr><td><b>Fremdschlüssel</b></td><td>Verweis auf den Primärschlüssel einer anderen Tabelle</td><td><code>bestellung.kunde_id</code></td></tr>
+          <tr><td><b>Beziehung 1:n</b></td><td>Ein Kunde – viele Bestellungen</td><td>kunde ↔ bestellung</td></tr>
+          <tr><td><b>Beziehung n:m</b></td><td>Viele zu viele, über eine Zwischentabelle</td><td>bestellung ↔ artikel über <code>position</code></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Normalisierung: Redundanz vermeiden</h3>
+      <p>Schlechtes Beispiel – eine einzige Tabelle:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Best.-Nr.</th><th>Kunde</th><th>Kundenort</th><th>Artikel</th></tr></thead>
+        <tbody>
+          <tr><td>101</td><td>Meier</td><td>Köln</td><td>Bohrer, Dübel</td></tr>
+          <tr><td>102</td><td>Meier</td><td>Koeln</td><td>Säge</td></tr>
+        </tbody>
+      </table></div>
+      <ol class="steps">
+        <li><div><b>1. Normalform:</b> Jede Zelle enthält nur <b>einen</b> Wert. „Bohrer, Dübel“ wird auf zwei Zeilen aufgeteilt.</div></li>
+        <li><div><b>2. Normalform:</b> Alles, was nicht vom ganzen Schlüssel abhängt, in eigene Tabellen. Artikeldaten gehören in die Tabelle <code>artikel</code>.</div></li>
+        <li><div><b>3. Normalform:</b> Keine Abhängigkeit über Umwege. Der Kundenort hängt am Kunden, nicht an der Bestellung → eigene Tabelle <code>kunde</code>. Der Widerspruch „Köln“/„Koeln“ kann dann gar nicht mehr entstehen.</div></li>
+      </ol>
+      <div class="box fach"><span class="box-label">Wozu im KI-Projekt?</span>
+        <p>Für ein Modell braucht man meist <b>eine</b> flache Tabelle (eine Zeile pro Beispiel). Man holt die Daten also aus vielen normalisierten Tabellen und verbindet sie mit JOINs (Lektion 4). Außerdem gibt es NoSQL-Datenbanken (Dokument-, Schlüssel-Wert-, Graph-Datenbanken) und für KI-Suchen Vektordatenbanken (Modul 8).</p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Tabellen, Schlüssel und Normalisierung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Warum Normalisierung Arbeit spart</span>
+        <p>Frau Meier hat 500 Bestellungen aufgegeben und zieht von Köln nach Bonn. In der <b>einen großen Tabelle</b> steht der Ort in jeder der 500 Zeilen: 500 Änderungen, und wenn eine vergessen wird, hat dieselbe Kundin zwei Orte. In der <b>normalisierten</b> Lösung steht der Ort einmal in der Tabelle <code>kunde</code>: <b>eine</b> Änderung genügt. Das nennt man das Vermeiden von Redundanz und Änderungsanomalien.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein kleines Datenmodell für einen Shop</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tabelle</th><th>Spalten</th><th>Primärschlüssel</th><th>Fremdschlüssel</th></tr></thead>
+          <tbody>
+            <tr><td><code>kunde</code></td><td>id, name, ort</td><td>id</td><td>–</td></tr>
+            <tr><td><code>bestellung</code></td><td>nr, kunde_id, datum</td><td>nr</td><td>kunde_id → kunde.id</td></tr>
+            <tr><td><code>artikel</code></td><td>id, name, preis</td><td>id</td><td>–</td></tr>
+            <tr><td><code>position</code></td><td>bestellung_nr, artikel_id, menge</td><td>(bestellung_nr, artikel_id)</td><td>bestellung_nr → bestellung.nr; artikel_id → artikel.id</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Beziehungen:</b> Ein Kunde hat viele Bestellungen (1:n). Eine Bestellung enthält viele Artikel, ein Artikel steckt in vielen Bestellungen (n:m) – deshalb die Zwischentabelle <code>position</code>.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Welcher Schlüssel eignet sich?</span>
+        <p>Als Primärschlüssel der Tabelle <code>kunde</code> könnte man die E-Mail-Adresse nehmen. Das ist riskant: Sie kann sich ändern, und dann müssten alle Verweise angepasst werden. Üblich ist eine <b>künstliche, unveränderliche ID</b> (laufende Nummer oder zufällige Kennung). Gute Primärschlüssel sind eindeutig, nie leer und ändern sich nie.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die Begriffe Primärschlüssel und Fremdschlüssel am Beispiel der Tabellen kunde und bestellung.</p>
+        <p><b>Musterlösung:</b> Der Primärschlüssel identifiziert jede Zeile einer Tabelle eindeutig, z. B. kunde.id (2 Punkte). Der Fremdschlüssel in bestellung, nämlich kunde_id, verweist auf den Primärschlüssel kunde.id und stellt die Beziehung her: Ein Kunde kann viele Bestellungen haben (1:n) (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Primärschlüssel identifiziert eine Zeile, Fremdschlüssel verweist auf eine andere Tabelle. Normalisierung speichert jede Information nur einmal.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Bibliothek ist ein starkes Bild. Zeigen Sie das schlechte Beispiel und fragen Sie: „Was passiert, wenn Frau Meier umzieht?“ Man müsste jede Bestellung ändern – und vergisst garantiert eine. Das ist die Motivation für Normalisierung.</p>
+        <p>Die Normalformen nur in diesem Umfang behandeln. Wichtiger ist, dass die Begriffe Primär- und Fremdschlüssel sicher sitzen.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l3" data-title="SQL-Grundlagen" data-part="A · Datenquellen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 50 Minuten</span><h2>SQL-Grundlagen: Daten abfragen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>SQL ist wie eine sehr höfliche, sehr genaue Bestellung im Lager: „Bring mir (<b>SELECT</b>) Name und Umsatz aus (<b>FROM</b>) der Kundenkartei, aber nur (<b>WHERE</b>) Kunden aus Köln, sortiert (<b>ORDER BY</b>) nach Umsatz.“ Der Lagerist (die Datenbank) sucht alles heraus.</p>
+      </div>
+      <pre class="code"><span class="c">-- Grundform einer Abfrage</span>
+<span class="k">SELECT</span>   name, ort, umsatz          <span class="c">-- welche Spalten?</span>
+<span class="k">FROM</span>     kunde                       <span class="c">-- aus welcher Tabelle?</span>
+<span class="k">WHERE</span>    ort = <span class="s">'Köln'</span> <span class="k">AND</span> umsatz &gt; 1000   <span class="c">-- welche Zeilen?</span>
+<span class="k">ORDER BY</span> umsatz <span class="k">DESC</span>;                <span class="c">-- Reihenfolge (DESC = absteigend)</span></pre>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Baustein</th><th>Aufgabe</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><code>SELECT *</code></td><td>alle Spalten</td><td><code>SELECT * FROM kunde</code></td></tr>
+          <tr><td><code>WHERE</code></td><td>Zeilen filtern; <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>IN</code>, <code>BETWEEN</code>, <code>LIKE</code></td><td><code>WHERE ort IN ('Köln','Bonn')</code></td></tr>
+          <tr><td><code>IS NULL</code></td><td>fehlende Werte finden (nie <code>= NULL</code>!)</td><td><code>WHERE alter IS NULL</code></td></tr>
+          <tr><td><code>COUNT, SUM, AVG, MIN, MAX</code></td><td>Aggregatfunktionen</td><td><code>SELECT AVG(umsatz) FROM kunde</code></td></tr>
+          <tr><td><code>GROUP BY</code></td><td>Gruppen bilden</td><td>Umsatz je Ort</td></tr>
+          <tr><td><code>HAVING</code></td><td>Gruppen filtern (nach dem Gruppieren)</td><td>nur Orte mit mehr als 10 Kunden</td></tr>
+          <tr><td><code>DISTINCT</code></td><td>Duplikate im Ergebnis entfernen</td><td><code>SELECT DISTINCT ort FROM kunde</code></td></tr>
+          <tr><td><code>LIMIT</code></td><td>nur die ersten n Zeilen</td><td><code>LIMIT 10</code></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Beispiel mit Gruppierung</h3>
+      <pre class="code"><span class="k">SELECT</span>   ort, <span class="k">COUNT</span>(*) <span class="k">AS</span> anzahl, <span class="k">AVG</span>(umsatz) <span class="k">AS</span> mittlerer_umsatz
+<span class="k">FROM</span>     kunde
+<span class="k">WHERE</span>    aktiv = 1
+<span class="k">GROUP BY</span> ort
+<span class="k">HAVING</span>   <span class="k">COUNT</span>(*) &gt;= 10
+<span class="k">ORDER BY</span> mittlerer_umsatz <span class="k">DESC</span>;</pre>
+      <p class="code-cap">Liest sich: Für jeden Ort mit mindestens 10 aktiven Kunden die Anzahl und den mittleren Umsatz, die umsatzstärksten Orte zuerst.</p>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p><code>WHERE</code> filtert <b>einzelne Zeilen vor</b> dem Gruppieren, <code>HAVING</code> filtert <b>Gruppen danach</b>. Eine Bedingung mit <code>COUNT</code> oder <code>SUM</code> gehört deshalb immer in <code>HAVING</code>. Die Reihenfolge der Bausteine ist fest: SELECT – FROM – WHERE – GROUP BY – HAVING – ORDER BY.</p></div>
+      <div class="box fach"><span class="box-label">Daten ändern (nur zum Kennen)</span>
+        <p><code>INSERT INTO</code> (einfügen), <code>UPDATE … SET … WHERE</code> (ändern), <code>DELETE FROM … WHERE</code> (löschen). Ein <code>UPDATE</code> oder <code>DELETE</code> ohne <code>WHERE</code> betrifft <b>alle</b> Zeilen – ein klassischer, folgenreicher Fehler. Für Datenanalyse braucht man fast nur <code>SELECT</code>.</p>
+      </div>
+      <div class="prose">
+        <h3>SQL an einer kleinen Tabelle durchspielen</h3>
+        <p>Am besten lernt man SQL, indem man das Ergebnis selbst vorhersagt. Wir nutzen eine Tabelle mit sechs Kunden:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>id</th><th>name</th><th>ort</th><th class="r">umsatz</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Meier</td><td>Köln</td><td class="r">1.200</td></tr>
+            <tr><td>2</td><td>Yilmaz</td><td>Bonn</td><td class="r">800</td></tr>
+            <tr><td>3</td><td>Schulz</td><td>Köln</td><td class="r">450</td></tr>
+            <tr><td>4</td><td>Weber</td><td>Aachen</td><td class="r">2.100</td></tr>
+            <tr><td>5</td><td>Kaya</td><td>Köln</td><td class="r">1.500</td></tr>
+            <tr><td>6</td><td>Berg</td><td>Bonn</td><td class="r">300</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Filtern und Sortieren</span>
+        <pre class="code">SELECT name, umsatz
+FROM   kunde
+WHERE  ort = 'Köln' AND umsatz &gt; 1000
+ORDER BY umsatz DESC;</pre>
+        <p><b>Schritt für Schritt:</b> Zuerst werden die Zeilen mit Ort Köln gesucht (Meier, Schulz, Kaya), dann davon die mit Umsatz über 1.000 (Meier 1.200 und Kaya 1.500). Schließlich wird absteigend sortiert. <b>Ergebnis:</b> Kaya 1.500, Meier 1.200.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Gruppieren und Gruppen filtern</span>
+        <pre class="code">SELECT   ort, COUNT(*) AS anzahl, AVG(umsatz) AS mittel
+FROM     kunde
+GROUP BY ort
+HAVING   COUNT(*) &gt;= 2
+ORDER BY mittel DESC;</pre>
+        <div class="table-wrap"><table>
+          <thead><tr><th>ort</th><th class="r">anzahl</th><th class="r">mittel</th><th>bleibt nach HAVING?</th></tr></thead>
+          <tbody>
+            <tr><td>Köln</td><td class="r">3</td><td class="r">(1.200 + 450 + 1.500) : 3 = 1.050</td><td>ja</td></tr>
+            <tr><td>Bonn</td><td class="r">2</td><td class="r">(800 + 300) : 2 = 550</td><td>ja</td></tr>
+            <tr><td>Aachen</td><td class="r">1</td><td class="r">2.100</td><td>nein (nur 1 Kunde)</td></tr>
+          </tbody>
+        </table></div>
+        <p>Ergebnis: Köln (1.050) vor Bonn (550). Aachen wird von HAVING herausgefiltert, obwohl Weber den höchsten Einzelumsatz hat.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Von der Frage zur Abfrage</span>
+        <ul>
+          <li><b>„Wie viele Kunden haben wir?“</b> → <code>SELECT COUNT(*) FROM kunde;</code> (6)</li>
+          <li><b>„Wie hoch ist der Gesamtumsatz?“</b> → <code>SELECT SUM(umsatz) FROM kunde;</code> (6.350)</li>
+          <li><b>„Welche Orte kommen vor?“</b> → <code>SELECT DISTINCT ort FROM kunde;</code> (Köln, Bonn, Aachen)</li>
+          <li><b>„Die drei umsatzstärksten Kunden“</b> → <code>SELECT name, umsatz FROM kunde ORDER BY umsatz DESC LIMIT 3;</code> (Weber, Kaya, Meier)</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Schreiben Sie eine Abfrage, die für jeden Ort die Anzahl der Kunden und den Gesamtumsatz liefert, aber nur für Orte mit einem Gesamtumsatz über 2.000.</p>
+        <p><b>Musterlösung:</b> SELECT ort, COUNT(*) AS anzahl, SUM(umsatz) AS gesamt FROM kunde GROUP BY ort HAVING SUM(umsatz) &gt; 2000; (je 1 Punkt für SELECT mit Aggregaten, GROUP BY ort, HAVING statt WHERE, richtige Bedingung, richtige Syntax). Ergebnis bei der obigen Tabelle: Köln (3 / 3.150) und Aachen (1 / 2.100).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>SELECT wählt Spalten, WHERE wählt Zeilen, GROUP BY bildet Gruppen, HAVING filtert Gruppen, ORDER BY sortiert.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lesen Sie jede Abfrage laut als deutschen Satz vor. Lassen Sie die Teilnehmenden danach selbst Sätze in SQL übersetzen („alle Kunden aus Bonn, alphabetisch sortiert“).</p>
+        <p>Wer üben möchte: Es gibt kostenlose Online-SQL-Übungsumgebungen im Browser. SQL ist in der Prüfung typischerweise als Lese- oder kurze Schreibaufgabe enthalten.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l4" data-title="SQL-JOINs" data-part="A · Datenquellen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 40 Minuten</span><h2>JOINs: Tabellen verbinden</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Sie haben eine Gästeliste und eine Liste, wer welches Geschenk mitgebracht hat. Beide Listen haben die Gastnummer. Ein JOIN legt sie nebeneinander, sodass neben jedem Geschenk der Name des Gastes steht. Die Frage ist nur: Sollen Gäste ohne Geschenk auch auf der Liste stehen?</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/sql-join.gif" width="640" height="380" alt="Animation: Die Tabellen kunde und bestellung werden über die kunde_id verbunden. Beim INNER JOIN erscheinen nur Meier und Yilmaz mit ihren Bestellungen. Beim LEFT JOIN erscheint zusätzlich Schulz mit dem Betrag NULL, weil Schulz keine Bestellung hat." loading="lazy">
+        <figcaption>INNER JOIN zeigt nur Treffer, LEFT JOIN zeigt alle Zeilen der linken Tabelle.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>JOIN-Art</th><th>Liefert</th><th>Typische Frage</th></tr></thead>
+        <tbody>
+          <tr><td><b>INNER JOIN</b></td><td>Nur Zeilen mit Partner in beiden Tabellen</td><td>Welche Bestellungen haben welche Kunden?</td></tr>
+          <tr><td><b>LEFT JOIN</b></td><td>Alle Zeilen der linken Tabelle, fehlende Partner als NULL</td><td>Alle Kunden, auch die ohne Bestellung</td></tr>
+          <tr><td><b>RIGHT JOIN</b></td><td>Wie LEFT, nur von rechts aus</td><td>selten genutzt</td></tr>
+          <tr><td><b>FULL OUTER JOIN</b></td><td>Alle Zeilen beider Tabellen</td><td>Abgleich zweier Listen</td></tr>
+        </tbody>
+      </table></div>
+      <pre class="code"><span class="c">-- Kunden ohne Bestellung finden (Kündigungsgefahr!)</span>
+<span class="k">SELECT</span>    k.id, k.name
+<span class="k">FROM</span>      kunde k
+<span class="k">LEFT JOIN</span> bestellung b <span class="k">ON</span> b.kunde_id = k.id
+<span class="k">WHERE</span>     b.nr <span class="k">IS NULL</span>;
+
+<span class="c">-- Umsatz je Kunde für die Modell-Tabelle (eine Zeile pro Kunde)</span>
+<span class="k">SELECT</span>    k.id, k.alter, <span class="k">COUNT</span>(b.nr) <span class="k">AS</span> anzahl_bestellungen, <span class="k">COALESCE</span>(<span class="k">SUM</span>(b.betrag), 0) <span class="k">AS</span> umsatz
+<span class="k">FROM</span>      kunde k
+<span class="k">LEFT JOIN</span> bestellung b <span class="k">ON</span> b.kunde_id = k.id
+<span class="k">GROUP BY</span>  k.id, k.alter;</pre>
+      <p class="code-cap"><code>COALESCE(x, 0)</code> ersetzt NULL durch 0 – Kunden ohne Bestellung bekommen Umsatz 0 statt „leer“.</p>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Ein JOIN kann Zeilen <b>vervielfachen</b>: Hat ein Kunde drei Bestellungen, erscheint er dreimal. Wer danach einfach zählt, zählt Kunden mehrfach. Deshalb vor dem Training immer prüfen: Eine Zeile pro Beispiel?</p></div>
+      <div class="prose">
+        <h3>JOINs an Beispieltabellen durchspielen</h3>
+        <p>Zwei kleine Tabellen: Kunden (1 Meier, 2 Yilmaz, 3 Schulz) und Bestellungen (Nr. 10: Kunde 1, 120 €; Nr. 11: Kunde 1, 80 €; Nr. 12: Kunde 2, 200 €). Schulz hat noch nichts bestellt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: INNER JOIN gegen LEFT JOIN</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>JOIN</th><th>Zeilen im Ergebnis</th><th>Wer fehlt oder steht mit NULL?</th></tr></thead>
+          <tbody>
+            <tr><td><code>INNER JOIN</code></td><td>3: Meier 120, Meier 80, Yilmaz 200</td><td>Schulz fehlt ganz</td></tr>
+            <tr><td><code>LEFT JOIN</code> (Kunde links)</td><td>4: wie oben plus Schulz mit Betrag NULL</td><td>Schulz erscheint, der Betrag ist leer</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Unterschied ist wichtig für ML: Mit dem INNER JOIN <b>verliert</b> man alle Kunden ohne Bestellung – oft genau die gefährdeten Kunden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Zeile pro Kunde für das Modell</span>
+        <pre class="code">SELECT   k.name, COUNT(b.nr) AS anzahl, COALESCE(SUM(b.betrag), 0) AS umsatz
+FROM     kunde k
+LEFT JOIN bestellung b ON b.kunde_id = k.id
+GROUP BY k.id, k.name;</pre>
+        <div class="table-wrap"><table>
+          <thead><tr><th>name</th><th class="r">anzahl</th><th class="r">umsatz</th></tr></thead>
+          <tbody>
+            <tr><td>Meier</td><td class="r">2</td><td class="r">200</td></tr>
+            <tr><td>Yilmaz</td><td class="r">1</td><td class="r">200</td></tr>
+            <tr><td>Schulz</td><td class="r">0</td><td class="r">0</td></tr>
+          </tbody>
+        </table></div>
+        <p>Jetzt gibt es genau eine Zeile pro Kunde, und Schulz hat den Umsatz 0 statt „leer“ (dank <code>COALESCE</code>). So sieht eine Trainingstabelle aus.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Fehler ohne Verbindungsbedingung</span>
+        <p>Vergisst man das <code>ON b.kunde_id = k.id</code>, verbindet die Datenbank <b>jede Zeile mit jeder</b>: 3 Kunden × 3 Bestellungen = 9 Zeilen, in denen Meier plötzlich Bestellungen von Yilmaz hat. Man nennt das ein kartesisches Produkt. Bei großen Tabellen (1 Million × 1 Million Zeilen) bringt das die Datenbank zum Stillstand. Merke: Jeder JOIN braucht eine Bedingung.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Sie wollen alle Kunden sehen, auch die ohne Bestellung, jeweils mit der Anzahl ihrer Bestellungen. Welche JOIN-Art nutzen Sie, und warum ist INNER JOIN hier falsch?</p>
+        <p><b>Musterlösung:</b> LEFT JOIN von kunde auf bestellung (2 Punkte), danach GROUP BY und COUNT (1 Punkt). Ein INNER JOIN liefert nur Kunden mit mindestens einer Bestellung; Kunden ohne Bestellung würden aus dem Ergebnis verschwinden (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>INNER JOIN = nur gemeinsame Treffer. LEFT JOIN = alle links, rechts fehlt es als NULL. Für Modelle meist: LEFT JOIN plus GROUP BY auf eine Zeile pro Beispiel.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Animation laufen und stoppen Sie nach dem INNER JOIN: „Wo ist Schulz?“ Dann LEFT JOIN zeigen. Der Unterschied sitzt danach.</p>
+        <p>Die zweite Abfrage ist ein Muster aus der echten Projektarbeit: So entsteht aus vielen Tabellen eine Trainingstabelle.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l5" data-title="Datenerhebung und Datenschutz" data-part="A · Datenquellen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 40 Minuten</span><h2>Datenerhebung, Datenschutz und Datensicherheit</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Wer eine Umfrage nur vor einem Fitnessstudio macht, wird feststellen, dass „alle Menschen“ viel Sport treiben. Wie Daten erhoben werden, entscheidet darüber, ob sie die Wirklichkeit abbilden. Und: Nur weil man an Daten herankommt, darf man sie noch nicht für alles verwenden.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Erhebungsart</th><th>Beschreibung</th><th>Risiko</th></tr></thead>
+        <tbody>
+          <tr><td>Automatisch erfasst</td><td>Sensoren, Logdateien, Kassensystem</td><td>Messfehler, Ausfälle, Zeitzonen</td></tr>
+          <tr><td>Manuell erfasst</td><td>Formulare, Eingaben von Mitarbeitenden</td><td>Tippfehler, uneinheitliche Schreibweisen</td></tr>
+          <tr><td>Befragung</td><td>Umfragen, Interviews</td><td>Auswahlverzerrung, sozial erwünschte Antworten</td></tr>
+          <tr><td>Experiment</td><td>A/B-Test, kontrollierte Versuche</td><td>aufwendig, aber zeigt Ursachen</td></tr>
+          <tr><td>Labeling</td><td>Menschen vergeben Zielwerte</td><td>uneinheitliche Bewertung → Regeln und Doppelbewertung</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle: Stichprobenverzerrung (Selection Bias)</span><p>Wenn die Trainingsdaten nicht die Fälle abbilden, auf die das Modell später trifft, versagt es. Ein Bilderkennungsmodell, das nur mit Fotos bei Tageslicht trainiert wurde, erkennt nachts schlecht. Daten müssen <b>repräsentativ</b> sein.</p></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Datenschutz (DSGVO) in Kürze</span>
+          <ul>
+            <li>Personenbezogene Daten nur mit <b>Rechtsgrundlage</b> (z. B. Vertrag, Einwilligung, berechtigtes Interesse)</li>
+            <li><b>Zweckbindung</b>: nur für den Zweck, für den erhoben</li>
+            <li><b>Datenminimierung</b>: nur so viel wie nötig</li>
+            <li><b>Speicherbegrenzung</b>: löschen, wenn nicht mehr nötig</li>
+            <li>Ausführlich in Modul 10</li>
+          </ul>
+        </div>
+        <div class="box fach"><span class="box-label">Schutz durch Technik</span>
+          <ul>
+            <li><b>Anonymisierung</b>: kein Personenbezug mehr herstellbar → DSGVO gilt nicht mehr</li>
+            <li><b>Pseudonymisierung</b>: Name durch Kennnummer ersetzt, Zuordnungstabelle getrennt → weiterhin personenbezogen</li>
+            <li><b>Aggregation</b>: nur Summen und Durchschnitte speichern</li>
+          </ul>
+        </div>
+      </div>
+      <div class="box fach"><span class="box-label">Datensicherheit: die drei Schutzziele</span>
+        <p><b>Vertraulichkeit</b> (nur Befugte sehen die Daten – Rechtekonzept, Verschlüsselung), <b>Integrität</b> (Daten sind unverfälscht – Protokollierung, Prüfsummen, Schutz vor SQL-Injection durch parametrisierte Abfragen), <b>Verfügbarkeit</b> (Daten sind da, wenn man sie braucht – Backups, Redundanz).</p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Verzerrung, Pseudonymisierung und Datenminimierung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Umfrage, die nur Zufriedene beantworten</span>
+        <p>Ein Händler bittet 1.000 Kunden per E-Mail um eine Bewertung. 120 antworten, 108 davon sind zufrieden: Das sind <span class="calcline">108 : 120 = 90 %</span>. Aber die 880 Nicht-Antwortenden fehlen. Unzufriedene Kunden antworten oft gar nicht oder haben den Händler schon verlassen. Die 90 % bilden <b>nicht die Wirklichkeit</b> ab (Auswahlverzerrung). Ein Modell, das auf diesen Daten lernt, wäre zu optimistisch. Gegenmittel: Nicht-Antwortende gezielt nachfragen oder die Verzerrung bei der Deutung offenlegen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Pseudonymisierung und Anonymisierung im Vergleich</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Original</th><th>Pseudonymisiert</th><th>Anonymisiert (aggregiert)</th></tr></thead>
+          <tbody>
+            <tr><td>Hannah Meier, 34, Köln, 1.250 €</td><td>K-4711, 34, 50667, 1.250 €<br><i>Zuordnungstabelle K-4711 → Hannah Meier liegt getrennt und geschützt</i></td><td>Altersgruppe 30–39, Region West, Mittelwert 1.180 € (Gruppe von 250)</td></tr>
+          </tbody>
+        </table></div>
+        <p>Bei der <b>Pseudonymisierung</b> kann der Personenbezug mit der Zuordnungstabelle wiederhergestellt werden: Es sind weiterhin personenbezogene Daten, und die DSGVO gilt. Bei echter <b>Anonymisierung</b> ist niemand mehr identifizierbar, die DSGVO gilt nicht mehr. Aber: Anonymisieren ist schwer, denn Kombinationen aus Alter, Ort und Beruf können einzelne Personen verraten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Datenminimierung im Projekt</span>
+        <p>Für eine Kündigungsprognose reichen Vertragsdaten und Nutzungsverhalten. <b>Name, Straße und Telefonnummer</b> braucht das Modell nicht: Man lässt sie weg oder ersetzt sie durch eine Kennung. Das reduziert das Risiko, falls Daten abfließen, und erfüllt den Grundsatz der Datenminimierung. Fragen Sie bei jedem Merkmal: <b>Brauche ich es wirklich für das Ziel?</b></p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie den Unterschied zwischen Pseudonymisierung und Anonymisierung und sagen Sie, ob die DSGVO jeweils gilt.</p>
+        <p><b>Musterlösung:</b> Bei der Pseudonymisierung wird ein Merkmal (z. B. Name) durch eine Kennung ersetzt; die Zuordnung ist getrennt gespeichert und der Personenbezug kann wiederhergestellt werden – die DSGVO gilt weiter (3 Punkte). Bei der Anonymisierung kann niemand mehr identifiziert werden – die DSGVO gilt nicht mehr (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Daten müssen repräsentativ und rechtmäßig erhoben sein. Pseudonymisiert ist noch personenbezogen, anonymisiert nicht mehr.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Fitnessstudio-Beispiel bringt Stichprobenverzerrung auf den Punkt. Lassen Sie die Gruppe überlegen, welche Verzerrungen in betrieblichen Daten stecken: zum Beispiel nur Kunden, die sich beschweren, landen im Ticketsystem.</p>
+        <p>Die Rechtsvorschrift nennt „Sicherheit“ und „Datenerhebung/Datenschutz“ ausdrücklich in diesem Themenblock. Die DSGVO-Details kommen in Modul 10 – hier reicht der Überblick.</p>
+      </aside>
+    </section>
+
+    <div class="part-head"><span>Teil B · Lektionen 6–9</span><h2>Datenqualität prüfen und Daten bereinigen</h2><p>Bevor ein Modell lernt, wird geputzt: fehlende Werte, Dubletten, Ausreißer, Tippfehler.</p></div>
+
+    <section class="lesson" id="l6" data-title="Datenqualität" data-part="B · Bereinigung">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 30 Minuten</span><h2>Die Dimensionen der Datenqualität</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Adressbuch ist schlecht, wenn Nummern fehlen, falsche Nummern drinstehen, Personen doppelt vorkommen, Leute längst umgezogen sind oder nur die Hälfte der Freunde eingetragen ist. Jeder dieser Mängel ist eine eigene Qualitätsdimension.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Dimension</th><th>Frage</th><th>Beispiel für einen Mangel</th><th>Prüfung</th></tr></thead>
+        <tbody>
+          <tr><td><b>Vollständigkeit</b></td><td>Fehlen Werte?</td><td>Alter bei 20 % der Kunden leer</td><td>Anteil fehlender Werte je Spalte</td></tr>
+          <tr><td><b>Korrektheit / Gültigkeit</b></td><td>Stimmen die Werte?</td><td>Postleitzahl „1234“, Alter 212</td><td>Wertebereiche, Formatregeln</td></tr>
+          <tr><td><b>Konsistenz</b></td><td>Widersprechen sich Angaben?</td><td>„Köln“ und „Koeln“; Lieferdatum vor Bestelldatum</td><td>Regeln über mehrere Felder</td></tr>
+          <tr><td><b>Aktualität</b></td><td>Sind die Daten aktuell?</td><td>Adresse von 2015</td><td>Zeitstempel prüfen</td></tr>
+          <tr><td><b>Eindeutigkeit</b></td><td>Gibt es Dubletten?</td><td>Kunde zweimal angelegt</td><td>Duplikatsuche</td></tr>
+          <tr><td><b>Repräsentativität</b></td><td>Bilden die Daten die Wirklichkeit ab?</td><td>Nur Großkunden in den Trainingsdaten</td><td>Verteilungen vergleichen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Was schlechte Daten kosten</span>
+        <p>Falsche Daten führen zu falschen Modellen und damit zu falschen Entscheidungen: Kredite an die Falschen, Wartung zur falschen Zeit, Werbung an Verstorbene. Datenqualität ist deshalb Chefsache. Viele Unternehmen benennen <b>Data Owner</b> (fachlich verantwortlich) und <b>Data Stewards</b> (pflegen die Qualität).</p>
+      </div>
+      <div class="prose">
+        <h3>Datenqualität messen: konkrete Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Qualitätskennzahlen für eine Kundentabelle</span>
+        <p>Eine Tabelle enthält 1.000 Kunden.</p>
+        <ul>
+          <li><b>Vollständigkeit:</b> Das Alter fehlt bei 150 Kunden. <span class="calcline">(1.000 − 150) : 1.000 = 85 %</span> vollständig.</li>
+          <li><b>Gültigkeit:</b> 25 Postleitzahlen haben nicht fünf Ziffern. <span class="calcline">975 : 1.000 = 97,5 %</span> gültig.</li>
+          <li><b>Eindeutigkeit:</b> 40 Kunden kommen doppelt vor. <span class="calcline">(1.000 − 40) : 1.000 = 96 %</span> eindeutig.</li>
+        </ul>
+        <p>Mit solchen Zahlen lässt sich Qualität über die Zeit verfolgen und gegen Ziele (z. B. mindestens 95 % Vollständigkeit) prüfen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mängel richtig zuordnen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Mangel</th><th>Dimension</th></tr></thead>
+          <tbody>
+            <tr><td>Bei 20 % der Aufträge fehlt das Lieferdatum</td><td>Vollständigkeit</td></tr>
+            <tr><td>Alter eines Kunden: 212 Jahre</td><td>Korrektheit (Gültigkeit)</td></tr>
+            <tr><td>Lieferdatum liegt vor dem Bestelldatum</td><td>Konsistenz</td></tr>
+            <tr><td>Adressen stammen aus dem Jahr 2015</td><td>Aktualität</td></tr>
+            <tr><td>Ein Kunde steht zweimal in der Datei</td><td>Eindeutigkeit</td></tr>
+            <tr><td>Nur Großkunden in den Trainingsdaten, das Modell soll aber alle bewerten</td><td>Repräsentativität</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was ein Fehler kosten kann</span>
+        <p>Ein Versandhändler bewirbt Kunden mit Rabattcode, aber 3 % der Adressen sind veraltet. Bei 100.000 Briefen zu je 0,80 € gehen <span class="calcline">3.000 · 0,80 € = 2.400 €</span> ins Leere. Wichtiger: Ein Modell, das auf veralteten Adressen trainiert wurde, kann Kunden falsch einordnen. Ein kleiner Mangel multipliziert sich durch jeden Schritt der Verarbeitung.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Dimensionen der Datenqualität und je einen typischen Mangel.</p>
+        <p><b>Musterlösung:</b> Vollständigkeit – fehlende Werte, z. B. Alter bei 20 % der Kunden leer; Konsistenz – widersprüchliche Angaben, z. B. Lieferdatum vor Bestelldatum; Eindeutigkeit – Dubletten, z. B. Kunde doppelt angelegt (je 1 Punkt Dimension, 1 Punkt Mangel). Weitere zulässige Dimensionen: Korrektheit, Aktualität, Repräsentativität.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Sechs Dimensionen: vollständig, korrekt, konsistent, aktuell, eindeutig, repräsentativ.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie jede Person ein Beispiel für jede Dimension aus dem eigenen Betrieb nennen. Die Zuordnung „Mangel → Dimension“ ist eine typische Prüfungsfrage (siehe Übung 11).</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l7" data-title="Explorative Datenanalyse" data-part="B · Bereinigung">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 40 Minuten</span><h2>Explorative Datenanalyse: Die Daten erst einmal kennenlernen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Bevor ein Arzt operiert, untersucht er den Patienten: Puls, Blutdruck, Röntgenbild. Die explorative Datenanalyse (EDA) ist diese Voruntersuchung für Daten. Man schaut sich an, was man hat, bevor man etwas damit macht.</p>
+      </div>
+      <h3>Die EDA-Checkliste</h3>
+      <ol class="steps">
+        <li><div><b>Größe:</b> Wie viele Zeilen und Spalten? Was ist eine Zeile (Kunde, Bestellung, Messung)?</div></li>
+        <li><div><b>Datentypen:</b> Zahl, Text, Datum? Stimmen sie (z. B. „1.200“ als Text statt Zahl)?</div></li>
+        <li><div><b>Fehlende Werte:</b> Wie viele je Spalte?</div></li>
+        <li><div><b>Kennzahlen:</b> Mittelwert, Median, Minimum, Maximum, Standardabweichung (Modul 2).</div></li>
+        <li><div><b>Verteilungen:</b> Histogramme, Boxplots – Ausreißer, Schiefe, unmögliche Werte?</div></li>
+        <li><div><b>Kategorien:</b> Welche Ausprägungen, wie häufig? Schreibvarianten?</div></li>
+        <li><div><b>Zusammenhänge:</b> Korrelationen, Streudiagramme zum Ziel.</div></li>
+        <li><div><b>Zielvariable:</b> Wie ist sie verteilt? Sind die Klassen ausgewogen?</div></li>
+      </ol>
+      <pre class="code"><span class="k">import</span> pandas <span class="k">as</span> pd
+
+df = pd.read_csv(<span class="s">"kunden.csv"</span>)        <span class="c"># Daten laden</span>
+df.shape                                 <span class="c"># (Zeilen, Spalten)</span>
+df.head()                                <span class="c"># die ersten 5 Zeilen ansehen</span>
+df.info()                                <span class="c"># Datentypen und Anzahl gefüllter Werte</span>
+df.describe()                            <span class="c"># Kennzahlen aller Zahlenspalten</span>
+df.isna().sum()                          <span class="c"># fehlende Werte je Spalte</span>
+df[<span class="s">"ort"</span>].value_counts()                <span class="c"># Häufigkeit jeder Kategorie</span>
+df[<span class="s">"kuendigt"</span>].value_counts(normalize=<span class="k">True</span>)  <span class="c"># Anteile der Zielklassen</span>
+df.select_dtypes(<span class="s">"number"</span>).corr()       <span class="c"># Korrelationen</span>
+df[<span class="s">"umsatz"</span>].hist()                     <span class="c"># Histogramm</span></pre>
+      <p class="code-cap">pandas ist die Standard-Bibliothek für Tabellen in Python. Ein <code>DataFrame</code> ist eine Tabelle im Arbeitsspeicher.</p>
+      <div class="prose">
+        <h3>Weitere Beispiele: Befunde der EDA lesen und umsetzen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein EDA-Befund und die Konsequenzen</span>
+        <p>Für eine Kündigungsprognose liegt eine Tabelle mit 10.000 Kunden und 12 Spalten vor. Die EDA liefert:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Befund</th><th>Bedeutung</th><th>Entscheidung</th></tr></thead>
+          <tbody>
+            <tr><td>Alter fehlt bei 3 %</td><td>wenige Lücken</td><td>mit Median füllen, Indikatorspalte</td></tr>
+            <tr><td>Umsatz: Median 420 €, Maximum 95.000 €</td><td>Ausreißer oder Tippfehler</td><td>bei Fachabteilung klären</td></tr>
+            <tr><td>Spalte „einkommen“ zu 62 % leer</td><td>kaum nutzbar</td><td>Spalte entfernen</td></tr>
+            <tr><td>Kündigungen: 8 % der Kunden</td><td>unbalanciert</td><td>stratifiziert aufteilen, Recall und Precision nutzen</td></tr>
+            <tr><td>„Tarif“ hat die Werte „Basic“, „basic“, „BASIC“</td><td>uneinheitliche Schreibweise</td><td>vereinheitlichen</td></tr>
+          </tbody>
+        </table></div>
+        <p>Jede Zeile ist ein kleiner Auftrag. Die EDA ist erst abgeschlossen, wenn zu jedem Befund eine Entscheidung dokumentiert ist.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Datentyp-Fehler</span>
+        <p>Die Spalte „Umsatz“ enthält Werte wie „1.200“ und „1.200,50“. Das Programm liest sie als <b>Text</b>, weil der Punkt als Tausendertrenner nicht als Zahl erkannt wird. Folge: Der Mittelwert lässt sich nicht berechnen, oder „900“ steht alphabetisch hinter „1.200“. Der Blick auf <code>df.info()</code> zeigt den Typ „object“ statt „float“. Lösung: Zeichen bereinigen und in eine Zahl umwandeln.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Zielvariable prüfen</span>
+        <p>Von 10.000 Kunden haben 800 gekündigt: <span class="calcline">800 : 10.000 = 8 %</span>. Ein „Modell“, das immer „bleibt“ sagt, hätte 92 % Accuracy – und wäre nutzlos. Dieser Befund aus der EDA entscheidet über die Bewertungskennzahlen (Modul 6) und die Aufteilung der Daten (Lektion 14).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie vier Schritte der explorativen Datenanalyse und erklären Sie, warum die Verteilung der Zielvariable wichtig ist.</p>
+        <p><b>Musterlösung:</b> Größe und Datentypen prüfen, fehlende Werte zählen, Kennzahlen berechnen, Verteilungen und Ausreißer ansehen, Zusammenhänge prüfen (4 Punkte, je 1 Punkt). Die Verteilung der Zielvariable zeigt, ob die Klassen ausgewogen sind; bei seltenen Klassen sind besondere Maßnahmen nötig (stratifizieren, andere Metriken) (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erst anschauen, dann anfassen: Größe, Typen, Lücken, Kennzahlen, Verteilungen, Kategorien, Zusammenhänge, Zielvariable.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Betonen Sie: Die EDA ist kein Selbstzweck. Jede Auffälligkeit wird notiert und später entschieden: korrigieren, entfernen oder bewusst behalten. In der Transferarbeit macht eine kurze EDA-Folie einen sehr guten Eindruck.</p>
+        <p>Den Code nicht auswendig lernen lassen – er dient als Orientierung, was ein Werkzeug für jeden Punkt der Checkliste tut.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l8" data-title="Fehlende Werte" data-part="B · Bereinigung">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 40 Minuten</span><h2>Fehlende Werte: löschen oder ersetzen?</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Im Klassenbuch fehlt bei drei Schülern die Note einer Klassenarbeit. Man kann die Schüler aus der Notenstatistik streichen, ihnen die Durchschnittsnote eintragen oder nachfragen, warum die Note fehlt. Jede Lösung hat Folgen.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Strategie</th><th>Wann sinnvoll</th><th>Nachteil</th></tr></thead>
+        <tbody>
+          <tr><td><b>Zeilen löschen</b></td><td>Nur wenige Zeilen betroffen (Faustregel unter 5 %), zufällig verteilt</td><td>Datenverlust, Verzerrung, wenn Fehlen nicht zufällig ist</td></tr>
+          <tr><td><b>Spalte löschen</b></td><td>Spalte zu großen Teilen leer (z. B. über 60 %) und unwichtig</td><td>Information geht verloren</td></tr>
+          <tr><td><b>Mit Median füllen</b></td><td>Zahlen, besonders mit Ausreißern</td><td>Streuung wird kleiner</td></tr>
+          <tr><td><b>Mit Mittelwert füllen</b></td><td>Zahlen ohne Ausreißer, symmetrisch verteilt</td><td>anfällig für Ausreißer</td></tr>
+          <tr><td><b>Mit Modus füllen</b></td><td>Kategorien</td><td>häufigste Klasse wird noch häufiger</td></tr>
+          <tr><td><b>Eigene Kategorie „unbekannt“</b></td><td>Kategorien, wenn das Fehlen selbst etwas bedeutet</td><td>eine Kategorie mehr</td></tr>
+          <tr><td><b>Indikatorspalte</b> „war_fehlend“ + Füllen</td><td>wenn das Fehlen informativ sein kann</td><td>eine Spalte mehr</td></tr>
+          <tr><td><b>Modellbasiert</b> (z. B. kNN-Imputation)</td><td>viele Lücken, Zusammenhänge vorhanden</td><td>aufwendiger</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg: Alter 12, 15, ?, 9, 30, 14, ?</h3>
+      <ol class="steps">
+        <li><div>Vorhandene Werte sortieren: <span class="calcline">9, 12, 14, 15, 30</span></div></li>
+        <li><div>Median: <span class="calcline">14</span> · Mittelwert: <span class="calcline">80 : 5 = 16</span></div></li>
+        <li><div>Der Ausreißer 30 zieht den Mittelwert nach oben. <span class="result">Mit dem Median 14 füllen.</span></div></li>
+      </ol>
+      <div class="box fach"><span class="box-label">Warum fehlen Werte?</span>
+        <p><b>Völlig zufällig</b> (Messgerät hatte Aussetzer) – Löschen ist unproblematisch. <b>Systematisch</b> (Kunden mit hohem Einkommen lassen das Feld „Einkommen“ eher leer) – dann verzerrt jedes einfache Verfahren das Bild, und das Fehlen selbst ist eine wertvolle Information. Deshalb immer zuerst fragen: <b>Warum</b> fehlt der Wert?</p>
+      </div>
+      <pre class="code"><span class="k">from</span> sklearn.impute <span class="k">import</span> SimpleImputer
+imp = SimpleImputer(strategy=<span class="s">"median"</span>, add_indicator=<span class="k">True</span>)
+imp.fit(X_train)                 <span class="c"># Median NUR aus den Trainingsdaten lernen</span>
+X_train_f = imp.transform(X_train)
+X_test_f  = imp.transform(X_test)   <span class="c"># Test mit dem Trainings-Median füllen</span></pre>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Den Median aus <b>allen</b> Daten zu berechnen (inklusive Testdaten) ist bereits Data Leakage (Lektion 15). Ersatzwerte immer nur aus den Trainingsdaten lernen.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Lücken füllen oder Zeilen löschen?</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Median oder Mittelwert?</span>
+        <p>Die bekannten Gehälter einer Abteilung: 2.800, 3.000, 3.100, 3.200 und 12.000 € (ein Geschäftsführer). Bei einer weiteren Person fehlt der Wert.</p>
+        <ul>
+          <li>Mittelwert: <span class="calcline">24.100 : 5 = 4.820 €</span> – klingt nach „Durchschnitt“, entspricht aber niemandem der vier Beschäftigten.</li>
+          <li>Median: sortiert 2.800, 3.000, <b>3.100</b>, 3.200, 12.000 → <span class="calcline">3.100 €</span></li>
+        </ul>
+        <p>Mit dem Median 3.100 € füllt man die Lücke vernünftig; der Mittelwert hätte einen unrealistisch hohen Wert eingesetzt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn das Fehlen selbst eine Information ist</span>
+        <p>Bei 200 von 1.000 Kunden fehlt das Einkommen. Die Kündigungsquote bei fehlendem Einkommen beträgt 12 %, bei vorhandenem Einkommen 5 %. Kündigungen insgesamt: <span class="calcline">200 · 0,12 + 800 · 0,05 = 24 + 40 = 64</span>, also 6,4 %. Würde man die 200 einfach löschen oder mit dem Median füllen, ginge die Information verloren, dass <b>fehlende Angaben</b> mit höherem Kündigungsrisiko einhergehen. Besser: Einkommen füllen <b>und</b> eine Spalte „einkommen_fehlt“ (0/1) ergänzen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum Zeilen löschen teurer sein kann, als es aussieht</span>
+        <p>Ein Datensatz hat 8 Spalten. In jeder fehlen unabhängig voneinander nur 4 % der Werte. Wie viele Zeilen sind komplett?</p>
+        <p><span class="calcline">0,96⁸ ≈ 0,72</span> – nur <b>72 %</b> der Zeilen sind vollständig, <b>28 % gehen verloren</b>, wenn man jede Zeile mit einer Lücke löscht. Je mehr Spalten, desto schlimmer. Deshalb füllt man in der Praxis meistens, statt zu löschen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> In einer Spalte stehen die Werte 10, 12, (leer), 14, 100. Welchen Wert setzen Sie ein und warum?</p>
+        <p><b>Musterlösung:</b> Bekannte Werte sortiert: 10, 12, 14, 100. Median = (12 + 14) : 2 = 13; Mittelwert = 136 : 4 = 34 (2 Punkte). Der Ausreißer 100 verzerrt den Mittelwert; man füllt mit dem Median 13 (2 Punkte), berechnet nur aus den Trainingsdaten (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erst fragen, warum ein Wert fehlt. Zahlen meist mit dem Median füllen, Kategorien mit dem Modus oder „unbekannt“. Ersatzwerte nur aus den Trainingsdaten berechnen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Einkommensbeispiel für systematisches Fehlen ist wichtig, weil es zeigt, dass Datenbereinigung fachliches Nachdenken verlangt. Rechnen Sie das Beispiel mit der Gruppe; es ist fast identisch mit Übung 4.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l9" data-title="Dubletten, Ausreißer, Formate" data-part="B · Bereinigung">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 40 Minuten</span><h2>Dubletten, Ausreißer und uneinheitliche Formate</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Beim Aufräumen der Wohnung gibt es drei typische Funde: Dinge, die man doppelt hat, Dinge, die völlig fehl am Platz sind, und Dinge, die zusammengehören, aber in verschiedenen Schubladen liegen. Bei Daten heißen sie Dubletten, Ausreißer und Inkonsistenzen.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/datenbereinigung.gif" width="640" height="380" alt="Animation einer Tabelle mit sechs Kunden. Schritt für Schritt wird ein doppelter Eintrag Meier entfernt, ein fehlendes Alter mit dem Median 34 gefüllt, die Schreibweise köln mit Leerzeichen zu Köln vereinheitlicht und ein Umsatz von 95000 als Tippfehler auf 950 korrigiert." loading="lazy">
+        <figcaption>Vier typische Bereinigungsschritte an einem Shop-Export.</figcaption>
+      </figure>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Dubletten</span>
+          <p>Exakte Dubletten sind leicht zu finden. Schwierig sind <b>unscharfe Dubletten</b>: „Müller GmbH“ und „Mueller GmbH“. Hier helfen Ähnlichkeitsvergleiche und eindeutige Schlüssel (Kundennummer, Steuernummer).</p>
+        </div>
+        <div class="box fach"><span class="box-label">Ausreißer</span>
+          <p>Erkennen mit IQR-Regel oder z-Wert (Modul 2). Dann fachlich entscheiden: <b>Fehler</b> → korrigieren oder entfernen; <b>echter Extremfall</b> → behalten, eventuell begrenzen (Kappung, engl. clipping) oder logarithmieren.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Formate und Einheiten</span>
+          <p>Datumsformate (18.11.2026 / 2026-11-18), Dezimalkomma und -punkt, Groß-/Kleinschreibung, Leerzeichen am Ende, Einheiten (kg und g gemischt), Zeitzonen. Alles auf <b>ein</b> Format bringen.</p>
+        </div>
+      </div>
+      <pre class="code">df = df.drop_duplicates()                                  <span class="c"># exakte Dubletten entfernen</span>
+df[<span class="s">"ort"</span>] = df[<span class="s">"ort"</span>].str.strip().str.title()           <span class="c"># " köln " -&gt; "Köln"</span>
+df[<span class="s">"datum"</span>] = pd.to_datetime(df[<span class="s">"datum"</span>], dayfirst=<span class="k">True</span>) <span class="c"># Text -&gt; Datum</span>
+q1, q3 = df[<span class="s">"umsatz"</span>].quantile([0.25, 0.75])
+iqr = q3 - q1
+auffaellig = df[(df[<span class="s">"umsatz"</span>] &lt; q1 - 1.5*iqr) | (df[<span class="s">"umsatz"</span>] &gt; q3 + 1.5*iqr)]
+print(auffaellig)                                          <span class="c"># erst ansehen, dann entscheiden!</span></pre>
+      <div class="box tipp"><span class="box-label">Praxistipp</span><p>Jeder Bereinigungsschritt wird dokumentiert (was, warum, wie viele Zeilen betroffen). Das macht die Arbeit nachvollziehbar – für Kollegen, für Prüfer und für die Dokumentationspflichten nach dem AI Act (Modul 10).</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Dubletten, Ausreißer und Formate in der Praxis</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Unscharfe Dubletten</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>id</th><th>Firma</th><th>Straße</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td>301</td><td>Müller GmbH</td><td>Hauptstr. 5</td><td></td></tr>
+            <tr><td>845</td><td>Mueller GmbH</td><td>Hauptstraße 5</td><td>vermutlich dieselbe Firma</td></tr>
+            <tr><td>912</td><td>Müller &amp; Söhne KG</td><td>Ringweg 8</td><td>andere Firma</td></tr>
+          </tbody>
+        </table></div>
+        <p><code>drop_duplicates()</code> findet hier nichts, weil die Zeilen nicht identisch sind. Man braucht einen <b>Ähnlichkeitsvergleich</b> (Schreibweisen vereinheitlichen, „ü“ und „ue“ gleichsetzen, Abkürzungen auflösen) und am Ende eine Entscheidung: zusammenführen oder nicht? Bei Firmenkunden hilft die Steuernummer als eindeutiger Schlüssel.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ausreißer mit der IQR-Regel</span>
+        <p>Die Spalte „Umsatz je Bestellung“ hat Q1 = 300 € und Q3 = 700 €.</p>
+        <ol class="steps">
+          <li><div>IQR: <span class="calcline">700 − 300 = 400</span></div></li>
+          <li><div>Grenzen: <span class="calcline">300 − 1,5 · 400 = −300 · 700 + 1,5 · 400 = 1.300</span></div></li>
+          <li><div>Ein Eintrag von 95.000 € liegt weit darüber – ein Ausreißer. Rückfrage in der Fachabteilung: Tippfehler (950,00 €) oder echte Großbestellung? <span class="result">Erst klären, dann behandeln.</span></div></li>
+        </ol>
+        <p>Optionen bei echten Extremwerten: behalten, auf die Grenze <b>kappen</b> (hier 1.300), oder die Werte <b>logarithmieren</b>, um die Spreizung zu verkleinern.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Formate und Einheiten – die stillen Fehler</span>
+        <ul>
+          <li><b>Datumsformat:</b> „03.04.2026“ ist in Deutschland der 3. April, in den USA (04/03/2026 geschrieben) der 4. März. Mischt man beide, sind einzelne Daten schlicht falsch, ohne dass es auffällt.</li>
+          <li><b>Einheiten:</b> In der Spalte „Gewicht“ stehen 2,5 und 2.500. Meint die zweite Zahl Gramm? Dann ist es kein Ausreißer, sondern eine andere Einheit.</li>
+          <li><b>Logarithmus als Hilfsmittel:</b> <span class="calcline">ln(1 + x)</span> macht aus 100 → 4,6; aus 1.000 → 6,9; aus 1.000.000 → 13,8. Riesige Unterschiede werden zu überschaubaren Abständen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Umsatzwert von 95.000 € fällt bei sonst Werten bis 1.300 € (obere IQR-Grenze) auf. Nennen Sie das Vorgehen und zwei Möglichkeiten der Behandlung.</p>
+        <p><b>Musterlösung:</b> Zuerst fachlich klären, ob Tippfehler oder echter Extremfall (2 Punkte). Tippfehler: korrigieren oder entfernen. Echter Fall: behalten, ggf. kappen oder logarithmieren (je 1,5 Punkte). Alle Entscheidungen dokumentieren.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Dubletten entfernen, Formate vereinheitlichen, Ausreißer erst verstehen und dann behandeln – und alles dokumentieren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Gehen Sie die Animation Schritt für Schritt durch und lassen Sie bei jedem Schritt raten, was als Nächstes passiert. Beim Ausreißer 95.000 diskutieren: Woher wissen wir, dass es ein Tippfehler ist? Antwort: Rückfrage in der Fachabteilung oder Abgleich mit der Rechnung.</p>
+      </aside>
+    </section>
+
+    <div class="part-head"><span>Teil C · Lektionen 10–13</span><h2>Feature Engineering: Daten modellgerecht machen</h2><p>Modelle rechnen nur mit Zahlen – und sie rechnen naiv. Hier lernen Sie, Merkmale so aufzubereiten, dass ein Modell daraus lernen kann.</p></div>
+
+    <section class="lesson" id="l10" data-title="Kategorien kodieren" data-part="C · Feature Engineering">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 40 Minuten</span><h2>Kategorien in Zahlen umwandeln</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Würde man Farben nummerieren (rot = 1, grün = 2, blau = 3), wäre blau plötzlich „dreimal so viel“ wie rot. Das ist Unsinn – aber ein Modell glaubt es. Stattdessen stellt man für jede Farbe eine Ja/Nein-Frage: „Ist es rot?“, „Ist es grün?“, „Ist es blau?“</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/one-hot-encoding.gif" width="640" height="380" alt="Animation: Die Spalte Farbe mit den Werten rot, grün, blau, grün, rot wird in drei Spalten ist_rot, ist_grün und ist_blau umgewandelt. In jeder Zeile steht genau eine 1, sonst 0." loading="lazy">
+        <figcaption>One-Hot-Encoding: eine Spalte pro Kategorie, in jeder Zeile genau eine 1.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Für</th><th>Beispiel</th><th>Achtung</th></tr></thead>
+        <tbody>
+          <tr><td><b>One-Hot-Encoding</b></td><td>nominale Merkmale</td><td>Farbe → ist_rot, ist_grün, ist_blau</td><td>Bei vielen Kategorien sehr viele Spalten</td></tr>
+          <tr><td><b>Ordinal-Encoding</b></td><td>ordinale Merkmale</td><td>S = 1, M = 2, L = 3, XL = 4</td><td>Nur, wenn die Reihenfolge stimmt</td></tr>
+          <tr><td><b>Binär</b></td><td>zwei Ausprägungen</td><td>Newsletter ja = 1, nein = 0</td><td>–</td></tr>
+          <tr><td><b>Frequenz- / Target-Encoding</b></td><td>sehr viele Kategorien (z. B. 8.000 Postleitzahlen)</td><td>PLZ → Häufigkeit oder mittlere Kündigungsrate</td><td>Target-Encoding nur auf Trainingsdaten berechnen (Leakage-Gefahr)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="calc" id="calcOneHot"><span class="box-label">Rechner: One-Hot-Encoding</span>
+        <div class="calc-row"><div class="field" style="flex-basis:100%"><label for="ohInput">Werte einer Spalte (mit Semikolon trennen)</label><input type="text" id="ohInput" value="Köln; Bonn; Köln; Aachen; Bonn"></div></div>
+        <div class="table-wrap" id="ohOut"></div>
+        <p class="calc-note" id="ohNote"></p>
+      </div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle: Die Dummy-Falle</span><p>Bei linearen Modellen ist eine One-Hot-Spalte überflüssig: Wenn ist_rot = 0 und ist_grün = 0, muss es blau sein. Man lässt deshalb oft eine Spalte weg (<code>drop="first"</code>). Bei 5 Kategorien entstehen dann 4 Spalten. In der Prüfung beide Varianten kennen und angeben, welche man meint.</p></div>
+      <pre class="code"><span class="k">from</span> sklearn.preprocessing <span class="k">import</span> OneHotEncoder, OrdinalEncoder
+ohe = OneHotEncoder(handle_unknown=<span class="s">"ignore"</span>)              <span class="c"># neue, unbekannte Kategorie im Betrieb -&gt; alles 0</span>
+ord_ = OrdinalEncoder(categories=[[<span class="s">"S"</span>, <span class="s">"M"</span>, <span class="s">"L"</span>, <span class="s">"XL"</span>]])  <span class="c"># Reihenfolge ausdrücklich vorgeben</span></pre>
+      <div class="prose">
+        <h3>Weitere Beispiele: Kodieren im Detail</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: One-Hot-Encoding Schritt für Schritt</span>
+        <p>Die Spalte „ort“ enthält: Köln, Bonn, Köln, Aachen, Bonn. Es gibt drei Kategorien, also entstehen drei neue Spalten:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>ort</th><th class="r">ist_Köln</th><th class="r">ist_Bonn</th><th class="r">ist_Aachen</th></tr></thead>
+          <tbody>
+            <tr><td>Köln</td><td class="r">1</td><td class="r">0</td><td class="r">0</td></tr>
+            <tr><td>Bonn</td><td class="r">0</td><td class="r">1</td><td class="r">0</td></tr>
+            <tr><td>Köln</td><td class="r">1</td><td class="r">0</td><td class="r">0</td></tr>
+            <tr><td>Aachen</td><td class="r">0</td><td class="r">0</td><td class="r">1</td></tr>
+            <tr><td>Bonn</td><td class="r">0</td><td class="r">1</td><td class="r">0</td></tr>
+          </tbody>
+        </table></div>
+        <p>Lässt man eine Spalte weg (<code>drop="first"</code>, hier „Aachen“), genügen zwei Spalten: Sind beide 0, handelt es sich um Aachen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn es zu viele Kategorien gibt</span>
+        <p>Die Spalte „Postleitzahl“ hat 8.000 verschiedene Werte. One-Hot-Encoding würde <b>8.000 neue Spalten</b> erzeugen; bei 50.000 Kunden sind das <span class="calcline">50.000 · 8.000 = 400 Millionen</span> Zellen, fast alle 0. Alternativen: die PLZ auf die ersten zwei Ziffern (Region) verkürzen, die <b>Häufigkeit</b> der PLZ als Zahl verwenden (Frequency-Encoding) oder die <b>mittlere Kündigungsrate je Region</b> eintragen (Target-Encoding).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Target-Encoding und seine Gefahr</span>
+        <p>Region Nord: 400 Kunden, 40 haben gekündigt (<span class="calcline">10 %</span>). Region Süd: 300 Kunden, 12 gekündigt (<span class="calcline">4 %</span>). Man ersetzt die Region durch diese Quote. Gefährlich: Berechnet man die Quote auf <b>allen</b> Daten inklusive der Testdaten, fließt das Ziel in das Merkmal – das ist Data Leakage (Lektion 15). Die Quote darf nur aus den <b>Trainingsdaten</b> stammen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Die Spalte „Zahlungsart“ hat die Werte PayPal, Rechnung, Karte, Lastschrift, Vorkasse. Wie viele Spalten entstehen mit One-Hot-Encoding, und wie viele, wenn man eine Spalte weglässt? Begründen Sie, warum man nicht einfach 1 bis 5 nummeriert.</p>
+        <p><b>Musterlösung:</b> Fünf Spalten, mit Weglassen vier (2 Punkte). Zahlungsarten haben keine natürliche Reihenfolge (nominal); Nummern würden dem Modell eine Rangfolge und Abstände vortäuschen, z. B. dass Vorkasse „fünfmal so viel“ ist wie PayPal (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Nominal → One-Hot. Ordinal → Ordinal-Encoding mit richtiger Reihenfolge. Nie willkürliche Nummern für Kategorien ohne Reihenfolge.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Postleitzahl ist das perfekte Fallbeispiel: Sie besteht aus Ziffern, ist aber nominal. 50667 ist nicht „mehr“ als 10115. Mit dem Rechner kann jede Person eigene Kategorien eingeben und sieht sofort, wie viele Spalten entstehen.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l11" data-title="Skalieren" data-part="C · Feature Engineering">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 40 Minuten</span><h2>Skalieren: Merkmale auf eine gemeinsame Skala bringen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Sie vergleichen zwei Wohnungen: Die eine ist 2 Minuten näher am Bahnhof, die andere 50 € günstiger. Wer stur die Zahlen vergleicht, sagt: 50 ist viel mehr als 2, also zählt nur der Preis. Das ist falsch – die Einheiten sind verschieden. Skalieren macht Merkmale vergleichbar.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/skalierung.gif" width="640" height="380" alt="Animation: Punktwolke mit Alter und Einkommen. In den Rohdaten liegen alle Punkte auf einer schmalen senkrechten Linie, weil das Einkommen viel größere Zahlen hat. Nach der Standardisierung verteilen sich die Punkte gleichmäßig in beide Richtungen." loading="lazy">
+        <figcaption>Ohne Skalierung bestimmt das Einkommen jeden Abstand allein.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Formel</th><th>Ergebnis</th><th>Wann</th></tr></thead>
+        <tbody>
+          <tr><td><b>Min-Max-Normalisierung</b></td><td>(x − min) / (max − min)</td><td>Werte zwischen 0 und 1</td><td>bekannte Grenzen, wenige Ausreißer, z. B. Pixelwerte</td></tr>
+          <tr><td><b>Standardisierung (z-Wert)</b></td><td>(x − μ) / σ</td><td>Mittelwert 0, Standardabweichung 1</td><td>Standardwahl für die meisten Verfahren</td></tr>
+          <tr><td><b>Robuste Skalierung</b></td><td>(x − Median) / IQR</td><td>unempfindlich gegen Ausreißer</td><td>viele Ausreißer</td></tr>
+          <tr><td><b>Log-Transformation</b></td><td>log(x + 1)</td><td>staucht große Werte</td><td>stark rechtsschiefe Daten (Einkommen, Klicks)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg Min-Max: Alter zwischen 18 und 68, Wert 43</h3>
+      <ol class="steps">
+        <li><div><span class="calcline">x − min = 43 − 18 = 25</span></div></li>
+        <li><div><span class="calcline">max − min = 68 − 18 = 50</span></div></li>
+        <li><div><span class="calcline">25 : 50 = 0,5</span> → <span class="result">genau in der Mitte des Bereichs</span></div></li>
+      </ol>
+      <div class="calc" id="calcScale"><span class="box-label">Rechner: Min-Max und z-Werte</span>
+        <div class="calc-row"><div class="field" style="flex-basis:100%"><label for="scInput">Werte (Semikolon oder Leerzeichen, Dezimalkomma erlaubt)</label><input type="text" id="scInput" value="18; 25; 43; 52; 68"></div></div>
+        <div class="table-wrap" id="scOut"></div>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Skalierung nötig</span>
+          <p>Alle Verfahren, die mit <b>Abständen</b> oder <b>Gradienten</b> arbeiten: kNN, k-Means, SVM, lineare/logistische Regression mit Regularisierung, neuronale Netze, PCA.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Skalierung egal</span>
+          <p><b>Baumverfahren</b> (Entscheidungsbaum, Random Forest, Gradient Boosting): Sie fragen nur „ist der Wert größer als …?“ – die Einheit spielt keine Rolle.</p>
+        </div>
+      </div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Den Skalierer auf <b>allen</b> Daten anpassen und dann aufteilen ist Data Leakage. Richtig: <code>fit</code> nur auf den Trainingsdaten, <code>transform</code> auf Training, Validierung und Test.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Skalieren mit Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: z-Werte und Min-Max an einem einfachen Datensatz</span>
+        <p>Drei Monatseinkommen: 2.000, 3.000 und 4.000 €. Mittelwert 3.000 €, Standardabweichung (Stichprobe) 1.000 €.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Einkommen</th><th class="r">z-Wert (x − 3.000) : 1.000</th><th class="r">Min-Max (x − 2.000) : 2.000</th></tr></thead>
+          <tbody>
+            <tr><td class="r">2.000</td><td class="r">−1</td><td class="r">0</td></tr>
+            <tr><td class="r">3.000</td><td class="r">0</td><td class="r">0,5</td></tr>
+            <tr><td class="r">4.000</td><td class="r">+1</td><td class="r">1</td></tr>
+          </tbody>
+        </table></div>
+        <p>Beide Verfahren machen aus Euro-Beträgen vergleichbare Zahlen: Der z-Wert zeigt den Abstand vom Mittelwert in Standardabweichungen, Min-Max die Position zwischen kleinstem und größtem Wert.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn ein Ausreißer die Min-Max-Skalierung zerstört</span>
+        <p>Die Einkommen lauten 2.000, 3.000, 4.000 und 100.000 €. Mit Min-Max: <span class="calcline">(3.000 − 2.000) : 98.000 ≈ 0,010</span> und <span class="calcline">(4.000 − 2.000) : 98.000 ≈ 0,020</span>. Die ersten drei Werte werden in ein winziges Intervall zwischen 0 und 0,02 gepresst, der Ausreißer bekommt 1. Das Modell kann die ersten drei kaum noch unterscheiden. <b>Gegenmittel:</b> Ausreißer vorher behandeln, robuste Skalierung (Median und IQR) oder Logarithmus verwenden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum es bei kNN so wichtig ist</span>
+        <p>Beim k-Nächste-Nachbarn-Verfahren entscheidet der Abstand zwischen Datenpunkten. Zwei Kunden unterscheiden sich im Alter um 4 Jahre und im Jahresumsatz um 600 €. Ohne Skalierung ist der Abstand <span class="calcline">√(4² + 600²) ≈ 600</span> – das Alter spielt praktisch keine Rolle. Nach der Standardisierung (Alter σ = 10 Jahre, Umsatz σ = 400 €) sind es <span class="calcline">√(0,4² + 1,5²) ≈ 1,55</span>, und <b>beide Merkmale zählen</b>. Bei Entscheidungsbäumen wäre die Skalierung dagegen unnötig, weil sie nur fragen, ob ein Wert größer als eine Schwelle ist.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Das Alter liegt zwischen 20 und 60 Jahren. Berechnen Sie den Min-Max-Wert für 35 Jahre. Nennen Sie ein Verfahren, bei dem man skalieren muss, und eines, bei dem es unnötig ist.</p>
+        <p><b>Musterlösung:</b> (35 − 20) : (60 − 20) = 15 : 40 = 0,375 (2 Punkte). Skalieren nötig: z. B. kNN, k-Means, neuronale Netze (1,5 Punkte). Unnötig: Entscheidungsbäume bzw. Random Forest (1,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Standardisieren ist die Standardwahl. Nötig bei Abstands- und Gradientenverfahren, unnötig bei Bäumen. Immer nur auf Trainingsdaten anpassen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie in der Animation, wie die Punkte zuerst auf einer Linie kleben: Das Modell „sieht“ nur das Einkommen. Danach mit dem Rechner eigene Werte skalieren lassen.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l12" data-title="Neue Merkmale bilden" data-part="C · Feature Engineering">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 45 Minuten</span><h2>Feature Engineering: neue, aussagekräftige Merkmale bilden</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein erfahrener Autohändler schaut nicht nur auf Baujahr und Kilometerstand, sondern rechnet im Kopf „Kilometer pro Jahr“ aus. 100.000 km in 2 Jahren sind etwas ganz anderes als in 15 Jahren. Dieses neue Merkmal ist aussagekräftiger als die beiden Rohwerte. Genau das ist Feature Engineering: Fachwissen in Merkmale gießen.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Technik</th><th>Beispiel</th><th>Warum hilfreich</th></tr></thead>
+        <tbody>
+          <tr><td><b>Datum zerlegen</b></td><td>Wochentag, Monat, Feiertag ja/nein, Stunde</td><td>Montags andere Bestellmengen als samstags</td></tr>
+          <tr><td><b>Verhältnisse</b></td><td>km pro Jahr, Umsatz pro Besuch, Schulden / Einkommen</td><td>Vergleichbarkeit zwischen großen und kleinen Fällen</td></tr>
+          <tr><td><b>Differenzen und Dauer</b></td><td>Tage seit letztem Kauf, Lieferdauer</td><td>Zeitabstände sind oft sehr aussagekräftig</td></tr>
+          <tr><td><b>Aggregation</b></td><td>Anzahl Bestellungen, Durchschnittsbetrag, Trend der letzten 3 Monate</td><td>Aus vielen Zeilen eine Kennzahl pro Kunde</td></tr>
+          <tr><td><b>Binning</b> (Klassen bilden)</td><td>Alter → 18–29, 30–49, 50+</td><td>robuster, leichter erklärbar</td></tr>
+          <tr><td><b>Transformation</b></td><td>Logarithmus von Einkommen</td><td>schiefe Verteilungen glätten</td></tr>
+          <tr><td><b>Text-Merkmale</b></td><td>Länge, Anzahl Ausrufezeichen, Wortzählungen</td><td>Text wird messbar</td></tr>
+          <tr><td><b>Gleitende Fenster</b> (Zeitreihen)</td><td>Mittelwert der Vibration der letzten Stunde</td><td>Trends statt Einzelwerte</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Merkmalsauswahl</span>
+          <p>Mehr Merkmale sind nicht automatisch besser. Unwichtige oder doppelte Merkmale stören. Methoden: Korrelation mit dem Ziel prüfen, stark untereinander korrelierte Merkmale entfernen, Wichtigkeit aus Baummodellen (Feature Importance), schrittweises Weglassen, L1-Regularisierung (Modul 6).</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fluch der Dimensionalität</span>
+          <p>Je mehr Merkmale, desto „leerer“ wird der Raum: Bei 100 Merkmalen liegen alle Punkte weit voneinander entfernt, Abstände verlieren ihre Aussagekraft, und man braucht enorm viele Daten. Gegenmittel: Merkmalsauswahl oder Dimensionsreduktion (PCA, Modul 5).</p>
+        </div>
+      </div>
+      <pre class="code">df[<span class="s">"km_pro_jahr"</span>]   = df[<span class="s">"km"</span>] / (2026 - df[<span class="s">"baujahr"</span>]).clip(lower=1)
+df[<span class="s">"wochentag"</span>]     = df[<span class="s">"datum"</span>].dt.dayofweek
+df[<span class="s">"tage_seit_kauf"</span>] = (pd.Timestamp(<span class="s">"2026-11-18"</span>) - df[<span class="s">"letzter_kauf"</span>]).dt.days
+df[<span class="s">"altersgruppe"</span>]  = pd.cut(df[<span class="s">"alter"</span>], bins=[17, 29, 49, 120], labels=[<span class="s">"18-29"</span>, <span class="s">"30-49"</span>, <span class="s">"50+"</span>])</pre>
+      <div class="prose">
+        <h3>Weitere Beispiele: Merkmale für ein konkretes Problem entwerfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kündigungsprognose im Fitnessstudio</span>
+        <p>Aus den Rohdaten (Mitglied, Besuchszeitpunkte, Vertrag, Beitrag) entstehen sinnvolle Merkmale:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Neues Merkmal</th><th>Berechnung</th><th>Warum aussagekräftig</th></tr></thead>
+          <tbody>
+            <tr><td>Besuche je Woche (letzte 4 Wochen)</td><td>Zählung der Check-ins</td><td>Aktivität</td></tr>
+            <tr><td>Trend der Besuche</td><td>Besuche letzte 4 Wochen − Besuche davor</td><td>Wer nachlässt, kündigt eher</td></tr>
+            <tr><td>Tage seit letztem Besuch</td><td>Heute − letzter Check-in</td><td>Abstand zum Studio</td></tr>
+            <tr><td>Beitrag je Besuch</td><td>30 € : 8 Besuche = 3,75 € (gegen 30 € : 2 = 15 €)</td><td>Gefühlter Preis</td></tr>
+            <tr><td>Restlaufzeit in Monaten</td><td>Vertragsende − heute</td><td>Kündigung nur zum Ende möglich</td></tr>
+            <tr><td>Altersgruppe</td><td>Alter in Klassen</td><td>robuster als das Rohalter</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Verhältnisse schlagen Rohwerte</span>
+        <p>Ein Auto mit 100.000 km klingt abgenutzt. Ist es 2 Jahre alt, sind es 50.000 km pro Jahr – extreme Nutzung. Ist es 10 Jahre alt, sind es 10.000 km pro Jahr – normal. Das Merkmal <b>km pro Jahr</b> trennt die beiden Fälle, während Alter und Kilometerstand einzeln dies nicht tun.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Fluch der Dimensionalität in Zahlen</span>
+        <p>Teilt man jedes Merkmal in 10 Wertebereiche, ergeben 2 Merkmale <span class="calcline">10² = 100</span> Zellen, 5 Merkmale <span class="calcline">10⁵ = 100.000</span> Zellen, 10 Merkmale <span class="calcline">10¹⁰ = 10 Milliarden</span> Zellen. Hat man 10.000 Datensätze, kommt bei 10 Merkmalen auf jede Zelle im Mittel <b>0,000001 Datensatz</b>: Der Raum ist fast leer, und jedes Beispiel ist weit von allen anderen entfernt. Deshalb sind wenige, gut gewählte Merkmale oft besser als viele.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Für die Vorhersage von Lieferverzögerungen liegen Bestelldatum, Lieferdatum, Gewicht und Postleitzahl vor. Nennen Sie drei neue Merkmale, die Sie bilden würden.</p>
+        <p><b>Musterlösung:</b> Wochentag der Bestellung (Datum zerlegen); Lieferdauer in Tagen (Differenz zweier Daten); Gewicht je Artikel oder Gewichtsklasse (Binning); Region aus den ersten zwei Ziffern der PLZ. Je genanntem und begründetem Merkmal 2 Punkte (max. 6).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gute Merkmale schlagen komplizierte Modelle. Fachwissen der Abteilung ist die beste Quelle für neue Merkmale.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Autohändler-Beispiel überträgt sich auf jeden Betrieb. Lassen Sie die Gruppe für eine Kündigungsvorhersage im Fitnessstudio zehn Merkmale erfinden (Besuche pro Woche, Trend der Besuche, Tage seit letztem Besuch …). Das ist eine hervorragende Übung für die Transferarbeit.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l13" data-title="Unbalancierte Daten" data-part="C · Feature Engineering">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 35 Minuten</span><h2>Unbalancierte Daten: Wenn das Wichtige selten ist</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Wachhund, der nie bellt, liegt in 99,9 % der Nächte richtig – es kommt ja fast nie ein Einbrecher. Trotzdem ist er nutzlos. Bei Betrug, Maschinenausfällen oder seltenen Krankheiten sind die wichtigen Fälle selten. Ein Modell lernt dann leicht, einfach immer „alles normal“ zu sagen.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Maßnahme</th><th>Idee</th><th>Vorteil</th><th>Nachteil</th></tr></thead>
+        <tbody>
+          <tr><td><b>Undersampling</b></td><td>Von der häufigen Klasse weniger Beispiele nehmen</td><td>schnell</td><td>wirft Daten weg</td></tr>
+          <tr><td><b>Oversampling</b></td><td>Seltene Beispiele mehrfach verwenden</td><td>keine Daten verloren</td><td>Overfitting auf Kopien</td></tr>
+          <tr><td><b>SMOTE</b></td><td>Künstliche neue Beispiele zwischen ähnlichen seltenen Fällen erzeugen</td><td>vielfältiger als Kopien</td><td>kann unrealistische Fälle erzeugen</td></tr>
+          <tr><td><b>Klassengewichte</b></td><td>Fehler bei der seltenen Klasse stärker bestrafen</td><td>einfach, kein Datenumbau</td><td>Gewichte müssen passen</td></tr>
+          <tr><td><b>Schwellenwert verschieben</b></td><td>Schon ab 30 % statt 50 % Wahrscheinlichkeit Alarm</td><td>flexibel nach Kosten</td><td>mehr Fehlalarme</td></tr>
+          <tr><td><b>Passende Metrik</b></td><td>Recall, Precision, F1 statt Accuracy</td><td>ehrliche Bewertung</td><td>–</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Oversampling und SMOTE nur auf die <b>Trainingsdaten</b> anwenden, nie vor dem Aufteilen. Sonst landen Kopien desselben Falls in Training und Test – das Modell wird zu gut bewertet.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Seltene Klassen in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der nutzlose Wachhund</span>
+        <p>In 10.000 Transaktionen sind 100 Betrugsfälle (1 %). Ein „Modell“, das immer „kein Betrug“ sagt:</p>
+        <ul>
+          <li>Richtig klassifiziert: 9.900 von 10.000 → <b>Accuracy 99 %</b>.</li>
+          <li>Gefundene Betrugsfälle: 0 von 100 → <b>Recall 0 %</b>.</li>
+        </ul>
+        <p>Die Zahl 99 % klingt hervorragend, das Modell ist wertlos. Deshalb nutzt man bei seltenen Klassen Recall, Precision und F1 (Modul 6) statt der Accuracy.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Klassengewichte berechnen</span>
+        <p>Das Training enthält 8.000 Zeilen: 7.920 normal, 80 Betrug. Üblich ist das Gewicht <span class="calcline">n : (Klassenanzahl · Fälle der Klasse)</span>.</p>
+        <ul>
+          <li>Normal: <span class="calcline">8.000 : (2 · 7.920) ≈ 0,505</span></li>
+          <li>Betrug: <span class="calcline">8.000 : (2 · 80) = 50</span></li>
+        </ul>
+        <p>Ein übersehener Betrugsfall wiegt damit etwa 99-mal so schwer wie ein falscher Alarm. Das Modell wird gezwungen, die seltene Klasse ernst zu nehmen, ohne dass man Daten verändern muss.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Under- und Oversampling im Vergleich</span>
+        <ul>
+          <li><b>Undersampling:</b> Aus 7.920 normalen Fällen werden 80 zufällig ausgewählt. Das Training hat dann nur <span class="calcline">80 + 80 = 160</span> Zeilen – ausgewogen, aber 98 % der Daten sind weggeworfen.</li>
+          <li><b>Oversampling:</b> Jeder der 80 Betrugsfälle wird etwa 99-mal kopiert, um auf 7.920 zu kommen. Keine Daten gehen verloren, aber das Modell sieht dieselben 80 Fälle immer wieder und neigt zum Auswendiglernen.</li>
+          <li><b>SMOTE:</b> Statt zu kopieren, erzeugt man neue, ähnliche Betrugsfälle durch Mischen nahe beieinander liegender echter Fälle.</li>
+        </ul>
+        <p>Wichtig: Alle drei Verfahren gehören <b>ausschließlich in das Training</b>, nie in den Testdatensatz.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Bei einer Maschinenüberwachung sind 0,5 % der Messungen Ausfälle. Warum ist eine Accuracy von 99,5 % kein Erfolg, und welche zwei Maßnahmen schlagen Sie vor?</p>
+        <p><b>Musterlösung:</b> Ein Modell, das immer „kein Ausfall“ sagt, erreicht bereits 99,5 % Accuracy, findet aber keinen einzigen Ausfall (2 Punkte). Maßnahmen: Klassengewichte erhöhen oder Over-/Undersampling im Training (2 Punkte); Bewertung mit Recall, Precision und F1 statt Accuracy (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bei seltenen Klassen ist Accuracy wertlos. Ausgleichen (Gewichte, Sampling) nur im Training und mit Recall, Precision und F1 bewerten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Der Wachhund ist eine Brücke zum Bayes-Beispiel aus Modul 2 und zur Modellbewertung in Modul 6. Wiederholen Sie: Bei 1 % Betrug erreicht ein Modell, das immer „kein Betrug“ sagt, 99 % Accuracy.</p>
+      </aside>
+    </section>
+
+    <div class="part-head"><span>Teil D · Lektionen 14–16</span><h2>Saubere Aufteilung und Umsetzung in Python</h2><p>Die ehrliche Prüfung eines Modells beginnt mit der richtigen Aufteilung der Daten.</p></div>
+
+    <section class="lesson" id="l14" data-title="Train, Validierung, Test" data-part="D · Aufteilung">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 40 Minuten</span><h2>Training, Validierung, Test: die Daten richtig aufteilen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Lehrer, der die Klausuraufgaben vorher als Übungsblatt verteilt, weiß hinterher nicht, ob die Klasse etwas verstanden oder nur auswendig gelernt hat. Deshalb hält man Aufgaben zurück: Übungsaufgaben (Training), eine Probeklausur (Validierung) und die echte Klausur (Test), die niemand vorher sieht.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/train-test-split.gif" width="640" height="380" alt="Animation: 100 graue Quadrate werden gemischt und dann eingefärbt: 70 grün für Training, 15 orange für Validierung, 15 violett für Test. Darunter steht die Aufgabe jedes Teils." loading="lazy">
+        <figcaption>Erst mischen, dann aufteilen. Der Test wird nur einmal am Ende benutzt.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Teil</th><th>Üblicher Anteil</th><th>Wofür</th></tr></thead>
+        <tbody>
+          <tr><td><b>Training</b></td><td>60–80 %</td><td>Modell lernt seine Parameter</td></tr>
+          <tr><td><b>Validierung</b></td><td>10–20 %</td><td>Hyperparameter wählen, Modelle vergleichen, Early Stopping</td></tr>
+          <tr><td><b>Test</b></td><td>10–20 %</td><td>einmalige, ehrliche Abschlussbewertung</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg: 20.000 Datensätze, 70 / 15 / 15</h3>
+      <ol class="steps">
+        <li><div><span class="calcline">Training: 20.000 · 0,70 = 14.000</span></div></li>
+        <li><div><span class="calcline">Validierung: 20.000 · 0,15 = 3.000</span></div></li>
+        <li><div><span class="calcline">Test: 20.000 · 0,15 = 3.000</span></div></li>
+      </ol>
+      <div class="calc" id="calcSplit"><span class="box-label">Rechner: Aufteilung</span>
+        <div class="calc-row">
+          <div class="field"><label for="spN">Anzahl Datensätze</label><input type="number" id="spN" value="20000" min="1"></div>
+          <div class="field"><label for="spTr">Training %</label><input type="number" id="spTr" value="70" min="0" max="100"></div>
+          <div class="field"><label for="spVa">Validierung %</label><input type="number" id="spVa" value="15" min="0" max="100"></div>
+          <div class="field"><label for="spRare">Anteil seltene Klasse %</label><input type="number" id="spRare" value="2" min="0" max="100" step="0.1"></div>
+        </div>
+        <div class="kpis" id="spOut"></div>
+        <p class="calc-note" id="spNote"></p>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Stratifiziert aufteilen</span>
+          <p>Bei seltenen Klassen sorgt <b>Stratifizierung</b> dafür, dass jeder Teil denselben Anteil enthält. Bei 2 % Betrug und 3.000 Testfällen sind das 60 Betrugsfälle im Test – ohne Stratifizierung könnten es zufällig 40 oder 80 sein.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Zeitreihen: nach der Zeit aufteilen</span>
+          <p>Bei Daten mit Zeitbezug (Absatz, Sensoren) nie zufällig mischen. Training = Vergangenheit, Test = jüngster Zeitraum. Sonst „kennt“ das Modell die Zukunft. Gleiches gilt für Gruppen: Alle Daten einer Maschine oder eines Kunden gehören in denselben Teil.</p>
+        </div>
+      </div>
+      <pre class="code"><span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+X_tmp, X_test, y_tmp, y_test = train_test_split(X, y, test_size=0.15, stratify=y, random_state=42)
+X_train, X_val, y_train, y_val = train_test_split(X_tmp, y_tmp, test_size=0.15/0.85, stratify=y_tmp, random_state=42)
+<span class="c"># random_state macht den Zufall reproduzierbar</span></pre>
+      <div class="prose">
+        <h3>Weitere Beispiele: Aufteilen rechnen und planen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: 80 / 10 / 10 bei 5.000 Datensätzen</span>
+        <p>Training: <span class="calcline">5.000 · 0,8 = 4.000</span>. Validierung: <span class="calcline">5.000 · 0,1 = 500</span>. Test: <span class="calcline">500</span>. Hat das Ziel einen Anteil von 4 % (Ausfälle), sind es insgesamt <span class="calcline">5.000 · 0,04 = 200</span> Ausfälle. Stratifiziert enthält der Test davon 4 % von 500 = <b>20</b>. Mit nur 20 Fällen ist das Testergebnis wackelig: Ein einziger Fehler mehr verändert die Trefferquote um 5 Prozentpunkte. Bei wenigen seltenen Fällen lohnt sich deshalb die Kreuzvalidierung (Modul 6).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Zeitreihen richtig aufteilen</span>
+        <p>Ein Händler hat 24 Monate Absatzdaten. Eine zufällige Mischung würde dazu führen, dass das Modell Monate <i>nach</i> dem Testmonat im Training sieht und so „die Zukunft kennt“. Richtig: Training = Monate 1–18, Validierung = Monate 19–21, Test = Monate 22–24. Das spiegelt die Praxis: Das Modell wird mit der Vergangenheit gebaut und muss die Zukunft vorhersagen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Gruppen zusammenhalten</span>
+        <p>Ein Datensatz enthält 12.000 Röntgenbilder von 400 Patienten (im Mittel 30 Bilder je Patient). Mischt man zufällig, landen Bilder desselben Patienten im Training <i>und</i> im Test. Das Modell erkennt dann nicht die Krankheit, sondern den Patienten wieder – die Testergebnisse sind geschönt. Richtig ist die Aufteilung <b>nach Patienten</b>: alle Bilder eines Patienten in denselben Teil.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein Datensatz hat 12.000 Zeilen und wird 70/15/15 aufgeteilt. 3 % der Zeilen gehören zur seltenen Klasse. Wie viele Zeilen enthält jeder Teil, und wie viele seltene Fälle sind im Test, wenn stratifiziert wird?</p>
+        <p><b>Musterlösung:</b> Training 8.400, Validierung 1.800, Test 1.800 (3 Punkte). Seltene Fälle im Test: 1.800 · 0,03 = 54 (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Training lernt, Validierung wählt aus, Test bewertet einmal. Seltene Klassen stratifiziert aufteilen, Zeitreihen nach der Zeit.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Klausur-Analogie ist sehr eingängig. Ergänzen Sie: Wer den Test mehrfach nutzt, um Einstellungen zu verbessern, macht aus der Klausur heimlich eine Übung – die Note ist dann geschönt.</p>
+        <p>Die Kreuzvalidierung als Alternative bei wenig Daten kommt in Modul 6.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l15" data-title="Data Leakage" data-part="D · Aufteilung">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 40 Minuten</span><h2>Data Leakage: die gefährlichste Falle</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Wahrsager sagt Ihnen gestern Abend die Lottozahlen von gestern Abend voraus – nachdem er die Ziehung gesehen hat. Beeindruckend, aber wertlos. Data Leakage bedeutet: Das Modell bekommt beim Lernen Informationen, die es bei der echten Vorhersage nicht hätte.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/data-leakage.gif" width="640" height="380" alt="Animation einer Zeitachse mit Ereignissen eines Kunden: Vertrag seit 4 Jahren, Support-Anrufe, Preiserhöhung, dann der Vorhersagezeitpunkt, danach Kündigung und Kündigungsbestätigung. Alles rechts vom Vorhersagezeitpunkt ist rot markiert, die Kündigungsbestätigung als Merkmal durchgestrichen." loading="lazy">
+        <figcaption>Nur Informationen, die zum Vorhersagezeitpunkt vorliegen, dürfen Merkmale sein.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Art</th><th>Beispiel</th><th>Gegenmittel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Ziel-Leakage</b></td><td>Merkmal „Mahnstufe“ zur Vorhersage eines Kreditausfalls – Mahnungen gibt es erst nach dem Ausfall</td><td>Für jedes Merkmal fragen: Kenne ich das zum Vorhersagezeitpunkt?</td></tr>
+          <tr><td><b>Vorverarbeitungs-Leakage</b></td><td>Skalierer, Imputation oder Merkmalsauswahl auf allen Daten angepasst</td><td>Pipeline: alles nur auf Training anpassen</td></tr>
+          <tr><td><b>Zeit-Leakage</b></td><td>Zeitreihe zufällig gemischt</td><td>zeitlich aufteilen</td></tr>
+          <tr><td><b>Gruppen-Leakage</b></td><td>Fotos desselben Patienten in Training und Test</td><td>nach Gruppen aufteilen</td></tr>
+          <tr><td><b>Duplikat-Leakage</b></td><td>Dubletten oder Oversampling vor dem Aufteilen</td><td>erst aufteilen, dann ausgleichen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Warnsignale</span>
+        <ul>
+          <li>Ein Modell ist <b>zu gut</b> (99 % bei einer schwierigen Aufgabe).</li>
+          <li>Ein einzelnes Merkmal ist mit Abstand das wichtigste.</li>
+          <li>Testergebnis hervorragend, im Betrieb deutlich schlechter.</li>
+        </ul>
+      </div>
+      <pre class="code"><span class="k">from</span> sklearn.pipeline <span class="k">import</span> Pipeline
+<span class="k">from</span> sklearn.compose <span class="k">import</span> ColumnTransformer
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> StandardScaler, OneHotEncoder
+<span class="k">from</span> sklearn.impute <span class="k">import</span> SimpleImputer
+<span class="k">from</span> sklearn.linear_model <span class="k">import</span> LogisticRegression
+
+vorverarbeitung = ColumnTransformer([
+    (<span class="s">"zahlen"</span>, Pipeline([(<span class="s">"fuellen"</span>, SimpleImputer(strategy=<span class="s">"median"</span>)), (<span class="s">"skalieren"</span>, StandardScaler())]), [<span class="s">"alter"</span>, <span class="s">"umsatz"</span>]),
+    (<span class="s">"kategorien"</span>, OneHotEncoder(handle_unknown=<span class="s">"ignore"</span>), [<span class="s">"tarif"</span>, <span class="s">"region"</span>]),
+])
+modell = Pipeline([(<span class="s">"vorverarbeitung"</span>, vorverarbeitung), (<span class="s">"klassifikator"</span>, LogisticRegression(max_iter=1000))])
+modell.fit(X_train, y_train)          <span class="c"># Imputer, Skalierer, Encoder lernen NUR aus X_train</span>
+print(modell.score(X_test, y_test))   <span class="c"># Test bleibt unberührt</span></pre>
+      <div class="prose">
+        <h3>Weitere Beispiele: Leakage aufspüren</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Welche Merkmale sind erlaubt? (Kündigungsprognose am Monatsanfang)</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th>Wann bekannt?</th><th>Urteil</th></tr></thead>
+          <tbody>
+            <tr><td>Vertragslaufzeit bisher</td><td>sofort</td><td>erlaubt</td></tr>
+            <tr><td>Support-Anrufe der letzten 3 Monate</td><td>sofort</td><td>erlaubt</td></tr>
+            <tr><td>Tarif</td><td>sofort</td><td>erlaubt</td></tr>
+            <tr><td>„Kündigungsbestätigung versendet“</td><td>erst nach der Kündigung</td><td><b>Leakage</b></td></tr>
+            <tr><td>„Router zurückgeschickt“</td><td>erst nach der Kündigung</td><td><b>Leakage</b></td></tr>
+            <tr><td>Rückholangebot gesendet</td><td>erst nach der Kündigung</td><td><b>Leakage</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Faustregel: Alles, was <b>nach</b> dem Vorhersagezeitpunkt entsteht oder <b>durch</b> das Ergebnis ausgelöst wird, darf kein Merkmal sein.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Vorverarbeitungs-Leakage mit Zahlen</span>
+        <p>Training: 10, 20, 30 (Mittelwert 20). Test: 90. Berechnet man den Mittelwert aus allen vier Werten, erhält man <span class="calcline">(10 + 20 + 30 + 90) : 4 = 37,5</span>. Der Wert 90 aus dem Testdatensatz hat den Mittelwert beeinflusst – das Modell „weiß“ etwas über die Testdaten, obwohl es sie nie sehen sollte. Richtig: Mittelwert nur aus dem Training (20) lernen und dann damit den Test transformieren.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das Modell, das zu gut war</span>
+        <p>Ein Modell sagt Zahlungsausfälle mit 99,8 % Treffsicherheit voraus. Beim Nachsehen zeigt sich: Das wichtigste Merkmal ist „Mahnstufe“. Mahnungen gibt es aber erst, <i>nachdem</i> eine Zahlung ausgeblieben ist. Das Modell hat nicht die Zukunft vorhergesagt, sondern abgelesen, was schon passiert war. Im echten Einsatz, wo die Mahnstufe noch nicht existiert, wäre es nutzlos.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie den Begriff Data Leakage, nennen Sie zwei Ursachen und ein Warnsignal.</p>
+        <p><b>Musterlösung:</b> Data Leakage heißt, dass dem Modell beim Training Informationen zur Verfügung stehen, die es bei der echten Vorhersage nicht hätte; die Testergebnisse sind dann zu gut (2 Punkte). Ursachen: Merkmale, die erst nach dem Ereignis bekannt sind; Skalierer, Imputer oder Merkmalsauswahl auf allen Daten angepasst; zufälliges Mischen von Zeitreihen; Dubletten über Training und Test (je 1 Punkt, max. 2). Warnsignal: Ergebnis „zu gut, um wahr zu sein“ oder ein einzelnes dominierendes Merkmal (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Zu gut, um wahr zu sein, ist meistens Leakage. Für jedes Merkmal fragen: Kenne ich das zum Zeitpunkt der Vorhersage? Vorverarbeitung immer in einer Pipeline nur auf Training anpassen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Leakage ist in der Prüfung ein Lieblingsthema, weil es echtes Verständnis zeigt. Gehen Sie die Zeitachse in der Animation gemeinsam durch: Was weiß ich am Vorhersagetag? Danach Übung 7 direkt anschließen.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="l16" data-title="Python und pandas" data-part="D · Aufteilung">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 60 Minuten</span><h2>Python-Grundlagen für die Datenarbeit</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Python ist wie eine Werkbank mit sehr vielen fertigen Werkzeugen. Sie müssen das Werkzeug nicht selbst bauen – Sie müssen nur wissen, welches Sie in die Hand nehmen. Die wichtigsten für KI heißen pandas (Tabellen), NumPy (Zahlen), Matplotlib (Diagramme) und scikit-learn (Modelle).</p>
+      </div>
+      <h3>Die Grundbausteine</h3>
+      <pre class="code"><span class="c"># Variablen und Datentypen</span>
+alter = 34                   <span class="c"># ganze Zahl (int)</span>
+preis = 19.99                <span class="c"># Kommazahl (float) – Python nutzt den Punkt!</span>
+name = <span class="s">"Meier"</span>               <span class="c"># Text (str)</span>
+aktiv = <span class="k">True</span>                 <span class="c"># Wahrheitswert (bool)</span>
+
+<span class="c"># Listen und Wörterbücher</span>
+werte = [2, 3, 3, 4, 8]
+kunde = {<span class="s">"name"</span>: <span class="s">"Meier"</span>, <span class="s">"alter"</span>: 34}
+
+<span class="c"># Bedingung und Schleife</span>
+<span class="k">for</span> w <span class="k">in</span> werte:
+    <span class="k">if</span> w &gt; 3:
+        print(w, <span class="s">"ist größer als 3"</span>)
+
+<span class="c"># Funktion</span>
+<span class="k">def</span> mittelwert(liste):
+    <span class="k">return</span> sum(liste) / len(liste)
+
+print(mittelwert(werte))     <span class="c"># 4.0</span></pre>
+      <p class="code-cap">Einrückung ist in Python Pflicht: Was eingerückt ist, gehört zur Zeile darüber.</p>
+      <h3>pandas: die wichtigsten Befehle</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aufgabe</th><th>Befehl</th></tr></thead>
+        <tbody>
+          <tr><td>CSV laden / speichern</td><td><code>pd.read_csv("datei.csv")</code> / <code>df.to_csv("neu.csv", index=False)</code></td></tr>
+          <tr><td>Spalte auswählen</td><td><code>df["alter"]</code></td></tr>
+          <tr><td>Zeilen filtern</td><td><code>df[df["ort"] == "Köln"]</code></td></tr>
+          <tr><td>Neue Spalte</td><td><code>df["netto"] = df["brutto"] / 1.19</code></td></tr>
+          <tr><td>Gruppieren</td><td><code>df.groupby("ort")["umsatz"].mean()</code></td></tr>
+          <tr><td>Sortieren</td><td><code>df.sort_values("umsatz", ascending=False)</code></td></tr>
+          <tr><td>Tabellen verbinden (wie SQL-JOIN)</td><td><code>pd.merge(kunden, bestellungen, left_on="id", right_on="kunde_id", how="left")</code></td></tr>
+          <tr><td>Fehlende Werte füllen</td><td><code>df["alter"].fillna(df["alter"].median())</code></td></tr>
+          <tr><td>One-Hot-Encoding</td><td><code>pd.get_dummies(df, columns=["farbe"])</code></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Der Weg vom Rohdatensatz zum Modell</h3>
+      <ol class="steps">
+        <li><div>Daten laden (SQL oder CSV) und mit der EDA-Checkliste anschauen.</div></li>
+        <li><div>Bereinigen: Dubletten, Formate, offensichtliche Fehler.</div></li>
+        <li><div>Merkmale bilden und Zielvariable festlegen; Leakage-Prüfung jedes Merkmals.</div></li>
+        <li><div>Aufteilen in Training, Validierung und Test (stratifiziert bzw. zeitlich).</div></li>
+        <li><div>Pipeline bauen: Imputation, Kodierung, Skalierung, Modell.</div></li>
+        <li><div>Auf Training anpassen, mit Validierung vergleichen, am Ende einmal testen.</div></li>
+        <li><div>Jeden Schritt dokumentieren.</div></li>
+      </ol>
+      <div class="box tipp"><span class="box-label">Werkzeuge</span><p><b>Jupyter Notebook</b> (Code und Erklärtext in einem Dokument, ideal zum Ausprobieren), <b>VS Code</b> (Editor für größere Projekte), <b>Google Colab</b> (Notebooks im Browser, ohne Installation). Für die Prüfung genügt es, Code lesen und erklären zu können.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Code lesen und erklären</h3>
+        <p>In der Prüfung genügt es, Code zu lesen und zu erklären. Übersetzen Sie jede Zeile in einen deutschen Satz. Ein Beispiel mit vier Kunden:</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Filtern und Mittelwert in pandas</span>
+        <pre class="code">import pandas as pd
+df = pd.DataFrame({"alter":  [25, 34, 41, 52],
+                   "umsatz": [300, 450, 900, 1200]})
+
+aeltere = df[df["alter"] &gt; 30]        # nur Zeilen mit Alter über 30
+print(aeltere["umsatz"].mean())       # Mittelwert ihres Umsatzes</pre>
+        <ol class="steps">
+          <li><div><code>df["alter"] &gt; 30</code> prüft jede Zeile: falsch, wahr, wahr, wahr.</div></li>
+          <li><div>Es bleiben drei Zeilen (34, 41, 52 Jahre) mit Umsatz 450, 900 und 1.200.</div></li>
+          <li><div>Mittelwert: <span class="calcline">(450 + 900 + 1.200) : 3 = 850</span> → <span class="result">Ausgabe: 850.0</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Spalte bereinigen</span>
+        <pre class="code">df["ort"] = df["ort"].str.strip().str.title()</pre>
+        <p><b>Erklärung:</b> <code>str.strip()</code> entfernt Leerzeichen am Anfang und Ende, <code>str.title()</code> schreibt jedes Wort mit großem Anfangsbuchstaben. Aus „ köln “ und „KÖLN“ wird einheitlich „Köln“. Das Ergebnis wird in dieselbe Spalte zurückgeschrieben.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Typische Anfängerfehler</span>
+        <ul>
+          <li><b>= statt ==:</b> <code>if alter = 30</code> ist ein Fehler. Ein einfaches Gleichheitszeichen <i>weist zu</i>, zwei <i>vergleichen</i>: <code>if alter == 30</code>.</li>
+          <li><b>Einrückung vergessen:</b> Nach <code>for …:</code> oder <code>if …:</code> muss der folgende Block eingerückt sein, sonst meldet Python einen Fehler.</li>
+          <li><b>Dezimalkomma:</b> <code>19,99</code> ist in Python keine Zahl, sondern zwei (ein Tupel). Es muss <code>19.99</code> heißen.</li>
+          <li><b>Zählen ab 0:</b> Das erste Element einer Liste hat den Index 0: <code>werte[0]</code>.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie, was die folgenden Zeilen bewirken: <code>df = df.drop_duplicates()</code> und <code>df["alter"].fillna(df["alter"].median())</code>.</p>
+        <p><b>Musterlösung:</b> drop_duplicates entfernt exakt doppelte Zeilen aus der Tabelle (2 Punkte). Die zweite Zeile ersetzt fehlende Werte der Spalte „alter“ durch den Median der vorhandenen Altersangaben (2 Punkte). Hinweis: Den Median nur aus den Trainingsdaten berechnen (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Python + pandas für Tabellen, scikit-learn für Vorverarbeitung und Modelle. Code muss man in der Prüfung vor allem lesen und erklären können.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Für viele Teilnehmende ist das die erste Begegnung mit Code. Arbeiten Sie, wenn möglich, live in Google Colab: Laden Sie eine kleine CSV und führen Sie die Befehle der Tabelle aus. Das nimmt die Scheu schneller als jede Erklärung.</p>
+        <p>Betonen Sie: Die Rechtsvorschrift verlangt „Grundzüge der Programmierung, z. B. mit Python“ – Lesen und Erklären steht im Vordergrund, nicht fehlerfreies Schreiben großer Programme.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="uebungen" data-title="Übungen" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Übungen · 120 Minuten</span><h2>12 Übungen mit Antwortfeldern</h2></div>
+      <p>Tragen Sie Ihre Antworten in die Felder ein. Zahlen und Auswahl prüft die Seite selbst, Freitext und SQL bewertet auf Knopfdruck die KI wie ein IHK-Prüfer. Öffnen Sie die Musterlösung erst danach. Ihre Antworten werden gespeichert, und Ihre Lehrkraft sieht Ihren Stand.</p>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 1: Die richtige Kodierung</h3><span class="points">4 Punkte</span></div>
+        <p>Wie bereiten Sie diese Merkmale für eine logistische Regression auf? (1) Lieblingsfarbe, (2) Kleidergröße S/M/L/XL, (3) Jahresumsatz in Euro, (4) fortlaufende Kundennummer.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>(1) One-Hot-Encoding (nominal). (2) Ordinal-Encoding in der Reihenfolge S &lt; M &lt; L &lt; XL. (3) Skalieren, z. B. Standardisierung, eventuell vorher logarithmieren. (4) Entfernen – eine laufende Nummer trägt keine Information und kann zu Scheinzusammenhängen führen.</p>
+        </details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 2: Min-Max-Normalisierung</h3><span class="points">2 Punkte</span></div>
+        <p>Das Alter in einem Datensatz liegt zwischen 18 und 68 Jahren. Welchen Wert erhält eine Person mit 43 Jahren nach der Min-Max-Normalisierung?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(43 − 18) : (68 − 18) = 25 : 50 = <b>0,5</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 3: Standardisierung</h3><span class="points">2 Punkte</span></div>
+        <p>Das Einkommen hat im Training den Mittelwert 40.000 € und die Standardabweichung 8.000 €. Welchen z-Wert hat ein Einkommen von 52.000 €?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(52.000 − 40.000) : 8.000 = 12.000 : 8.000 = <b>1,5</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 4: Fehlende Werte füllen</h3><span class="points">4 Punkte</span></div>
+        <p>In der Spalte „Wartezeit in Minuten“ stehen die Werte 12, 15, leer, 9, 30, 14, leer. Berechnen Sie Median und Mittelwert der vorhandenen Werte. Mit welchem Wert füllen Sie die Lücken, und warum?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Vorhandene Werte sortiert: 9, 12, 14, 15, 30. Median = <b>14</b>, Mittelwert = 80 : 5 = <b>16</b>. Füllen mit dem Median 14, weil der Ausreißer 30 den Mittelwert verzerrt; der Median ist robust. Der Median wird nur aus den Trainingsdaten berechnet.</p>
+        </details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 5: Daten aufteilen</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Datensatz hat 20.000 Zeilen und wird im Verhältnis 70 / 15 / 15 aufgeteilt. Wie viele Zeilen enthalten Training, Validierung und Test?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Training 14.000, Validierung 3.000, Test 3.000.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 6: Stratifizierung</h3><span class="points">2 Punkte</span></div>
+        <p>In 10.000 Transaktionen sind 2 % Betrugsfälle. 20 % der Daten werden stratifiziert als Testdaten abgetrennt. Wie viele Betrugsfälle sind im Testdatensatz?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Test: 10.000 · 0,2 = 2.000 Transaktionen. Davon 2 %: <b>40 Betrugsfälle</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 7: Leakage erkennen</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Mobilfunkanbieter will am Monatsanfang vorhersagen, welche Kunden im Laufe des Monats kündigen. Welche Merkmale sind erlaubt, welche wären Data Leakage? (1) Vertragslaufzeit bisher, (2) „Kündigungsbestätigung versendet“, (3) Anzahl Support-Anrufe in den letzten 3 Monaten, (4) „Router zurückgeschickt“.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Erlaubt: (1) und (3) – zum Vorhersagezeitpunkt bekannt. Leakage: (2) und (4) – sie entstehen erst als Folge der Kündigung.</p>
+        </details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 8: SQL schreiben</h3><span class="points">3 Punkte</span></div>
+        <p>Die Tabelle <code>kunde</code> hat die Spalten <code>id, name, region, umsatz</code>. Schreiben Sie eine Abfrage, die Name und Umsatz aller Kunden aus der Region „Nord“ mit einem Umsatz über 1.000 liefert, absteigend nach Umsatz sortiert.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <pre class="code"><span class="k">SELECT</span> name, umsatz
+<span class="k">FROM</span> kunde
+<span class="k">WHERE</span> region = <span class="s">'Nord'</span> <span class="k">AND</span> umsatz &gt; 1000
+<span class="k">ORDER BY</span> umsatz <span class="k">DESC</span>;</pre>
+          <p>Je 1 Punkt: richtige Spalten und Tabelle, richtige WHERE-Bedingung mit AND, richtige Sortierung.</p>
+        </details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 9: JOIN</h3><span class="points">3 Punkte</span></div>
+        <p>Welche JOIN-Art liefert alle Kunden, auch solche ohne Bestellung? Schreiben Sie eine Abfrage, die nur die Kunden <b>ohne</b> Bestellung findet (Tabellen <code>kunde(id, name)</code> und <code>bestellung(nr, kunde_id)</code>).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>LEFT JOIN (1 P.).</p>
+          <pre class="code"><span class="k">SELECT</span> k.id, k.name
+<span class="k">FROM</span> kunde k
+<span class="k">LEFT JOIN</span> bestellung b <span class="k">ON</span> b.kunde_id = k.id
+<span class="k">WHERE</span> b.nr <span class="k">IS NULL</span>;</pre>
+          <p>2 P. für die Abfrage (LEFT JOIN mit richtiger Verknüpfung, Filter mit IS NULL).</p>
+        </details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 10: Spalten nach One-Hot-Encoding</h3><span class="points">3 Punkte</span></div>
+        <p>Ein Datensatz hat 3 Zahlenspalten, die Spalte „Farbe“ mit 4 Ausprägungen und die Spalte „Region“ mit 3 Ausprägungen. (a) Wie viele Spalten entstehen aus „Farbe“ beim vollständigen One-Hot-Encoding? (b) Wie viele Spalten hat der Datensatz danach insgesamt?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) <b>4</b> Spalten. (b) 3 + 4 + 3 = <b>10</b> Spalten. Mit <code>drop="first"</code> wären es 3 + 3 + 2 = 8.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 11: Qualitätsdimensionen</h3><span class="points">4 Punkte</span></div>
+        <p>Ordnen Sie jeden Mangel einer Dimension der Datenqualität zu: (1) Kunde Meier ist zweimal angelegt. (2) Postleitzahl „1234“. (3) Die Adresse stammt von 2015, die Kundin ist umgezogen. (4) Bei 30 % der Kunden fehlt die E-Mail-Adresse.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) Eindeutigkeit, (2) Korrektheit/Gültigkeit, (3) Aktualität, (4) Vollständigkeit.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 12: Unbalancierte Daten</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Betrugserkennungsmodell erreicht 99,5 % Accuracy. In den Daten sind 0,5 % Betrugsfälle. Bewerten Sie das Ergebnis und nennen Sie zwei Maßnahmen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Die Accuracy ist wertlos: Ein Modell, das nie Betrug meldet, erreicht ebenfalls 99,5 % (2 P.). Maßnahmen (je 1 P.): Bewertung mit Recall, Precision, F1; Klassengewichte oder Over-/Undersampling bzw. SMOTE nur auf den Trainingsdaten; Schwellenwert senken; stratifiziert aufteilen.</p>
+        </details></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Aufgaben 1–7 eignen sich nach Teil C, die SQL-Aufgaben 8 und 9 direkt nach Lektion 4. Lassen Sie SQL-Abfragen auf Papier schreiben, bevor sie eingetippt werden.</p>
+      </aside>
+    </section>
+
+    <section class="lesson" id="quiz" data-title="Abschlussquiz" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 30 Minuten</span><h2>Abschlussquiz Modul 3</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="btnrow"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Ohne Unterlagen bearbeiten lassen. Die häufigsten Fehler betreffen erfahrungsgemäß HAVING/WHERE und die Frage, wann Skalierung nötig ist.</p></aside>
+    </section>
+
+    <section class="lesson" id="summary" data-title="Zusammenfassung" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Datenarten</h3><p>Strukturiert (Tabelle), semistrukturiert (JSON), unstrukturiert (Text, Bild, Ton).</p></div>
+        <div class="card"><h3>Datenbank</h3><p>Primärschlüssel identifiziert, Fremdschlüssel verbindet; Normalisierung vermeidet Doppeltes.</p></div>
+        <div class="card"><h3>SQL</h3><p>SELECT – FROM – WHERE – GROUP BY – HAVING – ORDER BY; LEFT JOIN für „auch ohne Partner“.</p></div>
+        <div class="card"><h3>Qualität</h3><p>Vollständig, korrekt, konsistent, aktuell, eindeutig, repräsentativ.</p></div>
+        <div class="card"><h3>Fehlende Werte</h3><p>Erst „warum?“, dann Median/Modus/„unbekannt“ – nur aus Trainingsdaten.</p></div>
+        <div class="card"><h3>Kodieren</h3><p>Nominal → One-Hot, ordinal → Ordinal-Encoding.</p></div>
+        <div class="card"><h3>Skalieren</h3><p>z-Werte für Abstands- und Gradientenverfahren; Bäume brauchen es nicht.</p></div>
+        <div class="card"><h3>Aufteilen</h3><p>Training lernt, Validierung wählt, Test bewertet einmal; stratifiziert oder zeitlich.</p></div>
+        <div class="card"><h3>Leakage</h3><p>Nur was zum Vorhersagezeitpunkt bekannt ist; Vorverarbeitung in der Pipeline.</p></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+        <tbody>
+          <tr><td>Aggregation</td><td>Viele Werte zu einer Kennzahl zusammenfassen (Summe, Mittel)</td></tr>
+          <tr><td>DataFrame</td><td>Tabelle in pandas</td></tr>
+          <tr><td>EDA</td><td>Explorative Datenanalyse: Daten vor der Modellierung untersuchen</td></tr>
+          <tr><td>Feature Engineering</td><td>Neue, aussagekräftige Merkmale bilden</td></tr>
+          <tr><td>Fremdschlüssel</td><td>Spalte, die auf den Primärschlüssel einer anderen Tabelle verweist</td></tr>
+          <tr><td>Imputation</td><td>Fehlende Werte durch Schätzwerte ersetzen</td></tr>
+          <tr><td>JOIN</td><td>Tabellen über gemeinsame Schlüssel verbinden</td></tr>
+          <tr><td>Normalisierung (DB)</td><td>Datenbankentwurf ohne Redundanz (nicht zu verwechseln mit Min-Max-Normalisierung)</td></tr>
+          <tr><td>One-Hot-Encoding</td><td>Eine 0/1-Spalte je Kategorie</td></tr>
+          <tr><td>Pipeline</td><td>Verkettete Vorverarbeitung und Modell, angepasst nur auf Trainingsdaten</td></tr>
+          <tr><td>SMOTE</td><td>Erzeugt künstliche Beispiele der seltenen Klasse</td></tr>
+          <tr><td>Stratifizierung</td><td>Aufteilung mit gleichen Klassenanteilen in allen Teilen</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Weiter mit Modul 4:</b> Überwachtes Lernen – jetzt kommen die Modelle, die aus den vorbereiteten Daten lernen.</p>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fragen Sie zum Abschluss: „Welcher Schritt dieses Moduls ist in Ihrem Betrieb wohl am aufwendigsten?“ Meist ist es die Datenqualität – ein guter Aufhänger für die Transferarbeit.</p></aside>
+    </section>
+<!--SCRIPTS-->
+<script type="application/json" id="quiz-data">[
+["Welches Format ist typisch für semistrukturierte Daten?", ["CSV-Tabelle", "JSON", "JPEG-Foto", "MP3-Datei"], 1, "JSON hat Bezeichner, aber kein starres Tabellenschema. Lektion 1."],
+["Was ist ein Fremdschlüssel?", ["Ein Passwort für die Datenbank", "Eine Spalte, die auf den Primärschlüssel einer anderen Tabelle verweist", "Der eindeutige Schlüssel einer Zeile", "Ein verschlüsselter Wert"], 1, "Fremdschlüssel verbinden Tabellen. Lektion 2."],
+["Welches Ziel verfolgt die Normalisierung einer Datenbank?", ["Werte zwischen 0 und 1 bringen", "Redundanz und Widersprüche vermeiden", "Daten verschlüsseln", "Abfragen beschleunigen, indem alles in eine Tabelle kommt"], 1, "Jede Information nur einmal speichern. Lektion 2."],
+["Welche Klausel filtert Gruppen nach dem Gruppieren?", ["WHERE", "ORDER BY", "HAVING", "SELECT"], 2, "WHERE filtert Zeilen vorher, HAVING Gruppen danach. Lektion 3."],
+["Wie findet man in SQL Zeilen mit fehlendem Alter?", ["WHERE alter = NULL", "WHERE alter IS NULL", "WHERE alter = ''", "WHERE alter = 0"], 1, "NULL vergleicht man nur mit IS NULL. Lektion 3."],
+["Welcher JOIN liefert alle Kunden, auch solche ohne Bestellung?", ["INNER JOIN", "LEFT JOIN (Kunde links)", "CROSS JOIN", "Kein JOIN kann das"], 1, "LEFT JOIN behält alle Zeilen der linken Tabelle. Lektion 4."],
+["Pseudonymisierte Daten sind …", ["nicht mehr personenbezogen", "weiterhin personenbezogen", "automatisch gelöscht", "immer verschlüsselt"], 1, "Mit der Zuordnungstabelle ist der Personenbezug herstellbar. Lektion 5."],
+["Ein Kunde ist doppelt angelegt. Welche Qualitätsdimension ist verletzt?", ["Aktualität", "Vollständigkeit", "Eindeutigkeit", "Repräsentativität"], 2, "Dubletten verletzen die Eindeutigkeit. Lektion 6."],
+["Was zeigt df.isna().sum() in pandas?", ["Die Summe aller Werte", "Die Anzahl fehlender Werte je Spalte", "Die Anzahl der Zeilen", "Die Dubletten"], 1, "isna markiert fehlende Werte, sum zählt sie je Spalte. Lektion 7."],
+["Womit füllt man fehlende Zahlenwerte bei Ausreißern am besten?", ["Mittelwert", "Median", "Maximum", "Null"], 1, "Der Median ist robust gegen Ausreißer. Lektion 8."],
+["Aus welchen Daten wird der Ersatzwert für fehlende Werte berechnet?", ["Aus allen Daten", "Nur aus den Testdaten", "Nur aus den Trainingsdaten", "Aus den Validierungsdaten"], 2, "Sonst entsteht Data Leakage. Lektion 8."],
+["Wie kodiert man das Merkmal „Kleidergröße S/M/L/XL“ sinnvoll?", ["One-Hot oder Ordinal, bevorzugt Ordinal mit richtiger Reihenfolge", "Gar nicht", "Zufällige Zahlen", "Als Text lassen"], 0, "Ordinal: Die Reihenfolge trägt Information. Lektion 10."],
+["Wie viele Spalten entstehen beim vollständigen One-Hot-Encoding eines Merkmals mit 6 Kategorien?", ["1", "5", "6", "12"], 2, "Eine Spalte pro Kategorie; mit drop='first' wären es 5. Lektion 10."],
+["Min-Max: Werte zwischen 10 und 50, x = 20. Ergebnis?", ["0,2", "0,25", "0,4", "0,5"], 1, "(20 − 10) : (50 − 10) = 10 : 40 = 0,25. Lektion 11."],
+["Für welches Verfahren ist Skalierung NICHT nötig?", ["k-Nächste-Nachbarn", "k-Means", "Random Forest", "Neuronales Netz"], 2, "Bäume vergleichen nur mit Schwellen. Lektion 11."],
+["Was beschreibt der „Fluch der Dimensionalität“?", ["Zu wenige Merkmale", "Bei sehr vielen Merkmalen werden Daten im Raum dünn, Abstände verlieren Aussagekraft", "Zu große Bilder", "Zu viele Zeilen in der Datenbank"], 1, "Mehr Merkmale brauchen exponentiell mehr Daten. Lektion 12."],
+["Wann darf Oversampling (z. B. SMOTE) angewendet werden?", ["Vor dem Aufteilen auf alle Daten", "Nur auf die Trainingsdaten nach dem Aufteilen", "Nur auf die Testdaten", "Nie"], 1, "Sonst landen Kopien im Test. Lektion 13."],
+["Wie teilt man Zeitreihendaten auf?", ["Zufällig mischen", "Zeitlich: Vergangenheit Training, jüngster Zeitraum Test", "Nach Alphabet", "Gar nicht"], 1, "Das Modell darf die Zukunft nicht kennen. Lektion 14."],
+["Ein Modell zur Kreditausfallvorhersage nutzt das Merkmal „Mahnstufe“. Was liegt vor?", ["Overfitting", "Data Leakage", "Underfitting", "Normalisierung"], 1, "Mahnungen entstehen erst nach dem Ausfall. Lektion 15."],
+["Welche Python-Bibliothek ist der Standard für Tabellen?", ["Matplotlib", "pandas", "TensorFlow", "Flask"], 1, "pandas mit dem DataFrame. Lektion 16."]
+]</script>
+<script>
+/* Antwortfelder der Übungen in Modul 3 */
+(function () {
+  function z(id, label, punkte, wert, tol, einheit) { return { id: id, label: label, typ: "zahl", punkte: punkte, wert: wert, tol: tol, einheit: einheit }; }
+  var KOD = ["One-Hot-Encoding", "Ordinal-Encoding", "Skalieren (z. B. Standardisierung)", "Entfernen"];
+  var LEAK = ["Erlaubt", "Data Leakage"];
+  var DIM = ["Vollständigkeit", "Korrektheit / Gültigkeit", "Konsistenz", "Aktualität", "Eindeutigkeit", "Repräsentativität"];
+  window.UEBUNGEN = {
+    modul: 3,
+    aufgaben: {
+      a1: { teile: [
+        { id: "k1", label: "(1) Lieblingsfarbe", typ: "wahl", punkte: 1, optionen: KOD, richtig: 0 },
+        { id: "k2", label: "(2) Kleidergröße", typ: "wahl", punkte: 1, optionen: KOD, richtig: 1 },
+        { id: "k3", label: "(3) Jahresumsatz", typ: "wahl", punkte: 1, optionen: KOD, richtig: 2 },
+        { id: "k4", label: "(4) Kundennummer", typ: "wahl", punkte: 1, optionen: KOD, richtig: 3 }] },
+      a2: { teile: [z("mm", "Normalisierter Wert", 2, 0.5, 0.001)] },
+      a3: { teile: [z("z", "z-Wert", 2, 1.5, 0.001)] },
+      a4: { teile: [z("med", "Median", 1, 14, 0.001, "Minuten"), z("mw", "Mittelwert", 1, 16, 0.001, "Minuten"),
+        { id: "wahl", label: "Füllwert und Begründung", typ: "text", punkte: 2, erwartung: "Median 14 (1 P.), weil der Ausreißer 30 den Mittelwert verzerrt bzw. der Median robust ist (1 P.)." }] },
+      a5: { teile: [z("tr", "Training", 1, 14000, 0.5, "Zeilen"), z("va", "Validierung", 1, 3000, 0.5, "Zeilen"), z("te", "Test", 1, 3000, 0.5, "Zeilen")] },
+      a6: { teile: [z("n", "Betrugsfälle im Test", 2, 40, 0.001)] },
+      a7: { teile: [
+        { id: "m1", label: "(1) Vertragslaufzeit bisher", typ: "wahl", punkte: 1, optionen: LEAK, richtig: 0 },
+        { id: "m2", label: "(2) Kündigungsbestätigung versendet", typ: "wahl", punkte: 1, optionen: LEAK, richtig: 1 },
+        { id: "m3", label: "(3) Support-Anrufe letzte 3 Monate", typ: "wahl", punkte: 1, optionen: LEAK, richtig: 0 },
+        { id: "m4", label: "(4) Router zurückgeschickt", typ: "wahl", punkte: 1, optionen: LEAK, richtig: 1 }] },
+      a8: { teile: [{ id: "sql", label: "Ihre SQL-Abfrage", typ: "text", punkte: 3, hinweis: "SELECT …", erwartung: "SELECT name, umsatz FROM kunde WHERE region = 'Nord' AND umsatz > 1000 ORDER BY umsatz DESC; – je 1 P. für Spalten/Tabelle, WHERE mit AND, ORDER BY DESC. Kleinschreibung und fehlendes Semikolon sind egal." }] },
+      a9: { teile: [
+        { id: "art", label: "JOIN-Art", typ: "wahl", punkte: 1, optionen: ["INNER JOIN", "LEFT JOIN", "CROSS JOIN"], richtig: 1 },
+        { id: "sql", label: "Abfrage für Kunden ohne Bestellung", typ: "text", punkte: 2, hinweis: "SELECT …", erwartung: "LEFT JOIN bestellung über kunde_id = id (1 P.) und WHERE b.nr IS NULL bzw. b.kunde_id IS NULL (1 P.). Gleichwertig: WHERE id NOT IN (SELECT kunde_id FROM bestellung) oder NOT EXISTS." }] },
+      a10: { teile: [z("a", "(a) Spalten aus „Farbe“", 1, 4, 0.001), z("b", "(b) Spalten insgesamt", 2, 10, 0.001)] },
+      a11: { teile: [
+        { id: "d1", label: "(1) Kunde doppelt angelegt", typ: "wahl", punkte: 1, optionen: DIM, richtig: 4 },
+        { id: "d2", label: "(2) Postleitzahl „1234“", typ: "wahl", punkte: 1, optionen: DIM, richtig: 1 },
+        { id: "d3", label: "(3) Adresse von 2015", typ: "wahl", punkte: 1, optionen: DIM, richtig: 3 },
+        { id: "d4", label: "(4) E-Mail fehlt bei 30 %", typ: "wahl", punkte: 1, optionen: DIM, richtig: 0 }] },
+      a12: { teile: [{ id: "bew", label: "Bewertung und zwei Maßnahmen", typ: "text", punkte: 4,
+        erwartung: "Accuracy wertlos, weil ein Modell, das nie Betrug meldet, ebenfalls 99,5 % erreicht (2 P.); zwei Maßnahmen je 1 P.: Recall/Precision/F1, Klassengewichte, Over-/Undersampling/SMOTE nur im Training, Schwellenwert senken, stratifiziert aufteilen." }] }
+    }
+  };
+})();
+</script>
+<script>
+/* Rechner in Modul 3 */
+(function () {
+  function parseList(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(",", "."); }).filter(function (t) { return t !== ""; }).map(Number).filter(function (n) { return isFinite(n); }); }
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 2 : d }) : "–"; }
+  function esc(s) { var e = document.createElement("span"); e.textContent = s; return e.innerHTML; }
+
+  var oh = document.getElementById("ohInput");
+  function onehot() {
+    var vals = oh.value.split(";").map(function (s) { return s.trim(); }).filter(Boolean);
+    var cats = []; vals.forEach(function (v) { if (cats.indexOf(v) === -1) cats.push(v); });
+    var h = "<table><thead><tr><th>Wert</th>" + cats.map(function (c) { return "<th>ist_" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
+    vals.forEach(function (v) { h += "<tr><td>" + esc(v) + "</td>" + cats.map(function (c) { return '<td class="r">' + (c === v ? "<b>1</b>" : "0") + "</td>"; }).join("") + "</tr>"; });
+    h += "</tbody></table>";
+    document.getElementById("ohOut").innerHTML = vals.length ? h : "";
+    document.getElementById("ohNote").textContent = cats.length + " Kategorien → " + cats.length + " Spalten (mit drop=\"first\": " + Math.max(0, cats.length - 1) + ").";
+  }
+  oh.addEventListener("input", onehot); onehot();
+
+  var sc = document.getElementById("scInput");
+  function scale() {
+    var v = parseList(sc.value), out = document.getElementById("scOut");
+    if (v.length < 2) { out.textContent = "Bitte mindestens zwei Zahlen eingeben."; return; }
+    var mn = Math.min.apply(null, v), mx = Math.max.apply(null, v), n = v.length;
+    var mu = v.reduce(function (a, b) { return a + b; }, 0) / n;
+    var sd = Math.sqrt(v.reduce(function (a, b) { return a + (b - mu) * (b - mu); }, 0) / n);
+    var h = "<table><thead><tr><th class=\"r\">Wert</th><th class=\"r\">Min-Max</th><th class=\"r\">z-Wert</th></tr></thead><tbody>";
+    v.forEach(function (x) { h += '<tr><td class="r">' + fmt(x) + '</td><td class="r">' + fmt(mx === mn ? 0 : (x - mn) / (mx - mn), 3) + '</td><td class="r">' + fmt(sd ? (x - mu) / sd : 0, 3) + "</td></tr>"; });
+    h += '</tbody></table><p class="calc-note" style="padding:8px 12px">min = ' + fmt(mn) + ", max = " + fmt(mx) + ", Mittelwert μ = " + fmt(mu) + ", σ = " + fmt(sd) + " (Grundgesamtheit, wie StandardScaler).</p>";
+    out.innerHTML = h;
+  }
+  sc.addEventListener("input", scale); scale();
+
+  var ids = ["spN", "spTr", "spVa", "spRare"];
+  function split() {
+    var N = Math.max(0, Math.round(+document.getElementById("spN").value || 0));
+    var tr = +document.getElementById("spTr").value || 0, va = +document.getElementById("spVa").value || 0, rare = +document.getElementById("spRare").value || 0;
+    var te = 100 - tr - va, out = document.getElementById("spOut"), note = document.getElementById("spNote");
+    if (te < 0) { out.innerHTML = ""; note.textContent = "Training und Validierung zusammen dürfen höchstens 100 % sein."; return; }
+    var nTr = Math.round(N * tr / 100), nVa = Math.round(N * va / 100), nTe = N - nTr - nVa;
+    function k(l, v) { return '<div class="kpi"><span>' + l + "</span><b>" + v + "</b></div>"; }
+    out.innerHTML = k("Training", fmt(nTr, 0)) + k("Validierung", fmt(nVa, 0)) + k("Test (" + fmt(te, 1) + " %)", fmt(nTe, 0)) + k("Seltene Fälle im Test", fmt(nTe * rare / 100, 1));
+    note.textContent = "Bei stratifizierter Aufteilung enthält jeder Teil " + fmt(rare, 2) + " % seltene Fälle: Training " + fmt(nTr * rare / 100, 1) + ", Validierung " + fmt(nVa * rare / 100, 1) + ", Test " + fmt(nTe * rare / 100, 1) + ".";
+  }
+  ids.forEach(function (i) { document.getElementById(i).addEventListener("input", split); }); split();
+})();
+</script>

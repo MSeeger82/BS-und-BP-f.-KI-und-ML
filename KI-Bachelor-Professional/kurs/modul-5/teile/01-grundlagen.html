@@ -1,0 +1,209 @@
+<!--META {"nr": 5, "titel": "Neuronale Netze und Deep Learning", "lektionen": 17, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 5 von 17 · ca. 45 Lernstunden</span>
+      <h1 id="introTitle">Neuronale Netze und Deep Learning: vom einzelnen Neuron bis zum Sprachmodell</h1>
+      <p>Neuronale Netze stecken hinter Bild- und Spracherkennung, Übersetzung und generativer KI. In diesem Modul bauen Sie sie Schritt für Schritt auf: ein Neuron, eine Schicht, ein tiefes Netz. Sie verstehen, wie Netze lernen (Backpropagation), welche Architekturen es für Bilder, Folgen und Sprache gibt und wie große Sprachmodelle Text erzeugen. Zum Schluss entscheiden Sie wie ein Projektleiter zwischen Prompting, RAG und Fine-Tuning – mit Blick auf Kosten und Ressourcen.</p>
+      <div class="facts">
+        <span class="chip">17 Lektionen in 3 Teilen</span><span class="chip">8 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 3</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--surface-2);"></i><span><b>Formel</b> – mit Rechenbeispiel</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Das künstliche Neuron" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 30 Minuten</span><h2>Das künstliche Neuron: Gewichte, Summe, Aktivierung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Sie entscheiden, ob Sie joggen gehen: Wetter gut (wichtig), Zeit vorhanden (sehr wichtig), Freund kommt mit (ein bisschen wichtig). Sie gewichten die Gründe, zählen zusammen – und wenn es genug ist, gehen Sie los.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>künstliches Neuron</b> multipliziert jede Eingabe xᵢ mit einem <b>Gewicht</b> wᵢ, addiert alles und einen <b>Bias</b> b und schickt das Ergebnis z durch eine <b>Aktivierungsfunktion</b> f. Gewichte und Bias sind die Parameter, die gelernt werden.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/neuron.gif" width="640" height="380" alt="Animation: Drei Eingaben 2, 1 und 3 fließen mit Gewichten 0,5, minus 1 und 0,25 in ein Neuron. Mit Bias 0,5 ergibt die Summe 1,25; die ReLU-Funktion gibt 1,25 aus." loading="lazy">
+        <figcaption>z = 2·0,5 + 1·(−1) + 3·0,25 + 0,5 = 1,25 → ReLU(1,25) = 1,25</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formel</span>
+        <div class="eq">z = w₁x₁ + w₂x₂ + … + wₙxₙ + b &nbsp;&nbsp; a = f(z)</div>
+        <div class="legend-eq"><span>Positive Gewichte verstärken, negative hemmen. Der Bias verschiebt die Schwelle, ab der das Neuron „feuert“.</span></div>
+      </div>
+      <div class="prose">
+        <p>Ein einzelnes Neuron mit Sigmoid-Aktivierung ist genau eine logistische Regression (Modul 3). Die Kraft entsteht erst, wenn viele Neuronen in Schichten zusammenarbeiten. Das historische <b>Perzeptron</b> (1958) war ein solches Neuron mit Sprungfunktion.</p>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: ein Neuron</span>
+        <div class="calc-row">
+          <div class="field"><label for="nX">Eingaben x (Leerzeichen getrennt)</label><input type="text" id="nX" value="2 1 3"></div>
+          <div class="field"><label for="nW">Gewichte w (gleiche Anzahl)</label><input type="text" id="nW" value="0,5 -1 0,25"></div>
+          <div class="field"><label for="nB">Bias b</label><input type="text" id="nB" value="0,5"></div>
+          <div class="field"><label for="nF">Aktivierung</label><select id="nF"><option value="relu">ReLU</option><option value="sigmoid">Sigmoid</option><option value="tanh">tanh</option><option value="linear">linear</option></select></div>
+        </div>
+        <div class="kpis" id="nOut"></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Neuron = gewichtete Summe + Bias + Aktivierungsfunktion.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Beispiel aus der Animation an der Tafel und spielen Sie im Rechner mit einem negativen Gewicht. Betonen Sie: Ein biologisches Neuron ist viel komplexer – der Name ist eine lose Analogie.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Aktivierungsfunktionen" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 25 Minuten</span><h2>Aktivierungsfunktionen: Sigmoid, tanh, ReLU, Softmax</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Wasserhahn reagiert nicht linear: Erst kommt nichts, dann ein Rinnsal, dann ein voller Strahl. Ohne solche Kennlinien wäre ein Netz nur eine große, lineare Rechnung – und könnte keine Kurven lernen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Aktivierungsfunktionen bringen <b>Nichtlinearität</b> ins Netz. Ohne sie wären auch hundert Schichten zusammen nur eine lineare Funktion.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/aktivierungen.gif" width="640" height="380" alt="Animation: Nacheinander werden die Kurven von Sigmoid (S-Form zwischen 0 und 1), tanh (S-Form zwischen minus 1 und 1) und ReLU (null für negative Werte, danach eine steigende Gerade) gezeichnet." loading="lazy">
+        <figcaption>Die drei wichtigsten Kennlinien.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Funktion</th><th>Formel</th><th>Wertebereich</th><th>Typischer Einsatz</th></tr></thead>
+        <tbody>
+          <tr><td>Sigmoid</td><td>1 / (1 + e^(−z))</td><td>0 bis 1</td><td>Ausgang bei binärer Klassifikation</td></tr>
+          <tr><td>tanh</td><td>(e^z − e^(−z)) / (e^z + e^(−z))</td><td>−1 bis 1</td><td>ältere RNNs</td></tr>
+          <tr><td>ReLU</td><td>max(0, z)</td><td>0 bis ∞</td><td>verdeckte Schichten, Standard</td></tr>
+          <tr><td>Softmax</td><td>e^(zᵢ) / Σ e^(zⱼ)</td><td>0 bis 1, Summe 1</td><td>Ausgang bei Mehrklassen-Klassifikation</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Softmax durchgerechnet:</b> Werte 2, 1, 0 → e² ≈ 7,389; e¹ ≈ 2,718; e⁰ = 1; Summe 11,107 → <span class="calcline">0,665 · 0,245 · 0,090</span>. Die Klasse mit dem höchsten Wert bekommt 66,5 %.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Innen meist ReLU, außen Sigmoid (zwei Klassen), Softmax (mehrere Klassen) oder linear (Regression).</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Sigmoid und tanh werden für große |z| fast flach – die Ableitung geht gegen null, Signale für das Lernen verschwinden (Lektion 7). Deshalb setzt man in tiefen Netzen innen ReLU ein.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Ausgangsschicht passt zur Aufgabe – das ist eine typische Prüfungsfrage: „Welche Aktivierung wählen Sie für die Ausgabeschicht eines Netzes, das zwischen fünf Fehlerarten unterscheidet?“ (Softmax.)</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Vom Neuron zum Netz" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Vom Neuron zum Netz: Schichten, Tiefe, Parameterzahl</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>In einer Firma bereiten Sachbearbeiter Informationen auf, Teamleiter fassen zusammen, die Geschäftsführung entscheidet. Jede Ebene arbeitet mit dem, was die vorige geliefert hat – so arbeiten auch die Schichten eines Netzes.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>mehrschichtiges Perzeptron</b> (MLP) hat eine Eingabeschicht, eine oder mehrere <b>verdeckte Schichten</b> (hidden layers) und eine Ausgabeschicht. In einer <b>voll verbundenen</b> (dense) Schicht ist jedes Neuron mit jedem der vorigen Schicht verbunden. „Deep“ heißt: viele verdeckte Schichten.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/vorwaerts.gif" width="640" height="380" alt="Animation: Ein Netz mit 3 Eingabeneuronen, zwei verdeckten Schichten mit 5 und 4 Neuronen und 2 Ausgängen. Das Signal läuft von links nach rechts, am Ende stehen Katze 0,91 und Hund 0,09." loading="lazy">
+        <figcaption>Vorwärtsdurchlauf (Forward Pass): Schicht für Schicht zur Vorhersage.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Parameter zählen</span>
+        <div class="eq">Parameter einer Dense-Schicht = Eingänge · Neuronen + Neuronen</div>
+        <div class="legend-eq"><span>Beispiel 784 → 128 → 10 (Ziffernerkennung mit 28×28-Pixeln): 784·128 + 128 = 100.480 und 128·10 + 10 = 1.290; zusammen 101.770 Parameter.</span></div>
+      </div>
+      <div class="prose">
+        <p>Je tiefer, desto abstraktere Merkmale: In der Bildverarbeitung erkennen frühe Schichten Kanten, mittlere Formen, späte ganze Objekte. Große Sprachmodelle haben Milliarden Parameter. Mehr Parameter heißen nicht automatisch besser – aber mehr Daten-, Rechen- und Energiebedarf.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Netze lernen in Schichten: Jede Schicht baut aus den Merkmalen der vorigen abstraktere Merkmale.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Die Parameterzahl einer kleinen Netzarchitektur auszurechnen ist eine beliebte Aufgabe. Den Bias je Neuron nicht vergessen!</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das 784-128-10-Beispiel gemeinsam. Lassen Sie danach das Netz aus der Animation zählen: 3·5+5 + 5·4+4 + 4·2+2 = 54 Parameter.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Verlustfunktionen" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Verlustfunktionen: MSE und Kreuzentropie</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Lehrer korrigiert nicht nur „richtig/falsch“, sondern bewertet, wie sehr eine Antwort danebenliegt – wer sich sehr sicher war und trotzdem falschlag, verliert mehr Punkte.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>Verlustfunktion</b> misst, wie schlecht die Vorhersage ist. Das Training minimiert sie. Sie muss zur Aufgabe passen.</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Regression: MSE = <span class="frac"><span>Σ (y − ŷ)²</span><span>n</span></span></div>
+        <div class="eq">Klassifikation: Kreuzentropie L = − log(p<sub>richtige Klasse</sub>)</div>
+        <div class="legend-eq"><span>Mit natürlichem Logarithmus: p = 0,9 → L ≈ 0,105 (kleiner Verlust); p = 0,1 → L ≈ 2,303 (großer Verlust). Selbstsicher falsch wird hart bestraft.</span></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Regression → MSE, Klassifikation → Kreuzentropie. Der Verlust ist die Zahl, die das Training kleiner machen will.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie die beiden Kreuzentropie-Werte: Ein Modell, das sich mit 90 % für die falsche Klasse entscheidet, bekommt einen großen Verlust – genau das soll das Training abtrainieren.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Backpropagation" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 30 Minuten</span><h2>Backpropagation anschaulich</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Kuchen ist misslungen. In der Bäckerei fragt man rückwärts: Lag es am Ofen? Am Teig? An der Butter, die der Lieferant brachte? Jeder bekommt so viel „Schuld“, wie er zum Ergebnis beigetragen hat – und ändert beim nächsten Mal genau das.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Backpropagation</b> berechnet effizient, wie stark jedes Gewicht zum Fehler beigetragen hat: Der Fehler wird von der Ausgabe rückwärts durch die Schichten verteilt; mit der <b>Kettenregel</b> ergibt sich für jedes Gewicht seine Ableitung (sein Gradient). Danach passt der Optimierer alle Gewichte an.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/backprop.gif" width="640" height="380" alt="Animation: Am Ausgang eines Netzes erscheint der Fehler. Er läuft Schicht für Schicht nach links zurück; die Verbindungen färben sich rot und ändern ihre Stärke." loading="lazy">
+        <figcaption>Vorwärts rechnen, Fehler messen, rückwärts zurückverteilen, Gewichte anpassen.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span><b>Vorwärts</b>: Eingabe durch alle Schichten bis zur Vorhersage.</span></li>
+        <li><span><b>Verlust</b> berechnen (Lektion 4).</span></li>
+        <li><span><b>Rückwärts</b>: Gradienten Schicht für Schicht mit der Kettenregel.</span></li>
+        <li><span><b>Aktualisieren</b>: w neu = w alt − Lernrate · Gradient (Gradientenabstieg aus Modul 3).</span></li>
+      </ol>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Backpropagation sagt jedem Gewicht, in welche Richtung und wie stark es sich ändern muss; der Gradientenabstieg führt die Änderung aus.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen muss niemand Backpropagation von Hand. Wichtig ist das Prinzip und das Zusammenspiel mit dem Gradientenabstieg. Frameworks wie PyTorch und TensorFlow erledigen die Ableitungen automatisch.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Optimierer, Batch und Epoche" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Optimierer, Lernrate, Batch, Epoche</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Batch</b> (Mini-Batch)</td><td>Teilmenge der Daten für einen Aktualisierungsschritt</td><td>64 Bilder</td></tr>
+          <tr><td><b>Iteration</b></td><td>ein Schritt mit einem Batch</td><td>–</td></tr>
+          <tr><td><b>Epoche</b></td><td>alle Trainingsdaten einmal durchlaufen</td><td>10.000 Beispiele, Batch 100 → 100 Iterationen je Epoche</td></tr>
+          <tr><td><b>Lernrate</b></td><td>Schrittweite der Aktualisierung</td><td>0,001</td></tr>
+          <tr><td><b>Optimierer</b></td><td>Regel für die Aktualisierung</td><td>SGD, SGD mit Momentum, Adam</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Adam</b> passt die Schrittweite je Parameter automatisch an und ist der verbreitete Standard. <b>Momentum</b> nimmt Schwung aus vorherigen Schritten mit, wie eine Kugel, die einen Hang hinunterrollt. <b>Lernratenpläne</b> verkleinern die Lernrate im Lauf des Trainings.</p>
+        <p>Training läuft meist auf <b>GPUs</b> oder spezialisierten Beschleunigern, weil sie viele Matrixrechnungen parallel ausführen. Die Batchgröße wird oft durch den Grafikspeicher begrenzt.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Eine Epoche = alle Daten einmal; Iterationen je Epoche = Anzahl Beispiele / Batchgröße.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie ein Beispiel: 50.000 Bilder, Batch 250, 20 Epochen → 200 Iterationen je Epoche, 4.000 insgesamt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Typische Trainingsprobleme" data-part="Teil A · Wie neuronale Netze lernen">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 30 Minuten</span><h2>Typische Trainingsprobleme und Gegenmittel</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Problem</th><th>Erkennbar an</th><th>Gegenmittel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Overfitting</b></td><td>Validierungsfehler steigt, Trainingsfehler sinkt weiter</td><td>mehr Daten, <b>Datenaugmentation</b> (Bilder drehen, spiegeln, aufhellen), <b>Dropout</b>, Regularisierung, <b>Early Stopping</b></td></tr>
+          <tr><td><b>Verschwindende Gradienten</b></td><td>vordere Schichten lernen kaum</td><td>ReLU statt Sigmoid, Batch-Normalisierung, Residualverbindungen (Abkürzungen zwischen Schichten)</td></tr>
+          <tr><td><b>Explodierende Gradienten</b></td><td>Verlust springt, wird „NaN“</td><td>kleinere Lernrate, Gradient Clipping</td></tr>
+          <tr><td><b>Zu wenig Daten</b></td><td>schlechte Validierungswerte trotz Tuning</td><td>Transfer Learning (Lektion 11), Augmentation, synthetische Daten</td></tr>
+          <tr><td><b>Kein Lernfortschritt</b></td><td>Verlust bleibt gleich</td><td>Lernrate prüfen, Daten und Labels prüfen, Skalierung der Eingaben</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Dropout</b> schaltet während des Trainings zufällig einen Anteil der Neuronen ab (z. B. 20 %). Das Netz kann sich dadurch nicht auf einzelne Neuronen verlassen und verallgemeinert besser. Bei der Vorhersage sind alle Neuronen aktiv.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Dropout, Augmentation und Early Stopping sind die Standardmittel gegen Overfitting in neuronalen Netzen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Dropout erklärt man gut mit einem Team, in dem jeden Tag zufällig jemand fehlt: Das Wissen muss sich auf viele Köpfe verteilen.</p>
+      </aside>
+    </section>

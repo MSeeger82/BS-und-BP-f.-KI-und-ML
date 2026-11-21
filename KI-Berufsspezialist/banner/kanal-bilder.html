@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kanalbilder – KI Berufsspezialist IHK</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: #070b12;
+      color: #e2e8f0;
+      padding: 28px 16px 56px;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 1.35rem; font-weight: 650; margin: 0 0 6px; letter-spacing: -0.02em; }
+    .sub { color: #94a3b8; margin: 0 0 22px; line-height: 1.5; max-width: 52rem; }
+    .grid {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: 320px 1fr; align-items: start; }
+    }
+    .card {
+      background: #0c121c;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .card h2 {
+      margin: 0 0 4px;
+      font-size: 0.95rem;
+      font-weight: 650;
+      color: #f1f5f9;
+    }
+    .card .hint {
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: #64748b;
+    }
+    .frame {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+      background: #000;
+      line-height: 0;
+    }
+    .frame.circle {
+      border-radius: 50%;
+      width: min(100%, 280px);
+      margin: 0 auto 12px;
+      aspect-ratio: 1;
+    }
+    .frame.circle canvas { width: 100%; height: auto; display: block; border-radius: 50%; }
+    canvas.preview { display: block; width: 100%; height: auto; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    button {
+      appearance: none;
+      border: 1px solid rgba(34, 211, 238, 0.45);
+      background: linear-gradient(180deg, #0e7490, #0f4c5c);
+      color: #ecfeff;
+      font: 600 14px/1 "Segoe UI", system-ui, sans-serif;
+      padding: 11px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(1.08); }
+    button.secondary {
+      background: #111827;
+      border-color: #334155;
+      color: #cbd5e1;
+    }
+    button.primary-all {
+      background: linear-gradient(180deg, #0891b2, #155e75);
+      border-color: rgba(103, 232, 249, 0.5);
+    }
+    .top-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .status { font-size: 12px; color: #64748b; margin-top: 10px; }
+    .ok { color: #67e8f9; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Kanalbilder · KI &amp; ML (IHK)</h1>
+    <p class="sub">
+      Profilbild und Banner für den YouTube-Kanal
+      <strong>Berufsspezialist / Bachelor Professional KI &amp; Maschinelles Lernen (IHK)</strong>.
+      Ein Klick speichert die PNGs lokal — danach bei YouTube hochladen.
+    </p>
+
+    <div class="top-actions">
+      <button type="button" class="primary-all" id="btnAll">Beide PNGs herunterladen</button>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Kanalbild (Profil)</h2>
+        <p class="hint">800 × 800 px · rund auf YouTube · Logo „KI“</p>
+        <div class="frame circle">
+          <canvas id="avatarPreview" width="800" height="800"></canvas>
+        </div>
+        <div class="actions">
+          <button type="button" id="btnAvatar">Profil-PNG speichern</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Kanalbanner</h2>
+        <p class="hint">2560 × 1440 px · Text in der Safe Area (Desktop / TV / Mobile)</p>
+        <div class="frame">
+          <canvas id="bannerPreview" class="preview" width="1280" height="720"></canvas>
+        </div>
+        <div class="actions">
+          <button type="button" id="btnBanner">Banner-PNG speichern</button>
+          <button type="button" class="secondary" id="btnBannerJpg">Banner-JPG (kleiner)</button>
+        </div>
+      </section>
+    </div>
+    <p class="status" id="status">Zeichne…</p>
+  </div>
+
+  <canvas id="avatarFull" width="800" height="800" hidden></canvas>
+  <canvas id="bannerFull" width="2560" height="1440" hidden></canvas>
+
+  <script>
+    const AV = 800;
+    const BW = 2560, BH = 1440;
+
+    function roundRect(ctx, x, y, w, h, r) {
+      const rr = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + rr, y);
+      ctx.arcTo(x + w, y, x + w, y + h, rr);
+      ctx.arcTo(x + w, y + h, x, y + h, rr);
+      ctx.arcTo(x, y + h, x, y, rr);
+      ctx.arcTo(x, y, x + w, y, rr);
+      ctx.closePath();
+    }
+
+    function neuralNet(ctx, cx, cy, scale, alpha) {
+      const nodes = [
+        [-1.1, -0.7], [-0.35, -0.95], [0.45, -0.85], [1.15, -0.55],
+        [-1.25, 0.05], [-0.4, -0.1], [0.35, 0.05], [1.2, 0.15],
+        [-0.95, 0.85], [-0.15, 0.95], [0.7, 0.8], [1.05, 0.55],
+      ].map(([x, y]) => [cx + x * scale, cy + y * scale]);
+
+      const edges = [
+        [0,4],[0,5],[1,4],[1,5],[1,6],[2,5],[2,6],[2,7],[3,6],[3,7],
+        [4,8],[4,9],[5,8],[5,9],[5,10],[6,9],[6,10],[6,11],[7,10],[7,11],
+      ];
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = "rgba(103, 232, 249, 0.55)";
+      ctx.lineWidth = Math.max(1.2, scale * 0.012);
+      edges.forEach(([a, b]) => {
+        ctx.beginPath();
+        ctx.moveTo(nodes[a][0], nodes[a][1]);
+        ctx.lineTo(nodes[b][0], nodes[b][1]);
+        ctx.stroke();
+      });
+      nodes.forEach(([x, y], i) => {
+        const r = (i % 3 === 0 ? 0.055 : 0.04) * scale;
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r * 2.2);
+        g.addColorStop(0, "rgba(165, 243, 252, 0.95)");
+        g.addColorStop(0.45, "rgba(34, 211, 238, 0.85)");
+        g.addColorStop(1, "rgba(8, 145, 178, 0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, y, r * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#ecfeff";
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+
+    function drawAvatar(ctx, s) {
+      // background
+      const bg = ctx.createRadialGradient(s * 0.5, s * 0.42, s * 0.05, s * 0.5, s * 0.5, s * 0.72);
+      bg.addColorStop(0, "#123047");
+      bg.addColorStop(0.45, "#0a1624");
+      bg.addColorStop(1, "#05080e");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, s, s);
+
+      // subtle grid
+      ctx.save();
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.06)";
+      ctx.lineWidth = 1;
+      const step = s / 12;
+      for (let i = 0; i <= 12; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * step, 0);
+        ctx.lineTo(i * step, s);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, i * step);
+        ctx.lineTo(s, i * step);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // ring
+      ctx.beginPath();
+      ctx.arc(s / 2, s / 2, s * 0.46, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(34, 211, 238, 0.28)";
+      ctx.lineWidth = s * 0.012;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(s / 2, s / 2, s * 0.46, -Math.PI * 0.15, Math.PI * 0.55);
+      ctx.strokeStyle = "rgba(103, 232, 249, 0.85)";
+      ctx.lineWidth = s * 0.014;
+      ctx.lineCap = "round";
+      ctx.stroke();
+
+      // neural motif behind monogram
+      neuralNet(ctx, s * 0.5, s * 0.42, s * 0.28, 0.55);
+
+      // monogram plate
+      const pw = s * 0.42, ph = s * 0.28;
+      const px = (s - pw) / 2, py = s * 0.33;
+      roundRect(ctx, px, py, pw, ph, s * 0.04);
+      const plate = ctx.createLinearGradient(px, py, px, py + ph);
+      plate.addColorStop(0, "rgba(14, 116, 144, 0.35)");
+      plate.addColorStop(1, "rgba(8, 47, 73, 0.55)");
+      ctx.fillStyle = plate;
+      ctx.fill();
+      ctx.strokeStyle = "rgba(103, 232, 249, 0.45)";
+      ctx.lineWidth = Math.max(2, s * 0.004);
+      ctx.stroke();
+
+      // KI text
+      ctx.fillStyle = "#ecfeff";
+      ctx.font = `700 ${Math.round(s * 0.2)}px "Segoe UI", system-ui, sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.shadowColor = "rgba(34, 211, 238, 0.45)";
+      ctx.shadowBlur = s * 0.04;
+      ctx.fillText("KI", s / 2, s * 0.47);
+      ctx.shadowBlur = 0;
+
+      // bottom label
+      ctx.fillStyle = "#67e8f9";
+      ctx.font = `650 ${Math.round(s * 0.055)}px "Segoe UI", system-ui, sans-serif`;
+      ctx.letterSpacing = "0.12em";
+      ctx.fillText("IHK", s / 2, s * 0.72);
+      ctx.letterSpacing = "0";
+
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = `500 ${Math.round(s * 0.042)}px "Segoe UI", system-ui, sans-serif`;
+      ctx.fillText("Berufsspezialist · ML", s / 2, s * 0.79);
+    }
+
+    function drawBanner(ctx, w, h) {
+      const bg = ctx.createLinearGradient(0, 0, w * 0.2, h);
+      bg.addColorStop(0, "#070b12");
+      bg.addColorStop(0.5, "#0b1522");
+      bg.addColorStop(1, "#070d14");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
+
+      // glows
+      const glows = [
+        [0.16, 0.55, 0.38, "rgba(8, 145, 178, 0.30)"],
+        [0.82, 0.38, 0.32, "rgba(37, 99, 235, 0.20)"],
+        [0.50, 0.50, 0.30, "rgba(34, 211, 238, 0.10)"],
+      ];
+      glows.forEach(([x, y, r, c]) => {
+        const g = ctx.createRadialGradient(w * x, h * y, 0, w * x, h * y, w * r);
+        g.addColorStop(0, c);
+        g.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+      });
+
+      // grid
+      ctx.save();
+      ctx.strokeStyle = "rgba(148, 163, 184, 0.05)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < w; x += 80) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+      }
+      for (let y = 0; y < h; y += 80) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+      }
+      ctx.restore();
+
+      // top line
+      const line = ctx.createLinearGradient(0, 0, w, 0);
+      line.addColorStop(0, "rgba(34,211,238,0)");
+      line.addColorStop(0.2, "rgba(34,211,238,0.55)");
+      line.addColorStop(0.5, "rgba(125,211,252,0.85)");
+      line.addColorStop(0.8, "rgba(34,211,238,0.55)");
+      line.addColorStop(1, "rgba(34,211,238,0)");
+      ctx.fillStyle = line;
+      ctx.fillRect(0, 0, w, 4);
+
+      // left neural decoration
+      neuralNet(ctx, w * 0.13, h * 0.52, Math.min(w, h) * 0.22, 0.7);
+
+      // right abstract bars (data / code feel)
+      ctx.save();
+      for (let i = 0; i < 7; i++) {
+        const bh = 18 + (i * 17) % 55;
+        const x = w * 0.78 + i * 28;
+        const y = h * 0.42 + ((i % 3) - 1) * 40;
+        roundRect(ctx, x, y, 14, bh, 4);
+        ctx.fillStyle = `rgba(34, 211, 238, ${0.12 + (i % 4) * 0.06})`;
+        ctx.fill();
+      }
+      ctx.restore();
+
+      // SAFE AREA content (approx center 1546×423)
+      const cx = w / 2;
+      const contentTop = h * 0.34;
+
+      // badge
+      const badge = "IHK  ·  KI & MASCHINELLES LERNEN";
+      ctx.font = `650 28px "Segoe UI", system-ui, sans-serif`;
+      const bw = ctx.measureText(badge).width + 48;
+      const bx = cx - bw / 2;
+      const by = contentTop;
+      roundRect(ctx, bx, by, bw, 48, 24);
+      ctx.fillStyle = "rgba(8, 47, 73, 0.75)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(34, 211, 238, 0.45)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.fillStyle = "#67e8f9";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(badge, cx, by + 25);
+
+      // headline
+      ctx.fillStyle = "#f8fafc";
+      ctx.font = `700 72px "Segoe UI", system-ui, sans-serif`;
+      ctx.shadowColor = "rgba(0,0,0,0.45)";
+      ctx.shadowBlur = 18;
+      ctx.fillText("Kompletter Lehrstoff als Erklärvideos", cx, contentTop + 120);
+      ctx.shadowBlur = 0;
+
+      // sub
+      ctx.fillStyle = "#cbd5e1";
+      ctx.font = `500 34px "Segoe UI", system-ui, sans-serif`;
+      ctx.fillText("Berufsspezialist & Bachelor Professional in KI und ML (IHK)", cx, contentTop + 185);
+
+      // chips
+      const chips = ["DQR 5", "DQR 6", "Prüfungsnah", "Praxis & Theorie"];
+      ctx.font = `600 22px "Segoe UI", system-ui, sans-serif`;
+      const gap = 16;
+      const pads = chips.map((t) => ctx.measureText(t).width + 36);
+      const total = pads.reduce((a, b) => a + b, 0) + gap * (chips.length - 1);
+      let x = cx - total / 2;
+      const cy = contentTop + 255;
+      chips.forEach((t, i) => {
+        const tw = pads[i];
+        roundRect(ctx, x, cy - 20, tw, 40, 10);
+        ctx.fillStyle = "rgba(15, 23, 42, 0.7)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(100, 116, 139, 0.55)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = "#e2e8f0";
+        ctx.textBaseline = "middle";
+        ctx.fillText(t, x + tw / 2, cy);
+        x += tw + gap;
+      });
+
+      // footer
+      ctx.fillStyle = "#64748b";
+      ctx.font = `500 22px "Segoe UI", system-ui, sans-serif`;
+      ctx.textAlign = "left";
+      ctx.fillText("Geprüfter Berufsspezialist  ·  Bachelor Professional", 64, h - 52);
+      ctx.textAlign = "right";
+      ctx.fillText("YouTube-Lernkanal  ·  IHK-Rahmenplan", w - 64, h - 52);
+    }
+
+    function downloadCanvas(canvas, filename, type, quality) {
+      const a = document.createElement("a");
+      a.download = filename;
+      a.href = canvas.toDataURL(type || "image/png", quality);
+      a.click();
+    }
+
+    function paint() {
+      const avFull = document.getElementById("avatarFull");
+      const avPrev = document.getElementById("avatarPreview");
+      const bnFull = document.getElementById("bannerFull");
+      const bnPrev = document.getElementById("bannerPreview");
+
+      drawAvatar(avFull.getContext("2d"), AV);
+      // preview same
+      avPrev.width = AV; avPrev.height = AV;
+      drawAvatar(avPrev.getContext("2d"), AV);
+
+      drawBanner(bnFull.getContext("2d"), BW, BH);
+      // half-res preview
+      const pctx = bnPrev.getContext("2d");
+      pctx.setTransform(1, 0, 0, 1, 0, 0);
+      pctx.clearRect(0, 0, bnPrev.width, bnPrev.height);
+      pctx.drawImage(bnFull, 0, 0, bnPrev.width, bnPrev.height);
+
+      document.getElementById("status").innerHTML =
+        '<span class="ok">Fertig.</span> Profil 800×800 · Banner 2560×1440 — Buttons zum Speichern nutzen.';
+    }
+
+    document.getElementById("btnAvatar").onclick = () => {
+      downloadCanvas(document.getElementById("avatarFull"), "youtube-kanalbild-800x800.png");
+    };
+    document.getElementById("btnBanner").onclick = () => {
+      downloadCanvas(document.getElementById("bannerFull"), "youtube-banner-2560x1440.png");
+    };
+    document.getElementById("btnBannerJpg").onclick = () => {
+      downloadCanvas(document.getElementById("bannerFull"), "youtube-banner-2560x1440.jpg", "image/jpeg", 0.92);
+    };
+    document.getElementById("btnAll").onclick = () => {
+      downloadCanvas(document.getElementById("avatarFull"), "youtube-kanalbild-800x800.png");
+      setTimeout(() => {
+        downloadCanvas(document.getElementById("bannerFull"), "youtube-banner-2560x1440.png");
+      }, 400);
+    };
+
+    paint();
+  </script>
+</body>
+</html>

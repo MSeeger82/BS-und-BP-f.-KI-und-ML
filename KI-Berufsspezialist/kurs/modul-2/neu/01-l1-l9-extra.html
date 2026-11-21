@@ -1,0 +1,297 @@
+<!--EXTRA l1-->
+      <div class="prose">
+        <h3>Formeln lesen üben: drei Beispiele zum Mitrechnen</h3>
+        <p>Formeln wirken fremd, bis man sie ein paarmal selbst in Worte übersetzt hat. Gehen Sie die drei Beispiele langsam durch. Immer nach demselben Muster: <b>erst vorlesen, dann in Alltagssprache übersetzen, dann mit Zahlen füllen</b>.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Summe und Mittelwert</span>
+        <p>Formel: <i>x̄</i> = 1/<i>n</i> · Σ <i>x</i><sub>i</sub>. Die Werte sind die Wartezeiten in Minuten von drei Anrufen: 4, 7 und 9.</p>
+        <ol class="steps">
+          <li><div>Übersetzung: „Addiere alle Werte und teile durch die Anzahl.“</div></li>
+          <li><div>Anzahl: <span class="calcline">n = 3</span></div></li>
+          <li><div>Summe: <span class="calcline">4 + 7 + 9 = 20</span></div></li>
+          <li><div>Teilen: <span class="calcline">20 : 3 ≈ 6,67</span> → <span class="result">Mittlere Wartezeit ≈ 6,7 Minuten</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Quadrat und Wurzel nicht verwechseln</span>
+        <p>Quadrat und Wurzel sind Gegenspieler: <span class="calcline">5² = 25</span> und <span class="calcline">√25 = 5</span>. Aufpassen bei Minuszeichen: <span class="calcline">(−3)² = 9</span>, aber <span class="calcline">−3² = −9</span> – ohne Klammer wird nur die 3 quadriert und das Minus davorgesetzt. Im Taschenrechner lohnt es sich, negative Zahlen immer in Klammern einzugeben.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Eine Wahrscheinlichkeit lesen</span>
+        <p>„P(Regen | Wolken) = 0,6“ liest man: „Die Wahrscheinlichkeit für Regen, <b>wenn</b> Wolken da sind, beträgt 60 %.“ Der senkrechte Strich bedeutet „unter der Bedingung“. Er trennt das, was wir wissen wollen (links), von dem, was bereits feststeht (rechts).</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li><b>Punkt vor Strich vergessen:</b> <span class="calcline">2 + 3 · 4 = 14</span>, nicht 20. Multiplikation und Division gehen vor.</li>
+          <li><b>Klammern weglassen:</b> <span class="calcline">(2 + 3) · 4 = 20</span>. Bei Brüchen mit Summe im Zähler (<span class="calcline">(5 + 7) : 2 = 6</span>) immer klammern.</li>
+          <li><b>Dezimalkomma und Punkt:</b> Im Deutschen ist 1.000 tausend und 1,5 anderthalb. Taschenrechner und Tabellenprogramme nutzen oft den Punkt als Dezimaltrenner – prüfen Sie die Einstellung.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (4 Punkte):</b> Erklären Sie in Worten, was die Formel x̄ = (1/n) · Σ x<sub>i</sub> bedeutet, und berechnen Sie x̄ für die Werte 4, 7, 9.</p>
+        <p><b>Musterlösung:</b> Man addiert alle n Werte und teilt die Summe durch die Anzahl n; das Ergebnis ist der Mittelwert (2 Punkte). Rechnung: n = 3, Summe = 20, x̄ = 20 : 3 ≈ 6,67 (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l2-->
+      <div class="prose">
+        <h3>Eine Kundendatei einordnen: acht Merkmale, acht Entscheidungen</h3>
+        <p>Das Skalenniveau entscheidet, was Sie mit einem Merkmal rechnen dürfen. Üben Sie das an einer typischen Kundendatei:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th>Beispielwert</th><th>Skalenniveau</th><th>Begründung</th></tr></thead>
+          <tbody>
+            <tr><td>Postleitzahl</td><td>50667</td><td>nominal</td><td>Ist ein Name für einen Ort. 50667 ist nicht „mehr“ als 10115, ein Mittelwert wäre sinnlos.</td></tr>
+            <tr><td>Zahlungsart</td><td>PayPal</td><td>nominal</td><td>Nur Kategorien ohne Reihenfolge.</td></tr>
+            <tr><td>Kundenstatus</td><td>Gold / Silber / Bronze</td><td>ordinal</td><td>Reihenfolge klar, Abstände nicht.</td></tr>
+            <tr><td>Zufriedenheit 1–5</td><td>4</td><td>ordinal (oft wie metrisch behandelt)</td><td>Reihenfolge ja, gleiche Abstände nur angenommen.</td></tr>
+            <tr><td>Geburtsjahr</td><td>1985</td><td>Intervall</td><td>Abstände sinnvoll, aber kein echter Nullpunkt (Jahr 0 ist kein „Nichts“).</td></tr>
+            <tr><td>Alter</td><td>34 Jahre</td><td>Verhältnis</td><td>Echter Nullpunkt, „doppelt so alt“ ist sinnvoll.</td></tr>
+            <tr><td>Jahresumsatz</td><td>1.250 €</td><td>Verhältnis</td><td>Echter Nullpunkt (0 € = kein Umsatz).</td></tr>
+            <tr><td>Anzahl Beschwerden</td><td>2</td><td>Verhältnis, diskret</td><td>Abzählbar, echter Nullpunkt.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Warum „doppelt so warm“ nicht stimmt</span>
+        <p>10 °C und 20 °C: Man darf sagen, der Unterschied beträgt 10 Grad. Aber „20 °C ist doppelt so warm wie 10 °C“ ist falsch, denn 0 °C bedeutet nicht „keine Wärme“. Rechnet man in Kelvin um (0 °C = 273,15 K), sind es 283,15 K und 293,15 K – das Verhältnis beträgt nur etwa 1,035. Erst die Kelvin-Skala hat einen echten Nullpunkt und wäre eine Verhältnisskala.</p>
+      </div>
+      <div class="prose">
+        <h3>Was folgt daraus für das maschinelle Lernen?</h3>
+        <ul>
+          <li><b>Nominale Merkmale</b> werden meist per One-Hot-Encoding umgewandelt: Aus „Zahlungsart“ werden mehrere Ja/Nein-Spalten. So bekommt kein Wert eine künstliche Rangfolge.</li>
+          <li><b>Ordinale Merkmale</b> kann man in Rangzahlen (1, 2, 3) umwandeln, wenn die Reihenfolge wichtig ist – mit dem Bewusstsein, dass die Abstände nur angenommen sind.</li>
+          <li><b>Metrische Merkmale</b> werden häufig skaliert, damit Merkmale mit großen Zahlen (Umsatz in Euro) keine kleinen (Anzahl Beschwerden) erdrücken.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie die vier Skalenniveaus und je ein Beispiel. Erklären Sie, warum man bei der Postleitzahl keinen Mittelwert bilden darf.</p>
+        <p><b>Musterlösung:</b> Nominal (Zahlungsart), ordinal (Schulnote), Intervall (Temperatur in °C), Verhältnis (Umsatz) – je ½ Punkt Nennung, je ½ Punkt Beispiel (4 Punkte). Die Postleitzahl ist nominal: Sie benennt einen Ort, die Zahlenwerte haben keine rechnerische Bedeutung; ein Mittelwert wäre sinnlos (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Mittelwerte in der Praxis</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Durchschnittspreis beim Einkauf (gewichteter Mittelwert)</span>
+        <p>Ein Betrieb kauft im Jahr drei Lieferungen ein: 100 Stück zu 4 €, 300 Stück zu 5 € und 600 Stück zu 6 €. Was ist der durchschnittliche Preis je Stück?</p>
+        <ol class="steps">
+          <li><div>Falsch wäre der einfache Mittelwert der Preise: <span class="calcline">(4 + 5 + 6) : 3 = 5 €</span>, denn er ignoriert, dass viel mehr Stück zum hohen Preis gekauft wurden.</div></li>
+          <li><div>Richtig: Jeden Preis mit seiner Menge gewichten. Gesamtkosten: <span class="calcline">100 · 4 + 300 · 5 + 600 · 6 = 400 + 1.500 + 3.600 = 5.500 €</span></div></li>
+          <li><div>Gesamtmenge: <span class="calcline">100 + 300 + 600 = 1.000 Stück</span></div></li>
+          <li><div>Durchschnitt: <span class="calcline">5.500 : 1.000</span> → <span class="result">5,50 € je Stück</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mittelwert aus Gruppen-Mittelwerten</span>
+        <p>In der Produktion arbeiten 10 Beschäftigte mit einem Durchschnittslohn von 2.500 € und in der Verwaltung 30 mit 3.100 €. Der Durchschnitt aller 40 ist <b>nicht</b> der Mittelwert der beiden Zahlen (2.800 €). Richtig:</p>
+        <p><span class="calcline">(10 · 2.500 + 30 · 3.100) : 40 = (25.000 + 93.000) : 40 = 2.950 €</span></p>
+        <p>Die größere Gruppe zieht den Gesamtdurchschnitt näher an ihren Wert.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Mittelwert als Ausgleichspunkt</span>
+        <p>Fünf Mitarbeitende brauchen für den Arbeitsweg 10, 15, 20, 25 und 30 Minuten. Mittelwert: <span class="calcline">(10 + 15 + 20 + 25 + 30) : 5 = 20</span> Minuten. Die Abweichungen vom Mittelwert sind −10, −5, 0, +5 und +10; ihre Summe ist 0. Das ist die Eigenschaft des Mittelwerts als „Schwerpunkt“: Was oberhalb zu viel ist, gleicht genau aus, was unterhalb fehlt. Deshalb muss man später die Abweichungen quadrieren (Lektion 5).</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Mittelwerte von Gruppen einfach mitteln, ohne die Gruppengröße zu beachten.</li>
+          <li>Prozentzahlen mitteln: Steigt etwas erst um 10 % und dann um 20 %, ist der Gesamtanstieg nicht 15 %, sondern <span class="calcline">1,10 · 1,20 = 1,32</span>, also 32 %.</li>
+          <li>Den Mittelwert bei stark schiefen Daten (Einkommen) als „typisch“ ausgeben.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Berechnen Sie die durchschnittliche Lieferzeit: Lieferant A liefert 20 Bestellungen in durchschnittlich 3 Tagen, Lieferant B 60 Bestellungen in durchschnittlich 5 Tagen.</p>
+        <p><b>Musterlösung:</b> Gewichteter Mittelwert (2 Punkte): (20 · 3 + 60 · 5) : (20 + 60) = (60 + 300) : 80 = 360 : 80 = 4,5 Tage (3 Punkte). Der einfache Mittelwert 4 Tage wäre falsch.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l4-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Wann Median und Modus die bessere Wahl sind</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gehälter in einem kleinen Betrieb</span>
+        <p>Acht Beschäftigte verdienen: 2.400, 2.500, 2.500, 2.600, 2.700, 2.800, 3.000 und 9.000 € (die Geschäftsführung).</p>
+        <ol class="steps">
+          <li><div>Mittelwert: <span class="calcline">27.500 : 8 = 3.437,50 €</span> – kein Beschäftigter außer der Geschäftsführung verdient annähernd so viel.</div></li>
+          <li><div>Median: Werte sind sortiert, n = 8 (gerade). Mittlere Werte: 4. und 5. Stelle, also 2.600 und 2.700. <span class="calcline">(2.600 + 2.700) : 2 = 2.650 €</span> – ein viel typischerer Wert.</div></li>
+          <li><div>Modus: 2.500 € kommt zweimal vor, alle anderen einmal. <span class="result">Modus = 2.500 €</span></div></li>
+        </ol>
+        <p>Wer „das Durchschnittsgehalt“ bewerben will, nimmt gern den Mittelwert; wer ehrlich informieren will, nennt den Median.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Modus bei Kategorien</span>
+        <p>Ein Webshop zählt die Zahlungsarten: 120-mal PayPal, 90-mal Rechnung, 60-mal Karte. Einen Mittelwert gibt es hier nicht (Kategorien!). Der Modus ist <b>PayPal</b> – die häufigste Zahlungsart. Das ist die einzige sinnvolle Lagemessung bei nominalen Daten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Mittelwert und Median verraten die Form der Verteilung</span>
+        <ul>
+          <li>Mittelwert <b>größer</b> als Median: Einzelne sehr hohe Werte ziehen den Mittelwert nach oben – die Verteilung ist <b>rechtsschief</b> (Einkommen, Wartezeiten).</li>
+          <li>Mittelwert <b>kleiner</b> als Median: wenige sehr niedrige Werte ziehen ihn nach unten – <b>linksschief</b> (z. B. Punkte in einer sehr leichten Klausur).</li>
+          <li>Mittelwert <b>ungefähr gleich</b> dem Median: die Daten sind ungefähr symmetrisch.</li>
+        </ul>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Median aus der <b>unsortierten</b> Liste ablesen.</li>
+          <li>Bei gerader Anzahl nur einen der beiden mittleren Werte nehmen.</li>
+          <li>Beim Modus vergessen, dass es mehrere geben kann (zwei gleich häufige Werte: bimodal).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Berechnen Sie Mittelwert, Median und Modus für die Werte 4, 7, 7, 9, 13 und beurteilen Sie, welches Maß hier am besten passt.</p>
+        <p><b>Musterlösung:</b> Mittelwert 40 : 5 = 8 (2 Punkte). Median: sortiert, n = 5, mittlerer Wert (3. Stelle) = 7 (2 Punkte). Modus: 7 (1 Punkt). Alle drei liegen nah beieinander, die Daten sind ungefähr symmetrisch ohne starke Ausreißer; der Mittelwert ist daher geeignet (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l5-->
+      <div class="prose">
+        <h3>Zwei Lieferanten, gleicher Mittelwert, ganz verschiedene Zuverlässigkeit</h3>
+        <p>Streuung wird erst anschaulich, wenn man zwei Datensätze mit gleichem Mittelwert vergleicht. Die Lieferzeiten in Tagen für fünf Bestellungen:</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Lieferant A gegen Lieferant B</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th>Lieferzeiten</th><th class="r">Mittelwert</th><th class="r">Spannweite</th><th class="r">Σ (x − x̄)²</th><th class="r">Varianz s²</th><th class="r">Standardabw. s</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>3, 4, 4, 4, 5</td><td class="r">4</td><td class="r">2</td><td class="r">1 + 0 + 0 + 0 + 1 = 2</td><td class="r">2 : 4 = 0,5</td><td class="r">≈ 0,71</td></tr>
+            <tr><td>B</td><td>1, 2, 4, 6, 7</td><td class="r">4</td><td class="r">6</td><td class="r">9 + 4 + 0 + 4 + 9 = 26</td><td class="r">26 : 4 = 6,5</td><td class="r">≈ 2,55</td></tr>
+          </tbody>
+        </table></div>
+        <p>Beide Lieferanten liefern im Mittel nach 4 Tagen. Bei A weicht eine Lieferung typischerweise nur 0,7 Tage ab, bei B etwa 2,6 Tage. <b>A ist zuverlässiger</b> und besser planbar. Kein Mittelwert allein hätte das gezeigt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Streuung relativ betrachten (Variationskoeffizient)</span>
+        <p>Wie streuen Lieferzeiten (Mittelwert 4 Tage) im Vergleich zu Bestellwerten (Mittelwert 4.000 €)? Man teilt die Standardabweichung durch den Mittelwert: <span class="calcline">s : x̄</span>. Für Lieferant A: <span class="calcline">0,71 : 4 ≈ 17,7 %</span>, für B: <span class="calcline">2,55 : 4 ≈ 63,7 %</span>. So kann man Streuungen von Größen mit unterschiedlicher Einheit vergleichen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wie viel Streuung ist zu viel?</span>
+        <p>Eine Abfüllanlage soll 500 g füllen. Der Mittelwert stimmt (500 g), aber die Standardabweichung beträgt 8 g. Dann liegen etwa 5 % der Packungen mehr als 16 g (zwei Standardabweichungen) vom Soll entfernt, das heißt unter 484 g oder über 516 g. Bei s = 2 g wären es nur ±4 g. In der Qualitätssicherung wird deshalb nicht nur der Mittelwert, sondern vor allem die Streuung überwacht.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Die <b>Wurzel</b> am Ende vergessen und die Varianz als Standardabweichung ausgeben.</li>
+          <li>Durch <b>n</b> statt <b>n − 1</b> teilen, ohne darauf zu achten, ob eine Stichprobe vorliegt.</li>
+          <li>Die Abweichungen <b>vor dem Quadrieren</b> addieren (Ergebnis immer 0).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Berechnen Sie Spannweite, Varianz und Standardabweichung (Stichprobe) für die Werte 2, 4, 6.</p>
+        <p><b>Musterlösung:</b> Spannweite 6 − 2 = 4 (1 Punkt). Mittelwert 4 (1 Punkt). Abweichungen −2, 0, +2; Quadrate 4, 0, 4; Summe 8 (2 Punkte). Varianz 8 : (3 − 1) = 4 (1 Punkt). Standardabweichung √4 = 2 (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Quartile bei gerader Anzahl und Boxplots lesen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Quartile bei gerader Anzahl von Werten</span>
+        <p>Acht Bearbeitungszeiten in Minuten: 3, 5, 6, 8, 9, 11, 12, 14.</p>
+        <ol class="steps">
+          <li><div>Median (n = 8, mittlere Werte 8 und 9): <span class="calcline">(8 + 9) : 2 = 8,5</span></div></li>
+          <li><div>Untere Hälfte: 3, 5, 6, 8 → <span class="calcline">Q1 = (5 + 6) : 2 = 5,5</span></div></li>
+          <li><div>Obere Hälfte: 9, 11, 12, 14 → <span class="calcline">Q3 = (11 + 12) : 2 = 11,5</span></div></li>
+          <li><div>IQR: <span class="calcline">11,5 − 5,5 = 6</span></div></li>
+          <li><div>Grenzen: <span class="calcline">5,5 − 1,5 · 6 = −3,5 · 11,5 + 1,5 · 6 = 20,5</span>. Alle Werte liegen dazwischen: <span class="result">keine Ausreißer.</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Zwei Boxplots vergleichen</span>
+        <p>Lieferant A hat einen Median von 3 Tagen und eine schmale Box (IQR 1). Lieferant B hat einen Median von 4 Tagen, eine breite Box (IQR 4) und einen Ausreißer bei 14 Tagen. Deutung: A liefert schneller und gleichmäßiger. B ist im Mittel nur einen Tag langsamer, aber unberechenbar – und gelegentlich kommt es zu extremen Verspätungen. Für Entscheidungen, bei denen Pünktlichkeit zählt, ist A zu bevorzugen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Ausreißer, zwei Deutungen</span>
+        <p>In den Verkaufsdaten steht eine Bestellung über 1.000 Stück, sonst liegen alle zwischen 10 und 60. Der Boxplot markiert sie als Ausreißer. Rückfrage beim Vertrieb: Es war eine einmalige Großbestellung für einen Messestand. Man behält den Wert in der Datenbank, schließt ihn aber für die Prognose des normalen Geschäfts aus. Hätte es sich um einen Tippfehler (100 statt 10) gehandelt, würde man ihn korrigieren. Erst die fachliche Klärung entscheidet.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (7 Punkte):</b> Bestimmen Sie für die Werte 1, 3, 4, 5, 6, 7, 30 Median, Q1, Q3 und IQR und prüfen Sie, ob Ausreißer vorliegen.</p>
+        <p><b>Musterlösung:</b> n = 7, Median = 5 (1 Punkt). Untere Hälfte 1, 3, 4: Q1 = 3 (1 Punkt). Obere Hälfte 6, 7, 30: Q3 = 7 (1 Punkt). IQR = 7 − 3 = 4 (1 Punkt). Grenzen: unten 3 − 6 = −3, oben 7 + 6 = 13 (2 Punkte). Der Wert 30 liegt darüber: Ausreißer (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l7-->
+      <div class="prose">
+        <h3>Üben: Das richtige Diagramm wählen</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Situation</th><th>Diagramm</th><th>Warum</th></tr></thead>
+          <tbody>
+            <tr><td>Wie verteilen sich die Kundenalter (5.000 Werte)?</td><td>Histogramm</td><td>Zeigt Häufigkeit in Altersklassen, Form der Verteilung</td></tr>
+            <tr><td>Vergleich der Bearbeitungszeiten von vier Standorten</td><td>Boxplots nebeneinander</td><td>Median, Streuung und Ausreißer je Standort auf einen Blick</td></tr>
+            <tr><td>Hängt Werbebudget mit Umsatz zusammen?</td><td>Streudiagramm</td><td>Jeder Monat ein Punkt; Muster werden sichtbar</td></tr>
+            <tr><td>Wie entwickelt sich der Umsatz 2023 bis 2025?</td><td>Liniendiagramm</td><td>Zeitverlauf und Trend</td></tr>
+            <tr><td>Beschwerden nach Themen</td><td>Balkendiagramm (sortiert)</td><td>Rangfolge der Kategorien</td></tr>
+            <tr><td>Welche von 30 Sensorwerten hängen zusammen?</td><td>Heatmap der Korrelationen</td><td>30 × 30 Paare in einem Bild</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Wie eine abgeschnittene Achse täuscht</span>
+        <p>Der Umsatz stieg von 100 auf 102 Millionen Euro, also um 2 %. Zeichnet man die senkrechte Achse nicht bei 0, sondern bei 99 beginnend, ragt der Balken für 102 etwa dreimal so hoch wie der für 100 (<span class="calcline">3 : 1 statt 102 : 100</span>). Der Betrachter meint, der Umsatz habe sich verdreifacht. Bei Balkendiagrammen muss die Achse immer bei 0 beginnen. Bei Liniendiagrammen ist ein Ausschnitt erlaubt, sollte aber kenntlich gemacht werden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Ein Diagramm, das eine Aussage hat</span>
+        <p>Schlecht: Titel „Umsatz“, vier Farben, keine Achsenbeschriftung. Gut: Titel „Der Umsatz stieg 2025 um 8 %, getrieben vom Onlinegeschäft“, zwei Linien (Filiale, Online) in klar unterscheidbaren Farben, Achsen mit Einheit „Mio. €“ und Jahreszahl, eine kurze Anmerkung zum Einbruch im März. Die Aussage ist beim ersten Blick klar.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Sie wollen prüfen, ob Ausreißer in den Lieferzeiten vorliegen, und die Lieferzeiten dreier Lieferanten vergleichen. Welches Diagramm wählen Sie? Nennen Sie zwei Merkmale einer guten Darstellung.</p>
+        <p><b>Musterlösung:</b> Boxplots, je Lieferant einer nebeneinander (2 Punkte). Sie zeigen Median, Streuung (Box) und Ausreißer. Merkmale: Achsen mit Beschriftung und Einheit, Balken beginnen bei 0 (bei Boxplots: gemeinsame Skala), Titel mit Kernaussage (je 1,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l8-->
+      <div class="prose">
+        <h3>Weitere Beispiele: mit der Normalverteilung rechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Füllmengen in der Abfüllung</span>
+        <p>Flaschen werden mit μ = 500 ml und σ = 2 ml gefüllt (annähernd normalverteilt).</p>
+        <ul>
+          <li><b>Wie viel Prozent liegen zwischen 496 und 504 ml?</b> Das sind μ ± 2σ (500 ± 4): ca. <b>95 %</b>.</li>
+          <li><b>Wie viel Prozent liegen unter 494 ml?</b> <span class="calcline">z = (494 − 500) : 2 = −3</span>; nur etwa 0,15 % – bei 100.000 Flaschen rund 150.</li>
+          <li><b>Was bedeutet das für den Betrieb?</b> Wer weniger als 0,15 % Ausschuss will, muss σ verkleinern oder den Mittelwert leicht anheben.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wer hat besser abgeschnitten? (z-Werte vergleichen)</span>
+        <p>Klausur A: 78 Punkte bei Mittelwert 70 und σ = 8. Klausur B: 85 Punkte bei Mittelwert 80 und σ = 10.</p>
+        <ol class="steps">
+          <li><div>Klausur A: <span class="calcline">z = (78 − 70) : 8 = 1,0</span></div></li>
+          <li><div>Klausur B: <span class="calcline">z = (85 − 80) : 10 = 0,5</span></div></li>
+          <li><div><span class="result">A war relativ besser:</span> eine Standardabweichung über dem Schnitt gegen eine halbe.</div></li>
+        </ol>
+        <p>Die absoluten Punkte (85 gegen 78) täuschen: Erst die Standardisierung macht die beiden Klausuren vergleichbar. Genau das nutzt man beim Skalieren von Merkmalen im ML.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ausreißer-Regel mit z-Werten</span>
+        <p>Die Bearbeitungsdauer einer Anfrage ist im Mittel 24 Minuten bei σ = 6. Eine Anfrage dauert 51 Minuten: <span class="calcline">z = (51 − 24) : 6 = 4,5</span>. Das liegt weit jenseits von |z| = 3 – ein Ausreißer, den man prüfen sollte (Systemausfall? Sonderfall?).</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li><b>Vorzeichen vergessen:</b> Werte unter dem Mittelwert haben ein negatives z.</li>
+          <li><b>Normalverteilung ungeprüft annehmen:</b> Bei schiefen Daten (Einkommen) stimmen 68-95-99,7 nicht. Erst das Histogramm anschauen.</li>
+          <li>σ der <b>Stichprobe</b> und σ der <b>Grundgesamtheit</b> verwechseln (Lektion 5).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Eine Messgröße ist normalverteilt mit μ = 50 und σ = 4. Berechnen Sie den z-Wert für x = 62 und beurteilen Sie, ob der Wert ein Ausreißer ist.</p>
+        <p><b>Musterlösung:</b> z = (62 − 50) : 4 = 3 (3 Punkte). Der Wert liegt drei Standardabweichungen über dem Mittelwert; nur etwa 0,15 % der Werte sind so hoch oder höher. Nach der Regel |z| &gt; 3 ist er gerade an der Grenze zum Ausreißer und sollte fachlich geprüft werden (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Eine Korrelation Schritt für Schritt berechnen</h3>
+        <p>In der Prüfung deuten Sie meist nur r. Um zu verstehen, <i>was</i> r misst, lohnt sich einmal die Handrechnung mit kleinen Zahlen. Gegeben: Werbebudget <i>x</i> (in Tausend Euro) und Umsatz <i>y</i> (in Tausend Euro) in fünf Monaten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Werbebudget und Umsatz</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Monat</th><th class="r">x</th><th class="r">y</th><th class="r">x − x̄</th><th class="r">y − ȳ</th><th class="r">Produkt</th><th class="r">(x − x̄)²</th><th class="r">(y − ȳ)²</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="r">1</td><td class="r">10</td><td class="r">−2</td><td class="r">−6</td><td class="r">12</td><td class="r">4</td><td class="r">36</td></tr>
+            <tr><td>2</td><td class="r">2</td><td class="r">14</td><td class="r">−1</td><td class="r">−2</td><td class="r">2</td><td class="r">1</td><td class="r">4</td></tr>
+            <tr><td>3</td><td class="r">3</td><td class="r">15</td><td class="r">0</td><td class="r">−1</td><td class="r">0</td><td class="r">0</td><td class="r">1</td></tr>
+            <tr><td>4</td><td class="r">4</td><td class="r">20</td><td class="r">1</td><td class="r">4</td><td class="r">4</td><td class="r">1</td><td class="r">16</td></tr>
+            <tr><td>5</td><td class="r">5</td><td class="r">21</td><td class="r">2</td><td class="r">5</td><td class="r">10</td><td class="r">4</td><td class="r">25</td></tr>
+            <tr class="total"><td>Summe</td><td class="r">15</td><td class="r">80</td><td class="r"></td><td class="r"></td><td class="r">28</td><td class="r">10</td><td class="r">82</td></tr>
+          </tbody>
+        </table></div>
+        <ol class="steps">
+          <li><div>Mittelwerte: <span class="calcline">x̄ = 15 : 5 = 3 · ȳ = 80 : 5 = 16</span></div></li>
+          <li><div>Formel: <span class="calcline">r = Σ(x − x̄)(y − ȳ) : √[Σ(x − x̄)² · Σ(y − ȳ)²]</span></div></li>
+          <li><div>Einsetzen: <span class="calcline">r = 28 : √(10 · 82) = 28 : √820 ≈ 28 : 28,64</span></div></li>
+          <li><div><span class="result">r ≈ 0,98</span> – ein sehr starker positiver Zusammenhang. Bestimmtheitsmaß: <span class="calcline">r² ≈ 0,96</span>, also 96 % der Umsatzunterschiede lassen sich durch das Werbebudget erklären.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Scheinzusammenhang erkennen</span>
+        <p>Eine Auswertung ergibt: Je mehr Feuerwehrleute bei einem Brand im Einsatz sind, desto größer der Schaden (r = 0,8). Folgt daraus, dass Feuerwehrleute Schaden verursachen? Natürlich nicht. Der <b>große Brand</b> erklärt beides: Er braucht mehr Einsatzkräfte und richtet mehr Schaden an. Diese dritte Größe ist die Störvariable.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Negativer Zusammenhang im Betrieb</span>
+        <p>Bei Heizkosten und Außentemperatur ist r = −0,95: Je kälter, desto höher die Kosten. Das „Minus“ heißt nur, dass beide in <i>entgegengesetzte</i> Richtung laufen. Der Zusammenhang ist sehr stark (0,95 ist nahe 1). Aus einer Korrelation von −0,95 darf man schließen: Mit steigender Temperatur sinken die Heizkosten verlässlich – aber man kann noch nicht sagen, um wie viel pro Grad. Das leistet erst die Regression (Modul 4).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Zwischen Eisverkauf und Sonnenbrandfällen wurde r = 0,85 berechnet. Deuten Sie den Wert und erklären Sie, warum man nicht auf eine Ursache schließen darf.</p>
+        <p><b>Musterlösung:</b> r = 0,85 bedeutet einen starken positiven linearen Zusammenhang; beide steigen gemeinsam (2 Punkte). r² = 0,72, also etwa 72 % der Schwankung hängen zusammen (1 Punkt). Korrelation ist keine Kausalität: Eine Störvariable, nämlich das Wetter (Sonne und Hitze), verursacht beides (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->

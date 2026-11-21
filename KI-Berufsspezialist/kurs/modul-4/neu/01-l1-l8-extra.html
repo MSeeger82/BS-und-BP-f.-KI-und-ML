@@ -1,0 +1,256 @@
+<!--EXTRA l1-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Der Ablauf an zwei Aufgaben und die Baseline</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ausfall einer Pumpe vorhersagen – die sechs Schritte konkret</span>
+        <ol class="steps">
+          <li><div><b>Ziel:</b> „Fällt die Pumpe in den nächsten 7 Tagen aus?“ Antwort ja/nein → Klassifikation.</div></li>
+          <li><div><b>Daten:</b> Vibration, Temperatur, Betriebsstunden; Label aus dem Wartungsprotokoll. Zeitlich aufteilen.</div></li>
+          <li><div><b>Baseline:</b> „Immer kein Ausfall.“ Bei 2 % Ausfällen ergibt das 98 % Accuracy und 0 % Recall.</div></li>
+          <li><div><b>Training:</b> z. B. Random Forest mit <code>fit(X_train, y_train)</code>.</div></li>
+          <li><div><b>Validierung:</b> Recall und Precision auf den Validierungsdaten; Hyperparameter anpassen.</div></li>
+          <li><div><b>Test und Einsatz:</b> einmalig auf den Testdaten, dann Überwachung im Betrieb.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Baseline bei einer Zahlenprognose</span>
+        <p>Ein Händler sagt den Wochenabsatz voraus. Die einfachste Regel („wie in der Vorwoche“) liegt im Schnitt 12 Stück daneben (MAE 12). Ein Modell erreicht MAE 8. Verbesserung: <span class="calcline">(12 − 8) : 12 ≈ 33 %</span>. Erreichte das Modell dagegen nur 11,5, wäre der Aufwand kaum gerechtfertigt. Erst der Abstand zur Baseline macht die Leistung greifbar.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum 93 % manchmal nichts bedeuten</span>
+        <p>Bei einer Kündigungsvorhersage kündigen 8 % der Kunden. Die Baseline „bleibt immer“ schafft 92 %. Ein Modell mit 93 % ist nur einen Punkt besser – möglicherweise nutzlos. Wichtiger ist, wie viele der Kündigenden es <i>findet</i> (Recall). Genau deshalb kommt in Schritt 3 die Baseline, noch bevor das erste Modell trainiert wird.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Die Testdaten mehrfach benutzen, um Einstellungen zu verbessern (Schritt 5 gehört zur Validierung).</li>
+          <li>Keine Baseline festlegen und „gute“ Zahlen nicht einordnen können.</li>
+          <li>Mit Schritt 4 beginnen und Ziel und Daten vernachlässigen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie die Schritte des überwachten Lernens und erklären Sie, wozu eine Baseline dient.</p>
+        <p><b>Musterlösung:</b> Ziel festlegen, Daten vorbereiten, Baseline bestimmen, Modell trainieren, mit Validierungsdaten bewerten und einstellen, einmal testen und einsetzen (3 Punkte). Die Baseline ist die einfachste denkbare Lösung (z. B. immer die häufigste Klasse); nur wenn das Modell sie deutlich schlägt, bringt Machine Learning einen Nutzen (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l2-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Die Regression mit Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Dieselbe Mietaufgabe wie in Modul 1, jetzt gerechnet</span>
+        <p>Drei Wohnungen: 40 m² → 520 €, 60 m² → 700 €, 80 m² → 960 €.</p>
+        <ol class="steps">
+          <li><div>Mittelwerte: <span class="calcline">x̄ = 60 · ȳ = (520 + 700 + 960) : 3 ≈ 726,67</span></div></li>
+          <li><div>Abweichungen x: −20, 0, +20; y: −206,67; −26,67; +233,33</div></li>
+          <li><div>Zähler: <span class="calcline">(−20)(−206,67) + 0 + 20 · 233,33 = 4.133 + 4.667 = 8.800</span> · Nenner: <span class="calcline">400 + 0 + 400 = 800</span></div></li>
+          <li><div>Steigung <span class="calcline">w₁ = 8.800 : 800 = 11</span>, Achsenabschnitt <span class="calcline">w₀ = 726,67 − 11 · 60 ≈ 66,67</span></div></li>
+          <li><div><span class="result">Modell: Miete ≈ 66,67 + 11 · Fläche.</span> Für 70 m²: <span class="calcline">66,67 + 770 ≈ 836,67 €</span></div></li>
+        </ol>
+        <p><b>Fehler des Modells:</b> 40 m² → Vorhersage 506,67 (Fehler +13,33); 60 m² → 726,67 (−26,67); 80 m² → 946,67 (+13,33). Die Residuen summieren sich zu 0. MSE = <span class="calcline">(177,8 + 711,1 + 177,8) : 3 ≈ 355,6</span>, RMSE ≈ 18,9 €.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mehrere Merkmale deuten</span>
+        <p>Ein Modell für den Preis eines Gebrauchtwagens: <b>Preis = 24.000 − 1.800 · Alter (Jahre) − 0,06 · Kilometer + 1.200 · Automatik (0/1)</b>.</p>
+        <ul>
+          <li>Jedes Jahr Alter senkt den Preis um 1.800 € – bei gleichem Kilometerstand und gleicher Schaltung.</li>
+          <li>Jeder Kilometer kostet 6 Cent Wertverlust.</li>
+          <li>Ein Automatikgetriebe erhöht den Preis um 1.200 €.</li>
+          <li>Beispiel: 5 Jahre, 80.000 km, Automatik: <span class="calcline">24.000 − 9.000 − 4.800 + 1.200 = 11.400 €</span></li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die Grenzen der Linie – Extrapolation</span>
+        <p>Das Mietmodell wurde mit Wohnungen von 40 bis 80 m² trainiert. Für 300 m² liefert es <span class="calcline">66,67 + 11 · 300 ≈ 3.367 €</span>. Ob das stimmt, weiß niemand: Große Villen folgen anderen Regeln als kleine Wohnungen. Ein Modell sollte nur im Bereich eingesetzt werden, den die Trainingsdaten abdecken. Außerhalb davon ist jede Vorhersage eine Vermutung.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Modell lautet Umsatz = 20 + 4 · Werbung (Werbung in Tausend €, Umsatz in Tausend €). Berechnen Sie den Umsatz für 12 und erklären Sie die Zahlen 20 und 4.</p>
+        <p><b>Musterlösung:</b> 20 + 4 · 12 = 68 (Tausend €) (2 Punkte). 20 ist der Achsenabschnitt: der Umsatz ohne Werbung (1,5 Punkte). 4 ist die Steigung: Jede weitere Tausend Euro Werbung erhöht den Umsatz im Mittel um 4 Tausend Euro (1,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Wahrscheinlichkeiten, Schwellen und mehrere Klassen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Dasselbe Modell, drei Kunden</span>
+        <p>Das Modell lautet <span class="calcline">z = −3 + 0,8 · Mahnungen</span>.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Mahnungen</th><th class="r">z</th><th class="r">σ(z)</th><th>Entscheidung (Schwelle 0,5)</th></tr></thead>
+          <tbody>
+            <tr><td class="r">2</td><td class="r">−1,4</td><td class="r">≈ 0,198</td><td>kein Ausfall</td></tr>
+            <tr><td class="r">5</td><td class="r">1,0</td><td class="r">≈ 0,731</td><td>Ausfall</td></tr>
+            <tr><td class="r">8</td><td class="r">3,4</td><td class="r">≈ 0,968</td><td>Ausfall</td></tr>
+          </tbody>
+        </table></div>
+        <p>Je mehr Mahnungen, desto höher die Wahrscheinlichkeit – aber nie genau 0 oder 1. Die Sigmoid-Kurve schmiegt sich an beide Grenzen an.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Schwelle aus den Kosten ableiten</span>
+        <p>Ein Betrugsfall verursacht im Mittel 500 € Schaden, die manuelle Prüfung einer Zahlung kostet 20 €. Prüfen lohnt sich, sobald <span class="calcline">Wahrscheinlichkeit · 500 € &gt; 20 €</span>, also ab <span class="calcline">p &gt; 20 : 500 = 0,04</span>. Die sinnvolle Schwelle liegt hier bei 4 %, <b>nicht</b> bei 50 %. Bei einem Modell, dessen Fehlalarme fast nichts kosten, senkt man die Schwelle stark; bei teuren Fehlalarmen (z. B. Kunden grundlos sperren) hebt man sie an.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Softmax bei drei Klassen</span>
+        <p>Ein Modell bewertet eine Kundenmail mit den Punktzahlen: Rechnung 2, Technik 1, Kündigung 0. Softmax macht daraus Wahrscheinlichkeiten: <span class="calcline">e² ≈ 7,39 · e¹ ≈ 2,72 · e⁰ = 1</span>, Summe ≈ 11,11. Ergebnis: Rechnung ≈ 66,5 %, Technik ≈ 24,5 %, Kündigung ≈ 9,0 % (zusammen 100 %). Die Mail wird der Rechnungsabteilung zugeordnet.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Modell berechnet z = −1 + 0,5 · x. Für x = 4: Berechnen Sie die Wahrscheinlichkeit σ(z) und geben Sie die Klasse bei Schwelle 0,5 an. Warum ist es trotz des Namens kein Regressionsverfahren?</p>
+        <p><b>Musterlösung:</b> z = −1 + 2 = 1; σ(1) ≈ 0,731 (2 Punkte). 0,731 &gt; 0,5: Klasse 1 (1 Punkt). Die logistische Regression sagt eine Kategorie voraus (über eine Wahrscheinlichkeit und eine Schwelle), nicht eine beliebige Zahl; sie ist daher ein Klassifikationsverfahren (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l4-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Gini, Splits vergleichen und Overfitting</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gini für verschiedene Mischungen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Knoten (Zusage / Ablehnung)</th><th>Rechnung</th><th class="r">Gini</th></tr></thead>
+          <tbody>
+            <tr><td>10 / 0 (rein)</td><td>1 − (1² + 0²)</td><td class="r">0</td></tr>
+            <tr><td>9 / 1</td><td>1 − (0,9² + 0,1²) = 1 − 0,82</td><td class="r">0,18</td></tr>
+            <tr><td>7 / 3</td><td>1 − (0,7² + 0,3²) = 1 − 0,58</td><td class="r">0,42</td></tr>
+            <tr><td>5 / 5 (maximal gemischt)</td><td>1 − (0,5² + 0,5²)</td><td class="r">0,50</td></tr>
+          </tbody>
+        </table></div>
+        <p>Je gleichmäßiger die Mischung, desto höher der Gini-Wert (maximal 0,5 bei zwei Klassen). Der Baum sucht nach Fragen, die den Wert verkleinern.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Zwei mögliche Fragen im Vergleich</span>
+        <p>Ein Knoten hat 20 Anträge: 10 Zusagen, 10 Ablehnungen (Gini 0,5).</p>
+        <ul>
+          <li><b>Frage A (Einkommen):</b> links 12 Anträge (9 Zusagen, 3 Ablehnungen), rechts 8 (1 Zusage, 7 Ablehnungen). Gini links: <span class="calcline">1 − (0,75² + 0,25²) = 0,375</span>; rechts: <span class="calcline">1 − (0,125² + 0,875²) ≈ 0,219</span>. Gewichtet: <span class="calcline">0,6 · 0,375 + 0,4 · 0,219 ≈ 0,3125</span>. Gewinn: <b>0,5 − 0,3125 = 0,1875</b>.</li>
+          <li><b>Frage B (Wohnort):</b> links 10 (6 / 4), rechts 10 (4 / 6). Gini je 0,48, gewichtet 0,48. Gewinn: <b>0,02</b>.</li>
+        </ul>
+        <p>Der Baum wählt Frage A: Sie trennt die Gruppen deutlich besser. Die Frage B bringt fast nichts.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Overfitting sichtbar machen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>max_depth</th><th class="r">Genauigkeit Training</th><th class="r">Genauigkeit Validierung</th><th>Deutung</th></tr></thead>
+          <tbody>
+            <tr><td>2</td><td class="r">80 %</td><td class="r">78 %</td><td>zu einfach (Underfitting)</td></tr>
+            <tr><td>5</td><td class="r">90 %</td><td class="r">86 %</td><td><b>beste Validierung</b></td></tr>
+            <tr><td>10</td><td class="r">98 %</td><td class="r">82 %</td><td>beginnt auswendig zu lernen</td></tr>
+            <tr><td>unbegrenzt</td><td class="r">100 %</td><td class="r">79 %</td><td>Overfitting</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Abstand zwischen Training und Validierung wächst mit der Tiefe. Gewählt wird die Tiefe mit der besten <b>Validierung</b>, nicht die mit dem besten Trainingsergebnis.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein Knoten mit 3 A und 1 B wird verglichen mit einem Knoten mit 8 A und 2 B. Berechnen Sie jeweils den Gini-Wert und sagen Sie, welcher reiner ist.</p>
+        <p><b>Musterlösung:</b> Knoten 1: 1 − (0,75² + 0,25²) = 1 − 0,625 = 0,375 (2 Punkte). Knoten 2: 1 − (0,8² + 0,2²) = 1 − 0,68 = 0,32 (2 Punkte). Knoten 2 ist reiner, weil der Gini-Wert kleiner ist (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l5-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Zufall im Wald</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Abstimmung und Wahrscheinlichkeit</span>
+        <p>Ein Random Forest mit 100 Bäumen beurteilt einen Kreditantrag. 62 Bäume stimmen für „Zusage“, 38 für „Ablehnung“. Entscheidung: Zusage. Zusätzlich liefert der Wald eine Schätzung: <span class="calcline">62 : 100 = 62 %</span> Zusage. Bei 52 : 48 wäre der Wald unsicher, bei 95 : 5 sehr sicher. Diese Zahl kann man als Schwelle für die Weitergabe an einen Menschen nutzen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viel sieht jeder Baum? (Bootstrap)</span>
+        <p>Aus 10 Trainingszeilen wird für einen Baum 10-mal mit Zurücklegen gezogen. Die Chance, dass eine bestimmte Zeile <b>nicht</b> gezogen wird, ist bei jedem Zug 9/10; nach 10 Zügen <span class="calcline">0,9¹⁰ ≈ 0,35</span>. Bei großen Datensätzen nähert sich der Wert 0,368 (etwa 37 %). Ein Baum sieht also etwa 63 % der Zeilen, und etwa 37 % der Zeilen sind für ihn „Testdaten“ (<b>Out-of-Bag</b>). So bekommt man eine ehrliche Schätzung des Fehlers, ohne Daten abzutrennen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Feature Importance lesen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th class="r">Wichtigkeit</th></tr></thead>
+          <tbody>
+            <tr><td>Schuldenquote</td><td class="r">0,32</td></tr>
+            <tr><td>Einkommen</td><td class="r">0,25</td></tr>
+            <tr><td>Beschäftigungsdauer</td><td class="r">0,18</td></tr>
+            <tr><td>Kredithöhe</td><td class="r">0,15</td></tr>
+            <tr><td>Laufzeit</td><td class="r">0,10</td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Werte ergeben zusammen 1. Die Schuldenquote trägt am meisten zu den Entscheidungen bei. <b>Wichtig:</b> Das sagt nicht, in welche Richtung ein Merkmal wirkt (höhere Schulden senken die Zusage-Chance), nur wie stark es genutzt wird. Und: Stark korrelierte Merkmale teilen sich ihre Wichtigkeit.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie, wie ein Random Forest arbeitet und warum mehrere Bäume bessere Ergebnisse liefern als einer.</p>
+        <p><b>Musterlösung:</b> Viele Entscheidungsbäume werden auf zufälligen Stichproben der Trainingsdaten (Bootstrap) trainiert, und bei jeder Frage steht nur eine zufällige Teilmenge der Merkmale zur Wahl (2 Punkte). Die Bäume sind dadurch verschieden; bei Klassifikation entscheidet die Mehrheit, bei Regression der Mittelwert (2 Punkte). Die Fehler einzelner Bäume gleichen sich aus, das senkt die Varianz und das Overfitting (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Boosting mit Zahlen und die Wahl zwischen den Ensembles</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gradient Boosting an drei Mieten</span>
+        <p>Wahre Mieten: 500, 700 und 900 €. Lernrate 0,5.</p>
+        <ol class="steps">
+          <li><div><b>Start:</b> Alle Vorhersagen sind der Mittelwert 700. Fehler (Residuen): <span class="calcline">−200 · 0 · +200</span>.</div></li>
+          <li><div><b>Runde 1:</b> Ein kleiner Baum lernt die Residuen und sagt −180, 0, +180 voraus. Neue Vorhersage: <span class="calcline">700 + 0,5 · (−180) = 610 · 700 · 790</span>. Neue Fehler: −110, 0, +110.</div></li>
+          <li><div><b>Runde 2:</b> Der nächste Baum lernt die neuen Fehler (−100, 0, +100). Neue Vorhersage: <span class="calcline">610 − 50 = 560 · 700 · 790 + 50 = 840</span>. Fehler: −60, 0, +60.</div></li>
+          <li><div><span class="result">Der Fehler schrumpft von 200 über 110 auf 60.</span> Nach vielen Runden ist er sehr klein.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum die Lernrate klein bleibt</span>
+        <p>Mit Lernrate 1 würde der erste Baum seine Fehler sofort in voller Höhe „korrigieren“ – und dabei auch das Rauschen mitlernen. Mit Lernrate 0,1 sind mehr Runden nötig, aber jeder Schritt ist vorsichtig, das Ergebnis verallgemeinert besser. Typisch: kleine Lernrate (0,05–0,1) und viele Runden (einige hundert), mit Früh-Abbruch, wenn die Validierung nicht mehr besser wird.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Bagging oder Boosting?</span>
+        <ul>
+          <li><b>Viele verrauschte Messwerte, Overfitting-Gefahr, wenig Zeit zum Einstellen:</b> Random Forest – robust ohne große Feinarbeit.</li>
+          <li><b>Tabellendaten, höchste Genauigkeit, Zeit zum Feintuning:</b> Gradient Boosting (XGBoost, LightGBM).</li>
+          <li><b>Mehrere gute, unterschiedliche Modelle liegen bereits vor:</b> Stacking mit einem Meta-Modell.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Unterschiede zwischen Bagging (Random Forest) und Boosting.</p>
+        <p><b>Musterlösung:</b> Bagging trainiert die Bäume parallel und unabhängig, Boosting nacheinander, wobei jeder Baum die Fehler der vorherigen korrigiert (2 Punkte). Bagging nutzt tiefe Bäume, Boosting flache, schwache Bäume (2 Punkte). Bagging senkt vor allem die Varianz, Boosting den Bias; Boosting neigt eher zu Overfitting (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l7-->
+      <div class="prose">
+        <h3>kNN mit dem Rechner nachrechnen</h3>
+        <p>Die sechs bekannten Kunden aus dem Rechner: A (2 | 1) Nein, B (3 | 2) Nein, C (2,5 | 4) Ja, D (5 | 5) Ja, E (4 | 1) Nein, F (4,5 | 4) Ja. Der neue Kunde hat die Werte (3,5 | 3).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Abstände und Nachbarn von Hand</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kunde</th><th>Rechnung</th><th class="r">Abstand</th><th>Klasse</th></tr></thead>
+          <tbody>
+            <tr><td>B</td><td>√(0,5² + 1²) = √1,25</td><td class="r">1,12</td><td>Nein</td></tr>
+            <tr><td>C</td><td>√(1² + 1²) = √2</td><td class="r">1,41</td><td>Ja</td></tr>
+            <tr><td>F</td><td>√(1² + 1²) = √2</td><td class="r">1,41</td><td>Ja</td></tr>
+            <tr><td>E</td><td>√(0,5² + 2²) = √4,25</td><td class="r">2,06</td><td>Nein</td></tr>
+            <tr><td>A</td><td>√(1,5² + 2²) = √6,25</td><td class="r">2,50</td><td>Nein</td></tr>
+            <tr><td>D</td><td>√(1,5² + 2²) = √6,25</td><td class="r">2,50</td><td>Ja</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><b>k = 1:</b> B → <b>Nein</b></li>
+          <li><b>k = 3:</b> B, C, F → Nein, Ja, Ja → <b>Ja</b></li>
+          <li><b>k = 5:</b> B, C, F, E, A → 2 × Ja, 3 × Nein → <b>Nein</b></li>
+        </ul>
+        <p>Je nach k ändert sich die Antwort. Deshalb wählt man k anhand von Validierungsdaten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: kNN für Zahlen (Regression)</span>
+        <p>Man will den Preis einer Wohnung schätzen. Die drei ähnlichsten Wohnungen kosteten 200.000 €, 220.000 € und 240.000 €. Vorhersage: <span class="calcline">(200 + 220 + 240) : 3 = 220</span> Tausend €. Man kann auch nach Entfernung gewichten, sodass nähere Nachbarn stärker zählen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum kNN langsam wird</span>
+        <p>Bei jeder einzelnen Vorhersage muss der Abstand zu <b>allen</b> Trainingspunkten berechnet werden. Bei 1 Million Trainingspunkten sind das 1 Million Abstandsberechnungen pro Anfrage – bei 10.000 Anfragen pro Sekunde viel zu langsam. Deshalb nutzt man Suchstrukturen oder wählt andere Verfahren. Dafür braucht kNN <b>kein Training</b>.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum ist beim kNN-Verfahren die Skalierung der Merkmale wichtig, und wie wählt man k?</p>
+        <p><b>Musterlösung:</b> kNN beruht auf Abständen; Merkmale mit großen Zahlenwerten (z. B. Einkommen in Euro) würden den Abstand dominieren und kleine (Alter) kaum zählen (2 Punkte). Man standardisiert vorher (1 Punkt). k wird mit Validierungsdaten (oder Kreuzvalidierung) bestimmt; bei zwei Klassen ungerades k wählen, um Unentschieden zu vermeiden (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l8-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Trennlinie, Straßenbreite und Kernel</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Eine Trennlinie anwenden</span>
+        <p>Die Trennlinie lautet <span class="calcline">x₁ + x₂ − 5 = 0</span>. Für einen neuen Punkt setzt man ein: Punkt (1 | 2): <span class="calcline">1 + 2 − 5 = −2</span> → negativ → Klasse „Kreis“. Punkt (4 | 3): <span class="calcline">4 + 3 − 5 = +2</span> → positiv → Klasse „Quadrat“. Das Vorzeichen entscheidet, der Betrag zeigt, wie weit der Punkt von der Linie entfernt ist. Die Straßenbreite beträgt hier <span class="calcline">2 : √(1² + 1²) = 2 : 1,41 ≈ 1,41</span> Einheiten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wirkung des Parameters C</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th>Kleines C</th><th>Großes C</th></tr></thead>
+          <tbody>
+            <tr><td>Straße</td><td>breit</td><td>schmal</td></tr>
+            <tr><td>Fehler im Training</td><td>einige erlaubt</td><td>kaum erlaubt</td></tr>
+            <tr><td>Risiko</td><td>Underfitting</td><td>Overfitting (Ausreißer bestimmen die Linie)</td></tr>
+            <tr><td>Wann?</td><td>verrauschte Daten</td><td>saubere, gut getrennte Daten</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Kernel-Trick an einer Zahlenachse</span>
+        <p>Auf einer Zahlenachse liegen Klasse A bei x = −1, 0, +1 und Klasse B bei x = −3 und +3. Keine einzelne Schwelle trennt sie (A liegt in der Mitte). Fügt man ein zweites Merkmal x² hinzu, entstehen Punkte: A (−1 | 1), (0 | 0), (1 | 1) und B (−3 | 9), (3 | 9). Jetzt trennt die waagerechte Linie <span class="calcline">x² = 5</span> beide Klassen sauber. Der Kernel-Trick leistet dieses „Hinzufügen“ von Merkmalen rechnerisch geschickt, ohne sie wirklich auszurechnen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die Begriffe Margin und Support-Vektor einer SVM und die Wirkung eines großen Wertes für C.</p>
+        <p><b>Musterlösung:</b> Der Margin ist der Abstand der Trennlinie zu den nächsten Punkten beider Klassen; die SVM maximiert ihn (2 Punkte). Support-Vektoren sind die Punkte direkt am Rand der „Straße“; nur sie bestimmen die Lage der Linie (1 Punkt). Ein großes C bestraft Fehler stark, der Margin wird schmal, die Gefahr von Overfitting steigt (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->

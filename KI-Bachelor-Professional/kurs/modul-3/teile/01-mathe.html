@@ -1,0 +1,207 @@
+<!--META {"nr": 3, "titel": "Mathematik und einfache Lernverfahren", "lektionen": 16, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 3 von 17 · ca. 40 Lernstunden</span>
+      <h1 id="introTitle">Mathematik und einfache Lernverfahren: wie Modelle wirklich rechnen</h1>
+      <p>Hier wird nachgerechnet, was in Modul 1 beschrieben wurde. Keine Angst vor Formeln: Sie brauchen nur die vier Grundrechenarten, Quadrieren, Wurzelziehen und einen Taschenrechner. Jede Formel kommt mit einem Bild und einem durchgerechneten Beispiel. Danach kennen Sie die klassischen Lernverfahren – lineare und logistische Regression, k-nächste Nachbarn, Entscheidungsbaum, Random Forest, Naive Bayes und SVM – und wissen, wann welches passt.</p>
+      <div class="facts">
+        <span class="chip">16 Lektionen in 3 Teilen</span><span class="chip">8 Animationen</span><span class="chip">2 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 3</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--surface-2);"></i><span><b>Formel</b> – mit Legende und Rechenbeispiel</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Vektoren und Matrizen" data-part="Teil A · Mathematische Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 30 Minuten</span><h2>Vektoren und Matrizen: Daten als Zahlenreihen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Steckbrief: Alter 34, Größe 1,78 m, 3 Kinder. Schreibt man nur die Zahlen hintereinander – (34; 1,78; 3) –, hat man einen Vektor. Eine ganze Personalliste ist ein Stapel solcher Zeilen: eine Matrix.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Vektor</b> ist eine geordnete Liste von Zahlen. Jedes Datenbeispiel ist ein Vektor seiner Merkmale. Eine <b>Matrix</b> ist eine Tabelle aus Zahlen mit Zeilen und Spalten; der Datensatz mit n Beispielen und p Merkmalen ist eine n×p-Matrix <b>X</b>.</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Wichtige Rechnungen</span>
+        <div class="eq">Skalarprodukt: a · b = a₁b₁ + a₂b₂ + … + aₙbₙ</div>
+        <div class="eq">Länge (Norm): ‖a‖ = √(a₁² + a₂² + … + aₙ²)</div>
+        <div class="legend-eq"><span>Beispiel: (2; 3) · (4; 1) = 2·4 + 3·1 = 11. Länge von (3; 4) = √(9 + 16) = 5.</span></div>
+      </div>
+      <div class="prose">
+        <p>Warum das wichtig ist: Ein lineares Modell rechnet genau ein Skalarprodukt – Gewichte mal Merkmale, aufaddiert: <span class="calcline">ŷ = w₁x₁ + w₂x₂ + … + b</span>. Ein neuronales Netz macht das Tausende Male gleichzeitig; Grafikprozessoren (GPUs) sind auf genau solche Matrixrechnungen spezialisiert.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Beispiel ist ein Vektor, ein Datensatz eine Matrix – und die meisten Modelle rechnen mit gewichteten Summen (Skalarprodukten).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Nehmen Sie die Mathe-Angst: Ein Vektor ist nichts als eine Excel-Zeile. Rechnen Sie das Skalarprodukt einmal an der Tafel, dann mit Preisen und Mengen: (3 Brötchen, 2 Brezeln) · (0,50 €, 0,80 €) = 3,10 € – der Einkaufsbetrag ist ein Skalarprodukt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Abstand und Ähnlichkeit" data-part="Teil A · Mathematische Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 25 Minuten</span><h2>Abstand und Ähnlichkeit</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>In Manhattan läuft man nicht durch Häuser, sondern um Blöcke herum. Die Luftlinie ist kürzer als der Fußweg. Beides sind Abstände – je nachdem, wie man sich bewegen darf.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Viele Verfahren (kNN, k-Means, Empfehlungssysteme, RAG-Suche) entscheiden über <b>Abstände</b> oder <b>Ähnlichkeiten</b> zwischen Vektoren. Kleiner Abstand bedeutet ähnliche Beispiele.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/abstaende.gif" width="640" height="380" alt="Animation: Zwei Punkte A (2|1) und B (6|4) im Gitter. Zuerst entsteht der Weg entlang der Gitterlinien mit Länge 7, dann die direkte Linie mit Länge 5." loading="lazy">
+        <figcaption>Manhattan-Abstand 7, euklidischer Abstand 5.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Euklidisch: d = √((x₁ − y₁)² + (x₂ − y₂)² + …)</div>
+        <div class="eq">Manhattan: d = |x₁ − y₁| + |x₂ − y₂| + …</div>
+        <div class="eq">Kosinus-Ähnlichkeit: cos θ = <span class="frac"><span>a · b</span><span>‖a‖ · ‖b‖</span></span></div>
+        <div class="legend-eq"><span>Kosinus misst die Richtung, nicht die Länge: 1 = gleiche Richtung, 0 = unabhängig. Standard bei Text-Embeddings.</span></div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Abstände sind nur fair, wenn die Merkmale skaliert sind – sonst entscheidet das Merkmal mit den größten Zahlen.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Euklidischer Abstand zwischen (1 | 2) und (4 | 6)?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">7</button>
+          <button type="button" class="opt" data-right="true">5</button>
+          <button type="button" class="opt">25</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig: √(3² + 4²) = √25 = 5." data-no="Nicht ganz. Differenzen 3 und 4, quadrieren und addieren: 25, die Wurzel ist 5. 7 wäre der Manhattan-Abstand."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Der Satz des Pythagoras ist der euklidische Abstand – das kennen alle aus der Schule. Brücke zu Modul 5: Sprachmodelle verwandeln Texte in Vektoren; ähnliche Texte liegen nahe beieinander.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Funktionen und Steigung" data-part="Teil A · Mathematische Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 25 Minuten</span><h2>Funktionen und Steigung: was eine Ableitung bedeutet</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Auf einer Wanderung sagt das Schild „12 % Steigung“: Pro 100 m geradeaus geht es 12 m hoch. Die Steigung sagt, wie schnell sich die Höhe ändert, wenn man einen Schritt macht.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Eine <b>Funktion</b> ordnet jedem Eingabewert einen Ausgabewert zu, z. B. f(x) = x². Die <b>Ableitung</b> f′(x) gibt die Steigung an jeder Stelle an. Für ML ist wichtig: Die Ableitung der Fehlerfunktion zeigt, in welche Richtung man einen Parameter verstellen muss, damit der Fehler sinkt.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Funktion</th><th>Ableitung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>f(x) = c (Konstante)</td><td>0</td><td>f(x) = 5 → Steigung überall 0</td></tr>
+          <tr><td>f(x) = a·x</td><td>a</td><td>f(x) = 3x → Steigung 3</td></tr>
+          <tr><td>f(x) = x²</td><td>2x</td><td>bei x = 3 ist die Steigung 6</td></tr>
+          <tr><td>f(x) = (x − 3)²</td><td>2(x − 3)</td><td>Minimum bei x = 3, dort Steigung 0</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Hat eine Funktion mehrere Eingaben (Parameter), gibt es für jede eine <b>partielle Ableitung</b>. Zusammen bilden sie den <b>Gradienten</b> – einen Vektor, der in Richtung des steilsten Anstiegs zeigt. <b>Kettenregel</b>: Bei verschachtelten Funktionen multipliziert man die Ableitungen – das ist der Kern von Backpropagation (Modul 5).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ableitung = Steigung. Am tiefsten Punkt einer Fehlerkurve ist die Steigung null.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Bleiben Sie anschaulich. Für die Prüfung reicht: Ableitung = Steigung, Gradient = Richtung des steilsten Anstiegs, man geht in die Gegenrichtung, um den Fehler zu senken.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Gradientenabstieg" data-part="Teil A · Mathematische Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 30 Minuten</span><h2>Gradientenabstieg: im Nebel den tiefsten Punkt finden</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Sie stehen im dichten Nebel auf einem Berg und wollen ins Tal. Sie sehen nur den Boden unter den Füßen. Also tasten Sie, wo es am steilsten bergab geht, machen einen Schritt in diese Richtung – und wiederholen das.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Der <b>Gradientenabstieg</b> verändert die Parameter schrittweise entgegen dem Gradienten der Fehlerfunktion. Die <b>Lernrate</b> η bestimmt die Schrittweite.</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Formel</span>
+        <div class="eq">w<sub>neu</sub> = w<sub>alt</sub> − η · f′(w<sub>alt</sub>)</div>
+        <div class="legend-eq"><span>Beispiel f(w) = (w − 3)² + 1, also f′(w) = 2(w − 3). Start w = −1, η = 0,1: Steigung −8, w<sub>neu</sub> = −1 − 0,1 · (−8) = −0,2. Der nächste Schritt führt näher an w = 3.</span></div>
+      </div>
+      <figure class="board">
+        <img src="gifs/gradientenabstieg.gif" width="640" height="380" alt="Animation: Eine Kugel läuft auf einer Parabel schrittweise ins Minimum. Erst mit Lernrate 0,1 gleichmäßig, dann mit Lernrate 0,95 in großen Sprüngen hin und her." loading="lazy">
+        <figcaption>Zu große Lernraten springen über das Minimum hinweg – oder entfernen sich sogar davon.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Variante</th><th>Daten pro Schritt</th><th>Eigenschaft</th></tr></thead>
+        <tbody>
+          <tr><td>Batch-Gradientenabstieg</td><td>alle Trainingsdaten</td><td>genau, aber langsam bei großen Daten</td></tr>
+          <tr><td>Stochastischer Gradientenabstieg (SGD)</td><td>ein Beispiel</td><td>schnell, unruhig</td></tr>
+          <tr><td>Mini-Batch</td><td>z. B. 32 bis 256 Beispiele</td><td>Standard in der Praxis</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Lernrate zu klein: sehr langsam. Lernrate zu groß: springt über das Ziel oder läuft davon.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Gradientenabstieg kann in einem <b>lokalen Minimum</b> stecken bleiben – einem kleinen Tal, das nicht das tiefste ist. Bei der linearen Regression gibt es nur ein Minimum, bei neuronalen Netzen viele.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie einen Schritt an der Tafel. Danach die Frage: Was ist die Lernrate – Parameter oder Hyperparameter? (Hyperparameter.)</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Wahrscheinlichkeit und Bayes" data-part="Teil A · Mathematische Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 40 Minuten</span><h2>Wahrscheinlichkeit, bedingte Wahrscheinlichkeit, Satz von Bayes</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Der Rauchmelder piept. Brennt es? Meistens nicht – er piept auch, wenn jemand Toast anbrennen lässt. Weil echte Brände selten sind, sind die meisten Alarme Fehlalarme, obwohl der Melder gut ist.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>bedingte Wahrscheinlichkeit</b> P(A | B) ist die Wahrscheinlichkeit von A, wenn B bekannt ist. Der <b>Satz von Bayes</b> rechnet von P(B | A) auf P(A | B) um und berücksichtigt dabei, wie häufig A überhaupt ist (A-priori-Wahrscheinlichkeit, Basisrate).</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">P(A | B) = <span class="frac"><span>P(B | A) · P(A)</span><span>P(B)</span></span> &nbsp;&nbsp; mit P(B) = P(B | A)·P(A) + P(B | nicht A)·P(nicht A)</div>
+        <div class="legend-eq"><span>P(A) = Basisrate (z. B. 1 % krank), P(B | A) = Trefferquote des Tests, P(B | nicht A) = Fehlalarmquote.</span></div>
+      </div>
+      <figure class="board">
+        <img src="gifs/bayes.gif" width="640" height="380" alt="Animation: 1.000 Kästchen, 10 sind krank. Der Test schlägt bei 9 Kranken und 50 Gesunden an. Von 59 positiven Tests sind nur 9 tatsächlich krank, etwa 15 Prozent." loading="lazy">
+        <figcaption>1 % krank, Test erkennt 90 %, Fehlalarme bei 5 %: Nur etwa jeder siebte positive Test stimmt.</figcaption>
+      </figure>
+      <div class="prose">
+        <p><span class="calcline">P(krank | positiv) = 0,9 · 0,01 / (0,9 · 0,01 + 0,05 · 0,99) = 0,009 / 0,0585 ≈ 0,154</span></p>
+        <p>Für Unternehmen: Ein Betrugsmodell mit „95 % Genauigkeit“ produziert bei seltenen Betrugsfällen trotzdem fast nur Fehlalarme. Die Basisrate gehört in jede Wirtschaftlichkeitsrechnung.</p>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Satz von Bayes</span>
+        <div class="calc-row">
+          <div class="field"><label for="bayP">Basisrate P(A) in %</label><input type="number" id="bayP" value="1" min="0" max="100" step="0.1"></div>
+          <div class="field"><label for="baySens">Trefferquote P(B | A) in %</label><input type="number" id="baySens" value="90" min="0" max="100" step="0.1"></div>
+          <div class="field"><label for="bayFp">Fehlalarmquote P(B | nicht A) in %</label><input type="number" id="bayFp" value="5" min="0" max="100" step="0.1"></div>
+        </div>
+        <div class="kpis" id="bayOut"></div>
+        <p class="calc-note" id="bayNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ist ein Ereignis selten, sind auch bei einem guten Test viele Alarme falsch – die Basisrate entscheidet mit.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>P(positiv | krank) und P(krank | positiv) sind verschiedene Dinge. Sie zu verwechseln ist so häufig, dass es einen Namen hat: Basisratenfehler.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie zuerst schätzen: „Wie sicher ist ein positiver Test?“ Die meisten sagen 90 %. Dann die Animation und den Rechner. Ändern Sie die Basisrate auf 20 % – plötzlich stimmen über 80 % der Alarme.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Normalverteilung" data-part="Teil A · Mathematische Grundlagen">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Normalverteilung und Standardabweichung in der Praxis</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Körpergrößen von Erwachsenen: Die meisten liegen nahe am Durchschnitt, sehr kleine und sehr große Menschen sind selten. Zeichnet man die Häufigkeiten, entsteht eine Glocke.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>Normalverteilung</b> (Gauß’sche Glockenkurve) ist symmetrisch um ihren Mittelwert μ; ihre Breite bestimmt die Standardabweichung σ. Viele Messgrößen und Messfehler sind annähernd normalverteilt.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bereich</th><th>Anteil der Werte (Faustregel 68-95-99,7)</th></tr></thead>
+        <tbody>
+          <tr><td>μ ± 1σ</td><td>ca. 68 %</td></tr>
+          <tr><td>μ ± 2σ</td><td>ca. 95 %</td></tr>
+          <tr><td>μ ± 3σ</td><td>ca. 99,7 %</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Beispiel:</b> Füllmengen einer Abfüllanlage μ = 500 ml, σ = 4 ml. Zwischen 492 und 508 ml (± 2σ) liegen etwa 95 % der Flaschen; unter 488 ml (−3σ) liegen nur etwa 0,15 %. Eine Flasche mit 485 ml ist also sehr ungewöhnlich – ein Fall für die Anomalieerkennung.</p>
+        <p>Nicht alles ist normalverteilt: Einkommen, Wartezeiten und Bestellwerte sind meist <b>rechtsschief</b>. Dann sind Median und Quartile die ehrlicheren Kennzahlen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bei Normalverteilung liegen etwa 68 % der Werte innerhalb einer, 95 % innerhalb zweier und 99,7 % innerhalb dreier Standardabweichungen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die 3-Sigma-Regel ist die Grundlage vieler einfacher Überwachungen in Produktion und IT. Six Sigma (Modul 8) baut darauf auf.</p>
+      </aside>
+    </section>

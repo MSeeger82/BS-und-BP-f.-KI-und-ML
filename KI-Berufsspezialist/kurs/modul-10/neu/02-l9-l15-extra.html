@@ -1,0 +1,304 @@
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Sicherheit, Verträge und Mitbestimmung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Checkliste für einen Auftragsverarbeitungsvertrag</span>
+        <ol>
+          <li>Gegenstand, Dauer, Art und Zweck der Verarbeitung sind beschrieben.</li>
+          <li>Der Dienstleister verarbeitet nur nach dokumentierter Weisung (kein Training eigener Modelle mit den Daten, wenn nicht vereinbart).</li>
+          <li>Vertraulichkeit der Mitarbeitenden, technische und organisatorische Maßnahmen sind festgelegt.</li>
+          <li>Unterauftragnehmer (z. B. Cloud-Anbieter) sind benannt und genehmigungspflichtig.</li>
+          <li>Rückgabe oder Löschung der Daten nach Vertragsende ist geregelt.</li>
+          <li>Kontrollrechte und Unterstützung bei Betroffenenanfragen und Datenpannen sind vereinbart.</li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Datenpanne und die 72 Stunden</span>
+        <p>Ein Mitarbeiter kopiert eine Kundenliste in einen nicht freigegebenen Chatdienst. Der Datenschutzbeauftragte erfährt davon am Freitag um 16:00 Uhr.</p>
+        <ol class="steps">
+          <li><div>Frist: 72 Stunden ab Kenntnis, also bis <span class="calcline">Freitag 16:00 + 3 Tage = Montag 16:00 Uhr</span> – das Wochenende zählt mit.</div></li>
+          <li><div>Sofort: Schaden begrenzen (Dienst kontaktieren, Löschung verlangen), Vorfall dokumentieren, Risiko bewerten.</div></li>
+          <li><div>Meldung an die Aufsichtsbehörde, wenn ein Risiko für die Betroffenen nicht ausgeschlossen werden kann; bei hohem Risiko zusätzlich Information der Betroffenen.</div></li>
+          <li><div>Maßnahmen: Nutzungsregeln, Schulung, freigegebenes Werkzeug anbieten.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Bußgeld nach DSGVO</span>
+        <p>Obergrenze: 20 Mio. € oder 4 % des weltweiten Jahresumsatzes, <b>der höhere Wert</b>. Bei 600 Mio. € Umsatz: <span class="calcline">0,04 · 600 = 24 Mio. €</span> &gt; 20 Mio. €, also 24 Mio. €. Bei 100 Mio. € Umsatz: 4 Mio. € &lt; 20 Mio. €, es gilt 20 Mio. €.</p>
+        <p>Achtung: Anders als beim AI Act gilt hier die Regel „der höhere Wert“ unabhängig von der Unternehmensgröße.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Betriebsrat und „können“</span>
+        <p>Ein Betrieb führt einen KI-Assistenten ein, der aufzeichnet, wer wann welche Anfragen stellt. Der Arbeitgeber versichert, die Daten nicht zur Leistungskontrolle zu verwenden. Nach § 87 Abs. 1 Nr. 6 BetrVG kommt es nicht auf die Absicht an, sondern darauf, ob die Einrichtung dazu <i>geeignet</i> ist, Verhalten oder Leistung zu überwachen. Das ist hier der Fall; der Betriebsrat hat mitzubestimmen. Üblicher Weg: Betriebsvereinbarung mit Regeln zu Zweck, Umfang der Protokolle, Zugriff und Löschfristen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 5: KI-spezifische Angriffe</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Angriff</th><th>Beispiel</th><th>Gegenmaßnahme</th></tr></thead>
+          <tbody>
+            <tr><td>Data Poisoning</td><td>Angreifer schleust manipulierte Beispiele in die Trainingsdaten eines Spamfilters ein</td><td>Datenquellen prüfen, Ausreißer und Auffälligkeiten untersuchen, Zugriff beschränken</td></tr>
+            <tr><td>Model Inversion / Extraktion</td><td>Wiederholte Abfragen rekonstruieren Merkmale der Trainingsdaten</td><td>Abfragen begrenzen, Ausgaben vergröbern, Differential Privacy</td></tr>
+            <tr><td>Prompt Injection</td><td>Eingeschleuste Anweisungen in einem Dokument</td><td>Minimale Rechte, Eingaben abgrenzen, Freigaben (Modul 8)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Die Meldefrist erst ab „Gewissheit über das Ausmaß“ rechnen. Sie läuft ab Kenntnis.</li>
+          <li>Einen Dienstleister ohne AVV nutzen, weil „alle das machen“.</li>
+          <li>Datenübermittlung in Drittländer nur aufgrund eines Hinweises auf der Website des Anbieters annehmen, ohne Grundlage (Angemessenheitsbeschluss, Standardvertragsklauseln) zu prüfen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ihr Betrieb möchte einen Cloud-KI-Dienst eines US-Anbieters nutzen, in den Kundendaten eingegeben werden. Nennen Sie vier Punkte, die vorher zu klären sind.</p>
+        <p><b>Musterlösung:</b> Auftragsverarbeitungsvertrag (Art. 28); Grundlage für den Drittlandtransfer (Angemessenheitsbeschluss bzw. Zertifizierung nach dem EU-US Data Privacy Framework oder Standardvertragsklauseln); technische und organisatorische Maßnahmen (Art. 32); Rechtsgrundlage und Zweck für die Verarbeitung; Ausschluss der Nutzung der Daten zum Training, wenn nicht gewünscht; ggf. Information des Betriebsrats; Meldeprozess für Datenpannen (je 1,5 Punkte, max. 6).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Wie Bias entsteht</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Proxys in Personaldaten</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal im Lebenslauf</th><th>Verrät möglicherweise</th></tr></thead>
+          <tbody>
+            <tr><td>Vorname</td><td>Geschlecht, Herkunft</td></tr>
+            <tr><td>Postleitzahl</td><td>Herkunft, soziale Lage</td></tr>
+            <tr><td>Lücke im Lebenslauf (Elternzeit)</td><td>Geschlecht, Familienstand</td></tr>
+            <tr><td>Teilzeitphasen</td><td>Geschlecht, Betreuungspflichten</td></tr>
+            <tr><td>Hobbys, Vereinsmitgliedschaften</td><td>Religion, Herkunft, politische Haltung</td></tr>
+            <tr><td>Abschlussjahr / Berufsjahre</td><td>Alter</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Modell muss das Geschlecht nicht kennen, um nach Geschlecht zu diskriminieren, wenn solche Merkmale es verraten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Kreislauf der Rückkopplung</span>
+        <p>Ein Bewerbungsfilter wurde mit Einstellungen der letzten zehn Jahre trainiert, in denen nur 12 % Frauen eingestellt wurden. Das Modell lernt: „Merkmale, die oft bei Frauen vorkommen, sind weniger gut.“ Es lädt weniger Frauen ein, daher werden weniger eingestellt (z. B. 9 %). Wird das Modell mit diesen neuen Daten nachtrainiert, verstärkt sich das Muster weiter (z. B. 6 %). Aus einem historischen Missstand wird ein selbstverstärkender Effekt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das falsche Label</span>
+        <p>Ein Krankenversicherer will erkennen, welche Patienten intensive Betreuung brauchen. Weil „Gesundheitsbedarf“ schwer zu messen ist, nimmt er die bisherigen <b>Behandlungskosten</b> als Ziel. In einer bekannten US-Untersuchung (2019) zeigte sich bei einem solchen Verfahren: Gruppen, die weniger Zugang zur Versorgung hatten, verursachten weniger Kosten bei gleicher Krankheitslast – das Modell stufte sie als gesünder ein. Das Label „Kosten“ misst etwas anderes als „Bedarf“ (Mess-Bias).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Unterrepräsentierte Gruppen</span>
+        <p>Eine Gesichtserkennung wurde überwiegend mit Fotos hellhäutiger Männer trainiert. In einer bekannten Untersuchung (2018) lag die Fehlerquote bei einigen Systemen für dunkelhäutige Frauen bei bis zu etwa einem Drittel, für hellhäutige Männer unter einem Prozent. Ursache sind weniger Trainingsbeispiele und schlechtere Qualität dieser Gruppe in den Daten.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Annehmen, ein Algorithmus sei „neutral, weil er rechnet“. Er übernimmt die Muster der Daten.</li>
+          <li>Nur auf das Modell schauen und die Datenerhebung und Zielgröße nicht hinterfragen.</li>
+          <li>Das Modell in einem neuen Kontext einsetzen (andere Region, andere Bevölkerung) und nicht neu prüfen (Einsatz-Bias).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Betrieb entfernt aus den Bewerberdaten Geschlecht und Herkunft. Warum kann das Modell trotzdem diskriminieren, und was ist zu tun?</p>
+        <p><b>Musterlösung:</b> Andere Merkmale (Vorname, Postleitzahl, Lücken im Lebenslauf, Hobbys) wirken als Stellvertreter (Proxys) und tragen die Information weiter; auch historische Daten können diskriminierend sein (3 Punkte). Maßnahmen: Ergebnisse je Gruppe messen (Fairness-Kennzahlen), Proxys prüfen, Daten und Ziel hinterfragen, menschliche Kontrolle (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Fairness-Kennzahlen berechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die 4/5-Regel gerade eben erfüllt</span>
+        <p>Gruppe A: 400 Bewerbungen, davon 110 ausgewählt. Gruppe B: 250 Bewerbungen, davon 55 ausgewählt.</p>
+        <ol class="steps">
+          <li><div>Quote A: <span class="calcline">110 : 400 = 27,5 %</span> · Quote B: <span class="calcline">55 : 250 = 22 %</span></div></li>
+          <li><div>Verhältnis: <span class="calcline">22 : 27,5 = 0,80</span> → genau an der Grenze der 4/5-Regel</div></li>
+        </ol>
+        <p>Die Faustregel verlangt mindestens 0,8; bei exakt 0,8 ist sie gerade erfüllt, jede weitere Verschiebung zu Lasten von B wäre ein Warnsignal.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Gleiche Auswahlquote, trotzdem unfair?</span>
+        <p>Zahlen aus Beispiel 1, jetzt mit Eignung: In Gruppe A sind 100 Personen geeignet, das System wählt davon 80 aus. In Gruppe B sind 60 geeignet, das System wählt davon 36 aus.</p>
+        <ul>
+          <li>Richtig-Positiv-Rate A: <span class="calcline">80 : 100 = 80 %</span></li>
+          <li>Richtig-Positiv-Rate B: <span class="calcline">36 : 60 = 60 %</span></li>
+          <li>Unterschied: 20 Prozentpunkte – geeignete Personen aus Gruppe B werden deutlich seltener erkannt.</li>
+        </ul>
+        <p>Das System verletzt hier <b>Equal Opportunity</b>, obwohl die Auswahlquote nach der 4/5-Regel noch gerade genügt. Wer nur eine Kennzahl prüft, übersieht solche Fälle.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wenn Kennzahlen sich widersprechen</span>
+        <p>In Gruppe A sind 50 % der Bewerber geeignet, in Gruppe B 30 %. Ein <b>perfektes</b> System, das genau die Geeigneten auswählt, hätte bei je 1.000 Bewerbungen die Auswahlquoten 50 % und 30 %. Das Verhältnis ist <span class="calcline">30 : 50 = 0,6</span> – die 4/5-Regel wäre verletzt, obwohl kein einziger Fehler gemacht wurde. Soll man die Auswahlquoten angleichen, muss man Geeignete ablehnen oder Ungeeignete einladen. Welche Fairness angemessen ist, entscheiden Fachbereich, Recht und Ethik gemeinsam – und dokumentieren es.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Kennzahl und Fehlalarme</span>
+        <p>Beim Kreditscoring gilt für Gruppe A eine Falsch-Positiv-Rate von 10 %, für Gruppe B von 18 % (ungerechtfertigte Ablehnungen von Zahlungsfähigen werden hier als Fehlalarme betrachtet). Der Unterschied von 8 Prozentpunkten zeigt, dass Gruppe B häufiger zu Unrecht abgelehnt wird – <b>Equalized Odds</b> wäre nicht erfüllt, selbst wenn die Treffsicherheit insgesamt gleich ist.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Das Verhältnis falsch herum bilden (bevorzugte durch benachteiligte Gruppe); es wird immer die kleinere durch die größere Quote geteilt.</li>
+          <li>Fairness mit Gleichbehandlung verwechseln: Gleiche Regeln können ungleiche Wirkung haben.</li>
+          <li>Gruppen mit sehr wenigen Fällen mit großen Gruppen vergleichen, ohne die Unsicherheit zu bedenken.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Gruppe A: 300 Bewerbungen, 90 eingeladen. Gruppe B: 200 Bewerbungen, 42 eingeladen. Berechnen Sie die Auswahlquoten und das Verhältnis und bewerten Sie es.</p>
+        <p><b>Musterlösung:</b> Quote A = 90 : 300 = 30 %; Quote B = 42 : 200 = 21 % (2 Punkte). Verhältnis = 21 : 30 = <b>0,70</b> (2 Punkte). Unter 0,8: Hinweis auf Benachteiligung von Gruppe B; Ursachen prüfen (Daten, Proxys, Schwellen), Maßnahmen und Dokumentation (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Entscheidungen erklären</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein lineares Modell direkt lesen</span>
+        <p>Ein logistisches Modell für das Ausfallrisiko hat für „Zahl der Zahlungsverzüge“ den Koeffizienten 0,7. Das bedeutet: Mit jedem zusätzlichen Verzug wird das <b>Chancenverhältnis</b> (Odds) mit <span class="calcline">e<sup>0,7</sup> ≈ 2,0</span> multipliziert, sich also etwa verdoppelt. Solche Modelle sind von Natur aus erklärbar: Man kann jedem Merkmal einen Einfluss zuordnen, ohne weitere Werkzeuge.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein SHAP-Wasserfall für einen Fall</span>
+        <p>Das durchschnittliche Ausfallrisiko aller Kunden liegt bei 10 %. Für einen Kunden tragen die Merkmale bei:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th class="r">Beitrag (Prozentpunkte)</th></tr></thead>
+          <tbody>
+            <tr><td>Schuldenquote hoch</td><td class="r">+12</td></tr>
+            <tr><td>Zahlungsausfälle in der Vergangenheit</td><td class="r">+6</td></tr>
+            <tr><td>Einkommen überdurchschnittlich</td><td class="r">−3</td></tr>
+            <tr><td>Beschäftigung seit 6 Jahren</td><td class="r">−2</td></tr>
+          </tbody>
+        </table></div>
+        <p>Summe: <span class="calcline">10 + 12 + 6 − 3 − 2 = 23 %</span>. Die Beiträge ergeben zusammen genau die Vorhersage – das ist die Grundidee von SHAP. Der Sachbearbeiter sieht sofort, dass Schuldenquote und frühere Ausfälle den Ausschlag geben.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Eine kontrafaktische Erklärung</span>
+        <p>Ein Kreditantrag über 8.000 € wird abgelehnt. Die kontrafaktische Aussage lautet: „Bei einer Kreditsumme von 5.000 € oder einem um 300 € höheren monatlichen Einkommen wäre der Antrag bewilligt worden.“ Das ist für Betroffene verständlicher und handlungsleitender als eine Liste von Gewichten. Wichtig: Nur Merkmale vorschlagen, die man ändern kann, und keine, die diskriminierend wirken (z. B. „wenn Sie jünger wären“).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Wem erklärt man was?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Adressat</th><th>Frage</th><th>Geeignete Methode</th></tr></thead>
+          <tbody>
+            <tr><td>Abgelehnter Antragsteller</td><td>„Was kann ich ändern?“</td><td>kontrafaktische Erklärung, wichtigste Gründe in einfacher Sprache</td></tr>
+            <tr><td>Sachbearbeiter</td><td>„Ist die Bewertung plausibel?“</td><td>SHAP je Fall</td></tr>
+            <tr><td>Data Scientist</td><td>„Lernt das Modell etwas Unsinniges?“</td><td>Feature Importance, Partial Dependence</td></tr>
+            <tr><td>Aufsicht</td><td>„Welche Faktoren bestimmen Entscheidungen insgesamt?“</td><td>globale Erklärung und Dokumentation</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Eine Erklärung mit der Wahrheit gleichsetzen: SHAP und LIME erklären, was das Modell tut – nicht, ob der Zusammenhang in der Welt kausal ist.</li>
+          <li>Alle Adressaten mit derselben technischen Erklärung bedienen.</li>
+          <li>Feature Importance als Beweis für Ursachen lesen („Postleitzahl ist wichtig, also verursacht der Wohnort Ausfälle“).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Der durchschnittliche Wert beträgt 20 %. SHAP-Beiträge: +15, +8, −5, −4, +4. Berechnen Sie die Vorhersage und erklären Sie den Unterschied zwischen lokaler und globaler Erklärung.</p>
+        <p><b>Musterlösung:</b> 20 + 15 + 8 − 5 − 4 + 4 = <b>38 %</b> (2 Punkte). Lokal: erklärt eine einzelne Vorhersage („Warum diese Entscheidung?“, z. B. SHAP, LIME); global: erklärt das Modellverhalten insgesamt („Was zählt insgesamt?“, z. B. Feature Importance) (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Aufsicht und Verantwortung im Alltag</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Welche Form der Aufsicht passt?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Anwendung</th><th>Form</th><th>Begründung</th></tr></thead>
+          <tbody>
+            <tr><td>Kreditentscheidung über Privatpersonen</td><td>Human in the Loop</td><td>erhebliche Wirkung: Mensch entscheidet jeden Fall</td></tr>
+            <tr><td>Spamfilter im Mailsystem</td><td>Human on the Loop (oder kaum Aufsicht)</td><td>geringe Wirkung; Stichproben und Eingriffsmöglichkeit genügen</td></tr>
+            <tr><td>Autonomes Lager-Fahrzeug</td><td>Human on the Loop</td><td>System agiert, Mensch überwacht und kann stoppen</td></tr>
+            <tr><td>Entscheidung, ob und wo KI im Betrieb eingesetzt wird</td><td>Human in Command</td><td>Mensch bestimmt Einsatz, Grenzen und Abschaltung</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Automation Bias messen</span>
+        <p>Ein Prüfer bestätigt 98 % der Vorschläge eines Systems. Das kann bedeuten, dass das System sehr gut ist – oder dass er nicht wirklich prüft. Methode: In die Fälle werden gezielt 20 absichtlich falsche Vorschläge eingestreut („Testfälle“). Erkennt der Prüfer davon nur 9, liegt die Erkennungsrate bei <span class="calcline">9 : 20 = 45 %</span> – die Aufsicht ist nicht wirksam. Gegenmaßnahmen: weniger Fälle pro Person, Begründungen anzeigen, Schulung, Abweichung ausdrücklich erwünscht, Stichproben durch eine zweite Person.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die sieben Anforderungen für ein Kundenservice-System</span>
+        <ul>
+          <li><b>Menschliche Aufsicht:</b> Übergabe an Mitarbeitende jederzeit möglich.</li>
+          <li><b>Robustheit:</b> Test mit Tippfehlern, Dialekt, absichtlichen Täuschungsversuchen.</li>
+          <li><b>Privatsphäre:</b> keine unnötigen Daten, Löschfristen.</li>
+          <li><b>Transparenz:</b> Kennzeichnung als KI, Hinweis auf Grenzen.</li>
+          <li><b>Fairness:</b> gleiche Qualität für alle Sprachen und Kundengruppen prüfen.</li>
+          <li><b>Gesellschaftliches Wohlergehen:</b> Weiterbildung der Beschäftigten, keine Verdrängung ohne Plan.</li>
+          <li><b>Rechenschaft:</b> klare Verantwortliche, Protokolle, Beschwerdeweg.</li>
+        </ul>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Ethik als „Reden über Werte“ ohne konkrete Maßnahmen und Verantwortliche verstehen.</li>
+          <li>Menschliche Aufsicht auf den Nothalt reduzieren.</li>
+          <li>Aufsicht ohne Befugnis: Wer das System nicht übersteuern darf, beaufsichtigt es nicht.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie Automation Bias und nennen Sie drei Maßnahmen, um die menschliche Aufsicht wirksam zu machen.</p>
+        <p><b>Musterlösung:</b> Automation Bias ist die Neigung, Vorschlägen einer Maschine zu stark zu vertrauen, besonders unter Zeitdruck (2 Punkte). Maßnahmen: ausreichend Zeit und realistische Fallzahlen, Befugnis zum Abweichen, Schulung, verständliche Begründungen, Testfälle und Stichproben, Fehlerkultur (je 1,33 Punkte, max. 4).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele zur Fallstudie: Zahlen und Rollenspiel</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Was passiert mit den 80 %?</span>
+        <p>15.000 Bewerbungen, die oberen 20 % werden eingeladen: <span class="calcline">15.000 · 0,20 = 3.000</span>. Die übrigen <span class="calcline">15.000 − 3.000 = 12.000</span> Bewerbungen würden ohne weiteres Zutun abgelehnt – ohne dass je ein Mensch sie gesehen hat. Das ist eine ausschließlich automatisierte Entscheidung mit erheblicher Wirkung (Art. 22 DSGVO). Lösung: Ein Mensch prüft die Ablehnungen nicht vollständig, aber wirksam – z. B. alle Fälle knapp unter der Grenze und eine zufällige Stichprobe von 5 % aller Ablehnungen (<span class="calcline">12.000 · 0,05 = 600</span>); Bewerber können eine menschliche Überprüfung verlangen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Fairness-Auswertung nach einem Pilot</span>
+        <p>Von 15.000 Bewerbungen kommen 4.500 von Frauen und 10.500 von Männern. Eingeladen werden 690 Frauen und 2.310 Männer.</p>
+        <ol class="steps">
+          <li><div>Quote Frauen: <span class="calcline">690 : 4.500 = 15,3 %</span> · Quote Männer: <span class="calcline">2.310 : 10.500 = 22 %</span></div></li>
+          <li><div>Verhältnis: <span class="calcline">15,3 : 22 ≈ 0,70</span> → unter 0,8, Warnsignal</div></li>
+        </ol>
+        <p>Nächste Schritte: Proxys suchen (Lücken im Lebenslauf, Teilzeit), Gewichtung der Merkmale prüfen (Erklärbarkeit), Trainingsdaten untersuchen, ggf. Anbieter zur Nachbesserung verpflichten oder den Einsatz stoppen. Das Ergebnis wird dokumentiert.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Rollenspiel – wer sagt was?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Rolle</th><th>Zentrale Forderung</th></tr></thead>
+          <tbody>
+            <tr><td>Personalleitung</td><td>Entlastung bei 15.000 Bewerbungen, schnellere Antworten</td></tr>
+            <tr><td>Datenschutzbeauftragte/r</td><td>Rechtsgrundlage, Information der Bewerber, DSFA, Auftragsverarbeitungsvertrag, Art. 22</td></tr>
+            <tr><td>Betriebsrat</td><td>Mitbestimmung, Betriebsvereinbarung, Auswahlrichtlinien, Schutz vor Leistungskontrolle</td></tr>
+            <tr><td>Anbieter</td><td>Nachweise: Konformität, Bias-Tests, Gebrauchsanweisung, Logs</td></tr>
+            <tr><td>Geschäftsleitung</td><td>Kosten-Nutzen, rechtssichere Einführung, Reputation</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Nur ein Regelwerk prüfen (z. B. nur DSGVO) und AI Act, AGG und Mitbestimmung vergessen.</li>
+          <li>Die Absagen „zur Entlastung“ automatisieren und Art. 22 übersehen.</li>
+          <li>Keine Abbruchkriterien für den Pilot festlegen (z. B. Fairness-Verhältnis unter 0,8).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (10 Punkte):</b> Ihr Betrieb will ein gekauftes System zur Vorauswahl von Bewerbungen einführen. Prüfen Sie die rechtlichen Anforderungen.</p>
+        <p><b>Musterlösung:</b> AI Act: Hochrisiko (Beschäftigung), Betreiberpflichten (Aufsicht, Logs, Information, Überwachung) (2 Punkte). DSGVO: Rechtsgrundlage, Information, Art. 22 (echte menschliche Prüfung der Absagen), DSFA, AVV (3 Punkte). AGG/Fairness: Messung je Gruppe, Proxys prüfen, 4/5-Regel als Warnsignal (2 Punkte). Betriebsrat: § 87 Abs. 1 Nr. 6 und § 95 BetrVG, Betriebsvereinbarung (1 Punkt). Erklärbarkeit und Bewerberanfragen (1 Punkt). Pilot mit Erfolgs- und Abbruchkriterien, Monitoring (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l15-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Das Prüfschema angewendet</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Drei Vorhaben im Vergleich</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Frage</th><th>A: Chatbot für Kundenanfragen</th><th>B: Stimmungsanalyse der Callcenter-Mitarbeitenden</th><th>C: Prognose des Lagerbestands</th></tr></thead>
+          <tbody>
+            <tr><td>1 Verboten?</td><td>nein</td><td><b>ja</b> – Stopp</td><td>nein</td></tr>
+            <tr><td>2 Risikoklasse / Rolle</td><td>begrenzt; Betreiber</td><td>–</td><td>minimal; Betreiber</td></tr>
+            <tr><td>3 Transparenz</td><td>ja: Hinweis „KI-Assistent“</td><td>–</td><td>nein</td></tr>
+            <tr><td>4 Personendaten</td><td>ja: Rechtsgrundlage, Minimierung</td><td>–</td><td>nein</td></tr>
+            <tr><td>5 Art. 22</td><td>nein, wenn nur Auskünfte</td><td>–</td><td>nein</td></tr>
+            <tr><td>6 DSFA</td><td>prüfen</td><td>–</td><td>nein</td></tr>
+            <tr><td>7 Dienstleister, Drittland</td><td>AVV, Drittlandfrage klären</td><td>–</td><td>AVV, falls Cloud</td></tr>
+            <tr><td>8 Fairness</td><td>Qualität für alle Gruppen testen</td><td>–</td><td>nicht relevant</td></tr>
+            <tr><td>9 Betriebsrat</td><td>falls Auswertung der Beschäftigten möglich</td><td>–</td><td>meist nein</td></tr>
+            <tr><td>10 Aufsicht</td><td>Übergabe an Mitarbeitende</td><td>–</td><td>Kontrolle durch Disponenten</td></tr>
+            <tr><td>11 Urheberrecht</td><td>Lizenzbedingungen prüfen</td><td>–</td><td>nein</td></tr>
+            <tr><td>12 Schulung</td><td>ja</td><td>–</td><td>ja</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Schema zeigt, wie unterschiedlich der Aufwand ist: B endet schon bei Frage 1, C erfordert fast nichts, A braucht eine ordentliche Prüfung.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Das Schema als Dokument</span>
+        <p>Pro Vorhaben wird eine Seite angelegt: Beschreibung, Antworten auf die zwölf Fragen mit Datum, Verantwortliche/r, nötige Maßnahmen mit Frist, Ergebnis („freigegeben“, „freigegeben mit Auflagen“, „abgelehnt“). So entsteht ein Nachweis im Sinn der Rechenschaftspflicht – und für die Transferarbeit ein überzeugender Anhang.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Das Schema nur einmalig zu Projektstart ausfüllen. Bei wesentlichen Änderungen (neuer Zweck, neue Daten) ist es neu zu prüfen.</li>
+          <li>Fragen mit „nicht relevant“ beantworten, ohne es zu begründen.</li>
+          <li>Das Schema als Ersatz für Rechtsberatung verstehen; bei Unsicherheit Fachleute hinzuziehen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie sechs Prüffragen, die vor jedem KI-Einsatz zu stellen sind, mit der jeweiligen Rechtsgrundlage.</p>
+        <p><b>Musterlösung:</b> Verboten? (AI Act Art. 5); Risikoklasse und Rolle (Art. 6, Anhang III); Transparenzpflichten (Art. 50); Personenbezogene Daten, Rechtsgrundlage (DSGVO Art. 5, 6, 9); automatisierte Entscheidung (Art. 22); DSFA (Art. 35); Dienstleister, Drittland, Sicherheit (Art. 28, 32, 44 ff.); Diskriminierung (AGG); Betriebsrat (BetrVG); Aufsicht und Erklärbarkeit; Urheberrecht; Schulung (AI Act Art. 4). Je Frage mit Grundlage 1 Punkt, max. 6.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Wenden Sie das Schema auf eine KI-Anwendung Ihres Betriebs an, die schon läuft. Fast immer zeigt sich eine Frage, die bisher nicht bedacht wurde – meist Transparenz, Auftragsverarbeitung oder Schulung.</p>
+      </div>
+<!--/EXTRA-->

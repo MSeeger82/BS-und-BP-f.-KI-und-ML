@@ -1,0 +1,297 @@
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="k-Means" data-part="Teil C · Clustering und Dimensionsreduktion">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 35 Minuten</span><h2>k-Means Schritt für Schritt</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Drei Eisverkäufer am Strand verteilen sich: Jeder Badegast geht zum nächsten Stand. Dann rückt jeder Verkäufer in die Mitte seiner Kundschaft. Die Badegäste orientieren sich neu – bis niemand mehr wechselt.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>k-Means</b> teilt die Daten in k Cluster, sodass die Punkte möglichst nahe an ihrem Clusterzentrum (Centroid) liegen. Minimiert wird die Summe der quadrierten Abstände zu den Zentren (WCSS, Inertia).</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/kmeans.gif" width="640" height="380" alt="Animation: Punkte in drei Gruppen und drei Kreuze als Zentren. Abwechselnd werden die Punkte dem nächsten Zentrum zugeordnet und eingefärbt, dann wandern die Zentren in die Mitte ihrer Punkte, bis sich nichts mehr ändert." loading="lazy">
+        <figcaption>Zuordnen, verschieben, wiederholen.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span><b>k festlegen</b> und k Startzentren wählen (zufällig oder klug verteilt mit k-Means++).</span></li>
+        <li><span><b>Zuordnen</b>: Jeder Punkt gehört zum nächsten Zentrum.</span></li>
+        <li><span><b>Verschieben</b>: Jedes Zentrum wird zum Mittelwert seiner Punkte.</span></li>
+        <li><span><b>Wiederholen</b>, bis sich die Zuordnung nicht mehr ändert.</span></li>
+      </ol>
+      <div class="prose">
+        <p><b>Rechenbeispiel Zentrum:</b> Punkte (1 | 2), (3 | 4), (2 | 6) gehören zu Cluster A. Neues Zentrum: <span class="calcline">((1 + 3 + 2) / 3 | (2 + 4 + 6) / 3) = (2 | 4)</span>.</p>
+        <p><b>Grenzen:</b> k muss vorgegeben werden; Ergebnis hängt vom Start ab (mehrmals starten); nur „runde“, ähnlich große Cluster; skalierte Merkmale nötig; Ausreißer ziehen Zentren weg.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>k-Means: zuordnen zum nächsten Zentrum, Zentrum in die Mitte verschieben, wiederholen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Strand-Beispiel macht den Algorithmus greifbar. Rechnen Sie einen Verschiebeschritt mit drei Punkten an der Tafel.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Anzahl der Cluster wählen" data-part="Teil C · Clustering und Dimensionsreduktion">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 25 Minuten</span><h2>Anzahl der Cluster wählen: Elbow-Methode und Silhouette</h2></div>
+      <figure class="board">
+        <img src="gifs/elbow.gif" width="640" height="380" alt="Animation: Eine fallende Kurve des Fehlers über der Clusteranzahl k von 1 bis 8; bei k gleich 3 knickt sie deutlich ab und wird danach flach. Der Knick ist rot markiert." loading="lazy">
+        <figcaption>Der „Ellbogen“ liegt bei k = 3.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Silhouettenkoeffizient</span>
+        <div class="eq">s = <span class="frac"><span>b − a</span><span>max(a, b)</span></span></div>
+        <div class="legend-eq"><span>a = mittlerer Abstand eines Punkts zu den Punkten im eigenen Cluster, b = mittlerer Abstand zum nächsten fremden Cluster. s nahe 1: gut getrennt; nahe 0: an der Grenze; negativ: eher im falschen Cluster.</span></div>
+      </div>
+      <div class="prose">
+        <p><b>Beispiel:</b> a = 2, b = 5 → <span class="calcline">s = (5 − 2) / 5 = 0,6</span>. Man berechnet s für alle Punkte, bildet den Mittelwert und wählt das k mit dem höchsten Wert.</p>
+        <p>Am wichtigsten bleibt die <b>fachliche Brauchbarkeit</b>: Fünf Kundensegmente, für die das Marketing fünf verschiedene Maßnahmen hat, sind nützlicher als mathematisch optimale elf.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Elbow: Wo bringt ein zusätzlicher Cluster kaum noch Verbesserung? Silhouette: Wie gut passt jeder Punkt in seinen Cluster?</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Der Fehler sinkt mit mehr Clustern immer – bei k = Anzahl Punkte ist er null. Deshalb sucht man den Knick, nicht das Minimum.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Hierarchisches Clustering" data-part="Teil C · Clustering und Dimensionsreduktion">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 25 Minuten</span><h2>Hierarchisches Clustering und Dendrogramm</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Stammbaum: Geschwister bilden die engste Gruppe, mit den Cousins die Familie, mit den Großeltern-Linien die Verwandtschaft. Je nachdem, auf welcher Höhe man den Baum „durchschneidet“, entstehen wenige große oder viele kleine Gruppen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Agglomeratives hierarchisches Clustering</b> beginnt mit jedem Punkt als eigenem Cluster und fügt schrittweise die beiden ähnlichsten zusammen. Das Ergebnis ist ein <b>Dendrogramm</b>; die Clusteranzahl wählt man danach durch einen Schnitt auf passender Höhe.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verknüpfung (Linkage)</th><th>Abstand zweier Cluster</th><th>Eigenschaft</th></tr></thead>
+        <tbody>
+          <tr><td>Single</td><td>nächstes Punktpaar</td><td>bildet lange Ketten</td></tr>
+          <tr><td>Complete</td><td>entferntestes Punktpaar</td><td>kompakte Cluster</td></tr>
+          <tr><td>Average</td><td>mittlerer Abstand aller Paare</td><td>Kompromiss</td></tr>
+          <tr><td>Ward</td><td>Zuwachs der Streuung beim Verschmelzen</td><td>ähnlich k-Means, sehr verbreitet</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Vorteile:</b> k muss nicht vorab feststehen, das Dendrogramm ist gut zu erklären. <b>Nachteil:</b> rechenintensiv bei großen Datenmengen (zehntausende Punkte und mehr).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Hierarchisches Clustering baut einen Baum ähnlicher Gruppen; die Clusterzahl entsteht durch einen Schnitt im Dendrogramm.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeichnen Sie ein kleines Dendrogramm mit fünf Punkten. Schneiden Sie auf zwei Höhen und zeigen Sie, wie sich die Clusterzahl ändert.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="DBSCAN und Anomalieerkennung" data-part="Teil C · Clustering und Dimensionsreduktion">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 30 Minuten</span><h2>DBSCAN und Anomalieerkennung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Auf einem Volksfest sieht man von oben dichte Menschentrauben vor den Bühnen – egal, welche Form sie haben. Wer allein am Rand steht, gehört zu keiner Gruppe.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>DBSCAN</b> (Density-Based Spatial Clustering of Applications with Noise) bildet Cluster aus dicht beieinanderliegenden Punkten. Ein Punkt mit mindestens <b>minPts</b> Nachbarn im Radius <b>ε</b> ist ein Kernpunkt; zusammenhängende Kernpunkte und ihre Nachbarn bilden einen Cluster; alle übrigen Punkte sind <b>Rauschen</b>.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/dbscan.gif" width="640" height="380" alt="Animation: Graue Punkte bilden einen Ring und einen Kern in der Mitte, dazu fünf einzelne Punkte. DBSCAN färbt den Ring grün, den Kern orange und markiert die Einzelpunkte rot als Rauschen." loading="lazy">
+        <figcaption>DBSCAN erkennt Cluster beliebiger Form und markiert Ausreißer.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Anomalieerkennung im Überblick</h3>
+        <ul>
+          <li><b>Statistisch</b>: z-Werte, IQR-Regel (Modul 2) – einfach, für einzelne Merkmale.</li>
+          <li><b>Dichtebasiert</b>: DBSCAN-Rauschen, Local Outlier Factor.</li>
+          <li><b>Isolation Forest</b>: Ausreißer lassen sich mit wenigen zufälligen Schnitten isolieren.</li>
+          <li><b>Rekonstruktion</b>: Autoencoder (Modul 5) rekonstruieren Normales gut, Ungewöhnliches schlecht.</li>
+        </ul>
+        <p>Einsatz: Betrugsverdacht, Maschinenstörungen, Netzwerkangriffe, Datenqualitätsprobleme. Weil Labels fehlen, ist die Bewertung schwierig – Fachleute prüfen eine Stichprobe der Treffer.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>DBSCAN findet dichte Gruppen jeder Form, braucht kein k und markiert Ausreißer als Rauschen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie den Unterschied zu k-Means: k-Means würde den Ring in Stücke schneiden. Fragen Sie nach Einsatzorten für Anomalieerkennung im eigenen Betrieb.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Dimensionsreduktion mit PCA" data-part="Teil C · Clustering und Dimensionsreduktion">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 25 Minuten</span><h2>Dimensionsreduktion: PCA anschaulich</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Schattenbild an der Wand: Aus einem dreidimensionalen Gegenstand wird ein flaches Bild. Dreht man den Gegenstand geschickt, erkennt man im Schatten trotzdem fast alles.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die <b>Hauptkomponentenanalyse</b> (PCA, Principal Component Analysis) dreht das Koordinatensystem so, dass die erste neue Achse (Hauptkomponente) die größte Streuung erfasst, die zweite die zweitgrößte usw. Behält man nur die ersten Komponenten, verdichtet man viele Merkmale auf wenige.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/pca.gif" width="640" height="380" alt="Animation: Eine schräge, längliche Punktwolke; eine violette Achse erscheint in Richtung der größten Ausdehnung, dann wandern alle Punkte senkrecht auf diese Achse." loading="lazy">
+        <figcaption>Zwei Merkmale werden auf eine Hauptkomponente projiziert.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Erklärte Varianz</b>: Jede Komponente erklärt einen Anteil der Gesamtstreuung; man behält so viele, bis z. B. 90 % erreicht sind.</li>
+          <li><b>Zwecke</b>: Visualisierung in 2D, Rauschen reduzieren, Rechenzeit sparen, korrelierte Merkmale bündeln.</li>
+          <li><b>Voraussetzung</b>: Merkmale standardisieren – sonst dominiert das Merkmal mit der größten Einheit.</li>
+          <li><b>Nachteil</b>: Komponenten sind Mischungen der Originalmerkmale und schwer fachlich zu deuten.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>PCA ersetzt viele korrelierte Merkmale durch wenige neue Achsen, die möglichst viel Streuung erhalten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Verbinden Sie zu Modul 2: Merkmale mit r = 0,95 tragen fast dieselbe Information – PCA bündelt sie zu einer Komponente.</p>
+      </aside>
+    </section>
+
+    <!-- Übungen -->
+    <section class="lesson" id="uebungen" data-title="Übungen">
+      <div class="lesson-head"><span class="meta">Übungen · 150 Minuten</span><h2>Übungen mit Musterlösung</h2></div>
+      <p>Rechnen Sie mit Taschenrechner und tragen Sie die Ergebnisse ein. Der Konfusionsmatrix-Rechner in Lektion 2 hilft bei der Kontrolle.</p>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 1: Kennzahlen berechnen</h3><span class="points">6 Punkte</span></div>
+        <p>Ein Wartungsmodell markiert Maschinen mit drohendem Ausfall. Ergebnis auf 500 Testfällen: TP 30, FP 20, FN 10, TN 440. Berechnen Sie Accuracy, Precision, Recall und F1 (in %, eine Nachkommastelle).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Accuracy = 470 / 500 = <b>94,0 %</b>; Precision = 30 / 50 = <b>60,0 %</b>; Recall = 30 / 40 = <b>75,0 %</b>; F1 = 2 · 0,6 · 0,75 / 1,35 = <b>66,7 %</b>. Je 1,5 Punkte.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 2: Kennzahl wählen</h3><span class="points">3 Punkte</span></div>
+        <p>Welche Kennzahl ist am wichtigsten? 1. Ein Modell sperrt verdächtige Kundenkonten automatisch. 2. Ein Modell sucht sicherheitskritische Risse in Flugzeugteilen; jeder Treffer wird ohnehin von Menschen geprüft. 3. Anfragen werden einer von fünf etwa gleich großen Abteilungen zugeordnet.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Precision – jede falsche Sperre trifft einen ehrlichen Kunden. 2. Recall – kein Riss darf übersehen werden. 3. Accuracy bzw. F1 – Klassen ausgewogen, Fehler ähnlich teuer. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 3: Unausgewogene Klassen</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Dienstleister präsentiert ein Kündigermodell mit 96 % Accuracy. 4 % der Kunden kündigen tatsächlich. Bewerten Sie die Aussage und nennen Sie zwei Kennzahlen, die Sie stattdessen sehen wollen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>96 % erreicht schon ein Modell, das niemals „kündigt“ vorhersagt – die Aussage beweist nichts (2 P.). Gefordert: Recall und Precision für die Klasse „kündigt“, F1 oder PR-AUC, idealerweise Kosten/Nutzen im Pilotbetrieb (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 4: Regressionsmetriken</h3><span class="points">5 Punkte</span></div>
+        <p>Tatsächliche Lieferzeiten 4, 6, 10, 8 Tage, Prognosen 5, 6, 7, 8 Tage. Berechnen Sie MAE, MSE und RMSE (zwei Nachkommastellen).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Fehler −1, 0, 3, 0. MAE = 4 / 4 = <b>1,00</b> (1 P.); MSE = (1 + 0 + 9 + 0) / 4 = <b>2,50</b> (2 P.); RMSE = √2,5 ≈ <b>1,58</b> Tage (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 5: Diagnose aus Lernkurven</h3><span class="points">4 Punkte</span></div>
+        <p>Ordnen Sie zu und nennen Sie je eine Maßnahme: a) Trainingsfehler 2 %, Validierungsfehler 19 %. b) Trainingsfehler 21 %, Validierungsfehler 22 %.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) Overfitting (1 P.); Maßnahme: mehr Daten, Regularisierung, einfacheres Modell, Early Stopping (1 P.). b) Underfitting (1 P.); Maßnahme: komplexeres Modell, bessere Merkmale, weniger Regularisierung (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 6: Kreuzvalidierung</h3><span class="points">4 Punkte</span></div>
+        <p>a) Bei 5-facher Kreuzvalidierung ergeben sich F1-Werte 0,70; 0,74; 0,72; 0,68; 0,76. Berechnen Sie den Mittelwert. b) Warum darf man bei monatlichen Absatzdaten nicht zufällig in Folds teilen?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 3,60 / 5 = <b>0,72</b> (2 P.). b) Sonst trainiert das Modell mit späteren Monaten und prüft auf früheren – es kennt die Zukunft (Data Leakage); stattdessen vorwärts rollierend validieren (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 7: Grid Search</h3><span class="points">3 Punkte</span></div>
+        <p>Für einen Random Forest sollen 4 Werte für die Baumanzahl, 3 für die Tiefe und 2 für die Mindestblattgröße getestet werden, jeweils mit 5-facher Kreuzvalidierung. Wie viele Trainingsläufe sind das, und welche Alternative spart Zeit?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>4 · 3 · 2 · 5 = <b>120</b> Läufe (2 P.). Alternative: Random Search oder Bayes’sche Optimierung mit festem Budget (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 8: Kosten statt Accuracy</h3><span class="points">5 Punkte</span></div>
+        <p>Ein übersehener Maschinenausfall kostet 4.000 €, eine unnötige Inspektion 150 €. Modell A: FN 6, FP 40. Modell B: FN 2, FP 110. Welches Modell ist günstiger, und um wie viel?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>A: 6 · 4.000 + 40 · 150 = <b>30.000 €</b> (2 P.). B: 2 · 4.000 + 110 · 150 = <b>24.500 €</b> (2 P.). B ist <b>5.500 €</b> günstiger (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 9: k-Means rechnen</h3><span class="points">4 Punkte</span></div>
+        <p>Zentren A (2 | 2) und B (8 | 8). Punkte P1 (3 | 1), P2 (7 | 9), P3 (4 | 3), P4 (9 | 6). a) Ordnen Sie jeden Punkt dem nächsten Zentrum zu. b) Berechnen Sie das neue Zentrum von A.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) P1 → A, P2 → B, P3 → A, P4 → B (2 P.). b) Mittel von P1 und P3: ((3 + 4) / 2 | (1 + 3) / 2) = <b>(3,5 | 2)</b> (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 10: Silhouette</h3><span class="points">3 Punkte</span></div>
+        <p>Für einen Punkt gilt: mittlerer Abstand im eigenen Cluster a = 1,5, mittlerer Abstand zum nächsten fremden Cluster b = 6. Berechnen und deuten Sie den Silhouettenkoeffizienten.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>s = (6 − 1,5) / 6 = <b>0,75</b> (2 P.); der Punkt passt gut in seinen Cluster und ist klar vom Nachbarcluster getrennt (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 11: Verfahren für Gruppen und Ausreißer</h3><span class="points">3 Punkte</span></div>
+        <p>Welches Verfahren passt? 1. Sensordaten einer Anlage: Normalzustand bilden unregelmäßig geformte dichte Bereiche, gesucht sind einzelne ungewöhnliche Messungen. 2. Ein Händler will genau vier Kundensegmente für vier Kampagnen. 3. Ein Forschungsteam will 300 Produkte zeigen, wie sie in Gruppen und Untergruppen zusammenhängen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. DBSCAN (bzw. Isolation Forest) · 2. k-Means mit k = 4 · 3. hierarchisches Clustering mit Dendrogramm. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 12: Situationsaufgabe Bewertungskonzept</h3><span class="points">8 Punkte</span></div>
+        <p>Die Muster Energie GmbH lässt ein Modell entwickeln, das Stromzähler mit Manipulationsverdacht markiert. 0,5 % der Zähler sind manipuliert; jeder Verdacht löst einen Technikereinsatz (180 €) aus, eine unentdeckte Manipulation kostet im Schnitt 2.500 €. Der Anbieter wirbt mit „99,4 % Genauigkeit“. Entwerfen Sie ein Bewertungskonzept: Welche Kennzahlen, welche Validierung, wie wird die Schwelle festgelegt, und wie wird der Nutzen im Betrieb nachgewiesen?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p><b>Kennzahlen</b> (2 P.): Recall und Precision für „manipuliert“, PR-AUC; Accuracy ist bei 0,5 % Basisrate aussagelos (99,5 % schon ohne Modell). <b>Validierung</b> (2 P.): stratifizierte bzw. zeitlich vorwärts gerichtete Kreuzvalidierung, unberührte Testdaten, auf Leakage prüfen. <b>Schwelle</b> (2 P.): über eine Kostenmatrix (FN 2.500 €, FP 180 €) und die Technikerkapazität optimieren. <b>Nutzen</b> (2 P.): Pilot bzw. A/B-Test gegen das bisherige Verfahren, gemessen in aufgedeckten Fällen, Einsatzkosten und Netto-Ersparnis; laufendes Monitoring.</p>
+        </details>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Aufgaben 1, 4, 8, 9 und 10 sind klassische Rechenaufgaben für Teil 1, Bereich B. Aufgabe 12 ist eine kleine Situationsaufgabe; achten Sie auf die Verbindung von Technik und Kosten.</p>
+      </aside>
+    </section>
+
+    <!-- Quiz -->
+    <section class="lesson" id="quiz" data-title="Abschlussquiz">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 25 Minuten</span><h2>Abschlussquiz Modul 4</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="flow-a"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Taschenrechner erlaubt. Wer unter 14 liegt, wiederholt die Lektionen zu den falschen Antworten.</p>
+      </aside>
+    </section>
+
+    <!-- Zusammenfassung -->
+    <section class="lesson" id="summary" data-title="Zusammenfassung">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Konfusionsmatrix</h3><p>TP, FP, FN, TN – erst „richtig/falsch“, dann „positiv/negativ“.</p></div>
+        <div class="card"><h3>Precision / Recall</h3><p>Qualität der Alarme / Vollständigkeit der Treffer; F1 verbindet beide.</p></div>
+        <div class="card"><h3>ROC und AUC</h3><p>alle Schwellen auf einmal; 0,5 Zufall, 1 perfekt.</p></div>
+        <div class="card"><h3>Unausgewogene Klassen</h3><p>Accuracy täuscht; Recall, Precision, Kosten zeigen.</p></div>
+        <div class="card"><h3>Regression</h3><p>MAE, RMSE, R², MAPE.</p></div>
+        <div class="card"><h3>Generalisierung</h3><p>Underfitting = Bias, Overfitting = Varianz; Lernkurven lesen.</p></div>
+        <div class="card"><h3>Validierung</h3><p>k-fach, stratifiziert, gruppiert; Zeitreihen vorwärts.</p></div>
+        <div class="card"><h3>Tuning und Regularisierung</h3><p>Grid/Random Search; L1 wählt aus, L2 schrumpft.</p></div>
+        <div class="card"><h3>Baseline und Kosten</h3><p>Erst schlagen, was es schon gibt; in Euro bewerten.</p></div>
+        <div class="card"><h3>Clustering, PCA</h3><p>k-Means, hierarchisch, DBSCAN; Elbow, Silhouette; PCA verdichtet.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Glossar Modul 4</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+          <tbody>
+            <tr><td>AUC</td><td>Fläche unter der ROC-Kurve</td></tr>
+            <tr><td>Centroid</td><td>Zentrum eines Clusters bei k-Means</td></tr>
+            <tr><td>Dendrogramm</td><td>Baumdiagramm des hierarchischen Clusterings</td></tr>
+            <tr><td>Early Stopping</td><td>Training beenden, wenn der Validierungsfehler steigt</td></tr>
+            <tr><td>F1-Score</td><td>Harmonisches Mittel aus Precision und Recall</td></tr>
+            <tr><td>Fold</td><td>Teil der Daten bei der Kreuzvalidierung</td></tr>
+            <tr><td>Kostenmatrix</td><td>Kosten je Fehlerart, Grundlage für Schwelle und Modellwahl</td></tr>
+            <tr><td>Recall</td><td>Anteil der gefundenen echten positiven Fälle</td></tr>
+            <tr><td>Silhouette</td><td>Maß, wie gut ein Punkt in seinen Cluster passt</td></tr>
+            <tr><td>Stratifizierung</td><td>Aufteilung mit gleichem Klassenanteil in allen Teilen</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Weiter mit Modul 5:</b> Neuronale Netze und Deep Learning – vom einzelnen Neuron bis zum Sprachmodell.</p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Jede Person erklärt eine Karte. Ausblick: Neuronale Netze sind mächtig, aber bewertet werden sie mit genau diesen Kennzahlen.</p>
+      </aside>
+    </section>
+<!--SCRIPTS-->

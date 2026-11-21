@@ -1,0 +1,243 @@
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Dubletten, Ausreißer und Formate in der Praxis</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Unscharfe Dubletten</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>id</th><th>Firma</th><th>Straße</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td>301</td><td>Müller GmbH</td><td>Hauptstr. 5</td><td></td></tr>
+            <tr><td>845</td><td>Mueller GmbH</td><td>Hauptstraße 5</td><td>vermutlich dieselbe Firma</td></tr>
+            <tr><td>912</td><td>Müller &amp; Söhne KG</td><td>Ringweg 8</td><td>andere Firma</td></tr>
+          </tbody>
+        </table></div>
+        <p><code>drop_duplicates()</code> findet hier nichts, weil die Zeilen nicht identisch sind. Man braucht einen <b>Ähnlichkeitsvergleich</b> (Schreibweisen vereinheitlichen, „ü“ und „ue“ gleichsetzen, Abkürzungen auflösen) und am Ende eine Entscheidung: zusammenführen oder nicht? Bei Firmenkunden hilft die Steuernummer als eindeutiger Schlüssel.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ausreißer mit der IQR-Regel</span>
+        <p>Die Spalte „Umsatz je Bestellung“ hat Q1 = 300 € und Q3 = 700 €.</p>
+        <ol class="steps">
+          <li><div>IQR: <span class="calcline">700 − 300 = 400</span></div></li>
+          <li><div>Grenzen: <span class="calcline">300 − 1,5 · 400 = −300 · 700 + 1,5 · 400 = 1.300</span></div></li>
+          <li><div>Ein Eintrag von 95.000 € liegt weit darüber – ein Ausreißer. Rückfrage in der Fachabteilung: Tippfehler (950,00 €) oder echte Großbestellung? <span class="result">Erst klären, dann behandeln.</span></div></li>
+        </ol>
+        <p>Optionen bei echten Extremwerten: behalten, auf die Grenze <b>kappen</b> (hier 1.300), oder die Werte <b>logarithmieren</b>, um die Spreizung zu verkleinern.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Formate und Einheiten – die stillen Fehler</span>
+        <ul>
+          <li><b>Datumsformat:</b> „03.04.2026“ ist in Deutschland der 3. April, in den USA (04/03/2026 geschrieben) der 4. März. Mischt man beide, sind einzelne Daten schlicht falsch, ohne dass es auffällt.</li>
+          <li><b>Einheiten:</b> In der Spalte „Gewicht“ stehen 2,5 und 2.500. Meint die zweite Zahl Gramm? Dann ist es kein Ausreißer, sondern eine andere Einheit.</li>
+          <li><b>Logarithmus als Hilfsmittel:</b> <span class="calcline">ln(1 + x)</span> macht aus 100 → 4,6; aus 1.000 → 6,9; aus 1.000.000 → 13,8. Riesige Unterschiede werden zu überschaubaren Abständen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Umsatzwert von 95.000 € fällt bei sonst Werten bis 1.300 € (obere IQR-Grenze) auf. Nennen Sie das Vorgehen und zwei Möglichkeiten der Behandlung.</p>
+        <p><b>Musterlösung:</b> Zuerst fachlich klären, ob Tippfehler oder echter Extremfall (2 Punkte). Tippfehler: korrigieren oder entfernen. Echter Fall: behalten, ggf. kappen oder logarithmieren (je 1,5 Punkte). Alle Entscheidungen dokumentieren.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Kodieren im Detail</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: One-Hot-Encoding Schritt für Schritt</span>
+        <p>Die Spalte „ort“ enthält: Köln, Bonn, Köln, Aachen, Bonn. Es gibt drei Kategorien, also entstehen drei neue Spalten:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>ort</th><th class="r">ist_Köln</th><th class="r">ist_Bonn</th><th class="r">ist_Aachen</th></tr></thead>
+          <tbody>
+            <tr><td>Köln</td><td class="r">1</td><td class="r">0</td><td class="r">0</td></tr>
+            <tr><td>Bonn</td><td class="r">0</td><td class="r">1</td><td class="r">0</td></tr>
+            <tr><td>Köln</td><td class="r">1</td><td class="r">0</td><td class="r">0</td></tr>
+            <tr><td>Aachen</td><td class="r">0</td><td class="r">0</td><td class="r">1</td></tr>
+            <tr><td>Bonn</td><td class="r">0</td><td class="r">1</td><td class="r">0</td></tr>
+          </tbody>
+        </table></div>
+        <p>Lässt man eine Spalte weg (<code>drop="first"</code>, hier „Aachen“), genügen zwei Spalten: Sind beide 0, handelt es sich um Aachen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn es zu viele Kategorien gibt</span>
+        <p>Die Spalte „Postleitzahl“ hat 8.000 verschiedene Werte. One-Hot-Encoding würde <b>8.000 neue Spalten</b> erzeugen; bei 50.000 Kunden sind das <span class="calcline">50.000 · 8.000 = 400 Millionen</span> Zellen, fast alle 0. Alternativen: die PLZ auf die ersten zwei Ziffern (Region) verkürzen, die <b>Häufigkeit</b> der PLZ als Zahl verwenden (Frequency-Encoding) oder die <b>mittlere Kündigungsrate je Region</b> eintragen (Target-Encoding).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Target-Encoding und seine Gefahr</span>
+        <p>Region Nord: 400 Kunden, 40 haben gekündigt (<span class="calcline">10 %</span>). Region Süd: 300 Kunden, 12 gekündigt (<span class="calcline">4 %</span>). Man ersetzt die Region durch diese Quote. Gefährlich: Berechnet man die Quote auf <b>allen</b> Daten inklusive der Testdaten, fließt das Ziel in das Merkmal – das ist Data Leakage (Lektion 15). Die Quote darf nur aus den <b>Trainingsdaten</b> stammen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Die Spalte „Zahlungsart“ hat die Werte PayPal, Rechnung, Karte, Lastschrift, Vorkasse. Wie viele Spalten entstehen mit One-Hot-Encoding, und wie viele, wenn man eine Spalte weglässt? Begründen Sie, warum man nicht einfach 1 bis 5 nummeriert.</p>
+        <p><b>Musterlösung:</b> Fünf Spalten, mit Weglassen vier (2 Punkte). Zahlungsarten haben keine natürliche Reihenfolge (nominal); Nummern würden dem Modell eine Rangfolge und Abstände vortäuschen, z. B. dass Vorkasse „fünfmal so viel“ ist wie PayPal (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Skalieren mit Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: z-Werte und Min-Max an einem einfachen Datensatz</span>
+        <p>Drei Monatseinkommen: 2.000, 3.000 und 4.000 €. Mittelwert 3.000 €, Standardabweichung (Stichprobe) 1.000 €.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Einkommen</th><th class="r">z-Wert (x − 3.000) : 1.000</th><th class="r">Min-Max (x − 2.000) : 2.000</th></tr></thead>
+          <tbody>
+            <tr><td class="r">2.000</td><td class="r">−1</td><td class="r">0</td></tr>
+            <tr><td class="r">3.000</td><td class="r">0</td><td class="r">0,5</td></tr>
+            <tr><td class="r">4.000</td><td class="r">+1</td><td class="r">1</td></tr>
+          </tbody>
+        </table></div>
+        <p>Beide Verfahren machen aus Euro-Beträgen vergleichbare Zahlen: Der z-Wert zeigt den Abstand vom Mittelwert in Standardabweichungen, Min-Max die Position zwischen kleinstem und größtem Wert.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn ein Ausreißer die Min-Max-Skalierung zerstört</span>
+        <p>Die Einkommen lauten 2.000, 3.000, 4.000 und 100.000 €. Mit Min-Max: <span class="calcline">(3.000 − 2.000) : 98.000 ≈ 0,010</span> und <span class="calcline">(4.000 − 2.000) : 98.000 ≈ 0,020</span>. Die ersten drei Werte werden in ein winziges Intervall zwischen 0 und 0,02 gepresst, der Ausreißer bekommt 1. Das Modell kann die ersten drei kaum noch unterscheiden. <b>Gegenmittel:</b> Ausreißer vorher behandeln, robuste Skalierung (Median und IQR) oder Logarithmus verwenden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum es bei kNN so wichtig ist</span>
+        <p>Beim k-Nächste-Nachbarn-Verfahren entscheidet der Abstand zwischen Datenpunkten. Zwei Kunden unterscheiden sich im Alter um 4 Jahre und im Jahresumsatz um 600 €. Ohne Skalierung ist der Abstand <span class="calcline">√(4² + 600²) ≈ 600</span> – das Alter spielt praktisch keine Rolle. Nach der Standardisierung (Alter σ = 10 Jahre, Umsatz σ = 400 €) sind es <span class="calcline">√(0,4² + 1,5²) ≈ 1,55</span>, und <b>beide Merkmale zählen</b>. Bei Entscheidungsbäumen wäre die Skalierung dagegen unnötig, weil sie nur fragen, ob ein Wert größer als eine Schwelle ist.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Das Alter liegt zwischen 20 und 60 Jahren. Berechnen Sie den Min-Max-Wert für 35 Jahre. Nennen Sie ein Verfahren, bei dem man skalieren muss, und eines, bei dem es unnötig ist.</p>
+        <p><b>Musterlösung:</b> (35 − 20) : (60 − 20) = 15 : 40 = 0,375 (2 Punkte). Skalieren nötig: z. B. kNN, k-Means, neuronale Netze (1,5 Punkte). Unnötig: Entscheidungsbäume bzw. Random Forest (1,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Merkmale für ein konkretes Problem entwerfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kündigungsprognose im Fitnessstudio</span>
+        <p>Aus den Rohdaten (Mitglied, Besuchszeitpunkte, Vertrag, Beitrag) entstehen sinnvolle Merkmale:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Neues Merkmal</th><th>Berechnung</th><th>Warum aussagekräftig</th></tr></thead>
+          <tbody>
+            <tr><td>Besuche je Woche (letzte 4 Wochen)</td><td>Zählung der Check-ins</td><td>Aktivität</td></tr>
+            <tr><td>Trend der Besuche</td><td>Besuche letzte 4 Wochen − Besuche davor</td><td>Wer nachlässt, kündigt eher</td></tr>
+            <tr><td>Tage seit letztem Besuch</td><td>Heute − letzter Check-in</td><td>Abstand zum Studio</td></tr>
+            <tr><td>Beitrag je Besuch</td><td>30 € : 8 Besuche = 3,75 € (gegen 30 € : 2 = 15 €)</td><td>Gefühlter Preis</td></tr>
+            <tr><td>Restlaufzeit in Monaten</td><td>Vertragsende − heute</td><td>Kündigung nur zum Ende möglich</td></tr>
+            <tr><td>Altersgruppe</td><td>Alter in Klassen</td><td>robuster als das Rohalter</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Verhältnisse schlagen Rohwerte</span>
+        <p>Ein Auto mit 100.000 km klingt abgenutzt. Ist es 2 Jahre alt, sind es 50.000 km pro Jahr – extreme Nutzung. Ist es 10 Jahre alt, sind es 10.000 km pro Jahr – normal. Das Merkmal <b>km pro Jahr</b> trennt die beiden Fälle, während Alter und Kilometerstand einzeln dies nicht tun.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der Fluch der Dimensionalität in Zahlen</span>
+        <p>Teilt man jedes Merkmal in 10 Wertebereiche, ergeben 2 Merkmale <span class="calcline">10² = 100</span> Zellen, 5 Merkmale <span class="calcline">10⁵ = 100.000</span> Zellen, 10 Merkmale <span class="calcline">10¹⁰ = 10 Milliarden</span> Zellen. Hat man 10.000 Datensätze, kommt bei 10 Merkmalen auf jede Zelle im Mittel <b>0,000001 Datensatz</b>: Der Raum ist fast leer, und jedes Beispiel ist weit von allen anderen entfernt. Deshalb sind wenige, gut gewählte Merkmale oft besser als viele.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Für die Vorhersage von Lieferverzögerungen liegen Bestelldatum, Lieferdatum, Gewicht und Postleitzahl vor. Nennen Sie drei neue Merkmale, die Sie bilden würden.</p>
+        <p><b>Musterlösung:</b> Wochentag der Bestellung (Datum zerlegen); Lieferdauer in Tagen (Differenz zweier Daten); Gewicht je Artikel oder Gewichtsklasse (Binning); Region aus den ersten zwei Ziffern der PLZ. Je genanntem und begründetem Merkmal 2 Punkte (max. 6).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Seltene Klassen in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der nutzlose Wachhund</span>
+        <p>In 10.000 Transaktionen sind 100 Betrugsfälle (1 %). Ein „Modell“, das immer „kein Betrug“ sagt:</p>
+        <ul>
+          <li>Richtig klassifiziert: 9.900 von 10.000 → <b>Accuracy 99 %</b>.</li>
+          <li>Gefundene Betrugsfälle: 0 von 100 → <b>Recall 0 %</b>.</li>
+        </ul>
+        <p>Die Zahl 99 % klingt hervorragend, das Modell ist wertlos. Deshalb nutzt man bei seltenen Klassen Recall, Precision und F1 (Modul 6) statt der Accuracy.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Klassengewichte berechnen</span>
+        <p>Das Training enthält 8.000 Zeilen: 7.920 normal, 80 Betrug. Üblich ist das Gewicht <span class="calcline">n : (Klassenanzahl · Fälle der Klasse)</span>.</p>
+        <ul>
+          <li>Normal: <span class="calcline">8.000 : (2 · 7.920) ≈ 0,505</span></li>
+          <li>Betrug: <span class="calcline">8.000 : (2 · 80) = 50</span></li>
+        </ul>
+        <p>Ein übersehener Betrugsfall wiegt damit etwa 99-mal so schwer wie ein falscher Alarm. Das Modell wird gezwungen, die seltene Klasse ernst zu nehmen, ohne dass man Daten verändern muss.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Under- und Oversampling im Vergleich</span>
+        <ul>
+          <li><b>Undersampling:</b> Aus 7.920 normalen Fällen werden 80 zufällig ausgewählt. Das Training hat dann nur <span class="calcline">80 + 80 = 160</span> Zeilen – ausgewogen, aber 98 % der Daten sind weggeworfen.</li>
+          <li><b>Oversampling:</b> Jeder der 80 Betrugsfälle wird etwa 99-mal kopiert, um auf 7.920 zu kommen. Keine Daten gehen verloren, aber das Modell sieht dieselben 80 Fälle immer wieder und neigt zum Auswendiglernen.</li>
+          <li><b>SMOTE:</b> Statt zu kopieren, erzeugt man neue, ähnliche Betrugsfälle durch Mischen nahe beieinander liegender echter Fälle.</li>
+        </ul>
+        <p>Wichtig: Alle drei Verfahren gehören <b>ausschließlich in das Training</b>, nie in den Testdatensatz.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Bei einer Maschinenüberwachung sind 0,5 % der Messungen Ausfälle. Warum ist eine Accuracy von 99,5 % kein Erfolg, und welche zwei Maßnahmen schlagen Sie vor?</p>
+        <p><b>Musterlösung:</b> Ein Modell, das immer „kein Ausfall“ sagt, erreicht bereits 99,5 % Accuracy, findet aber keinen einzigen Ausfall (2 Punkte). Maßnahmen: Klassengewichte erhöhen oder Over-/Undersampling im Training (2 Punkte); Bewertung mit Recall, Precision und F1 statt Accuracy (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Aufteilen rechnen und planen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: 80 / 10 / 10 bei 5.000 Datensätzen</span>
+        <p>Training: <span class="calcline">5.000 · 0,8 = 4.000</span>. Validierung: <span class="calcline">5.000 · 0,1 = 500</span>. Test: <span class="calcline">500</span>. Hat das Ziel einen Anteil von 4 % (Ausfälle), sind es insgesamt <span class="calcline">5.000 · 0,04 = 200</span> Ausfälle. Stratifiziert enthält der Test davon 4 % von 500 = <b>20</b>. Mit nur 20 Fällen ist das Testergebnis wackelig: Ein einziger Fehler mehr verändert die Trefferquote um 5 Prozentpunkte. Bei wenigen seltenen Fällen lohnt sich deshalb die Kreuzvalidierung (Modul 6).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Zeitreihen richtig aufteilen</span>
+        <p>Ein Händler hat 24 Monate Absatzdaten. Eine zufällige Mischung würde dazu führen, dass das Modell Monate <i>nach</i> dem Testmonat im Training sieht und so „die Zukunft kennt“. Richtig: Training = Monate 1–18, Validierung = Monate 19–21, Test = Monate 22–24. Das spiegelt die Praxis: Das Modell wird mit der Vergangenheit gebaut und muss die Zukunft vorhersagen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Gruppen zusammenhalten</span>
+        <p>Ein Datensatz enthält 12.000 Röntgenbilder von 400 Patienten (im Mittel 30 Bilder je Patient). Mischt man zufällig, landen Bilder desselben Patienten im Training <i>und</i> im Test. Das Modell erkennt dann nicht die Krankheit, sondern den Patienten wieder – die Testergebnisse sind geschönt. Richtig ist die Aufteilung <b>nach Patienten</b>: alle Bilder eines Patienten in denselben Teil.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein Datensatz hat 12.000 Zeilen und wird 70/15/15 aufgeteilt. 3 % der Zeilen gehören zur seltenen Klasse. Wie viele Zeilen enthält jeder Teil, und wie viele seltene Fälle sind im Test, wenn stratifiziert wird?</p>
+        <p><b>Musterlösung:</b> Training 8.400, Validierung 1.800, Test 1.800 (3 Punkte). Seltene Fälle im Test: 1.800 · 0,03 = 54 (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l15-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Leakage aufspüren</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Welche Merkmale sind erlaubt? (Kündigungsprognose am Monatsanfang)</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th>Wann bekannt?</th><th>Urteil</th></tr></thead>
+          <tbody>
+            <tr><td>Vertragslaufzeit bisher</td><td>sofort</td><td>erlaubt</td></tr>
+            <tr><td>Support-Anrufe der letzten 3 Monate</td><td>sofort</td><td>erlaubt</td></tr>
+            <tr><td>Tarif</td><td>sofort</td><td>erlaubt</td></tr>
+            <tr><td>„Kündigungsbestätigung versendet“</td><td>erst nach der Kündigung</td><td><b>Leakage</b></td></tr>
+            <tr><td>„Router zurückgeschickt“</td><td>erst nach der Kündigung</td><td><b>Leakage</b></td></tr>
+            <tr><td>Rückholangebot gesendet</td><td>erst nach der Kündigung</td><td><b>Leakage</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Faustregel: Alles, was <b>nach</b> dem Vorhersagezeitpunkt entsteht oder <b>durch</b> das Ergebnis ausgelöst wird, darf kein Merkmal sein.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Vorverarbeitungs-Leakage mit Zahlen</span>
+        <p>Training: 10, 20, 30 (Mittelwert 20). Test: 90. Berechnet man den Mittelwert aus allen vier Werten, erhält man <span class="calcline">(10 + 20 + 30 + 90) : 4 = 37,5</span>. Der Wert 90 aus dem Testdatensatz hat den Mittelwert beeinflusst – das Modell „weiß“ etwas über die Testdaten, obwohl es sie nie sehen sollte. Richtig: Mittelwert nur aus dem Training (20) lernen und dann damit den Test transformieren.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das Modell, das zu gut war</span>
+        <p>Ein Modell sagt Zahlungsausfälle mit 99,8 % Treffsicherheit voraus. Beim Nachsehen zeigt sich: Das wichtigste Merkmal ist „Mahnstufe“. Mahnungen gibt es aber erst, <i>nachdem</i> eine Zahlung ausgeblieben ist. Das Modell hat nicht die Zukunft vorhergesagt, sondern abgelesen, was schon passiert war. Im echten Einsatz, wo die Mahnstufe noch nicht existiert, wäre es nutzlos.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie den Begriff Data Leakage, nennen Sie zwei Ursachen und ein Warnsignal.</p>
+        <p><b>Musterlösung:</b> Data Leakage heißt, dass dem Modell beim Training Informationen zur Verfügung stehen, die es bei der echten Vorhersage nicht hätte; die Testergebnisse sind dann zu gut (2 Punkte). Ursachen: Merkmale, die erst nach dem Ereignis bekannt sind; Skalierer, Imputer oder Merkmalsauswahl auf allen Daten angepasst; zufälliges Mischen von Zeitreihen; Dubletten über Training und Test (je 1 Punkt, max. 2). Warnsignal: Ergebnis „zu gut, um wahr zu sein“ oder ein einzelnes dominierendes Merkmal (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l16-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Code lesen und erklären</h3>
+        <p>In der Prüfung genügt es, Code zu lesen und zu erklären. Übersetzen Sie jede Zeile in einen deutschen Satz. Ein Beispiel mit vier Kunden:</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Filtern und Mittelwert in pandas</span>
+        <pre class="code">import pandas as pd
+df = pd.DataFrame({"alter":  [25, 34, 41, 52],
+                   "umsatz": [300, 450, 900, 1200]})
+
+aeltere = df[df["alter"] &gt; 30]        # nur Zeilen mit Alter über 30
+print(aeltere["umsatz"].mean())       # Mittelwert ihres Umsatzes</pre>
+        <ol class="steps">
+          <li><div><code>df["alter"] &gt; 30</code> prüft jede Zeile: falsch, wahr, wahr, wahr.</div></li>
+          <li><div>Es bleiben drei Zeilen (34, 41, 52 Jahre) mit Umsatz 450, 900 und 1.200.</div></li>
+          <li><div>Mittelwert: <span class="calcline">(450 + 900 + 1.200) : 3 = 850</span> → <span class="result">Ausgabe: 850.0</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Spalte bereinigen</span>
+        <pre class="code">df["ort"] = df["ort"].str.strip().str.title()</pre>
+        <p><b>Erklärung:</b> <code>str.strip()</code> entfernt Leerzeichen am Anfang und Ende, <code>str.title()</code> schreibt jedes Wort mit großem Anfangsbuchstaben. Aus „ köln “ und „KÖLN“ wird einheitlich „Köln“. Das Ergebnis wird in dieselbe Spalte zurückgeschrieben.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Typische Anfängerfehler</span>
+        <ul>
+          <li><b>= statt ==:</b> <code>if alter = 30</code> ist ein Fehler. Ein einfaches Gleichheitszeichen <i>weist zu</i>, zwei <i>vergleichen</i>: <code>if alter == 30</code>.</li>
+          <li><b>Einrückung vergessen:</b> Nach <code>for …:</code> oder <code>if …:</code> muss der folgende Block eingerückt sein, sonst meldet Python einen Fehler.</li>
+          <li><b>Dezimalkomma:</b> <code>19,99</code> ist in Python keine Zahl, sondern zwei (ein Tupel). Es muss <code>19.99</code> heißen.</li>
+          <li><b>Zählen ab 0:</b> Das erste Element einer Liste hat den Index 0: <code>werte[0]</code>.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie, was die folgenden Zeilen bewirken: <code>df = df.drop_duplicates()</code> und <code>df["alter"].fillna(df["alter"].median())</code>.</p>
+        <p><b>Musterlösung:</b> drop_duplicates entfernt exakt doppelte Zeilen aus der Tabelle (2 Punkte). Die zweite Zeile ersetzt fehlende Werte der Spalte „alter“ durch den Median der vorhandenen Altersangaben (2 Punkte). Hinweis: Den Median nur aus den Trainingsdaten berechnen (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->

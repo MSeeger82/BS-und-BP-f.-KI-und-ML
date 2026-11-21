@@ -1,0 +1,431 @@
+<title>KI-Kurs Modul {{NR}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: Lernbuch mit Kapitel-Leiste links; im Vortragsmodus eine Lektion pro Bildschirm. Diese Datei wird aus kurs/shared/template.html erzeugt. */
+:root {
+  --bg: #f1f4f3;
+  --surface: #ffffff;
+  --surface-2: #e7ecea;
+  --fg: #1c2530;
+  --muted: #5b6874;
+  --line: #d5dddb;
+  --accent: #0f766e;
+  --accent-soft: #d3ece8;
+  --warm: #b45f06;
+  --warm-soft: #fbe8cc;
+  --violet: #5a4bb0;
+  --violet-soft: #e6e2f8;
+  --coral: #c33f4b;
+  --coral-soft: #f8dadd;
+  --ok: #15803d;
+  --bad: #b91c1c;
+  --board: #fafbfa;
+  --code-bg: #1d2731;
+  --code-fg: #e3ebe8;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171b; --surface: #182126; --surface-2: #212c32; --fg: #e5ecea; --muted: #9aa8b0; --line: #2d3a41;
+    --accent: #3cbcaa; --accent-soft: #163a37; --warm: #f2a540; --warm-soft: #3d2c12; --violet: #a397f0; --violet-soft: #2a2550;
+    --coral: #f07f89; --coral-soft: #44222a; --ok: #4ade80; --bad: #f87171; --board: #fafbfa; --code-bg: #0b1014; --code-fg: #e3ebe8; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171b; --surface: #182126; --surface-2: #212c32; --fg: #e5ecea; --muted: #9aa8b0; --line: #2d3a41;
+  --accent: #3cbcaa; --accent-soft: #163a37; --warm: #f2a540; --warm-soft: #3d2c12; --violet: #a397f0; --violet-soft: #2a2550;
+  --coral: #f07f89; --coral-soft: #44222a; --ok: #4ade80; --bad: #f87171; --board: #fafbfa; --code-bg: #0b1014; --code-fg: #e3ebe8; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; }
+h2 { font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+h4 { font-size: 1rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 2px; border-radius: 4px; }
+code { font-family: var(--font-mono); font-size: .88em; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line);
+  padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.topbar-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; max-width: 1240px; margin: 0 auto; }
+.brand { display: flex; flex-direction: column; min-width: 0; margin-right: auto; }
+.brand small { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.brand strong { font-family: var(--font-display); font-size: 1.05rem; }
+.progress { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
+.progress-bar { width: 110px; height: 8px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.progress-bar span { display: block; height: 100%; background: var(--accent); width: 0; transition: width .3s; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 99px; padding: 3px; background: var(--bg); }
+.seg button { border: 0; background: transparent; color: var(--muted); padding: 5px 14px; border-radius: 99px; cursor: pointer; font-weight: 600; font-size: .9rem; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+.toggle { display: inline-flex; align-items: center; gap: 8px; font-size: .9rem; font-weight: 600; color: var(--muted); cursor: pointer; }
+.toggle input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+.shell { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px; max-width: 1240px; margin: 0 auto;
+  padding-block: 28px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px); align-self: start; max-height: calc(100vh - 110px); overflow: auto; }
+.toc h3 { font-size: .78rem; font-family: var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.toc a { display: grid; grid-template-columns: 26px 1fr 16px; gap: 6px; align-items: baseline; text-decoration: none; color: var(--fg); padding: 6px 8px; border-radius: 8px; font-size: .95rem; line-height: 1.3; }
+.toc a:hover { background: var(--surface-2); }
+.toc a.current { background: var(--accent-soft); }
+.toc .n { font-family: var(--font-mono); font-size: .75rem; color: var(--muted); }
+.toc .done { color: var(--accent); font-weight: 700; visibility: hidden; }
+.toc a.is-done .done { visibility: visible; }
+.toc .part { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--warm); padding: 12px 8px 4px; }
+main { min-width: 0; display: grid; gap: 28px; }
+
+.intro { display: grid; gap: 18px; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.intro .eyebrow { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.intro p { max-width: 65ch; color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: .85rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; background: var(--surface-2); color: var(--fg); }
+.legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.legend div { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; }
+.legend i { flex: 0 0 auto; width: 12px; height: 12px; border-radius: 3px; margin-top: 6px; }
+
+.part-head { padding: 8px 4px 0; display: grid; gap: 4px; }
+.part-head span { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--warm); }
+.part-head p { color: var(--muted); max-width: 65ch; }
+
+.lesson { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: grid; gap: 18px; scroll-margin-top: 90px; min-width: 0; }
+.lesson-head { display: grid; gap: 6px; }
+.lesson-head .meta { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.lesson > p, .prose p { max-width: 68ch; }
+.prose { display: grid; gap: 12px; }
+.prose ul, .prose ol, ul.prose, ol.prose { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; max-width: 66ch; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.cols > * { min-width: 0; }
+
+.box { border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; min-width: 0; }
+.box ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.box-label { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; }
+.alltag { background: var(--warm-soft); }
+.alltag .box-label { color: var(--warm); }
+.fach { background: var(--accent-soft); }
+.fach .box-label { color: var(--accent); }
+.merk { border: 2px solid var(--accent); background: var(--surface); }
+.merk .box-label { color: var(--accent); }
+.merk p { font-weight: 600; font-size: 1.08rem; }
+.tipp { background: var(--violet-soft); }
+.tipp .box-label { color: var(--violet); }
+.falle { background: var(--coral-soft); }
+.falle .box-label { color: var(--coral); }
+
+.formula { background: var(--surface-2); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; overflow-x: auto; }
+.formula .box-label { color: var(--muted); }
+.eq { font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif; font-size: 1.35rem; display: flex; flex-wrap: wrap; align-items: center; gap: .35em; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; font-size: .95em; }
+.frac > span:first-child { border-bottom: 1.5px solid currentColor; padding: 0 .3em .05em; }
+.frac > span:last-child { padding: .05em .3em 0; }
+.legend-eq { font-size: .95rem; color: var(--muted); display: grid; gap: 2px; }
+
+.steps { counter-reset: st; display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.steps li { counter-increment: st; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; align-items: start; }
+.steps li::before { content: counter(st); width: 26px; height: 26px; border-radius: 50%; background: var(--warm); color: var(--surface); font-weight: 700; font-size: .85rem; display: grid; place-items: center; margin-top: 2px; }
+.calcline { font-family: var(--font-mono); font-size: .92rem; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; overflow-x: auto; white-space: nowrap; display: inline-block; max-width: 100%; vertical-align: middle; }
+.result { font-weight: 700; color: var(--accent); }
+
+pre.code { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 12px; padding: 14px 16px; overflow-x: auto; font-family: var(--font-mono); font-size: .85rem; line-height: 1.55; }
+pre.code .c { color: #8fb3a8; }
+pre.code .k { color: #f2b56b; }
+pre.code .s { color: #a6d5f5; }
+.code-cap { font-size: .88rem; color: var(--muted); }
+
+figure.board { margin: 0; background: var(--board); border: 1px solid var(--line); border-radius: 14px; padding: 10px; display: grid; gap: 8px; }
+figure.board img { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; border-radius: 8px; }
+figure.board figcaption { font-size: .88rem; color: #4b5763; text-align: center; padding: 0 8px 4px; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--surface-2); font-weight: 700; font-size: .85rem; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: 0; }
+tr.total td { font-weight: 700; background: var(--accent-soft); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; background: var(--bg); }
+.card h3 { font-size: 1rem; }
+.card p { font-size: .93rem; color: var(--muted); }
+
+.flow { display: grid; gap: 10px; }
+.flow-step { display: grid; gap: 8px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.flow-q { font-weight: 700; }
+.flow-a { display: flex; flex-wrap: wrap; gap: 8px; }
+.flow-a span { padding: 4px 12px; border-radius: 99px; font-size: .92rem; font-weight: 600; }
+.yes { background: var(--accent-soft); color: var(--fg); }
+.no { background: var(--surface-2); color: var(--fg); }
+
+.calc { border: 2px dashed var(--accent); border-radius: 14px; padding: 18px; display: grid; gap: 14px; background: var(--surface); }
+.calc .box-label { color: var(--accent); }
+.calc-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+.field { display: grid; gap: 4px; min-width: 0; flex: 1 1 160px; }
+.field label { font-size: .85rem; font-weight: 600; color: var(--muted); }
+.field input[type="text"], .field input[type="number"], .field select, .field textarea { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
+.field input[type="range"] { width: 100%; accent-color: var(--accent); }
+.field output { font-family: var(--font-mono); font-size: .9rem; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+.kpi { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; }
+.kpi span { font-size: .8rem; color: var(--muted); }
+.kpi b { font-family: var(--font-display); font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.calc-note { font-size: .92rem; color: var(--muted); }
+.calc svg { width: 100%; max-width: 560px; height: auto; display: block; }
+.calc svg text { fill: var(--muted); font-size: 11px; font-family: var(--font-body); }
+
+.check { border-top: 1px dashed var(--line); padding-top: 14px; display: grid; gap: 10px; }
+.check-q { font-weight: 600; }
+.check-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { border: 1px solid var(--line); background: var(--bg); color: var(--fg); padding: 7px 14px; border-radius: 10px; cursor: pointer; text-align: left; }
+.opt:hover { border-color: var(--accent); }
+.opt.right { border-color: var(--ok); background: var(--accent-soft); }
+.opt.wrong { border-color: var(--bad); background: var(--coral-soft); }
+
+.notes { border-left: 4px solid var(--violet); background: var(--violet-soft); border-radius: 0 12px 12px 0; padding: 14px 18px; display: grid; gap: 8px; }
+.notes .box-label { color: var(--violet); }
+.notes p { max-width: 70ch; }
+body:not(.show-notes) .notes { display: none; }
+
+.lesson-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+.btn { border: 1px solid var(--accent); background: var(--accent); color: var(--surface); padding: 8px 16px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn[aria-pressed="true"] { background: var(--accent-soft); color: var(--fg); border-color: var(--accent); }
+.btn:disabled { opacity: .55; cursor: default; }
+.btnrow { display: flex; flex-wrap: wrap; gap: 8px; }
+
+details.solution { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--bg); }
+details.solution summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+details.solution[open] summary { margin-bottom: 8px; }
+details.solution > *:not(summary) + * { margin-top: 8px; }
+.task { display: grid; gap: 10px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.task:last-child { border-bottom: 0; }
+.task-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline; }
+.points { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
+
+.quiz-q { display: grid; gap: 10px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.quiz-q fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.quiz-q legend { font-weight: 600; margin-bottom: 6px; padding: 0; }
+.quiz-q label { display: flex; gap: 10px; align-items: flex-start; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; background: var(--bg); }
+.quiz-q label input { margin-top: 5px; accent-color: var(--accent); }
+.quiz-q label.right { border-color: var(--ok); background: var(--accent-soft); }
+.quiz-q label.wrong { border-color: var(--bad); background: var(--coral-soft); }
+.quiz-q .explain { font-size: .95rem; color: var(--muted); }
+.score { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 16px; border-radius: 12px; background: var(--surface-2); }
+.score strong { font-family: var(--font-display); font-size: 1.6rem; }
+
+.present-nav { display: none; }
+body.present .toc, body.present .intro, body.present .part-head { display: none; }
+body.present .shell { grid-template-columns: minmax(0, 1fr); max-width: 1100px; padding-bottom: 110px; }
+body.present .lesson { display: none; font-size: 1.15rem; padding: clamp(20px, 4vw, 44px); }
+body.present .lesson.active { display: grid; }
+body.present .lesson-foot .mark { display: none; }
+body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; justify-content: center; gap: 12px; align-items: center;
+  background: var(--surface); border-top: 1px solid var(--line);
+  padding-block: 10px calc(10px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.present-nav span { font-family: var(--font-mono); font-size: .85rem; color: var(--muted); min-width: 7ch; text-align: center; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .toc { position: static; max-height: none; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .lesson, .intro { padding: 20px; }
+  .eq { font-size: 1.15rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+/* BEGIN uebungen-css */
+/* END uebungen-css */
+</style>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><small>Berufsspezialist/in KI &amp; ML · Kurs</small><strong>Modul {{NR}}: {{TITEL}}</strong></div>
+    <div class="progress" aria-live="polite"><div class="progress-bar"><span id="progressFill"></span></div><span id="progressText">0 / {{LEKTIONEN}}</span></div>
+    <div class="seg" role="group" aria-label="Ansicht">
+      <button type="button" id="modeLearn" aria-pressed="true">Lernen</button>
+      <button type="button" id="modePresent" aria-pressed="false">Vortrag</button>
+    </div>
+    <label class="toggle" for="notesToggle"><input type="checkbox" id="notesToggle"> Sprechertext</label>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Inhalt"><h3>Inhalt</h3><ol id="tocList"></ol></nav>
+  <main id="main">
+{{CONTENT}}
+  </main>
+</div>
+
+<nav class="present-nav" aria-label="Folien">
+  <button type="button" class="btn ghost" id="prevSlide">Zurück</button>
+  <span id="slideCount">1 / 1</span>
+  <button type="button" class="btn" id="nextSlide">Weiter</button>
+</nav>
+
+<script>
+(function () {
+  var store = {
+    get: function (k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var KEY = "ki-kurs-m{{NR}}";
+  var PASS = {{PASS}};
+  var state = store.get(KEY) || { done: [], notes: false };
+
+  var lessons = Array.prototype.slice.call(document.querySelectorAll(".lesson"));
+  var numbered = lessons.filter(function (l) { return /^l\d+$/.test(l.id); });
+  var tocList = document.getElementById("tocList");
+  var lastPart = "";
+  lessons.forEach(function (sec, i) {
+    if (sec.dataset.part && sec.dataset.part !== lastPart) {
+      lastPart = sec.dataset.part;
+      var ph = document.createElement("li"); ph.className = "part"; ph.textContent = lastPart; tocList.appendChild(ph);
+    }
+    var li = document.createElement("li"), a = document.createElement("a");
+    a.href = "#" + sec.id; a.dataset.target = sec.id;
+    var n = /^l(\d+)$/.exec(sec.id);
+    a.innerHTML = '<span class="n">' + (n ? n[1].padStart(2, "0") : "·") + '</span><span></span><span class="done" aria-hidden="true">✓</span>';
+    a.children[1].textContent = sec.dataset.title;
+    li.appendChild(a); tocList.appendChild(li);
+    if (n) {
+      var foot = document.createElement("div"); foot.className = "lesson-foot";
+      var mark = document.createElement("button"); mark.type = "button"; mark.className = "btn ghost mark"; mark.dataset.id = sec.id;
+      foot.appendChild(mark);
+      var next = lessons[i + 1];
+      if (next) { var link = document.createElement("a"); link.href = "#" + next.id; link.textContent = "Weiter: " + next.dataset.title + " →"; foot.appendChild(link); }
+      sec.appendChild(foot);
+    }
+  });
+  function renderDone() {
+    document.querySelectorAll(".mark").forEach(function (b) {
+      var on = state.done.indexOf(b.dataset.id) !== -1;
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.textContent = on ? "Erledigt ✓" : "Als erledigt markieren";
+    });
+    tocList.querySelectorAll("a").forEach(function (a) { a.classList.toggle("is-done", state.done.indexOf(a.dataset.target) !== -1); });
+    var c = numbered.filter(function (l) { return state.done.indexOf(l.id) !== -1; }).length;
+    document.getElementById("progressText").textContent = c + " / " + numbered.length;
+    document.getElementById("progressFill").style.width = (numbered.length ? c / numbered.length * 100 : 0) + "%";
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest(".mark"); if (!b) return;
+    var i = state.done.indexOf(b.dataset.id);
+    if (i === -1) state.done.push(b.dataset.id); else state.done.splice(i, 1);
+    store.set(KEY, state); renderDone();
+  });
+  var notesToggle = document.getElementById("notesToggle");
+  notesToggle.checked = !!state.notes;
+  document.body.classList.toggle("show-notes", notesToggle.checked);
+  notesToggle.addEventListener("change", function () {
+    document.body.classList.toggle("show-notes", notesToggle.checked);
+    state.notes = notesToggle.checked; store.set(KEY, state);
+  });
+  document.querySelectorAll("[data-check]").forEach(function (box) {
+    var fb = box.querySelector(".feedback");
+    box.querySelectorAll(".opt").forEach(function (opt) {
+      opt.addEventListener("click", function () {
+        box.querySelectorAll(".opt").forEach(function (o) { o.classList.remove("right", "wrong"); });
+        var ok = opt.dataset.right === "true";
+        opt.classList.add(ok ? "right" : "wrong");
+        fb.hidden = false; fb.textContent = ok ? fb.dataset.ok : fb.dataset.no;
+      });
+    });
+  });
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && !document.body.classList.contains("present")) {
+          tocList.querySelectorAll("a").forEach(function (a) { a.classList.toggle("current", a.dataset.target === en.target.id); });
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    lessons.forEach(function (l) { io.observe(l); });
+  }
+
+  var idx = 0, btnLearn = document.getElementById("modeLearn"), btnPresent = document.getElementById("modePresent");
+  function show(i) {
+    idx = Math.max(0, Math.min(lessons.length - 1, i));
+    lessons.forEach(function (l, j) { l.classList.toggle("active", j === idx); });
+    document.getElementById("slideCount").textContent = (idx + 1) + " / " + lessons.length;
+    tocList.querySelectorAll("a").forEach(function (a) { a.classList.toggle("current", a.dataset.target === lessons[idx].id); });
+    window.scrollTo(0, 0);
+  }
+  function setMode(present) {
+    document.body.classList.toggle("present", present);
+    btnLearn.setAttribute("aria-pressed", present ? "false" : "true");
+    btnPresent.setAttribute("aria-pressed", present ? "true" : "false");
+    if (present) { var h = location.hash.slice(1), f = lessons.findIndex(function (l) { return l.id === h; }); show(f >= 0 ? f : idx); }
+    else lessons[idx].scrollIntoView();
+  }
+  btnLearn.addEventListener("click", function () { setMode(false); });
+  btnPresent.addEventListener("click", function () { setMode(true); });
+  document.getElementById("prevSlide").addEventListener("click", function () { show(idx - 1); });
+  document.getElementById("nextSlide").addEventListener("click", function () { show(idx + 1); });
+  document.addEventListener("keydown", function (e) {
+    if (!document.body.classList.contains("present")) return;
+    if (e.target.closest("input, textarea, select")) return;
+    if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); show(idx + 1); }
+    if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(idx - 1); }
+    if (e.key === "Escape") setMode(false);
+  });
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest(".lesson-foot a");
+    if (a && document.body.classList.contains("present")) { e.preventDefault(); show(idx + 1); }
+  });
+
+  // Quiz aus <script type="application/json" id="quiz-data">
+  var form = document.getElementById("quizForm");
+  var qd = document.getElementById("quiz-data");
+  if (form && qd) {
+    var Q = JSON.parse(qd.textContent);
+    Q.forEach(function (q, i) {
+      var div = document.createElement("div"); div.className = "quiz-q";
+      var fs = document.createElement("fieldset"), lg = document.createElement("legend");
+      lg.textContent = (i + 1) + ". " + q[0]; fs.appendChild(lg);
+      q[1].forEach(function (opt, j) {
+        var lab = document.createElement("label"), inp = document.createElement("input");
+        inp.type = "radio"; inp.name = "q" + i; inp.value = j; inp.id = "q" + i + "o" + j; lab.htmlFor = inp.id;
+        lab.appendChild(inp); var sp = document.createElement("span"); sp.textContent = opt; lab.appendChild(sp); fs.appendChild(lab);
+      });
+      div.appendChild(fs);
+      var ex = document.createElement("p"); ex.className = "explain"; ex.hidden = true; ex.textContent = q[3]; div.appendChild(ex);
+      form.appendChild(div);
+    });
+    form.addEventListener("submit", function (e) { e.preventDefault(); });
+    document.getElementById("quizCheck").addEventListener("click", function () {
+      var right = 0;
+      Q.forEach(function (q, i) {
+        var sel = form.querySelector('input[name="q' + i + '"]:checked');
+        form.querySelectorAll('input[name="q' + i + '"]').forEach(function (inp) {
+          var lab = inp.parentElement; lab.classList.remove("right", "wrong");
+          if (+inp.value === q[2]) lab.classList.add("right"); else if (inp.checked) lab.classList.add("wrong");
+        });
+        if (sel && +sel.value === q[2]) right++;
+        form.children[i].querySelector(".explain").hidden = false;
+      });
+      var box = document.getElementById("quizScore"); box.hidden = false;
+      document.getElementById("scoreNum").textContent = right + " / " + Q.length;
+      if (window.KursSpeicher) window.KursSpeicher.quiz(right, Q.length);
+      document.getElementById("scoreText").textContent = right >= PASS ? "Gut vorbereitet. Weiter mit dem nächsten Modul." : "Noch nicht sicher. Lesen Sie die Erklärungen und wiederholen Sie die genannten Lektionen.";
+      box.scrollIntoView({ block: "nearest" });
+    });
+    document.getElementById("quizReset").addEventListener("click", function () {
+      form.reset();
+      form.querySelectorAll("label").forEach(function (l) { l.classList.remove("right", "wrong"); });
+      form.querySelectorAll(".explain").forEach(function (p) { p.hidden = true; });
+      document.getElementById("quizScore").hidden = true;
+    });
+  }
+  renderDone();
+})();
+</script>
+
+{{SCRIPTS}}
+<!-- BEGIN uebungen-engine -->
+<!-- END uebungen-engine -->

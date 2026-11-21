@@ -1,0 +1,324 @@
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Wahrscheinlichkeit im Alltag und im Betrieb</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kugeln ziehen – mit und ohne Zurücklegen</span>
+        <p>In einer Urne liegen 5 rote und 3 blaue Kugeln (insgesamt 8). <span class="calcline">P(rot) = 5 : 8 = 62,5 %</span>.</p>
+        <ul>
+          <li><b>Zwei rote hintereinander mit Zurücklegen</b> (die Ziehungen sind unabhängig): <span class="calcline">5/8 · 5/8 = 25/64 ≈ 39,1 %</span></li>
+          <li><b>Zwei rote hintereinander ohne Zurücklegen</b>: Beim zweiten Zug sind nur noch 4 rote von 7 Kugeln übrig. <span class="calcline">5/8 · 4/7 = 20/56 ≈ 35,7 %</span></li>
+        </ul>
+        <p>Der Unterschied zeigt: Ohne Zurücklegen sind die Ziehungen <b>abhängig</b>, die einfache Multiplikation von P(A) und P(B) gilt nur für unabhängige Ereignisse.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mehrere Prüfstationen</span>
+        <p>Ein Fehler in einem Bauteil wird von jeder von drei unabhängigen Prüfstationen mit 80 % Wahrscheinlichkeit gefunden. Wie wahrscheinlich ist es, dass der Fehler <b>mindestens einmal</b> gefunden wird?</p>
+        <ol class="steps">
+          <li><div>Eine Station findet ihn nicht: <span class="calcline">1 − 0,8 = 0,2</span></div></li>
+          <li><div>Alle drei übersehen ihn: <span class="calcline">0,2 · 0,2 · 0,2 = 0,008</span></div></li>
+          <li><div>Mindestens eine findet ihn: <span class="calcline">1 − 0,008 = 0,992</span> → <span class="result">99,2 %</span></div></li>
+        </ol>
+        <p>Das ist die Idee der „mehrfachen Absicherung“: Selbst unvollkommene Prüfungen erreichen zusammen eine hohe Sicherheit – wenn sie wirklich unabhängig voneinander arbeiten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Vierfeldertafel einer Kundenbefragung</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th class="r">Newsletter</th><th class="r">kein Newsletter</th><th class="r">Summe</th></tr></thead>
+          <tbody>
+            <tr><td>Frauen</td><td class="r">90</td><td class="r">90</td><td class="r">180</td></tr>
+            <tr><td>Männer</td><td class="r">30</td><td class="r">90</td><td class="r">120</td></tr>
+            <tr class="total"><td>Summe</td><td class="r">120</td><td class="r">180</td><td class="r">300</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><span class="calcline">P(Newsletter) = 120 : 300 = 40 %</span></li>
+          <li><span class="calcline">P(Newsletter | Frau) = 90 : 180 = 50 %</span> – nur auf die Zeile „Frauen“ schauen</li>
+          <li><span class="calcline">P(Newsletter | Mann) = 30 : 120 = 25 %</span></li>
+          <li><span class="calcline">P(Frau | Newsletter) = 90 : 120 = 75 %</span> – jetzt nur auf die Spalte „Newsletter“ schauen</li>
+        </ul>
+        <p>Die Ergebnisse unterscheiden sich, weil man durch unterschiedliche Gruppen teilt. Genau das ist die „Prüfungsfalle“ oben.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Bei UND <b>addieren</b> statt multiplizieren (oder umgekehrt bei ODER).</li>
+          <li>Unabhängigkeit annehmen, obwohl die Ereignisse zusammenhängen (Ziehen ohne Zurücklegen, zwei Maschinen im selben Stromnetz).</li>
+          <li>Prozente und Bruchzahlen mischen: <span class="calcline">5 % = 0,05</span>, nicht 5.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Maschine A fällt an einem Tag mit 4 %, Maschine B mit 3 % aus (unabhängig). Berechnen Sie die Wahrscheinlichkeit, dass beide ausfallen, und dass mindestens eine ausfällt.</p>
+        <p><b>Musterlösung:</b> Beide: 0,04 · 0,03 = 0,0012 = 0,12 % (3 Punkte). Keine fällt aus: 0,96 · 0,97 = 0,9312. Mindestens eine: 1 − 0,9312 = 0,0688 = 6,88 % (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Bayes mit Häufigkeiten</h3>
+        <p>Die sichere Methode bleibt immer dieselbe: eine runde Zahl von Fällen annehmen, aufteilen, die Alarme zählen. Zwei weitere Beispiele zum Üben:</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Medizinischer Schnelltest</span>
+        <p>Eine Krankheit hat eine Häufigkeit von 1 %. Der Test erkennt 95 % der Kranken (Trefferquote) und schlägt bei 4 % der Gesunden fälschlich an. Wie sicher ist ein positives Ergebnis?</p>
+        <ol class="steps">
+          <li><div>10.000 Personen annehmen. Krank: <span class="calcline">1 % von 10.000 = 100</span> · gesund: <span class="calcline">9.900</span></div></li>
+          <li><div>Richtig positiv: <span class="calcline">95 % von 100 = 95</span></div></li>
+          <li><div>Falsch positiv: <span class="calcline">4 % von 9.900 = 396</span></div></li>
+          <li><div>Alle positiven Tests: <span class="calcline">95 + 396 = 491</span></div></li>
+          <li><div>Anteil der Kranken unter den Positiven: <span class="calcline">95 : 491 ≈ 0,193</span> → <span class="result">nur etwa 19 %</span></div></li>
+        </ol>
+        <p>Ein positives Testergebnis bedeutet also meist noch keine Krankheit. Deshalb folgt auf einen auffälligen Schnelltest üblicherweise ein genauerer Test.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Betrugserkennung bei Kartenzahlungen</span>
+        <p>0,5 % aller Transaktionen sind Betrug. Das System erkennt 80 % davon und schlägt bei 2 % der normalen Zahlungen fälschlich an. Bei 100.000 Zahlungen:</p>
+        <ul>
+          <li>Betrug: <span class="calcline">500</span> → erkannt: <span class="calcline">400</span></li>
+          <li>Normal: <span class="calcline">99.500</span> → falsche Alarme: <span class="calcline">1.990</span></li>
+          <li>Alarme insgesamt: <span class="calcline">2.390</span>, davon echt: <span class="calcline">400 : 2.390 ≈ 16,7 %</span></li>
+        </ul>
+        <p><b>Was hilft?</b> Halbiert man die Fehlalarmrate auf 1 %, sinken die falschen Alarme auf 995. Dann sind <span class="calcline">400 : 1.395 ≈ 28,7 %</span> der Alarme echt. Eine bessere Trefferquote (z. B. 90 %) hilft viel weniger: <span class="calcline">450 : (450 + 1.990) ≈ 18,4 %</span>. Bei seltenen Ereignissen ist die Fehlalarmrate der entscheidende Hebel.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li><b>Trefferquote mit Sicherheit verwechseln.</b> „Der Test erkennt 95 % der Kranken“ heißt nicht „95 % der Positiven sind krank“.</li>
+          <li><b>Die Grundrate vergessen.</b> Ohne sie ist jede Bayes-Rechnung falsch.</li>
+          <li>Bei der Formel <b>P(B)</b> (alle Alarme) nur die echten Alarme zählen und die falschen vergessen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> 1 % der Mails sind Phishing. Der Filter erkennt 95 % davon und schlägt bei 2 % der normalen Mails an. Wie viel Prozent der Alarme sind echt?</p>
+        <p><b>Musterlösung:</b> Bei 10.000 Mails: 100 Phishing, 9.900 normal (1 Punkt). Echte Alarme: 95 (1 Punkt). Fehlalarme: 2 % von 9.900 = 198 (1 Punkt). Alle Alarme: 293 (1 Punkt). Anteil echter Alarme: 95 : 293 ≈ 32 % (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Verteilungen in der Praxis</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Binomialverteilung – Ausschuss in einer Stichprobe</span>
+        <p>5 % der Teile sind defekt (p = 0,05). Man prüft eine Stichprobe von 10 Teilen (n = 10).</p>
+        <ul>
+          <li><b>Kein defektes Teil:</b> <span class="calcline">0,95¹⁰ ≈ 0,599</span> → etwa 60 %</li>
+          <li><b>Genau ein defektes Teil:</b> <span class="calcline">10 · 0,05 · 0,95⁹ ≈ 0,315</span> → etwa 31,5 %</li>
+          <li><b>Mindestens ein defektes Teil:</b> <span class="calcline">1 − 0,599 ≈ 0,401</span> → etwa 40 %</li>
+        </ul>
+        <p>Erstaunlich: Obwohl nur 5 % der Teile defekt sind, enthält eine Stichprobe von 10 in 40 % der Fälle mindestens ein defektes Teil. Das erklärt, warum Stichprobenprüfungen sorgfältig geplant werden müssen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Poisson-Verteilung – Anrufe in der Hotline</span>
+        <p>Im Mittel gehen 4 Anrufe pro Minute ein (λ = 4). Die Wahrscheinlichkeit für genau <i>k</i> Anrufe ist <span class="calcline">P(k) = λᵏ · e<sup>−λ</sup> : k!</span> (e ≈ 2,718; in der Prüfung wird die Formel gegeben).</p>
+        <ul>
+          <li><b>Kein Anruf in einer Minute:</b> <span class="calcline">P(0) = e⁻⁴ ≈ 0,018</span> → 1,8 %</li>
+          <li><b>Genau zwei Anrufe:</b> <span class="calcline">P(2) = 16 · 0,0183 : 2 ≈ 0,147</span> → 14,7 %</li>
+          <li><b>Mindestens ein Anruf:</b> <span class="calcline">1 − 0,018 ≈ 0,982</span></li>
+        </ul>
+        <p>Mit solchen Zahlen planen Hotlines ihre Besetzung: Wie oft kommen plötzlich zehn Anrufe in einer Minute?</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Gleichverteilung – Wartezeit auf den Bus</span>
+        <p>Ein Bus fährt alle 10 Minuten, Sie erscheinen zu einem zufälligen Zeitpunkt. Jede Wartezeit zwischen 0 und 10 Minuten ist gleich wahrscheinlich. Die Wahrscheinlichkeit, weniger als 2 Minuten zu warten, ist <span class="calcline">2 : 10 = 20 %</span>; die mittlere Wartezeit beträgt 5 Minuten.</p>
+      </div>
+      <div class="prose">
+        <h3>Zuordnung üben</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Situation</th><th>Verteilung</th></tr></thead>
+          <tbody>
+            <tr><td>Anzahl defekter Teile in einer Stichprobe von 50 (Ausschussrate 2 %)</td><td>Binomial</td></tr>
+            <tr><td>Anzahl Störungen pro Monat an einer Anlage</td><td>Poisson</td></tr>
+            <tr><td>Körpergröße erwachsener Personen</td><td>Normal</td></tr>
+            <tr><td>Zufallszahl zwischen 0 und 1</td><td>Gleichverteilung</td></tr>
+            <tr><td>Wie viele Kunden pro Stunde in einer Filiale (selten, zufällig)?</td><td>Poisson</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Bei einem Prozess sind 10 % der Teile Ausschuss. Berechnen Sie die Wahrscheinlichkeit, dass unter 3 zufällig gewählten Teilen genau eines Ausschuss ist.</p>
+        <p><b>Musterlösung:</b> Binomialverteilung mit n = 3, p = 0,1, k = 1 (2 Punkte). Reihenfolgen: 3 (1 Punkt). Eine Reihenfolge: 0,1 · 0,9 · 0,9 = 0,081 (1 Punkt). Zusammen: 3 · 0,081 = 0,243 = 24,3 % (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Größen, Bilder und die Rechenregel</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Wie groß ist die Matrix?</span>
+        <ul>
+          <li>Eine Kundendatei mit <b>1.000 Kunden</b> und <b>12 Merkmalen</b> ist eine Matrix mit 1.000 Zeilen und 12 Spalten: eine <b>1.000 × 12-Matrix</b>, zusammen 12.000 Zahlen.</li>
+          <li>Ein Graustufenfoto mit <b>28 × 28 Pixeln</b> hat 784 Zahlen, als Vektor aufgereiht ein Vektor der Länge 784.</li>
+          <li>Ein Farbfoto mit <b>100 × 100 Pixeln</b> hat drei Farbkanäle: <span class="calcline">100 · 100 · 3 = 30.000 Zahlen</span>.</li>
+        </ul>
+        <p>Das erklärt, warum Bilder viel Rechenleistung brauchen: Schon ein kleines Foto sind Zehntausende Zahlen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Schicht eines neuronalen Netzes ist Matrix mal Vektor</span>
+        <p>Eine Schicht hat zwei Neuronen und bekommt drei Eingaben <i>x</i> = (3, 2, 1). Die Gewichte stehen in einer Matrix, jede Zeile gehört zu einem Neuron:</p>
+        <p><span class="calcline">W = ( 1 0 2 / 0 1 −1 )</span></p>
+        <ol class="steps">
+          <li><div>Neuron 1: <span class="calcline">1 · 3 + 0 · 2 + 2 · 1 = 5</span></div></li>
+          <li><div>Neuron 2: <span class="calcline">0 · 3 + 1 · 2 + (−1) · 1 = 1</span></div></li>
+          <li><div><span class="result">Ergebnis: Vektor (5, 1)</span> – zwei Ausgaben, eine je Neuron.</div></li>
+        </ol>
+        <p>Die Form (2 × 3 mal 3 × 1 ergibt 2 × 1) zeigt: Die Spaltenzahl der Matrix (3) muss zur Länge des Vektors (3) passen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Zeilen und Spalten vertauschen (Transponieren)</span>
+        <p>Aus einer 4 × 3-Matrix (4 Kunden, 3 Merkmale) wird durch Transponieren eine 3 × 4-Matrix (3 Merkmale, 4 Kunden). Die Zahlen bleiben gleich, nur Zeilen und Spalten wechseln. Das braucht man, wenn eine Formel „Merkmale in den Zeilen“ erwartet.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Matrix und Vektor multiplizieren wollen, obwohl die Größen nicht passen (3 Spalten, aber ein Vektor mit 2 Einträgen).</li>
+          <li>Zeilen und Spalten verwechseln: Im ML stehen die <b>Beispiele in den Zeilen</b>, die Merkmale in den Spalten.</li>
+          <li>Annehmen, Matrizen seien nur etwas für Mathematiker: Jede Tabelle in Excel ist eine Matrix.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Eine Matrix mit den Zeilen (1, 2) und (3, 4) wird mit dem Vektor (5, 6) multipliziert. Berechnen Sie das Ergebnis und geben Sie die Größe an.</p>
+        <p><b>Musterlösung:</b> Zeile 1: 1 · 5 + 2 · 6 = 17. Zeile 2: 3 · 5 + 4 · 6 = 39 (je 2 Punkte). Ergebnis: Vektor (17, 39) mit zwei Einträgen; eine 2 × 2-Matrix mal ein 2er-Vektor ergibt einen 2er-Vektor (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Skalarprodukt als Bewertungsformel und der Abstand mit Skalierung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Bewerberauswahl mit Gewichten</span>
+        <p>Drei Kriterien werden bewertet: Erfahrung, Fachtest, Interview. Die Gewichte sind 0,5, 0,3 und 0,2. Eine Bewerberin erreicht 80, 90 und 70 Punkte.</p>
+        <p><span class="calcline">0,5 · 80 + 0,3 · 90 + 0,2 · 70 = 40 + 27 + 14 = 81 Punkte</span></p>
+        <p>Das ist ein Skalarprodukt aus dem Gewichtsvektor (0,5; 0,3; 0,2) und dem Punktevektor (80, 90, 70). Das Neuron eines Netzes rechnet nichts anderes: Es bewertet seine Eingaben mit Gewichten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein Neuron mit drei Eingaben</span>
+        <p>Eingaben <i>x</i> = (2, 1, 3), Gewichte <i>w</i> = (0,4; −0,5; 0,2), Bias <i>b</i> = 0,3.</p>
+        <p><span class="calcline">z = 0,4 · 2 + (−0,5) · 1 + 0,2 · 3 + 0,3 = 0,8 − 0,5 + 0,6 + 0,3 = 1,2</span></p>
+        <p>Ein negatives Gewicht bedeutet: Diese Eingabe wirkt dämpfend, je größer sie ist, desto kleiner <i>z</i>.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Abstand vor und nach dem Skalieren</span>
+        <p>Kunde A: 30 Jahre, 5 Käufe, 300 € Umsatz. Kunde B: 34 Jahre, 8 Käufe, 900 € Umsatz.</p>
+        <ol class="steps">
+          <li><div><b>Ohne Skalierung:</b> <span class="calcline">√(4² + 3² + 600²) = √(16 + 9 + 360.000) ≈ 600</span>. Der Umsatz dominiert völlig, Alter und Käufe spielen keine Rolle.</div></li>
+          <li><div><b>Skaliert</b> (jede Differenz durch die Standardabweichung des Merkmals geteilt: Alter 10, Käufe 3, Umsatz 400): <span class="calcline">4 : 10 = 0,4 · 3 : 3 = 1 · 600 : 400 = 1,5</span></div></li>
+          <li><div>Abstand: <span class="calcline">√(0,4² + 1² + 1,5²) = √(0,16 + 1 + 2,25) = √3,41 ≈ 1,85</span> – jetzt tragen alle drei Merkmale in angemessener Weise bei.</div></li>
+        </ol>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Berechnen Sie das Skalarprodukt und die euklidische Distanz der Vektoren a = (2, 1, 3) und b = (1, 4, 0).</p>
+        <p><b>Musterlösung:</b> Skalarprodukt: 2 · 1 + 1 · 4 + 3 · 0 = 6 (3 Punkte). Distanz: Differenzen 1, −3, 3; Quadrate 1, 9, 9; Summe 19; Wurzel √19 ≈ 4,36 (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l15-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Texte mit Wortzählung vergleichen</h3>
+        <p>Der einfachste Weg, einen Text in einen Vektor zu verwandeln, ist das Zählen von Wörtern. Betrachten wir drei Mini-Dokumente und die drei Wörter „Auto“, „kaufen“, „Haus“:</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Drei Dokumente, drei Vektoren</span>
+        <ul>
+          <li><b>Dokument A:</b> „Auto kaufen Auto“ → Vektor (2, 1, 0)</li>
+          <li><b>Dokument B:</b> „Haus kaufen“ → Vektor (0, 1, 1)</li>
+          <li><b>Dokument C:</b> „Auto kaufen“ → Vektor (1, 1, 0)</li>
+        </ul>
+        <ol class="steps">
+          <li><div>A mit C: Skalarprodukt <span class="calcline">2 · 1 + 1 · 1 + 0 · 0 = 3</span>; Längen <span class="calcline">|A| = √5 ≈ 2,24 · |C| = √2 ≈ 1,41</span>; <span class="calcline">3 : (2,24 · 1,41) ≈ 0,95</span> → <span class="result">sehr ähnlich</span></div></li>
+          <li><div>A mit B: Skalarprodukt <span class="calcline">2 · 0 + 1 · 1 + 0 · 1 = 1</span>; <span class="calcline">1 : (2,24 · 1,41) ≈ 0,32</span> → nur schwach ähnlich (gemeinsam ist nur „kaufen“)</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Länge ist egal</span>
+        <p>Ein langer Artikel mit dreimal so vielen Wörtern, aber demselben Verhältnis der Themen, hat den Vektor (6, 3, 0) statt (2, 1, 0). Beide zeigen in dieselbe Richtung, die Kosinus-Ähnlichkeit ist 1. Man vergleicht also, <b>worum</b> es geht, nicht <b>wie viel</b> geschrieben wurde.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Warum nicht einfach den Abstand nehmen?</span>
+        <p>Der euklidische Abstand zwischen (2, 1, 0) und (6, 3, 0) beträgt √(16 + 4) ≈ 4,5 – groß, obwohl beide dasselbe Thema behandeln. Die Kosinus-Ähnlichkeit sagt zu Recht „identisch in der Richtung“. Bei Texten, die unterschiedlich lang sind, ist sie deshalb besser geeignet.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Kosinus und Winkel verwechseln: Der <b>Kosinus</b> liegt zwischen −1 und +1; der Winkel in Grad.</li>
+          <li>Die Längen im Nenner vergessen – dann hängt das Ergebnis von der Textlänge ab.</li>
+          <li>Annehmen, dass 0 „keine Ähnlichkeit“ und −1 „Gegenteil im Sinn“ heißt: Bei Wortzählungen sind alle Werte ≥ 0, der Kosinus bleibt zwischen 0 und 1.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Berechnen Sie die Kosinus-Ähnlichkeit von a = (1, 2, 2) und b = (2, 1, 2).</p>
+        <p><b>Musterlösung:</b> Skalarprodukt: 1 · 2 + 2 · 1 + 2 · 2 = 8 (2 Punkte). Längen: |a| = √(1 + 4 + 4) = 3 und |b| = √(4 + 1 + 4) = 3 (2 Punkte). Kosinus: 8 : 9 ≈ 0,89, also sehr ähnlich (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l16-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Ableiten üben und deuten</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Das Minimum einer Kostenfunktion finden</span>
+        <p>Die Kosten eines Betriebs in Abhängigkeit von der Auslastung <i>x</i> (in 10 %) betragen <i>K</i>(<i>x</i>) = <i>x</i>² − 8<i>x</i> + 20. Wo sind sie am niedrigsten?</p>
+        <ol class="steps">
+          <li><div>Ableitung: <span class="calcline">K′(x) = 2x − 8</span></div></li>
+          <li><div>Dort, wo die Steigung 0 ist, liegt das Minimum: <span class="calcline">2x − 8 = 0 → x = 4</span></div></li>
+          <li><div>Kosten dort: <span class="calcline">K(4) = 16 − 32 + 20 = 4</span> → <span class="result">Minimum bei x = 4 mit Kosten 4</span></div></li>
+        </ol>
+        <p>Das ist der Grundgedanke beim Training: Man sucht den Punkt, an dem die Steigung des Fehlers null ist.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Mehrere Regeln kombiniert</span>
+        <p><i>f</i>(<i>x</i>) = <i>x</i>³ + 2<i>x</i>. Mit Potenz- und Summenregel: <span class="calcline">f′(x) = 3x² + 2</span>. Steigung an der Stelle 2: <span class="calcline">f′(2) = 3 · 4 + 2 = 14</span>. An der Stelle −1: <span class="calcline">f′(−1) = 3 · 1 + 2 = 5</span>. Beide positiv: Die Funktion steigt an beiden Stellen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Das Vorzeichen deuten</span>
+        <p>Für <i>f</i>(<i>x</i>) = <i>x</i>² ist <i>f</i>′(<i>x</i>) = 2<i>x</i>. Bei <i>x</i> = −2 ist die Steigung −4 (die Kurve fällt, man geht nach rechts bergab). Bei <i>x</i> = 0 ist sie 0 (Talsohle). Bei <i>x</i> = 2 ist sie +4 (die Kurve steigt). Das Vorzeichen zeigt die Richtung, der Betrag die Steilheit. Beim Gradientenabstieg geht man gegen das Vorzeichen: Ist die Steigung positiv, verkleinert man <i>x</i>; ist sie negativ, vergrößert man es.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Bei der Potenzregel den Exponenten nicht um 1 verringern: <span class="calcline">x³ → 3x²</span>, nicht 3x³.</li>
+          <li>Konstanten falsch ableiten: <span class="calcline">7 → 0</span>.</li>
+          <li>Vergessen, dass die Ableitung ein <b>Rechenwerkzeug</b> ist: In der Prüfung muss man erklären können, wozu sie nützt (Richtung der Verbesserung).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Bilden Sie die Ableitung von f(x) = 4x³ − 2x + 7 und berechnen Sie die Steigung an der Stelle x = 1.</p>
+        <p><b>Musterlösung:</b> Ableitung: f′(x) = 12x² − 2 (3 Punkte: je Summand 1). Steigung bei x = 1: 12 · 1 − 2 = 10 (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l17-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Wie sich Ausreißer auf die Fehlermaße auswirken</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: MAE und MSE im Vergleich</span>
+        <p>Wahre Werte 10, 20, 30, 40. Vorhersagen: 11, 19, 31, 60. Die Fehler sind 1, 1, 1 und 20 (ein grober Ausreißer).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Maß</th><th>Rechnung</th><th class="r">Ergebnis</th></tr></thead>
+          <tbody>
+            <tr><td>MAE</td><td>(1 + 1 + 1 + 20) : 4</td><td class="r">5,75</td></tr>
+            <tr><td>MSE</td><td>(1 + 1 + 1 + 400) : 4</td><td class="r">100,75</td></tr>
+            <tr><td>RMSE</td><td>√100,75</td><td class="r">≈ 10,04</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Ausreißer macht <b>fast den gesamten MSE</b> aus (400 von 403): Quadrieren bestraft große Fehler überproportional. Wenn grobe Fehler besonders teuer sind (z. B. Fehlprognosen bei Medikamentenmengen), ist das gewollt. Wenn sie eher Messfehler sind, ist der MAE robuster.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Zwei Modelle vergleichen</span>
+        <p>Zwei Modelle sagen Wohnungsmieten vorher. Modell A hat einen RMSE von 45 €, Modell B von 62 €. <b>A ist im Mittel genauer</b>, denn der typische Fehler (gemessen in Euro, wie die Mieten selbst) ist kleiner. Der Vorteil des RMSE: Er hat dieselbe Einheit wie die vorhergesagte Größe und lässt sich in Worten deuten („Die Vorhersage liegt typischerweise etwa 45 € daneben“).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Verlust als Navigationshilfe</span>
+        <p>Im Training berechnet der Computer nach jeder Runde den Verlust: Runde 1: 90, Runde 2: 55, Runde 3: 30, Runde 4: 18. Er sinkt – das Modell lernt. Steigt der Verlust plötzlich wieder an, deutet das auf ein Problem hin (zum Beispiel eine zu große Lernrate, Lektion 18). Die Verlustkurve ist das wichtigste „Fieberthermometer“ beim Training.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Wahre Werte 5, 8, 11. Vorhersagen 6, 8, 9. Berechnen Sie MAE, MSE und RMSE.</p>
+        <p><b>Musterlösung:</b> Fehler: −1, 0, 2 (1 Punkt). MAE = (1 + 0 + 2) : 3 = 1 (2 Punkte). MSE = (1 + 0 + 4) : 3 ≈ 1,67 (2 Punkte). RMSE = √1,67 ≈ 1,29 (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l18-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Der Einfluss der Lernrate und der Weg zum Training im Großen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Lernrate 0,5 – sofort am Ziel</span>
+        <p>Dieselbe Aufgabe wie oben, <i>L</i>(<i>w</i>) = (<i>w</i> − 3)², Start <i>w</i> = 0. Mit η = 0,5: Steigung <span class="calcline">2 · (0 − 3) = −6</span>, neues Gewicht <span class="calcline">w = 0 − 0,5 · (−6) = 3</span>. Schon nach <b>einem</b> Schritt steht das Gewicht auf dem Minimum. Das gelingt nur bei dieser einfachen Parabel; in der Praxis sind die Landschaften viel komplizierter.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Lernrate 0,9 – es zappelt</span>
+        <ol class="steps">
+          <li><div>Schritt 1: Steigung −6, <span class="calcline">w = 0 − 0,9 · (−6) = 5,4</span>, Fehler <span class="calcline">(5,4 − 3)² = 5,76</span></div></li>
+          <li><div>Schritt 2: Steigung <span class="calcline">2 · (5,4 − 3) = 4,8</span>, <span class="calcline">w = 5,4 − 0,9 · 4,8 = 1,08</span>, Fehler 3,69</div></li>
+          <li><div>Schritt 3: Steigung <span class="calcline">2 · (1,08 − 3) = −3,84</span>, <span class="calcline">w = 1,08 + 3,456 = 4,536</span>, Fehler 2,36</div></li>
+        </ol>
+        <p>Das Gewicht springt von 0 auf 5,4, dann auf 1,08, dann auf 4,5 – es überspringt das Minimum bei 3 jedes Mal, nähert sich aber langsam an. Der Fehler sinkt noch, doch viel unruhiger als mit η = 0,1.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Epochen und Batches im Training</span>
+        <p>Ein Modell wird mit 1.000 Datensätzen trainiert. Es nutzt Mini-Batches mit 100 Beispielen. Pro Durchlauf durch alle Daten (<b>Epoche</b>) gibt es <span class="calcline">1.000 : 100 = 10</span> Gewichts-Updates. Nach 20 Epochen sind es 200 Updates. Große Sprachmodelle machen Millionen solcher Updates mit Milliarden Gewichten – das Prinzip ist aber dasselbe wie hier mit einem einzigen Gewicht.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li><b>Vorzeichen vertauschen:</b> Es heißt „<i>w</i> minus η mal Steigung“, nicht plus.</li>
+          <li><b>Lernrate zu groß wählen</b> und sich über steigenden Fehler wundern.</li>
+          <li><b>Annehmen, das Verfahren finde immer das tiefste Tal.</b> Es findet ein lokales Minimum; deshalb startet man oft mehrfach oder nutzt Optimierer wie Adam.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (7 Punkte):</b> L(w) = (w − 5)², Startwert w = 1. Führen Sie einen Schritt des Gradientenabstiegs mit η = 0,25 durch. Was passiert bei η = 1,1?</p>
+        <p><b>Musterlösung:</b> Ableitung L′(w) = 2(w − 5); bei w = 1: −8 (2 Punkte). Neues Gewicht: 1 − 0,25 · (−8) = 3 (2 Punkte); der Fehler sinkt von 16 auf 4 (1 Punkt). Bei η = 1,1: w = 1 + 8,8 = 9,8; der Fehler beträgt (9,8 − 5)² = 23,04 und ist größer als vorher (16): Die Lernrate ist zu groß, das Verfahren divergiert (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->

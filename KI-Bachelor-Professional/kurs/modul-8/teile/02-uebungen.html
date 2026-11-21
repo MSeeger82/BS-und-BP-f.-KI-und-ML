@@ -1,0 +1,156 @@
+    <!-- Übungen -->
+    <section class="lesson" id="uebungen" data-title="Übungen">
+      <div class="lesson-head"><span class="meta">Übungen · 120 Minuten</span><h2>Übungen mit Musterlösung</h2></div>
+      <p>Tragen Sie Ihre Antworten in die Felder ein. Der Rechner in Lektion 8 hilft bei Durchlaufzeiten und Personalbedarf.</p>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 1: Prozess oder Projekt?</h3><span class="points">3 Punkte</span></div>
+        <p>1. Monatlicher Rechnungsversand. 2. Einführung eines KI-Chatbots im Kundenservice. 3. Bearbeitung eingehender Reklamationen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Prozess · 2. Projekt · 3. Prozess. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 2: Prozessarten</h3><span class="points">4 Punkte</span></div>
+        <p>Ordnen Sie zu (Kern-, Unterstützungs- oder Managementprozess): 1. Lohnabrechnung. 2. Montage der Produkte. 3. Jahresplanung. 4. IT-Support.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Unterstützung · 2. Kern · 3. Management · 4. Unterstützung. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 3: SMART-Ziel</h3><span class="points">4 Punkte</span></div>
+        <p>Formulieren Sie ein SMART-Ziel für den Einsatz eines KI-Assistenten im Kundenservice eines Versandhändlers.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Beispiel: „Bis 31.12.2027 beantwortet der KI-Assistent 40 % der Kundenanfragen zu Lieferstatus und Rücksendung ohne Weiterleitung; die durchschnittliche Erstantwortzeit sinkt von 18 auf 2 Stunden, bei einer Kundenzufriedenheit von mindestens 4,2 von 5.“ Spezifisch, messbar, realistisch, terminiert und mit Qualitätskennzahl (4 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 4: BPMN-Symbole</h3><span class="points">4 Punkte</span></div>
+        <p>Was bedeutet: 1. Raute mit X 2. Raute mit + 3. dicker Kreis 4. gestrichelter Pfeil zwischen zwei Pools?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. exklusives Gateway (genau ein Weg) · 2. paralleles Gateway (alle Wege) · 3. Endereignis · 4. Nachrichtenfluss. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 5: Durchlaufzeit und Effizienz</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Reklamationsfall hat 30 Minuten Bearbeitungszeit, 450 Minuten Wartezeit und 20 Minuten Transport (Weiterleitung). Berechnen Sie Durchlaufzeit und Prozesseffizienz.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Durchlaufzeit 30 + 450 + 20 = <b>500 Minuten</b> (2 P.). Effizienz 30 / 500 = <b>6 %</b> (2 P.) – der Hebel liegt bei den Wartezeiten.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 6: Personalbedarf</h3><span class="points">4 Punkte</span></div>
+        <p>Täglich 480 Fälle mit je 9 Minuten Bearbeitung, 7 produktive Stunden je Person. a) Wie viele Personen werden benötigt (aufrunden)? b) Wie viele, wenn KI die Bearbeitung auf 4 Minuten je Fall senkt?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 480 · 9 / 60 = 72 h; 72 / 7 ≈ 10,3 → <b>11 Personen</b> (2 P.). b) 480 · 4 / 60 = 32 h; 32 / 7 ≈ 4,6 → <b>5 Personen</b> (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 7: Kennzahlen</h3><span class="points">3 Punkte</span></div>
+        <p>Im Monat wurden 2.000 Rechnungen verarbeitet, 1.360 davon ohne manuellen Eingriff; bei 36 Rechnungen gab es Fehlbuchungen. Berechnen Sie Automatisierungsquote und Fehlerquote in %.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Automatisierungsquote 1.360 / 2.000 = <b>68 %</b> (1,5 P.); Fehlerquote 36 / 2.000 = <b>1,8 %</b> (1,5 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 8: EPK-Regel</h3><span class="points">3 Punkte</span></div>
+        <p>In einer EPK folgt auf das Ereignis „Antrag eingegangen“ direkt ein XOR-Verknüpfer mit zwei Funktionen „Antrag genehmigen“ und „Antrag ablehnen“. Was ist falsch, und wie korrigieren Sie es?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Ereignisse können nicht entscheiden; nach einem Ereignis darf keine XOR-/ODER-Verzweigung folgen (1 P.). Korrektur: Funktion „Antrag prüfen“ einfügen, danach XOR mit den Ereignissen „Antrag ist genehmigungsfähig“ / „Antrag ist nicht genehmigungsfähig“, gefolgt von den jeweiligen Funktionen (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 9: Rolle der KI</h3><span class="points">3 Punkte</span></div>
+        <p>Welche Rolle übernimmt die KI? 1. Sie liest Lieferscheine automatisch aus und bucht den Wareneingang. 2. Sie schlägt dem Disponenten eine Tourenreihenfolge vor, er entscheidet. 3. Sie schätzt die Zahl der Retouren für die nächste Woche.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. automatisieren · 2. unterstützen · 3. vorhersagen. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 10: DMAIC</h3><span class="points">5 Punkte</span></div>
+        <p>Ordnen Sie die Tätigkeiten den DMAIC-Phasen zu: 1. Ausschussquote der letzten 12 Monate erheben. 2. Projektauftrag mit Problem und Ziel festlegen. 3. KI-Prüfstation einführen. 4. Regelkarte und Monitoring dauerhaft einrichten. 5. Mit Daten Ursachen des Ausschusses ermitteln.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Measure · 2. Define · 3. Improve · 4. Control · 5. Analyze. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 11: Process Mining</h3><span class="points">4 Punkte</span></div>
+        <p>Welche drei Angaben braucht ein Ereignisprotokoll mindestens? Welcher Process-Mining-Typ prüft, ob der tatsächliche Ablauf vom Soll-Prozess abweicht?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Fall-ID, Aktivität, Zeitstempel (3 P.). Conformance Checking (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 12: Situationsaufgabe Reklamationsprozess</h3><span class="points">8 Punkte</span></div>
+        <p>Die Muster Haushaltsgeräte GmbH erhält 900 Reklamationen pro Monat per E-Mail, Formular und Telefon. Sie werden ausgedruckt, von zwei Abteilungen nacheinander geprüft und dauern im Schnitt 9 Arbeitstage. Kunden beschweren sich über die Dauer. Beschreiben Sie Ihr Vorgehen: Erhebung, Analyse (mit zwei vermuteten Schwachstellen), ein SMART-Ziel, den Einsatz von KI im Soll-Prozess und die Überwachung.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p><b>Erhebung</b> (2 P.): Interviews und Workshop mit beiden Abteilungen, Beobachtung, Auswertung von Zeitstempeln aus Mail- und Ticketsystem (Process Mining), SIPOC und BPMN-Ist-Modell. <b>Analyse</b> (2 P.): Medienbruch durch Ausdrucken, lange Liegezeiten zwischen den Abteilungen, Rückfragen wegen fehlender Angaben, keine Priorisierung. <b>Ziel</b> (1 P.): z. B. „Bis 30.09.2027 sinkt die Durchlaufzeit von 9 auf 3 Arbeitstage bei gleicher oder besserer Kundenzufriedenheit.“ <b>Soll mit KI</b> (2 P.): einheitlicher digitaler Eingang, KI klassifiziert und extrahiert Angaben (Gerät, Fehler, Kaufdatum), prüft Vollständigkeit und fordert Fehlendes automatisch an, priorisiert; Standardfälle mit Freigabe durch Sachbearbeitung, Ausnahmen an Fachleute; parallele statt nacheinander geschaltete Prüfung. <b>Überwachung</b> (1 P.): Kennzahlen Durchlaufzeit, Automatisierungsquote, Fehlerquote, Zufriedenheit; Dashboard, Prozesseigner, Modell-Monitoring.</p>
+        </details>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Aufgabe 12 ist eine typische Teil-2-Situationsaufgabe. Achten Sie darauf, dass erst der Prozess verbessert und dann KI eingesetzt wird.</p>
+      </aside>
+    </section>
+
+    <!-- Quiz -->
+    <section class="lesson" id="quiz" data-title="Abschlussquiz">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 25 Minuten</span><h2>Abschlussquiz Modul 8</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="flow-a"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Wer unter 14 liegt, wiederholt die Lektionen zu den falschen Antworten.</p>
+      </aside>
+    </section>
+
+    <!-- Zusammenfassung -->
+    <section class="lesson" id="summary" data-title="Zusammenfassung">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Prozess</h3><p>wiederkehrend, Auslöser, Ergebnis, Kunde, Eigner.</p></div>
+        <div class="card"><h3>Prozessarten</h3><p>Kern-, Unterstützungs-, Managementprozesse; Prozesslandkarte.</p></div>
+        <div class="card"><h3>Ziele</h3><p>SMART mit Kennzahl, Ausgangs- und Zielwert.</p></div>
+        <div class="card"><h3>Erheben</h3><p>Interview, Workshop, Beobachtung, Dokumente, Daten.</p></div>
+        <div class="card"><h3>Modellieren</h3><p>SIPOC, BPMN 2.0 (Ereignis, Aktivität, Gateway, Lane), EPK.</p></div>
+        <div class="card"><h3>Analysieren</h3><p>Durchlaufzeit, Effizienz, Engpass, Medienbrüche, Verschwendung.</p></div>
+        <div class="card"><h3>KI im Prozess</h3><p>automatisieren, unterstützen, vorhersagen, priorisieren, prüfen.</p></div>
+        <div class="card"><h3>Ressourcen</h3><p>Menge × Zeit / Kapazität; Rechenleistung und Tokens mitplanen.</p></div>
+        <div class="card"><h3>Steuern</h3><p>Kennzahlen im Paar, Monitoring, Audits, Management-Review.</p></div>
+        <div class="card"><h3>Verbessern</h3><p>PDCA, KVP, DMAIC, Lean, Process Mining.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Glossar Modul 8</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+          <tbody>
+            <tr><td>BPMN</td><td>Standardnotation für Geschäftsprozesse</td></tr>
+            <tr><td>DMAIC</td><td>Define, Measure, Analyze, Improve, Control (Six Sigma)</td></tr>
+            <tr><td>Durchlaufzeit</td><td>Zeit vom Start bis zum Ende eines Falls</td></tr>
+            <tr><td>Engpass</td><td>Schritt mit der geringsten Kapazität</td></tr>
+            <tr><td>EPK</td><td>Ereignisgesteuerte Prozesskette</td></tr>
+            <tr><td>Gateway</td><td>Verzweigung oder Zusammenführung in BPMN</td></tr>
+            <tr><td>KVP</td><td>Kontinuierlicher Verbesserungsprozess</td></tr>
+            <tr><td>Medienbruch</td><td>Wechsel des Informationsträgers, z. B. PDF abtippen</td></tr>
+            <tr><td>Process Mining</td><td>Prozessrekonstruktion aus Ereignisprotokollen</td></tr>
+            <tr><td>SIPOC</td><td>Suppliers, Inputs, Process, Outputs, Customers</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Weiter mit Modul 9:</b> Projektmanagement klassisch und agil – KI-Projekte planen, steuern und skalieren.</p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Reihum je eine Karte erklären. Ausblick: Prozesse laufen dauerhaft, KI-Einführungen sind Projekte – darum geht es in Modul 9.</p>
+      </aside>
+    </section>
+<!--SCRIPTS-->

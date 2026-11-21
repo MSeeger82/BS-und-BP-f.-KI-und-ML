@@ -1,0 +1,1008 @@
+<!--META {"nr": 6, "titel": "Modellbewertung, Overfitting und Regularisierung", "lektionen": 15, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 6 von 12 · ca. 18 Lernstunden</span>
+      <h1 id="introTitle">Ist das Modell gut? Ehrlich messen, richtig deuten, Überanpassung vermeiden</h1>
+      <p>Ein Modell, das niemand ehrlich geprüft hat, ist ein Risiko. In diesem Modul lernen Sie alle Kennzahlen, die in der Prüfung vorkommen: Konfusionsmatrix, Accuracy, Precision, Recall, F1, ROC und AUC für Klassifikation sowie MAE, MSE, RMSE und R² für Regression. Sie lernen, Over- und Underfitting zu erkennen, mit Regularisierung gegenzusteuern und Modelle per Kreuzvalidierung fair zu vergleichen. Dieses Modul kommt in fast jeder Prüfung vor.</p>
+      <div class="facts">
+        <span class="chip">15 Lektionen in 4 Teilen</span><span class="chip">6 Animationen</span><span class="chip">3 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4: Evaluierung von KI-Modellen</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b></span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b></span></div>
+        <div><i style="background: var(--warm); border-radius: 50%;"></i><span><b>Rechenweg</b></span></div>
+        <div><i style="background: var(--surface); outline: 2px dashed var(--accent);"></i><span><b>Rechner</b></span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Prüfungsfalle</b></span></div>
+      </div>
+    </section>
+
+    <div class="part-head"><span>Teil A · Lektionen 1–6</span><h2>Klassifikation bewerten</h2></div>
+
+    <section class="lesson" id="l1" data-title="Warum ehrlich messen?" data-part="A · Klassifikation">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 25 Minuten</span><h2>Warum ehrlich messen?</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Wetterdienst, der in der Wüste jeden Tag „Sonne“ vorhersagt, liegt zu 99 % richtig – und ist trotzdem nutzlos, weil er den einen Regentag verpasst, auf den es ankommt. Eine einzige Zahl kann täuschen. Gute Bewertung fragt: Welche Fehler macht das Modell, und was kosten sie?</p>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Drei Grundregeln</span>
+          <ol class="prose"><li>Auf Daten bewerten, die das Modell nie gesehen hat (Validierung, Test).</li><li>Mit einer Baseline vergleichen.</li><li>Die Kennzahl passend zum Geschäftsziel wählen.</li></ol>
+        </div>
+        <div class="box fach"><span class="box-label">Technische und fachliche Kennzahlen</span>
+          <p>Technisch: Recall 0,82. Fachlich: „Wir finden 82 % der Defekte, das spart 140.000 € im Jahr.“ Die Prüfung erwartet beides – und dass Sie das eine in das andere übersetzen können.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Warum eine einzige Zahl täuschen kann</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ein Test mit 90 % „Genauigkeit“</span>
+        <p>Ein Schnelltest wird bei 10.000 Personen eingesetzt, von denen 1 % erkrankt sind (100 Personen). Er erkennt 95 % der Kranken und gibt bei 10 % der Gesunden fälschlich Alarm.</p>
+        <ul>
+          <li>Kranke und erkannt: <span class="calcline">95</span>, übersehen: <span class="calcline">5</span>.</li>
+          <li>Gesunde mit Fehlalarm: <span class="calcline">10 % von 9.900 = 990</span>, richtig unauffällig: <span class="calcline">8.910</span>.</li>
+          <li>Accuracy: <span class="calcline">(95 + 8.910) : 10.000 = 90,05 %</span> – klingt gut.</li>
+          <li>Aber: Von 1.085 Positiven sind nur <span class="calcline">95 : 1.085 ≈ 8,8 %</span> wirklich krank.</li>
+        </ul>
+        <p>Eine Zahl (Accuracy) sagt „90 % richtig“, eine andere (Precision) „nur jeder zwölfte Alarm ist berechtigt“. Welche zählt, hängt vom Ziel ab.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Technische in fachliche Aussage übersetzen</span>
+        <p>Ein Qualitätsmodell hat einen Recall von 0,82. Das Werk hat im Jahr etwa 150 Defekte, jeder verursacht ohne Entdeckung 1.000 € Folgekosten. Übersetzung: <span class="calcline">150 · 0,82 = 123</span> Defekte werden erkannt, <span class="calcline">123 · 1.000 € = 123.000 €</span> Folgekosten werden vermieden; 27 Defekte rutschen weiter durch. Für die Entscheidung der Geschäftsführung ist die Zahl in Euro verständlicher als „0,82“.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die drei Grundregeln im Projekt</span>
+        <ol>
+          <li><b>Ungesehene Daten:</b> Das Modell wird mit den Testdaten geprüft, die beim Training nicht vorkamen.</li>
+          <li><b>Baseline:</b> „Immer kein Defekt“ erreicht 98 %; das Modell mit 98,4 % ist kaum besser – der Vergleich zeigt: Die Accuracy ist hier das falsche Maß.</li>
+          <li><b>Passende Kennzahl:</b> Recall, weil ein übersehener Defekt 1.000 €, ein Fehlalarm nur 20 € kostet.</li>
+        </ol>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie drei Grundregeln der ehrlichen Modellbewertung.</p>
+        <p><b>Musterlösung:</b> Auf Daten bewerten, die das Modell nie gesehen hat (Validierung/Test) (2 Punkte); mit einer Baseline vergleichen (1 Punkt); die Kennzahl passend zum Geschäftsziel und den Kosten der Fehler wählen (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Eine Kennzahl ist nur so gut wie ihre Passung zum Ziel. Immer auf ungesehenen Daten, immer gegen eine Baseline.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fragen Sie: „Welche Fehler wären in Ihrem Betrieb teuer – ein übersehener Fall oder ein Fehlalarm?“ Die Antwort bestimmt die Kennzahl und zieht sich durch das ganze Modul.</p></aside>
+    </section>
+
+    <section class="lesson" id="l2" data-title="Die Konfusionsmatrix" data-part="A · Klassifikation">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 35 Minuten</span><h2>Die Konfusionsmatrix: vier Arten, richtig oder falsch zu liegen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Rauchmelder kann viermal reagieren: Es brennt und er piept (gut). Es brennt und er schweigt (gefährlich). Es brennt nicht und er piept (lästig). Es brennt nicht und er schweigt (gut). Diese vier Fälle sind die Konfusionsmatrix.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/konfusionsmatrix.gif" width="640" height="380" alt="Animation: 30 Bauteile, rot für wirklich defekt, grün für in Ordnung, wandern einzeln in eines von vier Feldern: richtig positiv, falsch negativ, falsch positiv, richtig negativ. Am Ende stehen 8, 2, 3 und 17 in den Feldern und darunter Accuracy, Precision und Recall." loading="lazy">
+        <figcaption>Jede Vorhersage landet in genau einem Feld.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Vorhersage: positiv</th><th>Vorhersage: negativ</th></tr></thead>
+        <tbody>
+          <tr><td><b>Wirklich positiv</b></td><td><b>TP</b> – richtig positiv (Treffer)</td><td><b>FN</b> – falsch negativ (übersehen, Fehler 2. Art)</td></tr>
+          <tr><td><b>Wirklich negativ</b></td><td><b>FP</b> – falsch positiv (Fehlalarm, Fehler 1. Art)</td><td><b>TN</b> – richtig negativ</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box tipp"><span class="box-label">Eselsbrücke</span><p>Der zweite Buchstabe (P/N) sagt, was das <b>Modell</b> vorhergesagt hat. Der erste (T/F) sagt, ob das <b>stimmt</b>. FN = „sagte negativ, und das war falsch“ – also ein übersehener Fall.</p></div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Was „positiv“ ist, muss man festlegen – meist die seltene, gesuchte Klasse (defekt, Betrug, krank). Die Achsen werden in Büchern und Software unterschiedlich angeordnet. Immer zuerst die Beschriftung lesen.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Die Matrix aus einer Liste aufbauen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Acht Mails, vier Felder</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Mail</th><th>Wirklich</th><th>Modell sagt</th><th>Feld</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Spam</td><td>Spam</td><td>TP</td></tr>
+            <tr><td>2</td><td>Spam</td><td>kein Spam</td><td>FN (übersehen)</td></tr>
+            <tr><td>3</td><td>kein Spam</td><td>kein Spam</td><td>TN</td></tr>
+            <tr><td>4</td><td>kein Spam</td><td>Spam</td><td>FP (Fehlalarm)</td></tr>
+            <tr><td>5</td><td>kein Spam</td><td>kein Spam</td><td>TN</td></tr>
+            <tr><td>6</td><td>Spam</td><td>Spam</td><td>TP</td></tr>
+            <tr><td>7</td><td>kein Spam</td><td>kein Spam</td><td>TN</td></tr>
+            <tr><td>8</td><td>Spam</td><td>Spam</td><td>TP</td></tr>
+          </tbody>
+        </table></div>
+        <p>Zählt man: <b>TP = 3, FN = 1, FP = 1, TN = 3</b>. Summe 8. Aus diesen vier Zahlen folgen alle Kennzahlen, zum Beispiel Accuracy = (3 + 3) : 8 = 75 %.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Was „positiv“ bedeutet, ändert die Kennzahlen</span>
+        <p>Beim Bauteil-Beispiel (TP 80, FN 20, FP 30, TN 870) ist „defekt“ die positive Klasse: Precision 72,7 %, Recall 80 %. Definiert man stattdessen „in Ordnung“ als positiv, vertauschen sich die Felder: TP′ = 870, FN′ = 30, FP′ = 20, TN′ = 80. Dann ist Precision′ = 870 : 890 ≈ 97,8 % und Recall′ = 870 : 900 ≈ 96,7 % – beeindruckend klingende Werte, die von der eigentlichen Frage (Defekte finden) ablenken. Deshalb: Die gesuchte, seltene Klasse ist positiv.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Fehler 1. und 2. Art im Alltag</span>
+        <ul>
+          <li><b>Gericht:</b> Einen Unschuldigen verurteilen (FP, Fehler 1. Art) oder einen Schuldigen freisprechen (FN, Fehler 2. Art)?</li>
+          <li><b>Medizin:</b> Gesunde fälschlich behandeln (FP) oder Kranke nicht erkennen (FN)?</li>
+          <li><b>Betrieb:</b> Ein gutes Bauteil aussortieren (FP) oder ein defektes ausliefern (FN)?</li>
+        </ul>
+        <p>Welcher Fehler schwerer wiegt, ist immer eine fachliche Entscheidung.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (4 Punkte):</b> Erklären Sie TP, FP, FN und TN am Beispiel eines Spamfilters.</p>
+        <p><b>Musterlösung:</b> TP: Spam wird als Spam erkannt. FP: eine normale Mail wird fälschlich als Spam eingestuft (Fehlalarm). FN: Spam landet unerkannt im Posteingang (übersehen). TN: eine normale Mail wird korrekt durchgelassen. Je 1 Punkt.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>TP Treffer, FN übersehen, FP Fehlalarm, TN richtig in Ruhe gelassen. Aus diesen vier Zahlen lassen sich alle Kennzahlen berechnen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie die Animation laufen und rufen Sie bei jedem Bauteil das Feld laut. Danach ist die Matrix verankert.</p></aside>
+    </section>
+
+    <section class="lesson" id="l3" data-title="Accuracy, Precision, Recall" data-part="A · Klassifikation">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 50 Minuten</span><h2>Accuracy, Precision, Recall, Spezifität</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Fischer wirft ein Netz aus. <b>Recall</b>: Wie viele der Fische im See hat er gefangen? <b>Precision</b>: Wie viel im Netz ist wirklich Fisch und nicht alte Stiefel? Ein riesiges Netz fängt alle Fische (hoher Recall), aber auch viel Müll (niedrige Precision).</p>
+      </div>
+      <p>Beispiel: Ein Modell prüft 1.000 Bauteile, 100 sind tatsächlich defekt. TP = 80, FN = 20, FP = 30, TN = 870.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kennzahl</th><th>Formel</th><th>Frage dahinter</th><th>Rechnung</th><th class="r">Ergebnis</th></tr></thead>
+        <tbody>
+          <tr><td><b>Accuracy</b></td><td>(TP + TN) / alle</td><td>Wie oft liegt das Modell richtig?</td><td>950 / 1.000</td><td class="r">95,0 %</td></tr>
+          <tr><td><b>Precision</b></td><td>TP / (TP + FP)</td><td>Wenn es „defekt“ sagt – stimmt es?</td><td>80 / 110</td><td class="r">72,7 %</td></tr>
+          <tr><td><b>Recall</b> (Sensitivität)</td><td>TP / (TP + FN)</td><td>Wie viele Defekte werden gefunden?</td><td>80 / 100</td><td class="r">80,0 %</td></tr>
+          <tr><td><b>Spezifität</b></td><td>TN / (TN + FP)</td><td>Wie viele gute Teile werden korrekt durchgelassen?</td><td>870 / 900</td><td class="r">96,7 %</td></tr>
+          <tr><td><b>Falsch-Positiv-Rate</b></td><td>FP / (FP + TN) = 1 − Spezifität</td><td>Wie viele gute Teile lösen Alarm aus?</td><td>30 / 900</td><td class="r">3,3 %</td></tr>
+        </tbody>
+      </table></div>
+      <div class="calc" id="calcCM"><span class="box-label">Rechner: Konfusionsmatrix und Kosten</span>
+        <div class="calc-row">
+          <div class="field"><label for="cmTP">TP</label><input type="number" id="cmTP" value="80" min="0"></div>
+          <div class="field"><label for="cmFN">FN</label><input type="number" id="cmFN" value="20" min="0"></div>
+          <div class="field"><label for="cmFP">FP</label><input type="number" id="cmFP" value="30" min="0"></div>
+          <div class="field"><label for="cmTN">TN</label><input type="number" id="cmTN" value="870" min="0"></div>
+          <div class="field"><label for="cmCFN">Kosten je FN (€)</label><input type="number" id="cmCFN" value="500" min="0"></div>
+          <div class="field"><label for="cmCFP">Kosten je FP (€)</label><input type="number" id="cmCFP" value="20" min="0"></div>
+        </div>
+        <div class="kpis" id="cmOut"></div>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Recall priorisieren, wenn …</span><p>ein übersehener Fall teuer oder gefährlich ist: Krebsvorsorge, Betrug, sicherheitskritische Defekte, Maschinenausfall. FN vermeiden.</p></div>
+        <div class="box fach"><span class="box-label">Precision priorisieren, wenn …</span><p>ein Fehlalarm teuer ist: Spamfilter (wichtige Mail weg), automatische Kontosperrung, teure manuelle Nachprüfung. FP vermeiden.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Alle Kennzahlen an zwei weiteren Fällen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Das Screening mit 1 % Krankheitshäufigkeit</span>
+        <p>TP = 95, FN = 5, FP = 990, TN = 8.910 (10.000 Personen).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kennzahl</th><th>Rechnung</th><th class="r">Ergebnis</th></tr></thead>
+          <tbody>
+            <tr><td>Accuracy</td><td>(95 + 8.910) : 10.000</td><td class="r">90,05 %</td></tr>
+            <tr><td>Precision</td><td>95 : (95 + 990)</td><td class="r">8,8 %</td></tr>
+            <tr><td>Recall</td><td>95 : (95 + 5)</td><td class="r">95,0 %</td></tr>
+            <tr><td>Spezifität</td><td>8.910 : 9.900</td><td class="r">90,0 %</td></tr>
+            <tr><td>Falsch-Positiv-Rate</td><td>990 : 9.900</td><td class="r">10,0 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Recall ist hervorragend, die Precision miserabel: Von elf Alarmen ist nur einer echt. Für eine Vorsorge-Reihenuntersuchung ist das akzeptabel, weil ein zweiter, genauerer Test folgt – für eine automatische Behandlung nicht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Spamfilter</span>
+        <p>1.000 Mails, 200 davon Spam. TP = 190, FN = 10, FP = 20, TN = 780.</p>
+        <ul>
+          <li>Precision: <span class="calcline">190 : 210 ≈ 90,5 %</span> – jede zehnte Spam-Markierung betrifft eine echte Mail.</li>
+          <li>Recall: <span class="calcline">190 : 200 = 95 %</span>.</li>
+          <li>Spezifität: <span class="calcline">780 : 800 = 97,5 %</span>.</li>
+        </ul>
+        <p>Für einen Spamfilter ist die Precision wichtiger, denn eine verlorene wichtige Mail (FP) ist schlimmer als eine durchgerutschte Werbemail (FN).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Welche Kennzahl für welchen Fall?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Anwendung</th><th>Schlimmer ist …</th><th>Daher vor allem …</th></tr></thead>
+          <tbody>
+            <tr><td>Krebs-Früherkennung</td><td>Erkrankte übersehen (FN)</td><td>Recall</td></tr>
+            <tr><td>Automatische Kontosperrung</td><td>Unschuldige sperren (FP)</td><td>Precision</td></tr>
+            <tr><td>Sicherheitskritischer Defekt in Flugzeugteilen</td><td>Defekt übersehen (FN)</td><td>Recall</td></tr>
+            <tr><td>Spamfilter</td><td>wichtige Mail verloren (FP)</td><td>Precision</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> TP = 50, FP = 25, FN = 10, TN = 215. Berechnen Sie Accuracy, Precision und Recall.</p>
+        <p><b>Musterlösung:</b> Accuracy (50 + 215) : 300 = 88,3 % (2 Punkte). Precision 50 : 75 = 66,7 % (2 Punkte). Recall 50 : 60 = 83,3 % (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Precision: Stimmt der Alarm? Recall: Wird alles gefunden? Spezifität: Bleibt Gutes unbehelligt?</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Das Fischernetz-Bild ist das wirksamste Bild für Precision und Recall. Lassen Sie im Rechner die Kosten ändern: Plötzlich ist das Modell mit mehr Fehlalarmen das bessere.</p></aside>
+    </section>
+
+    <section class="lesson" id="l4" data-title="F1-Score und Mehrklassen" data-part="A · Klassifikation">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 40 Minuten</span><h2>F1-Score, F-beta und die Accuracy-Falle</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Eine Schülerin hat in Mathe eine 1 und in Deutsch eine 5. Der Durchschnitt 3 klingt mittelmäßig in Ordnung. Ein Lehrer, der beide Fächer wichtig findet, sagt: „Eine 5 reicht, um durchzufallen.“ Der F1-Score ist dieser strenge Lehrer: Ist Precision oder Recall schlecht, ist auch F1 schlecht.</p>
+      </div>
+      <div class="formula"><span class="box-label">F1-Score (harmonisches Mittel)</span>
+        <div class="eq"><i>F</i><sub>1</sub> = 2 · <span class="frac"><span>Precision · Recall</span><span>Precision + Recall</span></span></div>
+      </div>
+      <h3>Rechenweg: Precision 0,727, Recall 0,8</h3>
+      <ol class="steps"><li><div><span class="calcline">2 · 0,727 · 0,8 / (0,727 + 0,8) = 1,163 / 1,527 ≈ 0,762</span></div></li></ol>
+      <p>Zum Vergleich: Precision 1,0 und Recall 0,1 ergeben einen einfachen Durchschnitt von 0,55, aber F1 = 2 · 0,1 / 1,1 ≈ <b>0,18</b>.</p>
+      <div class="box fach"><span class="box-label">F-beta: Gewichtung verschieben</span>
+        <p>F<sub>β</sub> = (1 + β²) · P · R / (β² · P + R). Mit <b>β = 2</b> zählt der Recall doppelt so viel (Krebsvorsorge), mit <b>β = 0,5</b> die Precision. Beispiel oben: F2 ≈ 0,784.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Die Accuracy-Falle</span><p>Im Beispiel sind 90 % der Teile in Ordnung. Ein Modell, das <b>immer</b> „in Ordnung“ sagt, hat 90 % Accuracy, aber Recall 0 – es findet keinen einzigen Defekt. Bei unbalancierten Daten Accuracy nie allein verwenden.</p></div>
+      <div class="box fach"><span class="box-label">Mehr als zwei Klassen</span>
+        <p>Man berechnet Precision und Recall für jede Klasse („diese Klasse gegen alle anderen“). <b>Macro-Mittel</b>: einfacher Durchschnitt über die Klassen (jede Klasse gleich wichtig). <b>Weighted</b>: gewichtet nach Klassengröße. <b>Micro</b>: alle Einzelentscheidungen zusammengezählt.</p>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: F1, F-beta und Mittelwerte über Klassen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: F1, F2 und F0,5 für dieselben Werte</span>
+        <p>Precision 0,9 und Recall 0,5.</p>
+        <ul>
+          <li>F1: <span class="calcline">2 · 0,9 · 0,5 : (0,9 + 0,5) = 0,9 : 1,4 ≈ 0,643</span></li>
+          <li>F2 (Recall doppelt gewichtet): <span class="calcline">5 · 0,9 · 0,5 : (4 · 0,9 + 0,5) = 2,25 : 4,1 ≈ 0,549</span></li>
+          <li>F0,5 (Precision stärker gewichtet): <span class="calcline">1,25 · 0,9 · 0,5 : (0,25 · 0,9 + 0,5) = 0,5625 : 0,725 ≈ 0,776</span></li>
+        </ul>
+        <p>Das Modell ist präzise, aber findet nur die Hälfte der Fälle. F2 bestraft den schwachen Recall stärker, F0,5 die gute Precision belohnend. Man wählt das F-Maß, das zum Ziel passt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Macro, Weighted und Micro bei drei Klassen</span>
+        <p>Eine Kundenmail wird einer von drei Abteilungen zugeordnet. Der Recall je Klasse: Rechnung 0,9 (100 Mails), Technik 0,8 (100 Mails), Sonderfälle 0,3 (10 Mails).</p>
+        <ul>
+          <li><b>Macro:</b> <span class="calcline">(0,9 + 0,8 + 0,3) : 3 ≈ 0,67</span> – jede Klasse zählt gleich, die schwache Sonderfall-Klasse drückt stark.</li>
+          <li><b>Weighted:</b> <span class="calcline">(90 + 80 + 3) : 210 ≈ 0,82</span> – nach Klassengröße gewichtet.</li>
+          <li><b>Micro:</b> alle Einzelentscheidungen zusammen: 173 von 210 richtig ≈ 0,82.</li>
+        </ul>
+        <p>Der Macro-Wert verrät das Problem bei den Sonderfällen; der Weighted-Wert verdeckt es. Wer seltene Klassen ernst nimmt, schaut auf Macro.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die Accuracy-Falle bei einer Maschinenüberwachung</span>
+        <p>Ein Modell sagt immer „kein Ausfall“. Bei 0,5 % Ausfällen hat es 99,5 % Accuracy, Recall 0 %, Precision nicht definiert (kein einziger Alarm). F1 ist 0. Ein zweites Modell mit 98 % Accuracy findet 70 % der Ausfälle. Für den Betrieb ist offensichtlich das zweite Modell besser, obwohl die Accuracy niedriger ist.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Precision 0,6 und Recall 0,9. Berechnen Sie F1 und erklären Sie, warum man das harmonische statt des einfachen Mittels nimmt.</p>
+        <p><b>Musterlösung:</b> F1 = 2 · 0,6 · 0,9 : (0,6 + 0,9) = 1,08 : 1,5 = 0,72 (3 Punkte). Das harmonische Mittel wird klein, sobald eine der beiden Zahlen klein ist; ein einfaches Mittel würde ein Modell mit sehr schlechter Precision oder sehr schlechtem Recall zu gut bewerten (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>F1 = harmonisches Mittel aus Precision und Recall – nur hoch, wenn beide hoch sind. Bei seltenen Klassen F1 statt Accuracy.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Rechnen Sie das Extrembeispiel 1,0 / 0,1 vor. Der Unterschied zwischen 0,55 und 0,18 zeigt, warum man den harmonischen Mittelwert nimmt.</p></aside>
+    </section>
+
+    <section class="lesson" id="l5" data-title="Schwelle und Kosten" data-part="A · Klassifikation">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 45 Minuten</span><h2>Die Schwelle wählen: Precision gegen Recall abwägen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Am Flughafen-Sicherheitscheck kann man den Metalldetektor empfindlicher stellen. Dann piept er bei jeder Gürtelschnalle (viele Fehlalarme), übersieht aber kaum noch etwas. Unempfindlicher eingestellt geht es schneller, aber gefährliche Dinge rutschen durch. Die Einstellung ist die Schwelle.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/schwelle-precision-recall.gif" width="640" height="380" alt="Animation: Zwei überlappende Verteilungen von Modellwahrscheinlichkeiten, rote schmale Balken für Betrugsfälle, breite Balken für normale Zahlungen. Eine senkrechte Schwelle wandert von 0,8 nach 0,2 und zurück auf 0,5. Rechts steigen und fallen Recall und Precision gegenläufig." loading="lazy">
+        <figcaption>Schwelle nach links: Recall steigt, Precision sinkt. Nach rechts umgekehrt.</figcaption>
+      </figure>
+      <div class="calc" id="calcThr"><span class="box-label">Rechner: Schwelle an 20 bewerteten Zahlungen</span>
+        <div class="calc-row"><div class="field" style="flex-basis:100%"><label for="thrR">Schwelle</label><input type="range" id="thrR" min="0" max="1" step="0.05" value="0.5"><output id="thrOut"></output></div></div>
+        <div class="kpis" id="thrK"></div>
+        <p class="calc-note" id="thrList"></p>
+      </div>
+      <h3>Die Schwelle nach Kosten wählen</h3>
+      <p>Ein übersehener Betrug kostet 500 €, eine unnötige Prüfung 20 €. Bei Schwelle 0,5: FN = 10, FP = 100 → 10 · 500 + 100 · 20 = 7.000 €. Bei Schwelle 0,3: FN = 4, FP = 300 → 2.000 + 6.000 = 8.000 €. Hier ist 0,5 günstiger – obwohl 0,3 mehr Betrug findet. Die beste Schwelle minimiert die <b>Gesamtkosten</b>, nicht einen einzelnen Fehler.</p>
+      <div class="prose">
+        <h3>Weitere Beispiele: Schwellen nach Kosten vergleichen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Drei Schwellen, ein Kostenvergleich</span>
+        <p>Ein übersehener Betrug kostet 500 €, eine unnötige Prüfung 20 €.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Schwelle</th><th class="r">FN</th><th class="r">FP</th><th>Kosten</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0,3</td><td class="r">4</td><td class="r">300</td><td>4 · 500 + 300 · 20 = 8.000 €</td></tr>
+            <tr><td class="r">0,5</td><td class="r">10</td><td class="r">100</td><td>10 · 500 + 100 · 20 = <b>7.000 €</b></td></tr>
+            <tr><td class="r">0,7</td><td class="r">25</td><td class="r">40</td><td>25 · 500 + 40 · 20 = 13.300 €</td></tr>
+          </tbody>
+        </table></div>
+        <p>Bei diesen Kosten ist die Schwelle 0,5 optimal. Weder die strengste (0,7, wenig Fehlalarme) noch die vorsichtigste (0,3, wenig Übersehene) gewinnt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Dieselben Zahlen, andere Kosten</span>
+        <p>Steigt der Schaden pro übersehenem Betrug auf 2.000 € (z. B. weil höhere Beträge gehandelt werden), ändert sich die Rangfolge: Schwelle 0,3 kostet <span class="calcline">4 · 2.000 + 6.000 = 14.000 €</span>, Schwelle 0,5 <span class="calcline">10 · 2.000 + 2.000 = 22.000 €</span>, Schwelle 0,7 <span class="calcline">25 · 2.000 + 800 = 50.800 €</span>. Jetzt ist die niedrige Schwelle 0,3 am günstigsten. Die Kennzahlen des Modells sind dieselben geblieben, nur die <b>Wirtschaftlichkeit</b> hat die Entscheidung gedreht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: So legt man die Schwelle im Projekt fest</span>
+        <ol class="steps">
+          <li><div>Kosten eines FN und eines FP mit der Fachabteilung ermitteln (Schaden, Prüfaufwand).</div></li>
+          <li><div>Auf den <b>Validierungsdaten</b> für mehrere Schwellen FN und FP zählen.</div></li>
+          <li><div>Gesamtkosten je Schwelle berechnen und die günstigste wählen.</div></li>
+          <li><div>Die Wahl begründen, dokumentieren und regelmäßig überprüfen, wenn sich Kosten oder Daten ändern.</div></li>
+        </ol>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein FN kostet 100 €, ein FP 5 €. Bei Schwelle 0,5: FN = 20, FP = 50; bei Schwelle 0,3: FN = 8, FP = 200. Welche Schwelle ist günstiger?</p>
+        <p><b>Musterlösung:</b> 0,5: 20 · 100 + 50 · 5 = 2.250 € (2 Punkte). 0,3: 8 · 100 + 200 · 5 = 1.800 € (2 Punkte). Die Schwelle 0,3 ist günstiger (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Die Schwelle ist eine Geschäftsentscheidung: Kosten eines FN gegen Kosten eines FP. Sie wird auf Validierungsdaten festgelegt.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Mit dem Rechner die Schwelle Schritt für Schritt verschieben und die Liste beobachten: Welche Zahlungen wechseln die Seite? Die Kostenrechnung ist eine typische Prüfungsaufgabe (Übung 4).</p></aside>
+    </section>
+
+    <section class="lesson" id="l6" data-title="ROC und AUC" data-part="A · Klassifikation">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 40 Minuten</span><h2>ROC-Kurve und AUC: alle Schwellen auf einmal</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Statt nur eine Einstellung des Metalldetektors zu testen, testet man alle und trägt jedes Mal auf: Wie viele echte Gefahren wurden erkannt, wie viele Fehlalarme gab es? Diese Kurve zeigt die Güte des Geräts unabhängig von der Einstellung.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/roc-auc.gif" width="640" height="380" alt="Animation: Links wandert eine Schwelle durch die Verteilungen. Rechts entsteht Punkt für Punkt die ROC-Kurve aus Falsch-Positiv-Rate und Richtig-Positiv-Rate. Am Ende wird die Fläche unter der Kurve gefüllt und AUC gleich 0,94 angezeigt." loading="lazy">
+        <figcaption>Jeder Punkt der Kurve ist eine Schwelle. Die Fläche darunter ist die AUC.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th class="r">AUC</th><th>Deutung</th></tr></thead>
+        <tbody>
+          <tr><td class="r">1,0</td><td>perfekte Trennung</td></tr>
+          <tr><td class="r">0,9 – 1,0</td><td>sehr gut</td></tr>
+          <tr><td class="r">0,8 – 0,9</td><td>gut</td></tr>
+          <tr><td class="r">0,7 – 0,8</td><td>brauchbar</td></tr>
+          <tr><td class="r">0,5</td><td>reines Raten (Diagonale)</td></tr>
+          <tr><td class="r">unter 0,5</td><td>schlechter als Raten – Vorhersagen vermutlich vertauscht</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Was AUC bedeutet</span><p>Die Wahrscheinlichkeit, dass das Modell einem zufällig gewählten positiven Fall einen höheren Wert gibt als einem zufällig gewählten negativen. Sie ist unabhängig von der Schwelle.</p></div>
+        <div class="box fach"><span class="box-label">PR-Kurve bei seltenen Klassen</span><p>Bei sehr unbalancierten Daten wirkt die ROC-Kurve oft zu optimistisch, weil die vielen TN die Falsch-Positiv-Rate klein halten. Dann ist die <b>Precision-Recall-Kurve</b> (und ihre Fläche, PR-AUC) aussagekräftiger.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: ROC-Punkte, AUC und die Grenzen bei seltenen Klassen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Drei Punkte einer ROC-Kurve</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Schwelle</th><th class="r">Richtig-Positiv-Rate (Recall)</th><th class="r">Falsch-Positiv-Rate</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0,8</td><td class="r">0,50</td><td class="r">0,02</td></tr>
+            <tr><td class="r">0,5</td><td class="r">0,80</td><td class="r">0,10</td></tr>
+            <tr><td class="r">0,2</td><td class="r">0,95</td><td class="r">0,40</td></tr>
+          </tbody>
+        </table></div>
+        <p>Je niedriger die Schwelle, desto mehr Positive werden erkannt – aber auch desto mehr Fehlalarme. Jeder Punkt wird in ein Diagramm mit der Falsch-Positiv-Rate (waagerecht) und der Richtig-Positiv-Rate (senkrecht) eingetragen. Eine Kurve, die weit nach links oben reicht, gehört zu einem guten Modell. Die Diagonale entspricht Raten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wenn die ROC-Kurve zu gut aussieht</span>
+        <p>Bei 100.000 Fällen sind 1 % positiv (1.000). Ein Modell erreicht TPR 90 % und FPR 5 %: <span class="calcline">TP = 900, FP = 5 % von 99.000 = 4.950</span>. Die ROC sieht gut aus (FPR nur 5 %), aber die Precision beträgt <span class="calcline">900 : (900 + 4.950) ≈ 15 %</span>: Sechs von sieben Alarmen sind falsch. Bei seltenen Klassen zeigt die Precision-Recall-Kurve dieses Problem deutlicher.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was die AUC genau aussagt</span>
+        <p>Eine AUC von 0,94 bedeutet: Wählt man zufällig einen positiven und einen negativen Fall aus, bekommt der positive in 94 % der Fälle den höheren Wert vom Modell. Zwei Modelle lassen sich so vergleichen, ohne eine Schwelle festzulegen. Für den Einsatz braucht man trotzdem eine konkrete Schwelle und die Kosten (Lektion 5).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Was zeigt eine ROC-Kurve, und was bedeutet eine AUC von 0,5?</p>
+        <p><b>Musterlösung:</b> Eine ROC-Kurve zeigt für alle möglichen Schwellen die Richtig-Positiv-Rate gegen die Falsch-Positiv-Rate (3 Punkte). Eine AUC von 0,5 entspricht der Diagonalen: Das Modell ist nicht besser als Raten (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>ROC: Richtig-Positiv-Rate gegen Falsch-Positiv-Rate über alle Schwellen. AUC 0,5 = Raten, 1 = perfekt. Bei seltenen Klassen zusätzlich PR-Kurve.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Betonen Sie: Die AUC ist gut zum Vergleichen von Modellen, aber für den Einsatz braucht man trotzdem eine konkrete Schwelle (Lektion 5).</p></aside>
+    </section>
+
+    <div class="part-head"><span>Teil B · Lektion 7</span><h2>Regression bewerten</h2></div>
+
+    <section class="lesson" id="l7" data-title="Regressionsmetriken" data-part="B · Regression">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 50 Minuten</span><h2>MAE, MSE, RMSE, R² und MAPE</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Schätzspiel auf dem Jahrmarkt: Wie viele Bonbons sind im Glas? Wer im Schnitt 20 danebenliegt, schätzt besser als jemand, der im Schnitt 50 danebenliegt. Bei Zahlenvorhersagen misst man, wie weit die Schätzungen im Durchschnitt danebenliegen.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kennzahl</th><th>Formel in Worten</th><th>Einheit</th><th>Besonderheit</th></tr></thead>
+        <tbody>
+          <tr><td><b>MAE</b></td><td>Mittelwert der Beträge der Fehler</td><td>wie die Zielgröße</td><td>leicht verständlich, robust</td></tr>
+          <tr><td><b>MSE</b></td><td>Mittelwert der quadrierten Fehler</td><td>Einheit²</td><td>bestraft große Fehler stark; Trainingsziel</td></tr>
+          <tr><td><b>RMSE</b></td><td>Wurzel aus MSE</td><td>wie die Zielgröße</td><td>Standardkennzahl für Berichte</td></tr>
+          <tr><td><b>R²</b></td><td>1 − Restfehler / Gesamtstreuung</td><td>ohne Einheit</td><td>Anteil erklärter Streuung; 1 perfekt, 0 wie Mittelwert</td></tr>
+          <tr><td><b>MAPE</b></td><td>Mittelwert der prozentualen Fehler</td><td>%</td><td>vergleichbar über Produkte; unbrauchbar bei Werten nahe 0</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rechenweg: wahre Werte 10, 20, 30 – Vorhersagen 12, 18, 33</h3>
+      <ol class="steps">
+        <li><div>Fehler: <span class="calcline">−2, 2, −3</span> · Beträge: <span class="calcline">2, 2, 3</span> · Quadrate: <span class="calcline">4, 4, 9</span></div></li>
+        <li><div><span class="calcline">MAE = 7 / 3 ≈ 2,33 · MSE = 17 / 3 ≈ 5,67 · RMSE = √5,67 ≈ 2,38</span></div></li>
+        <li><div>R²: Mittelwert 20; Gesamtstreuung <span class="calcline">(10−20)² + 0 + (30−20)² = 200</span> → <span class="calcline">R² = 1 − 17 / 200 = 0,915</span></div></li>
+        <li><div>MAPE: <span class="calcline">(2/10 + 2/20 + 3/30) / 3 = (0,2 + 0,1 + 0,1) / 3 ≈ 13,3 %</span></div></li>
+      </ol>
+      <div class="calc" id="calcReg"><span class="box-label">Rechner: Regressionsmetriken</span>
+        <div class="calc-row">
+          <div class="field"><label for="rgY">Wahre Werte y</label><input type="text" id="rgY" value="10; 20; 30"></div>
+          <div class="field"><label for="rgP">Vorhersagen ŷ</label><input type="text" id="rgP" value="12; 18; 33"></div>
+        </div>
+        <div class="kpis" id="rgOut"></div>
+      </div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Ein MAE von 2,33 ist weder gut noch schlecht – es kommt auf die Größenordnung an. 2,33 € Fehler bei Mieten von 900 € ist hervorragend, bei Preisen von 3 € katastrophal. Deshalb immer mit Baseline und Zielwertbereich vergleichen. Und: R² kann auf Testdaten <b>negativ</b> werden, wenn das Modell schlechter ist als der Mittelwert.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Regressionsmetriken im Vergleich</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Wie ein Ausreißer die Kennzahlen verändert</span>
+        <p>Wahre Werte 10, 20, 30, 40. Vorhersagen: 11, 19, 31, 60.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kennzahl</th><th>Rechnung</th><th class="r">Ergebnis</th></tr></thead>
+          <tbody>
+            <tr><td>MAE</td><td>(1 + 1 + 1 + 20) : 4</td><td class="r">5,75</td></tr>
+            <tr><td>MSE</td><td>(1 + 1 + 1 + 400) : 4</td><td class="r">100,75</td></tr>
+            <tr><td>RMSE</td><td>√100,75</td><td class="r">10,04</td></tr>
+            <tr><td>R²</td><td>1 − 403 : 500 (Gesamtstreuung: 225 + 25 + 25 + 225 = 500)</td><td class="r">0,19</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der eine große Fehler lässt den RMSE auf das Doppelte des MAE steigen und R² von nahe 1 auf 0,19 fallen. Wer große Fehler besonders fürchtet, schaut auf den RMSE.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: MAPE – der prozentuale Fehler und seine Tücke</span>
+        <p>Produkt A: wahr 1.000, Vorhersage 900 (10 % Fehler). Produkt B: wahr 10, Vorhersage 8 (20 % Fehler). MAPE: <span class="calcline">(10 % + 20 %) : 2 = 15 %</span>. Der absolute Fehler ist bei A mit 100 viel größer als bei B mit 2, trotzdem schneidet B prozentual schlechter ab. Bei Werten nahe 0 explodiert die Kennzahl (Division durch fast null). Deshalb prüft man MAE und MAPE gemeinsam.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: R² kann negativ werden</span>
+        <p>Wahre Werte 10, 20, 30 (Mittelwert 20, Gesamtstreuung 200). Ein schlechtes Modell sagt jedes Mal 50 voraus: Fehler 40, 30, 20; Quadrate 1.600, 900, 400, zusammen 2.900. <span class="calcline">R² = 1 − 2.900 : 200 = −13,5</span>. Ein negatives R² heißt: Das Modell ist deutlich schlechter als die einfache Regel „immer der Mittelwert“. So etwas passiert auf Testdaten, wenn ein Modell überangepasst ist.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Wahre Werte 5, 8, 11. Vorhersagen 6, 8, 9. Berechnen Sie MAE, RMSE und R².</p>
+        <p><b>Musterlösung:</b> Fehler −1, 0, 2. MAE = 3 : 3 = 1 (1,5 Punkte). MSE = 5 : 3 ≈ 1,67; RMSE ≈ 1,29 (2 Punkte). Mittelwert 8; Gesamtstreuung 9 + 0 + 9 = 18; R² = 1 − 5 : 18 ≈ 0,72 (2,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>MAE = typischer Fehler, RMSE = typischer Fehler mit Strafe für große Ausreißer, R² = Anteil erklärter Streuung.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Rechnung kam schon in Modul 2 vor – hier wird sie zur Bewertung genutzt. Lassen Sie im Rechner einen großen Ausreißer einbauen und beobachten, dass RMSE stärker reagiert als MAE.</p></aside>
+    </section>
+
+    <div class="part-head"><span>Teil C · Lektionen 8–12</span><h2>Generalisierung: Lernen statt Auswendiglernen</h2></div>
+
+    <section class="lesson" id="l8" data-title="Over- und Underfitting" data-part="C · Generalisierung">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 40 Minuten</span><h2>Overfitting und Underfitting</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Zwei Schüler bereiten sich auf eine Prüfung vor. Der eine lernt nur „irgendwas mit Zahlen“ – er versteht zu wenig (Underfitting). Der andere lernt alle Übungsaufgaben samt Tippfehlern auswendig – in der Prüfung mit neuen Aufgaben versagt er (Overfitting). Gesucht ist der Schüler dazwischen, der das Prinzip verstanden hat.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/overfitting.gif" width="640" height="380" alt="Animation in drei Teilen: Ein Polynom vom Grad 1 ist eine fast gerade Linie und verfehlt die Punkte (Underfitting). Grad 3 folgt dem Verlauf gut. Grad 11 schlängelt sich durch jeden Trainingspunkt, verfehlt aber die Validierungspunkte stark. Rechts Balken für Trainings- und Validierungsfehler." loading="lazy">
+        <figcaption>Zu einfach, passend, zu komplex – erkennbar am Vergleich von Trainings- und Validierungsfehler.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Zustand</th><th>Trainingsfehler</th><th>Validierungsfehler</th><th>Ursache</th><th>Gegenmaßnahmen</th></tr></thead>
+        <tbody>
+          <tr><td><b>Underfitting</b> (hoher Bias)</td><td>hoch</td><td>hoch</td><td>Modell zu einfach, Merkmale fehlen</td><td>komplexeres Modell, mehr/bessere Merkmale, länger trainieren, weniger Regularisierung</td></tr>
+          <tr><td><b>Gute Anpassung</b></td><td>niedrig</td><td>niedrig, nahe am Training</td><td>–</td><td>–</td></tr>
+          <tr><td><b>Overfitting</b> (hohe Varianz)</td><td>sehr niedrig</td><td>deutlich höher</td><td>Modell lernt Rauschen auswendig</td><td>mehr Daten, Regularisierung, einfacheres Modell, Dropout, Early Stopping, Datenaugmentation, weniger Merkmale</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Die Diagnose geht immer über den Vergleich: „Trainings-Accuracy 99 %, Validierung 71 % → großer Abstand → Overfitting.“ Beide schlecht → Underfitting. Nennen Sie danach mindestens drei passende Maßnahmen.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Diagnose von Modellen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Vier Modelle, vier Diagnosen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Modell</th><th class="r">Training</th><th class="r">Validierung</th><th>Diagnose</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td class="r">99 %</td><td class="r">71 %</td><td>Overfitting (Abstand 28 Punkte)</td></tr>
+            <tr><td>B</td><td class="r">65 %</td><td class="r">64 %</td><td>Underfitting (beide schlecht)</td></tr>
+            <tr><td>C</td><td class="r">88 %</td><td class="r">85 %</td><td>gute Anpassung</td></tr>
+            <tr><td>D</td><td class="r">95 %</td><td class="r">60 %</td><td>starkes Overfitting</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Maßnahmen passend wählen</span>
+        <ul>
+          <li><b>Modell A (Overfitting), 2.000 Datensätze:</b> mehr Daten sammeln; Baumtiefe begrenzen oder Regularisierung erhöhen; weniger Merkmale; bei neuronalen Netzen Dropout und Early Stopping.</li>
+          <li><b>Modell B (Underfitting):</b> komplexeres Modell wählen (z. B. Random Forest statt linearer Regression); neue, aussagekräftigere Merkmale bilden (Modul 3); Regularisierung senken; länger trainieren. Mehr Daten allein helfen hier nicht.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Polynomgrad und Fehler</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Grad des Polynoms</th><th class="r">MSE Training</th><th class="r">MSE Validierung</th><th>Deutung</th></tr></thead>
+          <tbody>
+            <tr><td>1 (Gerade)</td><td class="r">25</td><td class="r">27</td><td>zu einfach</td></tr>
+            <tr><td>3</td><td class="r">9</td><td class="r">11</td><td><b>passend</b></td></tr>
+            <tr><td>11</td><td class="r">0,5</td><td class="r">48</td><td>Overfitting: lernt Rauschen</td></tr>
+          </tbody>
+        </table></div>
+        <p>Mit wachsender Komplexität sinkt der Trainingsfehler immer weiter, der Validierungsfehler fällt zunächst und steigt dann wieder. Gewählt wird das Modell mit dem niedrigsten <b>Validierungs</b>fehler.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ein Modell erreicht auf den Trainingsdaten 98 % und auf den Validierungsdaten 74 %. Diagnostizieren Sie das Problem und nennen Sie drei Maßnahmen.</p>
+        <p><b>Musterlösung:</b> Großer Abstand zwischen Training und Validierung: Overfitting (2 Punkte). Maßnahmen: mehr Trainingsdaten; Regularisierung bzw. einfacheres Modell (z. B. begrenzte Baumtiefe); weniger Merkmale; Dropout und Early Stopping bei neuronalen Netzen (je 1 Punkt, max. 3). Begründung bei der Antwort ergänzen (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Großer Abstand zwischen Training und Validierung = Overfitting. Beide schlecht = Underfitting.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Diagnose ist die wohl häufigste Prüfungsaufgabe überhaupt. Lassen Sie die Tabelle als Lernkarte schreiben.</p></aside>
+    </section>
+
+    <section class="lesson" id="l9" data-title="Bias und Varianz" data-part="C · Generalisierung">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 30 Minuten</span><h2>Der Bias-Varianz-Kompromiss</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Schütze mit verstelltem Visier trifft immer an dieselbe falsche Stelle (Bias). Ein Schütze mit zittriger Hand streut wild um die Mitte (Varianz). Ideal ist beides klein.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/bias-varianz.gif" width="640" height="380" alt="Animation: Vier Zielscheiben füllen sich mit Treffern. Geringer Bias und geringe Varianz: eng in der Mitte. Geringer Bias, hohe Varianz: verstreut um die Mitte, Overfitting. Hoher Bias, geringe Varianz: eng daneben, Underfitting. Beides hoch: verstreut und daneben." loading="lazy">
+        <figcaption>Bias = systematisch daneben. Varianz = unruhig, je nach Trainingsdaten anders.</figcaption>
+      </figure>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Bias (Verzerrung)</span><p>Fehler durch zu einfache Annahmen. Das Modell trifft das Muster grundsätzlich nicht – egal, wie viele Daten es bekommt. → Underfitting.</p></div>
+        <div class="box fach"><span class="box-label">Varianz</span><p>Wie stark sich das Modell ändert, wenn man es mit anderen Trainingsdaten trainiert. Hohe Varianz heißt: Es passt sich zufälligen Eigenheiten an. → Overfitting.</p></div>
+      </div>
+      <div class="box fach"><span class="box-label">Der Kompromiss</span><p>Mehr Modellkomplexität senkt den Bias, erhöht aber die Varianz. Der Gesamtfehler ist am kleinsten irgendwo dazwischen. Ensembles verschieben den Kompromiss: Bagging senkt die Varianz, Boosting den Bias (Modul 4).</p></div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>„Bias“ hat zwei Bedeutungen: statistischer Bias (systematischer Fehler, hier) und algorithmischer Bias (Benachteiligung von Gruppen, Modul 10). In der Antwort klarstellen, welcher gemeint ist.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Bias, Varianz und der Gesamtfehler</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der Gesamtfehler als Summe</span>
+        <p>Der erwartete Fehler eines Modells setzt sich zusammen aus <b>Bias²</b> (systematischer Fehler), <b>Varianz</b> (Empfindlichkeit gegenüber den Trainingsdaten) und <b>Rauschen</b> (nicht vermeidbarer Zufall in den Daten).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Modell</th><th class="r">Bias²</th><th class="r">Varianz</th><th class="r">Rauschen</th><th class="r">Gesamtfehler</th></tr></thead>
+          <tbody>
+            <tr><td>A: sehr einfach (Gerade)</td><td class="r">16</td><td class="r">2</td><td class="r">4</td><td class="r">22</td></tr>
+            <tr><td>B: mittel (Polynom Grad 3)</td><td class="r">4</td><td class="r">5</td><td class="r">4</td><td class="r"><b>13</b></td></tr>
+            <tr><td>C: sehr komplex (Grad 11)</td><td class="r">1</td><td class="r">20</td><td class="r">4</td><td class="r">25</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das einfache Modell hat hohen Bias, das komplexe hohe Varianz. Das mittlere Modell erreicht den kleinsten Gesamtfehler. Das Rauschen (4) kann kein Modell beseitigen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Die Zielscheiben zuordnen</span>
+        <ul>
+          <li><b>Eng in der Mitte:</b> niedriger Bias, niedrige Varianz – das Ziel.</li>
+          <li><b>Verstreut rund um die Mitte:</b> niedriger Bias, hohe Varianz → Overfitting (z. B. ein tiefer Baum).</li>
+          <li><b>Eng, aber daneben:</b> hoher Bias, niedrige Varianz → Underfitting (z. B. eine Gerade bei gekrümmten Daten).</li>
+          <li><b>Verstreut und daneben:</b> beides hoch, meist schlechte Daten oder ungeeignetes Modell.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Hohe Varianz bei kleinen Datenmengen</span>
+        <p>Trainiert man ein tiefes Modell dreimal mit je 50 anderen Kunden, erhält man drei sehr verschiedene Modelle, die für denselben Neukunden Vorhersagen von 20 %, 55 % und 80 % liefern: hohe Varianz. Mit 5.000 Kunden liegen die drei Modelle nah beieinander. Mehr Daten senken die Varianz, aber nicht den Bias.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie Bias und Varianz und beschreiben Sie den Kompromiss bei steigender Modellkomplexität.</p>
+        <p><b>Musterlösung:</b> Bias ist ein systematischer Fehler durch zu einfache Annahmen (Underfitting) (1,5 Punkte). Varianz ist die Empfindlichkeit gegenüber den Trainingsdaten (Overfitting) (1,5 Punkte). Mit wachsender Komplexität sinkt der Bias, die Varianz steigt; der Gesamtfehler ist am kleinsten bei mittlerer Komplexität (2 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Hoher Bias = zu einfach, Underfitting. Hohe Varianz = zu empfindlich, Overfitting. Ziel: das Minimum des Gesamtfehlers.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die vier Zielscheiben sind ein Standardbild aus Lehrbüchern. Lassen Sie jede Scheibe einer Situation aus Lektion 8 zuordnen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l10" data-title="Lernkurven" data-part="C · Generalisierung">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 30 Minuten</span><h2>Lernkurven lesen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Fitnesstagebuch zeigt, ob mehr Training noch etwas bringt. Wenn die Leistung seit Wochen gleich bleibt, braucht es etwas anderes – mehr vom Gleichen hilft nicht. Lernkurven zeigen dasselbe für Modelle.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kurve</th><th>Verlauf</th><th>Bedeutung</th><th>Was hilft</th></tr></thead>
+        <tbody>
+          <tr><td>Fehler über <b>Datenmenge</b></td><td>Beide Fehler hoch und nah beieinander</td><td>Underfitting – mehr Daten helfen nicht</td><td>besseres Modell oder Merkmale</td></tr>
+          <tr><td>Fehler über <b>Datenmenge</b></td><td>Großer Abstand, Validierungsfehler sinkt noch</td><td>Overfitting – mehr Daten helfen</td><td>mehr Daten sammeln, Regularisierung</td></tr>
+          <tr><td>Fehler über <b>Epochen</b> (neuronale Netze)</td><td>Validierungsfehler sinkt, dann steigt er wieder</td><td>ab dem Wendepunkt Overfitting</td><td>Early Stopping am Minimum</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Early Stopping</span><p>Man beobachtet den Validierungsfehler nach jeder Epoche. Steigt er mehrere Epochen hintereinander (Geduld, engl. patience), bricht man ab und nimmt die Gewichte vom besten Zeitpunkt.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Lernkurven in Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Hilft mehr Daten? (Fehlerrate über der Datenmenge)</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Trainingsdaten</th><th class="r">Fehler Training</th><th class="r">Fehler Validierung</th></tr></thead>
+          <tbody>
+            <tr><td class="r">100</td><td class="r">2 %</td><td class="r">25 %</td></tr>
+            <tr><td class="r">500</td><td class="r">5 %</td><td class="r">15 %</td></tr>
+            <tr><td class="r">2.000</td><td class="r">7 %</td><td class="r">11 %</td></tr>
+            <tr><td class="r">10.000</td><td class="r">8 %</td><td class="r">9 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Der Abstand schrumpft mit mehr Daten: Das Modell überanpasst weniger. Bei 10.000 Beispielen liegen beide Fehler nahe beieinander; weitere Daten bringen kaum noch etwas. Wären beide Fehler hoch (z. B. 25 % und 28 %), wäre mehr Datenmenge sinnlos – dann braucht es ein besseres Modell oder bessere Merkmale.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Early Stopping an einer Epochenkurve</span>
+        <p>Validierungsverlust nach Epoche 1 bis 7: 0,90 · 0,60 · 0,45 · <b>0,40</b> · 0,41 · 0,43 · 0,46. Mit Geduld 3 bricht man nach Epoche 7 ab (drei Epochen ohne Verbesserung seit dem Minimum in Epoche 4) und nimmt die Gewichte von <b>Epoche 4</b>. Trainiert man stur weiter, steigt der Validierungsverlust, während der Trainingsverlust weiter fällt: Das Netz lernt die Trainingsdaten auswendig.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Was die Kurve für das Projekt bedeutet</span>
+        <p>Ein Betrieb überlegt, 20.000 € in zusätzliches Labeling zu investieren. Die Lernkurve zeigt: Zwischen 2.000 und 10.000 Beispielen sank der Validierungsfehler nur noch von 11 % auf 9 %. Ein weiteres Verdoppeln bringt vermutlich weniger als einen halben Punkt. Die Investition in bessere Merkmale oder ein anderes Modell wäre wirksamer. Lernkurven machen solche Entscheidungen mit Zahlen begründbar.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Die Fehler eines Modells sind für Training und Validierung beide hoch und liegen nah beieinander, auch bei wachsender Datenmenge. Welche Diagnose stellen Sie, und was empfehlen Sie?</p>
+        <p><b>Musterlösung:</b> Underfitting (hoher Bias) (2 Punkte). Mehr Daten helfen nicht; stattdessen ein komplexeres Modell, aussagekräftigere Merkmale oder geringere Regularisierung (3 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Lernkurven zeigen, ob mehr Daten oder ein anderes Modell hilft. Bei Epochen-Kurven: Early Stopping am Minimum des Validierungsfehlers.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Zeichnen Sie die drei Kurventypen an die Tafel und lassen Sie die Gruppe raten, was zu tun ist. Lernkurven sind in Transferarbeiten ein starkes Argument für Entscheidungen.</p></aside>
+    </section>
+
+    <section class="lesson" id="l11" data-title="Regularisierung" data-part="C · Generalisierung">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 45 Minuten</span><h2>Regularisierung: das Modell bremsen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Aufsatz mit Wortbegrenzung zwingt den Schreiber, sich aufs Wesentliche zu beschränken. Regularisierung ist eine „Wortbegrenzung“ für Modelle: Große Gewichte kosten Strafpunkte, also nutzt das Modell nur, was wirklich hilft.</p>
+      </div>
+      <div class="formula"><span class="box-label">Verlust mit Strafterm</span>
+        <div class="eq"><i>L</i><sub>Ridge</sub> = MSE + λ · Σ <i>w</i><sub>j</sub>² &nbsp;&nbsp;&nbsp; <i>L</i><sub>Lasso</sub> = MSE + λ · Σ |<i>w</i><sub>j</sub>|</div>
+        <div class="legend-eq"><span>λ (lambda) regelt die Stärke: 0 = keine Bremse, groß = starke Bremse (Gefahr von Underfitting).</span></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Wirkung</th><th>Wofür</th></tr></thead>
+        <tbody>
+          <tr><td><b>L2 (Ridge)</b></td><td>macht Gewichte klein, aber selten genau 0</td><td>viele korrelierte Merkmale, allgemeine Stabilisierung</td></tr>
+          <tr><td><b>L1 (Lasso)</b></td><td>setzt unwichtige Gewichte auf genau 0</td><td>automatische Merkmalsauswahl</td></tr>
+          <tr><td><b>Elastic Net</b></td><td>Mischung aus L1 und L2</td><td>Kompromiss</td></tr>
+          <tr><td><b>Dropout</b> (neuronale Netze)</td><td>schaltet beim Training zufällig Neuronen ab</td><td>verhindert, dass sich Neuronen gegenseitig „abschreiben“</td></tr>
+          <tr><td><b>Early Stopping</b></td><td>Training rechtzeitig beenden</td><td>neuronale Netze, Boosting</td></tr>
+          <tr><td><b>Datenaugmentation</b></td><td>künstlich mehr Trainingsbeispiele (Bilder drehen, spiegeln)</td><td>Bilder, Audio</td></tr>
+          <tr><td><b>Baum-Begrenzung</b></td><td>max_depth, min_samples_leaf, Pruning</td><td>Entscheidungsbäume</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box falle"><span class="box-label">Prüfungsfalle</span><p>Merkhilfe: <b>L1 → „1 Nullen“</b>: Lasso erzeugt Nullen und wählt damit Merkmale aus. L2 verkleinert nur. In scikit-learn heißt die Stärke bei Ridge/Lasso <code>alpha</code>, bei der logistischen Regression <code>C</code> – dort ist es umgekehrt: kleines C = starke Regularisierung.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Regularisierung an Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der Strafterm von Ridge und Lasso</span>
+        <p>Ein Modell hat die Gewichte 3, −2 und 0,5; der MSE auf den Trainingsdaten beträgt 4; λ = 0,1.</p>
+        <ul>
+          <li><b>Ridge (L2):</b> Σ w² = 9 + 4 + 0,25 = 13,25 → Strafe <span class="calcline">0,1 · 13,25 = 1,325</span> → Gesamtverlust <span class="calcline">4 + 1,325 = 5,325</span></li>
+          <li><b>Lasso (L1):</b> Σ |w| = 3 + 2 + 0,5 = 5,5 → Strafe <span class="calcline">0,1 · 5,5 = 0,55</span> → Gesamtverlust <span class="calcline">4 + 0,55 = 4,55</span></li>
+        </ul>
+        <p>Das Training sucht Gewichte, die MSE <i>und</i> Strafe zusammen klein halten. Große Gewichte werden dadurch „teuer“ – besonders bei Ridge, weil das Quadrat große Werte stark bestraft.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Lasso wählt Merkmale aus</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Merkmal</th><th class="r">Gewicht ohne Regularisierung</th><th class="r">Gewicht mit Lasso</th></tr></thead>
+          <tbody>
+            <tr><td>Einkommen</td><td class="r">1,20</td><td class="r">1,00</td></tr>
+            <tr><td>Alter</td><td class="r">0,80</td><td class="r">0,50</td></tr>
+            <tr><td>Schuhgröße</td><td class="r">0,30</td><td class="r"><b>0</b></td></tr>
+            <tr><td>Zufallszahl</td><td class="r">0,10</td><td class="r"><b>0</b></td></tr>
+          </tbody>
+        </table></div>
+        <p>Lasso setzt die unwichtigen Merkmale auf genau 0 und liefert so nebenbei eine Merkmalsauswahl. Ridge würde sie nur verkleinern (z. B. 0,3 → 0,1).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Dropout und Augmentation</span>
+        <ul>
+          <li><b>Dropout 0,5</b> bei einer Schicht mit 100 Neuronen: In jedem Trainingsschritt sind zufällig etwa 50 Neuronen abgeschaltet. Kein Neuron kann sich auf bestimmte andere „verlassen“, das Netz wird robuster. Beim späteren Einsatz sind alle Neuronen aktiv.</li>
+          <li><b>Datenaugmentation:</b> 1.000 Bilder werden gedreht, gespiegelt und etwas aufgehellt. Mit vier Veränderungen je Bild stehen <span class="calcline">1.000 · (1 + 4) = 5.000</span> Trainingsbeispiele zur Verfügung, ohne ein neues Foto zu machen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Unterscheiden Sie L1- und L2-Regularisierung und nennen Sie je eine Wirkung.</p>
+        <p><b>Musterlösung:</b> L2 (Ridge) addiert die Summe der quadrierten Gewichte als Strafe und verkleinert alle Gewichte, setzt sie aber selten auf null (2,5 Punkte). L1 (Lasso) addiert die Summe der Beträge und setzt unwichtige Gewichte auf genau null; damit wählt sie Merkmale aus (2,5 Punkte).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Regularisierung bestraft Komplexität: L2 verkleinert Gewichte, L1 setzt sie auf null, Dropout und Early Stopping bremsen neuronale Netze.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Zuordnung L1/L2 wird häufig gefragt (Übung 10). Betonen Sie die Merkhilfe „L1 macht Nullen“.</p></aside>
+    </section>
+
+    <section class="lesson" id="l12" data-title="Kreuzvalidierung" data-part="C · Generalisierung">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 40 Minuten</span><h2>Kreuzvalidierung: jeder Teil kommt einmal dran</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Bei einem Kochwettbewerb probiert nicht nur ein Jurymitglied, sondern fünf, jeweils von einem anderen Teller. Der Durchschnitt ist fairer als ein einzelnes Urteil – und die Streuung zeigt, wie einig sich die Jury ist.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/kreuzvalidierung.gif" width="640" height="380" alt="Animation: Fünf Zeilen mit je fünf Blöcken. In jedem Durchlauf ist ein anderer Block orange als Prüfteil markiert, die übrigen vier sind zum Lernen. Pro Durchlauf erscheint ein F1-Wert: 0,82, 0,85, 0,80, 0,84, 0,79. Am Ende der Mittelwert 0,82 mit Standardabweichung 0,03." loading="lazy">
+        <figcaption>5 Durchläufe, 5 Ergebnisse, ein Mittelwert mit Streuung.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><div>Trainingsdaten in k gleich große Teile (Folds) teilen, üblich k = 5 oder 10.</div></li>
+        <li><div>k-mal trainieren: jeweils k − 1 Teile zum Lernen, 1 Teil zum Prüfen.</div></li>
+        <li><div>Ergebnis: Mittelwert und Standardabweichung der k Scores.</div></li>
+      </ol>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Variante</th><th>Wann</th></tr></thead>
+        <tbody>
+          <tr><td><b>Stratifizierte</b> k-fache KV</td><td>Klassifikation, besonders mit seltenen Klassen</td></tr>
+          <tr><td><b>Zeitreihen-KV</b> (rollierend)</td><td>Zeitdaten: immer mit Vergangenheit lernen, mit der folgenden Periode prüfen</td></tr>
+          <tr><td><b>Gruppen-KV</b></td><td>mehrere Datensätze pro Kunde/Maschine – Gruppe nie auf Training und Prüfung verteilen</td></tr>
+          <tr><td><b>Leave-One-Out</b></td><td>sehr wenig Daten (k = Anzahl Beispiele)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Vorteile</span><p>Nutzt alle Daten zum Lernen und Prüfen, stabilere Bewertung, die Streuung zeigt Zuverlässigkeit. Ideal für Hyperparameter-Suche.</p></div>
+        <div class="box fach"><span class="box-label">Nachteil</span><p>k-facher Rechenaufwand. Und: Ein separater <b>Testdatensatz</b> bleibt trotzdem zurückgelegt für die Abschlussbewertung.</p></div>
+      </div>
+      <pre class="code"><span class="k">from</span> sklearn.model_selection <span class="k">import</span> cross_val_score, StratifiedKFold
+cv = StratifiedKFold(n_splits=5, shuffle=<span class="k">True</span>, random_state=42)
+scores = cross_val_score(modell, X_train, y_train, cv=cv, scoring=<span class="s">"f1"</span>)
+print(scores.mean(), scores.std())</pre>
+      <div class="prose">
+        <h3>Weitere Beispiele: Kreuzvalidierung rechnen und planen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Mittelwert und Streuung der fünf Durchläufe</span>
+        <p>Die fünf F1-Werte: 0,82, 0,85, 0,80, 0,84, 0,79.</p>
+        <ol class="steps">
+          <li><div>Mittelwert: <span class="calcline">(0,82 + 0,85 + 0,80 + 0,84 + 0,79) : 5 = 4,10 : 5 = 0,82</span></div></li>
+          <li><div>Abweichungen: 0, +0,03, −0,02, +0,02, −0,03; Quadrate: 0, 0,0009, 0,0004, 0,0004, 0,0009; Summe 0,0026</div></li>
+          <li><div>Standardabweichung: <span class="calcline">√(0,0026 : 4) ≈ 0,025</span> → <span class="result">F1 = 0,82 ± 0,03</span></div></li>
+        </ol>
+        <p>Die Streuung zeigt, wie stabil das Modell ist. Ein Wert von 0,82 ± 0,02 ist verlässlicher als 0,82 ± 0,10.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viele Trainings entstehen?</span>
+        <p>Ein Team will drei Modellarten mit je vier Hyperparameter-Kombinationen vergleichen, 5-fach kreuzvalidiert: <span class="calcline">3 · 4 · 5 = 60</span> Trainings. Dauert eines 2 Minuten, sind das 120 Minuten – zwei Stunden. Bei großen Modellen (Stunden pro Training) wird die Kreuzvalidierung zu teuer, dann reicht ein einzelner Validierungsdatensatz.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Kreuzvalidierung für Zeitreihen</span>
+        <p>Bei Monatsdaten über 24 Monate wird <b>nicht</b> gemischt, sondern „rollierend“ geprüft:</p>
+        <ul>
+          <li>Training: Monat 1–12 → Prüfung: Monat 13</li>
+          <li>Training: Monat 1–13 → Prüfung: Monat 14</li>
+          <li>Training: Monat 1–14 → Prüfung: Monat 15 … und so weiter</li>
+        </ul>
+        <p>So lernt das Modell immer nur aus der Vergangenheit und wird mit der unmittelbar folgenden Periode geprüft – genau wie im Einsatz.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die 5-fache Kreuzvalidierung. Wie oft wird trainiert, und warum bleibt trotzdem ein Testdatensatz zurückgelegt?</p>
+        <p><b>Musterlösung:</b> Die Trainingsdaten werden in fünf gleich große Teile geteilt; fünfmal wird mit vier Teilen trainiert und mit dem fünften geprüft; das Ergebnis ist der Mittelwert der fünf Scores samt Streuung (3 Punkte). Es wird fünfmal trainiert (1 Punkt). Der Testdatensatz bleibt für die einmalige, ehrliche Abschlussbewertung zurückgelegt, weil die Kreuzvalidierung bereits zur Auswahl und Einstellung gedient hat (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>k-fache Kreuzvalidierung: k Durchläufe, jeder Teil einmal Prüfteil, Ergebnis = Mittelwert ± Streuung. Testdaten bleiben trotzdem unberührt.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Fragen Sie: „Wie oft wird bei 10-facher KV trainiert?“ (10-mal). Und: „Ist die Kreuzvalidierung ein Ersatz für den Test?“ (Nein.)</p></aside>
+    </section>
+
+    <div class="part-head"><span>Teil D · Lektionen 13–15</span><h2>Bewertung in der Praxis</h2></div>
+
+    <section class="lesson" id="l13" data-title="Modelle vergleichen" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 35 Minuten</span><h2>Modelle vergleichen und auswählen</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Beim Autokauf zählt nicht nur die Höchstgeschwindigkeit, sondern auch Verbrauch, Preis, Zuverlässigkeit und ob es in die Garage passt. Bei Modellen ist es genauso.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Modell</th><th class="r">F1 (KV)</th><th class="r">± Streuung</th><th class="r">Vorhersagezeit</th><th>Erklärbar</th><th class="r">Kosten / Jahr</th></tr></thead>
+        <tbody>
+          <tr><td>Baseline</td><td class="r">0,00</td><td class="r">–</td><td class="r">&lt; 1 ms</td><td>ja</td><td class="r">0 €</td></tr>
+          <tr><td>Logistische Regression</td><td class="r">0,71</td><td class="r">0,02</td><td class="r">1 ms</td><td>ja</td><td class="r">500 €</td></tr>
+          <tr><td>Random Forest</td><td class="r">0,76</td><td class="r">0,03</td><td class="r">15 ms</td><td>teilweise</td><td class="r">1.500 €</td></tr>
+          <tr><td>Gradient Boosting</td><td class="r">0,77</td><td class="r">0,04</td><td class="r">10 ms</td><td>teilweise</td><td class="r">1.500 €</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box fach"><span class="box-label">Wie entscheiden?</span>
+        <ul>
+          <li>Unterschiede kleiner als die Streuung (0,76 gegen 0,77 bei ± 0,03/0,04) sind <b>nicht aussagekräftig</b>.</li>
+          <li>Bei Gleichstand das einfachere, erklärbarere, günstigere Modell wählen (Ockhams Rasiermesser).</li>
+          <li>Neben der Kennzahl zählen Laufzeit, Kosten, Erklärbarkeit, Wartbarkeit, rechtliche Vorgaben.</li>
+          <li>Wichtigste Frage: Erreicht es das <b>Geschäftsziel</b>?</li>
+        </ul>
+      </div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Eine Modellauswahl begründen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Ist der Unterschied echt?</span>
+        <p>Random Forest erreicht in der Kreuzvalidierung F1 = 0,76 ± 0,03, Gradient Boosting 0,77 ± 0,04. Der Unterschied von 0,01 ist kleiner als jede der beiden Streuungen. Mit anderen Daten könnte die Rangfolge umgekehrt ausfallen. Man darf daher <b>nicht</b> behaupten, Boosting sei besser. Bei Gleichstand entscheiden Kosten, Tempo, Erklärbarkeit und Wartbarkeit.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Nettonutzen statt nur F1</span>
+        <p>Der geschätzte Jahresnutzen (Ersparnis durch gefundene Defekte) beträgt für die logistische Regression 40.000 €, den Random Forest 46.000 € und Gradient Boosting 46.500 €. Die Kosten für Betrieb und Pflege: 500 €, 1.500 € und 1.500 €.</p>
+        <ul>
+          <li>Logistische Regression: <span class="calcline">40.000 − 500 = 39.500 €</span></li>
+          <li>Random Forest: <span class="calcline">46.000 − 1.500 = 44.500 €</span></li>
+          <li>Gradient Boosting: <span class="calcline">46.500 − 1.500 = 45.000 €</span></li>
+        </ul>
+        <p>Boosting liegt nur 500 € vor dem Forest – bei der Unsicherheit der Schätzung ein Gleichstand. Der Random Forest ist mit 15 ms schnell genug und stabil; Boosting braucht mehr Feintuning. Eine Empfehlung kann daher auf den Forest fallen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Verschiedene Betriebe, verschiedene Antworten</span>
+        <ul>
+          <li><b>Bank (Kreditentscheidung):</b> logistische Regression, weil jede Ablehnung begründet werden muss. F1 ist etwas niedriger, aber das ist der Preis der Erklärbarkeit.</li>
+          <li><b>Onlineshop (Produktempfehlung):</b> Gradient Boosting, weil Fehler harmlos sind und jedes Prozent mehr Klicks Geld bringt.</li>
+          <li><b>Industrie (Echtzeit an der Maschine):</b> kleines, schnelles Modell, weil die Antwort innerhalb von Millisekunden vorliegen muss.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Zwei Modelle haben F1 0,80 ± 0,05 und 0,82 ± 0,05. Das zweite ist teurer. Wie entscheiden Sie?</p>
+        <p><b>Musterlösung:</b> Der Unterschied von 0,02 liegt innerhalb der Streuung und ist nicht aussagekräftig (2 Punkte). Bei Gleichstand wählt man das einfachere, günstigere und besser erklärbare Modell, also das erste (2 Punkte); ein Blick auf das Geschäftsziel bleibt maßgeblich (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Modell ist nur dann besser, wenn der Unterschied größer als die Streuung ist. Bei Gleichstand gewinnt das einfachere Modell.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie die Gruppe anhand der Tabelle eine Empfehlung für eine Bank und für einen Onlineshop formulieren – die Antworten werden verschieden ausfallen, und das ist richtig so.</p></aside>
+    </section>
+
+    <section class="lesson" id="l14" data-title="Mehr als Genauigkeit" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 35 Minuten</span><h2>Mehr als Genauigkeit: Kalibrierung, Robustheit, Fairness</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Wetterdienst, der „70 % Regen“ sagt, sollte an solchen Tagen auch wirklich in etwa 7 von 10 Fällen recht haben. Sonst kann man mit seinen Prozentangaben nicht planen – selbst wenn er oft richtig liegt.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aspekt</th><th>Frage</th><th>Prüfung</th></tr></thead>
+        <tbody>
+          <tr><td><b>Kalibrierung</b></td><td>Stimmen die ausgegebenen Wahrscheinlichkeiten?</td><td>Kalibrierungskurve: vorhergesagt 70 % → tatsächlich ca. 70 %</td></tr>
+          <tr><td><b>Robustheit</b></td><td>Hält das Modell kleinen Störungen stand?</td><td>Tests mit verrauschten, fehlenden oder ungewöhnlichen Eingaben (Modul 12)</td></tr>
+          <tr><td><b>Fairness</b></td><td>Sind Fehlerraten für alle Gruppen ähnlich?</td><td>Kennzahlen getrennt nach Gruppen (Modul 10)</td></tr>
+          <tr><td><b>Stabilität über die Zeit</b></td><td>Bleibt die Leistung im Betrieb erhalten?</td><td>Monitoring, Drift-Erkennung (Modul 9)</td></tr>
+          <tr><td><b>Effizienz</b></td><td>Wie schnell, wie teuer?</td><td>Antwortzeit, Rechenkosten, Energie</td></tr>
+          <tr><td><b>Erklärbarkeit</b></td><td>Kann man Entscheidungen begründen?</td><td>Feature Importance, SHAP (Modul 10)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Kalibrierung, Fairness und Robustheit prüfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Eine Kalibrierungstabelle lesen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Vorhergesagte Wahrscheinlichkeit</th><th class="r">Fälle</th><th class="r">tatsächlich positiv</th><th class="r">Anteil</th></tr></thead>
+          <tbody>
+            <tr><td>10–20 %</td><td class="r">500</td><td class="r">70</td><td class="r">14 %</td></tr>
+            <tr><td>40–50 %</td><td class="r">300</td><td class="r">126</td><td class="r">42 %</td></tr>
+            <tr><td>70–80 %</td><td class="r">200</td><td class="r">104</td><td class="r">52 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Im unteren und mittleren Bereich stimmen Vorhersage und Wirklichkeit gut überein. Bei den hohen Werten ist das Modell <b>überoptimistisch</b>: Es sagt 70–80 % voraus, tatsächlich sind es nur 52 %. Wer auf Basis dieser Wahrscheinlichkeiten Entscheidungen trifft (z. B. Versicherungsprämien), macht Fehler. Abhilfe: nachträgliche Kalibrierung.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Fairness in Zahlen</span>
+        <p>Ein Bewerbungsfilter findet bei Gruppe A 80 % der geeigneten Personen (Recall 0,80), bei Gruppe B nur 60 % (Recall 0,60). Der Abstand von 20 Prozentpunkten zeigt: Geeignete Personen der Gruppe B werden systematisch häufiger übersehen. Auch wenn kein Merkmal wie Geschlecht verwendet wird, kann das Modell indirekt benachteiligen. Deshalb werden Kennzahlen immer auch <b>getrennt nach Gruppen</b> betrachtet (Modul 10).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Robustheitstest</span>
+        <p>Man verfälscht die Testdaten künstlich: 5 % Rauschen auf den Messwerten, 10 % der Werte fehlen. Modell A fällt von F1 0,76 auf 0,74, Modell B von 0,77 auf 0,55. Modell A ist robust, Modell B empfindlich: Im Betrieb, wo Sensoren ausfallen und Messungen schwanken, wird Modell B überraschen. Bei der Auswahl zählt diese Eigenschaft mit.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Eigenschaften eines guten Modells neben der Genauigkeit und erklären Sie eine davon.</p>
+        <p><b>Musterlösung:</b> z. B. Kalibrierung, Robustheit, Fairness, Stabilität im Betrieb, Effizienz, Erklärbarkeit (3 Punkte für drei Nennungen). Beispiel Kalibrierung: Die ausgegebenen Wahrscheinlichkeiten stimmen mit der tatsächlichen Häufigkeit überein, sodass man auf ihrer Basis planen kann (3 Punkte für eine verständliche Erklärung).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein gutes Modell ist genau, gut kalibriert, robust, fair, stabil, bezahlbar und erklärbar genug für seinen Einsatz.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Lektion verbindet Modul 6 mit den Modulen 9, 10 und 12. Für den AI Act sind Genauigkeit, Robustheit und Fairness bei Hochrisiko-Systemen ausdrücklich gefordert.</p></aside>
+    </section>
+
+    <section class="lesson" id="l15" data-title="Fallbeispiel Bewertungsbericht" data-part="D · Praxis">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 40 Minuten</span><h2>Fallbeispiel: Ein Bewertungsbericht wie in der Prüfung</h2></div>
+      <div class="box alltag"><span class="box-label">Ausgangslage</span>
+        <p>Ein Getriebehersteller hat ein Modell zur Vorhersage von Maschinenausfällen (Ausfall in den nächsten 7 Tagen ja/nein). Testdaten: 1.000 Maschinentage. Ergebnis: TP = 18, FN = 6, FP = 22, TN = 954. Ein Ausfall kostet 40.000 €, eine vorsorgliche Inspektion 300 €.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Kennzahlen:</b> <span class="calcline">Accuracy 972/1.000 = 97,2 % · Precision 18/40 = 45 % · Recall 18/24 = 75 % · F1 = 2 · 0,45 · 0,75 / 1,2 = 56,25 %</span></div></li>
+        <li><div><b>Einordnung:</b> Die Accuracy ist wegen der Seltenheit der Ausfälle (2,4 %) kaum aussagekräftig. Entscheidend sind Recall und Precision.</div></li>
+        <li><div><b>Kosten mit Modell:</b> <span class="calcline">6 · 40.000 + (18 + 22) · 300 = 240.000 + 12.000 = 252.000 €</span>. <b>Ohne Modell:</b> <span class="calcline">24 · 40.000 = 960.000 €</span>. Ersparnis rund 708.000 € auf 1.000 Maschinentage.</div></li>
+        <li><div><b>Bewertung:</b> Fehlalarme kosten wenig, übersehene Ausfälle sehr viel → Recall weiter erhöhen (Schwelle senken), auch wenn die Precision sinkt.</div></li>
+        <li><div><b>Nächste Schritte:</b> Schwelle auf Validierungsdaten kostenoptimal wählen, Kreuzvalidierung für stabile Werte, Überwachung im Betrieb.</div></li>
+      </ol>
+      <div class="box tipp"><span class="box-label">Aufbau einer guten Antwort</span><p>Kennzahlen mit Rechenweg → Einordnung (welche zählt hier und warum) → Übersetzung in Geld oder Geschäftsziel → Empfehlung. Genau so werden Situationsaufgaben bewertet.</p></div>
+      <div class="prose">
+        <h3>Weitere Beispiele: Den Bericht variieren und üben</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Was passiert, wenn man die Schwelle senkt?</span>
+        <p>Das Ausgangsmodell: TP = 18, FN = 6, FP = 22, TN = 954; Kosten 252.000 €. Senkt man die Schwelle, erhält man zum Beispiel TP = 21, FN = 3, FP = 60, TN = 916 (Summe 1.000).</p>
+        <ul>
+          <li>Recall: <span class="calcline">21 : 24 = 87,5 %</span> (vorher 75 %).</li>
+          <li>Precision: <span class="calcline">21 : 81 ≈ 25,9 %</span> (vorher 45 %).</li>
+          <li>Kosten: <span class="calcline">3 · 40.000 + (21 + 60) · 300 = 120.000 + 24.300 = 144.300 €</span> – deutlich weniger als 252.000 €.</li>
+        </ul>
+        <p>Obwohl Precision und F1 sinken, sind die Gesamtkosten fast halbiert, weil ein übersehener Ausfall so viel mehr kostet als eine Inspektion. Das ist das Beispiel dafür, warum die Kosten die Entscheidung bestimmen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Musterantwort in vier Absätzen</span>
+        <ol>
+          <li><b>Kennzahlen:</b> „Accuracy 97,2 %, Precision 45 %, Recall 75 %, F1 56,3 %.“ (mit Rechenweg)</li>
+          <li><b>Einordnung:</b> „Die Accuracy ist wegen der Seltenheit der Ausfälle (2,4 %) kaum aussagekräftig. Entscheidend sind Recall und Precision.“</li>
+          <li><b>Euro:</b> „Mit Modell 252.000 €, ohne Modell 960.000 €: Ersparnis rund 708.000 € auf 1.000 Maschinentage.“</li>
+          <li><b>Empfehlung:</b> „Schwelle senken, um den Recall zu erhöhen, Kosten auf Validierungsdaten prüfen, Betrieb überwachen.“</li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Typische Fehler in Bewertungsberichten</span>
+        <ul>
+          <li>Nur die Accuracy nennen und die Seltenheit der Klasse nicht beachten.</li>
+          <li>Kennzahlen aus den Trainingsdaten statt aus den Testdaten berichten.</li>
+          <li>Kennzahlen ohne Übersetzung in den Nutzen für das Unternehmen stehen lassen.</li>
+          <li>Keine Baseline angeben.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (9 Punkte):</b> Testdaten: 1.000 Maschinentage mit TP = 30, FN = 10, FP = 40, TN = 920. Ein Ausfall kostet 25.000 €, eine Inspektion 200 €. Berechnen Sie Accuracy, Precision, Recall und F1, die Kosten mit und ohne Modell und geben Sie eine Empfehlung.</p>
+        <p><b>Musterlösung:</b> Accuracy 950 : 1.000 = 95 % (1 Punkt). Precision 30 : 70 ≈ 42,9 % (1 Punkt). Recall 30 : 40 = 75 % (1 Punkt). F1 = 2 · 0,429 · 0,75 : 1,179 ≈ 54,5 % (1 Punkt). Kosten mit Modell: 10 · 25.000 + (30 + 40) · 200 = 250.000 + 14.000 = 264.000 € (2 Punkte). Ohne Modell: 40 · 25.000 = 1.000.000 € (1 Punkt). Ersparnis ca. 736.000 € (1 Punkt). Empfehlung: Modell einsetzen; Recall weiter erhöhen, weil Fehlalarme (200 €) viel billiger sind als übersehene Ausfälle (25.000 €); Schwelle auf Validierungsdaten kostenoptimal wählen (1 Punkt).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kennzahlen rechnen, passende Kennzahl begründen, in Euro übersetzen, Empfehlung ableiten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Fallstudie entspricht Aufgabe 3 der Probeprüfung im Lehrplan. Lassen Sie sie in Einzelarbeit lösen (20 Minuten) und vergleichen Sie danach die Begründungen.</p></aside>
+    </section>
+
+    <section class="lesson" id="uebungen" data-title="Übungen" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Übungen · 120 Minuten</span><h2>12 Übungen mit Antwortfeldern</h2></div>
+      <p>Tragen Sie Ihre Antworten in die Felder ein. Prozente ohne %-Zeichen, Komma oder Punkt erlaubt. Freitext bewertet die KI wie ein IHK-Prüfer.</p>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 1: Kennzahlen aus der Konfusionsmatrix</h3><span class="points">5 Punkte</span></div>
+        <p>TP = 40, FP = 10, FN = 20, TN = 130. Berechnen Sie Accuracy, Precision, Recall und F1 in Prozent (eine Nachkommastelle).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Accuracy 170/200 = <b>85,0 %</b>; Precision 40/50 = <b>80,0 %</b>; Recall 40/60 ≈ <b>66,7 %</b>; F1 = 2 · 0,8 · 0,667 / 1,467 ≈ <b>72,7 %</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 2: Spezifität</h3><span class="points">2 Punkte</span></div>
+        <p>Berechnen Sie für dieselben Werte die Spezifität und die Falsch-Positiv-Rate in Prozent.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Spezifität 130/140 ≈ <b>92,9 %</b>; FPR 10/140 ≈ <b>7,1 %</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 3: Die Accuracy-Falle</h3><span class="points">3 Punkte</span></div>
+        <p>In 1.000 Fällen sind 10 positiv. Ein Modell sagt immer „negativ“. Berechnen Sie Accuracy und Recall und erklären Sie, warum das Modell nutzlos ist.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Accuracy 990/1.000 = <b>99 %</b>; Recall 0/10 = <b>0 %</b>. Es findet keinen einzigen gesuchten Fall; die hohe Accuracy entsteht nur durch die Seltenheit der positiven Klasse.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 4: Kosten zweier Modelle</h3><span class="points">3 Punkte</span></div>
+        <p>Ein übersehener Betrug kostet 500 €, eine unnötige Prüfung 20 €. Modell A: FN = 10, FP = 100. Modell B: FN = 4, FP = 300. Berechnen Sie die Kosten beider Modelle. Welches ist günstiger?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>A: 10 · 500 + 100 · 20 = <b>7.000 €</b>. B: 4 · 500 + 300 · 20 = <b>8.000 €</b>. <b>A</b> ist günstiger, obwohl B mehr Betrug findet.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 5: Regressionsmetriken</h3><span class="points">3 Punkte</span></div>
+        <p>Wahre Werte 10, 20, 30, 40; Vorhersagen 12, 18, 33, 37. Berechnen Sie MAE, MSE und RMSE (zwei Nachkommastellen).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Fehler −2, 2, −3, 3. MAE = 10/4 = <b>2,5</b>; MSE = (4 + 4 + 9 + 9)/4 = <b>6,5</b>; RMSE = √6,5 ≈ <b>2,55</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 6: Bestimmtheitsmaß</h3><span class="points">2 Punkte</span></div>
+        <p>Berechnen Sie für Aufgabe 5 das R² (drei Nachkommastellen).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Mittelwert 25; Gesamtstreuung 225 + 25 + 25 + 225 = 500; Restfehler 26. R² = 1 − 26/500 = <b>0,948</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 7: Diagnose I</h3><span class="points">4 Punkte</span></div>
+        <p>Trainings-Accuracy 99 %, Validierungs-Accuracy 71 %. Stellen Sie die Diagnose und nennen Sie drei Maßnahmen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p><b>Overfitting</b> (1 P.). Maßnahmen (je 1 P.): Regularisierung, mehr oder augmentierte Daten, einfacheres Modell bzw. Baumtiefe begrenzen, Early Stopping, Dropout, weniger Merkmale.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 8: Diagnose II</h3><span class="points">2 Punkte</span></div>
+        <p>Trainings-Accuracy 62 %, Validierungs-Accuracy 60 % bei einer Aufgabe, bei der Fachleute 90 % erreichen. Diagnose und eine Maßnahme?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p><b>Underfitting</b> (1 P.). Maßnahme (1 P.): komplexeres Modell, bessere/mehr Merkmale, weniger Regularisierung, länger trainieren.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 9: Kreuzvalidierung</h3><span class="points">3 Punkte</span></div>
+        <p>Eine 5-fache Kreuzvalidierung liefert die F1-Werte 0,82; 0,85; 0,80; 0,84; 0,79. Berechnen Sie den Mittelwert. Wie oft wurde das Modell trainiert?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>Mittelwert 4,10 / 5 = <b>0,82</b> (2 P.). <b>5</b>-mal trainiert (1 P.).</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 10: Regularisierung zuordnen</h3><span class="points">3 Punkte</span></div>
+        <p>Welches Verfahren passt? (1) Setzt unwichtige Gewichte auf genau null. (2) Verkleinert alle Gewichte, ohne sie auf null zu setzen. (3) Schaltet beim Training eines neuronalen Netzes zufällig Neuronen ab.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(1) L1 / Lasso, (2) L2 / Ridge, (3) Dropout.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 11: F1</h3><span class="points">2 Punkte</span></div>
+        <p>Precision 0,6, Recall 0,9. Berechnen Sie den F1-Score.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>2 · 0,6 · 0,9 / 1,5 = 1,08 / 1,5 = <b>0,72</b>.</p></details></div>
+
+      <div class="task"><div class="task-head"><h3>Aufgabe 12: Die richtige Kennzahl</h3><span class="points">4 Punkte</span></div>
+        <p>Begründen Sie, ob Sie Precision oder Recall priorisieren: (a) KI-gestützte Krebsvorsorge, (b) automatische Sperrung von Kundenkonten bei Betrugsverdacht.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary><p>(a) Recall (1 P.): Ein übersehener Krebsfall ist sehr schwerwiegend, ein Fehlalarm führt nur zu einer weiteren Untersuchung (1 P.). (b) Precision (1 P.): Eine falsche Sperrung trifft unschuldige Kunden direkt und schadet dem Vertrauen; alternativ Recall hoch halten, aber Sperrung erst nach menschlicher Prüfung (1 P.).</p></details></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Aufgaben 1 bis 6 sind reine Rechenaufgaben und sollten in der Prüfung sicher sitzen. Lassen Sie sie auf Zeit lösen: 25 Minuten.</p></aside>
+    </section>
+
+    <section class="lesson" id="quiz" data-title="Abschlussquiz" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 30 Minuten</span><h2>Abschlussquiz Modul 6</h2></div>
+      <p>20 Fragen, jeweils eine richtige Antwort. Ab 14 richtigen Antworten sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="btnrow"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Ohne Unterlagen, mit Taschenrechner.</p></aside>
+    </section>
+
+    <section class="lesson" id="summary" data-title="Formelkarte" data-part="Abschluss">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Formelkarte Modellbewertung</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Größe</th><th>Formel</th></tr></thead>
+        <tbody>
+          <tr><td>Accuracy</td><td>(TP + TN) / (TP + TN + FP + FN)</td></tr>
+          <tr><td>Precision</td><td>TP / (TP + FP)</td></tr>
+          <tr><td>Recall, Richtig-Positiv-Rate</td><td>TP / (TP + FN)</td></tr>
+          <tr><td>Spezifität</td><td>TN / (TN + FP)</td></tr>
+          <tr><td>Falsch-Positiv-Rate</td><td>FP / (FP + TN)</td></tr>
+          <tr><td>F1</td><td>2 · P · R / (P + R)</td></tr>
+          <tr><td>Kosten</td><td>FN · Kosten_FN + FP · Kosten_FP</td></tr>
+          <tr><td>MAE / MSE / RMSE</td><td>Ø |Fehler| / Ø Fehler² / √MSE</td></tr>
+          <tr><td>R²</td><td>1 − Σ(y − ŷ)² / Σ(y − ȳ)²</td></tr>
+          <tr><td>Ridge / Lasso</td><td>MSE + λ Σ w² / MSE + λ Σ |w|</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Weiter mit Modul 7:</b> Neuronale Netze und Deep Learning.</p>
+      <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Formelkarte muss bis zur Prüfung auswendig sitzen.</p></aside>
+    </section>
+<!--SCRIPTS-->
+<script type="application/json" id="quiz-data">[
+["Was ist ein False Negative (FN)?", ["Ein Fehlalarm", "Ein übersehener positiver Fall", "Ein korrekt erkannter negativer Fall", "Ein korrekt erkannter positiver Fall"], 1, "Vorhersage negativ, aber falsch. Lektion 2."],
+["Wie heißt ein Fehlalarm noch?", ["Fehler 1. Art (False Positive)", "Fehler 2. Art", "True Negative", "Recall"], 0, "Lektion 2."],
+["Formel der Precision?", ["TP / (TP + FN)", "TP / (TP + FP)", "TN / (TN + FP)", "(TP + TN) / alle"], 1, "Lektion 3."],
+["Formel des Recall?", ["TP / (TP + FN)", "TP / (TP + FP)", "FP / (FP + TN)", "TN / alle"], 0, "Lektion 3."],
+["Bei welcher Anwendung ist Recall besonders wichtig?", ["Spamfilter", "Krebsvorsorge", "Produktempfehlungen", "Wetter-App"], 1, "Ein übersehener Fall ist schwerwiegend. Lektion 3."],
+["Warum ist Accuracy bei unbalancierten Daten irreführend?", ["Sie ist immer zu niedrig", "Ein Modell, das immer die häufige Klasse sagt, erreicht trotzdem hohe Werte", "Sie kann nicht berechnet werden", "Sie ignoriert TP"], 1, "Lektion 4."],
+["Precision 1,0 und Recall 0,1. F1 ungefähr?", ["0,55", "0,18", "0,10", "1,0"], 1, "2 · 0,1 / 1,1. Lektion 4."],
+["Was passiert, wenn man die Schwelle senkt?", ["Recall steigt, Precision sinkt meist", "Precision steigt, Recall sinkt", "Beides steigt", "Nichts"], 0, "Lektion 5."],
+["Was bedeutet eine AUC von 0,5?", ["Perfekte Trennung", "Nicht besser als Raten", "50 % Accuracy", "Halber Recall"], 1, "Lektion 6."],
+["Was trägt die ROC-Kurve auf?", ["Precision gegen Recall", "Richtig-Positiv-Rate gegen Falsch-Positiv-Rate", "Fehler gegen Epochen", "Accuracy gegen Schwelle"], 1, "Lektion 6."],
+["Welche Kennzahl bestraft große Fehler am stärksten?", ["MAE", "MSE", "Median-Fehler", "Accuracy"], 1, "Quadrieren. Lektion 7."],
+["R² = 0 bedeutet …", ["perfekte Vorhersage", "nicht besser als immer den Mittelwert vorherzusagen", "100 % Fehler", "das Modell ist überangepasst"], 1, "Lektion 7."],
+["Trainingsfehler sehr niedrig, Validierungsfehler hoch. Diagnose?", ["Underfitting", "Overfitting", "Gute Anpassung", "Data Drift"], 1, "Lektion 8."],
+["Hoher Bias führt zu …", ["Overfitting", "Underfitting", "hoher Varianz", "Data Leakage"], 1, "Lektion 9."],
+["Welche Maßnahme hilft NICHT gegen Overfitting?", ["Mehr Daten", "Regularisierung", "Das Modell noch komplexer machen", "Early Stopping"], 2, "Lektion 8/11."],
+["Was macht Early Stopping?", ["Bricht das Training ab, wenn der Validierungsfehler wieder steigt", "Stoppt die Vorhersage", "Löscht Ausreißer", "Senkt die Lernrate auf null"], 0, "Lektion 10."],
+["Welche Regularisierung setzt Gewichte auf genau null?", ["L2 (Ridge)", "L1 (Lasso)", "Dropout", "Batch-Normalisierung"], 1, "Lektion 11."],
+["Bei 10-facher Kreuzvalidierung wird das Modell wie oft trainiert?", ["1-mal", "5-mal", "10-mal", "100-mal"], 2, "Lektion 12."],
+["Ersetzt die Kreuzvalidierung den Testdatensatz?", ["Ja, immer", "Nein, der Test bleibt für die Abschlussbewertung zurückgelegt", "Nur bei Regression", "Nur bei neuronalen Netzen"], 1, "Lektion 12."],
+["Modell A F1 0,76 ± 0,03, Modell B 0,77 ± 0,04. Was folgt?", ["B ist klar besser", "Der Unterschied ist nicht aussagekräftig; weitere Kriterien entscheiden", "A ist klar besser", "Beide sind unbrauchbar"], 1, "Lektion 13."]
+]</script>
+<script>
+/* Antwortfelder der Übungen in Modul 6 */
+(function () {
+  function z(id, label, punkte, wert, tol, einheit) { return { id: id, label: label, typ: "zahl", punkte: punkte, wert: wert, tol: tol, einheit: einheit }; }
+  window.UEBUNGEN = {
+    modul: 6,
+    aufgaben: {
+      a1: { teile: [z("acc", "Accuracy", 1, 85, 0.06, "%"), z("p", "Precision", 1, 80, 0.06, "%"), z("r", "Recall", 1, 66.7, 0.06, "%"), z("f1", "F1", 2, 72.7, 0.06, "%")] },
+      a2: { teile: [z("sp", "Spezifität", 1, 92.9, 0.06, "%"), z("fpr", "Falsch-Positiv-Rate", 1, 7.1, 0.06, "%")] },
+      a3: { teile: [z("acc", "Accuracy", 1, 99, 0.01, "%"), z("r", "Recall", 1, 0, 0.001, "%"), { id: "w", label: "Warum nutzlos?", typ: "text", punkte: 1, erwartung: "Findet keinen einzigen positiven Fall; hohe Accuracy nur wegen der seltenen positiven Klasse." }] },
+      a4: { teile: [z("a", "Kosten Modell A", 1, 7000, 0.5, "€"), z("b", "Kosten Modell B", 1, 8000, 0.5, "€"), { id: "w", label: "Günstigeres Modell", typ: "wahl", punkte: 1, optionen: ["Modell A", "Modell B"], richtig: 0 }] },
+      a5: { teile: [z("mae", "MAE", 1, 2.5, 0.001), z("mse", "MSE", 1, 6.5, 0.001), z("rmse", "RMSE", 1, 2.55, 0.006)] },
+      a6: { teile: [z("r2", "R²", 2, 0.948, 0.0006)] },
+      a7: { teile: [{ id: "d", label: "Diagnose", typ: "wahl", punkte: 1, optionen: ["Underfitting", "Overfitting", "Gute Anpassung"], richtig: 1 },
+        { id: "m", label: "Drei Maßnahmen", typ: "text", punkte: 3, erwartung: "Je 1 P.: Regularisierung, mehr/augmentierte Daten, einfacheres Modell bzw. Baumtiefe begrenzen, Early Stopping, Dropout, weniger Merkmale." }] },
+      a8: { teile: [{ id: "d", label: "Diagnose", typ: "wahl", punkte: 1, optionen: ["Underfitting", "Overfitting", "Gute Anpassung"], richtig: 0 },
+        { id: "m", label: "Eine Maßnahme", typ: "text", punkte: 1, erwartung: "Komplexeres Modell, bessere/mehr Merkmale, weniger Regularisierung oder länger trainieren." }] },
+      a9: { teile: [z("m", "Mittelwert F1", 2, 0.82, 0.001), z("n", "Anzahl Trainingsläufe", 1, 5, 0.001)] },
+      a10: { teile: [
+        { id: "r1", label: "(1) Gewichte auf null", typ: "wahl", punkte: 1, optionen: ["L1 / Lasso", "L2 / Ridge", "Dropout"], richtig: 0 },
+        { id: "r2", label: "(2) Gewichte verkleinern", typ: "wahl", punkte: 1, optionen: ["L1 / Lasso", "L2 / Ridge", "Dropout"], richtig: 1 },
+        { id: "r3", label: "(3) Neuronen abschalten", typ: "wahl", punkte: 1, optionen: ["L1 / Lasso", "L2 / Ridge", "Dropout"], richtig: 2 }] },
+      a11: { teile: [z("f1", "F1-Score", 2, 0.72, 0.001)] },
+      a12: { teile: [{ id: "t", label: "Begründung für (a) und (b)", typ: "text", punkte: 4, erwartung: "(a) Recall (1 P.), weil übersehener Krebs schwerwiegend und Fehlalarm nur Folgeuntersuchung (1 P.). (b) Precision (1 P.), weil falsche Sperrung Unschuldige trifft und Vertrauen kostet; alternativ menschliche Prüfung vor Sperrung (1 P.)." }] }
+    }
+  };
+})();
+</script>
+<script>
+/* Rechner in Modul 6 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 2 : d }) : "–"; }
+  function kpi(l, v) { return '<div class="kpi"><span>' + l + "</span><b>" + v + "</b></div>"; }
+  function num(id) { var v = parseFloat(String(document.getElementById(id).value).replace(",", ".")); return isFinite(v) ? v : 0; }
+  function list(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(",", "."); }).filter(Boolean).map(Number).filter(isFinite); }
+  function pct(x) { return isFinite(x) ? fmt(x * 100, 1) + " %" : "–"; }
+
+  function cm() {
+    var tp = num("cmTP"), fn = num("cmFN"), fp = num("cmFP"), tn = num("cmTN"), cfn = num("cmCFN"), cfp = num("cmCFP");
+    var all = tp + fn + fp + tn, p = tp / (tp + fp), r = tp / (tp + fn), f1 = 2 * p * r / (p + r);
+    document.getElementById("cmOut").innerHTML = kpi("Accuracy", pct((tp + tn) / all)) + kpi("Precision", pct(p)) + kpi("Recall", pct(r)) +
+      kpi("Spezifität", pct(tn / (tn + fp))) + kpi("F1", pct(f1)) + kpi("Fehlerkosten", fmt(fn * cfn + fp * cfp, 0) + " €");
+  }
+  ["cmTP", "cmFN", "cmFP", "cmTN", "cmCFN", "cmCFP"].forEach(function (i) { document.getElementById(i).addEventListener("input", cm); }); cm();
+
+  var cases = [[0.95, 1], [0.9, 1], [0.85, 1], [0.8, 0], [0.7, 1], [0.65, 0], [0.6, 1], [0.55, 0], [0.5, 0], [0.45, 1], [0.4, 0], [0.35, 1], [0.3, 0], [0.25, 0], [0.2, 0], [0.15, 0], [0.1, 0], [0.08, 0], [0.05, 0], [0.02, 0]];
+  function thr() {
+    var t = num("thrR");
+    document.getElementById("thrOut").textContent = fmt(t, 2);
+    var tp = 0, fp = 0, fn = 0, tn = 0, txt = [];
+    cases.forEach(function (c) {
+      var alarm = c[0] >= t;
+      if (alarm && c[1]) tp++; else if (alarm) fp++; else if (c[1]) fn++; else tn++;
+      txt.push(fmt(c[0], 2) + (c[1] ? " (Betrug)" : "") + (alarm ? " → Alarm" : ""));
+    });
+    var p = tp + fp ? tp / (tp + fp) : NaN, r = tp / (tp + fn);
+    document.getElementById("thrK").innerHTML = kpi("TP / FN", tp + " / " + fn) + kpi("FP / TN", fp + " / " + tn) + kpi("Precision", pct(p)) + kpi("Recall", pct(r));
+    document.getElementById("thrList").textContent = "Bewertungen (7 Betrugsfälle unter 20): " + txt.join(" · ");
+  }
+  document.getElementById("thrR").addEventListener("input", thr); thr();
+
+  function reg() {
+    var y = list(document.getElementById("rgY").value), yh = list(document.getElementById("rgP").value), out = document.getElementById("rgOut");
+    if (!y.length || y.length !== yh.length) { out.innerHTML = kpi("Hinweis", "gleich viele Werte eingeben"); return; }
+    var n = y.length, mean = y.reduce(function (a, b) { return a + b; }, 0) / n;
+    var mae = 0, mse = 0, sst = 0, mape = 0, mapeOk = true;
+    y.forEach(function (v, i) { var e = v - yh[i]; mae += Math.abs(e); mse += e * e; sst += (v - mean) * (v - mean); if (v === 0) mapeOk = false; else mape += Math.abs(e / v); });
+    mae /= n; mse /= n;
+    out.innerHTML = kpi("MAE", fmt(mae, 3)) + kpi("MSE", fmt(mse, 3)) + kpi("RMSE", fmt(Math.sqrt(mse), 3)) + kpi("R²", sst ? fmt(1 - mse * n / sst, 3) : "–") + kpi("MAPE", mapeOk ? fmt(mape / n * 100, 1) + " %" : "nicht definiert");
+  }
+  ["rgY", "rgP"].forEach(function (i) { document.getElementById(i).addEventListener("input", reg); }); reg();
+})();
+</script>

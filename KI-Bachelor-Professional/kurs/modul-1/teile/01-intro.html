@@ -1,0 +1,165 @@
+<!--META {"nr": 1, "titel": "Grundbegriffe von KI und Maschinellem Lernen", "lektionen": 17, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 1 von 17 · ca. 25 Lernstunden · kostenlos</span>
+      <h1 id="introTitle">Grundbegriffe: Was KI ist, wie eine Maschine lernt und wofür man sie einsetzt</h1>
+      <p>Dieses Modul legt das Fundament für den ganzen Kurs zum Bachelor Professional in KI und Maschinellem Lernen. Sie brauchen kein Vorwissen: Jeder Begriff kommt zuerst mit einem Bild aus dem Alltag und danach mit der genauen Erklärung, wie Sie sie in der Prüfung brauchen. Am Ende können Sie KI-Vorhaben im Betrieb richtig einordnen – die wichtigste Grundlage, um später Projekte zu planen, zu bewerten und zu führen.</p>
+      <div class="facts">
+        <span class="chip">17 Lektionen in 4 Teilen</span><span class="chip">7 Animationen</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 4 Nr. 1</span><span class="chip">Prüfung: Teil 1, Bereich A und B</span>
+      </div>
+      <div class="legend" aria-label="So sind die Lektionen aufgebaut">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – ein vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – die genaue Erklärung für die Prüfung</span></div>
+        <div><i style="background: var(--surface); outline: 2px solid var(--accent);"></i><span><b>Merksatz</b> – das eine, was hängen bleiben muss</span></div>
+        <div><i style="background: var(--violet-soft); outline: 2px solid var(--violet);"></i><span><b>Prüfungstipp</b> – so wird es abgefragt</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="KI im Alltag und im Betrieb" data-part="Teil A · Was ist KI?">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 15 Minuten</span><h2>KI steckt längst im Alltag – und in fast jedem Betrieb</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ihr Handy entsperrt sich mit Ihrem Gesicht. Das Navi kennt den Stau, bevor Sie ihn sehen. Das Postfach schiebt Betrugsmails in den Spam-Ordner. Der Streamingdienst schlägt Ihnen eine Serie vor, die Ihnen tatsächlich gefällt. Hinter all dem steckt dasselbe Prinzip: Ein Computer hat aus sehr vielen früheren Fällen gelernt und schätzt damit einen neuen Fall ein.</p>
+      </div>
+      <div class="prose">
+        <h3>Und im Betrieb?</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Bereich</th><th>Typischer KI-Einsatz</th><th>Was das Modell liefert</th></tr></thead>
+          <tbody>
+            <tr><td>Produktion</td><td>Kamera prüft Bauteile, Sensoren melden drohende Ausfälle</td><td>„in Ordnung / Ausschuss“, Restlebensdauer in Stunden</td></tr>
+            <tr><td>Vertrieb</td><td>Absatzprognose, Kündigerwarnung, Preisempfehlung</td><td>Stückzahl je Woche, Kündigungswahrscheinlichkeit</td></tr>
+            <tr><td>Verwaltung</td><td>Belege auslesen, Anfragen sortieren, Texte entwerfen</td><td>Rechnungsbetrag, Kategorie, Textvorschlag</td></tr>
+            <tr><td>Personal</td><td>Dienstpläne optimieren, Wissen im Intranet finden</td><td>Planvorschlag, Antwort mit Quelle</td></tr>
+            <tr><td>Kundenservice</td><td>Chat-Assistent, Weiterleitung an die richtige Stelle</td><td>Antworttext, Zuständigkeit</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Was Sie nach diesem Modul können</h3>
+        <ul>
+          <li>KI, maschinelles Lernen, Deep Learning und generative KI sauber auseinanderhalten.</li>
+          <li>Erklären, wie ein Modell aus Daten lernt, und warum man es an neuen Daten prüfen muss.</li>
+          <li>Eine betriebliche Aufgabe als Regression oder Klassifikation erkennen und die passende Lernart wählen.</li>
+          <li>Typische Algorithmen und den Lebenszyklus eines KI-Modells im Betrieb beschreiben.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Wo ein Computer aus vielen früheren Beispielen eine Einschätzung für einen neuen Fall ableitet, steckt fast immer maschinelles Lernen.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>In Teil 2 der schriftlichen Prüfung beginnen Aufgaben oft mit „Nennen Sie drei Einsatzmöglichkeiten von KI in der Muster GmbH“. Nennen Sie dann Beispiele <b>aus der beschriebenen Situation</b> und jeweils, was das Modell konkret ausgibt – das zeigt, dass Sie den Fall verstanden haben.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie zum Einstieg: „Wer hat heute schon KI benutzt?“ Gehen Sie dann die Beispiele durch – am Ende melden sich fast alle. Danach die Tabelle: Lassen Sie die Teilnehmenden ergänzen, wo KI in ihrem eigenen Betrieb steckt oder stecken könnte.</p>
+        <p>Botschaft: KI ist Alltagstechnik, keine Science-Fiction. Für den Bachelor Professional geht es nicht nur um die Technik, sondern darum, KI im Betrieb sinnvoll einzusetzen und zu steuern.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Was ist KI?" data-part="Teil A · Was ist KI?">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 20 Minuten</span><h2>Was bedeutet „Künstliche Intelligenz“?</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Taschenrechner nimmt uns Rechenarbeit ab. KI nimmt uns eine andere Art von Arbeit ab: erkennen, einschätzen, entscheiden – Aufgaben, für die wir Menschen normalerweise nachdenken müssen.</p>
+          <p>Die KI „denkt“ dabei nicht wie wir. Sie rechnet mit Wahrscheinlichkeiten. Sie hat kein Bewusstsein und keine Absichten.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Künstliche Intelligenz (KI)</b> ist der Oberbegriff für Computersysteme, die Aufgaben lösen, für die Menschen Intelligenz brauchen: wahrnehmen, verstehen, schlussfolgern, entscheiden, lernen.</p>
+          <p>Die <b>EU-KI-Verordnung</b> (Art. 3 Nr. 1) definiert ein KI-System als maschinengestütztes System, das für explizite oder implizite Ziele <b>aus den Eingaben ableitet</b>, wie es Ausgaben wie Vorhersagen, Inhalte, Empfehlungen oder Entscheidungen erzeugt, und das mit unterschiedlicher Autonomie arbeitet.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Regelbasiert oder lernend?</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th>Regelbasierte KI</th><th>Lernende KI (maschinelles Lernen)</th></tr></thead>
+          <tbody>
+            <tr><td>Wer macht die Regeln?</td><td>Menschen schreiben Wenn-dann-Regeln</td><td>Das System leitet sie aus Beispielen ab</td></tr>
+            <tr><td>Beispiel</td><td>Expertensystem für Diagnosen, Schachprogramm mit festen Regeln</td><td>Spamfilter, Bilderkennung, Sprachmodell</td></tr>
+            <tr><td>Stärke</td><td>Nachvollziehbar, vorhersehbar</td><td>Löst Aufgaben, für die niemand Regeln formulieren kann</td></tr>
+            <tr><td>Schwäche</td><td>Starr; versagt bei Fällen, an die niemand gedacht hat</td><td>Braucht viele gute Daten; kann sich irren</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Schwache und starke KI</h3>
+        <p><b>Schwache (enge) KI</b> löst eine klar umrissene Aufgabe – alle heutigen Systeme gehören dazu, auch große Sprachmodelle. <b>Starke KI</b> (auch AGI, Artificial General Intelligence) wäre allgemein intelligent wie ein Mensch, in beliebigen Aufgaben. Sie existiert bisher nicht.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>KI = Systeme, die Denkaufgaben übernehmen. Nicht jede KI lernt – aber die moderne KI fast immer.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Programm vergibt Rabatte nach der festen Regel „über 1.000 € Umsatz → 5 %“. Ist das maschinelles Lernen?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Ja, es trifft eine Entscheidung</button>
+          <button type="button" class="opt" data-right="true">Nein, die Regel stammt vom Menschen</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Die Regel wurde nicht aus Daten gelernt. Je nach Sichtweise ist es eine einfache regelbasierte Automatisierung, aber kein maschinelles Lernen." data-no="Nicht ganz. Entscheidend ist, wer die Regel macht: Hier hat ein Mensch sie vorgegeben – maschinelles Lernen setzt voraus, dass die Regel aus Daten gelernt wird."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Die Definition der EU-KI-Verordnung ist prüfungsrelevant, weil sie entscheidet, ob ein System unter die Verordnung fällt. Kernwort ist „ableiten“: Ein KI-System leitet aus Eingaben ab, wie es Ausgaben erzeugt. Eine reine Tabellenberechnung mit festen Formeln fällt nach den Leitlinien der Kommission nicht darunter.</p>
+        <p>Diskutieren Sie die Kontrollfrage: Wo endet Automatisierung, wo beginnt KI? Für die Prüfung zählt die saubere Begründung.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Die vier Ebenen" data-part="Teil A · Was ist KI?">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 15 Minuten</span><h2>KI, maschinelles Lernen, Deep Learning, generative KI</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Denken Sie an russische Matroschka-Puppen: In der großen Puppe steckt eine kleinere, darin eine noch kleinere. Genauso stecken die vier Begriffe ineinander. Jeder innere Begriff ist ein Teilbereich des äußeren.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/ebenen.gif" width="640" height="380" alt="Animation: Vier ineinanderliegende Ellipsen erscheinen nacheinander. Außen Künstliche Intelligenz, darin Maschinelles Lernen, darin Deep Learning, innen Generative KI." loading="lazy">
+        <figcaption>Von außen nach innen wird es immer spezieller.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Einfach gesagt</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><b>Künstliche Intelligenz</b></td><td>Alles, was Denkaufgaben übernimmt – auch mit festen Regeln</td><td>Expertensystem, Routenplaner</td></tr>
+          <tr><td><b>Maschinelles Lernen (ML)</b></td><td>Das System lernt Regeln aus Beispielen</td><td>Kündigerprognose, Spamfilter</td></tr>
+          <tr><td><b>Deep Learning (DL)</b></td><td>ML mit tiefen neuronalen Netzen aus vielen Schichten; lernt direkt aus Bild, Ton, Text</td><td>Bauteilprüfung per Kamera, Spracherkennung</td></tr>
+          <tr><td><b>Generative KI</b></td><td>Erzeugt neue Inhalte statt nur zu bewerten</td><td>Chat-Assistent, Bild- und Codegenerator</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Jedes Deep Learning ist maschinelles Lernen, und jedes maschinelle Lernen ist KI – aber nicht umgekehrt.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>„KI“ und „Chatbot“ sind nicht dasselbe. Chat-Assistenten sind nur der innerste Kreis. Wer in der Prüfung KI mit generativer KI gleichsetzt, verschenkt Punkte – die meisten betrieblichen KI-Anwendungen sind klassische Vorhersagemodelle.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Animation einmal ohne Kommentar laufen, dann Ebene für Ebene erklären. „Deep“ bezieht sich nur auf die vielen Schichten des Netzes, nicht auf „tiefes Verständnis“ – das kommt in Modul 5.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Daten als Wissen" data-part="Teil A · Was ist KI?">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Daten als Repräsentation von Wissen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine erfahrene Disponentin weiß, dass montags und vor Feiertagen mehr bestellt wird. Dieses Wissen steckt in ihrem Kopf – und in den Bestelldaten der letzten Jahre. Ein Modell kann es nur aus den Daten holen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Für maschinelles Lernen wird Wissen in <b>Daten</b> abgebildet: Jede Zeile ist ein <b>Beispiel</b> (Datensatz, Instanz), jede Spalte ein <b>Merkmal</b> (Feature). Die Größe, die vorhergesagt werden soll, heißt <b>Zielgröße</b> oder <b>Label</b>.</p>
+          <p>Das Modell lernt den Zusammenhang zwischen Merkmalen und Zielgröße – und nur den, der in den Daten steckt.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Ein Datensatz zum Anfassen</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kunde</th><th>Vertragsdauer (Monate)</th><th>Beschwerden</th><th>Tarif</th><th>Rechnung (€)</th><th>Gekündigt?</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="r">34</td><td class="r">0</td><td>Basis</td><td class="r">29</td><td>nein</td></tr>
+            <tr><td>2</td><td class="r">5</td><td class="r">3</td><td>Premium</td><td class="r">79</td><td>ja</td></tr>
+            <tr><td>3</td><td class="r">18</td><td class="r">1</td><td>Basis</td><td class="r">35</td><td>nein</td></tr>
+          </tbody>
+        </table></div>
+        <p class="code-cap">Merkmale: Vertragsdauer, Beschwerden, Tarif, Rechnung. Zielgröße (Label): Gekündigt.</p>
+        <h3>Wie Daten Wissen repräsentieren</h3>
+        <ul>
+          <li><b>Strukturierte Daten</b>: Tabellen mit festen Spalten (Datenbank, Excel).</li>
+          <li><b>Unstrukturierte Daten</b>: Texte, Bilder, Audio, Video – sie werden für das Modell in Zahlen übersetzt (z. B. Pixelwerte, Embeddings).</li>
+          <li><b>Semi-strukturierte Daten</b>: z. B. JSON, Log-Dateien, E-Mails mit Kopfzeilen.</li>
+          <li>Neben Daten gibt es auch <b>explizites Wissen</b> in Regeln, Ontologien und Wissensgraphen – das ist die Welt der regelbasierten KI.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Modell weiß nur, was in seinen Daten steckt. Fehlt ein wichtiger Einfluss in den Daten, kann es ihn nicht lernen.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Die Kunden-ID ist kein sinnvolles Merkmal. Sie trägt kein Wissen über das Kündigen – ein Modell, das sie nutzt, lernt Zufallsmuster auswendig.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Versandhändler will vorhersagen, ob ein Paket zu spät kommt. Was ist hier die Zielgröße?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Das Gewicht des Pakets</button>
+          <button type="button" class="opt" data-right="true">„Verspätet ja/nein“</button>
+          <button type="button" class="opt">Die Postleitzahl</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Die Zielgröße ist das, was vorhergesagt werden soll. Gewicht und Postleitzahl sind Merkmale." data-no="Nicht ganz. Gewicht und Postleitzahl sind Merkmale – also Eingaben. Vorhergesagt wird, ob das Paket verspätet ist."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diese Begriffe – Beispiel, Merkmal, Label – brauchen die Teilnehmenden in jedem weiteren Modul. Lassen Sie für den eigenen Betrieb einen Mini-Datensatz an die Tafel schreiben: Was wären Merkmale, was das Label?</p>
+      </aside>
+    </section>

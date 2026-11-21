@@ -1,0 +1,214 @@
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Programmieren oder lernen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 40 Minuten</span><h2>Der große Unterschied: Regeln schreiben oder Regeln lernen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p><b>Das Kochrezept:</b> Sie geben jemandem eine genaue Anleitung: 200 g Mehl, 2 Eier, 20 Minuten bei 180 Grad. Wer sich daran hält, bekommt jedes Mal denselben Kuchen. Das ist <b>klassisches Programmieren</b> – ein Mensch denkt sich die Regeln aus und schreibt sie auf.</p>
+          <p><b>Das Kind und die Tiere:</b> Einem Kind erklärt niemand per Regel, was einen Hund von einer Katze unterscheidet. Es sieht viele Hunde und Katzen, jemand sagt jeweils „Hund“ oder „Katze“, und irgendwann erkennt es neue Tiere selbst – auch Rassen, die es noch nie gesehen hat. Das ist <b>maschinelles Lernen</b>: Die Regeln entstehen aus den Beispielen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Klassische Programmierung:</b> Daten + Regeln → Ergebnis.</p>
+          <p><b>Maschinelles Lernen:</b> Daten + bekannte Ergebnisse → Regeln. Diese gelernten Regeln nennt man das <b>Modell</b>. Anschließend wird das Modell auf neue Daten angewendet, um Ergebnisse vorherzusagen.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/programmieren-vs-lernen.gif" width="640" height="380" alt="Animation: Oben fließen Daten und vom Menschen geschriebene Regeln in ein Programm, das ein Ergebnis liefert. Unten fließen Daten und bekannte Ergebnisse in einen Lernschritt, der als Ausgabe die Regeln, also das Modell, erzeugt." loading="lazy">
+        <figcaption>Beim maschinellen Lernen sind die Regeln nicht der Anfang, sondern das Ergebnis.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Die Umkehrung verstehen</h3>
+        <p>Der Kern dieser Lektion ist eine Umkehrung. Beim klassischen Programmieren stecken Sie <b>Regeln und Daten hinein</b> und bekommen <b>Antworten heraus</b>. Beim maschinellen Lernen stecken Sie <b>Daten und Antworten hinein</b> und bekommen <b>Regeln heraus</b>. Diese Regeln sind dann ein Werkzeug, das auch für neue Daten Antworten liefert.</p>
+        <p>Warum ist das nützlich? Weil es viele Aufgaben gibt, bei denen wir die Regeln gar nicht aufschreiben <i>können</i>. Versuchen Sie einmal, in Wenn-dann-Sätzen zu beschreiben, woran man ein Gesicht erkennt. Es gibt so viele Ausnahmen, dass die Liste nie fertig wird. Ein Mensch erkennt Gesichter mühelos, kann aber nicht erklären, wie. Genau hier hilft das Lernen aus Beispielen.</p>
+        <h3>Drei Beispiele im Vergleich</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Spamfilter</span>
+        <ul>
+          <li><b>Klassisch:</b> Ein Mensch schreibt: „Wenn die Mail das Wort ‚Gewinn‘ enthält und mehr als drei Links hat, dann Spam.“ Die Regel funktioniert zunächst. Dann schreiben die Absender „G3winn“ oder „Gewiinn“ – die Regel erkennt es nicht mehr, und jemand muss neue Regeln schreiben. Das ist ein Wettlauf, den der Mensch verliert.</li>
+          <li><b>Mit ML:</b> Das System bekommt 100.000 Mails, bei denen schon markiert ist, ob sie Spam sind. Es findet selbst Hunderte Merkmale, die zusammen auf Spam hindeuten (Absenderadresse, Tippfehler, Zahl der Links, Uhrzeit …). Mit neuen markierten Beispielen kann man es nachtrainieren, wenn sich die Maschen ändern.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Preis eines Gebrauchtwagens</span>
+        <p><b>Klassisch:</b> Man schreibt eine Formel auf, etwa „Neupreis minus 12 % pro Jahr minus 0,05 € pro gefahrenem Kilometer“. Das ist eine grobe Faustregel. Ob sie stimmt, hängt von Marke, Zustand und Ausstattung ab – und die Formel kennt das alles nicht.</p>
+        <p><b>Mit ML:</b> Das System bekommt 5.000 tatsächlich verkaufte Autos mit allen Angaben und dem erzielten Preis. Es findet selbst heraus, dass bei Kleinwagen der Kilometerstand stark zählt, bei Sportwagen eher die Ausstattung, und dass Dieselmodelle in manchen Jahren schneller an Wert verloren haben als Benziner. Solche Feinheiten schreibt niemand von Hand in eine Formel.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Mehrwertsteuer berechnen – hier ist Lernen unnötig</span>
+        <p>Eine Rechnung über 200 € netto bekommt 19 % Umsatzsteuer, also 38 €. Die Regel ist klar, kurz und ändert sich nur durch Gesetze. Hier wäre es unsinnig, ein Modell mit Beispielrechnungen zu trainieren: Es wäre teurer, ungenauer und schwerer zu überprüfen als eine einzige Zeile Programmcode. <b>Klassisches Programmieren ist hier eindeutig besser.</b></p>
+      </div>
+      <div class="prose">
+        <h3>Wann lohnt sich maschinelles Lernen? Drei Bedingungen</h3>
+        <ol>
+          <li><b>Die Regeln sind zu zahlreich oder zu kompliziert, um sie aufzuschreiben.</b> Gesichter erkennen, Sprache verstehen, Schäden auf Fotos finden.</li>
+          <li><b>Die Regeln ändern sich ständig.</b> Betrugsmaschen, Moden, Kundenverhalten. Ein Modell kann mit neuen Daten neu trainiert werden, während ein Regelwerk jedes Mal von Hand angepasst werden müsste.</li>
+          <li><b>Es gibt genug Beispieldaten in guter Qualität.</b> Ohne Beispiele kann nichts gelernt werden. Das ist die Bedingung, die in der Praxis am häufigsten scheitert.</li>
+        </ol>
+        <p>Wenn ein Problem mit wenigen, klaren und stabilen Regeln lösbar ist, ist klassische Programmierung besser: billiger, nachvollziehbar und fehlerfrei. Ein häufiger Anfängerfehler ist, KI einzusetzen, weil sie modern ist – und nicht, weil das Problem sie braucht.</p>
+        <h3>Was maschinelles Lernen kostet</h3>
+        <p>Ein Modell fällt nicht vom Himmel. Man braucht Daten (sammeln, bereinigen, markieren), Rechenleistung für das Training, Fachleute, die das Modell bewerten, und später Pflege, weil sich die Welt ändert. Regelbasierte Software ist beim Start oft schneller fertig. Das Lernen lohnt sich erst, wenn die Aufgabe so komplex ist, dass Regeln nicht mehr ausreichen.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Häufige Missverständnisse</span>
+        <ul>
+          <li><b>„Maschinelles Lernen löst jedes Problem besser als Regeln.“</b> Nein. Bei klaren, stabilen Regeln ist klassische Software überlegen.</li>
+          <li><b>„Das Modell programmiert sich selbst.“</b> Das Modell wird nicht von Menschen Regel für Regel geschrieben, aber Menschen wählen Daten, Verfahren und Bewertung aus. Viele Entscheidungen bleiben menschlich.</li>
+          <li><b>„Mehr Daten lösen alles.“</b> Mehr Daten helfen nur, wenn sie zur Aufgabe passen und korrekt sind. Fehlerhafte Daten werden mitgelernt.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Klassisch: Mensch schreibt die Regeln. ML: Die Maschine leitet die Regeln aus Beispielen ab. ML lohnt sich bei komplizierten, sich ändernden Regeln – und wenn es genug gute Daten gibt.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Eine beliebte Frage lautet: „Wann würden Sie bewusst kein maschinelles Lernen einsetzen?“ Gute Antwort: bei wenigen klaren, stabilen Regeln (z. B. Steuerberechnung), bei zu wenigen oder schlechten Daten und wenn jede Entscheidung vollständig nachvollziehbar sein muss.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Wofür ist klassische Programmierung besser geeignet als maschinelles Lernen?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Erkennen von Gesichtern auf Fotos</button>
+          <button type="button" class="opt" data-right="true">Berechnen der Umsatzsteuer auf eine Rechnung</button>
+          <button type="button" class="opt">Aufspüren neuer Betrugsmaschen</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Die Steuerregel ist klar und stabil, ein einfaches Programm ist billiger, genauer und leichter zu prüfen als ein Modell." data-no="Nicht ganz. Gesichter und neue Betrugsmaschen lassen sich schwer in feste Regeln fassen – dort hilft Lernen. Die Steuerberechnung hat eine klare Regel."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das ist die wichtigste Lektion des Moduls. Nehmen Sie sich Zeit. Fragen Sie: „Wie würden Sie einem Computer per Regel erklären, was eine Katze ist?“ Sammeln Sie Vorschläge wie „vier Beine, Fell, Schnurrhaare“ – und zeigen Sie dann, dass ein Hund das auch hat. So wird klar, warum Regeln an Grenzen stoßen.</p>
+        <p>Zeigen Sie dann die Animation: oben fließen Regeln hinein, unten kommen Regeln heraus. Lassen Sie die Teilnehmenden den Unterschied in eigenen Worten wiederholen, am besten mit dem Kochrezept als Bild.</p>
+        <p>Gehen Sie die drei Beispiele durch und achten Sie darauf, dass das dritte (Mehrwertsteuer) nicht untergeht: Es zeigt, dass ML kein Allheilmittel ist. Prüfende fragen gern: „Wann würden Sie bewusst kein ML einsetzen?“ Lassen Sie die Gruppe die drei Bedingungen in eigenen Worten nennen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Wie eine Maschine lernt">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 45 Minuten</span><h2>Wie lernt eine Maschine? Die wichtigsten Begriffe</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Stellen Sie sich eine Schülerin vor, die für eine Matheklausur übt. Sie rechnet Übungsaufgaben und schaut danach ins Lösungsheft. Bei jeder Aufgabe, die sie falsch gelöst hat, überlegt sie, was sie anders machen muss, und versucht es beim nächsten Mal besser. Nach Hunderten Aufgaben beherrscht sie das Verfahren. In der Klausur bekommt sie <b>neue</b> Aufgaben – und zeigt, ob sie das Prinzip verstanden oder nur die Übungsaufgaben auswendig gelernt hat.</p>
+        <p>Fast alles, was Sie in diesem Kurs über maschinelles Lernen hören, lässt sich auf diese Geschichte zurückführen. Behalten Sie sie im Hinterkopf – sie erklärt die Fachbegriffe, die jetzt kommen.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/lernschleife.gif" width="640" height="380" alt="Animation: Ein Kreislauf aus vier Schritten. 1 Beispiel zeigen, 2 Modell rät, 3 mit Lösung vergleichen, 4 Stellschrauben anpassen. Über vier Runden steigt die Sicherheit für die richtige Antwort Hund von 40 auf 93 Prozent." loading="lazy">
+        <figcaption>Training ist diese Schleife – millionenfach wiederholt.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Die Begriffe der Reihe nach</h3>
+        <p>Nehmen wir als durchgehendes Beispiel den <b>Preis eines Gebrauchtwagens</b>. Ein Autohändler möchte vorhersagen, für wie viel er ein Auto verkaufen kann.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Fachbegriff</th><th>In der Schul-Analogie</th><th>Bedeutung</th><th>Beispiel Gebrauchtwagenpreis</th></tr></thead>
+        <tbody>
+          <tr><td><b>Daten / Datensatz</b></td><td>Alle Übungsaufgaben</td><td>Sammlung von Beispielen</td><td>5.000 verkaufte Autos</td></tr>
+          <tr><td><b>Merkmal (Feature)</b></td><td>Angaben in der Aufgabe</td><td>Eingabeinformationen eines Beispiels</td><td>Alter, Kilometerstand, Marke, PS</td></tr>
+          <tr><td><b>Label (Zielwert)</b></td><td>Lösung im Lösungsheft</td><td>Die bekannte richtige Antwort</td><td>Tatsächlicher Verkaufspreis</td></tr>
+          <tr><td><b>Modell</b></td><td>Das, was die Schülerin verstanden hat</td><td>Gelernte Regeln mit vielen Stellschrauben (Parametern)</td><td>Formel, die aus Merkmalen einen Preis berechnet</td></tr>
+          <tr><td><b>Training</b></td><td>Üben mit Lösungsheft</td><td>Stellschrauben so anpassen, dass die Fehler kleiner werden</td><td>Rechnen, bis die Preise gut passen</td></tr>
+          <tr><td><b>Vorhersage (Inferenz)</b></td><td>Die Klausur</td><td>Modell auf neue, unbekannte Daten anwenden</td><td>Preis für ein Auto schätzen, das gerade reinkommt</td></tr>
+          <tr><td><b>Testdaten</b></td><td>Klausuraufgaben, die man vorher nicht kannte</td><td>Zurückgehaltene Beispiele zur ehrlichen Bewertung</td><td>1.000 Autos, die nicht im Training waren</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <h3>Was passiert beim Training? Ein Rechenbeispiel zum Mitverfolgen</h3>
+        <p>Damit das nicht abstrakt bleibt, rechnen wir ein ganz kleines Modell von Hand durch. Ein Vermieter will Mieten vorhersagen. Er hat drei Wohnungen als Beispiele (Merkmal: Wohnfläche, Label: tatsächliche Monatsmiete):</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wohnung</th><th>Wohnfläche (Merkmal)</th><th>Miete (Label)</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>40 m²</td><td>520 €</td></tr>
+            <tr><td>B</td><td>60 m²</td><td>700 €</td></tr>
+            <tr><td>C</td><td>80 m²</td><td>960 €</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Modell ist hier eine ganz einfache Regel mit <b>einer Stellschraube</b>: <i>Miete = Preis je m² mal Wohnfläche</i>. Die Stellschraube ist der Preis je Quadratmeter. Wir probieren zwei Einstellungen aus und messen jedes Mal den Fehler, also den Abstand zwischen Vorhersage und tatsächlicher Miete.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Zwei Stellschrauben-Einstellungen im Vergleich</span>
+        <ol class="steps">
+          <li><div><b>Einstellung 1: 10 € je m².</b> Vorhersagen: A 400 €, B 600 €, C 800 €. Fehler: <span class="calcline">|520 − 400| = 120 · |700 − 600| = 100 · |960 − 800| = 160</span>. Durchschnittlicher Fehler <span class="calcline">(120 + 100 + 160) : 3 ≈ 127 €</span>.</div></li>
+          <li><div><b>Einstellung 2: 12 € je m².</b> Vorhersagen: A 480 €, B 720 €, C 960 €. Fehler: <span class="calcline">|520 − 480| = 40 · |700 − 720| = 20 · |960 − 960| = 0</span>. Durchschnittlicher Fehler <span class="calcline">(40 + 20 + 0) : 3 = 20 €</span>.</div></li>
+          <li><div>Einstellung 2 ist deutlich besser. <span class="result">Training heißt: Die Stellschraube so lange verstellen, bis der Fehler klein ist.</span> Ein Computer probiert das nicht wahllos, sondern mit einem Rechenverfahren, das die Richtung der Verbesserung ausrechnet (mehr dazu im Gradientenabstieg in Modul 2 und in Modul 7).</div></li>
+        </ol>
+        <p>Echte Modelle haben nicht eine, sondern Tausende bis Milliarden Stellschrauben – man nennt sie <b>Parameter</b>. Das Prinzip ist aber dasselbe.</p>
+      </div>
+      <div class="prose">
+        <h3>Daten als Träger von Wissen</h3>
+        <p>In der Prüfungsordnung heißt es „Daten als Repräsentanten von Wissen“. Gemeint ist: Das Wissen, wie viel ein Auto wert ist, steht in keinem Buch. Es steckt in den vielen tatsächlichen Verkäufen. Das Modell holt dieses Wissen aus den Daten heraus. Daraus folgt auch: Sind die Daten falsch, einseitig oder veraltet, lernt das Modell genau diese Fehler mit. Fachleute sagen dazu <b>„Garbage in, garbage out“</b> – Müll rein, Müll raus.</p>
+        <h3>Auswendiglernen ist kein Lernen: Training und Test</h3>
+        <p>Eine Schülerin, die nur die Lösungen der Übungsaufgaben auswendig lernt, fällt in der Klausur durch. Bei Modellen heißt das <b>Overfitting</b> (Überanpassung). Darum teilt man die vorhandenen Daten auf: Mit den meisten Beispielen wird <b>trainiert</b>, ein Teil wird zurückgehalten und erst am Schluss zum <b>Testen</b> benutzt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Training und Test beim Autopreis</span>
+        <p>Der Händler hat 1.000 verkaufte Autos. Er trainiert mit 800 und hält 200 zurück. Ergebnis: Auf den 800 Trainingsautos liegt das Modell im Schnitt nur 4 % daneben, auf den 200 neuen Autos aber 18 %. Der große Abstand ist ein Warnsignal: Das Modell hat die Trainingsautos „auswendig gelernt“ und verallgemeinert schlecht. Hätte der Händler nur auf den Trainingsdaten gemessen, würde er sich fälschlich sicher fühlen. Mehr dazu in Modul 6.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Häufige Missverständnisse</span>
+        <ul>
+          <li><b>Merkmal und Label verwechseln.</b> Das Label ist immer die Antwort, die später vorhergesagt werden soll – hier der Preis. Alles andere sind Merkmale.</li>
+          <li><b>„Das Modell speichert alle Beispiele.“</b> Nein. Es speichert gelernte Stellschrauben-Werte, keine Kopie der Daten (auch wenn es manchmal Teile auswendig lernt – dann ist das ein Fehler).</li>
+          <li><b>Auf den Trainingsdaten testen.</b> Das gibt ein zu gutes Bild. Ehrlich bewertet wird nur mit Daten, die das Modell nie gesehen hat.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Training = Stellschrauben anpassen, bis die Fehler auf den Beispielen klein sind. Ob das Modell etwas taugt, zeigt sich erst an neuen Daten.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Bei einer Vorhersage, ob ein Kunde kündigt – was ist das Label?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Vertragslaufzeit des Kunden</button>
+          <button type="button" class="opt" data-right="true">Ob der Kunde tatsächlich gekündigt hat</button>
+          <button type="button" class="opt">Das trainierte Modell</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Das Label ist die bekannte Antwort auf die Frage, die das Modell später vorhersagen soll. Die Vertragslaufzeit ist ein Merkmal." data-no="Nicht ganz. Das Label ist immer die Antwort, die vorhergesagt werden soll – hier: gekündigt ja oder nein."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Erzählen Sie die Geschichte der Schülerin ausführlich, denn alle Begriffe der Tabelle hängen daran. Lassen Sie die Animation laufen und kommentieren Sie jede Runde: „Erst rät das Modell Katze, die Lösung sagt Hund, also werden die Stellschrauben gedreht. In Runde 4 ist es sich zu 93 Prozent sicher.“</p>
+        <p>Gehen Sie die Tabelle anhand des Gebrauchtwagens durch. Fragen Sie die Gruppe nach weiteren Merkmalen (Unfallwagen, Farbe, Region). So üben die Teilnehmenden, Merkmal und Label auseinanderzuhalten – das ist eine Standardfrage.</p>
+        <p>Rechnen Sie das Mietbeispiel gemeinsam an der Tafel durch. Es dauert fünf Minuten und macht „Training“ greifbar: Wer einmal gesehen hat, dass 12 € je Quadratmeter weniger Fehler macht als 10 €, hat verstanden, was Stellschrauben sind. Das Overfitting-Beispiel mit 4 % und 18 % reicht, um die Gefahr zu zeigen; Details kommen in Modul 6.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Schwache und starke KI">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Schwache KI, starke KI – und was es (noch) nicht gibt</h2></div>
+      <div class="box alltag"><span class="box-label">Im Alltag</span>
+        <p>Ein Schachprogramm schlägt jeden Menschen im Schach. Aber fragen Sie es, wie man ein Ei kocht, und es versteht die Frage nicht einmal – es kann nur Schach. Ein Mensch dagegen spielt vielleicht nur mittelmäßig Schach, kocht aber ein Ei, schreibt eine Postkarte, tröstet einen Freund und lernt im nächsten Monat einen ganz neuen Beruf. Das Schachprogramm ist ein <b>extremer Spezialist</b>, der Mensch ein <b>Allrounder</b>.</p>
+        <p>Dieser Unterschied zwischen Spezialist und Allrounder ist der Kern der Unterscheidung von schwacher und starker KI.</p>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Gibt es das?</th></tr></thead>
+        <tbody>
+          <tr><td><b>Schwache KI</b> (engl. Narrow AI)</td><td>Löst eine klar umrissene Aufgabe sehr gut, kann aber nichts anderes</td><td>Ja – alle heutigen Systeme, auch Chat-Assistenten</td></tr>
+          <tr><td><b>Starke KI</b> (engl. Artificial General Intelligence, AGI)</td><td>Allgemeine Intelligenz auf menschlichem Niveau in allen Bereichen</td><td>Nein, bisher nicht erreicht</td></tr>
+          <tr><td><b>Superintelligenz</b></td><td>Übertrifft Menschen in allen Bereichen deutlich</td><td>Nein, rein hypothetisch</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <h3>Schwach heißt nicht „schlecht“</h3>
+        <p>Das Wort „schwach“ führt in die Irre. Gemeint ist nicht, dass die Systeme wenig leisten. Eine schwache KI kann in ihrem Bereich besser sein als jeder Mensch: Sie erkennt Hautkrebs auf Fotos, übersetzt in Sekunden zwischen 100 Sprachen oder findet in Millionen Bankbuchungen die verdächtige. „Schwach“ bezieht sich auf die <b>Breite</b>, nicht auf die Leistung: Die Fähigkeit bleibt auf eine Aufgabe oder einen engen Bereich beschränkt.</p>
+        <h3>Was „allgemein“ bedeuten würde</h3>
+        <p>Eine starke KI (AGI) müsste wie ein Mensch viele unterschiedliche Aufgaben bewältigen, aus wenigen Beispielen Neues lernen, Wissen aus einem Bereich auf einen anderen übertragen und mit unbekannten Situationen sinnvoll umgehen. Das kann heute kein System. Ob und wann das gelingt, ist unter Fachleuten stark umstritten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Qualitätskontrolle in der Fertigung</span>
+        <p>Ein Kamerasystem erkennt auf Metallteilen Kratzer mit 99 % Trefferquote – besser als das menschliche Auge nach acht Stunden Schicht. Wird das System aber vor einen Karton mit Schrauben gestellt, kann es nichts damit anfangen. Es wurde für <i>eine</i> Aufgabe trainiert. Soll es etwas anderes leisten, braucht es neue Daten und ein neues Training. Das ist typisch für schwache KI.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Chat-Assistent wirkt allgemein – ist es aber nicht</span>
+        <p>Ein Sprachmodell kann Gedichte schreiben, Programmcode erklären und Rezepte vorschlagen. Das wirkt wie breites Können. Trotzdem gilt es fachlich als schwache KI: Es wurde auf <i>eine</i> Aufgabe trainiert, nämlich Text zu erzeugen, der zum Vorangegangenen passt. Es hat kein Bewusstsein, keine eigenen Ziele und weiß nicht, ob seine Aussagen stimmen. Fragt man es nach einem Ereignis von gestern, das nicht in den Trainingsdaten steckt, erfindet es im Zweifel etwas Plausibles.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ein Medienbericht und wie man ihn einordnet</span>
+        <p>Eine Schlagzeile lautet: „KI besteht Anwaltsprüfung – Anwälte bald überflüssig?“ Drei Fragen helfen bei der Einordnung: <b>Welche Aufgabe</b> genau hat die KI gelöst (ein Test mit Multiple-Choice-Fragen)? <b>Unter welchen Bedingungen</b> (vorbereitete Aufgaben, kein echter Mandant, keine Verantwortung)? <b>Was gehört noch zum Beruf</b> (Mandanten beraten, Fristen im Blick behalten, vor Gericht auftreten)? Meist zeigt sich: Die Leistung ist real, aber ein enger Ausschnitt. Das ist schwache KI.</p>
+      </div>
+      <div class="prose">
+        <h3>Warum diese Unterscheidung für die Praxis wichtig ist</h3>
+        <ul>
+          <li><b>Erwartungen richtig setzen.</b> Wer glaubt, ein System „versteht“ seinen Betrieb, plant falsch. Es kann nur das, wofür es trainiert wurde.</li>
+          <li><b>Grenzen kennen.</b> Außerhalb des Trainingsbereichs sind die Ergebnisse unzuverlässig.</li>
+          <li><b>Verantwortung behalten.</b> Weil kein System allgemein „weiß“, was richtig ist, bleibt die Verantwortung beim Menschen und beim Unternehmen.</li>
+        </ul>
+        <p>Und woran kann man die Debatte in der Prüfung festmachen? Ob eine starke KI einmal möglich ist, ist eine Zukunftsfrage. Prüfungsrelevant ist die Definition: <b>Alles, was heute im Einsatz ist, ist schwache KI.</b></p>
+      </div>
+      <div class="box falle"><span class="box-label">Häufige Missverständnisse</span>
+        <ul>
+          <li><b>„Chat-Assistenten sind starke KI, weil sie so vielseitig sind.“</b> Nein. Vielseitig wirken sie, weil sie über sehr viele Themen Text erzeugen können; fachlich bleiben sie schwache KI.</li>
+          <li><b>„Schwache KI ist ungefährlich.“</b> Nein. Auch schwache KI kann Schaden anrichten, etwa durch Fehlentscheidungen oder Missbrauch. Risiken sind kein Privileg der starken KI (mehr dazu in Modul 10).</li>
+          <li><b>„Superintelligenz gibt es schon.“</b> Nein, sie ist rein hypothetisch.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Alles, was heute im Einsatz ist, ist schwache KI – ein Spezialist für eine Aufgabe, oft besser als Menschen, aber ohne breites Verständnis. Starke KI ist ein Forschungsziel, kein Produkt.</p></div>
+      <div class="check" data-check>
+        <p class="check-q">Kurz geprüft: Ein Chat-Assistent kann zu sehr vielen Themen Texte schreiben. Ist er damit eine starke KI?</p>
+        <div class="check-opts">
+          <button type="button" class="opt">Ja, er kann alles</button>
+          <button type="button" class="opt" data-right="true">Nein, er ist eine schwache KI, trainiert auf Textgenerierung</button>
+        </div>
+        <p class="feedback" hidden data-ok="Richtig. Er wirkt vielseitig, ist aber auf eine Aufgabe trainiert: passenden Text zu erzeugen. Bewusstsein und eigene Ziele hat er nicht." data-no="Nicht ganz. Starke KI mit allgemeiner menschlicher Intelligenz gibt es bisher nicht. Auch Chat-Assistenten sind schwache KI."></p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Hier kommen oft Fragen aus den Medien: „Wird KI uns bald ersetzen?“ Bleiben Sie sachlich: Für die Prüfung zählt die Definition. Starke KI existiert nicht. Nehmen Sie die Sorge ernst, ordnen Sie sie aber ein: Menschen werden von Menschen ersetzt, die KI einsetzen können – das ist eine Frage der Weiterbildung, nicht der Science-Fiction.</p>
+        <p>Diskutieren Sie kurz, warum Chat-Assistenten so menschlich wirken: Sie haben Milliarden Texte von Menschen gesehen und ahmen deren Sprache nach. Das ist beeindruckend, aber kein Verstehen im menschlichen Sinn.</p>
+        <p>Das Beispiel mit der Schlagzeile eignet sich als Übung: Bringen Sie eine aktuelle Meldung mit und lassen Sie die Gruppe die drei Einordnungsfragen darauf anwenden.</p>
+      </aside>
+    </section>

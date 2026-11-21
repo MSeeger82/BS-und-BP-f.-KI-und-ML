@@ -1,0 +1,137 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Welcher Datentyp ist 3.5 in Python?", ["str", "bool", "float", "int"], 2, "Kommazahlen sind float und werden mit Punkt geschrieben."],
+ ["Was gibt x[0] für x = [\"A\", \"B\", \"C\"] zurück?", ["Fehler", "\"B\"", "\"C\"", "\"A\""], 3, "Python zählt ab 0."],
+ ["Was ergibt \"3\" + \"4\" in Python?", ["12", "\"34\"", "Fehler", "7"], 1, "Texte werden verkettet."],
+ ["Wodurch werden Codeblöcke in Python gekennzeichnet?", ["Semikolon", "Großschreibung", "Geschweifte Klammern", "Einrückung"], 3, "Die Einrückung bestimmt, was zur Schleife oder Bedingung gehört."],
+ ["Was macht return in einer Funktion?", ["Importiert ein Modul", "Beendet das ganze Programm", "Gibt einen Wert an den Aufrufer zurück", "Druckt einen Wert"], 2, "print gibt aus, return gibt zurück."],
+ ["Wofür ist pandas gedacht?", ["Neuronale Netze auf GPUs trainieren", "Webseiten gestalten", "Bilder zeichnen", "Tabellendaten laden, bereinigen und auswerten"], 3, "DataFrames sind Tabellen in Python."],
+ ["Wie verknüpft man in pandas zwei Filterbedingungen mit „und“?", ["& mit Klammern um jede Bedingung", "+", "and", "&& "], 0, "df[(bedingung1) & (bedingung2)]."],
+ ["Was entspricht df.merge(b, on=\"kunden_id\", how=\"left\") in SQL?", ["ORDER BY", "LEFT JOIN", "GROUP BY", "HAVING"], 1, "merge verknüpft Tabellen wie ein JOIN."],
+ ["Welche Methode trainiert ein scikit-learn-Modell?", ["transform", "score", "predict", "fit"], 3, "fit(X, y) trainiert."],
+ ["Wozu dient random_state in train_test_split?", ["Erhöht die Genauigkeit", "Verschlüsselt die Daten", "Macht die zufällige Aufteilung reproduzierbar", "Mischt die Spalten"], 2, "Gleicher Wert → gleiche Aufteilung."],
+ ["Warum gehört der StandardScaler in eine Pipeline?", ["Weil er sonst nicht funktioniert", "Damit er nur aus Trainingsdaten lernt und im Betrieb identisch angewendet wird", "Wegen der Lizenz", "Damit das Modell schneller wird"], 1, "Verhindert Data Leakage."],
+ ["Was ist ein DummyClassifier mit strategy=\"most_frequent\"?", ["Eine Baseline, die immer die häufigste Klasse vorhersagt", "Ein Testwerkzeug für APIs", "Ein sehr starkes Modell", "Ein neuronales Netz"], 0, "Jedes echte Modell muss sie schlagen."],
+ ["Was bedeutet der HTTP-Statuscode 404?", ["OK", "Keine Berechtigung", "Nicht gefunden", "Serverfehler"], 2, "Der angefragte Endpunkt existiert nicht."],
+ ["Welche HTTP-Methode nutzt man typischerweise, um Daten für eine Vorhersage an eine API zu senden?", ["HEAD", "POST", "GET", "DELETE"], 1, "POST sendet Daten im Anfrageinhalt."],
+ ["Was gehört zur Reproduzierbarkeit eines Modells?", ["Nur die Kennzahlen", "Code, Datenstand, Parameter und Paketversionen", "Nur der Code", "Nur das Modell"], 1, "Alles muss versioniert sein."],
+ ["Was ist ein Schattenbetrieb?", ["Ein Backup-Server", "Neues Modell rechnet mit, ohne zu entscheiden; Ergebnisse werden verglichen", "Betrieb nur nachts", "Ein Modell ohne Monitoring"], 1, "Ein risikoarmer Weg, ein neues Modell zu prüfen."],
+ ["Was bedeutet CI/CD?", ["Cloud Infrastructure / Cloud Database", "Code Inspection / Code Deletion", "Continuous Integration / Continuous Delivery", "Customer Interface / Customer Data"], 2, "Automatisches Prüfen, Bauen und Ausrollen."],
+ ["Wo sollten API-Schlüssel gespeichert werden?", ["In Umgebungsvariablen oder einem Secret-Manager", "Direkt im Code", "In einer öffentlichen Tabelle", "In Git"], 0, "Nie im Code oder Repository."],
+ ["Warum grenzt man Nutzereingaben im Prompt z. B. mit Tags ab?", ["Für schönere Formatierung", "Damit es weniger Tokens kostet", "Damit das Modell sie als Daten statt als Anweisung behandelt – Schutz gegen Prompt Injection", "Weil es gesetzlich vorgeschrieben ist"], 2, "Klare Trennung von Anweisung und Inhalt."],
+ ["Was prüft ein Unit-Test?", ["Ob eine einzelne Funktion für bekannte Eingaben das erwartete Ergebnis liefert", "Die Zufriedenheit der Nutzer", "Die Geschwindigkeit des Internets", "Die Rechtmäßigkeit der Datenverarbeitung"], 0, "Etwa assert brutto(100) == 119.0."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Muss ich für den Bachelor Professional KI programmieren können?", "a": "Sie sollten Python-Code lesen, einfache Auswertungen mit pandas und Modelltraining mit scikit-learn nachvollziehen und erklären können. § 4 Nr. 5 der Rechtsvorschrift nennt Grundzüge der Programmierung, Datenanalyse und Modelltraining sowie Grundlagen der Entwicklung von KI-Systemen."}
+ ],
+ "l1": [
+  {"q": "Warum ist Python die Standardsprache für KI?", "a": "Python ist leicht lesbar und bietet ausgereifte Bibliotheken wie NumPy, pandas, scikit-learn, PyTorch und TensorFlow. Dadurch lassen sich Datenanalyse und Modelltraining mit wenig Code umsetzen."},
+  {"q": "Was ist ein Jupyter Notebook?", "a": "Eine Umgebung, in der Code, Ergebnisse und erklärender Text in Zellen kombiniert werden. Sie eignet sich zum Erkunden von Daten, für Produktivcode nutzt man Entwicklungsumgebungen und Versionsverwaltung."}
+ ],
+ "l2": [
+  {"q": "Welche Datentypen gibt es in Python?", "a": "Die wichtigsten sind int (ganze Zahl), float (Kommazahl), str (Text), bool (Wahr/Falsch), list (geordnete Liste) und dict (Zuordnung von Schlüsseln zu Werten)."}
+ ],
+ "l3": [
+  {"q": "Wie funktioniert eine for-Schleife in Python?", "a": "Sie nimmt nacheinander jedes Element einer Sammlung und führt den eingerückten Block dafür aus, zum Beispiel um eine Summe zu bilden."}
+ ],
+ "l4": [
+  {"q": "Was ist eine Funktion in Python?", "a": "Ein benannter, wiederverwendbarer Codeblock, der mit def definiert wird, Parameter erhält und mit return ein Ergebnis zurückgibt."}
+ ],
+ "l5": [
+  {"q": "Wofür braucht man NumPy?", "a": "Für schnelles Rechnen mit Arrays, also Vektoren und Matrizen, ohne Schleifen. Fast alle Daten- und ML-Bibliotheken bauen auf NumPy auf."}
+ ],
+ "l6": [
+  {"q": "Was ist ein DataFrame?", "a": "Eine Tabelle in pandas mit benannten Spalten. Man kann sie filtern, gruppieren, verknüpfen und umformen – ähnlich wie mit SQL, aber in Python."},
+  {"q": "Wie liest man eine deutsche CSV-Datei mit pandas?", "a": "Mit pd.read_csv und den Parametern sep=\";\" und decimal=\",\", weil deutsche Dateien meist Semikolon als Trennzeichen und Komma als Dezimalzeichen nutzen."}
+ ],
+ "l7": [
+  {"q": "Wie bereinigt man Daten mit pandas?", "a": "Zum Beispiel mit isna() fehlende Werte finden, drop_duplicates() Duplikate entfernen, Typen umwandeln, Texte vereinheitlichen und unmögliche Werte herausfiltern – jeder Schritt bleibt im Code nachvollziehbar."}
+ ],
+ "l8": [
+  {"q": "Wie erstellt man Diagramme in Python?", "a": "Mit Matplotlib oder direkt aus pandas, etwa df.plot(kind=\"bar\") für Vergleiche, kind=\"hist\" für Verteilungen und kind=\"scatter\" für Zusammenhänge."}
+ ],
+ "l9": [
+  {"q": "Wie trainiert man ein Modell mit scikit-learn?", "a": "Daten mit train_test_split aufteilen, ein Modell erzeugen, mit fit auf den Trainingsdaten trainieren, mit predict auf den Testdaten vorhersagen und mit passenden Kennzahlen bewerten."}
+ ],
+ "l10": [
+  {"q": "Was ist eine Pipeline in scikit-learn?", "a": "Eine Verkettung von Vorverarbeitungsschritten und Modell zu einem Objekt. Sie lernt alles nur aus den Trainingsdaten, verhindert so Data Leakage und wird im Betrieb identisch angewendet."}
+ ],
+ "l11": [
+  {"q": "Wie vergleicht man Modelle fair?", "a": "Mit Kreuzvalidierung auf den Trainingsdaten, gegen eine Baseline wie den DummyClassifier und mit der Kennzahl, die für das Geschäft zählt. Das Siegermodell wird zum Schluss auf den Testdaten bestätigt."}
+ ],
+ "l12": [
+  {"q": "Woraus besteht ein KI-System?", "a": "Aus Datenquellen, Datenpipeline, Modell und Modellservice, Schnittstellen zur Anwendung, Modellregister, Monitoring und Menschen, die Ergebnisse prüfen und Feedback geben."}
+ ],
+ "l13": [
+  {"q": "Was ist eine REST-API?", "a": "Eine Schnittstelle, über die Programme per HTTP-Anfrage, meist mit JSON, mit einem Dienst kommunizieren. Für ML-Modelle liefert sie zu den gesendeten Merkmalen die Vorhersage zurück."}
+ ],
+ "l14": [
+  {"q": "Was muss man bei KI versionieren?", "a": "Code mit Git, Datenstände, Experimente mit Parametern und Kennzahlen sowie Modelle in einem Modellregister. Nur so sind Ergebnisse und Entscheidungen später nachvollziehbar."}
+ ],
+ "l15": [
+  {"q": "Was ist MLOps?", "a": "Methoden und Werkzeuge, um ML-Modelle automatisiert zu testen, auszurollen, zu überwachen und neu zu trainieren – vergleichbar mit DevOps in der Softwareentwicklung."},
+  {"q": "Wie rollt man ein neues Modell risikoarm aus?", "a": "Zum Beispiel im Schattenbetrieb, als Canary-Release mit einem kleinen Teil der Anfragen oder im A/B-Test – mit Monitoring und der Möglichkeit, schnell zur vorigen Version zurückzukehren."}
+ ],
+ "l16": [
+  {"q": "Wie baut man eine Anwendung mit einem Sprachmodell?", "a": "Über die API eines Anbieters oder ein eigenes Modell, mit Systemprompt und Vorlagen, klar abgegrenzten Nutzereingaben, strukturierten Ausgaben, gegebenenfalls RAG und Werkzeugaufrufen, einem Testsatz zur Evaluation und Kostenkontrolle."}
+ ],
+ "l17": [
+  {"q": "Wie sichert man ein KI-System ab?", "a": "Mit Tests, Code-Reviews, Secrets außerhalb des Codes, minimalen Zugriffsrechten, getrennten Umgebungen, Prüfung der Abhängigkeiten, Protokollierung und Dokumentation."}
+ ]
+}
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 7 */
+(function () {
+  var DT = ["int", "float", "str", "bool", "list", "dict"];
+  var PD = ["Umsatzsumme je Filiale", "Anzahl fehlender Werte je Spalte", "Zeilen mit Menge über 10", "Mittelwert aller Spalten"];
+  var ST = ["OK, Vorhersage geliefert", "fehlerhafte Anfrage", "Fehler auf dem Server", "nicht gefunden"];
+  var RO = ["Schattenbetrieb", "Canary-Release", "A/B-Test"];
+  window.UEBUNGEN = {
+    modul: 7,
+    aufgaben: {
+      a1: { teile: [
+        { id: "d1", label: "1. 19.99", typ: "wahl", punkte: 1, optionen: DT, richtig: 1 },
+        { id: "d2", label: "2. \"Köln\"", typ: "wahl", punkte: 1, optionen: DT, richtig: 2 },
+        { id: "d3", label: "3. True", typ: "wahl", punkte: 1, optionen: DT, richtig: 3 },
+        { id: "d4", label: "4. [1, 2, 3]", typ: "wahl", punkte: 1, optionen: DT, richtig: 4 }
+      ] },
+      a2: { teile: [
+        { id: "s", label: "x[1] + x[-1]", typ: "zahl", punkte: 2, wert: 29, tol: 0 },
+        { id: "l", label: "len(x)", typ: "zahl", punkte: 1, wert: 4, tol: 0 }
+      ] },
+      a3: { teile: [{ id: "aus", label: "Ausgabe", typ: "zahl", punkte: 3, wert: 15, tol: 0 }] },
+      a4: { teile: [
+        { id: "r1", label: "rabatt(200)", typ: "zahl", punkte: 2, wert: 180, tol: 0.001 },
+        { id: "r2", label: "rabatt(200, 25)", typ: "zahl", punkte: 2, wert: 150, tol: 0.001 }
+      ] },
+      a5: { teile: [
+        { id: "p1", label: "1. groupby(\"filiale\")[\"umsatz\"].sum()", typ: "wahl", punkte: 1, optionen: PD, richtig: 0 },
+        { id: "p2", label: "2. isna().sum()", typ: "wahl", punkte: 1, optionen: PD, richtig: 1 },
+        { id: "p3", label: "3. df[df[\"menge\"] > 10]", typ: "wahl", punkte: 1, optionen: PD, richtig: 2 }
+      ] },
+      a6: { teile: [{ id: "code", label: "Ihr pandas-Code", typ: "text", punkte: 4, erwartung: "auswahl = df[(df['region'] == 'Nord') & (df['betrag'] > 500)]; auswahl.groupby('monat')['betrag'].mean() – Filter mit Klammern und & (2 P.), groupby/mean (2 P.)." }] },
+      a7: { teile: [
+        { id: "reihe", label: "Reihenfolge", typ: "wahl", punkte: 2, optionen: ["B → C → A → D", "C → B → A → D", "A → B → C → D", "B → A → C → D"], richtig: 0 },
+        { id: "warum", label: "Warum B vor C?", typ: "text", punkte: 2, erwartung: "Erst aufteilen, damit Skalierung und Modell nur aus Trainingsdaten lernen; sonst Data Leakage." }
+      ] },
+      a8: { teile: [{ id: "fehler", label: "Fehler und Korrektur", typ: "text", punkte: 4, erwartung: "Scaler lernt aus allen Daten inkl. Test – Data Leakage (2 P.); erst aufteilen, Pipeline aus StandardScaler und LogisticRegression nur auf X_train fitten (2 P.)." }] },
+      a9: { teile: [
+        { id: "c200", label: "1. 200", typ: "wahl", punkte: 1, optionen: ST, richtig: 0 },
+        { id: "c400", label: "2. 400", typ: "wahl", punkte: 1, optionen: ST, richtig: 1 },
+        { id: "c500", label: "3. 500", typ: "wahl", punkte: 1, optionen: ST, richtig: 2 }
+      ] },
+      a10: { teile: [{ id: "vers", label: "Vier Punkte", typ: "text", punkte: 4, erwartung: "Code-Stand (Commit), Trainingsdatenstand, Modellversion mit Parametern/Kennzahlen, Paketversionen/Umgebung, Protokoll der Anfrage mit Eingaben, Ergebnis, Zeit, Modellversion." }] },
+      a11: { teile: [
+        { id: "r1", label: "1. Rechnet parallel, nur protokolliert", typ: "wahl", punkte: 1, optionen: RO, richtig: 0 },
+        { id: "r2", label: "2. Erst 5 %, dann mehr", typ: "wahl", punkte: 1, optionen: RO, richtig: 1 },
+        { id: "r3", label: "3. Zufällige Gruppen, Kennzahlen vergleichen", typ: "wahl", punkte: 1, optionen: RO, richtig: 2 }
+      ] },
+      a12: { teile: [{ id: "plan", label: "Schritte und Rollen", typ: "text", punkte: 8, erwartung: "Mindestens sechs sinnvoll geordnete Schritte: Repository/Review, Datendefinition und Pipeline, Bewertung gegen Baseline über alle Standorte, versionierte API/Container, Integration mit Rückfallebene, Schattenbetrieb/Pilot und schrittweises Ausrollen, Monitoring/Neutraining, Schulung/Dokumentation/Datenschutz/Betriebsrat (6 P.). Zwei Rollen, z. B. Product Owner, ML Engineer, Softwareentwickler, IT-Betrieb, Datenschutz (2 P.)." }] }
+    }
+  };
+})();
+</script>

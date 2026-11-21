@@ -1,0 +1,328 @@
+<!--EXTRA l8-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Neue Modelle vorsichtig einführen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Canary in Stufen</span>
+        <p>500.000 Nutzer; das neue Modell macht bei 1,5 % der Anfragen einen schweren Fehler (das weiß man vorher nicht).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Stufe</th><th class="r">Nutzer auf neuem Modell</th><th class="r">Betroffene durch Fehler</th></tr></thead>
+          <tbody>
+            <tr><td>1 % (Start)</td><td class="r">5.000</td><td class="r">75</td></tr>
+            <tr><td>5 %</td><td class="r">25.000</td><td class="r">375</td></tr>
+            <tr><td>100 % (sofort)</td><td class="r">500.000</td><td class="r">7.500</td></tr>
+          </tbody>
+        </table></div>
+        <p>Rechnung: <span class="calcline">500.000 · 0,01 · 0,015 = 75</span>. Wird der Fehler schon auf der ersten Stufe durch das Monitoring erkannt, bleibt der Schaden bei 75 Betroffenen statt 7.500. Zwischen den Stufen wird jeweils gewartet, bis genug Daten vorliegen, und es gibt klare Stopp-Regeln (z. B. Fehlerrate &gt; 1 % → zurück auf das alte Modell).</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Shadow-Modus auswerten</span>
+        <p>Zwei Wochen läuft das neue Modell mit, seine Ergebnisse werden nur protokolliert. Von 10.000 Anfragen unterscheiden sich 1.200 (<span class="calcline">1.200 : 10.000 = 12 %</span>). Eine Fachperson sieht 100 davon an: Das neue Modell ist in 58 Fällen besser, das alte in 22, in 20 Fällen sind beide gleich gut oder schlecht. Das neue Modell scheint also besser – und niemand wurde dem Risiko ausgesetzt. Als Nächstes folgt ein Canary-Release.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: A/B-Test und die Stichprobengröße</span>
+        <p>Variante A (altes Empfehlungsmodell) erreicht 4,0 % Kaufabschlüsse, Variante B (neues Modell) 4,6 %. Relativer Zuwachs: <span class="calcline">(4,6 − 4,0) : 4,0 = 15 %</span>.</p>
+        <ul>
+          <li>Bei 10.000 Nutzern je Gruppe (400 gegen 460 Abschlüsse) ist der Unterschied gerade statistisch auffällig (z ≈ 2,1; Wahrscheinlichkeit durch Zufall rund 4 %).</li>
+          <li>Bei nur 1.000 Nutzern je Gruppe (40 gegen 46 Abschlüsse) ist derselbe Prozentunterschied nicht von Zufall zu trennen (z ≈ 0,7).</li>
+        </ul>
+        <p>Darum plant man vorher, wie viele Nutzer und wie lange getestet wird (Modul 2: Hypothesentests), und stoppt den Test nicht, sobald B zufällig vorne liegt.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Die richtige Strategie</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Situation</th><th>Strategie</th></tr></thead>
+          <tbody>
+            <tr><td>Neues Modell soll mitlaufen, ohne dass Kunden etwas merken</td><td>Shadow-Modus</td></tr>
+            <tr><td>Technische Fehler früh entdecken, Schaden begrenzen</td><td>Canary-Release</td></tr>
+            <tr><td>Wissen, ob die neue Variante mehr Umsatz bringt</td><td>A/B-Test</td></tr>
+            <tr><td>Umschalten in Sekunden und ebenso schnell zurück</td><td>Blue-Green</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Canary und A/B-Test verwechseln: Canary sichert die Technik ab, der A/B-Test misst die Geschäftswirkung.</li>
+          <li>Das alte Modell sofort löschen. Es muss für den Rollback verfügbar bleiben.</li>
+          <li>Einen A/B-Test nach zwei Tagen beenden, weil eine Variante vorn liegt.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> 300.000 Nutzer, Canary-Anteil 2 %, das neue Modell macht bei 3 % der Fälle einen schweren Fehler. Wie viele Nutzer sind betroffen, und wie viele wären es bei sofortigem Komplettwechsel?</p>
+        <p><b>Musterlösung:</b> 300.000 · 0,02 = 6.000 Nutzer; 6.000 · 0,03 = <b>180</b> Betroffene (3 Punkte). Komplettwechsel: 300.000 · 0,03 = <b>9.000</b> (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Nachvollziehbar und reproduzierbar</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Kundenbeschwerde vom 14. März</span>
+        <p>Ein Kunde beschwert sich, dass seine Kreditanfrage am 14. März abgelehnt wurde. Der Betrieb muss nachweisen, was geschah. Mit sauberer Versionierung genügt ein Blick in das Protokoll:</p>
+        <ul>
+          <li>Modellversion v3 (Registry-Eintrag mit Kennzahlen)</li>
+          <li>trainiert auf Datenstand 2026-03-01 (Snapshot-Kennung)</li>
+          <li>Code-Version: Commit a3f9c1</li>
+          <li>Umgebung: Docker-Image mit scikit-learn 1.4.2</li>
+          <li>Zufallswert (Seed) 42, Schwelle 0,35</li>
+        </ul>
+        <p>Ohne diese Angaben ließe sich die Entscheidung weder erklären noch wiederholen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Was passiert, wenn etwas fehlt?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Nicht versioniert</th><th>Folge</th></tr></thead>
+          <tbody>
+            <tr><td>Daten</td><td>Neutraining liefert anderes Ergebnis; niemand weiß, ob das Modell besser oder die Daten anders sind</td></tr>
+            <tr><td>Umgebung</td><td>Auf dem Server läuft eine neuere Bibliotheksversion, Vorhersagen weichen leicht ab</td></tr>
+            <tr><td>Seed</td><td>Zwei Läufe mit gleichem Code und Daten liefern verschiedene Zahlen; Vergleich unmöglich</td></tr>
+            <tr><td>Schwelle / Konfiguration</td><td>Jemand ändert sie im Betrieb von Hand, danach weiß niemand mehr, warum die Fehlalarme steigen</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Speicherbedarf der Datenversionen</span>
+        <p>Der Trainingsdatensatz hat 5 GB und wird monatlich aktualisiert. Wird jeden Monat ein vollständiger Schnappschuss abgelegt, sind es nach einem Jahr <span class="calcline">12 · 5 = 60 GB</span>. Werkzeuge wie DVC speichern nur Änderungen: Ändern sich pro Monat 10 % der Daten (0,5 GB), sind es <span class="calcline">5 + 11 · 0,5 = 10,5 GB</span>.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Zufall festhalten</span>
+        <pre class="code"><span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="c"># Ohne random_state: bei jedem Lauf eine andere Aufteilung</span>
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)   <span class="c"># 42 = fester Startwert</span></pre>
+        <p>Mit festem Startwert entsteht bei jedem Lauf dieselbe Aufteilung. Ein Unterschied im Ergebnis kommt dann garantiert von der Änderung und nicht vom Zufall.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Nur den Code in Git ablegen und glauben, damit sei alles reproduzierbar.</li>
+          <li>Modelldateien mit Namen wie „modell_final_neu2.pkl“ verwalten statt in einer Registry.</li>
+          <li>Datenänderungen (z. B. nachträgliche Korrekturen) nicht dokumentieren.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie vier Dinge, die in einem ML-Projekt versioniert werden sollten, und begründen Sie, warum nur Code nicht genügt.</p>
+        <p><b>Musterlösung:</b> Code (Git), Daten (DVC/Schnappschuss), Modell mit Kennzahlen (Registry), Umgebung (requirements, Docker), außerdem Seeds und Konfiguration (je 1 Punkt, max. 4). Begründung: Ein Modell ergibt sich aus Code <i>und</i> Daten <i>und</i> Parametern; ohne alle drei ist das Ergebnis nicht wiederholbar und eine Entscheidung (z. B. bei einer Beschwerde, im Hochrisiko-Fall nach AI Act) nicht nachweisbar (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Automatisieren und Skew vermeiden</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Was eine CI-Pipeline bei jeder Änderung prüft</span>
+        <ol class="steps">
+          <li><div>Ein Teammitglied ändert die Vorverarbeitung und lädt den Code hoch.</div></li>
+          <li><div>Automatisch laufen: Code-Tests, Datenprüfung (Wertebereiche, fehlende Werte, Datentypen), ein Schnelltraining auf einer kleinen Stichprobe.</div></li>
+          <li><div>Das Modell wird mit der letzten freigegebenen Version verglichen: Recall darf nicht um mehr als 1 Prozentpunkt sinken, Fairness-Unterschied nicht über 5 Prozentpunkten.</div></li>
+          <li><div>Alles grün: Das Paket wird freigegeben (CD). Rot: Die Änderung wird nicht übernommen, das Team bekommt eine Meldung.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Training-Serving-Skew in Zahlen</span>
+        <p>Beim Training wurde „Umsatz der letzten 30 Tage“ berechnet, im Betrieb rechnet ein anderes Team versehentlich mit 28 Tagen. Ein Kunde mit gleichmäßigem Umsatz von 100 € pro Tag:</p>
+        <ol class="steps">
+          <li><div>Training: <span class="calcline">30 · 100 = 3.000 €</span></div></li>
+          <li><div>Betrieb: <span class="calcline">28 · 100 = 2.800 €</span> → <span class="calcline">2.800 : 3.000 = 0,933</span>, also 6,7 % zu niedrig</div></li>
+        </ol>
+        <p>Für das Modell sehen alle Kunden plötzlich etwas weniger aktiv aus, und es sagt mehr Kündigungen voraus. Es erscheint keine Fehlermeldung, nur die Qualität sinkt unauffällig. Ein Feature Store definiert das Merkmal einmal und liefert dieselbe Berechnung für Training und Betrieb.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Datenprüfung am Eingang</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Prüfung</th><th>Beispiel</th><th>Reaktion</th></tr></thead>
+          <tbody>
+            <tr><td>Wertebereich</td><td>Alter muss zwischen 18 und 100 liegen; Eingang: 250</td><td>Datensatz ablehnen, Alarm</td></tr>
+            <tr><td>Fehlende Werte</td><td>Anteil fehlender Einkommen steigt von 2 % auf 15 %</td><td>Alarm, Quelle prüfen</td></tr>
+            <tr><td>Einheit</td><td>Gewicht kommt statt in kg plötzlich in g (Faktor 1.000)</td><td>Alarm, Einheit angleichen</td></tr>
+            <tr><td>Neue Kategorie</td><td>Zahlungsart „Wallet“ war im Training nie vorhanden</td><td>Als „unbekannt“ behandeln, melden</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Wann soll neu trainiert werden?</span>
+        <p>Regel für Continuous Training: neu trainieren, wenn (a) mindestens 30 Tage seit dem letzten Training vergangen sind, oder (b) der PSI eines wichtigen Merkmals über 0,25 liegt, oder (c) der Recall unter 70 % fällt. Das neue Modell geht erst nach automatischen Tests und Vergleich mit dem aktuellen in den Betrieb.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>CD ohne ausreichende Tests: Ein fehlerhaftes Modell geht automatisch in den Betrieb.</li>
+          <li>Continuous Training ohne Prüfschritt – ein neues Modell mit schlechteren Werten ersetzt das alte.</li>
+          <li>Merkmale in zwei Programmen doppelt programmieren.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Erklären Sie CI, CD und CT und beschreiben Sie das Training-Serving-Skew mit einem Gegenmittel.</p>
+        <p><b>Musterlösung:</b> CI: Änderungen werden automatisch zusammengeführt und getestet. CD: geprüfte Versionen werden automatisch bereitgestellt. CT: Modelle werden automatisch (zeitgesteuert oder bei Drift) neu trainiert und nach Tests freigegeben (je 1 Punkt). Skew: Merkmale werden im Training anders berechnet als im Betrieb, das Modell bekommt andere Eingaben und wird schlechter (2 Punkte). Gegenmittel: Feature Store, einheitliche Berechnung, Datenprüfung am Eingang (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Kennzahlen, Alarme und Reaktionen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Wie viele Neunen?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Verfügbarkeit</th><th class="r">erlaubter Ausfall in 30 Tagen</th><th class="r">erlaubter Ausfall im Jahr</th></tr></thead>
+          <tbody>
+            <tr><td class="r">99 %</td><td class="r">432 Minuten (7,2 Stunden)</td><td class="r">87,6 Stunden</td></tr>
+            <tr><td class="r">99,5 %</td><td class="r">216 Minuten</td><td class="r">43,8 Stunden</td></tr>
+            <tr><td class="r">99,9 %</td><td class="r">43,2 Minuten</td><td class="r">8,76 Stunden</td></tr>
+            <tr><td class="r">99,99 %</td><td class="r">4,32 Minuten</td><td class="r">52,6 Minuten</td></tr>
+          </tbody>
+        </table></div>
+        <p>Rechnung für 99,9 % im Jahr: <span class="calcline">0,001 · 525.600 Minuten = 525,6 Minuten ≈ 8,76 Stunden</span>. Jede zusätzliche Neun macht das System zehnmal zuverlässiger und deutlich teurer. Für eine Absatzprognose genügen oft 99 %, für eine Zahlungsprüfung eher 99,9 %.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Frühwarnung ohne Labels</span>
+        <p>Ein Kündigungsmodell stuft normalerweise 10 % der Kunden als „hohes Risiko“ ein. Plötzlich sind es 24 %, obwohl niemand etwas am Modell geändert hat. Ob die Kunden wirklich kündigen, weiß man erst in Wochen. Der Sprung ist aber ein Warnsignal: Entweder haben sich die Eingaben geändert (Datenfehler, Drift) oder es gab ein echtes Ereignis (z. B. Preiserhöhung). Alarmgrenze: Anteil &gt; 15 % → Analyse starten.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Kostenüberwachung mit Hochrechnung</span>
+        <p>Das Monatsbudget für eine Anwendung beträgt 2.000 €. Am 20. Tag sind 1.400 € verbraucht.</p>
+        <p><span class="calcline">1.400 : 20 = 70 € pro Tag · 30 Tage = 2.100 €</span> – das Budget wird voraussichtlich um 100 € überschritten. Der Alarm kommt am 20. Tag und nicht erst am Monatsende.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Fairness als Kennzahl</span>
+        <p>Der Recall beträgt für Gruppe A 82 %, für Gruppe B 74 %. Unterschied: <span class="calcline">82 − 74 = 8 Prozentpunkte</span> – über der vereinbarten Grenze von 5 Prozentpunkten. Ergebnis: Alarm, Analyse (Datenlage der Gruppe B? Merkmale?) und Entscheidung, ob nachtrainiert oder die Schwelle je Gruppe geprüft wird. Gleiche Gesamtgenauigkeit kann solche Unterschiede verdecken.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Nur die Technik überwachen (läuft der Server?) und nicht die Qualität der Vorhersagen.</li>
+          <li>Alarme ohne Verantwortlichen und ohne Plan, was zu tun ist.</li>
+          <li>Zu viele Alarme: Wenn ständig etwas piept, schaut irgendwann niemand mehr hin („Alarmmüdigkeit“).</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Wie viele Minuten Ausfall sind in 30 Tagen bei 99,95 % Verfügbarkeit erlaubt? Nennen Sie außerdem zwei Ebenen des Monitorings mit je einer Kennzahl.</p>
+        <p><b>Musterlösung:</b> 30 Tage = 43.200 Minuten; 0,0005 · 43.200 = <b>21,6 Minuten</b> (3 Punkte). Ebenen: Technik (Antwortzeit), Daten (PSI, fehlende Werte), Modell (Recall, Verteilung der Vorhersagen), Geschäft (Ausfälle, Umsatz), Kosten, Fairness – je Ebene mit Kennzahl 1 Punkt, max. 2.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: PSI mit anderen Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Drei Klassen, geringe Verschiebung</span>
+        <p>Training: 50 % / 30 % / 20 %. Aktuell: 40 % / 30 % / 30 %.</p>
+        <ol class="steps">
+          <li><div>Klasse 1: <span class="calcline">(0,40 − 0,50) · ln(0,40 : 0,50) = (−0,10) · (−0,223) = 0,0223</span></div></li>
+          <li><div>Klasse 2: <span class="calcline">(0,30 − 0,30) · ln(1) = 0</span></div></li>
+          <li><div>Klasse 3: <span class="calcline">(0,30 − 0,20) · ln(1,5) = 0,10 · 0,405 = 0,0405</span></div></li>
+          <li><div>PSI ≈ <span class="calcline">0,0223 + 0 + 0,0405 = 0,063</span> → <span class="result">unter 0,1: stabil</span></div></li>
+        </ol>
+        <p>Beide Summanden sind positiv, auch wenn eine Klasse kleiner und eine größer geworden ist – das Produkt aus Differenz und Logarithmus hat immer dasselbe Vorzeichen. Deshalb kann der PSI nie negativ werden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Klare Verschiebung</span>
+        <p>Training: 40 % / 40 % / 20 %. Aktuell: 20 % / 40 % / 40 %.</p>
+        <ol class="steps">
+          <li><div>Klasse 1: <span class="calcline">(0,20 − 0,40) · ln(0,5) = (−0,20) · (−0,693) = 0,1386</span></div></li>
+          <li><div>Klasse 2: <span class="calcline">0</span></div></li>
+          <li><div>Klasse 3: <span class="calcline">(0,40 − 0,20) · ln(2) = 0,20 · 0,693 = 0,1386</span></div></li>
+          <li><div>PSI ≈ <span class="calcline">0,277</span> → <span class="result">über 0,25: deutlicher Drift, handeln</span></div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Vier Altersklassen</span>
+        <p>Training: 10 / 40 / 40 / 10 %. Aktuell: 5 / 30 / 45 / 20 %.</p>
+        <ul>
+          <li>Klasse 1: <span class="calcline">(0,05 − 0,10) · ln(0,5) = 0,0347</span></li>
+          <li>Klasse 2: <span class="calcline">(0,30 − 0,40) · ln(0,75) = 0,0288</span></li>
+          <li>Klasse 3: <span class="calcline">(0,45 − 0,40) · ln(1,125) = 0,0059</span></li>
+          <li>Klasse 4: <span class="calcline">(0,20 − 0,10) · ln(2) = 0,0693</span></li>
+          <li>PSI ≈ <span class="calcline">0,0347 + 0,0288 + 0,0059 + 0,0693 = 0,139</span> → <span class="result">zwischen 0,1 und 0,25: beobachten</span></li>
+        </ul>
+        <p>Der Hauptbeitrag kommt von der ältesten Klasse, die sich verdoppelt hat – ein Hinweis, wo man genauer hinschauen sollte.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Wie bildet man die Klassen?</span>
+        <p>Bei Zahlenmerkmalen legt man die Klassengrenzen anhand der Trainingsdaten fest, z. B. in zehn gleich große Gruppen (Dezile mit je 10 %). Im Training enthält dann jede Klasse 10 %; im Betrieb zählt man, wie viele aktuelle Werte in jede Klasse fallen. Für Kategorien (Zahlungsart) ist jede Kategorie eine Klasse. Kommt eine völlig neue Kategorie vor, ist ihr Anteil im Training 0, der Logarithmus nicht definiert; man setzt einen sehr kleinen Wert ein oder meldet die neue Kategorie gesondert.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Prozentwerte und Anteile mischen (25 statt 0,25 in die Formel einsetzen).</li>
+          <li>Den PSI nur für das Gesamtbild berechnen und nicht je Merkmal – ein einzelnes verschobenes Merkmal geht sonst unter.</li>
+          <li>Aus „PSI &gt; 0,25“ automatisch „Modell ist schlecht“ folgern. Es heißt: Die Eingaben sind anders – es muss geprüft werden, ob das Modell darunter leidet.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Training: 60 % / 40 %. Aktuell: 40 % / 60 %. Berechnen Sie den PSI (zwei Nachkommastellen) und bewerten Sie ihn.</p>
+        <p><b>Musterlösung:</b> (0,40 − 0,60) · ln(0,40 : 0,60) = (−0,20) · (−0,405) = 0,081; (0,60 − 0,40) · ln(0,60 : 0,40) = 0,20 · 0,405 = 0,081; PSI ≈ <b>0,16</b> (4 Punkte). Bewertung: zwischen 0,1 und 0,25 → beobachten, Ursachen prüfen (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Wenn die Welt sich ändert</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der Alarm kommt aus der Genauigkeit</span>
+        <p>Monatliche Genauigkeit eines Betrugsmodells: 0,90 – 0,89 – 0,87 – 0,84 – 0,81 – 0,78. Die Alarmschwelle liegt bei 0,80.</p>
+        <p>Im sechsten Monat fällt der Wert unter die Schwelle. Weil Betrüger ihre Masche geändert haben, ist der Zusammenhang zwischen Merkmalen und Ziel ein anderer geworden – Concept Drift. Der PSI der Eingabemerkmale war unauffällig, da die Eingaben ähnlich aussehen. Der Fehlschluss „Die Daten sind stabil, also ist alles in Ordnung“ wäre hier falsch: Concept Drift sieht man nur an der Güte.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Alte Daten weniger gewichten</span>
+        <p>Beim Nachtrainieren sollen neuere Beispiele mehr zählen. Eine Möglichkeit: Das Gewicht halbiert sich alle 6 Monate.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Alter der Beispiele</th><th class="r">Gewicht</th></tr></thead>
+          <tbody>
+            <tr><td>aktuell</td><td class="r">1,00</td></tr>
+            <tr><td>6 Monate</td><td class="r">0,50</td></tr>
+            <tr><td>12 Monate</td><td class="r">0,25</td></tr>
+            <tr><td>18 Monate</td><td class="r">0,125</td></tr>
+          </tbody>
+        </table></div>
+        <p>Rechnung: <span class="calcline">0,5² = 0,25</span> nach zwei Halbwertszeiten (12 Monate). Das Modell lernt so vor allem das aktuelle Verhalten, ohne die Vergangenheit ganz zu vergessen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Lohnt sich das Nachtraining?</span>
+        <p>Die gesunkene Genauigkeit kostet 8.000 € pro Monat (verpasste Betrugsfälle). Ein Nachtraining mit Tests und kontrolliertem Rollout kostet 2.500 € einmalig. Es lohnt sich, sobald die erwartete monatliche Ersparnis die Kosten übertrifft: schon nach <span class="calcline">2.500 : 8.000 ≈ 0,3 Monaten</span>. Entsprechend legt man die Alarmschwelle so, dass man früh reagiert.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Data Drift, Concept Drift oder Saison?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Beobachtung</th><th>Einordnung</th></tr></thead>
+          <tbody>
+            <tr><td>Eiscreme-Absatz steigt jeden Sommer</td><td>Saisonale Wiederholung – kein Drift, sondern ein Merkmal („Monat“, „Temperatur“) einbauen</td></tr>
+            <tr><td>Neue Kundengruppe nach Werbekampagne</td><td>Data Drift (Eingaben verschieben sich)</td></tr>
+            <tr><td>Nach einer Preiserhöhung kündigen Kunden mit gleichen Merkmalen häufiger</td><td>Concept Drift (Zusammenhang ändert sich)</td></tr>
+            <tr><td>Sensor wird durch neues Modell mit anderem Messbereich ersetzt</td><td>Data Drift, möglicherweise Datenfehler</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Data Drift und Concept Drift gleichsetzen; die Reaktion unterscheidet sich (Daten prüfen oder Zusammenhang neu lernen).</li>
+          <li>Ein Nachtraining sofort in den Betrieb geben, ohne Test und kontrollierten Rollout.</li>
+          <li>Saisonale Schwankungen als Drift missverstehen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Unterscheiden Sie Data Drift und Concept Drift mit je einem Beispiel und nennen Sie drei Schritte der Reaktion.</p>
+        <p><b>Musterlösung:</b> Data Drift: Verteilung der Eingaben ändert sich (jüngere Kundschaft) und lässt sich ohne Labels messen (PSI). Concept Drift: Zusammenhang zwischen Eingabe und Ziel ändert sich (neue Betrugsmasche) und zeigt sich oft erst an sinkender Güte (je 1,5 Punkte). Reaktion: analysieren (Datenfehler oder echter Wandel), nachtrainieren, prüfen (Test, Shadow), kontrolliert ausrollen, dokumentieren (je 1 Punkt, max. 3).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Überlegen Sie für Ihr Transferthema: Welche Veränderungen (neue Kunden, Gesetze, Preise, Sensoren) könnten in den nächsten zwei Jahren eintreten? Notieren Sie, an welcher Kennzahl Sie sie bemerken würden.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele zur Fallstudie: Zahlen, Einheiten und Prüfungsaufbau</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Was die Abweichung kostet</span>
+        <p>Der Umsatz mit Obst und Gemüse beträgt 40.000 € je Filiale und Monat, bei 60 Filialen also 2,4 Mio. €. Die Abschriften sind von 4 % auf 7 % des Umsatzes gestiegen.</p>
+        <ol class="steps">
+          <li><div>Zusätzliche Abschriften pro Monat: <span class="calcline">2.400.000 · 0,03 = 72.000 €</span></div></li>
+          <li><div>In drei Monaten: <span class="calcline">3 · 72.000 = 216.000 €</span></div></li>
+          <li><div>Betroffene Filialen: <span class="calcline">8 : 60 ≈ 13 %</span> der Kette – die Auswertung nach Filialen lenkt den Blick sofort auf die neuen Standorte.</div></li>
+        </ol>
+        <p>Diese Rechnung begründet, warum das Thema Priorität hat, und liefert Argumente für den Aufwand der Fehlerbehebung.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Der Einheitenfehler</span>
+        <p>Der alte Lieferant lieferte Äpfel in 1-kg-Beuteln, der neue liefert 500-g-Beutel. Das Kassensystem zählt Beutel. Das Modell kennt aus dem Training „100 Beutel pro Woche“ und plant daher 100 kg. Tatsächlich wird bei gleicher Nachfrage <span class="calcline">100 kg : 0,5 kg = 200 Beutel</span> verkauft: Die Prognose ist um die Hälfte zu niedrig, die Regale sind leer. Die Datenprüfung am Eingang hätte eine Verdopplung der Stückzahlen bei gleichem Gewicht gemeldet; besser noch ist eine Umrechnung in Kilogramm als Merkmal.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Ursachen trennen</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Befund</th><th>Ursache</th><th>Maßnahme</th></tr></thead>
+          <tbody>
+            <tr><td>Beutelgröße geändert</td><td>Datenfehler</td><td>Einheit umrechnen, Eingangsprüfung ergänzen</td></tr>
+            <tr><td>Neue Filialen in Großstädten, andere Kundschaft</td><td>Data Drift</td><td>Merkmale prüfen, bei Bedarf Filial-Cluster nachtrainieren; vorerst Sicherheitsaufschlag und Prüfung</td></tr>
+            <tr><td>Lieferdienst-Partner ändert das Kaufverhalten</td><td>Concept Drift</td><td>Merkmal „Lieferdienst aktiv“ ergänzen, nachtrainieren</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li>Gleich „nachtrainieren“ empfehlen, ohne vorher die Ursache einzugrenzen – bei einem Datenfehler hilft das nicht.</li>
+          <li>Die Maßnahmen nur kurzfristig planen und das Monitoring nicht verbessern.</li>
+          <li>Das neue Modell ohne Shadow- oder Canary-Phase ausrollen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (8 Punkte):</b> Die Qualität einer Prognose in einem Handelsbetrieb sinkt seit drei Monaten. Beschreiben Sie Ihr Vorgehen.</p>
+        <p><b>Musterlösung:</b> (1) Eingrenzen: Fehler nach Standort, Warengruppe, Zeitraum aufschlüsseln (2 Punkte). (2) Ursachen unterscheiden: Datenfehler (Einheiten, Schnittstellen), Data Drift (PSI je Merkmal), Concept Drift (verändertes Verhalten, neuer Vertriebsweg) (2 Punkte). (3) Maßnahmen: Datenfehler beheben, Merkmale ergänzen, mit aktuellen Daten nachtrainieren; kurzfristig menschliche Prüfung oder Sicherheitsaufschlag (2 Punkte). (4) Kontrolliert einführen: Shadow-Modus, Canary, Rollback-Plan (1 Punkt). (5) Monitoring verbessern: PSI-Alarme, Eingangsprüfung, Continuous Training (1 Punkt).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
+        <p>Übertragen Sie die fünf Schritte auf ein System, das bei Ihnen schon läuft (auch ohne KI: eine Berechnung, ein Bericht). Wie würden Sie bemerken, dass es still schlechter wird, und wer würde darauf reagieren?</p>
+      </div>
+<!--/EXTRA-->

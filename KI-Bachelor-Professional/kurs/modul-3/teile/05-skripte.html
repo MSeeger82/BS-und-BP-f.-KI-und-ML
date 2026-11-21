@@ -1,0 +1,197 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Was ist das Skalarprodukt von (2; 5) und (3; 1)?", ["17", "10", "13", "11"], 3, "2·3 + 5·1 = 6 + 5 = 11."],
+ ["Euklidischer Abstand zwischen (0 | 0) und (6 | 8)?", ["10", "14", "100", "48"], 0, "√(36 + 64) = √100 = 10."],
+ ["Welches Abstandsmaß ist bei Text-Embeddings üblich?", ["Hamming-Abstand", "Spannweite", "Kosinus-Ähnlichkeit", "Manhattan-Abstand"], 2, "Kosinus misst die Richtung der Vektoren, unabhängig von ihrer Länge."],
+ ["Was bedeutet eine Ableitung von 0 an einer Stelle der Fehlerkurve?", ["Die Kurve ist dort waagerecht, z. B. im Minimum", "Das Modell ist fertig trainiert", "Der Fehler ist dort null", "Die Lernrate ist zu groß"], 0, "Im Minimum (oder Maximum) ist die Steigung null."],
+ ["Was passiert bei einer zu großen Lernrate?", ["Nichts", "Das Modell wird automatisch einfacher", "Die Parameter springen über das Minimum hinweg oder divergieren", "Das Training wird sehr langsam"], 2, "Zu große Schritte schießen über das Tal hinaus."],
+ ["w = 2, Steigung f′(w) = 4, Lernrate 0,5. Wie lautet w nach einem Schritt?", ["−2", "4", "2,5", "0"], 3, "w = 2 − 0,5 · 4 = 0."],
+ ["1 % Betrug, Erkennung 90 %, Fehlalarme 5 %. Etwa welcher Anteil der Alarme ist echter Betrug?", ["1 %", "15 %", "90 %", "50 %"], 1, "0,009 / (0,009 + 0,0495) ≈ 15 %."],
+ ["Was besagt die Faustregel 68-95-99,7?", ["Konfidenz von Bayes", "Prozentsätze für Precision, Recall und F1", "Anteile der Werte innerhalb von 1, 2 und 3 Standardabweichungen bei Normalverteilung", "Aufteilung in Training, Validierung und Test"], 2, "Bei Normalverteilung liegen ca. 68 % innerhalb μ ± 1σ usw."],
+ ["Wie berechnet man b₁ bei der einfachen linearen Regression?", ["Σ(x − x̄)(y − ȳ) / Σ(x − x̄)²", "ȳ − x̄", "Σy / Σx", "R² · ȳ"], 0, "Kovarianz geteilt durch Varianz von x."],
+ ["Ein Modell hat R² = 0,82. Was bedeutet das?", ["Der Fehler beträgt 18 €", "Das Modell erklärt 82 % der Streuung der Zielgröße", "82 % der Vorhersagen sind exakt", "Die Korrelation ist 0,18"], 1, "R² ist der Anteil der erklärten Streuung."],
+ ["Was minimiert die Methode der kleinsten Quadrate?", ["Den größten Fehler", "Die Anzahl falscher Vorhersagen", "Die Summe der Residuen", "Die Summe der quadrierten Residuen"], 3, "Quadrieren bestraft große Fehler stärker und vermeidet Ausgleich von Plus und Minus."],
+ ["Wie deutet man einen Koeffizienten in der multiplen Regression?", ["Als Korrelation", "Als Anteil erklärter Streuung", "Als Änderung der Vorhersage je Einheit des Merkmals, wenn alle anderen Merkmale gleich bleiben", "Als Wahrscheinlichkeit"], 2, "Ceteris paribus."],
+ ["Welchen Wert liefert die Sigmoid-Funktion bei z = 0?", ["0,5", "1", "e", "0"], 0, "σ(0) = 1 / (1 + 1) = 0,5."],
+ ["Wer sollte die Entscheidungsschwelle einer logistischen Regression festlegen?", ["Der Datenschutzbeauftragte", "Nur die Software", "Fachabteilung und Controlling anhand der Kosten von Fehlern", "Immer 0,5, ohne Ausnahme"], 2, "Die Schwelle ist eine Geschäftsentscheidung."],
+ ["Was passiert bei kNN mit k = 1?", ["Es wird zur linearen Regression", "Es folgt jedem einzelnen Nachbarn, auch Ausreißern – Overfitting-Gefahr", "Das Modell wird sehr glatt", "Es braucht keine Daten"], 1, "Ein einziger Nachbar entscheidet."],
+ ["Gini-Unreinheit eines Knotens mit 90 % Klasse A und 10 % Klasse B?", ["0,5", "0,10", "0,82", "0,18"], 3, "1 − (0,81 + 0,01) = 0,18."],
+ ["Welcher Vorteil gilt für Entscheidungsbäume?", ["Brauchen immer skalierte Daten", "Sind als Regeln gut erklärbar und brauchen keine Skalierung", "Funktionen nur mit Bildern", "Sind sehr stabil gegenüber kleinen Datenänderungen"], 1, "Instabilität ist dagegen ein Nachteil."],
+ ["Was kennzeichnet Gradient Boosting?", ["Viele Bäume unabhängig parallel", "Clustering ohne Labels", "Ein einziger sehr tiefer Baum", "Bäume nacheinander, jeder lernt die Restfehler der vorherigen"], 3, "Parallel wäre Bagging (Random Forest)."],
+ ["Warum heißt Naive Bayes „naiv“?", ["Weil es nicht trainiert wird", "Weil es Merkmale bei gegebener Klasse als unabhängig annimmt", "Weil es keine Wahrscheinlichkeiten nutzt", "Weil es nur für Anfänger ist"], 1, "Die Unabhängigkeitsannahme vereinfacht die Rechnung stark."],
+ ["Was maximiert eine Support Vector Machine?", ["Den Abstand (Margin) zwischen Trennlinie und nächsten Punkten", "Die Lernrate", "Die Tiefe des Baums", "Die Anzahl der Stützvektoren"], 0, "Breitester Sicherheitsabstand zwischen den Klassen."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Wie viel Mathematik braucht man für den Bachelor Professional KI?", "a": "Grundrechenarten, Quadrieren, Wurzeln, Brüche und einen Taschenrechner. Die Prüfung verlangt, einfache Kennzahlen und Modelle wie lineare Regression, Bayes oder Gini-Unreinheit nachzurechnen und zu deuten, nicht Beweise."},
+  {"q": "Welche Lernverfahren nennt die Rechtsvorschrift?", "a": "§ 4 Nr. 3 nennt mathematische Grundlagen und einfache Lernverfahren; dazu gehören lineare und logistische Regression, k-nächste Nachbarn, Entscheidungsbäume und Ensembles. Neuronale Netze folgen in Modul 5."}
+ ],
+ "l1": [
+  {"q": "Was ist ein Vektor im maschinellen Lernen?", "a": "Eine geordnete Liste von Zahlen. Jedes Datenbeispiel wird als Vektor seiner Merkmale dargestellt, der ganze Datensatz als Matrix."},
+  {"q": "Was ist ein Skalarprodukt?", "a": "Die Summe der Produkte gleicher Positionen zweier Vektoren, zum Beispiel (2; 3) · (4; 1) = 11. Lineare Modelle berechnen ihre Vorhersage als Skalarprodukt aus Gewichten und Merkmalen."}
+ ],
+ "l2": [
+  {"q": "Was ist der Unterschied zwischen euklidischem und Manhattan-Abstand?", "a": "Der euklidische Abstand ist die Luftlinie nach Pythagoras, der Manhattan-Abstand die Summe der Beträge der Differenzen entlang der Achsen."},
+  {"q": "Wofür nutzt man die Kosinus-Ähnlichkeit?", "a": "Sie misst den Winkel zwischen zwei Vektoren und ist Standard beim Vergleich von Text-Embeddings, etwa in der Dokumentensuche für RAG-Systeme."}
+ ],
+ "l3": [
+  {"q": "Was ist eine Ableitung anschaulich?", "a": "Die Steigung einer Funktion an einer Stelle. Für das Training zeigt sie, in welche Richtung ein Parameter verstellt werden muss, damit der Fehler sinkt."},
+  {"q": "Was ist ein Gradient?", "a": "Der Vektor aller partiellen Ableitungen einer Funktion mit mehreren Eingaben. Er zeigt in Richtung des steilsten Anstiegs; beim Training geht man in die Gegenrichtung."}
+ ],
+ "l4": [
+  {"q": "Wie funktioniert der Gradientenabstieg?", "a": "Die Parameter werden schrittweise entgegen dem Gradienten der Fehlerfunktion verändert: neues w = altes w − Lernrate · Steigung. Das wiederholt sich, bis der Fehler kaum noch sinkt."},
+  {"q": "Was ist die Lernrate?", "a": "Die Schrittweite des Gradientenabstiegs und ein Hyperparameter. Ist sie zu klein, lernt das Modell sehr langsam; ist sie zu groß, springt es über das Minimum hinweg."},
+  {"q": "Was ist Mini-Batch-Gradientenabstieg?", "a": "Jeder Schritt nutzt eine kleine Teilmenge der Trainingsdaten, zum Beispiel 32 bis 256 Beispiele. Das ist der Standard beim Training neuronaler Netze."}
+ ],
+ "l5": [
+  {"q": "Was sagt der Satz von Bayes?", "a": "Er rechnet von P(B | A) auf P(A | B) um: P(A | B) = P(B | A) · P(A) / P(B). Dabei wird die Basisrate P(A) berücksichtigt, also wie häufig A überhaupt ist."},
+  {"q": "Warum sind bei seltenen Ereignissen viele Alarme falsch?", "a": "Weil die vielen unauffälligen Fälle selbst bei kleiner Fehlalarmquote mehr falsche Alarme erzeugen, als es echte Fälle gibt. Bei 1 % Betrug, 90 % Erkennung und 5 % Fehlalarmen sind nur etwa 15 % der Alarme echt."}
+ ],
+ "l6": [
+  {"q": "Was ist die Normalverteilung?", "a": "Eine symmetrische, glockenförmige Verteilung um den Mittelwert μ mit der Breite σ. Rund 68 % der Werte liegen innerhalb einer, 95 % innerhalb zweier und 99,7 % innerhalb dreier Standardabweichungen."},
+  {"q": "Sind alle betrieblichen Daten normalverteilt?", "a": "Nein. Einkommen, Wartezeiten oder Bestellwerte sind meist rechtsschief. Dann beschreiben Median und Quartile die Daten besser als Mittelwert und Standardabweichung."}
+ ],
+ "l7": [
+  {"q": "Was bedeuten b₀ und b₁ in der linearen Regression?", "a": "b₀ ist der Achsenabschnitt, also der vorhergesagte Wert bei x = 0. b₁ ist die Steigung, also die Änderung der Vorhersage, wenn x um eine Einheit steigt."},
+  {"q": "Was ist ein Residuum?", "a": "Die Differenz zwischen echtem und vorhergesagtem Wert eines Beispiels, e = y − ŷ."}
+ ],
+ "l8": [
+  {"q": "Wie berechnet man eine Regressionsgerade von Hand?", "a": "Mittelwerte bilden, dann b₁ = Σ(x − x̄)(y − ȳ) / Σ(x − x̄)² und b₀ = ȳ − b₁ · x̄. Am übersichtlichsten geht das mit einer Tabelle der Abweichungen."},
+  {"q": "Was bedeutet das Bestimmtheitsmaß R²?", "a": "R² ist der Anteil der Streuung der Zielgröße, den das Modell erklärt, zwischen 0 und 1. Aussagekräftig ist vor allem das R² auf Testdaten."}
+ ],
+ "l9": [
+  {"q": "Wie deutet man Koeffizienten der multiplen Regression?", "a": "Ein Koeffizient gibt an, wie sich die Vorhersage ändert, wenn das Merkmal um eine Einheit steigt und alle anderen Merkmale gleich bleiben."},
+  {"q": "Was ist Multikollinearität?", "a": "Ein starker Zusammenhang zwischen Merkmalen, etwa Alter und Kilometerstand eines Autos. Die einzelnen Koeffizienten werden dann unsicher, auch wenn die Vorhersage gut bleibt."}
+ ],
+ "l10": [
+  {"q": "Ist die logistische Regression ein Regressionsverfahren?", "a": "Nein, sie ist ein Klassifikationsverfahren. Sie berechnet eine gewichtete Summe und wandelt sie mit der Sigmoid-Funktion in die Wahrscheinlichkeit einer Klasse um."},
+  {"q": "Wie wird die Schwelle der logistischen Regression festgelegt?", "a": "Nach den Kosten der Fehler: Ist ein übersehener Fall teuer und eine Prüfung billig, senkt man die Schwelle. Das entscheiden Fachabteilung und Controlling, nicht die Mathematik."}
+ ],
+ "l11": [
+  {"q": "Wie funktioniert k-nächste Nachbarn?", "a": "Für einen neuen Fall werden die k ähnlichsten Trainingsbeispiele gesucht; ihre Mehrheitsklasse oder ihr Mittelwert ist die Vorhersage."},
+  {"q": "Wie wählt man k?", "a": "Per Kreuzvalidierung. Kleines k folgt Ausreißern (Overfitting), großes k glättet zu stark (Underfitting); bei zwei Klassen nimmt man eine ungerade Zahl."}
+ ],
+ "l12": [
+  {"q": "Wie entscheidet ein Entscheidungsbaum, welche Frage er stellt?", "a": "Er wählt die Frage, nach der die entstehenden Gruppen am reinsten sind, gemessen mit Gini-Unreinheit oder Entropie, gewichtet nach Gruppengröße."},
+  {"q": "Wie berechnet man die Gini-Unreinheit?", "a": "G = 1 − Σ pᵢ², wobei pᵢ der Anteil der Klasse i im Knoten ist. Ein reiner Knoten hat G = 0, bei zwei gleich großen Klassen ist G = 0,5."},
+  {"q": "Wie verhindert man Overfitting bei Entscheidungsbäumen?", "a": "Durch Begrenzen der Tiefe, eine Mindestzahl Beispiele je Blatt oder Zurückschneiden (Pruning) – oder indem man viele Bäume zu einem Ensemble kombiniert."}
+ ],
+ "l13": [
+  {"q": "Was ist der Unterschied zwischen Random Forest und Gradient Boosting?", "a": "Random Forest trainiert viele Bäume parallel auf Zufallsstichproben und lässt sie abstimmen. Gradient Boosting trainiert Bäume nacheinander, und jeder korrigiert die Restfehler der vorherigen."},
+  {"q": "Welches Verfahren ist bei Tabellendaten meist am genauesten?", "a": "Gut eingestellte Gradient-Boosting-Verfahren wie XGBoost oder LightGBM schneiden bei Tabellendaten häufig am besten ab, oft besser als neuronale Netze."}
+ ],
+ "l14": [
+  {"q": "Wofür eignet sich Naive Bayes?", "a": "Vor allem für Textklassifikation wie Spamfilter oder Themenzuordnung. Es ist sehr schnell, braucht wenig Daten und ist eine gute Baseline."}
+ ],
+ "l15": [
+  {"q": "Was macht eine Support Vector Machine?", "a": "Sie sucht die Trennlinie mit dem größten Abstand zu den nächstgelegenen Punkten beider Klassen. Mit dem Kernel-Trick kann sie auch nicht linear trennbare Daten trennen."}
+ ],
+ "l16": [
+  {"q": "Welches Lernverfahren soll ich wählen?", "a": "Nach Datenart, Datenmenge, geforderter Genauigkeit und Erklärbarkeit. Bei Begründungspflicht zuerst lineare oder logistische Regression oder Bäume, bei Tabellendaten mit Fokus auf Genauigkeit Gradient Boosting, bei Bildern und Texten neuronale Netze."},
+  {"q": "Warum sollte man immer mit einer Baseline beginnen?", "a": "Weil sich ein komplexes Modell erst lohnt, wenn es messbar besser ist als ein einfaches. Die Baseline macht diesen Vergleich möglich und ist im Fachgespräch ein starkes Argument."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 3 */
+(function () {
+  function parseList(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(",", "."); }).filter(function (t) { return t !== ""; }).map(Number).filter(function (n) { return isFinite(n); }); }
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 3 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+
+  // Satz von Bayes
+  var bp = document.getElementById("bayP"), bs = document.getElementById("baySens"), bf = document.getElementById("bayFp");
+  function bayes() {
+    var p = (+bp.value) / 100, s = (+bs.value) / 100, f = (+bf.value) / 100;
+    var pos = s * p + f * (1 - p);
+    var post = pos > 0 ? s * p / pos : NaN;
+    document.getElementById("bayOut").innerHTML = kpi("P(B) – Alarm insgesamt", fmt(pos * 100, 2) + " %") + kpi("P(A | B) – Alarm ist echt", fmt(post * 100, 1) + " %") +
+      kpi("Je 10.000 Fälle: echte Alarme", fmt(s * p * 10000, 0)) + kpi("Je 10.000 Fälle: Fehlalarme", fmt(f * (1 - p) * 10000, 0));
+    document.getElementById("bayNote").textContent = "P(A | B) = P(B | A) · P(A) / P(B). Erhöhen Sie die Basisrate und beobachten Sie, wie der Anteil echter Alarme steigt.";
+  }
+  [bp, bs, bf].forEach(function (el) { el.addEventListener("input", bayes); }); bayes();
+
+  // Lineare Regression
+  var ix = document.getElementById("lrX"), iy = document.getElementById("lrY");
+  function regression() {
+    var x = parseList(ix.value), y = parseList(iy.value), out = document.getElementById("lrOut"), note = document.getElementById("lrNote");
+    if (x.length < 2 || x.length !== y.length) { out.innerHTML = ""; note.textContent = "Bitte gleich viele x- und y-Werte eingeben (mindestens zwei)."; return; }
+    var n = x.length, mx = x.reduce(function (a, b) { return a + b; }, 0) / n, my = y.reduce(function (a, b) { return a + b; }, 0) / n;
+    var sxy = 0, sxx = 0, sst = 0;
+    for (var i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) * (x[i] - mx); sst += (y[i] - my) * (y[i] - my); }
+    if (sxx === 0) { out.innerHTML = ""; note.textContent = "Alle x-Werte sind gleich – keine Gerade bestimmbar."; return; }
+    var b1 = sxy / sxx, b0 = my - b1 * mx, sse = 0;
+    for (var j = 0; j < n; j++) { var e = y[j] - (b0 + b1 * x[j]); sse += e * e; }
+    var r2 = sst > 0 ? 1 - sse / sst : NaN;
+    out.innerHTML = kpi("x̄", fmt(mx)) + kpi("ȳ", fmt(my)) + kpi("Σ(x−x̄)(y−ȳ)", fmt(sxy)) + kpi("Σ(x−x̄)²", fmt(sxx)) + kpi("b₁", fmt(b1)) + kpi("b₀", fmt(b0)) + kpi("Σ Residuen²", fmt(sse)) + kpi("R²", fmt(r2));
+    note.textContent = "ŷ = " + fmt(b0) + " + " + fmt(b1) + " · x";
+  }
+  [ix, iy].forEach(function (el) { el.addEventListener("input", regression); }); regression();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 3 */
+(function () {
+  var KL = ["kündigt", "treu"];
+  var VF = ["Lineare Regression", "Entscheidungsbaum", "Gradient Boosting", "Naive Bayes", "k-Means"];
+  window.UEBUNGEN = {
+    modul: 3,
+    aufgaben: {
+      a1: { teile: [
+        { id: "sp", label: "a) Skalarprodukt", typ: "zahl", punkte: 2, wert: 7, tol: 0 },
+        { id: "eu", label: "b) euklidischer Abstand", typ: "zahl", punkte: 1, wert: 5, tol: 0.001 },
+        { id: "ma", label: "b) Manhattan-Abstand", typ: "zahl", punkte: 1, wert: 7, tol: 0 }
+      ] },
+      a2: { teile: [
+        { id: "w1", label: "w nach Schritt 1", typ: "zahl", punkte: 2, wert: 3, tol: 0.001 },
+        { id: "w2", label: "w nach Schritt 2", typ: "zahl", punkte: 2, wert: 4, tol: 0.001 }
+      ] },
+      a3: { teile: [
+        { id: "p", label: "P(fehlerhaft | Alarm) in %", typ: "zahl", punkte: 3, wert: 16.2, tol: 0.2, einheit: "%" },
+        { id: "folge", label: "Folge für den Prozess", typ: "text", punkte: 2, erwartung: "Die meisten Alarme sind Fehlalarme; angeschlagene Teile nachprüfen statt verschrotten, Fehlalarmquote senken." }
+      ] },
+      a4: { teile: [
+        { id: "b1", label: "b₁", typ: "zahl", punkte: 2, wert: 1.1, tol: 0.001 },
+        { id: "b0", label: "b₀", typ: "zahl", punkte: 2, wert: 1.5, tol: 0.001 },
+        { id: "y10", label: "Umsatz für x = 10", typ: "zahl", punkte: 2, wert: 12.5, tol: 0.001, einheit: "T€" }
+      ] },
+      a5: { teile: [
+        { id: "r2", label: "R²", typ: "zahl", punkte: 2, wert: 0.75, tol: 0.001 },
+        { id: "deut", label: "Deutung", typ: "text", punkte: 1, erwartung: "Das Modell erklärt 75 % der Streuung der Zielgröße auf neuen Daten." }
+      ] },
+      a6: { teile: [
+        { id: "preis", label: "Preis", typ: "zahl", punkte: 2, wert: 5800, tol: 0, einheit: "€" },
+        { id: "deut", label: "Deutung von −0,04", typ: "text", punkte: 2, erwartung: "Jeder zusätzliche Kilometer senkt den Preis um 4 Cent, wenn alle anderen Merkmale gleich bleiben." }
+      ] },
+      a7: { teile: [
+        { id: "p", label: "Ausfallwahrscheinlichkeit in %", typ: "zahl", punkte: 3, wert: 73.1, tol: 0.15, einheit: "%" },
+        { id: "kl", label: "Klasse bei Schwelle 0,5", typ: "wahl", punkte: 1, optionen: ["Ausfall", "kein Ausfall"], richtig: 0 }
+      ] },
+      a8: { teile: [
+        { id: "k3", label: "a) k = 3", typ: "wahl", punkte: 1, optionen: KL, richtig: 0 },
+        { id: "k5", label: "b) k = 5", typ: "wahl", punkte: 1, optionen: KL, richtig: 1 },
+        { id: "skal", label: "c) Warum skalieren?", typ: "text", punkte: 2, erwartung: "kNN entscheidet über Abstände; ohne Skalierung dominieren Merkmale mit großen Zahlenbereichen." }
+      ] },
+      a9: { teile: [
+        { id: "g0", label: "Gini vorher", typ: "zahl", punkte: 1, wert: 0.5, tol: 0.001 },
+        { id: "gl", label: "Gini links", typ: "zahl", punkte: 1, wert: 0.375, tol: 0.001 },
+        { id: "gr", label: "Gini rechts", typ: "zahl", punkte: 1, wert: 0.375, tol: 0.001 },
+        { id: "gw", label: "Gini gewichtet danach", typ: "zahl", punkte: 1, wert: 0.375, tol: 0.001 },
+        { id: "gv", label: "Verbesserung", typ: "zahl", punkte: 1, wert: 0.125, tol: 0.001 }
+      ] },
+      a10: { teile: [{ id: "bb", label: "Unterschied und je ein Vorteil", typ: "text", punkte: 4, erwartung: "Random Forest: Bäume parallel auf Zufallsstichproben/-merkmalen, Mehrheit entscheidet, Vorteil robust (2 P.). Gradient Boosting: Bäume nacheinander auf Restfehlern, Vorteil hohe Genauigkeit auf Tabellendaten (2 P.)." }] },
+      a11: { teile: [
+        { id: "v1", label: "1. Kreditablehnung mit Regeln", typ: "wahl", punkte: 1, optionen: VF, richtig: 1 },
+        { id: "v2", label: "2. Abwanderung möglichst genau, 300 Merkmale", typ: "wahl", punkte: 1, optionen: VF, richtig: 2 },
+        { id: "v3", label: "3. Mails sortieren, einfache Baseline", typ: "wahl", punkte: 1, optionen: VF, richtig: 3 }
+      ] },
+      a12: { teile: [
+        { id: "verf", label: "Verfahren für (a) und (b) mit Begründung", typ: "text", punkte: 4, erwartung: "(a) Regression, z. B. Gradient Boosting mit linearer Regression als Baseline, Tabellendaten (2 P.). (b) Klassifikation, erklärbar (logistische Regression oder Boosting mit SHAP), Mensch prüft markierte Fälle (2 P.)." },
+        { id: "acc", label: "Accuracy und Schwelle", typ: "text", punkte: 4, erwartung: "Bei 0,8 % Betrug erreicht 'nie Betrug' 99,2 % Accuracy; Precision/Recall wichtig, viele Fehlalarme wegen Basisrate (2 P.). Schwelle nach Kosten übersehener Betrugsfälle vs. Prüfkosten und Prüfkapazität, mit Fachabteilung (2 P.)." }
+      ] }
+    }
+  };
+})();
+</script>

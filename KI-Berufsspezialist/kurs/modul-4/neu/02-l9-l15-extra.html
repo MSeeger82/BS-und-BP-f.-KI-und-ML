@@ -1,0 +1,205 @@
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Naive Bayes mit mehreren Wörtern und Glättung</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Zwei Indizien statt einem</span>
+        <p>30 % der Mails sind Spam. Das Wort „gratis“ steht in 40 % der Spam- und 5 % der normalen Mails, das Wort „Gewinn“ in 25 % der Spam- und 1 % der normalen Mails. Eine Mail enthält beide Wörter.</p>
+        <ol class="steps">
+          <li><div>Spam-Seite: <span class="calcline">0,3 · 0,4 · 0,25 = 0,030</span></div></li>
+          <li><div>Normal-Seite: <span class="calcline">0,7 · 0,05 · 0,01 = 0,00035</span></div></li>
+          <li><div>Normieren: <span class="calcline">0,030 : (0,030 + 0,00035) ≈ 0,988</span> → <span class="result">98,8 % Spam</span></div></li>
+        </ol>
+        <p>Ein einzelnes Indiz brachte 77 %, zwei Indizien zusammen fast 99 %. Das ist die Stärke: Viele schwache Hinweise addieren sich.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Das Problem der Wahrscheinlichkeit null</span>
+        <p>Das Wort „Zertifikat“ kam in den Trainingsdaten in 0 von 100 Spam-Mails vor. Dann wäre <span class="calcline">P(Zertifikat | Spam) = 0</span>, und das gesamte Produkt würde 0: Jede Mail mit diesem Wort gälte als „kein Spam“, egal wie viele andere Hinweise es gibt. Die <b>Laplace-Glättung</b> verhindert das, indem man überall etwas hinzuzählt, z. B. <span class="calcline">(0 + 1) : (100 + 2) ≈ 0,0098</span>. Ein ungesehenes Wort ist dann selten, aber nicht unmöglich.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Naive Bayes bei Kundenmails mit drei Klassen</span>
+        <p>Eine Firma ordnet Mails den Klassen „Rechnung“, „Technik“ und „Kündigung“ zu. Für jede Klasse speichert das Verfahren, wie häufig jedes Wort dort vorkommt. Eine neue Mail mit „Zahlung“, „Rechnung“ und „offen“ erhält für „Rechnung“ ein viel größeres Produkt als für die anderen und wird dorthin sortiert. Das funktioniert auch mit einigen hundert Beispielen pro Klasse erstaunlich gut und ist in Millisekunden trainiert.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> 20 % der Mails sind Spam. Das Wort „Angebot“ steht in 50 % der Spam-Mails und in 10 % der normalen Mails. Wie wahrscheinlich ist eine Mail mit „Angebot“ Spam?</p>
+        <p><b>Musterlösung:</b> Spam-Seite: 0,2 · 0,5 = 0,10 (1,5 Punkte). Normal-Seite: 0,8 · 0,1 = 0,08 (1,5 Punkte). Normiert: 0,10 : (0,10 + 0,08) = 0,556, also etwa 55,6 % (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Parameter, Hyperparameter und die Suche danach</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Parameter oder Hyperparameter?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Größe</th><th>Art</th><th>Begründung</th></tr></thead>
+          <tbody>
+            <tr><td>Gewicht w₁ in der linearen Regression</td><td>Parameter</td><td>wird im Training gelernt</td></tr>
+            <tr><td>Anzahl k der Nachbarn bei kNN</td><td>Hyperparameter</td><td>vorher vom Menschen eingestellt</td></tr>
+            <tr><td>Schwellenwert „Einkommen &gt; 5“ in einem Baum</td><td>Parameter</td><td>vom Algorithmus gefunden</td></tr>
+            <tr><td>Maximale Tiefe des Baums</td><td>Hyperparameter</td><td>Einstellung des Menschen</td></tr>
+            <tr><td>Lernrate beim Gradientenabstieg</td><td>Hyperparameter</td><td>Einstellung des Menschen</td></tr>
+            <tr><td>Gewichte eines neuronalen Netzes</td><td>Parameter</td><td>werden trainiert</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie viel Rechenarbeit eine Grid Search macht</span>
+        <p>Raster: <code>n_estimators</code> ∈ {100, 300} und <code>max_depth</code> ∈ {5, 10, None}. Das sind <span class="calcline">2 · 3 = 6</span> Kombinationen. Mit 5-facher Kreuzvalidierung wird jede Kombination fünfmal trainiert: <span class="calcline">6 · 5 = 30</span> Trainings. Kommt ein weiterer Hyperparameter mit 4 Werten hinzu, sind es schon <span class="calcline">6 · 4 · 5 = 120</span>. Die Zahl wächst schnell – deshalb ist Random Search bei vielen Einstellungen oft die klügere Wahl.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Die Validierungskurve lesen</span>
+        <p>Beim Random Forest wird die Baumtiefe variiert. Training: 0,80 / 0,92 / 0,99 / 1,00; Validierung: 0,78 / 0,87 / 0,83 / 0,80 (für Tiefe 2 / 5 / 10 / unbegrenzt). Ausgewählt wird die Tiefe 5 mit der höchsten Validierung (0,87). Bei größerer Tiefe steigt nur noch das Trainingsergebnis – das Modell lernt Details auswendig. Anschließend wird <b>einmal</b> mit den Testdaten geprüft.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie den Unterschied zwischen Parametern und Hyperparametern. Nennen Sie je ein Beispiel. Wie viele Trainings entstehen bei einer Grid Search mit 3 Werten für max_depth, 4 Werten für n_estimators und 5-facher Kreuzvalidierung?</p>
+        <p><b>Musterlösung:</b> Parameter werden im Training gelernt (z. B. die Gewichte einer Regression), Hyperparameter vom Menschen vorab eingestellt (z. B. max_depth oder k) (3 Punkte). Kombinationen: 3 · 4 = 12; Trainings: 12 · 5 = 60 (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Systematisch entscheiden</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Drei Fälle, drei Empfehlungen</span>
+        <ul>
+          <li><b>Personalauswahl:</b> Bewerbungen sollen vorsortiert werden; jede Absage muss begründbar sein. → Logistische Regression oder flacher Baum, weil sich Entscheidungen erklären lassen; ein wissenschaftlich sauberer Fairness-Check ist Pflicht.</li>
+          <li><b>Maschinenüberwachung:</b> 40 Sensormerkmale, 100.000 Messreihen, Ziel: Ausfall in 7 Tagen. → Gradient Boosting oder Random Forest: stark auf Tabellendaten, Feature Importance hilft der Instandhaltung.</li>
+          <li><b>Spamfilter für 50.000 Wörter:</b> sehr viele Merkmale, wenig Zeit. → Naive Bayes oder lineare SVM: schnell und gut bei Text.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Entscheidungsmatrix</span>
+        <p>Bewertung von 1 (schlecht) bis 5 (sehr gut):</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Verfahren</th><th class="r">Erklärbarkeit</th><th class="r">Genauigkeit</th><th class="r">Tempo</th></tr></thead>
+          <tbody>
+            <tr><td>Logistische Regression</td><td class="r">5</td><td class="r">3</td><td class="r">5</td></tr>
+            <tr><td>Random Forest</td><td class="r">3</td><td class="r">4</td><td class="r">3</td></tr>
+            <tr><td>Gradient Boosting</td><td class="r">2</td><td class="r">5</td><td class="r">3</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><b>Gewichte 0,5 / 0,3 / 0,2</b> (Erklärbarkeit wichtig, z. B. bei Kreditentscheidungen): Logistisch <span class="calcline">2,5 + 0,9 + 1,0 = 4,4</span>; Forest <span class="calcline">1,5 + 1,2 + 0,6 = 3,3</span>; Boosting <span class="calcline">1,0 + 1,5 + 0,6 = 3,1</span> → <b>Logistische Regression</b>.</li>
+          <li><b>Gewichte 0,1 / 0,7 / 0,2</b> (Genauigkeit entscheidet, z. B. Absatzprognose): Logistisch 3,6; Forest 3,7; Boosting <span class="calcline">0,2 + 3,5 + 0,6 = 4,3</span> → <b>Gradient Boosting</b>.</li>
+        </ul>
+        <p>Die Wahl hängt von den Gewichten ab – und diese kommen aus dem Anwendungsfall, nicht aus der Technik.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Nie ohne Vergleich</span>
+        <p>Ein Betrieb testet drei Modelle auf denselben Daten: Baseline F1 0,00; logistisch 0,47; Random Forest 0,51; Boosting 0,52. Der Unterschied zwischen Forest und Boosting beträgt einen Punkt – kaum aussagekräftig. Dann entscheiden andere Kriterien: Wie schnell ist die Vorhersage? Wie gut lässt sich das Modell erklären? Wie aufwendig ist die Pflege? Die Genauigkeit allein entscheidet selten.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Eine Versicherung will Betrugsverdacht bei Schadensmeldungen vorhersagen; Entscheidungen müssen später gegenüber der Aufsicht begründbar sein. Welches Verfahren empfehlen Sie und warum?</p>
+        <p><b>Musterlösung:</b> Logistische Regression oder ein flacher Entscheidungsbaum (2 Punkte), weil die Entscheidung über Gewichte bzw. Regeln im Einzelfall erklärbar ist (2 Punkte). Zusätzlich zum Vergleich ein Random Forest oder Boosting, um zu sehen, wie viel Leistung die Erklärbarkeit kostet (1 Punkt); Baseline nicht vergessen (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Erklärungen im Einzelfall</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Gewichte als Begründung</span>
+        <p>Die logistische Regression einer Bank hat die Gewichte: Schuldenquote +1,2, Beschäftigungsdauer −0,4 (je Jahr), Einkommen −0,6 (je 10.000 €). Einem abgelehnten Antragsteller kann man sagen: „Ihre hohe Schuldenquote und die kurze Beschäftigungsdauer haben die Einschätzung am stärksten verschlechtert; ein höheres Einkommen hätte sie verbessert.“ Das ist eine Begründung, die ein Mensch versteht – und die die Bank auch gegenüber einer Behörde vorlegen kann.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Einzelfall-Erklärung mit SHAP (vereinfacht)</span>
+        <p>Ein Boosting-Modell schätzt das Ausfallrisiko eines Antrags auf 17 %. Das durchschnittliche Risiko im Bestand beträgt 6 %. SHAP zerlegt die Differenz in Beiträge der Merkmale:</p>
+        <p><span class="calcline">6 % + 9 (Schuldenquote) + 5 (kurze Beschäftigung) − 3 (hohes Einkommen) = 17 %</span></p>
+        <p>So lässt sich auch ein komplexes Modell Fall für Fall erklären: Die Schuldenquote erhöht das Risiko am stärksten, das Einkommen wirkt dämpfend.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wann Erklärbarkeit Pflicht ist</span>
+        <ul>
+          <li><b>Kredit, Versicherung, Bewerbung:</b> Entscheidungen mit erheblicher Wirkung auf Personen; Betroffene haben Rechte auf Auskunft über die Logik (DSGVO) und die Systeme gelten oft als Hochrisiko nach dem AI Act.</li>
+          <li><b>Medizin:</b> Ärzte müssen eine Empfehlung einordnen können.</li>
+          <li><b>Filmempfehlung:</b> Fehler harmlos, eine Erklärung nicht nötig; hier zählt die Leistung.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Warum kann es sinnvoll sein, ein etwas weniger genaues, aber erklärbares Modell zu wählen? Nennen Sie zwei Verfahren zur nachträglichen Erklärung.</p>
+        <p><b>Musterlösung:</b> Wenn Entscheidungen im Einzelfall begründet werden müssen (z. B. Kredit, Personal; DSGVO, AI Act) oder wenn Vertrauen und Fehlersuche wichtig sind, ist Erklärbarkeit wichtiger als wenige Prozentpunkte Genauigkeit (3 Punkte). Nachträgliche Erklärung: SHAP und LIME; außerdem Feature Importance (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: scikit-learn lesen und prüfen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Was die Schleife ausgibt</span>
+        <p>Der Code aus der Lektion trainiert sechs Modelle und gibt jeweils den F1-Wert aus. Eine mögliche Ausgabe:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Modell</th><th class="r">F1 (Validierung)</th></tr></thead>
+          <tbody>
+            <tr><td>Baseline</td><td class="r">0,000</td></tr>
+            <tr><td>Logistisch</td><td class="r">0,470</td></tr>
+            <tr><td>Baum</td><td class="r">0,440</td></tr>
+            <tr><td>Random Forest</td><td class="r">0,510</td></tr>
+            <tr><td>Boosting</td><td class="r">0,520</td></tr>
+            <tr><td>kNN</td><td class="r">0,400</td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Baseline erreicht F1 = 0, weil sie nie die seltene Klasse vorhersagt. Alle anderen schlagen sie deutlich. Zwischen Random Forest und Boosting ist der Unterschied klein.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Zeile Code erklären</span>
+        <pre class="code">wahrsch = modelle["Logistisch"].predict_proba(X_val)[:, 1]</pre>
+        <p><b>Erklärung:</b> <code>predict_proba</code> liefert für jeden Validierungsfall eine Tabelle mit den Wahrscheinlichkeiten für jede Klasse (Spalte 0 = Klasse 0, Spalte 1 = Klasse 1). Mit <code>[:, 1]</code> wird nur die Spalte der Klasse 1 ausgewählt, also die Wahrscheinlichkeit für „Ausfall“. So lässt sich später eine eigene Schwelle anlegen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Typische Fehler im Code</span>
+        <ul>
+          <li><b>fit auf den Testdaten:</b> <code>m.fit(X_test, y_test)</code> ist Leakage – gelernt wird nur mit Trainingsdaten.</li>
+          <li><b>Skalierung vergessen:</b> kNN und logistische Regression brauchen eine Pipeline mit Skalierer.</li>
+          <li><b>Accuracy bei seltenen Klassen:</b> <code>m.score(...)</code> liefert Accuracy – bei 2 % Ausfällen irreführend; besser <code>f1_score</code> oder <code>recall_score</code>.</li>
+          <li><b>Zufall nicht festgelegt:</b> ohne <code>random_state</code> ändern sich die Ergebnisse bei jedem Lauf.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie die Aufgaben der drei Methoden fit, predict und predict_proba.</p>
+        <p><b>Musterlösung:</b> fit trainiert das Modell mit den übergebenen Trainingsdaten (Merkmale und Labels) (2 Punkte). predict liefert für neue Fälle die vorhergesagte Klasse bzw. Zahl (1,5 Punkte). predict_proba liefert die Wahrscheinlichkeiten je Klasse, auf die man eine eigene Schwelle anwenden kann (1,5 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Prognosen prüfen und Merkmale bauen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Naive und saisonal-naive Prognose</span>
+        <p>Brötchenabsatz einer Bäckerei (Stück): Mo 100, Di 110, Mi 105, Do 120; in der Vorwoche war der Donnerstag 115.</p>
+        <ul>
+          <li><b>Naive Prognose</b> („wie gestern“) für Donnerstag: 105 (der Mittwochswert). Fehler gegen 120: <span class="calcline">|120 − 105| = 15</span>.</li>
+          <li><b>Saisonal-naive Prognose</b> („wie letzter Donnerstag“): 115. Fehler: <span class="calcline">|120 − 115| = 5</span>.</li>
+        </ul>
+        <p>Die saisonale Regel ist hier deutlich besser. Ein ML-Modell müsste noch genauer sein, sonst lohnt der Aufwand nicht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Lag-Tabelle für ein Modell</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tag</th><th class="r">Absatz (Ziel)</th><th class="r">Absatz gestern</th><th class="r">Absatz vor 7 Tagen</th><th class="r">Ø der letzten 3 Tage</th><th>Wochentag</th></tr></thead>
+          <tbody>
+            <tr><td>Do</td><td class="r">120</td><td class="r">105</td><td class="r">115</td><td class="r">(100 + 110 + 105) : 3 = 105</td><td>Do</td></tr>
+          </tbody>
+        </table></div>
+        <p>Jede Zeile enthält nur Informationen, die am Vorhersagetag <b>bereits bekannt</b> sind. Der heutige Absatz selbst kommt nicht als Merkmal vor.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Externe Einflüsse einbeziehen</span>
+        <p>Der Absatz schwankt mit dem Wetter: bei Regen −10 %, bei Sonne am Wochenende +15 %. Fügt man die Wettervorhersage als Merkmal hinzu, kann das Modell darauf reagieren. Achtung: Man darf nur die <b>Vorhersage</b> des Wetters nutzen, die man auch am Vorhersagetag hat, nicht das tatsächliche Wetter, das erst später bekannt wird (sonst Leakage).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Für die Prognose des Wochenabsatzes wollen Sie ein Modell trainieren. Nennen Sie drei geeignete Merkmale, eine Baseline und die richtige Aufteilung der Daten.</p>
+        <p><b>Musterlösung:</b> Merkmale: Absatz der Vorwoche, Durchschnitt der letzten vier Wochen, Kalenderwoche oder Feiertag (je 1 Punkt, max. 3). Baseline: „wie in der Vorwoche“ (1 Punkt). Aufteilung: zeitlich, ältere Wochen Training, jüngste Wochen Test, kein zufälliges Mischen (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l15-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Was die Fallstudie in Zahlen bedeutet</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Bilanz des Kreditmodells (vereinfacht)</span>
+        <p>Die Bank bearbeitet 2.000 Anträge pro Monat, 6 % fallen aus: <span class="calcline">2.000 · 0,06 = 120</span> Ausfälle, im Mittel je 4.000 € Verlust, zusammen <span class="calcline">120 · 4.000 = 480.000 €</span>.</p>
+        <ul>
+          <li><b>Das Modell findet 70 % der Ausfälle</b> (Recall 0,7): <span class="calcline">0,7 · 120 = 84</span> Fälle werden erkannt. Bei Ablehnung oder besserer Absicherung könnte etwa <span class="calcline">84 · 4.000 = 336.000 €</span> Schaden vermieden werden.</li>
+          <li><b>Der Preis:</b> Bei einer Precision von 25 % sind unter den markierten Anträgen <span class="calcline">84 : 0,25 = 336</span> Fälle, 252 davon zu Unrecht. Jede zusätzliche Prüfung kostet 30 €: <span class="calcline">336 · 30 = 10.080 €</span>.</li>
+          <li><b>Grobe Bilanz:</b> 336.000 € − 10.080 € ≈ <b>325.920 €</b> pro Monat – ohne die entgangenen Erträge guter Kunden, die zu Unrecht abgelehnt werden. Diese Gegenrechnung gehört in jede ehrliche Wirtschaftlichkeitsbetrachtung (Modul 11).</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum die Schwelle 0,25 statt 0,5 gewählt wurde</span>
+        <p>Ein übersehener Ausfall kostet 4.000 €, eine zusätzliche Prüfung 30 €. Das Verhältnis ist etwa 133 : 1. Prüft man schon ab einer Ausfallwahrscheinlichkeit von 0,25 statt 0,5, werden deutlich mehr Ausfälle erkannt (Recall steigt), dafür gibt es mehr Fehlalarme (Precision sinkt). Weil ein Fehlalarm so viel billiger ist als ein Ausfall, ist die niedrigere Schwelle wirtschaftlich sinnvoll.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Fairness im Blick behalten</span>
+        <p>Obwohl Geschlecht und Nationalität nicht als Merkmal verwendet werden, können andere Merkmale (z. B. Wohnort oder Teilzeit) damit zusammenhängen und indirekt benachteiligen. Deshalb wird nach dem Training geprüft: Sind Ablehnungsquoten und Fehlerquoten für verschiedene Gruppen vergleichbar? Zeigt sich eine auffällige Differenz, muss das Modell überarbeitet werden (Modul 10).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie in der richtigen Reihenfolge sechs Bausteine eines KI-Projekts, wie sie in der Fallstudie vorkommen, und begründen Sie die Wahl der logistischen Regression.</p>
+        <p><b>Musterlösung:</b> Ziel, Daten und Merkmale, Vorbereitung und Aufteilung, Baseline, Modelle vergleichen, Entscheidung mit Schwelle und Einsatz/Überwachung (3 Punkte). Die logistische Regression wurde gewählt, weil Ablehnungen begründet werden müssen und die Gewichte die Entscheidung erklären; der kleine Leistungsverlust gegenüber Boosting ist der Preis der Erklärbarkeit (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->

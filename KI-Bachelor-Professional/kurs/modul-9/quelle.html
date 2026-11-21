@@ -1,0 +1,798 @@
+<!--META {"nr": 9, "titel": "Projektmanagement klassisch und agil", "lektionen": 17, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 9 von 17 · ca. 40 Lernstunden</span>
+      <h1 id="introTitle">Projektmanagement klassisch und agil: KI-Projekte planen, steuern, skalieren</h1>
+      <p>Als Bachelor Professional leiten Sie KI-Projekte – vom Projektauftrag über Planung, Steuerung und Berichte bis zum Abschluss. In diesem Modul lernen Sie die klassischen Werkzeuge (Projektstrukturplan, Netzplan, Gantt, Risikomanagement, Earned Value), die agilen Methoden (Scrum, Kanban) und hybride Vorgehen, mit denen KI-Projekte in der Praxis meist laufen. Zum Schluss geht es um das, woran viele KI-Vorhaben scheitern: die Skalierung vom Prototyp in den breiten Betrieb.</p>
+      <div class="facts">
+        <span class="chip">17 Lektionen in 2 Teilen</span><span class="chip">9 Animationen</span><span class="chip">1 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 5 Nr. 2</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--violet-soft); outline: 2px solid var(--violet);"></i><span><b>Prüfungstipp</b> – so wird es abgefragt</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Was ist ein Projekt?" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 20 Minuten</span><h2>Was ist ein Projekt? Merkmale und magisches Dreieck</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Hochzeit zu organisieren ist ein Projekt: einmalig, mit festem Termin, begrenztem Budget, vielen Beteiligten und der Gefahr, dass etwas schiefgeht. Das tägliche Abendessen dagegen ist Routine.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Nach <b>DIN 69901</b> ist ein Projekt ein Vorhaben, das im Wesentlichen durch die Einmaligkeit der Bedingungen in ihrer Gesamtheit gekennzeichnet ist. Typische Merkmale: klares Ziel, Einmaligkeit, zeitliche Begrenzung, begrenzte Ressourcen, eigene Organisation, Komplexität und Risiko.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/dreieck.gif" width="640" height="380" alt="Animation: Ein Dreieck mit den Ecken Leistung und Qualität, Zeit und Kosten. Wird die Leistungsecke größer, müssen Zeit- und Kostenecke nach außen wandern." loading="lazy">
+        <figcaption>Leistung, Zeit und Kosten hängen zusammen.</figcaption>
+      </figure>
+      <div class="prose">
+        <p>KI-Projekte haben besondere Unsicherheiten: Ob die Daten reichen und das Modell gut genug wird, weiß man oft erst nach Experimenten. Deshalb plant man sie häufig in Stufen mit Entscheidungstoren (Lektion 17) oder agil.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Projekt = einmalig, zielgerichtet, befristet, mit begrenzten Ressourcen. Leistung, Zeit und Kosten müssen ausbalanciert werden.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Was war das letzte Projekt, bei dem Zeit, Kosten oder Leistung „gekippt“ sind? Was wurde geopfert? Meist war es die Qualität.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Projektauftrag und Ziele" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 25 Minuten</span><h2>Projekt initiieren: Projektauftrag und Projektziele</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Bevor ein Architekt plant, unterschreibt der Bauherr einen Auftrag: was gebaut wird, wie groß, bis wann, für wie viel. Ohne Auftrag streitet man später über alles.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Der <b>Projektauftrag</b> (Project Charter) ist die verbindliche Vereinbarung zwischen Auftraggeber und Projektleitung. Er schafft Klarheit und gibt der Projektleitung ihre Befugnisse.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Inhalt des Projektauftrags</th><th>Beispiel KI-Rechnungsprüfung</th></tr></thead>
+        <tbody>
+          <tr><td>Ausgangslage und Problem</td><td>6 Tage Durchlaufzeit, 12 min manuelle Arbeit je Rechnung</td></tr>
+          <tr><td>Ziele (SMART) und Nicht-Ziele</td><td>2 Tage, 70 % automatisch; nicht: Zahlungsprozess ändern</td></tr>
+          <tr><td>Umfang (Scope), Abgrenzung</td><td>Eingangsrechnungen Inland; Gutschriften später</td></tr>
+          <tr><td>Termine, Meilensteine</td><td>Pilot bis KW 12, Rollout bis KW 18</td></tr>
+          <tr><td>Budget, Ressourcen</td><td>180 T€, 2,5 Vollzeitstellen</td></tr>
+          <tr><td>Organisation, Rollen</td><td>Auftraggeber CFO, Projektleitung, Lenkungsausschuss</td></tr>
+          <tr><td>Risiken, Annahmen</td><td>Datenqualität, Akzeptanz, Betriebsrat</td></tr>
+          <tr><td>Abnahmekriterien</td><td>Kennzahlen nach 3 Monaten Betrieb erreicht</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ohne unterschriebenen Projektauftrag mit Zielen, Umfang, Budget und Abnahmekriterien gibt es kein Projekt – nur gute Absichten.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p><b>Scope Creep</b>: Der Umfang wächst schleichend („Kann die KI nicht auch noch …?“). Änderungen nur über ein geregeltes Änderungsverfahren (Lektion 10).</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Nicht-Ziele sind oft wichtiger als Ziele – sie verhindern Missverständnisse. Lassen Sie für eine eigene KI-Idee drei Ziele und zwei Nicht-Ziele formulieren.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Stakeholder und Umfeld" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 25 Minuten</span><h2>Stakeholderanalyse und Umfeldanalyse</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer im Mehrfamilienhaus den Garten umgestalten will, fragt besser vorher die Nachbarn – sonst blockiert einer, der vorher übergangen wurde.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Stakeholder</b> sind alle Personen und Gruppen, die ein Projekt beeinflussen oder davon betroffen sind. Die Analyse bewertet ihren <b>Einfluss</b> und ihr <b>Interesse</b> (bzw. ihre Einstellung) und leitet Maßnahmen ab.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>geringes Interesse</th><th>hohes Interesse</th></tr></thead>
+        <tbody>
+          <tr><td><b>hoher Einfluss</b></td><td>zufriedenstellen (z. B. Geschäftsführung anderer Bereiche)</td><td>eng einbinden (Auftraggeber, Betriebsrat, Fachabteilung)</td></tr>
+          <tr><td><b>geringer Einfluss</b></td><td>beobachten</td><td>informieren (Beschäftigte, Kunden)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Typische Stakeholder eines KI-Projekts: Auftraggeber, Nutzer in der Fachabteilung, IT und Betrieb, Datenschutzbeauftragter, Informationssicherheit, Betriebsrat, Rechtsabteilung, Lieferanten/Anbieter, Kunden. <b>Umfeldanalyse</b> erfasst zusätzlich sachliche Einflüsse: Gesetze (EU-KI-Verordnung, DSGVO), Technik, Markt, Termine anderer Projekte.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Wer Einfluss und Interesse hat, wird eng eingebunden – bei KI-Projekten fast immer Fachabteilung, Betriebsrat und Datenschutz.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Der Betriebsrat ist kein Gegner, sondern ein Stakeholder mit Mitbestimmungsrechten (Modul 16). Wer ihn früh einbindet, spart Monate.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Projektstrukturplan" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Projektstrukturplan (PSP) und Arbeitspakete</h2></div>
+      <figure class="board">
+        <img src="gifs/psp.gif" width="640" height="380" alt="Animation: Ein Baum wächst: oben das Projekt KI-Rechnungsprüfung, darunter fünf Teilprojekte Analyse, Daten, Modell, Integration und Einführung, darunter je zwei Arbeitspakete." loading="lazy">
+        <figcaption>Der PSP zerlegt das Projekt bis zu Arbeitspaketen.</figcaption>
+      </figure>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Der <b>Projektstrukturplan</b> zerlegt das Projekt hierarchisch in Teilaufgaben bis zu <b>Arbeitspaketen</b>. Gliederung objektorientiert (nach Ergebnissen), funktionsorientiert (nach Tätigkeiten) oder phasenorientiert. Der PSP ist die Grundlage für Ablauf-, Termin-, Kosten- und Ressourcenplanung.</p>
+        </div>
+        <div class="box tipp"><span class="box-label">Prüfungstipp</span>
+          <p>Ein Arbeitspaket ist abgrenzbar, hat ein überprüfbares Ergebnis, einen Verantwortlichen, eine Aufwands- und Dauerschätzung. Die Arbeitspaketbeschreibung enthält genau diese Punkte.</p>
+        </div>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Der PSP beantwortet das „Was“: Alles, was nicht im PSP steht, gehört nicht zum Projekt.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie für das eigene KI-Projekt einen PSP mit drei Ebenen auf einer Seite zeichnen. Häufig vergessen: Schulung, Dokumentation, Datenschutz, Betriebsübergabe.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Netzplan und kritischer Pfad" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 45 Minuten</span><h2>Ablaufplanung: Netzplan, kritischer Pfad, Puffer</h2></div>
+      <figure class="board">
+        <img src="gifs/netzplan.gif" width="640" height="380" alt="Animation: Vier Vorgangsknoten A mit Dauer 3, B mit 5, C mit 2 und D mit 4. Erst werden frühe Anfangs- und Endzeiten vorwärts berechnet, dann späte Zeiten rückwärts. C hat Gesamtpuffer 3, der kritische Pfad A–B–D wird rot markiert, Projektende 12." loading="lazy">
+        <figcaption>Kritischer Pfad A–B–D, Projektdauer 12.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Regeln (Vorgangsknotennetz)</span>
+        <div class="eq">Vorwärts: FAZ = größtes FEZ aller Vorgänger · FEZ = FAZ + Dauer</div>
+        <div class="eq">Rückwärts: SEZ = kleinstes SAZ aller Nachfolger · SAZ = SEZ − Dauer</div>
+        <div class="eq">Gesamtpuffer GP = SAZ − FAZ (= SEZ − FEZ) · freier Puffer FP = kleinstes FAZ der Nachfolger − FEZ</div>
+        <div class="legend-eq"><span>Kritischer Pfad = Kette der Vorgänge mit Gesamtpuffer 0. Jede Verzögerung dort verschiebt das Projektende.</span></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Vorgang</th><th class="r">Dauer</th><th>Vorgänger</th><th class="r">FAZ</th><th class="r">FEZ</th><th class="r">SAZ</th><th class="r">SEZ</th><th class="r">GP</th></tr></thead>
+        <tbody>
+          <tr><td>A Datenanalyse</td><td class="r">3</td><td>–</td><td class="r">0</td><td class="r">3</td><td class="r">0</td><td class="r">3</td><td class="r">0</td></tr>
+          <tr><td>B Modell entwickeln</td><td class="r">5</td><td>A</td><td class="r">3</td><td class="r">8</td><td class="r">3</td><td class="r">8</td><td class="r">0</td></tr>
+          <tr><td>C Schnittstelle planen</td><td class="r">2</td><td>A</td><td class="r">3</td><td class="r">5</td><td class="r">6</td><td class="r">8</td><td class="r">3</td></tr>
+          <tr><td>D Integration</td><td class="r">4</td><td>B, C</td><td class="r">8</td><td class="r">12</td><td class="r">8</td><td class="r">12</td><td class="r">0</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Vorwärts die frühesten, rückwärts die spätesten Termine; Puffer 0 = kritischer Pfad.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Bei mehreren Vorgängern nimmt man vorwärts das <b>größte</b> FEZ, bei mehreren Nachfolgern rückwärts das <b>kleinste</b> SAZ. Wer das verwechselt, rechnet den ganzen Netzplan falsch.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Netzplanaufgaben sind in Teil 2 der Prüfung sehr wahrscheinlich. Lassen Sie die Tabelle mit verdeckten Werten selbst ausfüllen und danach ein zweites Beispiel mit fünf Vorgängen rechnen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Termine und Ressourcen" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 25 Minuten</span><h2>Termine und Ressourcen: Gantt-Diagramm, Meilensteine, Auslastung</h2></div>
+      <figure class="board">
+        <img src="gifs/gantt.gif" width="640" height="380" alt="Animation: Ein Gantt-Diagramm mit sechs Balken von Analyse bis Rollout über 18 Kalenderwochen wird gezeichnet; ein Meilenstein Go/No-Go Pilot und eine rote Heute-Linie erscheinen." loading="lazy">
+        <figcaption>Das Gantt-Diagramm zeigt Termine, Überlappungen und Meilensteine.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Gantt-Diagramm</b> (Balkenplan): Vorgänge als Balken auf einer Zeitachse; anschaulich für Termine und Fortschritt.</li>
+          <li><b>Meilensteine</b>: Ereignisse ohne Dauer, an denen Ergebnisse geprüft und entschieden wird (z. B. Go/No-Go nach dem Pilot).</li>
+          <li><b>Ressourcenplanung</b>: Wer arbeitet wann woran? Überlastungen erkennen und durch Verschieben im Puffer oder zusätzliche Kapazität ausgleichen (Kapazitätsabgleich).</li>
+          <li><b>Aufwand und Dauer</b> sind verschieden: 20 Personentage Aufwand können bei zwei Personen 10 Arbeitstage dauern.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Netzplan für die Logik, Gantt für die Kommunikation, Meilensteine für Entscheidungen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Verbinden Sie Netzplan und Gantt: Derselbe Plan, zwei Sichten. Im Gantt erkennt man Ressourcenkonflikte, im Netzplan den kritischen Pfad.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Kosten und Earned Value" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 35 Minuten</span><h2>Kosten und Budget, Earned-Value-Analyse</h2></div>
+      <figure class="board">
+        <img src="gifs/earned-value.gif" width="640" height="380" alt="Animation: Drei Kurven über zehn Monate: grau der Planwert, grün der Fertigstellungswert, rot die Istkosten. Am Stichtag Monat 5 liegen PV 58, EV 44 und AC 55; daraus CPI 0,80 und SPI 0,76." loading="lazy">
+        <figcaption>Teurer und später als geplant.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Kennzahlen</span>
+        <div class="eq">PV = Planwert (geplante Kosten bis Stichtag) · EV = Fertigstellungswert (Plankosten der erledigten Arbeit) · AC = Istkosten</div>
+        <div class="eq">CV = EV − AC · SV = EV − PV · CPI = <span class="frac"><span>EV</span><span>AC</span></span> · SPI = <span class="frac"><span>EV</span><span>PV</span></span></div>
+        <div class="eq">Prognose Gesamtkosten EAC = <span class="frac"><span>BAC</span><span>CPI</span></span> (BAC = Gesamtbudget)</div>
+        <div class="legend-eq"><span>CPI unter 1: über Budget. SPI unter 1: hinter dem Plan.</span></div>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Earned Value</span>
+        <div class="calc-row">
+          <div class="field"><label for="evBac">Gesamtbudget BAC</label><input type="number" id="evBac" value="100"></div>
+          <div class="field"><label for="evPv">Planwert PV</label><input type="number" id="evPv" value="58"></div>
+          <div class="field"><label for="evEv">Fertigstellungswert EV</label><input type="number" id="evEv" value="44"></div>
+          <div class="field"><label for="evAc">Istkosten AC</label><input type="number" id="evAc" value="55"></div>
+        </div>
+        <div class="kpis" id="evOut"></div>
+        <p class="calc-note" id="evNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Earned Value vergleicht Plan, Fortschritt und Kosten: CPI = EV / AC, SPI = EV / PV.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>„Wir haben erst 55 % des Budgets ausgegeben, alles gut“ – ohne den Fertigstellungswert sagt das nichts. Entscheidend ist, wie viel Arbeit für das Geld geschafft wurde.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie mit dem Rechner die Prognose: Bei CPI 0,8 werden aus 100 T€ Budget voraussichtlich 125 T€. Das ist der Moment für ein Gespräch mit dem Lenkungsausschuss.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="Risikomanagement" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 30 Minuten</span><h2>Risikomanagement: erkennen, bewerten, begrenzen</h2></div>
+      <figure class="board">
+        <img src="gifs/risikomatrix.gif" width="640" height="380" alt="Animation: Eine 5×5-Matrix mit grünen, gelben und roten Feldern. Fünf Risiken wie schlechte Datenqualität, Ausfall einer Schlüsselperson und fehlende Zustimmung des Betriebsrats werden nach Wahrscheinlichkeit und Auswirkung eingetragen." loading="lazy">
+        <figcaption>Risiken nach Wahrscheinlichkeit und Auswirkung priorisieren.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span><b>Identifizieren</b>: Brainstorming, Checklisten, Erfahrungen früherer Projekte, Stakeholder befragen.</span></li>
+        <li><span><b>Bewerten</b>: Wahrscheinlichkeit × Auswirkung (Punkte oder Euro). Erwartungswert = Wahrscheinlichkeit · Schadenshöhe.</span></li>
+        <li><span><b>Maßnahmen</b>: vermeiden, vermindern, übertragen (Versicherung, Vertrag), akzeptieren – mit Verantwortlichem und Termin.</span></li>
+        <li><span><b>Überwachen</b>: Risikoliste regelmäßig aktualisieren, Frühwarnindikatoren beobachten.</span></li>
+      </ol>
+      <div class="prose">
+        <p><b>Beispiel:</b> Risiko „Datenqualität reicht nicht“, Wahrscheinlichkeit 30 %, Schaden 60.000 € (Verzögerung, Nacharbeit) → <span class="calcline">Erwartungswert 0,3 · 60.000 = 18.000 €</span>. Eine Datenanalyse vorab für 8.000 €, die das Risiko auf 10 % senkt, lohnt sich: neuer Erwartungswert 6.000 €, Ersparnis 12.000 € bei 8.000 € Kosten.</p>
+        <p><b>Typische KI-Risiken:</b> Datenqualität und -verfügbarkeit, Modellgüte reicht nicht, Akzeptanz, Recht (Hochrisiko-Einstufung, Datenschutz), Abhängigkeit vom Anbieter, Kosten im Betrieb, Schlüsselpersonen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Risiko = Wahrscheinlichkeit × Auswirkung. Maßnahmen lohnen sich, wenn sie den Erwartungswert stärker senken, als sie kosten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Das Rechenbeispiel verbindet Risiko- und Wirtschaftlichkeitsrechnung (Modul 13). Lassen Sie eine Risikoliste mit fünf Risiken für das eigene Projekt anlegen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Projektteam und Rollen" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 25 Minuten</span><h2>Projektteam zusammenstellen, Rollen und Verantwortungen (RACI)</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rolle im KI-Projekt</th><th>Aufgabe</th></tr></thead>
+        <tbody>
+          <tr><td>Auftraggeber / Sponsor</td><td>gibt Ziele und Budget, trifft Grundsatzentscheidungen</td></tr>
+          <tr><td>Lenkungsausschuss</td><td>steuert an Meilensteinen, entscheidet über Änderungen und Eskalationen</td></tr>
+          <tr><td>Projektleitung</td><td>plant, steuert, berichtet, führt das Team</td></tr>
+          <tr><td>Fachexperten (Domäne)</td><td>Wissen über den Prozess, Labels, Abnahme</td></tr>
+          <tr><td>Data Scientist / ML Engineer</td><td>Daten, Modelle, Pipelines</td></tr>
+          <tr><td>Data Engineer</td><td>Datenzugang, Datenqualität, Plattform</td></tr>
+          <tr><td>Softwareentwicklung / IT-Betrieb</td><td>Integration, Betrieb, Sicherheit</td></tr>
+          <tr><td>Datenschutz, Recht, Betriebsrat</td><td>Prüfung und Mitwirkung</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aufgabe</th><th>Projektleitung</th><th>Data Scientist</th><th>Fachbereich</th><th>Datenschutz</th></tr></thead>
+        <tbody>
+          <tr><td>Modell trainieren</td><td>A</td><td>R</td><td>C</td><td>I</td></tr>
+          <tr><td>Datenschutz-Folgenabschätzung</td><td>A</td><td>C</td><td>C</td><td>R</td></tr>
+          <tr><td>Abnahme Pilot</td><td>R</td><td>I</td><td>A</td><td>I</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>RACI</b>: Responsible (führt aus), Accountable (trägt die Verantwortung, genau eine Person je Aufgabe), Consulted (wird vorher gefragt), Informed (wird informiert). <b>Projektorganisation</b>: Stabs-/Einfluss-, Matrix- oder reine Projektorganisation (Modul 15).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Interdisziplinäre KI-Teams brauchen klare Rollen – je Aufgabe genau ein „A“ in der RACI-Matrix.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Typischer Fehler: Fachbereich fehlt im Team, das Modell löst dann ein Problem, das niemand hat. Fragen Sie: Wer liefert die Labels, wer nimmt ab?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Projektsteuerung" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 25 Minuten</span><h2>Projektsteuerung: Soll-Ist-Vergleich, Ampel, Änderungen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Navi vergleicht ständig, wo Sie sind und wo Sie sein sollten, und berechnet bei Abweichung eine neue Route. Projektsteuerung macht dasselbe mit Terminen, Kosten und Ergebnissen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Projektcontrolling</b> erfasst regelmäßig den Ist-Stand, vergleicht ihn mit dem Plan, analysiert Abweichungen und leitet Steuerungsmaßnahmen ab. <b>Änderungsmanagement</b> (Change Requests) regelt, wie Umfang, Termine oder Budget geändert werden.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Ampel</th><th>Bedeutung</th><th>Reaktion</th></tr></thead>
+        <tbody>
+          <tr><td>Grün</td><td>im Plan</td><td>weiter wie geplant</td></tr>
+          <tr><td>Gelb</td><td>Abweichung, mit eigenen Mitteln behebbar</td><td>Maßnahmen der Projektleitung</td></tr>
+          <tr><td>Rot</td><td>Ziel gefährdet, Entscheidung nötig</td><td>Eskalation an den Lenkungsausschuss</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Steuerungsmaßnahmen:</b> Ressourcen erhöhen, Arbeitspakete parallelisieren (Fast Tracking), Umfang reduzieren, Termine verschieben, Qualität anpassen (nur bewusst!). <b>Change Request</b>: Antrag mit Begründung → Auswirkungen auf Zeit, Kosten, Risiko bewerten → Entscheidung durch den Berechtigten → Pläne anpassen und dokumentieren.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Steuern heißt: messen, vergleichen, entscheiden – und Änderungen nur über ein geregeltes Verfahren zulassen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Spielen Sie einen Change Request durch: Der Vertrieb will zusätzlich Gutschriften prüfen lassen. Welche Auswirkungen, wer entscheidet?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Berichte und Abschluss" data-part="Teil A · Klassisches Projektmanagement">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 30 Minuten</span><h2>Berichte: Status-, Zwischen- und Abschlussbericht, Lessons Learned</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bericht</th><th>Zweck</th><th>Inhalte</th></tr></thead>
+        <tbody>
+          <tr><td><b>Statusbericht</b></td><td>regelmäßig (z. B. 14-tägig) den Stand zeigen</td><td>Ampel je Bereich, erledigt/geplant, Kennzahlen, Risiken, Entscheidungsbedarf</td></tr>
+          <tr><td><b>Zwischenbericht</b></td><td>an Meilensteinen Ergebnisse bewerten</td><td>erreichte Ergebnisse, technische, organisatorische und wirtschaftliche Bewertung, Empfehlung</td></tr>
+          <tr><td><b>Abschlussbericht</b></td><td>Projekt beenden und bewerten</td><td>Zielerreichung, Kosten- und Terminbilanz, Übergabe in den Betrieb, offene Punkte, Lessons Learned</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>§ 5 verlangt Berichte „unter Berücksichtigung technischer, organisatorischer und betriebswirtschaftlicher Zusammenhänge sowie unter Beachtung von vertraglichen Vorgaben, rechtlichen Regelungen und Nachhaltigkeitsaspekten“. Für KI-Projekte gehören daher hinein: Modellgüte gegenüber Baseline, Betriebskosten, rechtliche Einordnung (EU-KI-Verordnung, Datenschutz), Energiebedarf, Folgen für Beschäftigte.</p>
+        <p><b>KI-gestützt berichten</b>: Kennzahlen automatisch aus Systemen ziehen, Entwürfe mit Sprachmodellen erstellen, Ergebnisse visualisieren – Inhalte aber immer prüfen und verantworten. <b>Lessons Learned</b>: Was lief gut, was schlecht, was machen wir künftig anders? Ergebnisse für kommende Projekte zugänglich ablegen.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Berichte richten sich an Entscheider: kurz, mit Ampel, Kennzahlen, Risiken und klarem Entscheidungsbedarf.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Erstellen Sie die Gliederung eines Zwischenberichts für die Geschäftsführung“ – nennen Sie Ausgangslage, Zielerreichung mit Kennzahlen, Kosten und Termine, Risiken, rechtliche Aspekte, Nachhaltigkeit, Empfehlung und Entscheidungsbedarf.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie einen einseitigen Statusbericht. Der wichtigste Satz steht oben: „Wir brauchen bis Freitag eine Entscheidung zu …“.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Agiles Manifest" data-part="Teil B · Agil, hybrid, skaliert">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 20 Minuten</span><h2>Agiles Manifest und agile Prinzipien</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Weltreise plant man nicht bis zur letzten Stunde im Voraus. Man bucht die erste Etappe, lernt unterwegs und passt den Rest an. Agil heißt: in kurzen Schritten liefern, lernen, anpassen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Das <b>Agile Manifest</b> (2001) stellt vier Werte voran: <b>Individuen und Interaktionen</b> mehr als Prozesse und Werkzeuge, <b>funktionierende Software</b> mehr als umfassende Dokumentation, <b>Zusammenarbeit mit dem Kunden</b> mehr als Vertragsverhandlung, <b>Reagieren auf Veränderung</b> mehr als das Befolgen eines Plans. Dazu kommen zwölf Prinzipien.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>klassisch (Wasserfall)</th><th>agil</th></tr></thead>
+        <tbody>
+          <tr><td>Anforderungen</td><td>zu Beginn vollständig festgelegt</td><td>entwickeln sich, werden priorisiert</td></tr>
+          <tr><td>Lieferung</td><td>am Ende</td><td>in kurzen Zyklen, früh nutzbar</td></tr>
+          <tr><td>Fest / variabel</td><td>Umfang fest, Zeit und Kosten variabel</td><td>Zeit und Kosten fest, Umfang variabel</td></tr>
+          <tr><td>Geeignet für</td><td>klare, stabile Anforderungen (Bau, Umzug eines Rechenzentrums)</td><td>Unsicherheit, Experimente, neue Produkte (KI-Modelle)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Agil passt, wenn vieles unsicher ist – wie bei KI: Man lernt durch Ausprobieren, was mit den Daten möglich ist.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>„Mehr als“ heißt nicht „statt“: Agile Teams dokumentieren und planen auch – nur weniger im Voraus. Ein typisches Missverständnis.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Scrum" data-part="Teil B · Agil, hybrid, skaliert">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 40 Minuten</span><h2>Scrum: Verantwortlichkeiten, Ereignisse, Artefakte</h2></div>
+      <figure class="board">
+        <img src="gifs/scrum.gif" width="640" height="380" alt="Animation: Der Product Owner priorisiert das Product Backlog; im Sprint Planning werden Einträge ausgewählt; ein Sprint läuft mit täglichem Daily Scrum; danach folgen Sprint Review und Retrospektive, das Ergebnis ist ein Increment, das die Definition of Done erfüllt." loading="lazy">
+        <figcaption>Scrum in einem Bild.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Bestandteil</th><th>Inhalt (Scrum Guide 2020)</th></tr></thead>
+        <tbody>
+          <tr><td><b>Product Owner</b></td><td>maximiert den Wert des Produkts, verantwortet und priorisiert das Product Backlog, eine Person</td></tr>
+          <tr><td><b>Scrum Master</b></td><td>sorgt für das Verständnis und die Anwendung von Scrum, beseitigt Hindernisse, dient Team und Organisation</td></tr>
+          <tr><td><b>Developers</b></td><td>erstellen in jedem Sprint ein nutzbares Increment; organisieren ihre Arbeit selbst</td></tr>
+          <tr><td><b>Sprint</b></td><td>fester Zeitrahmen von höchstens einem Monat; Behälter für alle anderen Ereignisse</td></tr>
+          <tr><td><b>Sprint Planning</b></td><td>Was und wie im Sprint? Sprint Goal festlegen (bis 8 h bei einem Monat Sprint)</td></tr>
+          <tr><td><b>Daily Scrum</b></td><td>15 Minuten täglich, Fortschritt zum Sprint Goal, Plan anpassen</td></tr>
+          <tr><td><b>Sprint Review</b></td><td>Ergebnis mit Stakeholdern prüfen, Backlog anpassen (bis 4 h)</td></tr>
+          <tr><td><b>Sprint Retrospective</b></td><td>Zusammenarbeit und Arbeitsweise verbessern (bis 3 h)</td></tr>
+          <tr><td><b>Product Backlog</b> → Product Goal</td><td>geordnete Liste aller Anforderungen</td></tr>
+          <tr><td><b>Sprint Backlog</b> → Sprint Goal</td><td>ausgewählte Einträge und Plan für den Sprint</td></tr>
+          <tr><td><b>Increment</b> → Definition of Done</td><td>nutzbares Ergebnis, das die Qualitätskriterien erfüllt</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Scrum in KI-Projekten:</b> Backlog-Einträge sind oft Experimente („Prüfen, ob Merkmal X den Recall verbessert“). Die Definition of Done umfasst dann auch Tests, Dokumentation, Bewertung gegen die Baseline und Datenschutzprüfung.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Scrum: 3 Verantwortlichkeiten (Product Owner, Scrum Master, Developers), 5 Ereignisse, 3 Artefakte mit je einer Verpflichtung.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Der Scrum Master ist kein Projektleiter mit Weisungsbefugnis, und der Product Owner ist kein Komitee. Solche Verwechslungen kosten in der Prüfung Punkte.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die Tabelle in Gruppen auf Kärtchen zuordnen (Rolle, Ereignis, Artefakt). Danach: Wie sähe ein Sprint in einem KI-Projekt aus?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Kanban" data-part="Teil B · Agil, hybrid, skaliert">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 20 Minuten</span><h2>Kanban: Fluss sichtbar machen, WIP-Limits</h2></div>
+      <figure class="board">
+        <img src="gifs/kanban.gif" width="640" height="380" alt="Animation: Ein Kanban-Board mit den Spalten Offen, In Arbeit mit WIP-Limit 3, Prüfung mit WIP-Limit 2 und Fertig. Karten wandern von links nach rechts; ist eine Spalte voll, färbt sich ihre Überschrift rot." loading="lazy">
+        <figcaption>Begrenzte Arbeit in Bearbeitung sorgt für Fluss.</figcaption>
+      </figure>
+      <div class="prose">
+        <ul>
+          <li><b>Visualisieren</b>: alle Aufgaben auf einem Board mit Spalten für die Arbeitsschritte.</li>
+          <li><b>WIP begrenzen</b> (Work in Progress): je Spalte höchstens n Aufgaben – erst abschließen, dann Neues anfangen.</li>
+          <li><b>Fluss steuern</b>: Durchlaufzeit (Lead Time) und Durchsatz messen, Engpässe beseitigen. <b>Little’s Law</b>: mittlere Durchlaufzeit = Arbeit in Bearbeitung / Durchsatz – wer 9 Aufgaben gleichzeitig offen hat und 1,5 je Tag fertigstellt, wartet im Schnitt 6 Tage auf jedes Ergebnis.</li>
+          <li><b>Kein fester Sprint</b>: kontinuierlicher Fluss – gut für Betrieb, Support und Wartung von KI-Systemen.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kanban: sichtbar machen, Menge in Arbeit begrenzen, Fluss messen und verbessern.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie die eigene Aufgabenliste als Kanban-Board zeichnen. Wie viele Dinge sind „in Arbeit“? Meist zu viele – das ist der Aha-Moment.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Hybride Vorgehen und CRISP-DM" data-part="Teil B · Agil, hybrid, skaliert">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 25 Minuten</span><h2>Hybride Vorgehen und Vorgehensmodelle für KI-Projekte (CRISP-DM)</h2></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Hybrides Projektmanagement</b> kombiniert klassische Rahmenplanung (Phasen, Meilensteine, Budget, Verträge) mit agiler Umsetzung (Sprints für Modellentwicklung). Das ist in Unternehmen der Normalfall.</p>
+        </div>
+        <div class="box fach"><span class="box-label">CRISP-DM</span>
+          <p>Der <b>Cross-Industry Standard Process for Data Mining</b> hat sechs Phasen mit Rücksprüngen: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, Deployment. Er ist das bekannteste Vorgehensmodell für Datenprojekte.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>CRISP-DM-Phase</th><th>Fragen</th><th>Ergebnis</th></tr></thead>
+        <tbody>
+          <tr><td>Business Understanding</td><td>Welches Problem, welches Ziel, welche Erfolgskriterien?</td><td>Projektauftrag, Kennzahlen</td></tr>
+          <tr><td>Data Understanding</td><td>Welche Daten gibt es, wie gut sind sie?</td><td>Datenbericht, Qualitätsbewertung</td></tr>
+          <tr><td>Data Preparation</td><td>Wie bereiten wir sie auf?</td><td>Feature-Tabelle, Pipeline</td></tr>
+          <tr><td>Modeling</td><td>Welche Verfahren, welche Parameter?</td><td>Modellkandidaten</td></tr>
+          <tr><td>Evaluation</td><td>Erfüllt das Modell die Geschäftsziele?</td><td>Bewertung gegen Baseline, Go/No-Go</td></tr>
+          <tr><td>Deployment</td><td>Wie kommt es in den Betrieb?</td><td>Integration, Monitoring, Übergabe</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Hybrid ist Praxisstandard: klassischer Rahmen mit Meilensteinen, agile Sprints im Inneren, CRISP-DM als fachlicher Ablauf.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie, wie CRISP-DM-Phasen auf Meilensteine (klassisch) und Sprints (agil) verteilt werden. Viele Transferarbeiten nutzen genau diese Kombination.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Skalierung von KI-Projekten" data-part="Teil B · Agil, hybrid, skaliert">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 35 Minuten</span><h2>Skalierung: vom Proof of Concept zum Rollout; SAFe, LeSS, Nexus</h2></div>
+      <figure class="board">
+        <img src="gifs/skalierung.gif" width="640" height="380" alt="Animation: Ein Trichter aus vier Stufen: 50 Ideen, 12 technisch machbare Proofs of Concept, 4 Piloten mit Nutzen im Betrieb, 2 Rollouts an allen Standorten, mit Entscheidungstoren dazwischen." loading="lazy">
+        <figcaption>Viele Ideen, wenige Rollouts – mit klaren Entscheidungstoren.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Stufe</th><th>Ziel</th><th>Erfolgskriterium</th></tr></thead>
+        <tbody>
+          <tr><td>Proof of Concept (PoC)</td><td>Ist es technisch machbar?</td><td>Modellgüte auf historischen Daten über Baseline</td></tr>
+          <tr><td>Pilot</td><td>Wirkt es im echten Betrieb?</td><td>Geschäftskennzahl verbessert, Nutzer akzeptieren</td></tr>
+          <tr><td>Rollout / Skalierung</td><td>Wirkt es überall, dauerhaft und wirtschaftlich?</td><td>Betrieb stabil, Kosten je Fall im Plan</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Warum viele KI-Projekte im Pilot stecken bleiben („PoC-Falle“):</b> fehlende Datenplattform, kein MLOps, unklare Zuständigkeit im Betrieb, Integration unterschätzt, Kosten je Anfrage zu hoch, fehlende Akzeptanz, rechtliche Fragen zu spät geklärt.</p>
+        <p><b>Voraussetzungen für Skalierung:</b> wiederverwendbare Datenplattform, MLOps (Modul 7), Betriebsmodell mit Verantwortlichen, Schulung und Change Management (Modul 10), Budget für den laufenden Betrieb, Governance (Modul 6).</p>
+        <p><b>Agile Skalierungsrahmen</b> für viele Teams: <b>SAFe</b> (Scaled Agile Framework: Agile Release Trains, Planungsereignisse über mehrere Teams, Portfolioebene), <b>LeSS</b> (Large-Scale Scrum: ein Product Owner, ein Backlog für mehrere Teams), <b>Nexus</b> (3 bis 9 Scrum-Teams an einem Produkt), <b>Scrum of Scrums</b> (Abstimmung der Teams).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Skalieren heißt: PoC → Pilot → Rollout mit Entscheidungstoren – und vorher Plattform, MLOps, Betriebsmodell und Akzeptanz schaffen.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Die Skalierung von (KI-)Projekten“ steht wörtlich in § 1 und § 5. In der Transferarbeit sollten Sie zeigen, wie Ihr Projekt vom Pilot auf weitere Standorte oder Prozesse übertragen werden kann.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Wie viele KI-Piloten im eigenen Unternehmen sind wirklich im Betrieb? Die Antwort erklärt, warum diese Lektion so wichtig ist.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 17 -->
+    <section class="lesson" id="l17" data-title="Projektarbeit mit KI unterstützen" data-part="Teil B · Agil, hybrid, skaliert">
+      <div class="lesson-head"><span class="meta">Lektion 17 · 25 Minuten</span><h2>KI-Projekte mit KI unterstützen: Auswertung, Berichte, Präsentation</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Aufgabe</th><th>KI-Unterstützung</th><th>Grenze</th></tr></thead>
+        <tbody>
+          <tr><td>Protokolle</td><td>Besprechungen transkribieren und zusammenfassen</td><td>Einwilligung, Vertraulichkeit; prüfen</td></tr>
+          <tr><td>Planung</td><td>PSP-Entwurf, Risiko-Brainstorming, Aufwandsschätzung als Vorschlag</td><td>Fachwissen und Erfahrung entscheiden</td></tr>
+          <tr><td>Auswertung</td><td>Kennzahlen aus Systemen ziehen, Abweichungen erklären</td><td>Datenqualität, Plausibilität</td></tr>
+          <tr><td>Berichte</td><td>Entwürfe für Status- und Abschlussberichte</td><td>Verantwortung bleibt bei der Projektleitung</td></tr>
+          <tr><td>Präsentation</td><td>Folienstruktur, Visualisierungen, Formulierungen für Zielgruppen</td><td>Aussagen prüfen, Quellen nennen</td></tr>
+          <tr><td>Wissensmanagement</td><td>Lessons Learned durchsuchbar machen</td><td>Zugriffsrechte</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>KI beschleunigt Projektarbeit, ersetzt aber nicht die Verantwortung: Inhalte prüfen, Vertraulichkeit wahren, Quellen nennen.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Vertrauliche Projektunterlagen in einen öffentlichen KI-Dienst kopieren kann Geschäftsgeheimnisse und Datenschutz verletzen. Nur freigegebene Werkzeuge nutzen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Abschluss: Lassen Sie für das eigene Projekt festlegen, welche Projektaufgaben mit welchem freigegebenen KI-Werkzeug unterstützt werden dürfen – das ist gelebte KI-Kompetenz nach Art. 4 EU-KI-Verordnung.</p>
+      </aside>
+    </section>
+    <!-- Übungen -->
+    <section class="lesson" id="uebungen" data-title="Übungen">
+      <div class="lesson-head"><span class="meta">Übungen · 120 Minuten</span><h2>Übungen mit Musterlösung</h2></div>
+      <p>Tragen Sie Ihre Antworten in die Felder ein. Der Earned-Value-Rechner in Lektion 7 hilft bei Aufgabe 5.</p>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 1: Projekt oder Routine?</h3><span class="points">3 Punkte</span></div>
+        <p>1. Einführung einer KI-gestützten Rechnungsprüfung. 2. Tägliche Datensicherung. 3. Umzug des Rechenzentrums in ein neues Gebäude.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Projekt · 2. Routine (Prozess) · 3. Projekt. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 2: Stakeholder einordnen</h3><span class="points">4 Punkte</span></div>
+        <p>Welche Strategie wählen Sie? 1. Betriebsrat (Mitbestimmungsrechte, sehr interessiert). 2. Leiter eines anderen Geschäftsbereichs (kann Budget umverteilen, kaum interessiert). 3. Sachbearbeitung der Buchhaltung (stark betroffen, wenig Einfluss). 4. Kantinenbetreiber (weder Einfluss noch Interesse).</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. eng einbinden · 2. zufriedenstellen · 3. informieren (und als Nutzer beteiligen) · 4. beobachten. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 3: Netzplan</h3><span class="points">6 Punkte</span></div>
+        <p>Vorgänge (Dauer in Tagen, Vorgänger): A 4 (–), B 6 (A), C 3 (A), D 2 (C), E 5 (B und D). Berechnen Sie die Projektdauer, den kritischen Pfad und den Gesamtpuffer von C und D.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Vorwärts: A 0–4, B 4–10, C 4–7, D 7–9, E beginnt beim größten FEZ der Vorgänger = 10, endet 15. <b>Projektdauer 15 Tage</b> (2 P.). Rückwärts: E 10–15, B 4–10, D 8–10, C 5–8, A 0–4. <b>Kritischer Pfad A–B–E</b> (2 P.). <b>Gesamtpuffer C = 1, D = 1</b> (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 4: Aufwand und Dauer</h3><span class="points">2 Punkte</span></div>
+        <p>Das Arbeitspaket „Daten aufbereiten“ hat einen Aufwand von 36 Personentagen. Drei Personen arbeiten daran, jede ist zu 80 % für das Projekt verfügbar. Wie viele Arbeitstage dauert das Paket?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Kapazität je Tag 3 · 0,8 = 2,4 Personentage; 36 / 2,4 = <b>15 Arbeitstage</b> (2 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 5: Earned Value</h3><span class="points">5 Punkte</span></div>
+        <p>Budget (BAC) 200 T€. Am Stichtag: Planwert PV 120 T€, Fertigstellungswert EV 100 T€, Istkosten AC 125 T€. Berechnen Sie CV, SV, CPI, SPI und die Kostenprognose EAC = BAC / CPI.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>CV = 100 − 125 = <b>−25 T€</b> · SV = 100 − 120 = <b>−20 T€</b> · CPI = 100 / 125 = <b>0,80</b> · SPI = 100 / 120 ≈ <b>0,83</b> · EAC = 200 / 0,8 = <b>250 T€</b>. Je 1 Punkt. Das Projekt ist teurer und langsamer als geplant.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 6: Risiko bewerten</h3><span class="points">4 Punkte</span></div>
+        <p>Risiko „Trainingsdaten reichen nicht“: Wahrscheinlichkeit 40 %, Schaden 50.000 €. Eine Datenanalyse vorab kostet 6.000 € und senkt die Wahrscheinlichkeit auf 15 %. a) Erwartungswert vorher, b) nachher, c) Nettovorteil der Maßnahme, d) Lohnt sie sich?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 0,4 · 50.000 = <b>20.000 €</b> · b) 0,15 · 50.000 = <b>7.500 €</b> · c) 20.000 − 7.500 − 6.000 = <b>6.500 €</b> · d) <b>ja</b>. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 7: Risikostrategien</h3><span class="points">4 Punkte</span></div>
+        <p>Welche Strategie liegt vor? 1. Eine Versicherung gegen Haftungsschäden abschließen. 2. Auf eine unerprobte Technologie ganz verzichten. 3. Vorab eine Datenqualitätsanalyse durchführen. 4. Ein kleines Risiko bewusst tragen und eine Reserve einplanen.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. übertragen · 2. vermeiden · 3. vermindern · 4. akzeptieren. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 8: RACI prüfen</h3><span class="points">3 Punkte</span></div>
+        <p>In einer RACI-Matrix steht bei der Aufgabe „Modell abnehmen“: Projektleitung A, Fachbereich A, Data Scientist C, Datenschutz I. Was ist falsch, und wie korrigieren Sie es?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>Es gibt zwei A, aber genau eine Person darf verantwortlich sein (1 P.); es fehlt ein R, also wer die Abnahme durchführt (1 P.). Korrektur z. B.: Fachbereich A, Projektleitung R, Data Scientist C, Datenschutz I (1 P.).</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 9: Scrum</h3><span class="points">5 Punkte</span></div>
+        <p>Wer oder was ist gemeint? 1. Priorisiert das Product Backlog. 2. Beseitigt Hindernisse und sorgt dafür, dass Scrum verstanden wird. 3. Tägliches 15-Minuten-Treffen zum Sprint Goal. 4. Ergebnis mit Stakeholdern prüfen, Backlog anpassen. 5. Zusammenarbeit und Arbeitsweise verbessern.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. Product Owner · 2. Scrum Master · 3. Daily Scrum · 4. Sprint Review · 5. Sprint Retrospective. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 10: Vorgehen wählen</h3><span class="points">3 Punkte</span></div>
+        <p>Klassisch, agil oder hybrid? 1. Umzug eines Serverraums zu einem festen Termin mit klaren Anforderungen. 2. Entwicklung eines Prognosemodells, bei dem unklar ist, welche Daten wirken. 3. KI-Einführung mit festem Budget, Dienstleistervertrag und Meilensteinen, Modellentwicklung in Sprints.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>1. klassisch · 2. agil · 3. hybrid. Je 1 Punkt.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 11: Kanban und Little’s Law</h3><span class="points">4 Punkte</span></div>
+        <p>Ein Data-Team hat 9 Aufgaben gleichzeitig in Arbeit und schließt im Schnitt 1,5 Aufgaben pro Tag ab. a) Wie lange dauert eine Aufgabe im Mittel? b) Wie lange bei einem WIP-Limit von 3 und gleichem Durchsatz?</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p>a) 9 / 1,5 = <b>6 Tage</b> (2 P.) · b) 3 / 1,5 = <b>2 Tage</b> (2 P.). Weniger gleichzeitig angefangene Arbeit bringt jedes Ergebnis schneller.</p>
+        </details>
+      </div>
+
+      <div class="task">
+        <div class="task-head"><h3>Aufgabe 12: Situationsaufgabe Skalierung</h3><span class="points">8 Punkte</span></div>
+        <p>Die Muster Logistik AG hat an einem von zwölf Standorten einen erfolgreichen Pilot: Ein KI-Modell sagt den Personalbedarf im Lager voraus und senkt Überstunden um 30 %. Die Geschäftsführung will in sechs Monaten alle Standorte ausrollen. Beschreiben Sie a) drei Risiken des Rollouts, b) Voraussetzungen, die vorher geschaffen werden müssen, c) ein Vorgehen mit Stufen und Entscheidungstoren, d) die Projektorganisation und e) welche Kennzahlen der Lenkungsausschuss sehen sollte.</p>
+        <details class="solution"><summary>Lösung anzeigen</summary>
+          <p><b>a) Risiken</b> (2 P.): Standorte haben andere Abläufe und Datenqualität, Modell wirkt dort schlechter; Betrieb und Monitoring für zwölf Standorte fehlen; Akzeptanz der Schichtleitungen; Betriebsrat (Personalplanung, § 87 BetrVG); Kosten im Betrieb. <b>b) Voraussetzungen</b> (2 P.): einheitliche Datenplattform und Schnittstellen, MLOps mit Monitoring und Nachtraining je Standort, Betriebsmodell mit Verantwortlichen, Schulung, Betriebsvereinbarung, Budget für den laufenden Betrieb. <b>c) Vorgehen</b> (2 P.): Welle 1 mit zwei bis drei unterschiedlichen Standorten, Entscheidungstor nach acht Wochen anhand der Kennzahlen, dann Wellen mit Lessons Learned; hybrid mit Meilensteinplan und Sprints für Anpassungen. <b>d) Organisation</b> (1 P.): Auftraggeber Geschäftsführung, Lenkungsausschuss, Projektleitung, je Standort Key User, Data Science, IT-Betrieb, Betriebsrat und Datenschutz eingebunden. <b>e) Kennzahlen</b> (1 P.): Überstunden, Prognosefehler je Standort, Nutzung, Kosten je Standort, Termin- und Budgettreue (SPI, CPI).</p>
+        </details>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Netzplan und Earned Value sind Rechenaufgaben, die in Teil 2 der Prüfung oft vorkommen. Aufgabe 12 zeigt, wie Projektmanagement und Skalierung in einer Situationsaufgabe zusammenkommen.</p>
+      </aside>
+    </section>
+
+    <!-- Quiz -->
+    <section class="lesson" id="quiz" data-title="Abschlussquiz">
+      <div class="lesson-head"><span class="meta">Abschlussquiz · 25 Minuten</span><h2>Abschlussquiz Modul 9</h2></div>
+      <p>20 Fragen im Stil der schriftlichen Prüfung, jeweils eine richtige Antwort. Ab 14 richtigen Antworten (70 %) sind Sie gut vorbereitet.</p>
+      <form id="quizForm" novalidate></form>
+      <div class="score" id="quizScore" hidden><strong id="scoreNum">0 / 20</strong><span id="scoreText"></span></div>
+      <div class="flow-a"><button type="button" class="btn" id="quizCheck">Auswerten</button><button type="button" class="btn ghost" id="quizReset">Neu beginnen</button></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Wer unter 14 liegt, wiederholt die Lektionen zu den falschen Antworten, besonders Netzplan und Earned Value.</p>
+      </aside>
+    </section>
+
+    <!-- Zusammenfassung -->
+    <section class="lesson" id="summary" data-title="Zusammenfassung">
+      <div class="lesson-head"><span class="meta">Zusammenfassung</span><h2>Das Wichtigste auf einen Blick</h2></div>
+      <div class="cards">
+        <div class="card"><h3>Projekt</h3><p>einmalig, Ziel, befristet, begrenzte Ressourcen; magisches Dreieck.</p></div>
+        <div class="card"><h3>Projektauftrag</h3><p>Ziele, Nicht-Ziele, Umfang, Termine, Budget, Rollen, Abnahme.</p></div>
+        <div class="card"><h3>Stakeholder</h3><p>Einfluss × Interesse; Betriebsrat und Datenschutz früh einbinden.</p></div>
+        <div class="card"><h3>Planung</h3><p>PSP → Netzplan (kritischer Pfad) → Gantt, Meilensteine, Ressourcen.</p></div>
+        <div class="card"><h3>Kosten</h3><p>Earned Value: CPI = EV/AC, SPI = EV/PV, EAC = BAC/CPI.</p></div>
+        <div class="card"><h3>Risiken</h3><p>Wahrscheinlichkeit × Auswirkung; vermeiden, vermindern, übertragen, akzeptieren.</p></div>
+        <div class="card"><h3>Steuerung</h3><p>Soll-Ist, Ampel, Change Requests, Status- und Abschlussbericht.</p></div>
+        <div class="card"><h3>Agil</h3><p>Manifest, Scrum (3 – 5 – 3), Kanban mit WIP-Limits.</p></div>
+        <div class="card"><h3>Hybrid</h3><p>klassischer Rahmen, agile Sprints, CRISP-DM als Ablauf.</p></div>
+        <div class="card"><h3>Skalierung</h3><p>PoC → Pilot → Rollout mit Toren; SAFe, LeSS, Nexus.</p></div>
+      </div>
+      <div class="prose">
+        <h3>Glossar Modul 9</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead>
+          <tbody>
+            <tr><td>Arbeitspaket</td><td>kleinste Einheit im PSP mit Ergebnis, Verantwortlichem und Schätzung</td></tr>
+            <tr><td>Change Request</td><td>formaler Antrag auf Änderung von Umfang, Termin oder Budget</td></tr>
+            <tr><td>CPI / SPI</td><td>Kosten- bzw. Terminentwicklungsindex der Earned-Value-Analyse</td></tr>
+            <tr><td>CRISP-DM</td><td>sechsphasiges Vorgehensmodell für Datenprojekte</td></tr>
+            <tr><td>Kritischer Pfad</td><td>Vorgangskette ohne Puffer, bestimmt die Projektdauer</td></tr>
+            <tr><td>Lenkungsausschuss</td><td>Entscheidungsgremium über dem Projekt</td></tr>
+            <tr><td>Meilenstein</td><td>Ereignis ohne Dauer, an dem Ergebnisse geprüft werden</td></tr>
+            <tr><td>PoC</td><td>Proof of Concept, Nachweis der technischen Machbarkeit</td></tr>
+            <tr><td>RACI</td><td>Responsible, Accountable, Consulted, Informed</td></tr>
+            <tr><td>WIP-Limit</td><td>Obergrenze für gleichzeitig bearbeitete Aufgaben (Kanban)</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Weiter mit Modul 10:</b> Innovation und digitale Transformation – KI-Ideen finden, bewerten und im Unternehmen verankern.</p>
+      </div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Reihum je eine Karte erklären. Ausblick: Ein Projekt liefert ein KI-System, die Transformation sorgt dafür, dass es genutzt wird – das ist Modul 10.</p>
+      </aside>
+    </section>
+<!--SCRIPTS-->
+<script type="application/json" id="quiz-data">
+[
+ ["Welches Merkmal gehört nach DIN 69901 zu einem Projekt?", ["Tägliche Wiederholung", "Einmaligkeit der Bedingungen in ihrer Gesamtheit", "Unbegrenzte Ressourcen", "Keine Ziele"], 1, "Projekte sind einmalig, zielgerichtet, befristet und haben begrenzte Ressourcen."],
+ ["Welche drei Größen bilden das magische Dreieck?", ["Leistung, Zeit, Kosten", "Daten, Modell, Code", "Planung, Steuerung, Abschluss", "Team, Kunde, Lieferant"], 0, "Verändert man eine Ecke, verändern sich die anderen."],
+ ["Was beschreibt „Scope Creep“?", ["Ein Risiko-Werkzeug", "Ein agiles Ereignis", "Das schleichende Wachsen des Projektumfangs ohne geregelte Änderung", "Einen Netzplanfehler"], 2, "Gegenmittel: Änderungsmanagement mit Change Requests."],
+ ["Wie behandeln Sie einen Stakeholder mit hohem Einfluss und hohem Interesse?", ["Beobachten", "Nur informieren", "Ignorieren", "Eng einbinden"], 3, "Zum Beispiel Auftraggeber, Fachbereich und Betriebsrat."],
+ ["Was gehört NICHT in eine Arbeitspaketbeschreibung?", ["Verantwortlicher", "Ergebnis", "Aufwandsschätzung", "Privatadresse des Teams"], 3, "Ergebnis, Verantwortlicher, Aufwand, Dauer und Abgrenzung gehören hinein."],
+ ["Ein Vorgang hat zwei Vorgänger mit FEZ 8 und FEZ 5. Wie hoch ist sein FAZ?", ["5", "13", "8", "6,5"], 2, "Vorwärts gilt das größte FEZ der Vorgänger."],
+ ["Was kennzeichnet den kritischen Pfad?", ["Vorgänge mit dem größten Puffer", "Vorgänge mit Gesamtpuffer 0", "Die teuersten Vorgänge", "Alle Meilensteine"], 1, "Jede Verzögerung dort verschiebt das Projektende."],
+ ["Ein Vorgang hat FAZ 3 und SAZ 6. Wie groß ist der Gesamtpuffer?", ["3", "9", "0", "6"], 0, "GP = SAZ − FAZ = 6 − 3."],
+ ["Was ist ein Meilenstein?", ["Ein Vorgang mit langer Dauer", "Ein Ereignis ohne Dauer, an dem Ergebnisse geprüft werden", "Ein Kostenposten", "Ein Teammitglied"], 1, "Zum Beispiel Go/No-Go nach dem Pilot."],
+ ["EV 80, AC 100. Wie hoch ist der CPI?", ["1,25", "0,8", "20", "−20"], 1, "CPI = EV / AC = 80 / 100. Unter 1 heißt: über Budget."],
+ ["EV 60, PV 75. Was sagt der SPI?", ["Das Projekt ist günstiger als geplant", "Das Projekt ist hinter dem Terminplan (SPI 0,8)", "Das Projekt ist vor dem Plan", "Nichts"], 1, "SPI = EV / PV = 0,8."],
+ ["BAC 200, CPI 0,8. Wie hoch ist die Kostenprognose EAC?", ["160", "250", "240", "200"], 1, "EAC = BAC / CPI = 200 / 0,8."],
+ ["Wahrscheinlichkeit 20 %, Schaden 40.000 €. Wie hoch ist der Erwartungswert?", ["8.000 €", "20.000 €", "40.000 €", "800 €"], 0, "0,2 · 40.000 €."],
+ ["Eine Versicherung abzuschließen ist welche Risikostrategie?", ["Vermeiden", "Akzeptieren", "Übertragen", "Vermindern"], 2, "Das Risiko wird auf einen Dritten übertragen."],
+ ["Wie viele „A“ darf eine Aufgabe in einer RACI-Matrix haben?", ["Beliebig viele", "Mindestens zwei", "Keines", "Genau eines"], 3, "Genau eine Person trägt die Verantwortung."],
+ ["Welcher Wert steht im Agilen Manifest?", ["Verträge mehr als Zusammenarbeit", "Reagieren auf Veränderung mehr als das Befolgen eines Plans", "Werkzeuge mehr als Menschen", "Dokumentation mehr als funktionierende Software"], 1, "Die Werte rechts sind wichtig, die links wichtiger."],
+ ["Wer priorisiert in Scrum das Product Backlog?", ["Der Product Owner", "Der Scrum Master", "Der Lenkungsausschuss", "Die Geschäftsführung"], 0, "Eine Person, die den Wert des Produkts maximiert."],
+ ["Wie lange dauert ein Sprint höchstens?", ["Eine Woche", "Ein Jahr", "Ein Monat", "Drei Monate"], 2, "Laut Scrum Guide höchstens ein Monat."],
+ ["Was begrenzt ein WIP-Limit in Kanban?", ["Die Anzahl der Teammitglieder", "Das Budget", "Die Anzahl der gleichzeitig bearbeiteten Aufgaben je Spalte", "Die Sprintlänge"], 2, "Erst abschließen, dann Neues beginnen."],
+ ["Welche Stufe prüft, ob ein KI-Modell im echten Betrieb wirkt?", ["Proof of Concept", "Pilot", "Lessons Learned", "Projektauftrag"], 1, "Der PoC zeigt technische Machbarkeit, der Pilot den Nutzen im Betrieb."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Was gehört zum Projektmanagement in der Bachelor-Prüfung?", "a": "§ 5 Nr. 2 nennt das Initiieren, Planen, Steuern und Überwachen von KI-Projekten, das Bewerten von Risiken, das Zusammenstellen von Teams, Berichte unter technischen, organisatorischen und betriebswirtschaftlichen Gesichtspunkten sowie die Skalierung von KI-Projekten."}
+ ],
+ "l1": [
+  {"q": "Was ist ein Projekt nach DIN 69901?", "a": "Ein Vorhaben, das im Wesentlichen durch die Einmaligkeit der Bedingungen in ihrer Gesamtheit gekennzeichnet ist: klares Ziel, zeitliche Begrenzung, begrenzte Ressourcen, eigene Organisation, Komplexität und Risiko."},
+  {"q": "Was ist das magische Dreieck?", "a": "Das Spannungsfeld aus Leistung und Qualität, Zeit und Kosten. Wer eine Größe verändert, muss mindestens eine andere anpassen."}
+ ],
+ "l2": [
+  {"q": "Was steht in einem Projektauftrag?", "a": "Ausgangslage, SMART-Ziele und Nicht-Ziele, Umfang und Abgrenzung, Termine und Meilensteine, Budget und Ressourcen, Rollen, Risiken und Annahmen sowie Abnahmekriterien."}
+ ],
+ "l3": [
+  {"q": "Wie führt man eine Stakeholderanalyse durch?", "a": "Man sammelt alle Beteiligten und Betroffenen, bewertet Einfluss und Interesse und leitet Strategien ab: eng einbinden, zufriedenstellen, informieren oder beobachten."}
+ ],
+ "l4": [
+  {"q": "Was ist ein Projektstrukturplan?", "a": "Die hierarchische Zerlegung des Projekts in Teilaufgaben bis zu Arbeitspaketen, gegliedert nach Objekten, Funktionen oder Phasen. Er ist die Grundlage für Termin-, Kosten- und Ressourcenplanung."}
+ ],
+ "l5": [
+  {"q": "Wie berechnet man einen Netzplan?", "a": "Vorwärts ergeben sich frühester Anfang und frühestes Ende, wobei man bei mehreren Vorgängern das größte FEZ nimmt. Rückwärts ergeben sich späteste Zeiten mit dem kleinsten SAZ der Nachfolger. Der Gesamtpuffer ist SAZ minus FAZ."},
+  {"q": "Was ist der kritische Pfad?", "a": "Die Kette der Vorgänge ohne Gesamtpuffer. Jede Verzögerung eines dieser Vorgänge verschiebt das Projektende."}
+ ],
+ "l6": [
+  {"q": "Wofür nutzt man ein Gantt-Diagramm?", "a": "Es zeigt Vorgänge als Balken auf einer Zeitachse mit Meilensteinen und eignet sich gut, um Termine, Überlappungen und Fortschritt zu kommunizieren."},
+  {"q": "Was ist der Unterschied zwischen Aufwand und Dauer?", "a": "Aufwand ist die benötigte Arbeitszeit in Personentagen, Dauer die Kalenderzeit. 20 Personentage dauern bei zwei voll verfügbaren Personen 10 Arbeitstage."}
+ ],
+ "l7": [
+  {"q": "Was ist die Earned-Value-Analyse?", "a": "Sie vergleicht Planwert, Fertigstellungswert und Istkosten. Der CPI ist EV durch AC, der SPI EV durch PV; Werte unter 1 zeigen Kostenüberschreitung bzw. Terminverzug."},
+  {"q": "Wie prognostiziert man die Gesamtkosten?", "a": "Mit EAC gleich Gesamtbudget durch CPI. Bei einem CPI von 0,8 werden aus 100 T€ Budget voraussichtlich 125 T€."}
+ ],
+ "l8": [
+  {"q": "Wie bewertet man Projektrisiken?", "a": "Nach Wahrscheinlichkeit und Auswirkung, etwa in einer Risikomatrix oder als Erwartungswert in Euro. Daraus folgen Maßnahmen: vermeiden, vermindern, übertragen oder akzeptieren."},
+  {"q": "Welche Risiken sind typisch für KI-Projekte?", "a": "Unzureichende Datenqualität, zu geringe Modellgüte, fehlende Akzeptanz, rechtliche Fragen wie Hochrisiko-Einstufung oder Datenschutz, Anbieterabhängigkeit, hohe Betriebskosten und Ausfall von Schlüsselpersonen."}
+ ],
+ "l9": [
+  {"q": "Was ist eine RACI-Matrix?", "a": "Eine Tabelle, die je Aufgabe festlegt, wer ausführt (Responsible), wer verantwortet (Accountable, genau eine Person), wer gefragt wird (Consulted) und wer informiert wird (Informed)."},
+  {"q": "Welche Rollen braucht ein KI-Projekt?", "a": "Auftraggeber, Lenkungsausschuss, Projektleitung, Fachexperten, Data Scientists, Data Engineers, Softwareentwicklung und IT-Betrieb sowie Datenschutz, Recht und Betriebsrat."}
+ ],
+ "l10": [
+  {"q": "Wie steuert man ein Projekt?", "a": "Durch regelmäßigen Soll-Ist-Vergleich von Terminen, Kosten und Ergebnissen, Ampelstatus, Analyse der Abweichungen und Steuerungsmaßnahmen. Änderungen laufen über Change Requests."}
+ ],
+ "l11": [
+  {"q": "Welche Projektberichte gibt es?", "a": "Den regelmäßigen Statusbericht, den Zwischenbericht an Meilensteinen und den Abschlussbericht mit Zielerreichung, Kosten- und Terminbilanz, Übergabe und Lessons Learned."},
+  {"q": "Was gehört bei KI-Projekten zusätzlich in einen Bericht?", "a": "Modellgüte gegenüber der Baseline, Betriebskosten, rechtliche Einordnung nach EU-KI-Verordnung und Datenschutz, Energiebedarf und Auswirkungen auf Beschäftigte."}
+ ],
+ "l12": [
+  {"q": "Was steht im Agilen Manifest?", "a": "Vier Werte: Individuen und Interaktionen mehr als Prozesse und Werkzeuge, funktionierende Software mehr als umfassende Dokumentation, Zusammenarbeit mit dem Kunden mehr als Vertragsverhandlung, Reagieren auf Veränderung mehr als das Befolgen eines Plans."}
+ ],
+ "l13": [
+  {"q": "Wie ist Scrum aufgebaut?", "a": "Drei Verantwortlichkeiten (Product Owner, Scrum Master, Developers), fünf Ereignisse (Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective) und drei Artefakte (Product Backlog, Sprint Backlog, Increment)."},
+  {"q": "Wie passt Scrum zu KI-Projekten?", "a": "Backlog-Einträge sind oft Experimente, und die Definition of Done umfasst Tests, Dokumentation, Bewertung gegen die Baseline und die Datenschutzprüfung."}
+ ],
+ "l14": [
+  {"q": "Was ist Kanban?", "a": "Eine Methode, die Arbeit auf einem Board sichtbar macht, die gleichzeitig bearbeiteten Aufgaben mit WIP-Limits begrenzt und den Fluss über Durchlaufzeit und Durchsatz verbessert. Sie eignet sich gut für Betrieb und Wartung."}
+ ],
+ "l15": [
+  {"q": "Was ist hybrides Projektmanagement?", "a": "Eine Kombination aus klassischer Rahmenplanung mit Phasen, Meilensteinen und Budget und agiler Umsetzung in Sprints. In Unternehmen ist das der Normalfall."},
+  {"q": "Was ist CRISP-DM?", "a": "Ein Vorgehensmodell für Datenprojekte mit sechs Phasen: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation und Deployment, mit Rücksprüngen zwischen den Phasen."}
+ ],
+ "l16": [
+  {"q": "Warum bleiben viele KI-Projekte im Pilot stecken?", "a": "Häufig fehlen Datenplattform, MLOps, klare Zuständigkeiten im Betrieb und Budget für laufende Kosten; Integration und Akzeptanz werden unterschätzt und rechtliche Fragen zu spät geklärt."},
+  {"q": "Was sind SAFe, LeSS und Nexus?", "a": "Rahmenwerke, um agiles Arbeiten auf viele Teams zu skalieren: SAFe mit Agile Release Trains und Portfolioebene, LeSS mit einem Product Owner und einem Backlog für mehrere Teams, Nexus für drei bis neun Scrum-Teams an einem Produkt."}
+ ],
+ "l17": [
+  {"q": "Wie kann KI die Projektarbeit unterstützen?", "a": "Beim Protokollieren, bei Entwürfen für Pläne und Berichte, bei der Auswertung von Kennzahlen und bei Präsentationen. Die Inhalte müssen geprüft werden, und vertrauliche Unterlagen gehören nur in freigegebene Werkzeuge."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 9 */
+(function () {
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { minimumFractionDigits: d === undefined ? 0 : d, maximumFractionDigits: d === undefined ? 1 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+  var el = ["evBac", "evPv", "evEv", "evAc"].map(function (id) { return document.getElementById(id); });
+  function rechne() {
+    var v = el.map(function (e) { return Math.max(0, +e.value || 0); });
+    var bac = v[0], pv = v[1], ev = v[2], ac = v[3];
+    var cv = ev - ac, sv = ev - pv, cpi = ac ? ev / ac : NaN, spi = pv ? ev / pv : NaN;
+    var eac = cpi ? bac / cpi : NaN, etc = eac - ac, vac = bac - eac, fg = bac ? ev / bac : NaN;
+    document.getElementById("evOut").innerHTML = kpi("Kostenabweichung CV", fmt(cv)) + kpi("Terminabweichung SV", fmt(sv)) + kpi("CPI", fmt(cpi, 2)) + kpi("SPI", fmt(spi, 2)) +
+      kpi("Fertigstellungsgrad", fmt(fg * 100) + " %") + kpi("Prognose EAC", fmt(eac)) + kpi("Restkosten ETC", fmt(etc)) + kpi("Abweichung am Ende VAC", fmt(vac));
+    var k = !isFinite(cpi) ? "" : cpi < 0.98 ? "über Budget" : cpi > 1.02 ? "unter Budget" : "im Budget";
+    var t = !isFinite(spi) ? "" : spi < 0.98 ? "hinter dem Plan" : spi > 1.02 ? "vor dem Plan" : "im Plan";
+    document.getElementById("evNote").textContent = (k && t ? "Das Projekt liegt " + k + " und " + t + ". " : "") + "CPI = EV / AC, SPI = EV / PV, EAC = BAC / CPI, ETC = EAC − AC, VAC = BAC − EAC.";
+  }
+  el.forEach(function (e) { e.addEventListener("input", rechne); }); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 9 */
+(function () {
+  var PR = ["Projekt", "Routine (Prozess)"];
+  var ST = ["eng einbinden", "zufriedenstellen", "informieren", "beobachten"];
+  var RS = ["vermeiden", "vermindern", "übertragen", "akzeptieren"];
+  var SC = ["Product Owner", "Scrum Master", "Developers", "Sprint Planning", "Daily Scrum", "Sprint Review", "Sprint Retrospective"];
+  var VG = ["klassisch", "agil", "hybrid"];
+  window.UEBUNGEN = {
+    modul: 9,
+    aufgaben: {
+      a1: { teile: [
+        { id: "p1", label: "1. KI-Rechnungsprüfung einführen", typ: "wahl", punkte: 1, optionen: PR, richtig: 0 },
+        { id: "p2", label: "2. Tägliche Datensicherung", typ: "wahl", punkte: 1, optionen: PR, richtig: 1 },
+        { id: "p3", label: "3. Umzug des Rechenzentrums", typ: "wahl", punkte: 1, optionen: PR, richtig: 0 }
+      ] },
+      a2: { teile: [
+        { id: "s1", label: "1. Betriebsrat", typ: "wahl", punkte: 1, optionen: ST, richtig: 0 },
+        { id: "s2", label: "2. Leiter anderer Geschäftsbereich", typ: "wahl", punkte: 1, optionen: ST, richtig: 1 },
+        { id: "s3", label: "3. Sachbearbeitung Buchhaltung", typ: "wahl", punkte: 1, optionen: ST, richtig: 2 },
+        { id: "s4", label: "4. Kantinenbetreiber", typ: "wahl", punkte: 1, optionen: ST, richtig: 3 }
+      ] },
+      a3: { teile: [
+        { id: "dauer", label: "Projektdauer", typ: "zahl", punkte: 2, wert: 15, tol: 0, einheit: "Tage" },
+        { id: "pfad", label: "Kritischer Pfad", typ: "wahl", punkte: 2, optionen: ["A–B–E", "A–C–D–E", "A–B–D–E", "A–C–E"], richtig: 0 },
+        { id: "gpc", label: "Gesamtpuffer C", typ: "zahl", punkte: 1, wert: 1, tol: 0, einheit: "Tage" },
+        { id: "gpd", label: "Gesamtpuffer D", typ: "zahl", punkte: 1, wert: 1, tol: 0, einheit: "Tage" }
+      ] },
+      a4: { teile: [{ id: "tage", label: "Dauer in Arbeitstagen", typ: "zahl", punkte: 2, wert: 15, tol: 0, einheit: "Tage" }] },
+      a5: { teile: [
+        { id: "cv", label: "CV in T€", typ: "zahl", punkte: 1, wert: -25, tol: 0 },
+        { id: "sv", label: "SV in T€", typ: "zahl", punkte: 1, wert: -20, tol: 0 },
+        { id: "cpi", label: "CPI", typ: "zahl", punkte: 1, wert: 0.8, tol: 0.01 },
+        { id: "spi", label: "SPI", typ: "zahl", punkte: 1, wert: 0.83, tol: 0.01 },
+        { id: "eac", label: "EAC in T€", typ: "zahl", punkte: 1, wert: 250, tol: 0.01 }
+      ] },
+      a6: { teile: [
+        { id: "ev1", label: "a) Erwartungswert vorher", typ: "zahl", punkte: 1, wert: 20000, tol: 0, einheit: "€" },
+        { id: "ev2", label: "b) Erwartungswert nachher", typ: "zahl", punkte: 1, wert: 7500, tol: 0, einheit: "€" },
+        { id: "netto", label: "c) Nettovorteil", typ: "zahl", punkte: 1, wert: 6500, tol: 0, einheit: "€" },
+        { id: "lohnt", label: "d) Lohnt sich die Maßnahme?", typ: "wahl", punkte: 1, optionen: ["ja", "nein"], richtig: 0 }
+      ] },
+      a7: { teile: [
+        { id: "r1", label: "1. Versicherung", typ: "wahl", punkte: 1, optionen: RS, richtig: 2 },
+        { id: "r2", label: "2. Verzicht auf Technologie", typ: "wahl", punkte: 1, optionen: RS, richtig: 0 },
+        { id: "r3", label: "3. Datenqualitätsanalyse vorab", typ: "wahl", punkte: 1, optionen: RS, richtig: 1 },
+        { id: "r4", label: "4. Bewusst tragen mit Reserve", typ: "wahl", punkte: 1, optionen: RS, richtig: 3 }
+      ] },
+      a8: { teile: [{ id: "raci", label: "Fehler und Korrektur", typ: "text", punkte: 3, erwartung: "Zwei A, erlaubt ist genau eines (1 P.); kein R, also niemand führt aus (1 P.); Korrektur z. B. Fachbereich A, Projektleitung R, Data Scientist C, Datenschutz I (1 P.)." }] },
+      a9: { teile: [
+        { id: "c1", label: "1. Priorisiert das Product Backlog", typ: "wahl", punkte: 1, optionen: SC, richtig: 0 },
+        { id: "c2", label: "2. Beseitigt Hindernisse", typ: "wahl", punkte: 1, optionen: SC, richtig: 1 },
+        { id: "c3", label: "3. Tägliches 15-Minuten-Treffen", typ: "wahl", punkte: 1, optionen: SC, richtig: 4 },
+        { id: "c4", label: "4. Ergebnis mit Stakeholdern prüfen", typ: "wahl", punkte: 1, optionen: SC, richtig: 5 },
+        { id: "c5", label: "5. Arbeitsweise verbessern", typ: "wahl", punkte: 1, optionen: SC, richtig: 6 }
+      ] },
+      a10: { teile: [
+        { id: "v1", label: "1. Umzug Serverraum", typ: "wahl", punkte: 1, optionen: VG, richtig: 0 },
+        { id: "v2", label: "2. Prognosemodell, Datenlage unklar", typ: "wahl", punkte: 1, optionen: VG, richtig: 1 },
+        { id: "v3", label: "3. Fester Rahmen, Sprints im Inneren", typ: "wahl", punkte: 1, optionen: VG, richtig: 2 }
+      ] },
+      a11: { teile: [
+        { id: "dlz1", label: "a) Durchlaufzeit bei 9 in Arbeit", typ: "zahl", punkte: 2, wert: 6, tol: 0, einheit: "Tage" },
+        { id: "dlz2", label: "b) Durchlaufzeit bei WIP-Limit 3", typ: "zahl", punkte: 2, wert: 2, tol: 0, einheit: "Tage" }
+      ] },
+      a12: { teile: [{ id: "rollout", label: "Ihr Konzept", typ: "text", punkte: 8, erwartung: "a) drei plausible Risiken wie andere Abläufe/Datenqualität je Standort, fehlender Betrieb und Monitoring, Akzeptanz, Betriebsrat, Betriebskosten (2 P.); b) Voraussetzungen Datenplattform, MLOps mit Monitoring und Nachtraining, Betriebsmodell, Schulung, Betriebsvereinbarung, Budget (2 P.); c) Wellen mit Entscheidungstoren und Lessons Learned, hybrides Vorgehen (2 P.); d) Projektorganisation mit Auftraggeber, Lenkungsausschuss, Projektleitung, Key Usern, Betriebsrat, Datenschutz (1 P.); e) Kennzahlen Überstunden, Prognosefehler, Nutzung, Kosten, CPI/SPI (1 P.)." }] }
+    }
+  };
+})();
+</script>

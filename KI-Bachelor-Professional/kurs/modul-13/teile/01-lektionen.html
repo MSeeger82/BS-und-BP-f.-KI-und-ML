@@ -1,0 +1,341 @@
+<!--META {"nr": 13, "titel": "Abwägungsmethoden", "lektionen": 15, "pass": 14}-->
+    <section class="intro" aria-labelledby="introTitle">
+      <span class="eyebrow">Modul 13 von 17 · ca. 35 Lernstunden</span>
+      <h1 id="introTitle">Abwägungsmethoden: KI-Entscheidungen begründet treffen</h1>
+      <p>Lohnt sich das KI-Projekt? Welcher Anbieter passt am besten? Selbst entwickeln oder kaufen? In diesem Modul lernen Sie die Verfahren, mit denen solche Fragen nachvollziehbar beantwortet werden: Kosten-Nutzen-Analyse mit vollständigen Kosten (TCO), Nutzwertanalyse mit Paarvergleich, Kosten-Wirksamkeit, ROI und Amortisation, FMEA für die Qualität, Sensitivitäts- und Szenarioanalyse sowie Entscheidungsbäume. Und Sie lernen, Ergebnisse so aufzubereiten, dass Entscheider ihnen vertrauen.</p>
+      <div class="facts">
+        <span class="chip">15 Lektionen in 3 Teilen</span><span class="chip">7 Animationen</span><span class="chip">2 Rechner</span><span class="chip">12 Übungen mit Antwortfeldern</span><span class="chip">20 Quizfragen</span><span class="chip">Rechtsvorschrift § 7 Nr. 1</span>
+      </div>
+      <div class="legend" aria-label="Bausteine">
+        <div><i style="background: var(--warm-soft); outline: 2px solid var(--warm);"></i><span><b>Im Alltag</b> – vertrautes Bild als Einstieg</span></div>
+        <div><i style="background: var(--accent-soft); outline: 2px solid var(--accent);"></i><span><b>Fachlich</b> – genaue Erklärung</span></div>
+        <div><i style="background: var(--violet-soft); outline: 2px solid var(--violet);"></i><span><b>Prüfungstipp</b> – so wird es abgefragt</span></div>
+        <div><i style="background: var(--coral-soft); outline: 2px solid var(--coral);"></i><span><b>Falle</b> – hier verlieren viele Punkte</span></div>
+      </div>
+    </section>
+
+    <!-- Lektion 1 -->
+    <section class="lesson" id="l1" data-title="Entscheiden unter Unsicherheit" data-part="Teil A · Kosten und Nutzen">
+      <div class="lesson-head"><span class="meta">Lektion 1 · 20 Minuten</span><h2>Entscheiden unter Unsicherheit: Ziele, Alternativen, Kriterien</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Beim Autokauf vergleicht man nicht nur den Preis, sondern Verbrauch, Platz, Sicherheit und Wiederverkaufswert – und man weiß nicht genau, wie sich der Spritpreis entwickelt.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein Entscheidungsproblem besteht aus <b>Zielen</b>, <b>Alternativen</b> (auch „nichts tun“), <b>Kriterien</b> zur Bewertung, <b>Umweltzuständen</b> (unsichere Einflüsse wie Datenqualität oder Nutzungsmenge) und <b>Ergebnissen</b>. Entscheidungen unter <b>Risiko</b> kennen Wahrscheinlichkeiten, unter <b>Ungewissheit</b> nicht.</p>
+        </div>
+      </div>
+      <ol class="steps">
+        <li><span>Problem und Ziel klären (Was soll besser werden? Woran messen wir es?)</span></li>
+        <li><span>Alternativen sammeln, darunter die Nullvariante (Status quo)</span></li>
+        <li><span>Muss-Kriterien (K.-o.) und Soll-Kriterien festlegen</span></li>
+        <li><span>Verfahren wählen, bewerten, Unsicherheit prüfen, empfehlen</span></li>
+      </ol>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Gute Entscheidungen beginnen mit klaren Zielen, echten Alternativen (inklusive Status quo) und offen gelegten Kriterien.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Wurde im eigenen Unternehmen schon einmal eine KI-Lösung gekauft, ohne Alternativen zu vergleichen? Was waren die Folgen?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 2 -->
+    <section class="lesson" id="l2" data-title="Kosten-Nutzen-Analyse" data-part="Teil A · Kosten und Nutzen">
+      <div class="lesson-head"><span class="meta">Lektion 2 · 25 Minuten</span><h2>Kosten-Nutzen-Analyse: Idee, Einsatz, Grenzen</h2></div>
+      <div class="formula"><span class="box-label">Kennzahlen</span>
+        <div class="eq">Nettonutzen = Summe Nutzen − Summe Kosten · Nutzen-Kosten-Verhältnis = <span class="frac"><span>Nutzen</span><span>Kosten</span></span></div>
+        <div class="legend-eq"><span>Nettonutzen über 0 bzw. Verhältnis über 1: Das Vorhaben lohnt sich.</span></div>
+      </div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Einsatz</span>
+          <p>Wenn sich Kosten <b>und</b> Nutzen weitgehend in Geld ausdrücken lassen: Automatisierung mit messbarer Zeitersparnis, Reduktion von Ausschuss, Vermeidung von Strafen.</p>
+        </div>
+        <div class="box falle"><span class="box-label">Grenzen</span>
+          <p>Nicht alles ist sinnvoll in Euro messbar (Mitarbeiterzufriedenheit, Image, Fairness). Wer es trotzdem tut, erzeugt Scheingenauigkeit. Dann ergänzen: Nutzwertanalyse oder qualitative Bewertung.</p>
+        </div>
+      </div>
+      <div class="prose"><p><b>Beispiel:</b> Kosten über 3 Jahre 170.000 €, Nutzen 330.000 € → <span class="calcline">Nettonutzen 160.000 €, Verhältnis 330 / 170 ≈ 1,94</span>.</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Kosten-Nutzen-Analyse: alles in Geld, Nettonutzen und Verhältnis. Stark bei messbaren Effekten, schwach bei weichen Faktoren.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diskutieren Sie: Wie bewertet man „bessere Kundenerfahrung“ in Euro? Über Folgekennzahlen wie Kündigungsquote – aber mit Unsicherheit.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 3 -->
+    <section class="lesson" id="l3" data-title="Kosten erfassen (TCO)" data-part="Teil A · Kosten und Nutzen">
+      <div class="lesson-head"><span class="meta">Lektion 3 · 30 Minuten</span><h2>Kosten erfassen: einmalig, laufend, versteckt (TCO)</h2></div>
+      <figure class="board">
+        <img src="gifs/tco.gif" width="640" height="380" alt="Animation: Ein Eisberg. Über Wasser nur Lizenz und API mit 30 T€. Unter Wasser erscheinen Datenaufbereitung 40, Integration 35, Betrieb und Monitoring 25, Neutraining 15, Schulung und Change 10, Compliance 10 und Ausstieg 5 – zusammen 170 T€ über drei Jahre." loading="lazy">
+        <figcaption>Die Lizenz ist nur die Spitze.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kostenart</th><th>Beispiele bei KI</th></tr></thead>
+        <tbody>
+          <tr><td>einmalig</td><td>Auswahl, Datenaufbereitung, Entwicklung, Integration, Erstschulung, Hardware</td></tr>
+          <tr><td>laufend</td><td>Lizenzen, API- bzw. Token-Kosten, Rechenleistung, Betrieb, Monitoring, Support, Neutraining</td></tr>
+          <tr><td>versteckt</td><td>Zeit der Fachabteilung, Nacharbeit bei Fehlern, Compliance (DSFA, Dokumentation nach KI-Verordnung), Change Management, Ausstieg und Datenmigration</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Total Cost of Ownership = alle Kosten über die gesamte Nutzungsdauer, nicht nur der Angebotspreis.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Nutzungsabhängige Kosten (Tokens, Rechenzeit) wachsen mit dem Erfolg. Was im Pilot mit 1.000 Anfragen billig ist, kann bei 1 Mio. Anfragen teuer werden – Mengen für den Rollout hochrechnen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie für ein eigenes KI-Vorhaben eine TCO-Liste über drei Jahre erstellen. Welche Kosten tauchen in keinem Angebot auf?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 4 -->
+    <section class="lesson" id="l4" data-title="Nutzen erfassen" data-part="Teil A · Kosten und Nutzen">
+      <div class="lesson-head"><span class="meta">Lektion 4 · 25 Minuten</span><h2>Nutzen erfassen: monetär, quantifizierbar, qualitativ</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Nutzenart</th><th>Beispiel</th><th>Bewertung</th></tr></thead>
+        <tbody>
+          <tr><td>monetär</td><td>eingesparte Arbeitszeit, weniger Ausschuss, Mehrumsatz</td><td>direkt in Euro</td></tr>
+          <tr><td>quantifizierbar, nicht monetär</td><td>Durchlaufzeit von 6 auf 2 Tage, Fehlerquote von 3 % auf 1 %</td><td>Kennzahl, ggf. in Euro umrechnen</td></tr>
+          <tr><td>qualitativ</td><td>Zufriedenheit, Image, Wissenssicherung, Arbeitgeberattraktivität</td><td>Nutzwertanalyse, Beschreibung</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p><b>Beispiel Zeitersparnis:</b> 20.000 Rechnungen im Jahr, je 10 Minuten weniger Bearbeitung, 45 € je Stunde Vollkosten → <span class="calcline">20.000 × 10 / 60 = 3.333 h × 45 € ≈ 150.000 €</span>.</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Nutzen erst in Kennzahlen fassen, dann so weit wie seriös möglich in Euro umrechnen, den Rest qualitativ bewerten.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Eingesparte Zeit ist nur dann Geld, wenn sie genutzt wird – für andere Aufgaben, Wachstum ohne Neueinstellung oder Abbau von Überstunden. Sonst ist der Nutzen nur auf dem Papier.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Was passiert mit den 3.333 gesparten Stunden konkret? Die Antwort gehört in jede Entscheidungsvorlage.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 5 -->
+    <section class="lesson" id="l5" data-title="Verfahren im Vergleich" data-part="Teil A · Kosten und Nutzen">
+      <div class="lesson-head"><span class="meta">Lektion 5 · 25 Minuten</span><h2>Verfahren im Vergleich: Kostenvergleich, Kosten-Wirksamkeit, Nutzwertanalyse</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Verfahren</th><th>Wann?</th><th>Ergebnis</th></tr></thead>
+        <tbody>
+          <tr><td>Kostenvergleich</td><td>Alternativen mit gleichem Nutzen</td><td>günstigste Alternative</td></tr>
+          <tr><td>Kosten-Nutzen-Analyse</td><td>Kosten und Nutzen in Euro messbar</td><td>Nettonutzen, Nutzen-Kosten-Verhältnis</td></tr>
+          <tr><td>Kosten-Wirksamkeits-Analyse</td><td>Nutzen messbar, aber nicht in Euro (z. B. vermiedene Fehler)</td><td>Kosten je Einheit Wirkung</td></tr>
+          <tr><td>Nutzwertanalyse</td><td>mehrere, auch qualitative Kriterien</td><td>Nutzwert je Alternative</td></tr>
+          <tr><td>Investitionsrechnung</td><td>Zahlungen über mehrere Jahre</td><td>ROI, Amortisation, Kapitalwert (Modul 14)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p><b>Kosten-Wirksamkeit:</b> Lösung A kostet 50.000 € und vermeidet 500 Fehlbuchungen, Lösung B 80.000 € und vermeidet 1.000. <span class="calcline">A: 100 € je Fehler · B: 80 € je Fehler</span> → B ist wirksamer je Euro, kostet aber absolut mehr.</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Das Verfahren folgt aus der Frage: Gleicher Nutzen → Kostenvergleich; alles in Euro → Kosten-Nutzen; Wirkung ohne Euro → Kosten-Wirksamkeit; viele weiche Kriterien → Nutzwertanalyse.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>In der Praxis werden Verfahren kombiniert: Nutzwertanalyse für die Anbieterwahl, Investitionsrechnung für die Freigabe des Budgets.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 6 -->
+    <section class="lesson" id="l6" data-title="Nutzwertanalyse" data-part="Teil B · Bewerten und vergleichen">
+      <div class="lesson-head"><span class="meta">Lektion 6 · 40 Minuten</span><h2>Nutzwertanalyse Schritt für Schritt</h2></div>
+      <figure class="board">
+        <img src="gifs/nutzwert.gif" width="640" height="380" alt="Animation: Zwei Säulen für Anbieter A und B wachsen aus Teilnutzen: Kosten 40 Prozent (A 2,40, B 3,20), Genauigkeit 35 Prozent (A 3,15, B 2,10), Datenschutz 25 Prozent (A 1,25, B 2,25). Nutzwert A 6,80, B 7,55; B gewinnt." loading="lazy">
+        <figcaption>Teilnutzen addieren sich zum Nutzwert.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span><b>K.-o.-Kriterien</b> prüfen: Alternativen, die Muss-Anforderungen nicht erfüllen (z. B. DSGVO-konformer Betrieb), scheiden vorher aus.</span></li>
+        <li><span><b>Kriterien</b> festlegen: unabhängig voneinander, messbar oder klar beschreibbar.</span></li>
+        <li><span><b>Gewichten</b>: Summe 100 % (z. B. per Paarvergleich, Lektion 7).</span></li>
+        <li><span><b>Bewerten</b>: je Alternative und Kriterium Punkte (z. B. 1–10) nach vorher festgelegter Skala.</span></li>
+        <li><span><b>Teilnutzen</b> = Gewicht × Punkte; <b>Nutzwert</b> = Summe der Teilnutzen.</span></li>
+        <li><span><b>Sensitivität</b> prüfen und Empfehlung formulieren.</span></li>
+      </ol>
+      <div class="calc"><span class="box-label">Rechner: Nutzwertanalyse mit kritischem Gewicht</span>
+        <div class="calc-row">
+          <div class="field"><label for="nwG1">Gewicht Kriterium 1 (%)</label><input type="number" id="nwG1" value="40"></div>
+          <div class="field"><label for="nwG2">Gewicht Kriterium 2 (%)</label><input type="number" id="nwG2" value="35"></div>
+          <div class="field"><label for="nwG3">Gewicht Kriterium 3 (%)</label><input type="number" id="nwG3" value="25"></div>
+        </div>
+        <div class="calc-row">
+          <div class="field"><label for="nwA1">A: Punkte K1</label><input type="number" id="nwA1" value="6"></div>
+          <div class="field"><label for="nwA2">A: Punkte K2</label><input type="number" id="nwA2" value="9"></div>
+          <div class="field"><label for="nwA3">A: Punkte K3</label><input type="number" id="nwA3" value="5"></div>
+          <div class="field"><label for="nwB1">B: Punkte K1</label><input type="number" id="nwB1" value="8"></div>
+          <div class="field"><label for="nwB2">B: Punkte K2</label><input type="number" id="nwB2" value="6"></div>
+          <div class="field"><label for="nwB3">B: Punkte K3</label><input type="number" id="nwB3" value="9"></div>
+        </div>
+        <div class="kpis" id="nwOut"></div>
+        <p class="calc-note" id="nwNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Nutzwert = Σ Gewicht × Punkte. K.-o.-Kriterien zuerst, Sensitivität zuletzt.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Kriterien, die dasselbe messen (z. B. „Genauigkeit“ und „Trefferquote“), werden doppelt gezählt und verzerren das Ergebnis.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Spielen Sie mit dem Rechner: Ab welchem Gewicht für Kriterium 2 gewinnt A? Das ist der kritische Wert aus Lektion 11.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 7 -->
+    <section class="lesson" id="l7" data-title="Paarvergleich" data-part="Teil B · Bewerten und vergleichen">
+      <div class="lesson-head"><span class="meta">Lektion 7 · 25 Minuten</span><h2>Kriterien gewichten: Paarvergleich</h2></div>
+      <figure class="board">
+        <img src="gifs/paarvergleich.gif" width="640" height="380" alt="Animation: Eine 4×4-Matrix für Kosten, Genauigkeit, Datenschutz und Integration füllt sich mit 2, 1 und 0. Zeilensummen 2, 4, 5 und 1 ergeben bei 12 Punkten insgesamt die Gewichte 16,7, 33,3, 41,7 und 8,3 Prozent." loading="lazy">
+        <figcaption>Zeilensumme durch Gesamtsumme = Gewicht.</figcaption>
+      </figure>
+      <div class="prose">
+        <p>Jedes Kriterium wird mit jedem anderen verglichen: 2 = wichtiger, 1 = gleich wichtig, 0 = unwichtiger. Gegenüberliegende Felder ergänzen sich zu 2. Gesamtpunkte = n · (n − 1). Gewicht = Zeilensumme / Gesamtpunkte.</p>
+        <p><b>Schwäche:</b> Ein Kriterium, das jeden Vergleich verliert, erhält 0 % – obwohl es vielleicht dennoch wichtig ist. Abhilfe: es streichen oder jeder Zeile einen Grundpunkt geben. Alternativen: Direktgewichtung, Punkteverteilung im Team (z. B. 100 Punkte je Person).</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Paarvergleich: paarweise entscheiden, Zeilensummen bilden, durch n · (n − 1) teilen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie drei Personen den Paarvergleich getrennt ausfüllen und vergleichen Sie. Unterschiede zeigen, wo vor der Bewertung diskutiert werden muss.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 8 -->
+    <section class="lesson" id="l8" data-title="ROI und Amortisation" data-part="Teil B · Bewerten und vergleichen">
+      <div class="lesson-head"><span class="meta">Lektion 8 · 30 Minuten</span><h2>Return on Investment und Amortisation als Entscheidungshilfe</h2></div>
+      <figure class="board">
+        <img src="gifs/amortisation.gif" width="640" height="380" alt="Animation: Eine Linie startet bei minus 60 T€ und steigt je Jahr um 24 T€. Nach 2,5 Jahren kreuzt sie die Nulllinie. Nach 5 Jahren liegt sie bei plus 60 T€; der ROI beträgt 100 Prozent." loading="lazy">
+        <figcaption>Statische Amortisation.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formeln (statisch)</span>
+        <div class="eq">jährlicher Rückfluss = Einsparung bzw. Mehrerlös − laufende Kosten</div>
+        <div class="eq">Amortisationszeit = <span class="frac"><span>Investition</span><span>jährlicher Rückfluss</span></span> · ROI = <span class="frac"><span>Rückflüsse gesamt − Investition</span><span>Investition</span></span></div>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: ROI und Amortisation</span>
+        <div class="calc-row">
+          <div class="field"><label for="roI">Investition (€)</label><input type="number" id="roI" value="60000"></div>
+          <div class="field"><label for="roE">Einsparung je Jahr (€)</label><input type="number" id="roE" value="30000"></div>
+          <div class="field"><label for="roK">laufende Kosten je Jahr (€)</label><input type="number" id="roK" value="6000"></div>
+          <div class="field"><label for="roN">Nutzungsdauer (Jahre)</label><input type="number" id="roN" value="5"></div>
+        </div>
+        <div class="kpis" id="roOut"></div>
+        <p class="calc-note" id="roNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Amortisation = Investition / jährlicher Rückfluss; je kürzer, desto geringer das Risiko. ROI zeigt die Rendite über die Laufzeit.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Die Amortisationszeit sagt nichts über die Zeit danach. Ein Projekt mit 2 Jahren Amortisation und 3 Jahren Nutzung kann schlechter sein als eines mit 3 Jahren Amortisation und 8 Jahren Nutzung.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie das Lehrplanbeispiel: Chatbot 60.000 €, netto 24.000 € Ersparnis je Jahr → 2,5 Jahre.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 9 -->
+    <section class="lesson" id="l9" data-title="Make or Buy" data-part="Teil B · Bewerten und vergleichen">
+      <div class="lesson-head"><span class="meta">Lektion 9 · 30 Minuten</span><h2>Make or Buy: selbst entwickeln, kaufen, mieten</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Selbst entwickeln (Make)</th><th>Kaufen / Mieten (Buy, SaaS, API)</th></tr></thead>
+        <tbody>
+          <tr><td>Vorteile</td><td>passgenau, eigenes Know-how, Daten bleiben im Haus, Wettbewerbsvorteil</td><td>schnell verfügbar, erprobt, geringe Anfangsinvestition, Anbieter pflegt weiter</td></tr>
+          <tr><td>Nachteile</td><td>teuer, langsamer, Fachkräfte nötig, Risiko des Scheiterns</td><td>Abhängigkeit (Lock-in), weniger Anpassung, Datenschutzfragen, laufende Kosten wachsen mit der Nutzung</td></tr>
+          <tr><td>Passt, wenn</td><td>Kernkompetenz, eigene Daten sind der Vorteil, hohe Mengen</td><td>Standardaufgabe, geringe Mengen, schneller Start</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p><b>Break-even der Menge:</b> API kostet 0,02 € je Anfrage; eigener Betrieb 30.000 € fix je Jahr plus 0,005 € je Anfrage. <span class="calcline">30.000 / (0,02 − 0,005) = 2.000.000 Anfragen pro Jahr</span>. Darunter ist die API günstiger, darüber der eigene Betrieb – Personal, Risiko und Flexibilität noch nicht eingerechnet.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Make or Buy ist eine Frage von Kosten <b>und</b> Strategie: Standard kaufen, Differenzierendes selbst machen; Mengen und Abhängigkeit mitbewerten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Viele Unternehmen wählen einen Mittelweg: Basismodell kaufen oder mieten, mit eigenen Daten anpassen (Feinabstimmung oder RAG).</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Qualitätsanalysen und FMEA" data-part="Teil B · Bewerten und vergleichen">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 35 Minuten</span><h2>Qualitätsanalysen: Qualitätskennzahlen und FMEA</h2></div>
+      <div class="cols">
+        <div class="box fach"><span class="box-label">Qualitätskennzahlen</span>
+          <p>Fehlerquote, Erstlösungsquote, Genauigkeit, Recall und Präzision des Modells, Kundenzufriedenheit, Reklamationsquote. <b>Qualitätskosten</b>: Fehlerverhütung (Schulung, Tests), Prüfung (Stichproben, Monitoring), Fehlerkosten intern (Nacharbeit) und extern (Reklamation, Imageschaden, Haftung).</p>
+        </div>
+        <div class="box fach"><span class="box-label">FMEA</span>
+          <p>Die <b>Fehlermöglichkeits- und Einflussanalyse</b> sucht vorbeugend mögliche Fehler, ihre Folgen und Ursachen. Jeder Fehler wird mit 1–10 bewertet nach <b>Auftreten</b> (A), <b>Bedeutung</b> (B) und <b>Entdeckung</b> (E; 10 = kaum entdeckbar). RPZ = A × B × E.</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/fmea.gif" width="640" height="380" alt="Animation: Eine FMEA-Tabelle mit vier Fehlern: Rechnung falsch ausgelesen (4×7×6 = 168), Modell driftet unbemerkt (3×8×8 = 192), Schnittstelle fällt aus (2×6×2 = 24) und Prompt Injection (2×9×7 = 126). Die höchsten Werte werden rot markiert." loading="lazy">
+        <figcaption>Höchste RPZ zuerst – hohe Bedeutung immer.</figcaption>
+      </figure>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>FMEA: RPZ = Auftreten × Bedeutung × Entdeckung; Maßnahmen nach RPZ und für alle Fehler mit sehr hoher Bedeutung.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Eine niedrige RPZ kann einen katastrophalen, aber seltenen Fehler verstecken (B = 10, A = 1, E = 2 → RPZ 20). Deshalb Fehler mit Bedeutung 9–10 immer gesondert betrachten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Führen Sie eine Mini-FMEA für einen Chatbot durch: falsche Auskunft, Datenleck, Ausfall, beleidigende Antwort.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Sensitivitätsanalyse" data-part="Teil C · Unsicherheit und Empfehlung">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 30 Minuten</span><h2>Sensitivitätsanalyse: Was, wenn sich Annahmen ändern?</h2></div>
+      <figure class="board">
+        <img src="gifs/sensitivitaet.gif" width="640" height="380" alt="Animation: Zwei Linien zeigen den Nutzwert von Anbieter A (steigend) und B (fallend) in Abhängigkeit vom Gewicht der Genauigkeit. Sie kreuzen sich bei 48 Prozent; heute liegt das Gewicht bei 35 Prozent, das Ergebnis ist also robust." loading="lazy">
+        <figcaption>Kritischer Wert: Hier kippt die Entscheidung.</figcaption>
+      </figure>
+      <div class="prose">
+        <p>Die <b>Sensitivitätsanalyse</b> verändert eine unsichere Annahme (Gewicht, Mengen, Preis je Token, Einsparung) und beobachtet das Ergebnis. Der <b>kritische Wert</b> ist der Wert, bei dem sich die Empfehlung umkehrt. Liegt er weit vom angenommenen Wert entfernt, ist das Ergebnis robust.</p>
+        <p><b>Beispiel Amortisation:</b> Investition 60.000 €, Ziel Amortisation in höchstens 3 Jahren → <span class="calcline">kritischer Rückfluss = 60.000 / 3 = 20.000 € je Jahr</span>. Bei angenommenen 24.000 € darf der Rückfluss also um höchstens rund 17 % sinken.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Sensitivitätsanalyse: Annahmen variieren, kritischen Wert finden, Robustheit beurteilen.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Wozu dient eine Sensitivitätsanalyse?“ – Prüfen, wie stark das Ergebnis von unsicheren Annahmen abhängt und ab welchem Wert sich die Empfehlung ändert.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Nutzen Sie den Rechner in Lektion 6 und verändern Sie das Gewicht schrittweise. Wo kippt die Entscheidung?</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Szenarien" data-part="Teil C · Unsicherheit und Empfehlung">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 25 Minuten</span><h2>Szenarien: Best Case, Base Case, Worst Case</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Szenario</th><th>Annahmen</th><th class="r">Rückfluss je Jahr</th><th class="r">Amortisation</th></tr></thead>
+        <tbody>
+          <tr><td>Best Case</td><td>hohe Nutzung, Modell sehr genau, günstige Tokenpreise</td><td class="r">40.000 €</td><td class="r">1,5 Jahre</td></tr>
+          <tr><td>Base Case</td><td>realistische Planwerte</td><td class="r">24.000 €</td><td class="r">2,5 Jahre</td></tr>
+          <tr><td>Worst Case</td><td>geringe Akzeptanz, viel Nacharbeit, höhere Kosten</td><td class="r">10.000 €</td><td class="r">6 Jahre</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p>Anders als bei der Sensitivitätsanalyse werden <b>mehrere Annahmen gemeinsam</b> stimmig verändert. Investition jeweils 60.000 €. Entscheider sehen so die Bandbreite – und ob sie auch den Worst Case tragen können.</p></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Szenarien zeigen die Bandbreite. Entscheidend ist oft die Frage: Können wir mit dem Worst Case leben?</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Was müsste passieren, damit der Worst Case eintritt? Daraus ergeben sich Frühwarnindikatoren für das Projekt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Entscheidungsbaum und Erwartungswert" data-part="Teil C · Unsicherheit und Empfehlung">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Entscheidungsbaum und Erwartungswert</h2></div>
+      <figure class="board">
+        <img src="gifs/entscheidungsbaum.gif" width="640" height="380" alt="Animation: Von einem Entscheidungsknoten gehen Eigenentwicklung und Kauf ab. Eigenentwicklung: 60 Prozent Erfolg mit plus 300 T€, 40 Prozent Misserfolg mit minus 100 T€, Erwartungswert 140 T€. Kauf: 90 Prozent passt mit plus 160 T€, 10 Prozent passt kaum mit plus 20 T€, Erwartungswert 146 T€." loading="lazy">
+        <figcaption>Kauf: höherer Erwartungswert, kleineres Risiko.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formel</span>
+        <div class="eq">Erwartungswert EW = Σ Wahrscheinlichkeit × Ergebnis</div>
+      </div>
+      <div class="prose">
+        <p>Quadrate sind Entscheidungen, Kreise Zufallsereignisse, Dreiecke Ergebnisse. Man rechnet von rechts nach links: Erwartungswerte an den Zufallsknoten, dann die beste Alternative am Entscheidungsknoten. Neben dem Erwartungswert zählt die <b>Risikoeinstellung</b>: Wer einen Verlust von 100 T€ nicht verkraften kann, wählt die sichere Alternative auch bei gleichem Erwartungswert.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erwartungswert = Σ p × Ergebnis; zusätzlich Bandbreite und Risikotragfähigkeit beachten.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Ergänzen Sie einen Zwischenschritt: „erst Pilot für 20 T€, dann entscheiden“. Solche Optionen erhöhen oft den Erwartungswert, weil man Verluste begrenzt.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Ergebnisse aufbereiten" data-part="Teil C · Unsicherheit und Empfehlung">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 25 Minuten</span><h2>Ergebnisse aufbereiten: Empfehlung, Annahmen, Risiken</h2></div>
+      <ol class="steps">
+        <li><span><b>Empfehlung</b> zuerst, in einem Satz („Wir empfehlen Anbieter B, Start im 2. Quartal“).</span></li>
+        <li><span><b>Ausgangslage und Ziel</b> kurz.</span></li>
+        <li><span><b>Alternativen und Verfahren</b>: Was wurde wie verglichen?</span></li>
+        <li><span><b>Ergebnis</b> mit Kennzahlen und einer Grafik (Nutzwerte, Amortisation).</span></li>
+        <li><span><b>Annahmen</b> offenlegen, <b>Sensitivität</b> und <b>Szenarien</b> zeigen.</span></li>
+        <li><span><b>Risiken</b> und Maßnahmen, rechtliche Punkte, Nachhaltigkeit.</span></li>
+        <li><span><b>Entscheidungsbedarf</b> und nächste Schritte.</span></li>
+      </ol>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Eine Entscheidungsvorlage beginnt mit der Empfehlung und legt Annahmen, Unsicherheiten und Risiken offen.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>In der Präsentation zur Transferarbeit wirkt eine klare Empfehlung mit offen gelegten Annahmen überzeugender als eine Vielzahl von Tabellen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie eine einseitige Entscheidungsvorlage für den Make-or-Buy-Fall aus Lektion 9 schreiben.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Typische Fehler" data-part="Teil C · Unsicherheit und Empfehlung">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 20 Minuten</span><h2>Typische Fehler: Scheingenauigkeit, vergessene Kosten, Wunschdenken</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Fehler</th><th>Beispiel</th><th>Gegenmittel</th></tr></thead>
+        <tbody>
+          <tr><td>Scheingenauigkeit</td><td>„Nutzwert 7,4832“ bei geschätzten Punkten</td><td>runden, Bandbreiten angeben</td></tr>
+          <tr><td>Vergessene Kosten</td><td>nur Lizenz, nicht Integration und Betrieb</td><td>TCO-Checkliste</td></tr>
+          <tr><td>Wunschdenken</td><td>Einsparung aus dem Vertriebsfoliensatz des Anbieters</td><td>eigene Messung im Pilot, Worst Case</td></tr>
+          <tr><td>Rechtfertigung im Nachhinein</td><td>Gewichte so lange ändern, bis der Favorit gewinnt</td><td>Gewichte vor der Bewertung festlegen</td></tr>
+          <tr><td>Doppelzählung</td><td>ähnliche Kriterien zweimal</td><td>Kriterien auf Unabhängigkeit prüfen</td></tr>
+          <tr><td>Status quo vergessen</td><td>nur KI-Varianten verglichen</td><td>Nullvariante immer mitbewerten</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ehrliche Abwägung: Gewichte vorab festlegen, alle Kosten erfassen, Nutzen im Pilot messen, Unsicherheit offen zeigen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Fragen Sie: Welcher Fehler ist im eigenen Unternehmen am häufigsten? Meist sind es vergessene laufende Kosten.</p>
+      </aside>
+    </section>

@@ -1,0 +1,217 @@
+<!--EXTRA l8-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Karten für hochdimensionale Daten richtig lesen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kundenbeschwerden als Karte</span>
+        <p>Eine Firma hat 20.000 Beschwerden als Embeddings mit je 384 Zahlen. Mit UMAP entsteht ein 2D-Bild: Eine große Wolke enthält Beschwerden zur Lieferung, eine zweite Rechnungsfragen, eine kleine Insel besteht aus Datenschutz-Anfragen. Ohne Karte hätte niemand die Insel bemerkt. Sie wird jetzt gezielt von einem Spezialisten bearbeitet.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Was man aus der Karte nicht schließen darf</span>
+        <ul>
+          <li>Zwei Wolken liegen im Bild weit auseinander – das heißt <b>nicht</b>, dass sie in den echten Daten genauso weit voneinander entfernt sind.</li>
+          <li>Eine Wolke ist im Bild doppelt so groß wie eine andere – das heißt <b>nicht</b>, dass sie doppelt so viele oder doppelt so streuende Punkte hat.</li>
+          <li>Mit einer anderen Einstellung (z. B. „Perplexity“ bei t-SNE) sieht das Bild anders aus. Verlässlich ist nur: Punkte, die nah beieinander liegen, sind sich in den Originaldaten ähnlich.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Welches Verfahren wofür?</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Ziel</th><th>Verfahren</th></tr></thead>
+          <tbody>
+            <tr><td>Merkmale vor einem Modell reduzieren</td><td>PCA</td></tr>
+            <tr><td>Verlässlich Streuung erklären und Anteile berichten</td><td>PCA</td></tr>
+            <tr><td>Gruppen in Embeddings sichtbar machen</td><td>UMAP oder t-SNE</td></tr>
+            <tr><td>Die Karte als Modelleingang nutzen</td><td>nicht empfohlen (nur zur Ansicht)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie zwei Unterschiede zwischen PCA und t-SNE und eine Warnung bei der Deutung von t-SNE-Bildern.</p>
+        <p><b>Musterlösung:</b> PCA ist linear und bewahrt die großen Streuungsrichtungen, t-SNE ist nicht linear und bewahrt lokale Nachbarschaften (2 Punkte). PCA wird auch zur Vorverarbeitung genutzt, t-SNE fast nur zur Visualisierung (1 Punkt). Warnung: Abstände zwischen Gruppen und die Größe der Gruppen im Bild dürfen nicht überinterpretiert werden (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l9-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Anomalien erkennen und bewerten</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: z-Werte für drei Messungen</span>
+        <p>Normalbetrieb einer Maschine: μ = 100 °C, σ = 5 °C.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">Messwert</th><th class="r">z</th><th>Bewertung</th></tr></thead>
+          <tbody>
+            <tr><td class="r">108 °C</td><td class="r">(108 − 100) : 5 = 1,6</td><td>unauffällig</td></tr>
+            <tr><td class="r">85 °C</td><td class="r">(85 − 100) : 5 = −3,0</td><td>an der Grenze, prüfen (zu kalt)</td></tr>
+            <tr><td class="r">118 °C</td><td class="r">(118 − 100) : 5 = 3,6</td><td>Anomalie, prüfen</td></tr>
+          </tbody>
+        </table></div>
+        <p>Das Verfahren ist einfach, funktioniert aber nur für einzelne Messgrößen mit annähernd normaler Verteilung. Kombinationen von Werten (hohe Temperatur bei niedriger Last) erkennt es nicht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Isolation Forest – die Zahl der Schnitte</span>
+        <p>Der Algorithmus teilt die Daten mit zufälligen Schnitten. Ein Punkt mitten in der Wolke ist erst nach etwa 14 Schnitten allein; ein einsamer Punkt am Rand nach etwa 3. Über viele Bäume gemittelt ergibt sich: <b>kurzer Weg = verdächtig</b>. Das Verfahren braucht keine Labels, ist schnell und kommt mit vielen Merkmalen zurecht.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Zu viele Fehlalarme (Bayes lässt grüßen)</span>
+        <p>Von 10.000 Zahlungen sind 1 % wirklich verdächtig (100). Das Verfahren markiert 150 Zahlungen und erwischt davon 80 echte Fälle. Dann sind <span class="calcline">80 : 150 ≈ 53 %</span> der Alarme berechtigt; 70 Alarme sind falsch. Stellt man den Schwellenwert strenger ein, sinken die Fehlalarme, aber es entgehen mehr echte Fälle. Wie in Modul 2 und 4 gilt: Die richtige Einstellung hängt von den Kosten eines übersehenen Falls und eines Fehlalarms ab.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 4: Anomalie heißt nicht immer Fehler</span>
+        <p>Eine Messreihe zeigt plötzlich höhere Vibrationswerte. Ursache: Die Maschine fährt seit heute ein neues, schwereres Produkt. Der „neue Normalzustand“ muss dem Modell mitgeteilt werden (Nachtrainieren), sonst gibt es täglich Alarm. Deshalb gehört zu jedem Anomalie-System ein Ablauf, wer Alarme prüft und Rückmeldungen einspeist.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Eine Messgröße ist normalverteilt mit μ = 70 und σ = 4. Ein Wert von 82 wird gemessen. Berechnen Sie z und beurteilen Sie ihn. Warum ist bei der Betrugserkennung ein überwachtes Modell besser, wenn viele bekannte Fälle vorliegen?</p>
+        <p><b>Musterlösung:</b> z = (82 − 70) : 4 = 3 – Grenzfall; fachlich prüfen (2 Punkte). Mit bekannten, markierten Fällen kann ein überwachtes Verfahren gezielt lernen, wie Betrug aussieht, und ist meist genauer als ein Verfahren, das nur „Ungewöhnliches“ meldet (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l10-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Regeln bewerten und nutzen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Eine Regel, die nichts sagt (Brot und Milch)</span>
+        <p>Von 1.000 Bons enthalten 600 Brot, 500 Milch, 330 beides.</p>
+        <ul>
+          <li>Support: <span class="calcline">330 : 1.000 = 33 %</span></li>
+          <li>Konfidenz Brot → Milch: <span class="calcline">330 : 600 = 55 %</span></li>
+          <li>Milch ohnehin: <span class="calcline">500 : 1.000 = 50 %</span></li>
+          <li>Lift: <span class="calcline">55 % : 50 % = 1,1</span></li>
+        </ul>
+        <p>Die Konfidenz von 55 % wirkt hoch, aber der Lift von 1,1 zeigt: Wer Brot kauft, kauft kaum häufiger Milch als jeder andere. Die Regel ist praktisch wertlos. Anders bei Bier und Chips mit Lift 3.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Regeln filtern</span>
+        <p>Ein Händler legt Grenzen fest: Support mindestens 2 % (sonst zu selten), Konfidenz mindestens 40 %, Lift mindestens 1,5. Von 2.000 gefundenen Regeln bleiben 35 übrig. Die Fachabteilung sichtet sie: Manche sind banal („Zahnbürste → Zahncreme“), manche überraschend und nützlich („Grillanzünder → Frischfleisch am Freitag“). Die Auswahl der Maßnahme ist menschliche Arbeit.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Maßnahmen aus Regeln</span>
+        <ul>
+          <li><b>Platzierung:</b> Chips neben das Bier stellen.</li>
+          <li><b>Empfehlung:</b> Im Webshop „Wer dieses Netzteil kaufte, kaufte oft auch dieses Kabel“.</li>
+          <li><b>Bundle:</b> Grillset aus Kohle, Anzünder und Zange mit 5 % Rabatt.</li>
+          <li><b>Vorsicht:</b> Regeln beschreiben gemeinsames Auftreten, nicht Ursachen. Mit Preisaktionen verändert sich auch das Verhalten.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Von 500 Bons enthalten 100 Windeln (A), 50 Bier (B) und 30 beides. Berechnen Sie Support, Konfidenz A → B und Lift und beurteilen Sie die Regel.</p>
+        <p><b>Musterlösung:</b> Support 30 : 500 = 6 % (1,5 Punkte). Konfidenz 30 : 100 = 30 % (1,5 Punkte). Bier ohnehin 50 : 500 = 10 %; Lift = 30 % : 10 % = 3 (2 Punkte). Lift &gt; 1: echter Zusammenhang; Windelkäufer kaufen dreimal so oft Bier wie der Durchschnitt (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Return, Policy und Reward Hacking</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Der Diskontfaktor verändert den Return</span>
+        <p>Belohnungen eines Lagerroboters: −1, −1, +10.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">γ</th><th>Rechnung</th><th class="r">Return G</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0</td><td>−1 (nur die erste Belohnung zählt)</td><td class="r">−1</td></tr>
+            <tr><td class="r">0,5</td><td>−1 + 0,5 · (−1) + 0,25 · 10</td><td class="r">1,0</td></tr>
+            <tr><td class="r">0,9</td><td>−1 + 0,9 · (−1) + 0,81 · 10</td><td class="r">6,2</td></tr>
+            <tr><td class="r">1</td><td>−1 − 1 + 10</td><td class="r">8</td></tr>
+          </tbody>
+        </table></div>
+        <p>Bei γ = 0 ist der Agent kurzsichtig: Er sieht nur die Kosten des Weges. Bei γ nahe 1 wägt er das ferne Ziel voll ab. In der Praxis liegt γ meist zwischen 0,9 und 0,99.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Eine Policy als Tabelle</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Zustand</th><th>Aktion der Policy</th></tr></thead>
+          <tbody>
+            <tr><td>Greifer leer, Paket in Sicht</td><td>zum Paket fahren</td></tr>
+            <tr><td>Greifer voll, Weg frei</td><td>zur Packstation fahren</td></tr>
+            <tr><td>Hindernis vor dem Roboter</td><td>ausweichen</td></tr>
+            <tr><td>Akku unter 15 %</td><td>zur Ladestation</td></tr>
+          </tbody>
+        </table></div>
+        <p>Die Policy ordnet jedem Zustand eine Aktion zu. Lernen heißt, diese Tabelle (oder die Funktion dahinter) so zu verbessern, dass der Return maximal wird.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Reward Hacking aus der Praxis</span>
+        <p>Ein Empfehlungssystem wird dafür belohnt, die Zeit auf der Plattform zu verlängern. Es lernt, besonders aufregende und polarisierende Inhalte zu zeigen, weil sie am längsten fesseln – das Ziel („zufriedene Nutzer“) wurde verfehlt, die Belohnung („Verweildauer“) maximiert. Gutes Belohnungsdesign prüft: Was passiert, wenn der Agent genau das Gemessene maximiert und sonst nichts?</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Die Belohnungen eines Agenten sind 0, 0, 5. Berechnen Sie den Gesamtertrag mit γ = 0,9. Was bedeutet der Diskontfaktor?</p>
+        <p><b>Musterlösung:</b> G = 0 + 0,9 · 0 + 0,81 · 5 = 4,05 (3 Punkte). Der Diskontfaktor γ bestimmt, wie stark spätere Belohnungen zählen: je kleiner, desto kurzsichtiger der Agent (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Q-Learning in Aktion</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Dasselbe Update mit anderen Einstellungen</span>
+        <p>Ausgangslage: Q = 2, r = 10, bester Folgewert 4.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Einstellung</th><th>Ziel (r + γ · max Q)</th><th>Neuer Q-Wert</th><th>Bedeutung</th></tr></thead>
+          <tbody>
+            <tr><td>α = 0,5; γ = 0,9</td><td>10 + 3,6 = 13,6</td><td class="r">2 + 0,5 · 11,6 = 7,8</td><td>Normalfall</td></tr>
+            <tr><td>α = 0</td><td>13,6</td><td class="r">2</td><td>lernt nichts</td></tr>
+            <tr><td>α = 1</td><td>13,6</td><td class="r">13,6</td><td>übernimmt nur das neue Ziel</td></tr>
+            <tr><td>α = 0,5; γ = 0</td><td>10</td><td class="r">2 + 0,5 · 8 = 6</td><td>zählt nur die sofortige Belohnung</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Wie sich die Belohnung rückwärts ausbreitet</span>
+        <p>Ein Gang mit drei Feldern: Start → Mitte → Ziel. Der Schritt vom Start zur Mitte kostet −1, der Schritt von der Mitte ins Ziel bringt +10. α = 0,5, γ = 0,9, alle Q-Werte beginnen bei 0.</p>
+        <ol class="steps">
+          <li><div><b>Episode 1:</b> Der Agent geht von der Mitte ins Ziel und erhält +10. <span class="calcline">Q(Mitte, vor) = 0 + 0,5 · (10 + 0,9 · 0 − 0) = 5</span></div></li>
+          <li><div><b>Episode 2:</b> Vom Start zur Mitte (Belohnung −1). Der beste Folgewert in der Mitte ist jetzt 5. <span class="calcline">Q(Start, vor) = 0 + 0,5 · (−1 + 0,9 · 5 − 0) = 0,5 · 3,5 = 1,75</span></div></li>
+          <li><div><span class="result">Das Wissen „am Ziel ist es gut“ ist vom Ziel in die Mitte und von dort zum Start gewandert.</span> Nach vielen Episoden steht in der Tabelle für jedes Feld der beste erwartete Ertrag.</div></li>
+        </ol>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Aus der Tabelle handeln</span>
+        <p>In einem Zustand stehen die Q-Werte: links 3,1; rechts 5,4; vor 1,2. Der gierige Agent wählt „rechts“ (höchster Wert). Ein ε-greedy-Agent mit ε = 0,1 wählt mit 10 % Wahrscheinlichkeit zufällig eine der drei Aktionen, damit er auch weniger bekannte Wege weiter prüft.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Q(s,a) = 5, α = 0,2, r = 1, γ = 0,9, bester Folgewert 10. Berechnen Sie den neuen Q-Wert.</p>
+        <p><b>Musterlösung:</b> Ziel: 1 + 0,9 · 10 = 10 (2 Punkte). Fehler: 10 − 5 = 5 (1 Punkt). Neu: 5 + 0,2 · 5 = 6 (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l13-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Zwischen Ausprobieren und Ausnutzen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Wahrscheinlichkeiten bei ε-greedy</span>
+        <p>Vier Aktionen, ε = 0,2, eine davon ist die bisher beste.</p>
+        <ul>
+          <li>Mit 20 % wählt der Agent zufällig; jede der vier Aktionen hat dann 1/4 Chance: <span class="calcline">0,2 : 4 = 0,05</span> je Aktion.</li>
+          <li>Mit 80 % wählt er die beste.</li>
+          <li><b>Beste Aktion insgesamt:</b> <span class="calcline">0,8 + 0,05 = 0,85</span>. <b>Jede andere Aktion:</b> 0,05. Kontrolle: <span class="calcline">0,85 + 3 · 0,05 = 1</span>.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: ε sinkt mit der Zeit</span>
+        <p>Zu Beginn weiß der Agent nichts, er soll viel ausprobieren: ε = 1. Mit jeder Episode wird ε mit dem Faktor 0,99 multipliziert, mindestens bleibt 0,05. Nach 100 Episoden: <span class="calcline">0,99¹⁰⁰ ≈ 0,37</span>. Nach 300 Episoden: <span class="calcline">0,99³⁰⁰ ≈ 0,05</span>. Dann nutzt er zu 95 % sein Wissen und probiert nur noch gelegentlich. Das ist die gängige Strategie „erst erkunden, dann ausbeuten“.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Der mehrarmige Bandit gegen den starren A/B-Test</span>
+        <p>Drei Werbeanzeigen: A hat 4 %, B 6 %, C 5 % Klickrate (der Betreiber weiß das vorher nicht). 3.000 Besucher stehen zur Verfügung.</p>
+        <ul>
+          <li><b>Starrer Test:</b> jede Anzeige 1.000-mal: <span class="calcline">40 + 60 + 50 = 150</span> Klicks.</li>
+          <li><b>Bandit:</b> 600 Besucher gleichmäßig (200 je Anzeige: 8 + 12 + 10 = 30 Klicks), danach 80 % der verbleibenden 2.400 an die bis dahin beste (B): <span class="calcline">1.920 · 0,06 ≈ 115</span> Klicks, je 240 an A und C: <span class="calcline">9,6 + 12 = 21,6</span>. Zusammen ca. <b>167 Klicks</b>.</li>
+        </ul>
+        <p>Der Bandit holt etwa 11 % mehr Klicks heraus, weil er schon während des Tests mehr Besucher auf die bessere Anzeige lenkt.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie Exploration und Exploitation. Mit welcher Wahrscheinlichkeit wird bei ε = 0,1 und fünf Aktionen die beste Aktion gewählt?</p>
+        <p><b>Musterlösung:</b> Exploration: Neues ausprobieren, um bessere Aktionen zu finden; Exploitation: das bekannte Beste nutzen, um Belohnung zu sammeln (2 Punkte). Beste Aktion: 0,9 + 0,1 : 5 = 0,92 (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l14-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Praxis und Grenzen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Warum man in Simulationen übt</span>
+        <p>Ein Roboterarm soll nach 1 Million Greifversuchen zuverlässig greifen. Im echten Betrieb dauert ein Versuch 10 Sekunden: <span class="calcline">1.000.000 · 10 s = 10.000.000 s ≈ 116 Tage</span>, dazu Verschleiß und Beschädigungen. Eine Simulation läuft 1.000-mal schneller: <span class="calcline">10.000 s ≈ 2,8 Stunden</span>. Anschließend wird das Gelernte auf den echten Roboter übertragen und dort feinjustiert. Die Lücke zwischen Simulation und Wirklichkeit („Sim-to-Real“) bleibt eine Herausforderung: Reibung, Beleuchtung und Material sind in echt anders.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: RLHF – so lernt ein Sprachmodell Höflichkeit</span>
+        <ol class="steps">
+          <li><div>Das vortrainierte Modell erzeugt zu einer Frage mehrere Antworten.</div></li>
+          <li><div>Menschen ordnen sie nach Qualität (hilfreich, ehrlich, harmlos).</div></li>
+          <li><div>Aus diesen Bewertungen lernt ein <b>Belohnungsmodell</b>, welche Antworten Menschen mögen.</div></li>
+          <li><div>Das Sprachmodell wird per bestärkendem Lernen darauf getrimmt, Antworten mit hoher Belohnung zu erzeugen.</div></li>
+        </ol>
+        <p>Auch hier droht Reward Hacking: Das Modell kann lernen, gefällig statt wahr zu klingen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Energie sparen im Rechenzentrum</span>
+        <p>Ein RL-Agent steuert Lüfter und Kühlkreisläufe. Belohnung: wenig Energieverbrauch bei eingehaltenen Temperaturgrenzen; ein Überschreiten der Grenzen wird hart bestraft. Er lernt in einer Simulation des Rechenzentrums und wird erst dann – anfangs mit Sicherheitsgrenzen und menschlicher Aufsicht – im echten Betrieb eingesetzt. Berichtet wurden Energieeinsparungen im zweistelligen Prozentbereich; für Ihre Anlage hängt der Effekt von den Bedingungen ab.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Nennen Sie drei Grenzen des bestärkenden Lernens und erklären Sie, warum man meist zuerst in einer Simulation lernt.</p>
+        <p><b>Musterlösung:</b> Grenzen: sehr viele Versuche nötig; Belohnung schwer richtig zu formulieren (Reward Hacking); Sicherheit beim Ausprobieren; schwer erklärbar (je 1 Punkt, max. 3). Simulation: Fehlversuche im echten Betrieb wären teuer oder gefährlich, und in der Simulation sind viele Versuche schnell und billig möglich (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->

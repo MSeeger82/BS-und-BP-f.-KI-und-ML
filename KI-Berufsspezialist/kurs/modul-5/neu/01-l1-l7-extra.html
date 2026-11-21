@@ -1,0 +1,214 @@
+<!--EXTRA l1-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Die vier Aufgaben mit konkreten Zahlen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Vier Fragen aus einem Betrieb, vier Verfahren</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Frage aus der Praxis</th><th>Aufgabe</th><th>Mögliches Ergebnis</th></tr></thead>
+          <tbody>
+            <tr><td>„Welche Typen von Kunden haben wir eigentlich?“</td><td>Clustering</td><td>Drei Segmente: Stammkunden, Gelegenheitskäufer, Schläfer</td></tr>
+            <tr><td>„Wir messen 50 Werte an jeder Maschine – können wir das einfacher darstellen?“</td><td>Dimensionsreduktion</td><td>5 Kennzahlen erklären 92 % der Schwankung</td></tr>
+            <tr><td>„Welche Buchungen sehen merkwürdig aus?“</td><td>Anomalieerkennung</td><td>120 von 80.000 Buchungen markiert</td></tr>
+            <tr><td>„Welche Produkte werden zusammen gekauft?“</td><td>Assoziationsanalyse</td><td>Regel: Grillkohle → Anzünder (Lift 4,2)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum ein Ergebnis nicht „richtig“ oder „falsch“ ist</span>
+        <p>Ein Clustering teilt 14.400 Kunden in drei Gruppen. Ein anderes Verfahren oder eine andere Einstellung ergibt vier Gruppen. Welches ist richtig? Keines von beiden im absoluten Sinn. Prüfstein ist der Nutzen: Kann das Marketing mit den Gruppen unterschiedliche Maßnahmen planen? Sind die Gruppen stabil, wenn man andere Daten nimmt? Beim überwachten Lernen misst man den Fehler gegen das Label – hier fehlt dieser Maßstab. Deshalb gehört das Gespräch mit der Fachabteilung zum Verfahren.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Auch unüberwacht braucht saubere Daten</span>
+        <p>Beim Clustern von Maschinendaten steht eine Temperatur teils in °C, teils in °F (212 statt 100). Das Verfahren behandelt 212 als völlig anderen Zustand und bildet einen eigenen Cluster „heiße Maschinen“ – in Wahrheit ein Einheitenfehler. Unüberwachtes Lernen findet jedes Muster, auch Muster, die nur Datenfehler sind. Deshalb gilt wie überall: erst Daten prüfen, dann lernen lassen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Ordnen Sie zu: (a) Kundengruppen finden, (b) 40 Sensorwerte auf wenige Kennzahlen verdichten, (c) ungewöhnliche Zahlungen entdecken. Nennen Sie jeweils ein Verfahren.</p>
+        <p><b>Musterlösung:</b> (a) Clustering, z. B. k-Means oder DBSCAN (2 Punkte). (b) Dimensionsreduktion, z. B. PCA (2 Punkte). (c) Anomalieerkennung, z. B. Isolation Forest oder z-Wert-Regel (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l2-->
+      <div class="prose">
+        <h3>k-Means mit weiteren Beispielen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Zahlenachse aus dem Rechner von Hand</span>
+        <p>Punkte: 1, 2, 3, 9, 10, 11. Startzentren: 2 und 3.</p>
+        <ol class="steps">
+          <li><div><b>Runde 1, Zuordnen:</b> 1 → Z1 (Abstand 1 gegen 2), 2 → Z1 (0), 3 → Z2 (0), 9, 10, 11 → Z2.</div></li>
+          <li><div><b>Verschieben:</b> <span class="calcline">Z1 = (1 + 2) : 2 = 1,5 · Z2 = (3 + 9 + 10 + 11) : 4 = 8,25</span></div></li>
+          <li><div><b>Runde 2:</b> Der Punkt 3 ist nun näher an Z1 (1,5 gegen 5,25) und wechselt. Neue Zentren: <span class="calcline">Z1 = (1 + 2 + 3) : 3 = 2 · Z2 = (9 + 10 + 11) : 3 = 10</span></div></li>
+          <li><div><b>Runde 3:</b> keine Änderung. <span class="result">Ergebnis: {1, 2, 3} und {9, 10, 11}</span>, Summe der quadrierten Abstände: <span class="calcline">(1 + 0 + 1) + (1 + 0 + 1) = 4</span></div></li>
+        </ol>
+        <p>Andere Startzentren (z. B. 9 und 10) führen hier zum selben Endergebnis. In komplexen Daten ist das nicht garantiert, deshalb rechnet man mehrfach mit verschiedenen Starts.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Warum Skalierung vor k-Means nötig ist</span>
+        <p>Drei Kunden: A (30 Jahre, 5.000 € Umsatz), B (60 Jahre, 5.100 €), C (31 Jahre, 9.000 €).</p>
+        <ul>
+          <li><b>Ohne Skalierung:</b> Abstand A–B: <span class="calcline">√(30² + 100²) ≈ 104</span>; Abstand A–C: <span class="calcline">√(1² + 4.000²) ≈ 4.000</span>. k-Means hält A und B für sehr ähnlich (nur der Umsatz zählt), obwohl sie 30 Jahre auseinanderliegen.</li>
+          <li><b>Mit Skalierung</b> (Standardabweichung Alter 15 Jahre, Umsatz 2.000 €): A–B: <span class="calcline">√(2² + 0,05²) ≈ 2,00</span>; A–C: <span class="calcline">√(0,07² + 2²) ≈ 2,00</span>. Beide Merkmale zählen jetzt gleich viel.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wenn k-Means an die Grenzen stößt</span>
+        <p>Daten bestehen aus zwei Halbmonden, die ineinandergreifen. k-Means teilt sie mit einer geraden Trennlinie in zwei Hälften, die beide Monde zerschneiden – denn es sucht runde Gruppen um Zentren. Ein Verfahren wie DBSCAN (Lektion 4) erkennt dagegen die Monde. Merke: k-Means passt, wenn die Gruppen ungefähr kugelförmig und ähnlich groß sind.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Punkte 1, 2, 8, 9; Startzentren 1 und 8. Führen Sie k-Means durch und geben Sie die Endzentren an.</p>
+        <p><b>Musterlösung:</b> Zuordnung: 1, 2 → Zentrum 1; 8, 9 → Zentrum 8 (2 Punkte). Neue Zentren: (1 + 2) : 2 = 1,5 und (8 + 9) : 2 = 8,5 (2 Punkte). Keine weitere Änderung der Zuordnung: fertig (1 Punkt).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Ellbogen und Silhouette gerechnet</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Die Ellbogen-Kurve für die Zahlenachse</span>
+        <p>Für die Punkte 1, 2, 3, 9, 10, 11 ergibt die beste Einteilung jeweils folgende Summe der quadrierten Abstände (SSE):</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="r">k</th><th>Einteilung</th><th class="r">SSE</th></tr></thead>
+          <tbody>
+            <tr><td class="r">1</td><td>alle in einem Cluster (Mittel 6)</td><td class="r">100</td></tr>
+            <tr><td class="r">2</td><td>{1, 2, 3}, {9, 10, 11}</td><td class="r">4</td></tr>
+            <tr><td class="r">3</td><td>{1, 2, 3}, {9}, {10, 11}</td><td class="r">2,5</td></tr>
+            <tr><td class="r">4</td><td>{1, 2}, {3}, {9}, {10, 11}</td><td class="r">1</td></tr>
+            <tr><td class="r">6</td><td>jeder Punkt allein</td><td class="r">0</td></tr>
+          </tbody>
+        </table></div>
+        <p>Von k = 1 zu k = 2 fällt die SSE von 100 auf 4 – ein riesiger Sprung. Danach bringt jedes weitere Cluster nur noch kleine Verbesserungen. Der <b>Ellbogen liegt bei k = 2</b>. (k = 6 hat SSE 0, ist aber sinnlos: Jeder Punkt ist sein eigenes Cluster.)</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Silhouette einzelner Punkte</span>
+        <p>Für die Einteilung {1, 2, 3} und {9, 10, 11}:</p>
+        <ul>
+          <li><b>Punkt 3:</b> mittlerer Abstand zum eigenen Cluster <span class="calcline">a = (2 + 1) : 2 = 1,5</span>; zum anderen Cluster <span class="calcline">b = (6 + 7 + 8) : 3 = 7</span>. <span class="calcline">s = (7 − 1,5) : 7 ≈ 0,79</span> – sehr gut zugeordnet.</li>
+          <li><b>Punkt 2:</b> <span class="calcline">a = 1 · b = (7 + 8 + 9) : 3 = 8 · s = 7 : 8 = 0,875</span>.</li>
+          <li><b>Ein Grenzfall:</b> Liegt ein Punkt mit a = 5 und b = 5 mitten zwischen zwei Clustern, ist <span class="calcline">s = 0</span>. Bei a = 6 und b = 4 ist <span class="calcline">s = (4 − 6) : 6 ≈ −0,33</span>: Er liegt dem fremden Cluster näher und ist vermutlich falsch zugeordnet.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Zahlen gegen Nutzen</span>
+        <p>Die Silhouette ist bei k = 2 am höchsten (0,71), bei k = 4 etwas niedriger (0,68). Für das Marketing wären vier Segmente aber hilfreicher, weil sich daraus vier unterschiedliche Maßnahmen ableiten lassen. Die Entscheidung für k = 4 ist dann <b>fachlich begründet</b> und gehört dokumentiert („Silhouette nur geringfügig niedriger, Nutzen höher“).</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Ein Punkt hat a = 3 und b = 6. Berechnen Sie die Silhouette und deuten Sie sie. Wie bestimmt man mit der Ellbogen-Methode die Clusterzahl?</p>
+        <p><b>Musterlösung:</b> s = (6 − 3) : 6 = 0,5: Der Punkt ist ordentlich zugeordnet (2 Punkte). Ellbogen: Für verschiedene k die SSE berechnen und auftragen; k am Knick wählen, ab dem zusätzliche Cluster die SSE kaum noch senken (3 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l4-->
+      <div class="prose">
+        <h3>DBSCAN an einer Zahlenreihe nachvollziehen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Kern-, Rand- und Rauschpunkte bestimmen</span>
+        <p>Werte: 1, 2, 3, 4, 10, 20, 21, 22, 23, 50. Parameter: ε = 1,5 und minPts = 3 (der Punkt selbst zählt mit).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Punkt</th><th>Nachbarn im Radius 1,5</th><th>Anzahl</th><th>Art</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>1, 2</td><td class="r">2</td><td>Randpunkt (liegt bei Kernpunkt 2)</td></tr>
+            <tr><td>2</td><td>1, 2, 3</td><td class="r">3</td><td>Kernpunkt</td></tr>
+            <tr><td>3</td><td>2, 3, 4</td><td class="r">3</td><td>Kernpunkt</td></tr>
+            <tr><td>4</td><td>3, 4</td><td class="r">2</td><td>Randpunkt</td></tr>
+            <tr><td>10</td><td>10</td><td class="r">1</td><td>Rauschen</td></tr>
+            <tr><td>20</td><td>20, 21</td><td class="r">2</td><td>Randpunkt</td></tr>
+            <tr><td>21</td><td>20, 21, 22</td><td class="r">3</td><td>Kernpunkt</td></tr>
+            <tr><td>22</td><td>21, 22, 23</td><td class="r">3</td><td>Kernpunkt</td></tr>
+            <tr><td>23</td><td>22, 23</td><td class="r">2</td><td>Randpunkt</td></tr>
+            <tr><td>50</td><td>50</td><td class="r">1</td><td>Rauschen</td></tr>
+          </tbody>
+        </table></div>
+        <p><span class="result">Ergebnis: Cluster {1, 2, 3, 4} und Cluster {20, 21, 22, 23}; Rauschen: 10 und 50.</span> Die Zahl der Cluster ergibt sich von selbst, und die beiden Einzelgänger werden nicht zwangsweise einer Gruppe zugeschlagen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Lieferadressen und Hotspots</span>
+        <p>Ein Lieferdienst clustert die GPS-Koordinaten seiner Lieferungen. ε = 300 Meter, minPts = 20. Dichte Bereiche (Innenstadt, ein Neubaugebiet) werden Cluster, einzelne weit entfernte Adressen sind Rauschen. Aus den Clustern entstehen Stützpunkte für Fahrer. Mit k-Means wäre die Zahl der Cluster vorab zu raten gewesen, und weit abgelegene Adressen hätten die Zentren verzogen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wie kommt man zu ε und minPts?</span>
+        <p>Als Faustregel wählt man minPts etwa doppelt so groß wie die Zahl der Merkmale (bei 2 Merkmalen mindestens 4). Für ε zeichnet man den Abstand jedes Punktes zu seinem minPts-ten Nachbarn der Größe nach auf; am „Knick“ der Kurve liegt ein guter Wert. Wie beim Ellbogen gilt: Ausprobieren und mit Fachleuten prüfen.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Nennen Sie zwei Vorteile von DBSCAN gegenüber k-Means und einen Nachteil.</p>
+        <p><b>Musterlösung:</b> Vorteile: Die Clusterzahl muss nicht vorgegeben werden; beliebig geformte Cluster werden gefunden; Ausreißer werden als Rauschen erkannt (je 1,5 Punkte für zwei Vorteile). Nachteil: schwierige Wahl von ε; Probleme bei Clustern sehr unterschiedlicher Dichte (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l5-->
+      <div class="prose">
+        <h3>Ein Dendrogramm von Hand aufbauen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Fünf Punkte auf der Zahlenachse (Single Linkage)</span>
+        <p>Punkte: A = 1, B = 2, C = 6, D = 8, E = 20.</p>
+        <ol class="steps">
+          <li><div>Kleinster Abstand: A–B = 1 → <span class="calcline">{A, B}</span> bei Höhe 1.</div></li>
+          <li><div>Nächster: C–D = 2 → <span class="calcline">{C, D}</span> bei Höhe 2.</div></li>
+          <li><div>Abstand der Gruppen {A, B} und {C, D} bei Single Linkage = kleinster Abstand zwischen ihren Punkten = B–C = 4 → <span class="calcline">{A, B, C, D}</span> bei Höhe 4.</div></li>
+          <li><div>E liegt 12 von D entfernt → <span class="calcline">alle</span> bei Höhe 12.</div></li>
+        </ol>
+        <p><b>Schnitt bei Höhe 3:</b> {A, B}, {C, D}, {E} → drei Cluster. <b>Schnitt bei Höhe 6:</b> {A, B, C, D}, {E} → zwei Cluster. Je höher man schneidet, desto weniger Cluster.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Single gegen Complete Linkage</span>
+        <p>Der Abstand der Gruppen {A, B} und {C, D} beträgt bei <b>Single</b> Linkage 4 (nächste Punkte B und C), bei <b>Complete</b> Linkage 7 (entfernteste Punkte A und D: 8 − 1). Mit Complete Linkage werden Gruppen erst später verschmolzen, und die Gruppen werden kompakter. Single Linkage neigt zu langgezogenen Ketten, in denen Punkte über Zwischenstationen aneinandergereiht werden.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Wo sich hierarchisches Clustering lohnt</span>
+        <p>Ein Händler gliedert sein Sortiment: Die ähnlichsten Produkte bilden Untergruppen (Rotwein Spanien / Rotwein Italien), die sich zu größeren Gruppen zusammenschließen (Rotwein), dann zu „Wein“, dann zu „Getränke“. Das Dendrogramm zeigt diese Ebenen auf einen Blick, und das Marketing kann auf der passenden Ebene arbeiten. Bei 500 Produkten ist das gut machbar; bei 5 Millionen Datensätzen nicht mehr.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Erklären Sie, wie ein Dendrogramm entsteht und wie man daraus die Anzahl der Cluster festlegt.</p>
+        <p><b>Musterlösung:</b> Zunächst ist jeder Punkt ein eigenes Cluster; schrittweise werden die zwei ähnlichsten Cluster verschmolzen, bis nur eines übrig ist; die Verschmelzungshöhe (Abstand) wird im Baumdiagramm aufgetragen (3 Punkte). Durch einen waagerechten Schnitt in einer gewählten Höhe ergibt sich die Zahl der Cluster, nämlich die Zahl der geschnittenen Äste (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Vom Cluster zur Maßnahme</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: RFM für einen einzelnen Kunden</span>
+        <p>Ein Kunde hat vor 12 Tagen zuletzt gekauft (<b>Recency</b> 12), 18 Käufe im Jahr getätigt (<b>Frequency</b> 18) und im Schnitt 32 € ausgegeben: <span class="calcline">18 · 32 = 576 €</span> Jahresumsatz (<b>Monetary</b>). Vor dem Clustern bringt man die drei Werte auf eine gemeinsame Skala, zum Beispiel als z-Werte oder als Punkte von 1 bis 5 je Merkmal. Ohne diese Skalierung würde der Umsatz in Euro die Gruppierung bestimmen.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Rechnet sich die Maßnahme?</span>
+        <p>Cluster 2 („Schläfer“) hat 2.300 Kunden. Geplant: eine Mail mit einem 5-€-Gutschein. Erwartet wird eine Rücklaufquote von 8 %, der Warenkorb beträgt im Mittel 40 €, die Marge 30 %. Der Versand kostet je Mail 0,50 €.</p>
+        <ol class="steps">
+          <li><div>Reaktivierte Kunden: <span class="calcline">2.300 · 0,08 = 184</span></div></li>
+          <li><div>Umsatz: <span class="calcline">184 · 40 € = 7.360 €</span>, Marge: <span class="calcline">7.360 · 0,30 = 2.208 €</span></div></li>
+          <li><div>Kosten: Gutscheine <span class="calcline">184 · 5 € = 920 €</span> plus Versand <span class="calcline">2.300 · 0,50 € = 1.150 €</span> = 2.070 €</div></li>
+          <li><div>Ergebnis: <span class="result">2.208 € − 2.070 € = +138 €</span> – gerade so rentabel. Bei einem 10-€-Gutschein wäre es ein Verlust.</div></li>
+        </ol>
+        <p>Das Clustering liefert die Gruppe, die Wirtschaftlichkeit entscheidet über die Maßnahme.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Sind die Cluster stabil?</span>
+        <p>Man clustert zweimal mit unterschiedlichen zufälligen Hälften der Kunden. Ordnen sich 92 % der Kunden beide Male denselben Gruppen zu, sind die Cluster stabil. Liegen die Werte bei 55 %, hängen die Gruppen vom Zufall ab und sollten nicht für teure Maßnahmen genutzt werden.</p>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (6 Punkte):</b> Beschreiben Sie vier Schritte, wie aus einem Clustering-Ergebnis eine Marketingmaßnahme wird.</p>
+        <p><b>Musterlösung:</b> (1) Profil je Cluster erstellen (Mittelwerte, Anteile). (2) Den Gruppen sprechende Namen geben. (3) Stabilität und Größe prüfen. (4) Pro Gruppe eine Maßnahme festlegen und deren Erfolg und Wirtschaftlichkeit messen. Je 1,5 Punkte.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l7-->
+      <div class="prose">
+        <h3>Weitere Beispiele: Hauptkomponenten verstehen und rechnen</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 1: Wie viele Komponenten behalten?</span>
+        <p>Eine PCA über acht Maschinenmerkmale liefert Streuungsanteile (Eigenwerte) 6, 2,5, 1, 0,5 und kleinere Reste; die Summe aller beträgt 10.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Komponente</th><th class="r">Anteil</th><th class="r">kumuliert</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="r">60 %</td><td class="r">60 %</td></tr>
+            <tr><td>2</td><td class="r">25 %</td><td class="r">85 %</td></tr>
+            <tr><td>3</td><td class="r">10 %</td><td class="r">95 %</td></tr>
+            <tr><td>4</td><td class="r">5 %</td><td class="r">100 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Für mindestens 90 % erklärte Streuung genügen <b>drei</b> Komponenten. Aus acht Merkmalen werden drei – der Informationsverlust beträgt etwa 5 %.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 2: Ein Punkt wird auf die Achse projiziert</span>
+        <p>Zwei Merkmale, Temperatur und Druck, stark gleichlaufend. Die erste Hauptkomponente zeigt in Richtung (1 | 1), normiert <span class="calcline">(0,71 | 0,71)</span>. Ein Messpunkt (2 | 2) bekommt auf dieser Achse die Koordinate <span class="calcline">2 · 0,71 + 2 · 0,71 ≈ 2,83</span>. Statt zwei Zahlen reicht nun <b>eine</b> Zahl, die „allgemeine Betriebslast“ ausdrückt. Ein Punkt (2 | −2) hätte die Koordinate 0: Er weicht von der Hauptrichtung ab – das könnte eine Auffälligkeit sein.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel 3: Komprimieren und Speicher sparen</span>
+        <p>Eine Anlage liefert 50 Sensorwerte je Sekunde. Nach der PCA reichen 5 Komponenten für 92 % der Streuung. Der Speicher für die Analysedaten sinkt auf ein Zehntel (<span class="calcline">5 : 50 = 10 %</span>), das Training eines Modells wird entsprechend schneller. Der Preis: Die fünf Komponenten sind Mischungen aller Sensoren und nicht mehr direkt einem Messpunkt zuzuordnen.</p>
+      </div>
+      <div class="box falle"><span class="box-label">Typische Fehler</span>
+        <ul>
+          <li><b>Nicht standardisieren:</b> Das Merkmal mit den größten Zahlen bestimmt dann die erste Komponente.</li>
+          <li><b>PCA auf allen Daten anpassen,</b> bevor man in Training und Test aufteilt (Leakage, Modul 3).</li>
+          <li><b>Komponenten fachlich deuten wollen,</b> ohne die Gewichte (Ladungen) anzuschauen.</li>
+        </ul>
+      </div>
+      <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
+        <p><b>Frage (5 Punkte):</b> Eine PCA ergibt Eigenwerte 8, 1,5, 0,4, 0,1. Wie viel Prozent der Streuung erklären die ersten zwei Komponenten, und wie viele brauchen Sie für mindestens 95 %?</p>
+        <p><b>Musterlösung:</b> Summe = 10; Anteile 80 %, 15 %, 4 %, 1 % (1 Punkt). Erste zwei: 95 % (2 Punkte). Für mindestens 95 % genügen zwei Komponenten (2 Punkte).</p>
+      </div>
+<!--/EXTRA-->

@@ -1,0 +1,168 @@
+<script type="application/json" id="quiz-data">
+[
+ ["Was berechnet ein künstliches Neuron?", ["Nur das Maximum der Eingaben", "Eine gewichtete Summe der Eingaben plus Bias, danach eine Aktivierungsfunktion", "Den Mittelwert aller Eingaben", "Eine Zufallszahl"], 1, "z = Σ wᵢxᵢ + b, a = f(z)."],
+ ["Warum braucht ein Netz nichtlineare Aktivierungsfunktionen?", ["Sonst wären alle Schichten zusammen nur eine lineare Funktion", "Wegen der DSGVO", "Damit es weniger Parameter hat", "Damit es schneller rechnet"], 0, "Nur so können Kurven und komplexe Muster gelernt werden."],
+ ["Welche Aktivierung ist Standard in verdeckten Schichten tiefer Netze?", ["Softmax", "Sprungfunktion", "Sigmoid", "ReLU"], 3, "ReLU vermeidet verschwindende Gradienten weitgehend und ist schnell."],
+ ["Welche Ausgabeaktivierung passt zu einer Klassifikation mit sechs Klassen?", ["ReLU", "tanh", "Softmax", "Linear"], 2, "Softmax liefert Wahrscheinlichkeiten mit Summe 1."],
+ ["Wie viele Parameter hat eine voll verbundene Schicht mit 50 Eingängen und 20 Neuronen?", ["1.020", "1.000", "70", "1.050"], 0, "50 · 20 + 20 = 1.020."],
+ ["Welche Verlustfunktion nutzt man typischerweise für Klassifikation?", ["MAE", "R²", "Kreuzentropie", "MSE"], 2, "Kreuzentropie bestraft selbstsichere Fehler stark."],
+ ["Was leistet Backpropagation?", ["Sie sammelt neue Trainingsdaten", "Sie berechnet mit der Kettenregel, wie stark jedes Gewicht zum Fehler beiträgt", "Sie wählt die Netzarchitektur", "Sie entfernt Ausreißer"], 1, "Danach passt der Optimierer die Gewichte an."],
+ ["10.000 Beispiele, Batchgröße 50. Wie viele Iterationen hat eine Epoche?", ["200", "50", "500", "10.000"], 0, "10.000 / 50 = 200."],
+ ["Was macht Dropout?", ["Entfernt Schichten dauerhaft", "Schaltet im Training zufällig Neuronen ab und wirkt so gegen Overfitting", "Senkt die Lernrate", "Löscht schlechte Trainingsdaten"], 1, "Bei der Vorhersage sind alle Neuronen aktiv."],
+ ["Wofür sind Faltungsnetze (CNN) besonders geeignet?", ["Datenbankabfragen", "Steuerberechnung", "Bilder und andere Daten mit räumlicher Struktur", "Tabellendaten mit wenigen Merkmalen"], 2, "Filter erkennen lokale Muster wie Kanten und Formen."],
+ ["Was ist ein Vorteil der Gewichtsteilung in CNNs?", ["Viel weniger Parameter, und ein Muster wird an jeder Stelle erkannt", "Bessere Erklärbarkeit als ein Entscheidungsbaum", "Mehr Parameter", "Keine Trainingsdaten nötig"], 0, "Derselbe Filter wird überall verwendet."],
+ ["Was ist ein zentraler Vorteil von Transformern gegenüber RNNs?", ["Sie verarbeiten alle Positionen parallel und erfassen weit entfernte Bezüge besser", "Sie brauchen keine Daten", "Sie funktionieren nur mit Bildern", "Sie sind immer kleiner"], 0, "Self-Attention über alle Positionen gleichzeitig."],
+ ["Was bedeutet Transfer Learning?", ["Ein Modell auf einen anderen Server kopieren", "Gewichte zufällig neu setzen", "Ein vortrainiertes Modell mit wenigen eigenen Daten anpassen", "Daten zwischen Firmen übertragen"], 2, "Spart Daten, Zeit und Kosten."],
+ ["Was sagt ein großes Sprachmodell grundsätzlich vorher?", ["Den Wahrheitsgehalt eines Satzes", "Das nächste Token anhand von Wahrscheinlichkeiten", "Den Aktienkurs", "Die Stimmung des Nutzers"], 1, "Deshalb sind Halluzinationen möglich."],
+ ["Was bewirkt eine niedrige Temperatur bei einem Sprachmodell?", ["Kreativere, zufälligere Antworten", "Schnellere Antworten", "Vorhersehbarere, sachlichere Antworten", "Kürzere Antworten"], 2, "Das wahrscheinlichste Token wird fast immer gewählt."],
+ ["Was ist eine Halluzination?", ["Ein Fehler beim Speichern", "Ein langsamer Server", "Eine flüssige, plausibel klingende, aber falsche Ausgabe", "Ein Bild, das ein Modell erzeugt"], 2, "Gegenmittel: RAG mit Quellen, Prüfung, klare Grenzen im Prompt."],
+ ["Was ist Prompt Injection?", ["Das Training eines Modells", "Eine Datenbankabfrage", "Versteckte Anweisungen in Eingaben oder Dokumenten, die das System zu unerwünschtem Verhalten bringen", "Ein besonders guter Prompt"], 2, "Externe Inhalte nie als Anweisung behandeln."],
+ ["Ein Assistent soll Fragen zu sich wöchentlich ändernden internen Richtlinien mit Quelle beantworten. Was passt?", ["RAG", "Ein neues Modell von Grund auf trainieren", "Fine-Tuning", "Nur ein längerer Prompt"], 0, "Wissen fehlt und ändert sich → RAG."],
+ ["Wann ist Fine-Tuning eher sinnvoll als RAG?", ["Nie", "Wenn ein festes Verhalten, Format oder eine Fachsprache gelernt werden soll", "Wenn Quellenangaben nötig sind", "Wenn aktuelles Wissen fehlt"], 1, "Fine-Tuning ändert das Verhalten, RAG liefert Wissen."],
+ ["Was kostet bei vielen Anfragen auf Dauer oft am meisten?", ["Die Lizenz für Python", "Der Monitor des Entwicklers", "Der laufende Betrieb (Inferenz)", "Das einmalige Training"], 2, "Jede Anfrage verursacht Rechen- bzw. Tokenkosten."]
+]
+</script>
+<script type="application/json" id="faq-data">
+{
+ "intro": [
+  {"q": "Muss ich neuronale Netze für die Prüfung programmieren können?", "a": "Nein, aber Sie müssen Aufbau, Training und Architekturen erklären und einfache Rechnungen wie ein Neuron, Softmax oder die Parameterzahl einer Schicht ausführen können. Für Transferarbeit und Fachgespräch kommt die Begründung der Verfahrenswahl hinzu."}
+ ],
+ "l1": [
+  {"q": "Wie funktioniert ein künstliches Neuron?", "a": "Es multipliziert jede Eingabe mit einem Gewicht, addiert alles und einen Bias und schickt das Ergebnis durch eine Aktivierungsfunktion wie ReLU oder Sigmoid."},
+  {"q": "Was ist der Bias in einem Neuron?", "a": "Ein zusätzlicher lernbarer Wert, der unabhängig von den Eingaben addiert wird. Er verschiebt die Schwelle, ab der das Neuron stark reagiert."}
+ ],
+ "l2": [
+  {"q": "Wozu dienen Aktivierungsfunktionen?", "a": "Sie bringen Nichtlinearität ins Netz. Ohne sie wäre jedes noch so tiefe Netz nur eine lineare Funktion und könnte keine komplexen Muster lernen."},
+  {"q": "Welche Aktivierung gehört in die Ausgabeschicht?", "a": "Bei Regression linear, bei zwei Klassen Sigmoid, bei mehreren Klassen Softmax. In verdeckten Schichten ist ReLU der Standard."}
+ ],
+ "l3": [
+  {"q": "Wie berechnet man die Anzahl der Parameter eines neuronalen Netzes?", "a": "Je voll verbundener Schicht: Eingänge mal Neuronen plus ein Bias je Neuron. Die Werte aller Schichten werden addiert."},
+  {"q": "Was bedeutet „deep“ in Deep Learning?", "a": "Dass das Netz viele verdeckte Schichten hat. Jede Schicht baut aus den Merkmalen der vorigen abstraktere Merkmale."}
+ ],
+ "l4": [
+  {"q": "Welche Verlustfunktion nutzt man für Klassifikation?", "a": "Die Kreuzentropie: −log der Wahrscheinlichkeit, die das Netz der richtigen Klasse gibt. Für Regression nutzt man meist den mittleren quadratischen Fehler."}
+ ],
+ "l5": [
+  {"q": "Was ist Backpropagation?", "a": "Ein Verfahren, das den Fehler von der Ausgabe rückwärts durch die Schichten verteilt und mit der Kettenregel für jedes Gewicht seinen Gradienten berechnet. Danach passt der Optimierer die Gewichte an."}
+ ],
+ "l6": [
+  {"q": "Was ist der Unterschied zwischen Epoche, Batch und Iteration?", "a": "Ein Batch ist eine Teilmenge der Daten für einen Schritt, eine Iteration ist ein solcher Schritt, und eine Epoche ist ein Durchlauf durch alle Trainingsdaten."},
+  {"q": "Was ist der Adam-Optimierer?", "a": "Ein verbreiteter Optimierer, der die Schrittweite je Parameter automatisch anpasst und Schwung aus vorherigen Schritten mitnimmt."}
+ ],
+ "l7": [
+  {"q": "Was hilft gegen Overfitting bei neuronalen Netzen?", "a": "Mehr Daten, Datenaugmentation, Dropout, Regularisierung, Early Stopping und Transfer Learning von vortrainierten Modellen."},
+  {"q": "Was sind verschwindende Gradienten?", "a": "In tiefen Netzen werden die Lernsignale für vordere Schichten sehr klein, sodass diese kaum lernen. ReLU, Batch-Normalisierung und Residualverbindungen helfen."}
+ ],
+ "l8": [
+  {"q": "Wie funktioniert ein Faltungsnetz (CNN)?", "a": "Kleine Filter gleiten über das Bild und erzeugen Merkmalskarten, die zeigen, wo ein Muster vorkommt. Tiefere Schichten kombinieren Kanten zu Formen und Objekten."},
+  {"q": "Wie groß ist die Merkmalskarte nach einer Faltung?", "a": "Ohne Rand und mit Schrittweite 1 gilt: Bildbreite minus Filterbreite plus 1. Ein 8×8-Bild mit 3×3-Filter ergibt eine 6×6-Karte."}
+ ],
+ "l9": [
+  {"q": "Wofür nutzt man rekurrente Netze und LSTM?", "a": "Für Folgen wie Zeitreihen und Text. Sie lesen Schritt für Schritt und geben ein Gedächtnis weiter; bei Sprache wurden sie weitgehend von Transformern abgelöst."}
+ ],
+ "l10": [
+  {"q": "Was ist ein Transformer?", "a": "Eine Netzarchitektur, die mit Self-Attention für jedes Element einer Folge berechnet, wie stark es auf alle anderen achten soll, und alle Positionen parallel verarbeitet. Sie ist die Grundlage heutiger Sprachmodelle."},
+  {"q": "Was ist Self-Attention?", "a": "Ein Mechanismus, bei dem jedes Token Gewichte für alle anderen Tokens berechnet und deren Information entsprechend gewichtet einsammelt, zum Beispiel um zu erkennen, worauf sich ein Pronomen bezieht."}
+ ],
+ "l11": [
+  {"q": "Was ist Transfer Learning?", "a": "Ein auf großen Daten vortrainiertes Modell wird mit wenigen eigenen Beispielen an eine neue Aufgabe angepasst. So braucht man viel weniger Daten und Rechenzeit."},
+  {"q": "Worauf muss man bei vortrainierten Modellen achten?", "a": "Auf die Lizenz (gewerbliche Nutzung), die Herkunft der Trainingsdaten und mögliche Verzerrungen, die das Modell mitbringt."}
+ ],
+ "l12": [
+  {"q": "Wie funktioniert ein großes Sprachmodell?", "a": "Es ist ein Transformer, der auf sehr großen Textmengen gelernt hat, das nächste Token vorherzusagen, und danach mit Anweisungen und menschlichem Feedback verfeinert wurde. Es erzeugt Text Token für Token nach Wahrscheinlichkeiten."},
+  {"q": "Was ist ein Token?", "a": "Ein Textbaustein, den das Modell verarbeitet: ein Wort, ein Wortteil oder ein Zeichen. Deutsche Texte brauchen meist mehr Tokens pro Wort als englische; viele Anbieter rechnen je Token ab."},
+  {"q": "Warum halluzinieren Sprachmodelle?", "a": "Weil sie wahrscheinliche Fortsetzungen berechnen und nicht prüfen, ob eine Aussage stimmt. Ohne passende Quellen erzeugen sie manchmal plausible, aber falsche Antworten."}
+ ],
+ "l13": [
+  {"q": "Was macht einen guten Prompt aus?", "a": "Rolle, Kontext, klare Aufgabe, gewünschtes Format, Beispiele und Grenzen, etwa was zu tun ist, wenn die Antwort nicht im Kontext steht."},
+  {"q": "Was ist Prompt Injection?", "a": "Ein Angriff, bei dem versteckte Anweisungen in Eingaben oder Dokumenten das Sprachmodell zu unerwünschtem Verhalten verleiten. Externe Inhalte dürfen nie als Anweisungen behandelt werden."}
+ ],
+ "l14": [
+  {"q": "Was ist RAG?", "a": "Retrieval-Augmented Generation: Zu jeder Frage werden passende Abschnitte aus eigenen Dokumenten gesucht und mit der Frage an das Sprachmodell gegeben, das darauf gestützt antwortet und Quellen nennt."},
+  {"q": "Was ist eine Vektordatenbank?", "a": "Eine Datenbank, die Embeddings speichert und zu einer Anfrage die ähnlichsten Einträge findet, etwa per Kosinus-Ähnlichkeit. Sie ist der Suchbaustein von RAG-Systemen."}
+ ],
+ "l15": [
+  {"q": "Wann wähle ich Prompting, RAG oder Fine-Tuning?", "a": "Beginnen Sie mit Prompting. Fehlt aktuelles oder internes Wissen, nehmen Sie RAG. Soll das Modell ein festes Verhalten, Format oder eine Fachsprache lernen, ist Fine-Tuning sinnvoll."},
+  {"q": "Wie berechnet man die Kosten eines Sprachmodell-Dienstes?", "a": "Anzahl Anfragen mal (Eingabetokens mal Eingabepreis plus Ausgabetokens mal Ausgabepreis). Bei 2.000 Anfragen täglich mit 3.000 und 400 Tokens und 2 bzw. 8 € je Million Tokens sind das etwa 18,40 € pro Tag."}
+ ],
+ "l16": [
+  {"q": "Wo wird Deep Learning in Unternehmen eingesetzt?", "a": "In der Bild- und Videoanalyse, der Sprach- und Texterkennung, bei Zeitreihenprognosen, generativen Anwendungen, Empfehlungen und zunehmend in KI-Agenten, die mehrere Schritte mit Werkzeugen ausführen."},
+  {"q": "Was ist ein KI-Agent?", "a": "Ein System, das auf ein Ziel hin selbstständig mehrere Schritte plant und Werkzeuge wie Suche, Datenbanken oder E-Mail aufruft. Folgenreiche Aktionen sollten eine menschliche Freigabe brauchen."}
+ ],
+ "l17": [
+  {"q": "Cloud-KI oder eigenes Modell vor Ort?", "a": "Cloud-Dienste bieten schnellen Start, starke Modelle und variable Kosten, erfordern aber Prüfung von Datenschutz und Abhängigkeit. Eigene Infrastruktur lohnt sich bei hoher, stabiler Auslastung und strengen Anforderungen an die Daten."}
+ ]
+}
+</script>
+<script>
+/* Rechner in Modul 5 */
+(function () {
+  function parseList(s) { return s.split(/[;\s]+/).map(function (t) { return t.trim().replace(",", "."); }).filter(function (t) { return t !== ""; }).map(Number).filter(function (n) { return isFinite(n); }); }
+  function fmt(x, d) { return isFinite(x) ? x.toLocaleString("de-DE", { maximumFractionDigits: d === undefined ? 4 : d }) : "–"; }
+  var kpi = function (l, w) { return '<div class="kpi"><span>' + l + "</span><b>" + w + "</b></div>"; };
+  var ix = document.getElementById("nX"), iw = document.getElementById("nW"), ib = document.getElementById("nB"), ifn = document.getElementById("nF");
+  function rechne() {
+    var x = parseList(ix.value), w = parseList(iw.value), b = parseList(ib.value)[0] || 0, out = document.getElementById("nOut");
+    if (!x.length || x.length !== w.length) { out.innerHTML = kpi("Hinweis", "gleich viele x und w"); return; }
+    var z = b;
+    for (var i = 0; i < x.length; i++) z += x[i] * w[i];
+    var f = ifn.value, a;
+    if (f === "relu") a = Math.max(0, z);
+    else if (f === "sigmoid") a = 1 / (1 + Math.exp(-z));
+    else if (f === "tanh") a = Math.tanh(z);
+    else a = z;
+    out.innerHTML = kpi("Summe z", fmt(z)) + kpi("Ausgabe a", fmt(a)) + (f === "sigmoid" ? kpi("als Prozent", fmt(a * 100, 1) + " %") : "");
+  }
+  [ix, iw, ib].forEach(function (e) { e.addEventListener("input", rechne); }); ifn.addEventListener("change", rechne); rechne();
+})();
+</script>
+<script>
+/* Antwortfelder der Übungen in Modul 5 */
+(function () {
+  var AK = ["linear", "Sigmoid", "Softmax", "ReLU"];
+  var VW = ["Prompting", "RAG", "Fine-Tuning"];
+  window.UEBUNGEN = {
+    modul: 5,
+    aufgaben: {
+      a1: { teile: [
+        { id: "z", label: "z", typ: "zahl", punkte: 2, wert: 0.3, tol: 0.001 },
+        { id: "relu", label: "Ausgabe mit ReLU", typ: "zahl", punkte: 1, wert: 0.3, tol: 0.001 },
+        { id: "sig", label: "Ausgabe mit Sigmoid in %", typ: "zahl", punkte: 1, wert: 57.4, tol: 0.1, einheit: "%" }
+      ] },
+      a2: { teile: [{ id: "par", label: "Anzahl Parameter", typ: "zahl", punkte: 4, wert: 339, tol: 0 }] },
+      a3: { teile: [
+        { id: "o1", label: "1. Immobilienpreis", typ: "wahl", punkte: 1, optionen: AK, richtig: 0 },
+        { id: "o2", label: "2. Spam ja/nein", typ: "wahl", punkte: 1, optionen: AK, richtig: 1 },
+        { id: "o3", label: "3. Sieben Fehlerarten", typ: "wahl", punkte: 1, optionen: AK, richtig: 2 }
+      ] },
+      a4: { teile: [{ id: "p", label: "Wahrscheinlichkeit Klasse 1 in %", typ: "zahl", punkte: 3, wert: 88.1, tol: 0.1, einheit: "%" }] },
+      a5: { teile: [
+        { id: "ie", label: "Iterationen je Epoche", typ: "zahl", punkte: 1.5, wert: 375, tol: 0 },
+        { id: "ig", label: "Iterationen insgesamt", typ: "zahl", punkte: 1.5, wert: 4500, tol: 0 }
+      ] },
+      a6: { teile: [
+        { id: "la", label: "a) Verlust bei p = 0,8", typ: "zahl", punkte: 1, wert: 0.223, tol: 0.002 },
+        { id: "lb", label: "b) Verlust bei p = 0,05", typ: "zahl", punkte: 1, wert: 2.996, tol: 0.002 },
+        { id: "erk", label: "Erklärung des Unterschieds", typ: "text", punkte: 1, erwartung: "Je kleiner die Wahrscheinlichkeit der richtigen Klasse, desto stärker wächst der Verlust; selbstsichere Fehler werden hart bestraft." }
+      ] },
+      a7: { teile: [
+        { id: "groesse", label: "a) Breite (= Höhe) der Merkmalskarte", typ: "zahl", punkte: 2, wert: 28, tol: 0, einheit: "Pixel" },
+        { id: "par", label: "b) Parameter je Filter", typ: "zahl", punkte: 2, wert: 76, tol: 0 }
+      ] },
+      a8: { teile: [{ id: "mass", label: "Vier Maßnahmen, zwei davon erklärt", typ: "text", punkte: 4, erwartung: "Augmentation, Dropout, Early Stopping, Transfer Learning, Regularisierung, mehr Daten (2 P.); zwei schlüssig erklärt (2 P.)." }] },
+      a9: { teile: [{ id: "tr", label: "Prinzip und zwei Vorteile", typ: "text", punkte: 4, erwartung: "Self-Attention gewichtet für jedes Token alle anderen Tokens und sammelt deren Information (2 P.); Vorteile: parallele Verarbeitung, weit entfernte Bezüge (2 P.)." }] },
+      a10: { teile: [
+        { id: "v1", label: "1. Produktdatenblätter mit Quelle", typ: "wahl", punkte: 1, optionen: VW, richtig: 1 },
+        { id: "v2", label: "2. Arztbriefe im Hausformat", typ: "wahl", punkte: 1, optionen: VW, richtig: 2 },
+        { id: "v3", label: "3. Schnelltest Zusammenfassungen", typ: "wahl", punkte: 1, optionen: VW, richtig: 0 }
+      ] },
+      a11: { teile: [
+        { id: "ka", label: "Kosten je Anfrage", typ: "zahl", punkte: 2, wert: 0.0081, tol: 0.00005, einheit: "€" },
+        { id: "kt", label: "Kosten je Tag", typ: "zahl", punkte: 1, wert: 40.5, tol: 0.01, einheit: "€" },
+        { id: "km", label: "Kosten je Monat", typ: "zahl", punkte: 1, wert: 1215, tol: 0.5, einheit: "€" }
+      ] },
+      a12: { teile: [{ id: "konzept", label: "Ihr Lösungskonzept", typ: "text", punkte: 8, erwartung: "RAG mit Begründung (intern, veränderlich, Quellen) (2 P.); Ablauf: Aufbereiten/Chunks, Embeddings/Vektor-DB, Suche mit Rechteprüfung, Antwort mit Quelle/'weiß ich nicht' (2 P.); Risiken Halluzination und Vertraulichkeit mit Gegenmaßnahmen (2 P.); Kennzahlen z. B. korrekte Testfragen, Lösungszeit, Nutzung, Kosten je Anfrage (2 P.)." }] }
+    }
+  };
+})();
+</script>

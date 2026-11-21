@@ -1,0 +1,256 @@
+    <!-- Lektion 10 -->
+    <section class="lesson" id="l10" data-title="Lagemaße" data-part="Teil C · Daten beschreiben">
+      <div class="lesson-head"><span class="meta">Lektion 10 · 35 Minuten</span><h2>Deskriptive Statistik: Lagemaße</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Neun Freunde gehen essen, einer davon ist Millionär. Das „durchschnittliche Vermögen“ am Tisch ist riesig – aber niemand außer ihm ist reich. Der Median verrät: Die typische Person am Tisch hat ein ganz normales Vermögen.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Lagemaße</b> beschreiben, wo die Daten „im Zentrum“ liegen. <b>Deskriptive Statistik</b> beschreibt vorhandene Daten; schließende Statistik zieht Schlüsse auf eine Grundgesamtheit.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Maß</th><th>Berechnung</th><th>Eigenschaft</th></tr></thead>
+        <tbody>
+          <tr><td><b>Arithmetisches Mittel</b> x̄</td><td>Summe aller Werte / Anzahl</td><td>nutzt alle Werte, ausreißerempfindlich</td></tr>
+          <tr><td><b>Median</b></td><td>mittlerer Wert der sortierten Reihe; bei gerader Anzahl Mittel der beiden mittleren</td><td>robust gegen Ausreißer, ab ordinal</td></tr>
+          <tr><td><b>Modus</b></td><td>häufigster Wert</td><td>auch für nominale Daten</td></tr>
+        </tbody>
+      </table></div>
+      <figure class="board">
+        <img src="gifs/mittelwert-median.gif" width="640" height="380" alt="Animation: Neun Lieferzeiten als Punkte auf einer Achse. Ein Wert wandert immer weiter nach rechts; die Mittelwert-Linie folgt ihm, die Median-Linie bleibt bei 4." loading="lazy">
+        <figcaption>Ein einziger Ausreißer zieht den Mittelwert mit, der Median bleibt stehen.</figcaption>
+      </figure>
+      <div class="prose">
+        <h3>Rechenbeispiel</h3>
+        <p>Lieferzeiten in Tagen: 2, 3, 3, 4, 4, 5, 5, 6, 22.</p>
+        <ul>
+          <li>Mittelwert: <span class="calcline">(2 + 3 + 3 + 4 + 4 + 5 + 5 + 6 + 22) / 9 = 54 / 9 = 6</span></li>
+          <li>Median: 9 Werte, der 5. Wert der sortierten Reihe = <span class="result">4</span></li>
+          <li>Modus: 3, 4 und 5 kommen je zweimal vor – die Reihe ist mehrgipflig.</li>
+        </ul>
+        <p>Liegt der Mittelwert deutlich über dem Median, ist die Verteilung <b>rechtsschief</b> (wenige sehr große Werte) – typisch für Einkommen, Lieferzeiten und Bestellwerte.</p>
+      </div>
+      <div class="calc"><span class="box-label">Rechner: Lage und Streuung</span>
+        <div class="calc-row">
+          <div class="field"><label for="lsInput">Zahlen, getrennt durch Leerzeichen oder Semikolon (Komma als Dezimalzeichen erlaubt)</label><input type="text" id="lsInput" value="2 3 3 4 4 5 5 6 22"></div>
+        </div>
+        <div class="kpis" id="lsOut"></div>
+        <p class="calc-note" id="lsNote"></p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Bei Ausreißern oder schiefen Verteilungen beschreibt der Median den typischen Wert besser als der Mittelwert.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie im Rechner den Wert 22 durch 220 ersetzen und beobachten: Der Mittelwert springt, der Median bleibt. Fragen Sie, welche Kennzahl ein Vertriebsleiter für „typische Bestellwerte“ nehmen sollte.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 11 -->
+    <section class="lesson" id="l11" data-title="Streuungsmaße" data-part="Teil C · Daten beschreiben">
+      <div class="lesson-head"><span class="meta">Lektion 11 · 40 Minuten</span><h2>Streuungsmaße: Spannweite, Varianz, Standardabweichung, Quartile</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Zwei Busse kommen „im Schnitt“ pünktlich. Der eine immer auf die Minute, der andere mal 20 Minuten zu früh, mal 20 zu spät. Gleicher Mittelwert, völlig andere Zuverlässigkeit – das misst die Streuung.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Streuungsmaße</b> beschreiben, wie weit die Werte auseinanderliegen. Zusammen mit einem Lagemaß ergeben sie ein brauchbares Bild der Verteilung.</p>
+        </div>
+      </div>
+      <div class="formula"><span class="box-label">Formeln</span>
+        <div class="eq">Spannweite R = max − min</div>
+        <div class="eq">Varianz (Stichprobe) s² = <span class="frac"><span>Σ (xᵢ − x̄)²</span><span>n − 1</span></span> &nbsp;&nbsp; Standardabweichung s = √s²</div>
+        <div class="eq">Interquartilsabstand IQR = Q3 − Q1</div>
+        <div class="legend-eq"><span>Für eine Grundgesamtheit teilt man durch n statt n − 1 (σ²). Die Standardabweichung hat dieselbe Einheit wie die Daten.</span></div>
+      </div>
+      <div class="prose">
+        <h3>Rechenbeispiel Standardabweichung</h3>
+        <p>Werte 4, 6, 8, 10, 12: Mittelwert 8. Abweichungen −4, −2, 0, 2, 4; Quadrate 16, 4, 0, 4, 16; Summe 40.</p>
+        <p><span class="calcline">s² = 40 / (5 − 1) = 10</span> &nbsp; <span class="calcline">s = √10 ≈ 3,16</span></p>
+        <h3>Quartile und Boxplot</h3>
+        <p>Die sortierten Werte werden in vier gleich große Teile geteilt: Q1 (25 %), Median (50 %), Q3 (75 %). Der <b>Interquartilsabstand</b> enthält die mittleren 50 % der Werte. Ausreißerregel nach Tukey: Werte unter <b>Q1 − 1,5 · IQR</b> oder über <b>Q3 + 1,5 · IQR</b>.</p>
+      </div>
+      <figure class="board">
+        <img src="gifs/boxplot.gif" width="640" height="380" alt="Animation: Fünfzehn sortierte Werte, Q1, Median und Q3 werden markiert. Eine Box von 15 bis 22 entsteht, Whisker bis 12 und 24, der Wert 40 wird als Ausreißer markiert, weil er über 32,5 liegt." loading="lazy">
+        <figcaption>Q1 = 15, Q3 = 22, IQR = 7; Grenze oben 22 + 1,5 · 7 = 32,5 → 40 ist ein Ausreißer.</figcaption>
+      </figure>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Mittelwert und Standardabweichung gehören zusammen, Median und IQR auch – das zweite Paar ist robust gegen Ausreißer.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>Quartile werden je nach Lehrbuch und Software leicht unterschiedlich berechnet. Schreiben Sie in der Prüfung Ihren Rechenweg auf – dann gibt es volle Punkte, auch wenn Ihr Q1 um eine halbe Einheit vom Erwartungshorizont abweicht.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Rechnen Sie die Standardabweichung gemeinsam an der Tafel, dann prüfen Sie mit dem Rechner aus Lektion 10. Erklären Sie n − 1 anschaulich: Aus einer Stichprobe unterschätzt man die Streuung leicht, die Korrektur gleicht das aus.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 12 -->
+    <section class="lesson" id="l12" data-title="Zusammenhänge" data-part="Teil C · Daten beschreiben">
+      <div class="lesson-head"><span class="meta">Lektion 12 · 30 Minuten</span><h2>Zusammenhänge: Kovarianz, Korrelation – und keine Kausalität</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Im Sommer verkaufen Eisdielen mehr Eis, und es gibt mehr Sonnenbrände. Eis verursacht trotzdem keinen Sonnenbrand – beides hängt an der Sonne.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Der <b>Korrelationskoeffizient nach Pearson</b> r misst Stärke und Richtung eines <b>linearen</b> Zusammenhangs zweier metrischer Merkmale, von −1 (perfekt gegenläufig) über 0 (kein linearer Zusammenhang) bis +1 (perfekt gleichläufig).</p>
+        </div>
+      </div>
+      <figure class="board">
+        <img src="gifs/korrelation.gif" width="640" height="380" alt="Animation: Eine Punktwolke verändert sich von einer fallenden Linie über eine runde Wolke zu einer steigenden Linie; daneben läuft der Wert r von minus 0,9 bis plus 0,9." loading="lazy">
+        <figcaption>r beschreibt, wie eng sich die Punkte um eine Gerade scharen.</figcaption>
+      </figure>
+      <div class="formula"><span class="box-label">Formel</span>
+        <div class="eq">r = <span class="frac"><span>Cov(x, y)</span><span>s<sub>x</sub> · s<sub>y</sub></span></span> &nbsp;&nbsp; Cov(x, y) = <span class="frac"><span>Σ (xᵢ − x̄)(yᵢ − ȳ)</span><span>n − 1</span></span></div>
+        <div class="legend-eq"><span>Faustregel: |r| unter 0,3 schwach, 0,3 bis 0,7 mittel, über 0,7 stark.</span></div>
+      </div>
+      <div class="prose">
+        <ul>
+          <li><b>Scheinkorrelation</b>: Eine dritte Größe (Störgröße, Confounder) steuert beide Merkmale – wie die Sonne beim Eis.</li>
+          <li><b>Nichtlineare Zusammenhänge</b> (z. B. U-Form) können r ≈ 0 ergeben, obwohl ein starker Zusammenhang besteht – immer auch ein Streudiagramm ansehen.</li>
+          <li>Für ordinale Daten oder bei Ausreißern: <b>Rangkorrelation nach Spearman</b>.</li>
+          <li><b>Kausalität</b> belegt man mit Experimenten (z. B. A/B-Tests) oder fachlicher Begründung, nicht mit r allein.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Korrelation zeigt, dass zwei Größen zusammen schwanken – nicht, dass die eine die andere verursacht.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Zwei Merkmale mit r = 0,95 im selben Modell bringen kaum zusätzliche Information und können lineare Modelle instabil machen (<b>Multikollinearität</b>). Oft reicht eines davon.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Sammeln Sie lustige Scheinkorrelationen (Störche und Geburten). Dann der Ernst: Wer aus Korrelationen Maßnahmen ableitet („Kunden mit App kaufen mehr – also App verschenken“), kann viel Geld versenken.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 13 -->
+    <section class="lesson" id="l13" data-title="Visualisierung" data-part="Teil C · Daten beschreiben">
+      <div class="lesson-head"><span class="meta">Lektion 13 · 30 Minuten</span><h2>Visualisierung: das richtige Diagramm für die Frage</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Eine Wetterkarte zeigt in einer Sekunde, wo es regnet. Eine Tabelle mit 400 Messstationen bräuchte zehn Minuten. Gute Bilder sparen Zeit – schlechte führen in die Irre.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Die Wahl des Diagramms folgt der <b>Frage</b>: Vergleich, Verlauf, Verteilung, Zusammenhang oder Anteil. Visualisierung dient zwei Zwecken: <b>explorativ</b> (Daten verstehen) und <b>erklärend</b> (Ergebnisse vermitteln).</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Frage</th><th>Diagramm</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>Kategorien vergleichen</td><td>Balken-/Säulendiagramm</td><td>Umsatz je Filiale</td></tr>
+          <tr><td>Verlauf über Zeit</td><td>Liniendiagramm</td><td>Absatz je Woche</td></tr>
+          <tr><td>Verteilung eines Merkmals</td><td>Histogramm, Boxplot</td><td>Lieferzeiten, Bestellwerte</td></tr>
+          <tr><td>Zusammenhang zweier Merkmale</td><td>Streudiagramm</td><td>Werbebudget und Umsatz</td></tr>
+          <tr><td>Anteile an einem Ganzen</td><td>gestapelte Balken, (sparsam) Kreisdiagramm</td><td>Umsatzanteil je Produktgruppe</td></tr>
+          <tr><td>Zusammenhänge vieler Merkmale</td><td>Heatmap der Korrelationsmatrix</td><td>Merkmalsauswahl vor dem Training</td></tr>
+          <tr><td>Modellgüte</td><td>Konfusionsmatrix, ROC-Kurve, Lernkurve</td><td>Modul 4</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Erst die Frage, dann das Diagramm: Vergleich → Balken, Verlauf → Linie, Verteilung → Histogramm/Boxplot, Zusammenhang → Streudiagramm.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Eine abgeschnittene y-Achse (beginnt bei 95 statt 0) lässt bei Balken aus 2 % Unterschied einen Riesenabstand werden. Bei Balkendiagrammen beginnt die Achse bei null.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Zeigen Sie zwei Versionen desselben Balkendiagramms – einmal mit Null, einmal abgeschnitten. Fragen Sie, welche in einer Vorstandsrunde fair wäre. Das ist auch eine ethische Frage.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 14 -->
+    <section class="lesson" id="l14" data-title="Dashboards und Diagrammgestaltung" data-part="Teil C · Daten beschreiben">
+      <div class="lesson-head"><span class="meta">Lektion 14 · 25 Minuten</span><h2>Dashboards und gute Diagrammgestaltung</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Das Armaturenbrett im Auto zeigt wenige Werte: Tempo, Tank, Warnleuchten. Würde es alle 400 Sensorwerte anzeigen, wäre es nutzlos.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Ein <b>Dashboard</b> bündelt die wichtigsten Kennzahlen (KPIs) für eine Zielgruppe und eine Entscheidung. Werkzeuge sind z. B. Power BI, Tableau, Grafana oder eigene Web-Oberflächen.</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Gestaltungsregeln</h3>
+        <ol class="steps">
+          <li><span><b>Zielgruppe und Entscheidung klären</b>: Geschäftsführung braucht anderes als ein Data-Science-Team.</span></li>
+          <li><span><b>Wenige Kennzahlen</b>, die wichtigste oben links; Vergleich mit Ziel oder Vorjahr.</span></li>
+          <li><span><b>Farbe sparsam</b>: Grau für Kontext, eine Akzentfarbe für das Wichtige; Rot/Grün nicht als einziges Unterscheidungsmerkmal (Farbsehschwäche).</span></li>
+          <li><span><b>Beschriften</b> statt Legende suchen lassen; Einheiten und Zeitraum nennen.</span></li>
+          <li><span><b>Datenstand und Quelle</b> angeben – wer einer Zahl vertrauen soll, muss wissen, wie aktuell sie ist.</span></li>
+        </ol>
+        <p>Für KI-Systeme gehören ins Betriebs-Dashboard: Modellgüte über die Zeit, Eingabedrift, Anzahl Vorhersagen, Fehler, Kosten pro Anfrage – und Fälle, die an Menschen weitergegeben wurden.</p>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Ein gutes Dashboard beantwortet eine Frage auf einen Blick – alles andere ist Dekoration.</p></div>
+      <div class="box tipp"><span class="box-label">Prüfungstipp</span><p>„Adressatengerecht kommunizieren“ steht in § 1 der Rechtsvorschrift. In Situationsaufgaben bringt es Punkte, wenn Sie bei Berichten ausdrücklich sagen, <b>für wen</b> Sie welche Kennzahlen wie darstellen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Übung: Die Gruppe entwirft auf Papier ein Dashboard für die Geschäftsführung zum KI-Kundenservice – maximal fünf Kennzahlen. Danach vergleichen und begründen.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 15 -->
+    <section class="lesson" id="l15" data-title="Datensicherheit" data-part="Teil D · Daten schützen">
+      <div class="lesson-head"><span class="meta">Lektion 15 · 35 Minuten</span><h2>Datensicherheit: Schutzziele und Maßnahmen</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Ein Tresor nützt nichts, wenn der Schlüssel unter der Fußmatte liegt, niemand weiß, wer ihn hat, und es von seinem Inhalt keine Kopie gibt. Sicherheit braucht Technik <b>und</b> Organisation.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p><b>Datensicherheit</b> (Informationssicherheit) schützt Daten aller Art vor Verlust, Manipulation und unbefugtem Zugriff. <b>Datenschutz</b> schützt Menschen vor dem Missbrauch ihrer personenbezogenen Daten. Beides überschneidet sich in Art. 32 DSGVO.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Schutzziel</th><th>Bedeutung</th><th>Maßnahmen</th></tr></thead>
+        <tbody>
+          <tr><td><b>Vertraulichkeit</b></td><td>Nur Befugte sehen die Daten</td><td>Rollen- und Rechtekonzept, Verschlüsselung, Mehr-Faktor-Anmeldung</td></tr>
+          <tr><td><b>Integrität</b></td><td>Daten sind unverändert und korrekt</td><td>Protokollierung, Prüfsummen, Vier-Augen-Prinzip, Versionierung</td></tr>
+          <tr><td><b>Verfügbarkeit</b></td><td>Daten sind nutzbar, wenn man sie braucht</td><td>Backups (3-2-1-Regel), Redundanz, Notfallplan, Wiederherstellungstests</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p>Weitere Ziele: <b>Authentizität</b> (Herkunft ist echt) und <b>Nichtabstreitbarkeit</b>. Rahmenwerke: <b>ISO/IEC 27001</b> (Managementsystem für Informationssicherheit), <b>BSI IT-Grundschutz</b>. <b>3-2-1-Backup-Regel</b>: drei Kopien, auf zwei verschiedenen Medien, eine davon außer Haus bzw. offline.</p>
+        <h3>Besonderheiten bei KI</h3>
+        <ul>
+          <li>Trainingsdaten sind ein Angriffsziel: <b>Data Poisoning</b> (manipulierte Daten) verändert das Modell.</li>
+          <li>Modelle können Trainingsdaten preisgeben (Membership Inference) – sensible Daten minimieren.</li>
+          <li>Bei Cloud-KI-Diensten: Wo liegen die Daten, werden Eingaben zum Training verwendet, wer hat Zugriff?</li>
+          <li>Zugangsdaten (API-Schlüssel) nie im Code oder in Notebooks speichern.</li>
+        </ul>
+      </div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Vertraulichkeit, Integrität, Verfügbarkeit – jede Maßnahme lässt sich mindestens einem Schutzziel zuordnen.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Lassen Sie typische Maßnahmen auf Karten schreiben und den drei Schutzzielen zuordnen. Die 3-2-1-Regel ist eine häufige Prüfungsfrage. Vertiefung zu Recht und NIS-2 in Modul 12.</p>
+      </aside>
+    </section>
+
+    <!-- Lektion 16 -->
+    <section class="lesson" id="l16" data-title="Datenerhebung und Datenschutz" data-part="Teil D · Daten schützen">
+      <div class="lesson-head"><span class="meta">Lektion 16 · 40 Minuten</span><h2>Datenerhebung und Datenschutz</h2></div>
+      <div class="cols">
+        <div class="box alltag"><span class="box-label">Im Alltag</span>
+          <p>Wer beim Bäcker nur Brötchen kauft, muss nicht seine Telefonnummer angeben. Daten sammelt man nur, wenn man einen klaren Grund hat – und nur so viele, wie man dafür braucht.</p>
+        </div>
+        <div class="box fach"><span class="box-label">Fachlich</span>
+          <p>Sobald Daten sich auf eine bestimmte oder bestimmbare Person beziehen, gilt die <b>DSGVO</b>. Schon bei der Erhebung müssen Rechtsgrundlage, Zweck, Umfang und Speicherdauer feststehen (Datenschutz durch Technikgestaltung, Art. 25).</p>
+        </div>
+      </div>
+      <div class="prose">
+        <h3>Wege der Datenerhebung</h3>
+        <ul>
+          <li><b>Primärerhebung</b>: Befragung, Beobachtung, Experiment, Sensoren – gezielt für den Zweck, aber aufwendig.</li>
+          <li><b>Sekundärnutzung</b>: vorhandene Daten aus ERP, CRM, Logs – günstig, aber oft für einen anderen Zweck erhoben (Zweckbindung prüfen!).</li>
+          <li><b>Externe Daten</b>: offene Daten, gekaufte Daten, Web-Daten – Lizenzen und Urheberrecht beachten.</li>
+          <li><b>Synthetische Daten</b>: künstlich erzeugt, um Lücken zu füllen oder Personenbezug zu vermeiden.</li>
+        </ul>
+        <h3>Grundsätze der DSGVO (Art. 5) bei der Erhebung</h3>
+        <ul>
+          <li><b>Zweckbindung</b>: nur für festgelegte, eindeutige Zwecke.</li>
+          <li><b>Datenminimierung</b>: nur so viele Daten wie nötig.</li>
+          <li><b>Speicherbegrenzung</b>: löschen, wenn der Zweck erfüllt ist.</li>
+          <li><b>Transparenz</b>: Betroffene informieren (Art. 13/14).</li>
+          <li>Eine <b>Rechtsgrundlage</b> nach Art. 6 (z. B. Vertrag, berechtigtes Interesse, Einwilligung) – Details in Modul 12.</li>
+        </ul>
+      </div>
+      <figure class="board">
+        <img src="gifs/pseudonym.gif" width="640" height="380" alt="Animation: In einer Tabelle werden Namen durch Kennungen ersetzt, die Zuordnung liegt in einer getrennten Schlüsseltabelle. Danach wird die Schlüsseltabelle durchgestrichen: Die Daten sind anonym." loading="lazy">
+        <figcaption>Pseudonymisierte Daten bleiben personenbezogen – erst ohne jede Rückführbarkeit sind sie anonym.</figcaption>
+      </figure>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Pseudonymisierung</th><th>Anonymisierung</th></tr></thead>
+        <tbody>
+          <tr><td>Was passiert</td><td>Identifizierende Merkmale werden durch Kennungen ersetzt, Zuordnung getrennt aufbewahrt</td><td>Personenbezug wird so entfernt, dass er nicht mehr herstellbar ist</td></tr>
+          <tr><td>Personenbezug</td><td>bleibt bestehen</td><td>entfällt</td></tr>
+          <tr><td>DSGVO</td><td>gilt weiter (aber als Schutzmaßnahme anerkannt)</td><td>gilt nicht mehr</td></tr>
+          <tr><td>Methoden</td><td>Hash mit geheimem Schlüssel, Kennnummern</td><td>Aggregation, Generalisierung (Alter → Altersgruppe), Rauschen, k-Anonymität</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box merk"><span class="box-label">Merksatz</span><p>Pseudonymisiert ist nicht anonym: Solange jemand die Person wieder zuordnen kann, gilt die DSGVO.</p></div>
+      <div class="box falle"><span class="box-label">Falle</span><p>Name löschen reicht nicht. Die Kombination aus Postleitzahl, Geburtsdatum und Geschlecht identifiziert viele Menschen eindeutig. Anonymisierung muss gegen solche Verknüpfungen geprüft werden.</p></div>
+      <aside class="notes"><span class="box-label">Sprechertext</span>
+        <p>Diskutieren Sie die Falle mit einem Beispiel aus dem Betrieb: Wie viele Mitarbeitende gibt es in der Abteilung „Controlling, Standort Ulm, über 60“? Oft genau eine Person.</p>
+      </aside>
+    </section>
