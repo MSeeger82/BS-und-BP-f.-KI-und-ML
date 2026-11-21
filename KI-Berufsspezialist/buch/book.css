@@ -81,3 +81,6 @@ figure { margin: 3.5mm 0; break-inside: avoid; text-align: center; } figure img 
 .toc .row { display: flex; align-items: baseline; gap: 1.5mm; break-inside: avoid; } .toc .row .t { flex: 0 1 auto; } .toc .row .d { flex: 1 1 auto; border-bottom: 1px dotted #8a9792; transform: translateY(-1.2mm); min-width: 4mm; } .toc .row .n { flex: 0 0 auto; }
 .preface p { font-size: 10.4pt; }
 .md h1, .md h2 { font-size: 15pt; } .md h3 { font-size: 11.5pt; } .md blockquote { margin: 2mm 0; padding-left: 3mm; border-left: 2px solid var(--line); color: #333; }
+
+/* Stichwortverzeichnis */
+.ix { column-count: 2; column-gap: 8mm; font-size: 8.6pt; line-height: 1.3; } .ixl { font-family: "Bricolage"; font-weight: 700; font-size: 11pt; color: var(--teal); margin: 3mm 0 1mm; break-after: avoid; } .ixr { break-inside: avoid; display: flex; justify-content: space-between; gap: 3mm; } .ixn { color: var(--muted); white-space: nowrap; }

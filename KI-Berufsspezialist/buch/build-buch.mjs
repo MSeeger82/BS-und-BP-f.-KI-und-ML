@@ -1,4 +1,4 @@
-// Baut das Buch „Berufsspezialist KI und ML – Der Lehrfaden zur IHK-Prüfung“ als PDF.
+﻿// Baut das Buch „Berufsspezialist KI und ML – Der Lehrfaden zur IHK-Prüfung“ als PDF.
 //   node build-buch.mjs            → book.html + PDF (zwei Durchläufe fürs Inhaltsverzeichnis)
 //   node build-buch.mjs --html     → nur book.html
 import { createRequire } from "node:module";
@@ -18,6 +18,7 @@ const LEHRPLAN = path.resolve(HERE, "..", "lehrplan", "lehrplan.md");
 const FONTDIR = pathToFileURL("d:/IT Konsultant/VS Studio/itundx/node_modules/@fontsource-variable").href;
 const OUT_PDF = path.join(HERE, "Berufsspezialist-KI-ML-Lehrfaden.pdf");
 const ONLY_HTML = process.argv.includes("--html");
+const PRINT = process.argv.includes("--print");
 
 const TITEL = [
   "", "Grundlagen der Künstlichen Intelligenz", "Mathematik und Statistik für Maschinelles Lernen", "Daten: Qualität, Vorverarbeitung, Feature Engineering",
@@ -61,6 +62,34 @@ function quizOf(root) {
     if (arr) { const ctx = vm.createContext({ Q: null }); vm.runInContext(`Q = ${arr};`, ctx, { timeout: 2000 }); return ctx.Q; }
   }
   return [];
+}
+
+// ---------- Stichwortverzeichnis: fett gesetzte Fachbegriffe sammeln
+const STOP = new Set(["beispiel","lösung","merksatz","frage","musterlösung","antwort","ja","nein","vorteile","nachteile","typische fehler","prüfungsfalle","prüfungstipp","wichtig","achtung","ergebnis","rechnung","hinweis","ziel","idee","folge","fazit","schritt","aufgabe","tipp","formel","kapitel","abschnitt","fachlich","im alltag","ablauf","ursache","wirkung","vorgehen","beispiele","gegenmaßnahmen","gegenmaßnahme","maßnahmen","kriterium","kriterien","vorher","nachher","dann","oder","und","nicht","immer","nie","alle","jede","jeder","keine","kein","wer","was","wie","warum","wann","wo","hier","dort","punkte","punkt","rolle","zweck","inhalt","grund","gründe","problem","lösungen","fehler","regel","regeln","kosten","nutzen","risiko","risiken","daten","modell","modelle","besser","beobachten","benennen","begriffe","begründung","bewertung","beispiele sammeln","dagegen spricht","dafür spricht","das kind","das kochrezept","code","complete","text","thema","trend","tief","üblich","umgebung","update","überwachen","übersehen","test","besser","schlecht","gut","technik","schwach","stark","pilot","erklärung","vorhersagen","häufigkeit","kategorien","größe","einheiten","binär","ziel festlegen","daten vorbereiten"]);
+const termMap = new Map();
+function collectTerms(node, secLabel) {
+  for (const b of node.querySelectorAll("b, strong")) {
+    if (b.closest?.(".task")) continue;
+    let t = b.text.replace(/\s+/g, " ").trim().replace(/[:;.,!?)(„“"]+$/g, "").replace(/^[„“"(]+/, "").trim();
+    if (t.length < 4 || t.length > 42 || t.split(" ").length > 4) continue;
+    if ((t.match(/\(/g) || []).length !== (t.match(/\)/g) || []).length || /„/.test(t) !== /“/.test(t) || /-$/.test(t) || /\bund$/.test(t)) continue;
+    if (!/^[A-ZÄÖÜ]/.test(t) || /[=%€→<>]/.test(t) || /^\d/.test(t) || /\d{3,}/.test(t)) continue;
+    const key = t.toLowerCase(); if (STOP.has(key)) continue;
+    const e = termMap.get(key) ?? { label: t, secs: new Set(), n: 0 }; e.secs.add(secLabel); e.n++; termMap.set(key, e);
+  }
+}
+function indexHtml() {
+  const tech = (e) => e.secs.size >= 2 || e.n >= 2 || /[a-z][A-Z]|-|\d/.test(e.label) || /(?:ing|ation|ics|ity|ment|ator|set|tree|forest|net|score|rate|loss|gate|bias|drift|leakage|learning|mining)$/i.test(e.label);
+  const list = [...termMap.values()].filter(tech).sort((a, b) => a.label.localeCompare(b.label, "de"));
+  const secKey = (s) => s.split(".").map(Number);
+  const cmp = (a, b) => { const [a1, a2] = secKey(a), [b1, b2] = secKey(b); return a1 - b1 || a2 - b2; };
+  let cur = "";
+  const rows = list.map((e) => {
+    const letter = e.label[0].toUpperCase(); const head = letter !== cur ? ((cur = letter), `<div class="ixl">${letter}</div>`) : "";
+    return `${head}<div class="ixr"><span class="ixt">${esc(e.label)}</span> <span class="ixn">${[...e.secs].sort(cmp).slice(0, 6).join(", ")}</span></div>`;
+  });
+  toc.push({ level: 1, id: "stichwort", text: "Stichwortverzeichnis" });
+  return `<h1 class="app" id="stichwort">Stichwortverzeichnis</h1><p class="sec-meta">Auswahl wichtiger Fachbegriffe. Die Zahlen verweisen auf Abschnitte („6.3“ = Kapitel 6, Abschnitt 3).</p><div class="ix">${rows.join("")}</div>`;
 }
 
 // ---------- Abschnitte aufbereiten
@@ -109,6 +138,7 @@ function renderModule(n) {
       const min = (meta.match(/(\d+) Minuten/) ?? [])[1]; const title = `${n}.${secNo} ${h2?.text.trim() ?? ""}`; const hid = nid("s");
       toc.push({ level: 2, id: hid, text: title });
       node.querySelector(".lesson-head")?.remove();
+      collectTerms(node, `${n}.${secNo}`);
       out += `<h2 class="sec" id="${hid}">${esc(title)}</h2>${min ? `<p class="sec-meta">Lernzeit im Online-Kurs: etwa ${min} Minuten</p>` : ""}${strip(node, n)}`;
     } else if (id === "uebungen") {
       const hid = nid("u"); toc.push({ level: 2, id: hid, text: `Übungen zu Kapitel ${n}` });
@@ -203,7 +233,8 @@ const md = readFileSync(LEHRPLAN, "utf8");
 const css = readFileSync(path.join(HERE, "book.css"), "utf8").replace(/FONTDIR/g, FONTDIR);
 const frontHtml = front(md);
 let bodyChapters = ""; for (let n = 1; n <= 12; n++) bodyChapters += renderModule(n);
-const backHtml = back(md);
+const backHtml = back(md) + indexHtml();
+if (process.argv.includes("--index")) { console.log([...termMap.values()].length, "Stichwörter; gesamt", termMap.size); console.log([...termMap.values()].slice(300, 400).map((e) => e.label).join(" | ")); process.exit(0); }
 const assemble = (pages) => buchsprache(frontHtml.replace("<!--TOC-->", tocHtml(pages))) + bodyChapters + backHtml;
 
 writeFileSync(path.join(HERE, "book.html"), page(assemble(null), css));
@@ -217,15 +248,25 @@ async function render(html, outPdf, { coverOnly = false } = {}) {
   const f = path.join(HERE, coverOnly ? "cover.html" : "book.html"); writeFileSync(f, html);
   await pg.goto(pathToFileURL(f).href, { waitUntil: "load" }); await pg.evaluate(() => document.fonts.ready);
   await pg.pdf({ path: outPdf, width: "170mm", height: "240mm", printBackground: true, preferCSSPageSize: false, displayHeaderFooter: !coverOnly, outline: !coverOnly, tagged: true,
-    margin: coverOnly ? { top: 0, bottom: 0, left: 0, right: 0 } : { top: "18mm", bottom: "20mm", left: "19mm", right: "16mm" },
+    margin: coverOnly ? { top: 0, bottom: 0, left: 0, right: 0 } : PRINT ? { top: "18mm", bottom: "20mm", left: "21mm", right: "21mm" } : { top: "18mm", bottom: "20mm", left: "19mm", right: "16mm" },
     headerTemplate: "<div></div>", footerTemplate: `<div style="width:100%;font-size:8px;font-family:Arial,sans-serif;color:#667;text-align:center;padding-top:2mm"><span class="pageNumber"></span></div>` });
   await browser.close();
 }
-const bodyPdf = path.join(HERE, "body.pdf"); const coverPdf = path.join(HERE, "cover.pdf");
+const bodyPdf = path.join(HERE, PRINT ? "body-druck.pdf" : "body.pdf"); const coverPdf = path.join(HERE, "cover.pdf");
 await render(page(assemble(null), css), bodyPdf);
 const pagesJson = execFileSync("python", ["-I", path.join(HERE, "outline.py"), bodyPdf], { encoding: "utf8", maxBuffer: 1 << 26 });
 const pages = JSON.parse(pagesJson);
 await render(page(assemble(pages), css), bodyPdf);
-await render(page(cover(), css.replace(/@page[^}]*}/, "@page { size: 170mm 240mm; margin: 0 }") + "body{margin:0}"), coverPdf, { coverOnly: true });
-execFileSync("python", ["-I", path.join(HERE, "merge.py"), coverPdf, bodyPdf, OUT_PDF], { encoding: "utf8" });
-console.log("PDF fertig:", OUT_PDF);
+if (PRINT) {
+  // Innenteil für den Druck: ohne Titelblatt, gerade Seitenzahl (leere Schlussseite falls nötig)
+  const out = path.join(HERE, "Berufsspezialist-KI-ML-Lehrfaden-Innenteil-Druck.pdf");
+  console.log(execFileSync("python", ["-I", path.join(HERE, "pad.py"), bodyPdf, out], { encoding: "utf8" }));
+  console.log("Druck-Innenteil fertig:", out);
+} else {
+  await render(page(cover(), css.replace(/@page[^}]*}/, "@page { size: 170mm 240mm; margin: 0 }") + "body{margin:0}"), coverPdf, { coverOnly: true });
+  execFileSync("python", ["-I", path.join(HERE, "merge.py"), coverPdf, bodyPdf, OUT_PDF], { encoding: "utf8" });
+  console.log("PDF fertig:", OUT_PDF);
+}
+
+
+
