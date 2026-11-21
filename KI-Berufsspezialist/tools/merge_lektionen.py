@@ -35,7 +35,12 @@ for f in sorted((mod / "neu").glob("*.html")):
 # Der Inhalt wird in Lektion lK vor dem Merksatz-Kasten eingefügt (nach dem Ersetzen der Sektionen, also wiederholbar).
 EXTRA = re.compile(r'<!--EXTRA (l\d+)-->(.*?)<!--/EXTRA-->', re.S)
 e = 0
+# WICHTIG: Ergänzungen werden bei jedem Lauf erneut eingefügt (nicht idempotent, wenn die Quelle nicht neu erzeugt wird).
+# Mit zweitem Argument nur diese eine Datei verarbeiten:  python tools/merge_lektionen.py 6 03-offiziell-extra.html
+nur = sys.argv[2] if len(sys.argv) > 2 else None
 for f in sorted((mod / "neu").glob("*-extra.html")):
+    if nur and f.name != nur:
+        continue
     for m in EXTRA.finditer(f.read_text(encoding="utf-8")):
         lid, block = m.group(1), m.group(2).strip("\n")
         pat = re.compile(r'(<section class="lesson" id="' + re.escape(lid) + r'"[^>]*>.*?)(\s*<div class="box merk">)', re.S)

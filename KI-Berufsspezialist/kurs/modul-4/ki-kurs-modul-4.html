@@ -437,6 +437,18 @@ body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; b
         <p><b>Frage (5 Punkte):</b> Ein Modell lautet Umsatz = 20 + 4 · Werbung (Werbung in Tausend €, Umsatz in Tausend €). Berechnen Sie den Umsatz für 12 und erklären Sie die Zahlen 20 und 4.</p>
         <p><b>Musterlösung:</b> 20 + 4 · 12 = 68 (Tausend €) (2 Punkte). 20 ist der Achsenabschnitt: der Umsatz ohne Werbung (1,5 Punkte). 4 ist die Steigung: Jede weitere Tausend Euro Werbung erhöht den Umsatz im Mittel um 4 Tausend Euro (1,5 Punkte).</p>
       </div>
+      <div class="prose">
+        <h3>Regression, einfach und multipel – die offizielle Definition</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Begriffe</span>
+        <ul>
+          <li><b>Regression</b> ist die Vorhersage einer <b>messbaren Größe</b> mithilfe von Werten, die mit dieser Größe in Zusammenhang stehen. Typisch: Die Zahl hat eine sinnvolle Ordnung, sinnvolle Nachkommastellen, lässt sich runden oder mitteln („im Schnitt werden 223,7 Portionen Eis pro Tag verkauft“). Telefonnummern wären dagegen keine messbare Größe.</li>
+          <li>Ein Modell beschreibt den Zusammenhang zwischen einer <b>abhängigen Variablen</b> (erklärte Variable, bei der Regression <b>Zielgröße</b>) und einer oder mehreren <b>unabhängigen Variablen</b> (erklärende Variablen, <b>Einflussgrößen</b>).</li>
+          <li>Die Regressionslinie wird so gewählt, dass die <b>Summe der Fehlerquadrate</b> auf den Trainingsdaten minimal ist.</li>
+          <li>Bei der <b>multiplen linearen Regression</b> gibt es einen y-Achsenabschnitt und für jede unabhängige Variable einen Koeffizienten, der ihren Einfluss beschreibt. <b>Kategoriale (nominale) Variablen</b> werden mit <b>Dummy-Kodierung</b> einbezogen: 1 für die jeweilige Kategorie, sonst 0; bei n Kategorien genügen <b>n − 1</b> Dummy-Variablen.</li>
+        </ul>
+        <p>Rechnung: Eisverkauf = 20 + 10 · Temperatur − 15 · Bewölkung (0 klar … 4 bedeckt). Bei 25 °C und Bewölkung 2: <span class="calcline">20 + 250 − 30 = 240</span> Portionen. Die Wochentage Mo–So brauchen <span class="calcline">7 − 1 = 6</span> Dummy-Variablen; der siebte Tag ergibt sich, wenn alle sechs null sind. Die Vorhersagen sind praktisch nie perfekt.</p>
+      </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>Lineare Regression = gewichtete Summe der Merkmale plus Achsenabschnitt; gelernt durch kleinste Fehlerquadrate. Jedes Gewicht heißt: so viel ändert sich ŷ pro Einheit, alles andere gleich.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span>
         <p>Das Taxibeispiel ist sofort verständlich. Rechnen Sie den Rechenweg an der Tafel mit; er ist anspruchsvoller als die übrigen. Wichtiger als die Formel ist die Deutung der Gewichte – die kommt in Prüfungen häufig.</p>
@@ -597,6 +609,19 @@ body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; b
       <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
         <p><b>Frage (6 Punkte):</b> Ein Knoten mit 3 A und 1 B wird verglichen mit einem Knoten mit 8 A und 2 B. Berechnen Sie jeweils den Gini-Wert und sagen Sie, welcher reiner ist.</p>
         <p><b>Musterlösung:</b> Knoten 1: 1 − (0,75² + 0,25²) = 1 − 0,625 = 0,375 (2 Punkte). Knoten 2: 1 − (0,8² + 0,2²) = 1 − 0,68 = 0,32 (2 Punkte). Knoten 2 ist reiner, weil der Gini-Wert kleiner ist (2 Punkte).</p>
+      </div>
+      <div class="prose">
+        <h3>Aus den offiziellen Lehrmaterialien: Regressionsbäume, Überraschung und Pruning</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Klassifikations- und Regressionsbäume</span>
+        <p><b>Klassifikationsbäume</b> sind Entscheidungsbäume, deren Ergebnis eine Klasse ist. <b>Regressionsbäume</b> sind Entscheidungsbäume, deren Ergebnis eine messbare Größe ist; im Blatt steht der Mittelwert der dort gelandeten Trainingswerte. Beispiel Eisverkauf: Temperatur ≤ 20 °C → Blatt mit den Werten 80, 100, 120 → Vorhersage <span class="calcline">(80 + 100 + 120) : 3 = 100</span> Portionen; Temperatur &gt; 20 °C → Werte 180, 200, 220 → Vorhersage 200 Portionen.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Entropie als gewichtete Überraschung</span>
+        <p>Der <b>Überraschungswert</b> eines Ereignisses ist der negative natürliche Logarithmus seiner Wahrscheinlichkeit: −ln(0,5) = 0,693; −ln(0,1) = 2,303. Seltene Ereignisse überraschen mehr. Die <b>Entropie</b> (Claude Shannon) ist die mit den Wahrscheinlichkeiten gewichtete Summe aller Überraschungswerte, also ein Maß für Unsicherheit oder Unordnung.</p>
+        <p>Münze fair: <span class="calcline">0,5 · 0,693 + 0,5 · 0,693 = 0,693</span> (maximal). Gezinkte Münze 90 : 10: <span class="calcline">0,9 · 0,105 + 0,1 · 2,303 = 0,095 + 0,230 = 0,325</span> – weniger Unsicherheit. Gini-Index und Entropie sind zwei Maße dafür, wie gemischt die Klassen an einem Knoten sind; der Gini-Index ist null, wenn alle Datenpunkte zur selben Klasse gehören.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Overfitting bei Bäumen: Pre- und Post-Pruning</span>
+        <p>Ein sehr tiefer Baum passt sich zu stark an die Trainingsdaten an und verallgemeinert schlecht (Overfitting). Zwei Gegenmittel: <b>Pre-Pruning</b> verhindert zu komplexe Bäume schon beim Bauen durch Parameter, die Verzweigungen oder Blätter begrenzen (z. B. maximale Tiefe, Mindestzahl von Datenpunkten je Blatt). <b>Pruning</b> (Post-Pruning) vereinfacht einen fertigen Baum nachträglich.</p>
       </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>Ein Baum wählt die Frage, die die Gruppen am reinsten macht (Gini oder Entropie). Erklärbar, aber ohne Tiefenbegrenzung stark überangepasst.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span>
@@ -789,6 +814,19 @@ body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; b
       <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
         <p><b>Frage (5 Punkte):</b> Warum ist beim kNN-Verfahren die Skalierung der Merkmale wichtig, und wie wählt man k?</p>
         <p><b>Musterlösung:</b> kNN beruht auf Abständen; Merkmale mit großen Zahlenwerten (z. B. Einkommen in Euro) würden den Abstand dominieren und kleine (Alter) kaum zählen (2 Punkte). Man standardisiert vorher (1 Punkt). k wird mit Validierungsdaten (oder Kreuzvalidierung) bestimmt; bei zwei Klassen ungerades k wählen, um Unentschieden zu vermeiden (2 Punkte).</p>
+      </div>
+      <div class="prose">
+        <h3>Distanzfunktionen und instanzbasiertes Lernen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Abstandsmaße</span>
+        <ul>
+          <li><b>Euklidische Distanz:</b> Länge der direkten Verbindung zweier Punkte.</li>
+          <li><b>Manhattan-Distanz</b> („Taxifahrer-Distanz“): Summe der absoluten Differenzen der Koordinaten, also der kürzeste Weg parallel zu den Achsen.</li>
+        </ul>
+        <p>Rechnung: Von (0, 0) nach (3, 4): euklidisch <span class="calcline">√(9 + 16) = 5</span>, Manhattan <span class="calcline">3 + 4 = 7</span>. Beispiel aus den Lehrmaterialien: (5,5; 4,2) und (5,1; 3,8): euklidisch <span class="calcline">√(0,16 + 0,16) ≈ 0,57</span>, Manhattan <span class="calcline">0,4 + 0,4 = 0,8</span>.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Instanzbasiertes Lernen</span>
+        <p>Beim <b>instanzbasierten Lernen</b> werden Vorhersagen aus der Ähnlichkeit zu bereits vorhandenen Datenpunkten (Instanzen) abgeleitet; ein Modell im engeren Sinn wird nicht gebaut. Die k-Nächste-Nachbarn-<b>Klassifikation</b> nimmt die häufigste Klasse der k Nachbarn, die k-Nächste-Nachbarn-<b>Regression</b> den Mittelwert ihrer Werte. Beispiel: k = 3, Nachbarwerte 100, 120 und 140 → Vorhersage <span class="calcline">(100 + 120 + 140) : 3 = 120</span>. Weil Abstände zählen, müssen Merkmale vorher skaliert werden (Modul 3). (Begriffe nach den Lehrmaterialien KI B3, Universität Stuttgart, CC BY 4.0.)</p>
       </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>kNN: k nächste Nachbarn suchen, Mehrheit nehmen. Kein Training, Skalierung Pflicht, k per Validierung wählen.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span>

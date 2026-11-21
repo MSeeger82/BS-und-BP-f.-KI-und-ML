@@ -1,0 +1,73 @@
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>Anforderungen genauer: Arten, Machbarkeit, wann KI überhaupt passt</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Drei Arten von Anforderungen</span>
+        <ul>
+          <li><b>Funktionale Anforderungen:</b> Funktionalität, die das System bereitstellen muss. Beispiel: „Ein Benutzer kann verfügbare Filme suchen und ausleihen; das System beobachtet die Ausleihfristen.“</li>
+          <li><b>Nichtfunktionale Anforderungen:</b> Rahmenbedingungen, die das System einhalten muss. Beispiel: „Das System soll von Menschen mit Behinderungen benutzt werden können.“</li>
+          <li><b>Anforderungen der Domäne:</b> Dinge, die in dem Fachgebiet oft stillschweigend erwartet werden. Beispiel: „Aktuelle und genaue Informationen über Filme, mit Bewertungen und Verfügbarkeit.“</li>
+        </ul>
+        <p><b>Ungenau formulierte Anforderungen</b> werden von Entwicklern und Anwendern verschieden gedeutet: „Das System muss Dokumente der Typen X, Y und Z darstellen“ meint für den Anwender eine spezialisierte Anzeige je Dokumentenart, der Entwickler baut eine reine Textanzeige. Deshalb: eindeutig, messbar, für die Zielgruppe verständlich schreiben.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Machbarkeitsstudie, Erhebung, Konflikte</span>
+        <p>Eine <b>Machbarkeitsstudie</b> prüft, ob ein geplantes System lohnenswert ist: Lässt es sich mit aktueller Technik im Budget umsetzen? Lässt es sich in vorhandene Systeme integrieren? Was passiert ohne das System? Bei der Erhebung und Analyse arbeitet das technische Team mit dem Kunden zusammen. Typische Schwierigkeiten: Stakeholder wissen oft nicht, was sie wirklich brauchen; sie beschreiben es in ihrer Fachsprache; verschiedene Stakeholder stellen Anforderungen, die sich ausschließen; organisatorische und politische Faktoren wirken mit.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Red Flags und grünes Licht für KI</span>
+        <ul>
+          <li><b>Dagegen spricht:</b> Es gibt eine klare technische Spezifikation (dann direkt implementieren); einfache Schätzungen reichen oder die Mehrkosten übersteigen den Nutzen (KI hat immer eine Fehlerwahrscheinlichkeit); KI wird nur gefordert, um Management oder Geldgeber zu beeindrucken („Hype-Thema“).</li>
+          <li><b>Dafür spricht:</b> „Große“ Probleme mit vielen Eingabedaten, die sich schwer zerlegen lassen; offene Probleme ohne eine „korrekte“ Lösung, nur bessere und schlechtere; sich verändernde Probleme (Betrugsmaschen wechseln, ML lernt mit); grundsätzlich schwere Probleme mit unklaren Regeln.</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Zusätzliche Anforderungen an KI-Systeme</span>
+        <p>An die <b>Daten</b>: Menge und Qualität (groß, vielfältig, den Problembereich abdeckend), Datenschutz und Sicherheit (DSGVO), Einseitigkeit (Bias) und Fairness. Dazu kommen: Einhaltung ethischer und rechtlicher Vorgaben, Skalierbarkeit und Flexibilität, Wartung und Weiterentwicklung des Modells, Überwachung und Berichterstattung (Modul 9, Teil C). Beispiel Filmempfehlung: Der Algorithmus soll bestimmte Genres oder kleine Filmstudios nicht systematisch benachteiligen.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>KI-Modell in die Architektur einbinden und ausliefern</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Was KI-Architekturen von klassischen unterscheidet</span>
+        <ul>
+          <li><b>Datenabhängigkeit:</b> Die Leistung hängt von Qualität und Menge der Trainingsdaten ab.</li>
+          <li><b>Verlässlichkeit:</b> Entscheidungen beruhen auf Wahrscheinlichkeiten statt festen Regeln.</li>
+          <li><b>Flexibilität:</b> Das System kann sich an neue Daten anpassen, ohne neu programmiert zu werden.</li>
+          <li><b>Komplexität:</b> Es braucht zusätzliche Komponenten für Datenverarbeitung, Training und Bewertung.</li>
+        </ul>
+        <p><b>Zwei Integrationswege:</b> (1) <b>API-basiert</b>: Das Modell wird getrennt gehostet und über eine API angesprochen, eventuell von einem externen Dienstleister – die bestehende Architektur bleibt unverändert, die Wartung kann ausgelagert werden. (2) <b>Eingebettet</b>: Das Modell ist direkt Teil der Anwendungslogik, ohne Netzverbindung nutzbar, aber enger mit der Anwendung verwoben. Beispiel: Ein Warenwirtschaftssystem ruft für die Absatzprognose einen Modell-Dienst per API auf.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Auslieferung: lokal oder Client-Server</span>
+        <p><b>Lokal:</b> Die Anwendung läuft vollständig auf dem Endgerät, ohne Server (Rechner-App, Office, Bildbearbeitung). <b>Client-Server:</b> Die Kernfunktion läuft auf Servern, der Nutzer greift per Browser zu (Online-Banking, Shops). Vorteile: Rechenaufwand wird auf den Server ausgelagert (<i>Thin Client</i>), viele Clients werden von wenigen Servern bedient (Skalierung). Nachteile: Netzverbindung und Authentifizierung nötig. Eine Verteilung auf mehrere Rechner setzt eine <b>modularisierte Architektur</b> voraus – ohne getrennte Komponenten ist keine Verteilung möglich.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Qualitätsmerkmale, Benutzbarkeit und Testverfahren im Detail</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Effizienz, Wartbarkeit, Benutzbarkeit</span>
+        <ul>
+          <li><b>Effizienz:</b> Zwei Programme können dieselbe Funktion erfüllen, aber das eine braucht weniger Operationen. Auch wenn Rechner schneller werden (Moore’sches Gesetz), sparen effiziente Programme Zeit, Energie und Ressourcen und wirken sich direkt auf die Umwelt aus. Effizienz muss gegen andere Merkmale wie Sicherheit und Funktionalität abgewogen werden.</li>
+          <li><b>Wartbarkeit:</b> Software verschleißt nicht, wird aber ständig erweitert („Continuous Development“). Code von heute soll in zehn Jahren noch änderbar sein. Wichtig sind lebendige, aktuell gehaltene Dokumentation (alle Phasen und Testläufe) und <b>Verständlichkeit</b>: Ein sprechender Name wie <code>first_and_last</code> ist besser als <code>fl</code>; manchmal ist verständlicher Code wichtiger als ein Prozentpunkt mehr Effizienz.</li>
+          <li><b>Benutzbarkeit</b> (Usability, ISO 9241-11): das Ausmaß, in dem ein Produkt von bestimmten Nutzern genutzt werden kann, um bestimmte Ziele mit Effektivität, Effizienz und Zufriedenheit zu erreichen. <b>User Experience</b> (UX) beschreibt dagegen das Erlebnis bei der Nutzung. Beim UI-Design hilft Konsistenz (gleiche Begriffe, Farben, Abläufe), einfaches Rückgängigmachen und Abkürzungen für erfahrene Nutzer (Regeln nach Shneiderman).</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Zusätzliche Qualitätsmerkmale von KI-Systemen</span>
+        <ul>
+          <li><b>Flexibilität:</b> Das System kann für Zwecke genutzt werden, die ursprünglich nicht vorgesehen waren.</li>
+          <li><b>Anpassungsfähigkeit:</b> der nötige Aufwand, das System auf neue Einsatzzwecke (andere Hardware, andere Umgebung) einzustellen.</li>
+          <li><b>Autonomie:</b> Das System arbeitet längere Zeit ohne menschliche Aufsicht. Zu klären ist, wie lange das gut geht und in welchen Situationen die Kontrolle an einen Menschen zurückgehen soll.</li>
+          <li><b>Evolution:</b> Das System passt sich veränderten Bedingungen an, etwa ein Musik-Empfehlungssystem an neue Charts und verändertes Nutzerverhalten.</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Testen: statisch, dynamisch, systematisch</span>
+        <ul>
+          <li><b>Statische Analyse</b> prüft Quellcode und Dokumente, <i>ohne</i> den Code auszuführen (Code-Review, Walkthrough, Inspektion, Analysewerkzeuge) und findet Fehler früh.</li>
+          <li><b>Dynamisches Testen</b> führt das Programm mit Testdaten aus. <b>Fehlerorientiert</b> sucht Fehler dort, wo sie wahrscheinlich sind; <b>konformitätsorientiert</b> (Abnahmetest) prüft, ob das Programm seiner Spezifikation entspricht. Testfälle lassen sich mit Whitebox- (Kenntnis des Codes) oder Blackbox-Techniken (nur Eingabe und Ausgabe) entwerfen.</li>
+          <li><b>Systematisch statt zufällig:</b> Ziele festlegen, Testfälle mit Eingaben und erwarteten Ergebnissen entwerfen, Ablauf planen, ausführen, dokumentieren. So sind Tests wiederholbar; das bloße „Ausprobieren“ ist es nicht.</li>
+          <li>Je später ein Fehler entdeckt wird, desto teurer wird seine Behebung. Bei KI-Software wird nicht nur die Logik, sondern auch das Verhalten des Modells auf Daten gegen ein Sollverhalten geprüft.</li>
+        </ul>
+        <p>Beispiel: Fehlerbehebung kostet in der Entwurfsphase 1 Einheit, im Test 10, im Betrieb 100 (typische Größenordnung, nicht genau): Ein Fehler, der im Betrieb auffällt, kostet also etwa das Hundertfache. (Begriffe nach den Lehrmaterialien KI B3, Universität Stuttgart, CC BY 4.0.)</p>
+      </div>
+<!--/EXTRA-->

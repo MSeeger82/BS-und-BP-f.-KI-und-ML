@@ -421,6 +421,12 @@ body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; b
         <p><b>Frage (5 Punkte):</b> Punkte 1, 2, 8, 9; Startzentren 1 und 8. Führen Sie k-Means durch und geben Sie die Endzentren an.</p>
         <p><b>Musterlösung:</b> Zuordnung: 1, 2 → Zentrum 1; 8, 9 → Zentrum 8 (2 Punkte). Neue Zentren: (1 + 2) : 2 = 1,5 und (8 + 9) : 2 = 8,5 (2 Punkte). Keine weitere Änderung der Zuordnung: fertig (1 Punkt).</p>
       </div>
+      <div class="prose">
+        <h3>Aus den offiziellen Lehrmaterialien: Startwerte bei k-Means</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Initialisierung und Ablauf</span>
+        <p>Bei k-Means werden zu Beginn <b>k Clustermittelpunkte zufällig gewählt</b>; die Zahl k muss also im Voraus festgelegt werden. Danach werden bis zur Konvergenz zwei Schritte wiederholt: (1) jeden Datenpunkt dem nächstgelegenen Mittelpunkt zuordnen, (2) für jedes Cluster den neuen Mittelpunkt berechnen. Die <b>Initialisierung hat erheblichen Einfluss</b> auf das Ergebnis, positiv wie negativ. Deshalb startet man mehrmals mit verschiedenen Zufallswerten und nimmt das beste Ergebnis, oder verwendet Verfahren wie k-Means++, die weit auseinanderliegende Startpunkte wählen. Probleme entstehen, wenn Abstand kein gutes Kriterium ist, wenn Dichte eine Rolle spielt, bei ungünstiger Skalierung oder wenn die Zahl der Cluster nicht sinnvoll festlegbar ist.</p>
+      </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>k-Means: zuordnen, Zentren verschieben, wiederholen. Vorher skalieren, mehrere Starts, k gut wählen.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span><p>Rechnen Sie das 2D-Beispiel an der Tafel mit einem Koordinatensystem. Im Rechner können die Teilnehmenden ausprobieren, wie die Startzentren das Ergebnis beeinflussen – z. B. Start bei 1 und 2 gegen 1 und 11.</p></aside>
     </section>
@@ -473,6 +479,30 @@ body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; b
       <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
         <p><b>Frage (5 Punkte):</b> Ein Punkt hat a = 3 und b = 6. Berechnen Sie die Silhouette und deuten Sie sie. Wie bestimmt man mit der Ellbogen-Methode die Clusterzahl?</p>
         <p><b>Musterlösung:</b> s = (6 − 3) : 6 = 0,5: Der Punkt ist ordentlich zugeordnet (2 Punkte). Ellbogen: Für verschiedene k die SSE berechnen und auftragen; k am Knick wählen, ab dem zusätzliche Cluster die SSE kaum noch senken (3 Punkte).</p>
+      </div>
+      <div class="prose">
+        <h3>Intrinsische und extrinsische Bewertung von Clustern</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Zwei Arten der Bewertung</span>
+        <ul>
+          <li><b>Intrinsisch:</b> Es sind keine richtigen Klassen bekannt, bewertet wird nur die Struktur, z. B. mit der <b>Silhouette</b> s = (b − a) : max(a, b) (a = mittlerer Abstand zum eigenen Cluster, b = zum nächsten Cluster). Beispiel a = 2, b = 5: <span class="calcline">(5 − 2) : 5 = 0,6</span>. Beispiel a = 4, b = 2: <span class="calcline">(2 − 4) : 4 = −0,5</span> – der Punkt liegt näher am fremden Cluster. 1 bedeutet perfekt passend, negative Werte deuten auf falsche Zuordnung. Im <b>Silhouettenplot</b> sind die Werte aller Punkte je Cluster sortiert; gut ist, wenn alle möglichst groß sind und kaum negative vorkommen.</li>
+          <li><b>Extrinsisch:</b> Für alle Punkte sind <i>richtige Klassen</i> von außen vorgegeben. Man bewertet <b>Paare von Punkten</b>: Liegen Paare derselben Klasse auch im selben Cluster, und Paare verschiedener Klassen in verschiedenen Clustern?</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Paare zählen</span>
+        <p>Vier Punkte: A und B gehören zu Klasse X, C und D zu Klasse Y. Das Clustering liefert die Cluster {A, B, C} und {D}. Die sechs Paare:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Paar</th><th>Cluster</th><th>Klasse</th><th>Bewertung</th></tr></thead>
+          <tbody>
+            <tr><td>A–B</td><td>gleich</td><td>gleich</td><td>richtig positiv (RP)</td></tr>
+            <tr><td>A–C</td><td>gleich</td><td>verschieden</td><td>falsch positiv (FP)</td></tr>
+            <tr><td>B–C</td><td>gleich</td><td>verschieden</td><td>falsch positiv (FP)</td></tr>
+            <tr><td>A–D</td><td>verschieden</td><td>verschieden</td><td>richtig negativ (RN)</td></tr>
+            <tr><td>B–D</td><td>verschieden</td><td>verschieden</td><td>richtig negativ (RN)</td></tr>
+            <tr><td>C–D</td><td>verschieden</td><td>gleich</td><td>falsch negativ (FN)</td></tr>
+          </tbody>
+        </table></div>
+        <p>RP = 1, FP = 2, RN = 2, FN = 1. Precision <span class="calcline">1 : (1 + 2) ≈ 0,33</span>, Recall <span class="calcline">1 : (1 + 1) = 0,5</span>, Anteil richtig bewerteter Paare <span class="calcline">(1 + 2) : 6 = 0,5</span> (Rand-Index). Dieselben Kennzahlen wie in Modul 6, nur auf Paare übertragen. (Nach den Lehrmaterialien KI B3, Universität Stuttgart, CC BY 4.0.)</p>
       </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>Ellbogen: k am Knick der SSE-Kurve. Silhouette: höchster Durchschnitt (−1 bis +1). Am Ende entscheidet der fachliche Nutzen.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span><p>In der Animation fällt die Kurve bis k = 3 steil und wird dann flach – genau der Knick. Weisen Sie darauf hin, dass der Knick in echten Daten oft weniger deutlich ist; dann hilft die Silhouette.</p></aside>

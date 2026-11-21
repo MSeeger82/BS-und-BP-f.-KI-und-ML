@@ -1,0 +1,48 @@
+<!--EXTRA l1-->
+      <div class="prose">
+        <h3>Aus den offiziellen Lehrmaterialien: Wie Daten im Computer aussehen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Bit, Byte, Hexadezimal, Zeichenkodierung</span>
+        <ul>
+          <li>Die kleinste Speichereinheit ist das <b>Bit</b> („binary digit“, binäre Ziffer) mit den Werten 0 oder 1. Meist werden 8 Bit zu einem <b>Byte</b> gruppiert; ein Byte kann <span class="calcline">2⁸ = 256</span> verschiedene Werte darstellen.</li>
+          <li>Zur lesbaren Darstellung nutzt man das <b>Hexadezimalsystem</b>: Eine Hex-Ziffer (0–9, A–F) steht für 4 Bit, ein Byte also für genau zwei Ziffern.</li>
+          <li>Texte werden durch eine <b>Zeichenkodierung</b> in Zahlen übersetzt (z. B. ASCII, Unicode/UTF-8).</li>
+        </ul>
+        <p>Rechnung: Das Byte <span class="calcline">1011 0110</span> ist hexadezimal <b>B6</b> (1011 = B = 11, 0110 = 6) und dezimal <span class="calcline">11 · 16 + 6 = 182</span>. Der Buchstabe „A“ hat in ASCII den Wert 65, binär <span class="calcline">0100 0001</span>, hexadezimal 41. Umlaute wie „ä“ belegen in UTF-8 zwei Byte – ein Grund, warum falsch eingestellte Kodierungen beim Import „Ã¤“ statt „ä“ liefern.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Annotation und Tensoren</span>
+        <p><b>Annotation</b> ist die nachträgliche Ergänzung von Merkmalen in Daten, häufig genau des Merkmals, das gelernt werden soll (z. B. „Hund“ oder „Katze“ als Label zu einem Foto). Von Menschen annotierte Daten sind besonders wertvoll. <b>Tensoren</b> sind mehrdimensionale Datenstrukturen: Ein Vektor hat eine Dimension, eine Matrix zwei, ein Farbbild drei (Höhe, Breite, Farbkanäle). In Python sind Tensoren geschachtelte Arrays.</p>
+        <p>Rechnung: Ein RGB-Bild mit 224 × 224 Pixeln hat die Form (224, 224, 3), also <span class="calcline">224 · 224 · 3 = 150.528</span> Zahlen. Ein Batch aus 32 Bildern hat die Form (32, 224, 224, 3) mit <span class="calcline">32 · 150.528 = 4.816.896</span> Zahlen. (Quelle der Begriffe: Lehrmaterialien KI B3, Universität Stuttgart, CC BY 4.0.)</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l5-->
+      <div class="prose">
+        <h3>Datensicherheit: Schutzziele, Kontrollen und Verschlüsselung</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Was Datensicherheit leisten soll</span>
+        <p>Datensicherheit stellt sicher, dass <b>Unbefugte keinen Zugriff</b> auf Daten haben, dass Daten <b>nicht ungewollt verändert</b> werden und <b>nicht verloren gehen</b>. Bei personenbezogenen Daten sind Unternehmen verpflichtet, dafür technische und organisatorische Maßnahmen (TOM) zu treffen. Die Schutzziele heißen Vertraulichkeit, Integrität und Verfügbarkeit.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kontrolle (klassische Einteilung)</th><th>Frage</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td>Zutrittskontrolle</td><td>Wer kommt in Räume und Gebäude?</td><td>Schließanlage, Besucherliste</td></tr>
+            <tr><td>Zugangskontrolle</td><td>Wer kommt in Systeme?</td><td>Benutzerkonto, Passwort, Zwei-Faktor</td></tr>
+            <tr><td>Zugriffskontrolle</td><td>Wer sieht und ändert welche Daten?</td><td>Rollen- und Rechtekonzept</td></tr>
+            <tr><td>Weitergabekontrolle</td><td>Wie sind Daten beim Transport geschützt?</td><td>Verschlüsselung bei Übertragung</td></tr>
+            <tr><td>Eingabekontrolle</td><td>Wer hat wann was geändert?</td><td>Protokollierung (Logs)</td></tr>
+            <tr><td>Auftragskontrolle</td><td>Wie gehen Dienstleister mit den Daten um?</td><td>Auftragsverarbeitungsvertrag</td></tr>
+            <tr><td>Verfügbarkeitskontrolle</td><td>Wie schützt man vor Verlust?</td><td>Backups, Wiederherstellungstest</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box situation"><span class="box-label">Verschlüsselung: von Caesar bis RSA</span>
+        <ul>
+          <li><b>Verschiebeverfahren (Caesar):</b> Jeder Buchstabe wird um k Stellen verschoben. Mit k = 3 wird „KI“ zu „NL“ (K → N, I → L). Es gibt nur 25 sinnvolle Schlüssel; mit <b>Brute Force</b> („rohe Gewalt“, alles ausprobieren) ist es sofort geknackt.</li>
+          <li><b>Monoalphabetische Ersetzung:</b> Eine feste Tabelle ersetzt jeden Buchstaben. Es gibt <span class="calcline">26! ≈ 4 · 10²⁶</span> Tabellen, trotzdem knackt die <b>Häufigkeitsanalyse</b> den Text, weil „E“ im Deutschen am häufigsten vorkommt.</li>
+          <li><b>Polyalphabetisch (Vigenère):</b> Je nach Position wird ein anderes Alphabet verwendet. Mit dem Schlüssel „AB“ (Verschiebung 0, 1, 0, 1, …) wird „HALLO“ zu <span class="calcline">H→H, A→B, L→L, L→M, O→O</span> = „HBLMO“; die beiden L ergeben verschiedene Buchstaben, das macht die Häufigkeitsanalyse schwerer.</li>
+          <li><b>AES (symmetrisch):</b> Blockweise (128 Bit) in mehreren Runden (10, 12 oder 14 bei 128, 192 oder 256 Bit Schlüssel) mit den Schritten SubBytes, ShiftRows, MixColumns und AddRoundKey. Sender und Empfänger nutzen denselben geheimen Schlüssel. Bei 128 Bit gibt es <span class="calcline">2¹²⁸ ≈ 3,4 · 10³⁸</span> Schlüssel.</li>
+          <li><b>RSA (asymmetrisch):</b> Jeder Empfänger hat einen <b>öffentlichen Schlüssel</b> (zum Verschlüsseln, darf frei verteilt werden) und einen <b>privaten Schlüssel</b> (zum Entschlüsseln, bleibt geheim). Die Sicherheit beruht darauf, dass sich ein großer Modul nur extrem aufwendig in seine Primfaktoren zerlegen lässt. Das BSI empfiehlt (Stand 2/2024) 3.000 Bit Schlüssellänge.</li>
+        </ul>
+        <p>Winziges RSA-Beispiel: p = 3, q = 11, Modul n = 33, φ = 20, öffentlicher Exponent e = 3, privater Exponent d = 7 (denn 3 · 7 = 21 ≡ 1 mod 20). Klartext m = 4: <span class="calcline">c = 4³ mod 33 = 64 mod 33 = 31</span>. Entschlüsseln: <span class="calcline">31⁷ mod 33 = 4</span>. In der Praxis verschlüsselt man mit RSA nur einen AES-Schlüssel (Hybridverfahren) und die Daten selbst mit AES, weil AES viel schneller ist.</p>
+      </div>
+<!--/EXTRA-->

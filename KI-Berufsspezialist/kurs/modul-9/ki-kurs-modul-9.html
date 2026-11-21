@@ -516,6 +516,41 @@ body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; b
       <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
         <p>Schreiben Sie für Ihr Transferthema in drei Sätzen: Welche Entscheidung wird besser? Woran messen wir es? Was ist heute der Stand (Baseline)? Wenn sich das nicht beantworten lässt, ist das Thema noch nicht reif.</p>
       </div>
+      <div class="prose">
+        <h3>Aus den offiziellen Lehrmaterialien: Problemdomäne und Anforderungen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Begriffe aus der Softwareentwicklung</span>
+        <ul>
+          <li><b>Software Engineering</b> (Softwaretechnik): der disziplinierte Ansatz zum Entwerfen, Produzieren und Warten von Softwaresystemen.</li>
+          <li><b>Problemdomäne:</b> der fachliche Bereich, in dem die Software arbeitet und dessen Anforderungen sie erfüllen soll – mit Prozessen, Anwenderbedürfnissen, Zielen, Daten, Begriffen und Systemumgebung. Ein gründliches Verständnis ist entscheidend für den Erfolg.</li>
+          <li><b>Softwarefehler:</b> unbeabsichtigtes Verhalten oder Ergebnis innerhalb eines Systems.</li>
+          <li><b>Nutzeranforderungen</b> beschreiben in der Sprache der Anwender, was sie brauchen. <b>Systemanforderungen</b> legen detailliert fest, was das System tun muss.</li>
+        </ul>
+        <p>Beispiel Empfehlungssystem (Recommender-System: sagt automatisiert Produkte voraus, die für eine Person interessant sein könnten): Nutzeranforderung „Ich möchte passende Produkte vorgeschlagen bekommen.“ → Systemanforderungen „Pro Kunde eine Liste der 10 besten Empfehlungen“, „Antwort in höchstens 200 Millisekunden“, „Aktualisierung der Empfehlungen täglich um 6 Uhr“. Bei KI-Systemen kommen Anforderungen an Daten und Modellgüte hinzu (z. B. Recall ≥ 0,8).</p>
+      </div>
+      <div class="prose">
+        <h3>Anforderungen genauer: Arten, Machbarkeit, wann KI überhaupt passt</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Drei Arten von Anforderungen</span>
+        <ul>
+          <li><b>Funktionale Anforderungen:</b> Funktionalität, die das System bereitstellen muss. Beispiel: „Ein Benutzer kann verfügbare Filme suchen und ausleihen; das System beobachtet die Ausleihfristen.“</li>
+          <li><b>Nichtfunktionale Anforderungen:</b> Rahmenbedingungen, die das System einhalten muss. Beispiel: „Das System soll von Menschen mit Behinderungen benutzt werden können.“</li>
+          <li><b>Anforderungen der Domäne:</b> Dinge, die in dem Fachgebiet oft stillschweigend erwartet werden. Beispiel: „Aktuelle und genaue Informationen über Filme, mit Bewertungen und Verfügbarkeit.“</li>
+        </ul>
+        <p><b>Ungenau formulierte Anforderungen</b> werden von Entwicklern und Anwendern verschieden gedeutet: „Das System muss Dokumente der Typen X, Y und Z darstellen“ meint für den Anwender eine spezialisierte Anzeige je Dokumentenart, der Entwickler baut eine reine Textanzeige. Deshalb: eindeutig, messbar, für die Zielgruppe verständlich schreiben.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Machbarkeitsstudie, Erhebung, Konflikte</span>
+        <p>Eine <b>Machbarkeitsstudie</b> prüft, ob ein geplantes System lohnenswert ist: Lässt es sich mit aktueller Technik im Budget umsetzen? Lässt es sich in vorhandene Systeme integrieren? Was passiert ohne das System? Bei der Erhebung und Analyse arbeitet das technische Team mit dem Kunden zusammen. Typische Schwierigkeiten: Stakeholder wissen oft nicht, was sie wirklich brauchen; sie beschreiben es in ihrer Fachsprache; verschiedene Stakeholder stellen Anforderungen, die sich ausschließen; organisatorische und politische Faktoren wirken mit.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Red Flags und grünes Licht für KI</span>
+        <ul>
+          <li><b>Dagegen spricht:</b> Es gibt eine klare technische Spezifikation (dann direkt implementieren); einfache Schätzungen reichen oder die Mehrkosten übersteigen den Nutzen (KI hat immer eine Fehlerwahrscheinlichkeit); KI wird nur gefordert, um Management oder Geldgeber zu beeindrucken („Hype-Thema“).</li>
+          <li><b>Dafür spricht:</b> „Große“ Probleme mit vielen Eingabedaten, die sich schwer zerlegen lassen; offene Probleme ohne eine „korrekte“ Lösung, nur bessere und schlechtere; sich verändernde Probleme (Betrugsmaschen wechseln, ML lernt mit); grundsätzlich schwere Probleme mit unklaren Regeln.</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Zusätzliche Anforderungen an KI-Systeme</span>
+        <p>An die <b>Daten</b>: Menge und Qualität (groß, vielfältig, den Problembereich abdeckend), Datenschutz und Sicherheit (DSGVO), Einseitigkeit (Bias) und Fairness. Dazu kommen: Einhaltung ethischer und rechtlicher Vorgaben, Skalierbarkeit und Flexibilität, Wartung und Weiterentwicklung des Modells, Überwachung und Berichterstattung (Modul 9, Teil C). Beispiel Filmempfehlung: Der Algorithmus soll bestimmte Genres oder kleine Filmstudios nicht systematisch benachteiligen.</p>
+      </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>Vor jedem Modell: SMART-Ziel, Erfolgskriterien (geschäftlich, technisch, betrieblich), Baseline, Fehlerkosten, Recht und Wirtschaftlichkeit.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span><p>Lassen Sie jede Person für ihr Transferthema ein SMART-Ziel formulieren und in der Gruppe prüfen. Übung 2 übt genau das.</p></aside>
     </section>
@@ -703,6 +738,35 @@ body.present .present-nav { display: flex; position: fixed; left: 0; right: 0; b
       <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
         <p><b>Frage (5 Punkte):</b> Erklären Sie, worin sich MLOps von klassischem DevOps unterscheidet, und nennen Sie drei Bausteine von MLOps.</p>
         <p><b>Musterlösung:</b> Bei ML ändern sich neben dem Code auch Daten und Modelle, und ein Modell kann veralten, ohne dass jemand etwas ändert (Drift) (2 Punkte). Bausteine: Versionierung von Code, Daten und Modellen; Experiment-Tracking; automatisierte Pipelines; Tests; Bereitstellung; Monitoring (je 1 Punkt, max. 3).</p>
+      </div>
+      <div class="prose">
+        <h3>Architektur, Komponenten und Schnittstellen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Die Fachwörter der Architektur</span>
+        <ul>
+          <li><b>Architektur:</b> der grundlegende Aufbau einer Software und der Prozess, diesen zu entwerfen und zu dokumentieren – die „Blaupause“ zum Implementieren und Verstehen.</li>
+          <li><b>Abstraktion:</b> komplexe Details verbergen und nur das Nötige zeigen, damit man sich auf die Interaktion auf höherer Ebene konzentrieren kann.</li>
+          <li><b>Komponente</b> (Modul): modularer, wiederverwendbarer Teil eines Systems mit einer bestimmten Funktion, der mit anderen Komponenten zusammenarbeitet.</li>
+          <li><b>Schnittstelle</b> (Interface): Kontaktstelle zwischen Komponenten; sie legt fest, wie diese miteinander kommunizieren. Eine <b>API</b> definiert die Funktionen, die eine Komponente anderen Programmen anbietet.</li>
+          <li><b>Trennung der Zuständigkeiten</b> (Separation of Concerns): Ein Programm wird in Abschnitte gegliedert, die je einen Aspekt behandeln.</li>
+          <li><b>Deployment</b> (Auslieferung): Planung und Durchführung der Verteilung der Systemkomponenten auf die zugrunde liegenden Rechner-Ressourcen.</li>
+        </ul>
+        <p>Beispiel KI-System: Komponenten „Datenaufbereitung“, „Modell-Dienst“ (bietet eine API „/vorhersage“), „Oberfläche“ und „Monitoring“. Das Modell kann ausgetauscht werden, ohne dass die Oberfläche geändert werden muss, solange die Schnittstelle gleich bleibt. Das ist der Nutzen von Abstraktion und klaren Schnittstellen.</p>
+      </div>
+      <div class="prose">
+        <h3>KI-Modell in die Architektur einbinden und ausliefern</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Was KI-Architekturen von klassischen unterscheidet</span>
+        <ul>
+          <li><b>Datenabhängigkeit:</b> Die Leistung hängt von Qualität und Menge der Trainingsdaten ab.</li>
+          <li><b>Verlässlichkeit:</b> Entscheidungen beruhen auf Wahrscheinlichkeiten statt festen Regeln.</li>
+          <li><b>Flexibilität:</b> Das System kann sich an neue Daten anpassen, ohne neu programmiert zu werden.</li>
+          <li><b>Komplexität:</b> Es braucht zusätzliche Komponenten für Datenverarbeitung, Training und Bewertung.</li>
+        </ul>
+        <p><b>Zwei Integrationswege:</b> (1) <b>API-basiert</b>: Das Modell wird getrennt gehostet und über eine API angesprochen, eventuell von einem externen Dienstleister – die bestehende Architektur bleibt unverändert, die Wartung kann ausgelagert werden. (2) <b>Eingebettet</b>: Das Modell ist direkt Teil der Anwendungslogik, ohne Netzverbindung nutzbar, aber enger mit der Anwendung verwoben. Beispiel: Ein Warenwirtschaftssystem ruft für die Absatzprognose einen Modell-Dienst per API auf.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Auslieferung: lokal oder Client-Server</span>
+        <p><b>Lokal:</b> Die Anwendung läuft vollständig auf dem Endgerät, ohne Server (Rechner-App, Office, Bildbearbeitung). <b>Client-Server:</b> Die Kernfunktion läuft auf Servern, der Nutzer greift per Browser zu (Online-Banking, Shops). Vorteile: Rechenaufwand wird auf den Server ausgelagert (<i>Thin Client</i>), viele Clients werden von wenigen Servern bedient (Skalierung). Nachteile: Netzverbindung und Authentifizierung nötig. Eine Verteilung auf mehrere Rechner setzt eine <b>modularisierte Architektur</b> voraus – ohne getrennte Komponenten ist keine Verteilung möglich.</p>
       </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>MLOps bringt Modelle zuverlässig, wiederholbar und überwacht in den Betrieb: versionieren, automatisieren, testen, bereitstellen, überwachen, nachtrainieren.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span><p>Vergleichen Sie mit DevOps aus der Softwareentwicklung. Der Unterschied: Bei ML ändern sich nicht nur Code, sondern auch Daten – und das Modell kann veralten, ohne dass jemand etwas ändert.</p></aside>
@@ -1063,6 +1127,53 @@ X_train, X_test, y_train, y_test = train_test_split(
       <div class="box tipp"><span class="box-label">Prüfungsfrage mit Musterlösung</span>
         <p><b>Frage (5 Punkte):</b> Wie viele Minuten Ausfall sind in 30 Tagen bei 99,95 % Verfügbarkeit erlaubt? Nennen Sie außerdem zwei Ebenen des Monitorings mit je einer Kennzahl.</p>
         <p><b>Musterlösung:</b> 30 Tage = 43.200 Minuten; 0,0005 · 43.200 = <b>21,6 Minuten</b> (3 Punkte). Ebenen: Technik (Antwortzeit), Daten (PSI, fehlende Werte), Modell (Recall, Verteilung der Vorhersagen), Geschäft (Ausfälle, Umsatz), Kosten, Fairness – je Ebene mit Kennzahl 1 Punkt, max. 2.</p>
+      </div>
+      <div class="prose">
+        <h3>Softwarequalität und Testen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Qualität, Qualitätssicherung, Qualitätsattribute</span>
+        <ul>
+          <li><b>Software-Qualität:</b> das Ausmaß, in dem eine Software ihre Anforderungen erfüllt.</li>
+          <li><b>Qualitätssicherung</b> (Quality Assurance): alle Aktivitäten der Entwicklung, die Qualität fördern und sicherstellen.</li>
+          <li><b>Qualitätsattribute:</b> messbare Merkmale, die beschreiben, wie gut die Anforderungen erfüllt werden, z. B. <b>Effizienz</b> (möglichst wenig Zeit, Aufwand und Ressourcen für eine Funktion), <b>Wartbarkeit</b>, <b>Benutzbarkeit</b>, Zuverlässigkeit, Sicherheit.</li>
+          <li><b>Refactoring:</b> Quellcode verändern, ohne seine Funktionalität zu ändern – um ihn besser wartbar zu machen.</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Die vier Phasen des Testprozesses</span>
+        <ol>
+          <li><b>Planung:</b> Testziele, Testumfang, Ressourcen, Zeitplan und Teststrategie festlegen.</li>
+          <li><b>Spezifikation:</b> Testfälle und Szenarien aus der Spezifikation der Software ableiten.</li>
+          <li><b>Ausführung:</b> Testfälle implementieren und mit festgelegten Testdaten ausführen.</li>
+          <li><b>Dokumentation:</b> Ergebnisse festhalten, einschließlich aufgetretener Fehler und Auffälligkeiten.</li>
+        </ol>
+        <p>Beispiel: Für den Modell-Dienst aus Lektion 6 wird festgelegt (Planung), dass die Antwortzeit unter 200 ms und der Recall auf dem Testdatensatz über 0,8 liegen soll. Testfälle: typische Kunden, Kunden ohne Historie, ungültige Eingaben (Spezifikation). Ausführung mit 500 gespeicherten Testfällen, Ergebnis „480 bestanden, 20 fehlgeschlagen“ (<span class="calcline">480 : 500 = 96 %</span>), Dokumentation der 20 Fehler mit Ursache. (Begriffe nach den Lehrmaterialien KI B3, Universität Stuttgart, CC BY 4.0.)</p>
+      </div>
+      <div class="prose">
+        <h3>Qualitätsmerkmale, Benutzbarkeit und Testverfahren im Detail</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Effizienz, Wartbarkeit, Benutzbarkeit</span>
+        <ul>
+          <li><b>Effizienz:</b> Zwei Programme können dieselbe Funktion erfüllen, aber das eine braucht weniger Operationen. Auch wenn Rechner schneller werden (Moore’sches Gesetz), sparen effiziente Programme Zeit, Energie und Ressourcen und wirken sich direkt auf die Umwelt aus. Effizienz muss gegen andere Merkmale wie Sicherheit und Funktionalität abgewogen werden.</li>
+          <li><b>Wartbarkeit:</b> Software verschleißt nicht, wird aber ständig erweitert („Continuous Development“). Code von heute soll in zehn Jahren noch änderbar sein. Wichtig sind lebendige, aktuell gehaltene Dokumentation (alle Phasen und Testläufe) und <b>Verständlichkeit</b>: Ein sprechender Name wie <code>first_and_last</code> ist besser als <code>fl</code>; manchmal ist verständlicher Code wichtiger als ein Prozentpunkt mehr Effizienz.</li>
+          <li><b>Benutzbarkeit</b> (Usability, ISO 9241-11): das Ausmaß, in dem ein Produkt von bestimmten Nutzern genutzt werden kann, um bestimmte Ziele mit Effektivität, Effizienz und Zufriedenheit zu erreichen. <b>User Experience</b> (UX) beschreibt dagegen das Erlebnis bei der Nutzung. Beim UI-Design hilft Konsistenz (gleiche Begriffe, Farben, Abläufe), einfaches Rückgängigmachen und Abkürzungen für erfahrene Nutzer (Regeln nach Shneiderman).</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Zusätzliche Qualitätsmerkmale von KI-Systemen</span>
+        <ul>
+          <li><b>Flexibilität:</b> Das System kann für Zwecke genutzt werden, die ursprünglich nicht vorgesehen waren.</li>
+          <li><b>Anpassungsfähigkeit:</b> der nötige Aufwand, das System auf neue Einsatzzwecke (andere Hardware, andere Umgebung) einzustellen.</li>
+          <li><b>Autonomie:</b> Das System arbeitet längere Zeit ohne menschliche Aufsicht. Zu klären ist, wie lange das gut geht und in welchen Situationen die Kontrolle an einen Menschen zurückgehen soll.</li>
+          <li><b>Evolution:</b> Das System passt sich veränderten Bedingungen an, etwa ein Musik-Empfehlungssystem an neue Charts und verändertes Nutzerverhalten.</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Testen: statisch, dynamisch, systematisch</span>
+        <ul>
+          <li><b>Statische Analyse</b> prüft Quellcode und Dokumente, <i>ohne</i> den Code auszuführen (Code-Review, Walkthrough, Inspektion, Analysewerkzeuge) und findet Fehler früh.</li>
+          <li><b>Dynamisches Testen</b> führt das Programm mit Testdaten aus. <b>Fehlerorientiert</b> sucht Fehler dort, wo sie wahrscheinlich sind; <b>konformitätsorientiert</b> (Abnahmetest) prüft, ob das Programm seiner Spezifikation entspricht. Testfälle lassen sich mit Whitebox- (Kenntnis des Codes) oder Blackbox-Techniken (nur Eingabe und Ausgabe) entwerfen.</li>
+          <li><b>Systematisch statt zufällig:</b> Ziele festlegen, Testfälle mit Eingaben und erwarteten Ergebnissen entwerfen, Ablauf planen, ausführen, dokumentieren. So sind Tests wiederholbar; das bloße „Ausprobieren“ ist es nicht.</li>
+          <li>Je später ein Fehler entdeckt wird, desto teurer wird seine Behebung. Bei KI-Software wird nicht nur die Logik, sondern auch das Verhalten des Modells auf Daten gegen ein Sollverhalten geprüft.</li>
+        </ul>
+        <p>Beispiel: Fehlerbehebung kostet in der Entwurfsphase 1 Einheit, im Test 10, im Betrieb 100 (typische Größenordnung, nicht genau): Ein Fehler, der im Betrieb auffällt, kostet also etwa das Hundertfache. (Begriffe nach den Lehrmaterialien KI B3, Universität Stuttgart, CC BY 4.0.)</p>
       </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>Überwachen auf allen Ebenen: Technik, Daten, Modell, Geschäft, Kosten, Fairness. Eingabedaten als Frühwarnung, weil die Wahrheit oft spät kommt.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span><p>Die Verfügbarkeitsrechnung ist einfach und kommt gern vor. „Drei Neunen“ (99,9 %) und „vier Neunen“ (99,99 %) durchrechnen lassen.</p></aside>

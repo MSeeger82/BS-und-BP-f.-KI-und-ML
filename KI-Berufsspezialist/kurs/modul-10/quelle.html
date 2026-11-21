@@ -614,6 +614,22 @@
         <p><b>Frage (6 Punkte):</b> Ihr Betrieb möchte einen Cloud-KI-Dienst eines US-Anbieters nutzen, in den Kundendaten eingegeben werden. Nennen Sie vier Punkte, die vorher zu klären sind.</p>
         <p><b>Musterlösung:</b> Auftragsverarbeitungsvertrag (Art. 28); Grundlage für den Drittlandtransfer (Angemessenheitsbeschluss bzw. Zertifizierung nach dem EU-US Data Privacy Framework oder Standardvertragsklauseln); technische und organisatorische Maßnahmen (Art. 32); Rechtsgrundlage und Zweck für die Verarbeitung; Ausschluss der Nutzung der Daten zum Training, wenn nicht gewünscht; ggf. Information des Betriebsrats; Meldeprozess für Datenpannen (je 1,5 Punkte, max. 6).</p>
       </div>
+      <div class="prose">
+        <h3>Lehrreiche Datenschutzfälle und Datenbroker</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Fälle zum Durchdenken</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Fall</th><th>Was ging schief?</th><th>Welche Regel hilft?</th></tr></thead>
+          <tbody>
+            <tr><td>Cambridge Analytica (bekannt 2018)</td><td>Über eine Persönlichkeitstest-App wurden Daten von sehr vielen Facebook-Nutzern gesammelt, auch von deren Kontakten, und für politische Werbung weiterverwendet.</td><td>Zweckbindung, Einwilligung, Datenminimierung</td></tr>
+            <tr><td>Fitness-App mit Bewegungsdaten</td><td>Veröffentlichte Laufstrecken verrieten Orte, die geheim bleiben sollten (z. B. Militäranlagen).</td><td>Voreinstellungen datenschutzfreundlich wählen (Privacy by Design), Risiko vorher bewerten (DSFA)</td></tr>
+            <tr><td>Patientendaten im Netz</td><td>Ungeschützte Server machten Gesundheitsdaten abrufbar.</td><td>Art. 32 DSGVO: Zugriffskontrolle, Verschlüsselung; Meldung binnen 72 Stunden</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box fach"><span class="box-label">Datenbroker und Scoring-Unternehmen</span>
+        <p>Datenbroker sammeln Daten aus vielen Quellen, erstellen daraus Verbraucherprofile und verkaufen sie an Werbefirmen oder Einzelhändler. Die Daten stammen oft von Firmen, bei denen man nie selbst Kunde war. Probleme: Betroffene wissen nichts davon, Daten können falsch sein, Profile können zu Benachteiligung führen (z. B. beim Kredit). In der EU gelten dafür Informationspflichten (Art. 13, 14), das Auskunftsrecht (Art. 15), Zweckbindung und Rechtsgrundlagen; ähnliche Geschäftsmodelle sind hier deshalb schwieriger, aber nicht ausgeschlossen. Fragen zur eigenen Absicherung: Von welchem Anbieter stammen die Daten? Liegt eine Rechtsgrundlage vor? Wie können Betroffene Auskunft und Löschung verlangen?</p>
+      </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>Dienstleister brauchen einen AVV, Drittländer eine Grundlage, Pannen eine Meldung binnen 72 Stunden. KI am Arbeitsplatz: Beschäftigtendatenschutz und Betriebsrat.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span><p>Betonen Sie: Das Wort „können“ in § 87 BetrVG ist entscheidend – es reicht, dass ein System Leistung überwachen könnte.</p></aside>
     </section>
@@ -1016,6 +1032,24 @@
       </div>
       <div class="box tipp"><span class="box-label">Was heißt das für Ihren Betrieb?</span>
         <p>Wenden Sie das Schema auf eine KI-Anwendung Ihres Betriebs an, die schon läuft. Fast immer zeigt sich eine Frage, die bisher nicht bedacht wurde – meist Transparenz, Auftragsverarbeitung oder Schulung.</p>
+      </div>
+      <div class="prose">
+        <h3>Das Prüfschema an einer Foto-App mit KI-Avataren</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Eine App erzeugt aus Selfies „Magic Avatars“</span>
+        <p>Man lädt mehrere Fotos hoch; ein Bildgenerator, der auf einem großen Datensatz trainiert wurde (darunter viele aus dem Internet gesammelte Bilder, auch von Künstlern), erstellt Porträts in verschiedenen Stilen.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Prüffrage</th><th>Ergebnis</th></tr></thead>
+          <tbody>
+            <tr><td>Datenschutz (Art. 5, 6, 9)</td><td>Gesichtsfotos sind personenbezogen, biometrische Merkmale können besondere Kategorien berühren; Rechtsgrundlage, Zweck und Speicherdauer der hochgeladenen Fotos sind zu klären; Weitergabe an Dritte? Löschung nach Nutzung?</td></tr>
+            <tr><td>Dienstleister, Drittland (Art. 28, 44 ff.)</td><td>Wo werden die Fotos verarbeitet? Wird mit ihnen weiter trainiert?</td></tr>
+            <tr><td>Urheberrecht</td><td>Trainingsdaten mit geschützten Werken; „Stil“ von Künstlern übernommen; Rechte an den Ergebnissen unklar</td></tr>
+            <tr><td>Bias</td><td>Berichtet wurden stereotype oder sexualisierte Darstellungen bestimmter Gruppen; Test mit verschiedenen Personengruppen nötig</td></tr>
+            <tr><td>Transparenz (Art. 50 AI Act)</td><td>KI-erzeugte Bilder sind als solche erkennbar zu machen</td></tr>
+            <tr><td>Einstufung</td><td>Meist begrenztes Risiko (Transparenz); Datenschutz und Urheberrecht bleiben unabhängig davon relevant</td></tr>
+          </tbody>
+        </table></div>
+        <p>Lehre: Eine App kann technisch beeindruckend und rechtlich trotzdem problematisch sein. Das Prüfschema zeigt, an welchen Stellen man nachfragen muss, bevor man sie im Betrieb einsetzt oder anbietet.</p>
       </div>
       <div class="box merk"><span class="box-label">Merksatz</span><p>Zwölf Fragen vor jedem KI-Einsatz: Verbot, Risikoklasse, Transparenz, Datenschutz, Art. 22, DSFA, Dienstleister, Fairness, Mitbestimmung, Aufsicht, Urheberrecht, Schulung.</p></div>
       <aside class="notes"><span class="box-label">Sprechertext</span><p>Diese Checkliste eignet sich als Anhang der Transferarbeit. Prüfende sehen damit sofort, dass die rechtlichen Einflussfaktoren beachtet wurden – das verlangt § 3 Abs. 8 der Rechtsvorschrift ausdrücklich.</p></aside>

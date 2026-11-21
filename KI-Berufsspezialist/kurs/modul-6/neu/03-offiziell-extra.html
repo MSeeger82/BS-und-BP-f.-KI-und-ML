@@ -1,0 +1,143 @@
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>So heißt es in den offiziellen Lehrmaterialien</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Andere Namen für dieselben Kennzahlen</span>
+        <p>Die Lehrmaterialien zur Prüfung (KI B3, Universität Stuttgart, CC BY 4.0) verwenden teils andere Begriffe. Sie sollten alle kennen:</p>
+        <ul>
+          <li><b>Accuracy</b> = Genauigkeit = <b>Korrektklassifikationsrate</b> (Anteil der Fälle mit richtig vorhergesagter Klasse)</li>
+          <li><b>Precision</b> = <b>positiver Vorhersagewert</b> (Anteil der positiven Vorhersagen, die stimmen)</li>
+          <li><b>Recall</b> = <b>Sensitivität</b> (Anteil der tatsächlich positiven Fälle, die erkannt werden)</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Zwei Hautkrebs-Modelle mit gleicher Accuracy</span>
+        <p>1.000 Fotos von Hautveränderungen, 100 davon Hautkrebs („positiv“), 900 gesund. Beide Modelle klassifizieren 980 Fälle richtig (Accuracy <span class="calcline">980 : 1.000 = 98 %</span>).</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th>TP</th><th>FN</th><th>FP</th><th>TN</th><th>Precision</th><th>Recall</th></tr></thead>
+          <tbody>
+            <tr><td>Modell 1</td><td class="r">100</td><td class="r">0</td><td class="r">20</td><td class="r">880</td><td class="r">100 : 120 = 83,3 %</td><td class="r">100 : 100 = 100 %</td></tr>
+            <tr><td>Modell 2</td><td class="r">80</td><td class="r">20</td><td class="r">0</td><td class="r">900</td><td class="r">80 : 80 = 100 %</td><td class="r">80 : 100 = 80 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Modell 1 erkennt jeden Krebsfall, schlägt aber bei 20 Gesunden fälschlich Alarm. Modell 2 hat nie Fehlalarm, übersieht aber ein Fünftel der Erkrankten. Die Accuracy zeigt keinen Unterschied; erst Precision und Recall trennen „Korrektheit der Vorhersagen“ von „Erkennung der tatsächlichen Fälle“. Für eine Krebsvorsorge ist Modell 1 vorzuziehen.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l4-->
+      <div class="prose">
+        <h3>Offizielles Beispiel: Drei Klassen, Macro und gewichtetes Mittel</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Katze, Hund oder Goldfisch?</span>
+        <p>In den Zeilen der Konfusionsmatrix stehen die tatsächlichen Klassen, in den Spalten die Vorhersagen; die Diagonale enthält die richtigen Fälle.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tatsächlich ↓ / Vorhersage →</th><th>Katze</th><th>Hund</th><th>Goldfisch</th><th>Recall</th></tr></thead>
+          <tbody>
+            <tr><td>Katze (100)</td><td class="r">93</td><td class="r">7</td><td class="r">0</td><td class="r">93 %</td></tr>
+            <tr><td>Hund (200)</td><td class="r">14</td><td class="r">186</td><td class="r">0</td><td class="r">93 %</td></tr>
+            <tr><td>Goldfisch (40)</td><td class="r">9</td><td class="r">11</td><td class="r">20</td><td class="r">50 %</td></tr>
+            <tr><td>Precision</td><td class="r">93 : 116 = 80,2 %</td><td class="r">186 : 204 = 91,2 %</td><td class="r">20 : 20 = 100 %</td><td></td></tr>
+          </tbody>
+        </table></div>
+        <ol class="steps">
+          <li><div>Accuracy: <span class="calcline">(93 + 186 + 20) : 340 = 299 : 340 = 87,9 %</span></div></li>
+          <li><div>Macro-Mittel (jede Klasse gleich wichtig): Precision <span class="calcline">(80,2 + 91,2 + 100) : 3 ≈ 90,5 %</span>, Recall <span class="calcline">(93 + 93 + 50) : 3 ≈ 78,7 %</span></div></li>
+          <li><div>Gewichtetes Mittel (Gewichte = Klassenanteile 100/340 ≈ 0,29; 200/340 ≈ 0,59; 40/340 ≈ 0,12): Precision <span class="calcline">0,29 · 80,2 + 0,59 · 91,2 + 0,12 · 100 ≈ 89,1 %</span>, Recall <span class="calcline">0,29 · 93 + 0,59 · 93 + 0,12 · 50 ≈ 87,8 %</span></div></li>
+          <li><div>F-Score aus den Mittelwerten: Macro <span class="calcline">2 · 90,5 · 78,7 : (90,5 + 78,7) ≈ 84,1 %</span>; gewichtet <span class="calcline">2 · 89,1 · 87,8 : (89,1 + 87,8) ≈ 88,4 %</span></div></li>
+        </ol>
+        <p><b>Wann welches Mittel?</b> Macro, wenn alle Klassen gleich wichtig sind oder sich die Klassenverteilung im Einsatz ändern könnte, auch wenn seltene Klassen wichtig sind. Gewichtet, wenn die Verteilung repräsentativ und stabil ist und keine seltene Klasse besonders wichtig ist. Hier verrät der Macro-Recall (78,7 %) das Problem bei den Goldfischen, das die Accuracy (87,9 %) verdeckt.</p>
+        <p><b>Hinweis zur Prüfung:</b> In den Lehrmaterialien wird der F-Score aus den bereits gemittelten Werten Precision und Recall berechnet (so wie hier). Man kann auch den F1-Wert je Klasse bestimmen und dann mitteln; das ergibt leicht andere Zahlen. Lesen Sie die Aufgabe genau und geben Sie den Rechenweg an.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l7-->
+      <div class="prose">
+        <h3>Offizielles Beispiel: MSE und RMSE mit zwei großen Fehlern</h3>
+      </div>
+      <div class="box situation"><span class="box-label">Warum man Fehler quadriert</span>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Datenpunkt</th><th class="r">Richtig</th><th class="r">Vorhersage</th><th class="r">Fehler</th><th class="r">Fehlerquadrat</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="r">101,24</td><td class="r">101,25</td><td class="r">0,01</td><td class="r">0,0001</td></tr>
+            <tr><td>2</td><td class="r">87,13</td><td class="r">287,13</td><td class="r">200</td><td class="r">40.000</td></tr>
+            <tr><td>3</td><td class="r">287,13</td><td class="r">87,13</td><td class="r">−200</td><td class="r">40.000</td></tr>
+            <tr><td>4</td><td class="r">13,4</td><td class="r">16</td><td class="r">2,6</td><td class="r">6,76</td></tr>
+            <tr><td>5</td><td class="r">16</td><td class="r">13,4</td><td class="r">−2,6</td><td class="r">6,76</td></tr>
+            <tr><td><b>Summe</b></td><td></td><td></td><td class="r"><b>0,01</b></td><td class="r"><b>80.013,52</b></td></tr>
+          </tbody>
+        </table></div>
+        <ol class="steps">
+          <li><div>Die Summe der Fehler ist fast null, obwohl zwei Vorhersagen um 200 danebenliegen: Positive und negative Fehler heben sich auf. Deshalb wird quadriert (oder der Betrag genommen).</div></li>
+          <li><div>MSE (Mean Squared Error, mittleres Fehlerquadrat): <span class="calcline">80.013,52 : 5 = 16.002,70</span></div></li>
+          <li><div>RMSE (Wurzel daraus): <span class="calcline">√16.002,70 ≈ 126,5</span> – liegt in der Größenordnung der Fehler selbst, weil die Einheit wieder passt.</div></li>
+        </ol>
+        <p>Zusätzlich nennen die Lehrmaterialien das <b>Bestimmtheitsmaß R²</b> (Determinationskoeffizient): Es gibt an, welchen Anteil der Streuung das Modell erklärt, und wird vor allem in der Statistik verwendet.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l8-->
+      <div class="prose">
+        <h3>Wie die offiziellen Lehrmaterialien Overfitting erklären</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Definition und wichtige Aussagen</span>
+        <ul>
+          <li><b>Overfitting erkennt man daran, dass die Leistung auf Testdaten deutlich unter der Leistung auf den Trainingsdaten liegt.</b></li>
+          <li>Eine objektive Bewertung ist nur auf Daten möglich, die das Modell nie gesehen hat. Testdaten hält man zurück und sieht sie streng genommen vorher nicht einmal an.</li>
+          <li>Overfitting macht Modelle unnötig komplex und oft schlechter als ähnliche Modelle ohne Overfitting – aber auch ein Modell mit Overfitting kann noch brauchbar sein.</li>
+        </ul>
+      </div>
+      <div class="box situation"><span class="box-label">Beispiel: Zwei Bäume, über Kreuz bewertet</span>
+        <p>Zwei Entscheidungsbäume werden je auf der Hälfte der Tage trainiert (jeder 5. Tag, beginnend am 1. bzw. 3. Januar) und über Kreuz bewertet:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Accuracy</th><th class="r">Baum 1</th><th class="r">Baum 2</th></tr></thead>
+          <tbody>
+            <tr><td>auf Daten 1</td><td class="r">100 %</td><td class="r">89 %</td></tr>
+            <tr><td>auf Daten 2</td><td class="r">86 %</td><td class="r">100 %</td></tr>
+          </tbody>
+        </table></div>
+        <p>Jeder Baum ist nur auf den Daten perfekt, die er beim Training gesehen hat (100 %); auf den fremden Daten fällt er auf 86 % bzw. 89 %. Das ist das typische Muster für Overfitting. In einem weiteren Beispiel erreicht ein überangepasstes Modell 100 % auf Trainings- und 94,7 % auf Testdaten, ein einfacheres 96,0 % bzw. 97,3 %. Kleine Unterschiede können Zufall sein; das einfachere Modell ist wahrscheinlich dennoch das bessere.</p>
+      </div>
+      <div class="box situation"><span class="box-label">Aufteilung: repräsentativ und zufällig</span>
+        <ul>
+          <li><b>Üblich:</b> mehr Daten für das Training als für den Test, etwa 80 : 20 oder 75 : 25, bei vielen Daten auch 90 : 10. Mit mehr Daten werden Modelle besser und die Bewertung zuverlässiger.</li>
+          <li><b>Repräsentativ:</b> Beide Teile sollten den Daten ähneln, die im Einsatz erwartet werden. Beispiel Eisverkauf: Ein Modell, das nur mit Januar/Februar trainiert wurde, schätzt die Verkäufe im Mai schlecht; Trainingsdaten von Februar bis April passen besser. Beispiel Schwertlilien: Trainiert man nur mit zwei Sorten und testet mit der dritten, ist keine der beiden Mengen repräsentativ.</li>
+          <li><b>Zufällig:</b> Die Aufteilung erfolgt per Zufall, damit die Sortierung keine Rolle spielt. Bei wenig Daten bleiben Zufallseffekte: zufällig viele ungewöhnliche Fälle im Training (schlechte Verallgemeinerung) oder im Test (unzuverlässige Bewertung).</li>
+          <li><b>Validierungsdaten</b>, mit denen man Einstellungen optimiert, dürfen niemals zugleich als Testdaten dienen.</li>
+        </ul>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Weight Decay, Dropout-Skalierung und Batch-Normalisierung</h3>
+      </div>
+      <div class="box fach"><span class="box-label">L2-Regularisierung heißt auch Weight Decay („Gewichtszerfall“)</span>
+        <p>Beim Gradientenabstieg wird zusätzlich ein Teil des Gewichts selbst abgezogen: <b>w neu = w − η · Gradient − η · λ · w</b> (η Lernrate, λ Regularisierungsrate). Die Gewichte laufen dadurch immer weiter gegen null, solange sie nicht durch einen großen Gradienten gehalten werden. Große Gewichte können ein Zeichen für Overfitting sein, weil das Netz dann stark auf einen bestimmten Input reagiert.</p>
+        <p>Rechnung: w = 2,0; η = 0,1; λ = 0,01; Gradient = 0,5. <span class="calcline">w neu = 2,0 − 0,1 · 0,5 − 0,1 · 0,01 · 2,0 = 2,0 − 0,05 − 0,002 = 1,948</span>. Ohne Regularisierung wäre es 1,95.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Dropout: die tatsächliche Umsetzung</span>
+        <ul>
+          <li>Beim Training werden die Ausgaben der „ausfallenden“ Neuronen auf null gesetzt; die Ausfallwahrscheinlichkeit p wird je Schicht festgelegt (auch für die Eingangsschicht möglich).</li>
+          <li>Dropout wirkt, als würde man viele leicht verschiedene Netzwerke kombinieren (Ensemble) – eine bekannte Technik gegen Overfitting.</li>
+          <li>Beim Einsatz sind alle Neuronen aktiv, daher muss skaliert werden. Bei der „umgekehrten“ Variante werden schon beim Training die verbleibenden Werte mit <b>1 / (1 − p)</b> vergrößert. Bei p = 0,2 ist das <span class="calcline">1 : 0,8 = 1,25</span>.</li>
+          <li>Dropout wird nur beim Training angewendet; der Trainingsfehler wirkt dadurch höher als ohne Dropout.</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Batch-Normalisierung</span>
+        <p>Beim Training verändern sich die Gewichte in jeder Iteration, deshalb verschiebt sich auch der Wertebereich der Eingaben tieferer Schichten; die höheren Schichten müssen sich ständig neu anpassen. Die Batch-Normalisierung bringt die Eingaben einer Schicht in jeder Iteration in denselben Bereich: Mittelwert abziehen und durch die Standardabweichung teilen, danach mit den <b>lernbaren Parametern γ (Skalierung) und β (Verschiebung)</b> neu einstellen.</p>
+        <p>Rechnung für die Werte 2, 4, 6, 8: Mittelwert 5; Standardabweichung <span class="calcline">√((9 + 1 + 1 + 9) : 4) = √5 ≈ 2,24</span>; normalisiert <span class="calcline">(2 − 5) : 2,24 ≈ −1,34; −0,45; +0,45; +1,34</span>. Folgen: schnelleres Training, kleinere Werte für die L2-Regularisierung nötig, und die Technik kann helfen, Overfitting zu vermeiden.</p>
+      </div>
+      <div class="box fach"><span class="box-label">Ensembles gegen Overfitting</span>
+        <p>Man trainiert mehrere möglichst verschiedene Modelle und kombiniert deren Ergebnisse. Ein bekanntes Beispiel ist der Random Forest (viele Bäume, die nur auf zufällig ausgewählte Merkmale zugreifen). Das geht mit allen Verfahren, bei denen sich zufallsbedingte Unterschiede im Modell ergeben.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l12-->
+      <div class="prose">
+        <h3>Welches Modell setzt man nach der Kreuzvalidierung ein?</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Aussage der offiziellen Lehrmaterialien</span>
+        <p>Bei der n-fachen Kreuzvalidierung entstehen n Modelle. Eingesetzt wird keines davon: Man <b>trainiert das finale Modell am besten auf allen Daten neu</b>. Die Ergebnisse der Kreuzvalidierung dienen nur der objektiven Einschätzung der (Mindest-)Leistung dieses finalen Modells.</p>
+        <p>Weitere Merkpunkte: Je größer n, desto mehr Daten bleiben zum Training, aber desto mehr Modelle müssen trainiert und bewertet werden – man sucht einen Kompromiss. Bei 2-facher Kreuzvalidierung wird „über Kreuz“ getestet: Jede Hälfte dient einmal als Training und einmal als Test. Im Maschinellen Lernen ist der englische Begriff <i>Cross-Validation</i> gebräuchlicher als der deutsche.</p>
+        <p>Rechnung: 5-fach bei 1.000 Datenpunkten → je Durchlauf 800 zum Training und 200 zum Testen; <span class="calcline">5 Durchläufe · 200 = 1.000</span>, jeder Datenpunkt wird genau einmal zum Testen verwendet.</p>
+      </div>
+<!--/EXTRA-->

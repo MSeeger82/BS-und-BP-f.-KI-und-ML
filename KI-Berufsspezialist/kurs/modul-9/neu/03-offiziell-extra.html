@@ -1,0 +1,54 @@
+<!--EXTRA l3-->
+      <div class="prose">
+        <h3>Aus den offiziellen Lehrmaterialien: Problemdomäne und Anforderungen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Begriffe aus der Softwareentwicklung</span>
+        <ul>
+          <li><b>Software Engineering</b> (Softwaretechnik): der disziplinierte Ansatz zum Entwerfen, Produzieren und Warten von Softwaresystemen.</li>
+          <li><b>Problemdomäne:</b> der fachliche Bereich, in dem die Software arbeitet und dessen Anforderungen sie erfüllen soll – mit Prozessen, Anwenderbedürfnissen, Zielen, Daten, Begriffen und Systemumgebung. Ein gründliches Verständnis ist entscheidend für den Erfolg.</li>
+          <li><b>Softwarefehler:</b> unbeabsichtigtes Verhalten oder Ergebnis innerhalb eines Systems.</li>
+          <li><b>Nutzeranforderungen</b> beschreiben in der Sprache der Anwender, was sie brauchen. <b>Systemanforderungen</b> legen detailliert fest, was das System tun muss.</li>
+        </ul>
+        <p>Beispiel Empfehlungssystem (Recommender-System: sagt automatisiert Produkte voraus, die für eine Person interessant sein könnten): Nutzeranforderung „Ich möchte passende Produkte vorgeschlagen bekommen.“ → Systemanforderungen „Pro Kunde eine Liste der 10 besten Empfehlungen“, „Antwort in höchstens 200 Millisekunden“, „Aktualisierung der Empfehlungen täglich um 6 Uhr“. Bei KI-Systemen kommen Anforderungen an Daten und Modellgüte hinzu (z. B. Recall ≥ 0,8).</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l6-->
+      <div class="prose">
+        <h3>Architektur, Komponenten und Schnittstellen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Die Fachwörter der Architektur</span>
+        <ul>
+          <li><b>Architektur:</b> der grundlegende Aufbau einer Software und der Prozess, diesen zu entwerfen und zu dokumentieren – die „Blaupause“ zum Implementieren und Verstehen.</li>
+          <li><b>Abstraktion:</b> komplexe Details verbergen und nur das Nötige zeigen, damit man sich auf die Interaktion auf höherer Ebene konzentrieren kann.</li>
+          <li><b>Komponente</b> (Modul): modularer, wiederverwendbarer Teil eines Systems mit einer bestimmten Funktion, der mit anderen Komponenten zusammenarbeitet.</li>
+          <li><b>Schnittstelle</b> (Interface): Kontaktstelle zwischen Komponenten; sie legt fest, wie diese miteinander kommunizieren. Eine <b>API</b> definiert die Funktionen, die eine Komponente anderen Programmen anbietet.</li>
+          <li><b>Trennung der Zuständigkeiten</b> (Separation of Concerns): Ein Programm wird in Abschnitte gegliedert, die je einen Aspekt behandeln.</li>
+          <li><b>Deployment</b> (Auslieferung): Planung und Durchführung der Verteilung der Systemkomponenten auf die zugrunde liegenden Rechner-Ressourcen.</li>
+        </ul>
+        <p>Beispiel KI-System: Komponenten „Datenaufbereitung“, „Modell-Dienst“ (bietet eine API „/vorhersage“), „Oberfläche“ und „Monitoring“. Das Modell kann ausgetauscht werden, ohne dass die Oberfläche geändert werden muss, solange die Schnittstelle gleich bleibt. Das ist der Nutzen von Abstraktion und klaren Schnittstellen.</p>
+      </div>
+<!--/EXTRA-->
+
+<!--EXTRA l11-->
+      <div class="prose">
+        <h3>Softwarequalität und Testen</h3>
+      </div>
+      <div class="box fach"><span class="box-label">Qualität, Qualitätssicherung, Qualitätsattribute</span>
+        <ul>
+          <li><b>Software-Qualität:</b> das Ausmaß, in dem eine Software ihre Anforderungen erfüllt.</li>
+          <li><b>Qualitätssicherung</b> (Quality Assurance): alle Aktivitäten der Entwicklung, die Qualität fördern und sicherstellen.</li>
+          <li><b>Qualitätsattribute:</b> messbare Merkmale, die beschreiben, wie gut die Anforderungen erfüllt werden, z. B. <b>Effizienz</b> (möglichst wenig Zeit, Aufwand und Ressourcen für eine Funktion), <b>Wartbarkeit</b>, <b>Benutzbarkeit</b>, Zuverlässigkeit, Sicherheit.</li>
+          <li><b>Refactoring:</b> Quellcode verändern, ohne seine Funktionalität zu ändern – um ihn besser wartbar zu machen.</li>
+        </ul>
+      </div>
+      <div class="box fach"><span class="box-label">Die vier Phasen des Testprozesses</span>
+        <ol>
+          <li><b>Planung:</b> Testziele, Testumfang, Ressourcen, Zeitplan und Teststrategie festlegen.</li>
+          <li><b>Spezifikation:</b> Testfälle und Szenarien aus der Spezifikation der Software ableiten.</li>
+          <li><b>Ausführung:</b> Testfälle implementieren und mit festgelegten Testdaten ausführen.</li>
+          <li><b>Dokumentation:</b> Ergebnisse festhalten, einschließlich aufgetretener Fehler und Auffälligkeiten.</li>
+        </ol>
+        <p>Beispiel: Für den Modell-Dienst aus Lektion 6 wird festgelegt (Planung), dass die Antwortzeit unter 200 ms und der Recall auf dem Testdatensatz über 0,8 liegen soll. Testfälle: typische Kunden, Kunden ohne Historie, ungültige Eingaben (Spezifikation). Ausführung mit 500 gespeicherten Testfällen, Ergebnis „480 bestanden, 20 fehlgeschlagen“ (<span class="calcline">480 : 500 = 96 %</span>), Dokumentation der 20 Fehler mit Ursache. (Begriffe nach den Lehrmaterialien KI B3, Universität Stuttgart, CC BY 4.0.)</p>
+      </div>
+<!--/EXTRA-->
