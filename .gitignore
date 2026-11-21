@@ -3,3 +3,7 @@
 .env*
 *.bin
 Thumbs.db
+KI-Berufsspezialist/buch/*.pdf
+KI-Berufsspezialist/buch/book.html
+KI-Berufsspezialist/buch/cover.html
+KI-Berufsspezialist/buch/img/
